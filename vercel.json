@@ -3,5 +3,10 @@
   "framework": null,
   "installCommand": "",
   "buildCommand": "node tools/build-static.cjs",
-  "outputDirectory": "dist"
+  "outputDirectory": "dist",
+  "functions": {
+    "api/service.js": {
+      "maxDuration": 60
+    }
+  }
 }

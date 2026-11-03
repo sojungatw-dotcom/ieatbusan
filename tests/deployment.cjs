@@ -10,6 +10,8 @@ const config = JSON.parse(fs.readFileSync(path.join(root, 'vercel.json'), 'utf8'
 assert.equal(config.framework, null);
 assert.equal(config.outputDirectory, 'dist');
 assert.equal(config.buildCommand, 'node tools/build-static.cjs');
+assert.ok(fs.existsSync(path.join(root, 'api/service.js')));
+assert.ok(fs.existsSync(path.join(root, 'server/backend.cjs')));
 assert.deepEqual(fs.readdirSync(out).sort(), ['assets', 'css', 'index.html', 'js']);
 assert.equal(fs.readFileSync(path.join(out, 'index.html'), 'utf8'), fs.readFileSync(path.join(root, 'index.html'), 'utf8'));
 const context = { window: {} };
@@ -20,4 +22,6 @@ for (const food of context.window.FOODS) {
 for (const file of ['js/auth.js', 'js/store.js', 'js/app.js', 'css/app.css', 'assets/icon.svg']) {
   assert.ok(fs.statSync(path.join(out, file)).size > 0, file + ' missing');
 }
+const frontend = ['js/cloud.js','js/auth.js','js/store.js','js/app.js'].map(file => fs.readFileSync(path.join(out, file), 'utf8')).join('\n');
+assert.ok(!frontend.includes('SUPABASE_SECRET_KEY') && !frontend.includes('SUPABASE_SERVICE_ROLE_KEY'));
 console.log('PASS Vercel config, production file allowlist, script/style assets and all food images');

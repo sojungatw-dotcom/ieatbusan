@@ -1,5 +1,14 @@
 # 검증 기록
 
+## 2026-11-03 Supabase 연결 코드
+
+- Vercel Node API `/api/service` 추가. 서버에서만 SUPABASE_URL/PUBLISHABLE_KEY/SECRET_KEY 사용, 공개 프론트엔드에는 비밀 키·세션 토큰 미포함.
+- Supabase Auth 가입/로그인, 서버 검증 세션, HttpOnly/SameSite 쿠키와 토큰 갱신, CSRF 검사, 가입 요청 제한 연결. 사용자 입력의 user_id 대신 서버에서 검증한 사용자 ID 사용.
+- 공개 게시글·댓글·좋아요와 계정별 프로필·찜·최근 검색·설정, 비공개 Storage 사진 저장 연결. 이전 로컬 시안 데이터는 삭제하지 않으며 신규 계정으로 재가입 필요.
+- 빌드·배포 파일 검사, API 모의 응답 회귀, 프론트 인증 상태 회귀, 자동 스와이프 회귀, 기존 비동기 회귀 7/7 통과.
+- Supabase 테이블/RLS 확인 및 기존 예시 게시글·댓글 초기 데이터 등록 완료. Security Advisor 오류·경고 없음. 가입 제한 테이블의 RLS 정책 없음 정보 알림은 일반 사용자 접근을 전면 차단하는 의도된 서버 전용 구성임. 참고: https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy
+- 실제 HTTP 연결 검사 명령은 자동 승인 검토 서비스의 일시적인 용량 오류로 실행되지 않음. 업로드 후 `/api/service?action=status` 및 실제 계정/게시글 저장 검증은 별도 결과로 갱신할 것.
+
 ## 2026-11-03 Vercel 배포 설정
 
 - Framework `Other`, 설치 명령 없음, build `node tools/build-static.cjs`, output `dist`를 `vercel.json`으로 지정.

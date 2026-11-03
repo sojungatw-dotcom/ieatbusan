@@ -48,15 +48,12 @@
   /* ---------- community data ---------- */
   const seedTime = mins => S().seededAt - mins * 60000;
   function allPosts() {
-    const st = S();
-    const seed = SEED.posts.filter(p => !st.deletedPosts.includes(p.id)).map(p => ({ ...p, createdAt: seedTime(p.minutesAgo), photos: p.img ? [img(p.img)] : [], mine: false }));
-    return [...st.posts.filter(p => !st.deletedPosts.includes(p.id)), ...seed];
+    return S().posts;
   }
   const postById = id => allPosts().find(p => p.id === id);
   const postLikes = p => p.likes + (S().postLikes[p.id] ? 1 : 0);
   function commentsOf(id) {
-    const seed = (SEED.comments[id] || []).map(c => ({ ...c, createdAt: seedTime(c.minutesAgo) }));
-    return [...seed, ...(S().comments[id] || [])].sort((a, b) => a.createdAt - b.createdAt);
+    return [...(S().comments[id] || [])].sort((a, b) => a.createdAt - b.createdAt);
   }
   const notifications = () => SEED.notifications.map(n => ({ ...n, createdAt: seedTime(n.minutesAgo) }));
   const hasUnread = () => notifications().some(n => n.createdAt > S().notiReadAt);
@@ -484,6 +481,7 @@
     else list = list.filter(p => p.cat === tab).sort((a, b) => b.createdAt - a.createdAt);
     const tabs = [['popular', t('com.tab.popular')], ['latest', t('com.tab.latest')], ['review', t('cat.review')], ['question', t('cat.question')], ['free', t('cat.free')]];
     return `<main class="screen has-tabbar">${appHeader()}
+      <div class="section-head"><h1 class="page-title">${esc(t('tab.community'))}</h1><button class="text-btn" data-act="refreshCommunity">${esc(t('db.refresh'))}</button></div>
       <nav class="seg" aria-label="categories">${tabs.map(([k, label]) => `<a href="#/community/${k}" ${k === tab ? 'aria-current="page"' : ''} style="padding:12px 2px 10px;white-space:nowrap;border-bottom:2px solid ${k === tab ? 'var(--accent)' : 'transparent'};color:${k === tab ? 'var(--ink)' : 'var(--ink-3)'};font-weight:${k === tab ? 700 : 400}">${esc(label)}</a>`).join('')}</nav>
       ${list.length ? list.map(postCard).join('') : empty(t('com.empty'), 'community')}
       <div style="height:72px"></div>
@@ -594,7 +592,7 @@
     const menu = (href, label, val = '') => `<a class="menu-row" href="${href}"><span>${esc(label)}</span>${val ? `<span class="val">${esc(val)}</span>` : ''}${icon('chevronRight')}</a>`;
     const top = u ? `<div class="profile"><span class="avatar lg">${initial(u.nickname)}</span><div class="who"><b>${esc(u.nickname)}</b><span class="muted" style="font-size:13px">${esc(t('my.joined', { area: districtName(u.area), date: u.joined }))}</span>${u.bio ? `<div class="sub" style="font-size:13px">${esc(u.bio)}</div>` : ''}</div>
         <a class="btn btn-outline btn-sm" href="#/profile">${esc(t('my.edit'))}</a></div>
-      <div class="stats"><a href="#/my/posts"><b>${st.posts.length}</b><span>${esc(t('my.posts'))}</span></a><i></i><a href="#/my/comments"><b>${myComments().length}</b><span>${esc(t('my.comments'))}</span></a><i></i><a href="#/saved"><b>${st.savedFoods.length + st.savedPlaces.length}</b><span>${esc(t('my.saved'))}</span></a></div>`
+      <div class="stats"><a href="#/my/posts"><b>${st.posts.filter(post => post.mine).length}</b><span>${esc(t('my.posts'))}</span></a><i></i><a href="#/my/comments"><b>${myComments().length}</b><span>${esc(t('my.comments'))}</span></a><i></i><a href="#/saved"><b>${st.savedFoods.length + st.savedPlaces.length}</b><span>${esc(t('my.saved'))}</span></a></div>`
       : `<div class="login-card"><b>${esc(t('my.loginTitle'))}</b><span class="sub" style="font-size:14px">${esc(t('my.loginDesc'))}</span><a class="btn btn-primary" href="#/login">${esc(t('my.login'))}</a></div>`;
     return `<main class="screen has-tabbar">${pageHeader(t('my.title'), { back: false, right: `<a class="icon-btn" href="#/settings" aria-label="${esc(t('set.title'))}">${icon('settings')}</a>` })}
       ${top}<div class="band"></div>
@@ -737,15 +735,17 @@
     pickLang: el => { Store.set({ lang: el.dataset.code }); rerender(); },
     confirmLang: () => { Store.set({ langChosen: true }); if (stack.length > 1 && (S().user || S().guest) && !stack[stack.length - 2].startsWith('#/login')) history.back(); else go(S().user || S().guest ? '#/home' : '#/login'); },
     sort: () => { Store.set({ sort: S().sort === 'popular' ? 'name' : 'popular' }); rerender(); },
-    saveFood: el => {
+    saveFood: async el => {
+      if (!requireLogin()) return;
       const id = el.dataset.id; let on;
       Store.update(s => { on = !s.savedFoods.includes(id); s.savedFoods = on ? [id, ...s.savedFoods] : s.savedFoods.filter(x => x !== id); });
-      toast(t(on ? 'food.saved' : 'food.unsaved')); rerender();
+      await Store.flush(); if (!app.contains(el)) return; toast(t(on ? 'food.saved' : 'food.unsaved')); rerender();
     },
-    savePlace: el => {
+    savePlace: async el => {
+      if (!requireLogin()) return;
       const k = el.dataset.key; let on;
       Store.update(s => { on = !s.savedPlaces.includes(k); s.savedPlaces = on ? [k, ...s.savedPlaces] : s.savedPlaces.filter(x => x !== k); });
-      toast(t(on ? 'food.saved' : 'food.unsaved')); rerender();
+      await Store.flush(); if (!app.contains(el)) return; toast(t(on ? 'food.saved' : 'food.unsaved')); rerender();
     },
     jump: el => {
       const sec = document.getElementById('sec-' + el.dataset.sec); if (!sec) return;
@@ -782,15 +782,17 @@
       }, () => { if (mapRef === ref && request === locationRequest) toast(t('map.locFail')); }, { timeout: 8000 });
     },
     needLogin: (el, e) => { if (!loggedIn()) { e.preventDefault(); requireLogin(); } },
-    likePost: el => { if (!requireLogin()) return; const id = el.dataset.id; Store.update(s => { if (s.postLikes[id]) delete s.postLikes[id]; else s.postLikes[id] = true; }); rerender(); },
-    deletePost: el => {
+    refreshCommunity: async el => { await Cloud.refresh(); if (app.contains(el)) rerender(); },
+    likePost: async el => { if (!requireLogin()) return; await Cloud.like(el.dataset.id, !S().postLikes[el.dataset.id]); if (app.contains(el)) rerender(); },
+    deletePost: async el => {
       if (!confirm(t('post.deleteConfirm'))) return;
-      const id = el.dataset.id; Store.update(s => { s.posts = s.posts.filter(p => p.id !== id); delete s.comments[id]; });
+      await Cloud.deletePost(el.dataset.id);
+      if (!app.contains(el)) return;
       toast(t('post.deleted')); location.replace('#/community'); stack.pop();
     },
     rmPhoto: el => { draftPhotos.splice(Number(el.dataset.i), 1); renderPhotos(); },
-    logout: () => { if (!Store.signOut()) { toast(t('auth.storage')); return; } toast(t('set.loggedOut')); stack.length = 0; location.replace('#/login'); },
-    withdraw: () => { if (!confirm(t('set.withdrawConfirm'))) return; if (!Store.removeCurrentAccount()) { toast(t('auth.storage')); return; } stack.length = 0; location.replace('#/login'); },
+    logout: async () => { await Store.signOut(); toast(t('set.loggedOut')); stack.length = 0; location.replace('#/login'); },
+    withdraw: async () => { if (!confirm(t('set.withdrawConfirm'))) return; await Store.removeCurrentAccount(); stack.length = 0; location.replace('#/login'); },
   };
   app.addEventListener('click', e => {
     const el = e.target.closest('[data-act]');
@@ -800,7 +802,13 @@
     const link = e.target.closest('a');
     if (link && link !== el) return;
     if (el.dataset.act !== 'needLogin') e.preventDefault();
-    fn(el, e);
+    if (el.dataset.saving) return;
+    const result = fn(el, e);
+    if (result?.then) {
+      el.dataset.saving = 'true';
+      el.setAttribute('aria-busy', 'true');
+      result.catch(error => toast(t(error.message || 'db.failure'))).finally(() => { delete el.dataset.saving; el.removeAttribute('aria-busy'); });
+    }
   });
   app.addEventListener('keydown', e => {
     if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[role="button"][data-act]')) { e.preventDefault(); A[e.target.dataset.act](e.target, e); }
@@ -809,7 +817,7 @@
     const k = e.target.dataset.setting;
     if (k) Store.update(s => { s.settings[k] = e.target.checked; });
   });
-  app.addEventListener('submit', async e => {
+  async function submitForm(e) {
     const f = e.target; e.preventDefault();
     const kind = f.dataset.form;
     if (kind === 'login' || kind === 'signup') {
@@ -832,7 +840,7 @@
         } else {
           const id = await Auth.verify(username, password);
           if (!f.isConnected) return;
-          if (!Store.signIn(id)) throw new Error('auth.storage');
+          await Store.signIn(id);
           f.elements.password.value = '';
           registeredId = '';
           stack.length = 0;
@@ -856,23 +864,32 @@
     } else if (kind === 'comment') {
       if (!requireLogin()) return;
       const text = f.text.value.trim(); if (!text) return;
-      const id = f.dataset.id, u = S().user;
-      Store.update(s => { (s.comments[id] = s.comments[id] || []).push({ id: 'uc' + Date.now(), author: u.nickname, text, createdAt: Date.now(), likes: 0, mine: true }); });
+      await Cloud.comment(f.dataset.id, text);
+      if (!f.isConnected) return;
       toast(t('post.commented')); rerender(); window.scrollTo(0, document.body.scrollHeight);
     } else if (kind === 'write') {
+      if (!requireLogin()) return;
       const title = f.title.value.trim(), body = f.body.value.trim();
       if (!title || !body) { toast(t('write.need')); return; }
-      const u = S().user, id = 'u' + Date.now();
-      const post = { id, author: u.nickname, area: districtName(u.area), areaLabel: districtName(u.area), cat: f.cat.value, food: f.food.value || null, title, body, photos: draftPhotos.slice(), likes: 0, createdAt: Date.now(), mine: true };
-      Store.update(s => { s.posts = [post, ...s.posts]; });
-      if (!Store.save()) { Store.update(s => { s.posts[0].photos = []; }); }
+      const id = await Cloud.createPost({ title, body, cat: f.cat.value, food: f.food.value || null, photos: draftPhotos.slice() });
+      if (!f.isConnected) return;
       toast(t('write.done')); stack.pop(); location.replace('#/post/' + id);
     } else if (kind === 'profile') {
+      if (!requireLogin()) return;
       const nick = f.nickname.value.trim();
       if (nick.length < 2 || nick.length > 10) { toast(t('profile.invalid')); return; }
-      Store.update(s => { s.user.nickname = nick; s.user.area = Number(f.area.value); s.user.bio = f.bio.value.trim(); });
+      await Cloud.profile({ nickname: nick, area: Number(f.area.value), bio: f.bio.value.trim() });
+      if (!f.isConnected) return;
       toast(t('profile.saved')); back('#/my');
     }
+  }
+  app.addEventListener('submit', event => {
+    event.preventDefault();
+    const form = event.target;
+    if (form.dataset.submitting) return;
+    form.dataset.submitting = 'true';
+    submitForm(event).catch(error => toast(t(error.message || 'db.failure')))
+      .finally(() => { delete form.dataset.submitting; });
   });
   // 로그인 화면은 명시적으로 이동할 때만 다시 보이게 합니다.
   document.addEventListener('click', e => { const a = e.target.closest('a[href="#/login"]'); if (a) loginIntent = true; });
@@ -882,5 +899,7 @@
     const nav = (navigator.language || 'ko').slice(0, 2);
     Store.set({ lang: ['ko', 'en', 'zh', 'ja'].includes(nav) ? nav : 'en' });
   }
-  route();
+  window.addEventListener('ieb:save-error', event => toast(t(event.detail || 'db.failure')));
+  app.innerHTML = `<p class="pad" role="status">${esc(t('db.loading'))}</p>`;
+  Store.load().then(route).catch(error => { route(); toast(t(error.message || 'db.failure')); });
 })();

@@ -6,7 +6,9 @@ Run `node tools/build-static.cjs`, then `node tests/deployment.cjs`. The build v
 
 ## Local account regression checks
 
-Run `node tests/auth-regressions.cjs`. Uses real Node Web Crypto and isolated in-memory storage to check ID/password validation, duplicate IDs, salted password verification (no plaintext), failed login, account-specific data, logout/reload/login, storage failure rollback, account deletion, and unavailable crypto. Production auth is a browser-local prototype, not server authentication.
+Run `node tests/auth-regressions.cjs`. Checks the two-input screens, server auth calls, server session hydration, preference persistence and exclusion of credentials/posts/tokens from local UI storage. Uses isolated mocked API responses.
+
+Run `node tests/api-regressions.cjs`. Checks the actual Vercel handler with mocked Supabase responses: CSRF, validation, signup, duplicate IDs, login errors, HttpOnly cookies, server-verified user identity, user JWT use for RLS, ownership checks, preference allowlist, token refresh, logout and missing environment settings. This test does not prove a live deployment is connected; check `/api/service?action=status` and real test-account flows separately.
 
 ## Home carousel regression checks
 

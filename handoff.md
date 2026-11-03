@@ -7,6 +7,7 @@
 
 ## 0. 현재 상태와 다음 작업
 
+- **Supabase + Vercel API 전환 (2026-11-03):** 사용자 환경변수 등록 후 연결 코드 추가 요청. 브라우저는 `/api/service`만 호출하고 서버에서 SUPABASE_URL/PUBLISHABLE_KEY/SECRET_KEY를 사용. 아이디+비밀번호 가입/로그인 유지, Supabase Auth 검증·HttpOnly 쿠키·갱신·로그아웃·본인 탈퇴, 게시글/댓글/좋아요/프로필/찜/설정 DB 저장, 사진 비공개 Storage 업로드·서명 URL. 기존 로컬 시안 계정은 재가입 필요하며 원래 저장소 데이터는 보존. 예시 커뮤니티 데이터를 DB에 초기 등록. 이번 구성은 이전에 거부된 JWT 검증 없는 공개 Edge Function을 배포하지 않고 Vercel 서버의 신원 검증·CSRF·요청 제한과 RLS를 사용함. `/api/service?action=status`로 배포 버전·DB 연결을 확인. 실제 배포 검증 상태는 docs/verification.md의 최신 항목 확인.
 - **Vercel 배포 준비 (2026-11-03):** 사용자 요청으로 배포 설정을 추가하고 GitHub push 진행. `vercel.json` → `node tools/build-static.cjs` → `dist/`. 배포 파일은 index.html/css/js/assets만 포함. Vercel Import 시 Root Directory는 저장소 루트. 실제 Vercel 프로젝트 연결 및 공개 배포 확인은 별도. 현재 DB 연결은 미반영이며 로그인·게시글은 브라우저 저장 시안.
 
 - **홈 자동 넘김 구현 (2026-11-03):** 상단 5개 캐러셀을 미조작 4초 후 자동 이동·반복하도록 변경. 터치 중 정지, 손을 떼거나 직접 이동한 뒤 4초 재대기. 자동 재생 멈춤/재생 버튼, 백그라운드 탭 정지, 화면 이탈 시 타이머·이벤트 해제. 로그인 수정과 함께 기존 main 커밋에 포함.
