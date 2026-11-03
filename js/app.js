@@ -326,7 +326,7 @@
             <a class="save-btn" href="#/place/${p.food.id}/${p.i}" aria-label="${esc(t('map.detail'))}">${icon('chevronRight')}</a></div>`).join('')}</div></section>
       </div>${tabbar('map')}</main>`;
   };
-  let mapRef = null, markers = {};
+  let mapRef = null, markers = {}, locationMarker = null, locationRequest = 0;
   V.map.mount = ({ id }) => {
     const el = document.getElementById('map'); if (!el || !window.L) return;
     const sel = id && FOOD[id] ? id : null;
@@ -343,7 +343,7 @@
     if (places.length) mapRef.fitBounds(window.L.latLngBounds(places.map(p => [p.lat, p.lng])).pad(0.15), { maxZoom: 15 });
     const ref = mapRef;
     const resizeTimer = setTimeout(() => ref.invalidateSize(), 60);
-    cleanup.push(() => { clearTimeout(resizeTimer); ref.remove(); if (mapRef === ref) mapRef = null; });
+    cleanup.push(() => { clearTimeout(resizeTimer); ref.remove(); if (mapRef === ref) { mapRef = null; locationMarker = null; } });
   };
 
   /* ---------- community ---------- */
@@ -423,11 +423,20 @@
   }
   V.write.mount = () => {
     const inp = document.getElementById('w-photos'); if (!inp) return;
+    const photos = draftPhotos;
+    let active = true;
+    cleanup.push(() => { active = false; });
     inp.addEventListener('change', async () => {
       for (const file of [...inp.files]) {
-        if (draftPhotos.length >= 4) { toast(t('write.photoMax')); break; }
-        try { draftPhotos.push(await resizeImage(file)); } catch (e) { /* 이미지가 아니면 건너뜀 */ }
+        if (!active) return;
+        if (photos.length >= 4) { toast(t('write.photoMax')); break; }
+        try {
+          const photo = await resizeImage(file);
+          if (!active) return;
+          if (photos.length < 4) photos.push(photo);
+        } catch (e) { /* 이미지가 아니면 건너뜀 */ }
       }
+      if (!active) return;
       inp.value = ''; renderPhotos();
     });
     app.querySelectorAll('[data-cat-chip] input').forEach(r => r.addEventListener('change', () => {
@@ -629,12 +638,14 @@
     },
     locate: () => {
       if (!navigator.geolocation || !mapRef) { toast(t('map.locFail')); return; }
+      const ref = mapRef, request = ++locationRequest;
       navigator.geolocation.getCurrentPosition(pos => {
-        if (!mapRef) return;
+        if (mapRef !== ref || request !== locationRequest) return;
         const ll = [pos.coords.latitude, pos.coords.longitude];
-        window.L.circleMarker(ll, { radius: 8, color: '#fff', weight: 3, fillColor: '#3A7291', fillOpacity: 1 }).addTo(mapRef);
-        mapRef.flyTo(ll, 14);
-      }, () => toast(t('map.locFail')), { timeout: 8000 });
+        if (locationMarker) locationMarker.remove();
+        locationMarker = window.L.circleMarker(ll, { radius: 8, color: '#fff', weight: 3, fillColor: '#3A7291', fillOpacity: 1 }).addTo(ref);
+        ref.flyTo(ll, 14);
+      }, () => { if (mapRef === ref && request === locationRequest) toast(t('map.locFail')); }, { timeout: 8000 });
     },
     needLogin: (el, e) => { if (!loggedIn()) { e.preventDefault(); requireLogin(); } },
     likePost: el => { if (!requireLogin()) return; const id = el.dataset.id; Store.update(s => { if (s.postLikes[id]) delete s.postLikes[id]; else s.postLikes[id] = true; }); rerender(); },

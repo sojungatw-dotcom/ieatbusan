@@ -57,13 +57,14 @@ a { color: inherit; text-decoration: none; }
 }
 @media (min-width: 600px) {
   body { padding: 24px 0; }
-  .app { min-height: calc(100dvh - 48px); border-radius: 28px; overflow: hidden; box-shadow: 0 10px 40px rgba(40, 38, 34, .18); }
+  .app { min-height: calc(100dvh - 48px); border-radius: 28px; overflow: clip; box-shadow: 0 10px 40px rgba(40, 38, 34, .18); }
 }
 .screen { min-height: 100dvh; display: flex; flex-direction: column; }
 @media (min-width: 600px) { .screen { min-height: calc(100dvh - 48px); } }
 .screen.has-tabbar { padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px)); }
 .screen.has-cta { padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px)); }
 .grow { flex: 1; }
+.btn svg { width: 20px; height: 20px; flex: none; }
 
 /* ---------- Headers ---------- */
 .app-header, .page-header {
