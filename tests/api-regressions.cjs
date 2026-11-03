@@ -26,7 +26,12 @@ global.fetch = async (url, options = {}) => {
   if (path === '/rest/v1/rpc/ieb_allow_signup') return reply(true);
   if (path === '/rest/v1/ieb_profiles') return reply([{ id: uid, username: 'tester', nickname: 'Tester', area: 8, bio: '', created_at: '2026-11-03T00:00:00Z' }]);
   if (path === '/rest/v1/ieb_preferences') return reply([]);
-  if (path === '/rest/v1/ieb_posts' && options.method === 'GET') return reply(foreignPost ? [] : []);
+  if (path === '/rest/v1/ieb_posts' && options.method === 'GET') {
+    const select = new URL(url).searchParams.get('select');
+    // Likes also link posts to profiles; an implicit author join is ambiguous.
+    if (select?.includes('ieb_profiles(')) return reply({ code: 'PGRST201' }, 300);
+    return reply([]);
+  }
   if (path === '/rest/v1/ieb_comments' || path === '/rest/v1/ieb_post_likes') return reply([]);
   if (path === '/auth/v1/logout' || path.startsWith('/rest/v1/')) return reply({});
   throw new Error('Unexpected upstream endpoint: ' + path);

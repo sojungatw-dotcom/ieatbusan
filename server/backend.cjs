@@ -83,7 +83,7 @@ function credentials(body) {
 async function snapshot(cfg, session) {
   const opts = { token: session.token };
   const [posts, comments, likes, profile, preferences] = await Promise.all([
-    rest(cfg, 'ieb_posts', '?select=*,ieb_profiles(nickname,area)&order=created_at.desc&limit=500', opts),
+    rest(cfg, 'ieb_posts', '?select=*,ieb_profiles!ieb_posts_user_id_fkey(nickname,area)&order=created_at.desc&limit=500', opts),
     rest(cfg, 'ieb_comments', '?select=*,ieb_profiles(nickname)&order=created_at.asc&limit=5000', opts),
     rest(cfg, 'ieb_post_likes', '?select=post_id,user_id&limit=10000', opts),
     session.user ? rest(cfg, 'ieb_profiles', '?id=eq.' + session.user.id + '&select=*', opts) : [],
