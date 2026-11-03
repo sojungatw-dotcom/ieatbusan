@@ -1,5 +1,9 @@
 # Isolated browser checks
 
+## Home carousel regression checks
+
+Run `node tests/home-carousel.cjs`. Checks all four languages and both sorts, five featured slides and twenty list cards, scroll state, navigation boundaries, keyboard controls, restoring the selected food after rerender, resizing, and listener cleanup. Native touch gestures still require a device check.
+
 Run `./tools/serve.ps1 -Port 8766 -Fixtures`, then open `http://localhost:8766/`. Fixture mode serves this browser harness at the server root so the app's native hash links and redirects keep the harness loaded. Do not use `/tests/browser.html` as the browser entry point because the production app's base-relative redirects may leave it.
 
 Alternatively use the `127.0.0.1` hostname on a server that accepts it. Both test origins keep their localStorage separate from the user's `http://localhost:8765` demo.

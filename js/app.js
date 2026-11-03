@@ -119,6 +119,17 @@
 
   /* ---------- views ---------- */
   const V = {};
+  let homeFeaturedId = null;
+
+  function homeFoodCard(f, { rank = 0, eager = false, slide = false, count = 5 } = {}) {
+    const saved = S().savedFoods.includes(f.id);
+    return `<article class="food-card${slide ? ' home-slide' : ''}"${slide ? ` role="group" aria-roledescription="slide" aria-label="${rank} / ${count}: ${esc(fname(f))}" data-food-id="${f.id}"` : ''}>
+      <a href="#/food/${f.id}"><div class="photo"><img src="${img(f.id)}" alt="${esc(fname(f))}" loading="${eager ? 'eager' : 'lazy'}">${rank ? `<span class="rank">${rank}</span>` : ''}</div></a>
+      <div class="info"><a class="names" href="#/food/${f.id}"><div class="name">${esc(fname(f))}</div>${lang() !== 'ko' ? `<div class="orig">${esc(f.ko.name)}</div>` : ''}</a>
+        <button class="like-btn" data-act="saveFood" data-id="${f.id}" aria-pressed="${saved}" aria-label="♥ ${foodLikes(f)}">${icon('heart', saved)}<span>${foodLikes(f)}</span></button></div>
+      <p class="home-summary">${esc(L(f).summary)}</p>
+    </article>`;
+  }
 
   V.login = () => `<main class="screen login">
     <a class="lang-pill top-right" href="#/lang">${icon('globe')}<span>${esc(t('lang.name'))} · ${esc(t('lang.code'))}</span></a>
@@ -146,19 +157,70 @@
   V.home = () => {
     const sort = S().sort;
     const list = [...FOODS];
+    const featured = [...FOODS].sort((a, b) => b.likes - a.likes).slice(0, 5);
     if (sort === 'name') list.sort((a, b) => fname(a).localeCompare(fname(b), lang()));
     else list.sort((a, b) => foodLikes(b) - foodLikes(a));
-    return `<main class="screen has-tabbar">${appHeader()}
+    return `<main class="screen has-tabbar home-screen">${appHeader()}
+      <section class="home-carousel" aria-labelledby="home-featured-title" aria-roledescription="carousel">
+        <div class="section-head"><h2 id="home-featured-title">${esc(t('home.featured'))}</h2></div>
+        <p class="home-swipe-hint" id="home-swipe-hint">${esc(t('home.swipe'))}</p>
+        <div class="home-track" tabindex="0" aria-label="${esc(t('home.featured'))}" aria-describedby="home-swipe-hint">
+          ${featured.map((f, i) => homeFoodCard(f, { rank: i + 1, eager: i === 0, slide: true, count: featured.length })).join('')}
+        </div>
+        <div class="home-carousel-controls">
+          <button class="icon-btn home-prev" type="button" aria-label="${esc(t('home.previous'))}">${icon('back')}</button>
+          <div class="home-pages" role="group" aria-label="${esc(t('home.featured'))}">${featured.map((f, i) => `<button type="button" data-slide="${i}" aria-label="${i + 1}: ${esc(fname(f))}"><span></span></button>`).join('')}</div>
+          <span class="home-count" aria-live="polite" aria-atomic="true">1 / ${featured.length}</span>
+          <button class="icon-btn home-next" type="button" aria-label="${esc(t('home.next'))}">${icon('chevronRight')}</button>
+        </div>
+      </section>
+      <div class="band"></div>
       <div class="home-toolbar"><h1>${esc(t('home.title'))}</h1>
         <button class="sort-btn" data-act="sort">${esc(t(sort === 'name' ? 'home.sort.name' : 'home.sort.popular'))}${icon('chevronDown')}</button></div>
-      <div class="food-list">${list.map((f, i) => {
-        const saved = S().savedFoods.includes(f.id);
-        return `<article class="food-card"><a href="#/food/${f.id}">
-          <div class="photo"><img src="${img(f.id)}" alt="${esc(fname(f))}" loading="${i < 3 ? 'eager' : 'lazy'}">${sort === 'popular' ? `<span class="rank">${i + 1}</span>` : ''}</div></a>
-          <div class="info"><a class="names" href="#/food/${f.id}"><div class="name">${esc(fname(f))}</div>${lang() !== 'ko' ? `<div class="orig">${esc(f.ko.name)}</div>` : ''}</a>
-          <button class="like-btn" data-act="saveFood" data-id="${f.id}" aria-pressed="${saved}" aria-label="♥ ${foodLikes(f)}">${icon('heart', saved)}<span>${foodLikes(f)}</span></button></div>
-        </article>`;
-      }).join('')}</div>${tabbar('home')}</main>`;
+      <div class="food-list">${list.map((f, i) => homeFoodCard(f, { rank: sort === 'popular' ? i + 1 : 0 })).join('')}</div>${tabbar('home')}</main>`;
+  };
+  V.home.mount = () => {
+    const track = app.querySelector('.home-track');
+    const slides = [...track.children];
+    const pages = [...app.querySelectorAll('[data-slide]')];
+    const prev = app.querySelector('.home-prev'), next = app.querySelector('.home-next');
+    const counter = app.querySelector('.home-count');
+    let index = Math.max(0, slides.findIndex(slide => slide.dataset.foodId === homeFeaturedId));
+    const update = () => {
+      homeFeaturedId = slides[index].dataset.foodId;
+      prev.disabled = index === 0;
+      next.disabled = index === slides.length - 1;
+      counter.textContent = `${index + 1} / ${slides.length}`;
+      pages.forEach((page, i) => page.setAttribute('aria-current', String(i === index)));
+    };
+    const move = (to, instant = false) => {
+      const targetIndex = Math.max(0, Math.min(slides.length - 1, to));
+      track.scrollTo({ left: targetIndex * track.clientWidth,
+        behavior: instant || matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+    };
+    const onScroll = () => {
+      if (!track.clientWidth) return;
+      const nearest = Math.max(0, Math.min(slides.length - 1, Math.round(track.scrollLeft / track.clientWidth)));
+      if (nearest !== index) { index = nearest; update(); }
+    };
+    const onKey = event => {
+      const delta = event.key === 'ArrowLeft' ? -1 : event.key === 'ArrowRight' ? 1 : 0;
+      if (delta) { event.preventDefault(); move(index + delta); }
+    };
+    const onResize = () => move(index, true);
+    prev.addEventListener('click', () => move(index - 1));
+    next.addEventListener('click', () => move(index + 1));
+    pages.forEach((page, i) => page.addEventListener('click', () => move(i)));
+    track.addEventListener('scroll', onScroll, { passive: true });
+    track.addEventListener('keydown', onKey);
+    window.addEventListener('resize', onResize);
+    update();
+    move(index, true);
+    cleanup.push(() => {
+      track.removeEventListener('scroll', onScroll);
+      track.removeEventListener('keydown', onKey);
+      window.removeEventListener('resize', onResize);
+    });
   };
 
   V.food = ({ id }) => {
