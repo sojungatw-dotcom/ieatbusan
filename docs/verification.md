@@ -53,3 +53,10 @@
 - 네이티브 권한창, 실제 기기 위치, 모바일 실기기 및 공개 배포 검증은 별도 필요. 배포는 사용자 요청으로 보류 유지.
 
 ![고정 칩과 정상 크기 CTA](verification-sticky.jpg)
+
+## CTA 화살표 후속 확인
+
+- 새 화면에서 20×20px 정상 표시 확인. CSS 미적용 시 기본 SVG 크기가 과대해질 수 있어 아이콘 자체에 width/height=24 지정. 버튼 CSS는 20px 유지.
+- index.html의 app.css 및 icons.js URL 버전을 갱신하여 이전 파일 캐시 회피. 수정 뒤 실제 20×20px, 기본 속성 24×24, 새 CSS URL 적용 및 돼지국밥 지도 이동 확인.
+
+![CTA 화살표 확인](verification-cta.jpg)
