@@ -21,7 +21,7 @@
 - **추가 검증 완료:** 탈퇴 확인/취소 뒤 화면·저장소, 위치 성공/거부/시간초과/지연, 사진 4장 제한·삭제·용량초과 복구를 격리된 브라우저에서 확인. 확인창 응답과 위치는 테스트용 합성 응답이며 브라우저 고유 권한창·실제 기기 위치는 미검증.
 - **GitHub 권한 해결:** kimjuncheol-ai 초대 수락 및 push=true 확인. 원격은 https://github.com/sojungatw-dotcom/ieatbusan.git, 브랜치는 main만 사용.
 - **Git 반영 완료:** 수정 코드와 협업 문서를 main에 푸시함 (구현 커밋 aaaa106). 후속 문서 상태 커밋도 같은 브랜치에 포함.
-- **배포 보류 (사용자 결정, 2026-11-03):** 사용자가 "배포는 나중에 할게"라고 요청. 이번 작업에서 Pages를 활성화하지 않음. 다음 배포 시 저장소 소유자가 Settings → Pages → Deploy from a branch → main / (root) → Save. 공개 주소는 https://sojungatw-dotcom.github.io/ieatbusan/ 이며 아직 라이브 검증하지 않음. 현재 계정은 push 권한만 있고 Pages 활성화 API는 404로 거부됨.
+- **GitHub Pages 사용 안 함 (사용자 결정, 2026-11-03):** 사용자가 "깃허브 페이지는 필요 없어"라고 함. Pages를 켜거나 배포 작업을 제안하지 말 것. 실행은 로컬 정적 서버로만 함.
 - **재현 도구:** `tests/README.md`, `tests/async-regressions.cjs` (Node), `tools/serve.ps1 -Port 8766 -Fixtures` → http://localhost:8766/ (브라우저 격리 검증). 기본 실행은 `tools/serve.ps1 -Port 8765`.
 - **상세 검증 기록:** [docs/verification.md](docs/verification.md).
 - 로컬 서버: http://localhost:8765 (기존 임시 PowerShell HttpListener). 빌드 없는 정적 앱.
