@@ -9,6 +9,18 @@
   let saved = {};
   try {
     const old = JSON.parse(localStorage.getItem('ieatbusan.v1') || '{}');
+    // Remove all legacy browser-only credentials and cached local login data.
+    // Keep non-account content/settings; Supabase accounts are unaffected.
+    const hasLocalAccounts = Object.hasOwn(old, 'accounts') || Object.hasOwn(old, 'user') || old.legacyData?.user;
+    if (hasLocalAccounts) {
+      delete old.accounts;
+      delete old.user;
+      if (old.legacyData && typeof old.legacyData === 'object') {
+        delete old.legacyData.user;
+        delete old.legacyData.accounts;
+      }
+      localStorage.setItem('ieatbusan.v1', JSON.stringify(old));
+    }
     saved = { lang: old.lang, langChosen: old.langChosen, ...JSON.parse(localStorage.getItem(KEY) || '{}') };
   } catch { /* Storage may be unavailable; the online account still works. */ }
   let state = { ...defaults(), ...saved, user: null };

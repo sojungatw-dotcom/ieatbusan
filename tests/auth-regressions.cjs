@@ -33,6 +33,8 @@ const root=path.resolve(__dirname,'..'),read=file=>fs.readFileSync(path.join(roo
  await ctx.Store.signOut();assert.equal(ctx.Store.get().user,null);assert.equal(ctx.Store.get().savedFoods.length,0);
  await ctx.Auth.verify('tester','only-a-test-password');await ctx.Store.signIn();assert.equal(ctx.Store.get().savedFoods[0],'dwaeji-gukbap');
  await ctx.Store.removeCurrentAccount();assert.equal(ctx.Store.get().user,null);
- assert.ok(storage.has('ieatbusan.v1'),'Do not delete pre-existing prototype data');
+ assert.ok(storage.has('ieatbusan.v1'),'Keep non-account prototype data');
+ const legacy=JSON.parse(storage.get('ieatbusan.v1'));
+ assert.ok(!Object.hasOwn(legacy,'accounts')&&!Object.hasOwn(legacy,'user'),'Remove legacy local accounts and cached identity');
  console.log('PASS two-input auth screens, server auth calls, verified-session hydration, DB preference writes, no local account/post/token persistence, logout/relogin and legacy preservation');
 })().catch(error=>{console.error(error);process.exitCode=1;});
