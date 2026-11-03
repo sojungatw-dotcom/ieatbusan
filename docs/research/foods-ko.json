@@ -1,0 +1,1074 @@
+﻿[
+    {
+        "name":  "돼지국밥",
+        "photo":  {
+                      "imageUrl":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/%EB%8F%BC%EC%A7%80%EA%B5%AD%EB%B0%A51.jpg/960px-%EB%8F%BC%EC%A7%80%EA%B5%AD%EB%B0%A51.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:%EB%8F%BC%EC%A7%80%EA%B5%AD%EB%B0%A51.jpg",
+                      "author":  "Tmannya",
+                      "license":  "CC BY-SA 3.0",
+                      "depicts":  "뚝배기에 담긴 뽀얀 국물의 돼지국밥(송송 썬 파·부추 고명). 파일 설명은 \u0027부산의 대표음식 중 하나인 돼지국밥\u0027이며, 2014년 4월 부산에서 촬영됐습니다."
+                  },
+        "summary":  "뽀얀 돼지뼈 국물에 밥을 말아 먹는 부산 소울푸드",
+        "category":  "국밥",
+        "mainIngredients":  "돼지뼈 육수, 돼지고기 수육(앞다리살·삼겹살·항정살 등), 밥, 부추무침, 새우젓, 다대기",
+        "taste":  "구수하고 진한 고기 국물에 부드러운 수육, 새우젓과 부추로 짭짤하고 개운하게 마무리되는 맛",
+        "priceRange":  "8,000~13,000원",
+        "calories":  "약 650kcal (1인분, 공깃밥 포함)",
+        "origin":  "한국전쟁 때 부산으로 몰려든 피란민들이 값싼 돼지뼈와 부산물을 푹 고아 끓여 먹으면서 대중화됐다는 설이 유력합니다. 밀양·합천 등 경남 지역 장터국밥에서 왔다는 설도 있습니다.",
+        "howToEat":  [
+                         "먼저 아무것도 넣지 않은 국물을 한 숟가락 떠서 본연의 맛을 봅니다.",
+                         "부추무침(정구지)을 듬뿍 넣고 새우젓으로 간을 맞춥니다.",
+                         "칼칼한 맛을 원하면 다대기(양념장)를 조금씩 풀어 줍니다.",
+                         "밥을 말아 먹거나 따로국밥처럼 떠먹고, 고기는 새우젓에 찍어 먹습니다."
+                     ],
+        "tip":  "소금보다 새우젓으로 간을 해야 국물에 감칠맛이 더해집니다.",
+        "allergens":  [
+                          "돼지고기",
+                          "새우",
+                          "대두",
+                          "밀"
+                      ],
+        "allergenNote":  "소면 사리 제공 여부, 다대기 재료, 사골(쇠고기) 육수 혼합 여부는 가게마다 다릅니다.",
+        "restaurants":  [
+                            {
+                                "name":  "수변최고돼지국밥 민락본점",
+                                "area":  "수영구 민락동",
+                                "signature":  "항정국밥",
+                                "source":  "https://hotplacehunter.co.kr/?p=87993"
+                            },
+                            {
+                                "name":  "쌍둥이돼지국밥",
+                                "area":  "남구 대연동",
+                                "signature":  "돼지국밥·수육백반",
+                                "source":  "https://hotplacehunter.co.kr/?p=87993"
+                            },
+                            {
+                                "name":  "합천국밥집",
+                                "area":  "남구 용호동",
+                                "signature":  "따로국밥",
+                                "source":  "https://hotplacehunter.co.kr/?p=87993"
+                            },
+                            {
+                                "name":  "60년전통할매국밥",
+                                "area":  "동구 범일동",
+                                "signature":  "돼지국밥·따로국밥",
+                                "source":  "https://hotplacehunter.co.kr/?p=87993"
+                            }
+                        ],
+        "notes":  "사진은 부산 돼지국밥으로 설명된 Commons 파일입니다. 식당 동 정보는 출처의 도로명 주소(광안해변로370번길·유엔평화로·용호로·중앙대로533번길)를 기준으로 판단했습니다. 가격은 2025~2026년 소개 글 기준이라 변동될 수 있습니다. [검증 수정] 사진 URL 200·image/jpeg 확인, Commons API로 라이선스(CC BY-SA 3.0)·설명·분류(Dwaejigukbap, April 2014 in Busan) 재확인. 출처 글에서 네 식당의 주소와 메뉴를 다시 확인함. 60년전통할매국밥이 8,000원이라 가격대를 8,000~13,000원으로 넓히고, 이 집 대표 메뉴에 따로국밥을 추가함. 팁 문장에서 근거가 약한 \u0027소화도 잘 된다\u0027는 표현을 뺐고, 알레르기 메모에 사골(쇠고기) 육수 혼합 가능성을 추가함."
+    },
+    {
+        "name":  "밀면",
+        "photo":  {
+                      "imageUrl":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/Busan_Milmyeon_20200522_001.jpg/960px-Busan_Milmyeon_20200522_001.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:Busan_Milmyeon_20200522_001.jpg",
+                      "author":  "Mobius6",
+                      "license":  "CC BY-SA 4.0",
+                      "depicts":  "스테인리스 그릇에 담긴 부산 물밀면(양념장, 편육, 오이, 무, 노란 계란지단 고명)과 옆에 놓인 가위·무절임. 파일 설명은 \u0027Busan Milmyeon\u0027, 분류는 Mulmilmyeon"
+                  },
+        "summary":  "피란민이 밀가루로 만든 부산식 시원한 냉면",
+        "category":  "면류",
+        "mainIngredients":  "밀가루·전분 면, 사골 또는 한약재 육수, 양념장, 편육, 오이, 삶은 달걀(또는 지단)",
+        "taste":  "새콤달콤한 살얼음 육수에 쫄깃한 밀가루 면, 매콤한 양념장이 어우러진 시원한 맛",
+        "priceRange":  "9,000~11,000원",
+        "calories":  "약 550kcal (물밀면 1그릇)",
+        "origin":  "한국전쟁 뒤 부산에 정착한 이북 실향민들이 냉면 재료 대신 원조 물자로 흔해진 밀가루로 면을 뽑아 만든 것이 시작입니다. 1953년 남구 우암동에서 문을 연 내호냉면이 밀면의 발상지로 꼽힙니다.",
+        "howToEat":  [
+                         "먹기 전에 식초와 겨자를 기호에 맞게 넣습니다.",
+                         "면이 길면 가위로 한두 번 잘라 줍니다.",
+                         "양념장을 육수에 고루 풀어 섞은 뒤 면과 함께 먹습니다.",
+                         "함께 나오는 따뜻한 온육수를 중간중간 마시며 속을 달랩니다."
+                     ],
+        "tip":  "가게마다 육수 맛이 꽤 달라서 처음이라면 물밀면으로 시작해 여러 집을 비교해 보는 것도 재미입니다.",
+        "allergens":  [
+                          "밀",
+                          "쇠고기",
+                          "돼지고기",
+                          "난류",
+                          "대두"
+                      ],
+        "allergenNote":  "육수 재료(사골·닭·한약재)와 고명 고기 종류는 가게마다 다르며, 닭 육수를 쓰는 집도 있습니다.",
+        "restaurants":  [
+                            {
+                                "name":  "내호냉면",
+                                "area":  "남구 우암동",
+                                "signature":  "밀면",
+                                "source":  "https://news.samsung.com/kr/%EB%8C%80%ED%95%99%EC%83%9D-%EA%B8%B0%EC%9E%90%EB%8B%A8%EA%B0%A4%EB%9F%AD%EC%8B%9Cs6-%EB%B6%80%EC%82%B0-%EC%B5%9C%EA%B3%A0%EC%9D%98-%EB%B0%80%EB%A9%B4%EC%9D%84-%EC%B0%BE%EC%95%84%EB%9D%BC"
+                            },
+                            {
+                                "name":  "춘하추동밀면",
+                                "area":  "부산진구 부전동",
+                                "signature":  "물밀면",
+                                "source":  "https://news.samsung.com/kr/%EB%8C%80%ED%95%99%EC%83%9D-%EA%B8%B0%EC%9E%90%EB%8B%A8%EA%B0%A4%EB%9F%AD%EC%8B%9Cs6-%EB%B6%80%EC%82%B0-%EC%B5%9C%EA%B3%A0%EC%9D%98-%EB%B0%80%EB%A9%B4%EC%9D%84-%EC%B0%BE%EC%95%84%EB%9D%BC"
+                            },
+                            {
+                                "name":  "원조 개금밀면",
+                                "area":  "부산진구 개금동",
+                                "signature":  "물밀면·비빔밀면",
+                                "source":  "https://polle.com/place/2knfaO/%EC%9B%90%EC%A1%B0%20%EA%B0%9C%EA%B8%88%EB%B0%80%EB%A9%B4"
+                            },
+                            {
+                                "name":  "국제밀면",
+                                "area":  "연제구 거제동",
+                                "signature":  "물밀면",
+                                "source":  "https://polle.com/place/5B9gEF/%EA%B5%AD%EC%A0%9C%EB%B0%80%EB%A9%B4"
+                            }
+                        ],
+        "notes":  "사진 파일명이 부산 밀면으로 되어 있습니다. \u0027부산 3대 밀면\u0027은 출처마다 꼽는 가게가 다릅니다(개금·국제·춘하추동 또는 가야밀면·내호냉면 포함). 춘하추동은 서면 본점 기준으로 부전동으로 표기했습니다. [검증 수정] 사진 URL 200·image/jpeg 확인, Commons API로 라이선스(CC BY-SA 4.0)·분류(Mulmilmyeon) 재확인. 삼성 뉴스룸 기사에서 내호냉면(우암동, 1953년 피란 후 개업, 밀면 최초 탄생지로 소개)과 춘하추동(서면 본점)을 확인했고, polle에서 개금밀면(가야공원로14번길, 개금시장)과 국제밀면 본점(중앙대로1235번길, 교대역 인근)의 주소와 현재 가격(물밀면 10,000~11,000원)을 확인함. 사진 속 고명이 계란지단이어서 주재료에 \u0027(또는 지단)\u0027을 덧붙이고, 알레르기 메모에 닭 육수 가능성을 덧붙임."
+    },
+    {
+        "name":  "씨앗호떡",
+        "photo":  {
+                      "imageUrl":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/%EC%94%A8%EC%95%97%ED%98%B8%EB%96%A1.jpg/960px-%EC%94%A8%EC%95%97%ED%98%B8%EB%96%A1.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:%EC%94%A8%EC%95%97%ED%98%B8%EB%96%A1.jpg",
+                      "author":  "Tmannya",
+                      "license":  "CC BY-SA 3.0",
+                      "depicts":  "BIFF광장 바닥을 배경으로 종이에 받쳐 든, 반으로 갈라 해바라기씨 등 씨앗을 가득 채운 튀긴 호떡. 파일 설명은 \u0027부산의 명물인 씨앗이 잔뜩 들어간 호떡\u0027"
+                  },
+        "summary":  "튀긴 호떡에 고소한 씨앗을 꽉 채운 남포동 명물",
+        "category":  "길거리 간식",
+        "mainIngredients":  "찹쌀·밀가루 반죽, 흑설탕 시럽, 해바라기씨·호박씨·땅콩·잣 등 견과류, 마가린",
+        "taste":  "겉은 바삭하고 속은 쫀득하며, 달콤한 흑설탕 시럽과 고소한 씨앗이 씹히는 맛",
+        "priceRange":  "2,000~2,500원 (1개)",
+        "calories":  "약 300kcal (1개)",
+        "origin":  "호떡은 근대에 화교를 통해 들어왔고, 기름에 튀긴 호떡을 갈라 씨앗을 채우는 방식은 남포동 BIFF광장 노점에서 시작된 것으로 알려져 있습니다. 예능 \u00271박 2일\u0027에 소개된 뒤 전국적으로 유명해져 부산 대표 간식이 됐습니다.",
+        "howToEat":  [
+                         "노점 앞에 줄을 서서 갓 튀겨 나온 호떡을 주문합니다.",
+                         "반으로 가른 호떡 속에 씨앗을 듬뿍 채워 종이컵이나 종이에 받아 듭니다.",
+                         "녹은 설탕 시럽이 매우 뜨거우니 한 김 식힌 뒤 윗부분부터 베어 먹습니다.",
+                         "BIFF광장과 국제시장 골목을 걸으며 따뜻할 때 다 먹습니다."
+                     ],
+        "tip":  "포장하면 식어서 바삭함이 사라지니 현장에서 바로 먹는 것이 가장 맛있습니다.",
+        "allergens":  [
+                          "밀",
+                          "땅콩",
+                          "호두",
+                          "잣",
+                          "대두"
+                      ],
+        "allergenNote":  "씨앗·견과 구성과 튀김용 마가린(우유·대두 성분 포함 가능)은 노점마다 다릅니다.",
+        "restaurants":  [
+                            {
+                                "name":  "원조 승기 씨앗호떡",
+                                "area":  "중구 남포동",
+                                "signature":  "씨앗호떡",
+                                "source":  "https://tour.yanolja.com/content/restaurants/fb534b55-4d76-4127-a684-ae21345678fd"
+                            },
+                            {
+                                "name":  "남포동 원조 찹쌀호떡 본점",
+                                "area":  "중구 남포동",
+                                "signature":  "7가지 씨앗호떡",
+                                "source":  "https://tour.yanolja.com/content/restaurants/c4518a16-7d5e-4dd4-a474-0903b74524aa"
+                            },
+                            {
+                                "name":  "남포동 씨앗호떡",
+                                "area":  "중구 남포동",
+                                "signature":  "씨앗호떡",
+                                "source":  "https://www.busannavi.net/en/?p=7202"
+                            }
+                        ],
+        "notes":  "확인된 곳은 3곳뿐이라 3곳만 넣었습니다. BIFF광장에는 \u0027원조\u0027를 내세우는 비슷한 이름의 노점이 많아 원조 논쟁이 있습니다. 세 번째 출처(Busan Navi)의 노점은 상호 표기가 일반명이라 다른 노점과 같은 가게일 가능성이 있습니다. 세부 씨앗 구성(잣·호두 포함 여부)은 가게마다 다릅니다. [검증 수정] 사진 URL 200·image/jpeg 확인, Commons API로 라이선스(CC BY-SA 3.0)·분류(Ssiathotteok) 재확인. 야놀자 페이지로 승기씨앗호떡(남포동3가)과 남포동 원조 찹쌀호떡 본점(비프광장로 36, 7가지 씨앗·마가린 튀김)을, Busan Navi로 남포동 씨앗호떡(자갈치역 7번 출구 인근, 2,000원, 잣·해바라기씨)을 확인함. 해운대·서면 등에서 네 번째 가게를 찾아봤지만 확인되지 않아 추가하지 않음. \u0027원조 승기 씨앗호떡\u0027의 정식 상호는 출처상 \u0027승기씨앗호떡\u0027임. 확인되지 않은 \u00272000년대 후반\u0027이라는 시점을 유래에서 빼고, 시작 장소는 \u0027알려져 있습니다\u0027로 완화함(최초 판매자·시점은 확인되지 않음). 사진처럼 종이에 받쳐 주는 경우도 있어 먹는 법 2단계를 고침."
+    },
+    {
+        "name":  "낙곱새",
+        "photo":  {
+                      "imageUrl":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/Korean_cuisine-Nakji_bokkeum-02.jpg/960px-Korean_cuisine-Nakji_bokkeum-02.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:Korean_cuisine-Nakji_bokkeum-02.jpg",
+                      "author":  "shizu k (shezzz)",
+                      "license":  "CC BY-SA 2.0",
+                      "depicts":  "넓은 전골 팬에서 국물 자작하게 끓는 낙지볶음(낙지·대파·양파, 고추장 양념). 파일 설명은 \u0027Nakji_bokkeum, stir-fried small octopus marinated in gochujang-based sauce\u0027. 낙곱새 자체가 아니라 비슷한 낙지볶음 사진"
+                  },
+        "summary":  "낙지·곱창·새우를 매콤하게 끓인 조방 골목 전골",
+        "category":  "전골·볶음",
+        "mainIngredients":  "낙지, 소곱창, 새우, 양파·대파·당면, 고춧가루·고추장 양념",
+        "taste":  "칼칼하고 달짝지근한 양념에 쫄깃한 낙지, 고소한 곱창 기름, 탱글한 새우가 어우러진 진한 맛",
+        "priceRange":  "11,000~14,000원 (1인분)",
+        "calories":  "약 750kcal (1인분, 공깃밥 포함)",
+        "origin":  "옛 조선방직이 있던 동구 범일동 \u0027조방\u0027 일대 낙지볶음집에서 노동자들이 즐기던 낙지볶음에 곱창과 새우를 더한 것이 시작으로 알려져 있습니다. 조방낙지·개미집 같은 가게가 유명해지면서 부산 대표 음식이 됐습니다.",
+        "howToEat":  [
+                         "전골 팬에 재료가 담겨 나오면 불을 켜고 양념이 고루 배도록 저어 가며 끓입니다.",
+                         "곱창과 새우가 익으면 큰 대접에 밥을 담고 낙곱새를 국물째 떠 올립니다.",
+                         "함께 나오는 콩나물·부추·김가루를 얹어 쓱쓱 비벼 먹습니다.",
+                         "남은 양념에 밥을 볶아 볶음밥으로 마무리합니다."
+                     ],
+        "tip":  "처음엔 덜 맵게 주문하고, 양념이 졸면 점점 매워지니 국물이 있을 때 비벼 드세요.",
+        "allergens":  [
+                          "새우",
+                          "쇠고기",
+                          "대두",
+                          "밀"
+                      ],
+        "allergenNote":  "낙지는 의무 표시 대상은 아니지만 연체류 알레르기가 있다면 주의하고, 사리 추가와 양념 재료는 가게마다 다릅니다.",
+        "restaurants":  [
+                            {
+                                "name":  "조방낙지 범일직영점",
+                                "area":  "동구 범일동",
+                                "signature":  "낙곱새볶음",
+                                "source":  "https://polle.com/place/12SsOP/%EC%A1%B0%EB%B0%A9%EB%82%99%EC%A7%80"
+                            },
+                            {
+                                "name":  "원조 할매낙지",
+                                "area":  "부산진구 범천동",
+                                "signature":  "낙곱새",
+                                "source":  "https://polle.com/place/1qTA3T/%EC%9B%90%EC%A1%B0%20%ED%95%A0%EB%A7%A4%EB%82%99%EC%A7%80"
+                            },
+                            {
+                                "name":  "소문난 원조 조방낙지 본점",
+                                "area":  "동래구 명륜동",
+                                "signature":  "낙곱새",
+                                "source":  "https://polle.com/place/2cTtJF/%EC%86%8C%EB%AC%B8%EB%82%9C%20%EC%9B%90%EC%A1%B0%20%EC%A1%B0%EB%B0%A9%EB%82%99%EC%A7%80"
+                            },
+                            {
+                                "name":  "개미집 본점",
+                                "area":  "중구 신창동",
+                                "signature":  "낙곱새볶음",
+                                "source":  "https://www.ktriptips.com/kor/food/2609623"
+                            }
+                        ],
+        "notes":  "Wikimedia Commons에서 \u0027낙곱새·nakgopsae·낙지 곱창\u0027 등으로 찾아봤지만 낙곱새 사진은 없었습니다. 그래서 가장 비슷한 사진으로, 전골 팬에 국물 있게 끓이는 낙지볶음을 대신 넣었습니다. 사진에는 곱창과 새우가 없습니다. [검증 수정] 사진 URL 200·image/jpeg 확인, Commons API로 라이선스(CC BY-SA 2.0, VRTS 허가 확인)·설명 재확인. \u0027낙곱새·nakgopsae·낙지 곱창 새우·조방낙지\u0027 등으로 다시 검색해도 결과가 없었고, \u0027Nakji jeongol\u0027 사진들도 곱창·새우가 없어 국물 있는 부산식에 가장 가까운 현재 사진을 유지함. 식당: 조방낙지 범일직영점(조방로 21, 낙곱새볶음 12,000원), 원조 할매낙지(골드테마길 10, 낙+곱+새우 11,000원)를 polle에서 확인함. \u0027소문난 원조조방낙지\u0027는 다이닝코드 매거진의 옛 가격(8,000원) 대신 polle의 현재 정보(명륜로94번길 37, 본점, 낙곱새 13,000원)로 출처를 바꾸고 상호를 \u0027소문난 원조 조방낙지 본점\u0027으로 고침. \u0027개미집 (해운대점)\u0027은 다이닝코드에 지번만 있고 지점인지 확인되지 않아, 국제시장 인근 본점(중구 중구로30번길 21-1, 신창동2가, 대표 메뉴 낙곱새볶음)으로 바꿈."
+    },
+    {
+        "name":  "자갈치 활어회",
+        "photo":  {
+                      "imageUrl":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Korea-Busan-Hoe-Raw_seafood-01.jpg/960px-Korea-Busan-Hoe-Raw_seafood-01.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:Korea-Busan-Hoe-Raw_seafood-01.jpg",
+                      "author":  "Junho Jung (Flickr, South Korea)",
+                      "license":  "CC BY-SA 3.0",
+                      "depicts":  "부산에서 찍은 사진으로, 무채 위에 얇게 떠서 넓게 깔아 낸 흰살생선 활어회 한 접시 (파일명: Korea-Busan-Hoe-Raw seafood-01, 설명: A view of Busan, South Korea). 자갈치시장에서 찍었는지는 설명에 나와 있지 않음."
+                  },
+        "summary":  "자갈치시장에서 바로 떠 주는 싱싱한 활어회",
+        "category":  "해산물 · 회",
+        "mainIngredients":  "광어·우럭·도다리·숭어 등 제철 활어, 상추·깻잎, 마늘·고추, 초장·쌈장·간장",
+        "taste":  "쫄깃하고 탱탱한 식감에 담백하고 은은한 단맛이 돌며, 초장과 쌈장으로 새콤하고 고소한 맛을 더한다",
+        "priceRange":  "1인 25,000~40,000원 (2층 식당 상차림비 1인 4,000~5,000원 별도)",
+        "calories":  "약 300kcal (1인분, 회 200g·소스 포함)",
+        "origin":  "광복과 한국전쟁을 거치며 남항 자갈밭에 \u0027자갈치 아지매\u0027라 불린 여성 상인들이 좌판을 펴고 생선을 팔면서 지금의 자갈치시장이 자리 잡았다. 지금은 1층에서 활어를 고르고 위층 식당에서 바로 회를 떠 먹는 방식으로 부산 회 문화를 대표하는 곳이 됐다.",
+        "howToEat":  [
+                         "1층 수조에서 먹고 싶은 활어를 고르고 무게와 가격을 정한다",
+                         "손질한 회를 들고 위층 식당으로 올라가 상차림을 받는다",
+                         "상추나 깻잎에 회를 올리고 마늘·고추·쌈장을 곁들여 쌈으로 먹거나 초장·간장에 찍어 먹는다",
+                         "남은 뼈와 머리로 매운탕을 끓여 공깃밥과 함께 마무리한다"
+                     ],
+        "tip":  "1층에서 고른 회를 위층 식당에서 먹으면 상차림비가 따로 붙으니 주문 전에 금액을 꼭 확인하세요.",
+        "allergens":  [
+                          "대두",
+                          "밀"
+                      ],
+        "allergenNote":  "초장·간장·쌈장에 대두와 밀이 들어가며, 모둠회 구성에 따라 고등어·오징어·조개류가 함께 나올 수 있습니다.",
+        "restaurants":  [
+                            {
+                                "name":  "자갈치시장 (활어부·2층 회식당)",
+                                "area":  "중구 남포동",
+                                "signature":  "1층 활어 직접 고르기 + 2층 회 상차림",
+                                "source":  "https://www.ktriptips.com/kor/shopping/132190"
+                            },
+                            {
+                                "name":  "신동아수산물시장 회센터",
+                                "area":  "중구 남포동",
+                                "signature":  "1층 활어 고른 뒤 3층 회센터에서 회 뜨기",
+                                "source":  "https://www.ktriptips.com/kor/shopping/132576"
+                            },
+                            {
+                                "name":  "달봉이횟집",
+                                "area":  "중구 남포동",
+                                "signature":  "전복 코스, 전복회",
+                                "source":  "https://www.siksinhot.com/toplists/best/101891_busan"
+                            },
+                            {
+                                "name":  "부산명물횟집",
+                                "area":  "중구 남포동",
+                                "signature":  "광어회 회백반",
+                                "source":  "https://polle.com/place/5jorYe/%EB%B6%80%EC%82%B0%EB%AA%85%EB%AC%BC%ED%9A%9F%EC%A7%91"
+                            }
+                        ],
+        "notes":  "사진은 부산 횟집의 흰살생선 활어회이지만 자갈치시장에서 찍었는지는 확인되지 않았습니다. 부산명물횟집(자갈치해안로 55)은 활어회보다 회백반으로 유명한 50년 노포입니다. 상차림비, 휴무일은 시장과 가게마다 달라 확인이 필요합니다(자갈치시장은 매월 1·3·5째 화요일, 신동아수산물시장은 2·4째 화요일 휴무로 안내됨). [검증 수정] 사진 URL 200·image/jpeg 확인, Commons 라이선스 CC BY-SA 3.0 확인, 내용이 흰살생선회임을 직접 확인. 자갈치시장 출처가 다른 페이지(ktriptips 1017209: 자갈치시장 내용 없음)여서 자갈치시장 안내 페이지(ktriptips 132190, 자갈치해안로 52)로 교체. 회센터 층이 시장 건물마다 2~3층으로 달라 howToEat·tip의 \u00272층\u0027을 \u0027위층\u0027으로 고침. 달봉이횟집은 식신 소개 기준 자갈치시장 2층 동편 회·전복 전문점으로 확인. 부산명물횟집 대표 메뉴를 \u0027숙성 광어회 회백반\u0027에서 출처 표현대로 \u0027광어회 회백반\u0027으로 수정. origin의 시장 형성 시기를 \u0027한국전쟁 뒤\u0027에서 \u0027광복과 한국전쟁을 거치며\u0027로 다듬음."
+    },
+    {
+        "name":  "어묵",
+        "photo":  {
+                      "imageUrl":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Busan-eomuk.jpg/960px-Busan-eomuk.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:Busan-eomuk.jpg",
+                      "author":  "Ryan Bodenstein",
+                      "license":  "CC BY 2.0",
+                      "depicts":  "진열대에 쌓아 둔 여러 모양의 부산어묵(사각 어묵, 원형 어묵, 막대 모양 어묵) 클로즈업 (파일 설명: Busan-eomuk (fishcakes))"
+                  },
+        "summary":  "부산을 대표하는 쫄깃한 생선살 어묵",
+        "category":  "길거리 음식 · 분식",
+        "mainIngredients":  "흰살생선 연육, 밀가루·전분, 채소, 소금 / 국물: 무·멸치·다시마·간장",
+        "taste":  "생선살 맛이 진하고 쫄깃하며, 뜨끈한 국물은 시원하고 감칠맛이 난다",
+        "priceRange":  "꼬치 1개 1,000~1,500원, 어묵 고로케·핫바 2,500~4,500원",
+        "calories":  "약 180kcal (꼬치 3개와 국물 기준)",
+        "origin":  "일제강점기에 일본의 가마보코가 들어온 것이 시작으로, 광복과 한국전쟁 뒤 부평시장(현 깡통시장)과 영도 일대의 어묵 공장에서 대량으로 만들며 \u0027부산어묵\u0027이라는 이름이 자리 잡았다. 1953년 영도에서 문을 연 삼진어묵처럼 3대째 이어 온 가게도 많다.",
+        "howToEat":  [
+                         "노점 국물 통에서 따끈하게 데워진 어묵 꼬치를 하나 집는다",
+                         "원하면 간장을 살짝 찍거나 붓으로 발라 먹는다",
+                         "종이컵에 국물을 떠서 어묵과 번갈아 마신다",
+                         "다 먹은 뒤 꼬챙이 개수를 세어 계산하고, 어묵 전문점에서는 어묵 고로케나 핫바도 맛본다"
+                     ],
+        "tip":  "추운 날에는 국물을 여러 번 떠 마셔도 괜찮으니 꼬치 몇 개와 함께 몸을 녹여 보세요.",
+        "allergens":  [
+                          "밀",
+                          "대두"
+                      ],
+        "allergenNote":  "어묵에 따라 새우·오징어·게살·치즈·달걀흰자가 들어가는 제품이 있으니 종류별 표시를 확인하세요.",
+        "restaurants":  [
+                            {
+                                "name":  "삼진어묵 영도 본점",
+                                "area":  "영도구 봉래동",
+                                "signature":  "어묵 고로케",
+                                "source":  "https://www.elle.co.kr/article/1896062"
+                            },
+                            {
+                                "name":  "고래사어묵 해운대점",
+                                "area":  "해운대구 우동",
+                                "signature":  "어묵 우동(어묵면)",
+                                "source":  "https://www.elle.co.kr/article/1896062"
+                            },
+                            {
+                                "name":  "미도어묵 부평깡통시장점",
+                                "area":  "중구 부평동",
+                                "signature":  "갓 튀긴 핫바와 즉석 어묵",
+                                "source":  "https://www.elle.co.kr/article/1896062"
+                            },
+                            {
+                                "name":  "환공어묵 부산역점",
+                                "area":  "동구 초량동",
+                                "signature":  "모둠어묵 세트, 통새우 고로케",
+                                "source":  "https://polle.com/place/5oVwUx/%ED%99%98%EA%B3%B5%EC%96%B4%EB%AC%B5"
+                            }
+                        ],
+        "notes":  "사진은 부산어묵으로 설명된 진열 어묵이며, 어느 가게인지는 나와 있지 않습니다. [검증 수정] 사진 URL 200·image/jpeg, CC BY 2.0, 어묵 사진임을 직접 확인. 식당 주소 확인: 삼진어묵 영도 본점 태종로99번길 36(봉래동), 고래사어묵 해운대점 구남로 14(우동, 채용공고 주소에도 \u0027우동\u0027 표기), 미도어묵 부평깡통시장점 중구로43번길 31 부평깡통시장(부평동), 환공어묵 부산역점 중앙대로 206 부산역 2층(초량동). 환공어묵 메뉴판에 \u0027어묵 고로케\u0027가 아닌 모둠어묵 세트·통새우 고로케 등이 있어 대표 메뉴를 고침. 메뉴판상 고로케·핫바가 4,500원인 곳도 있어 가격대를 2,500~4,500원으로 넓힘."
+    },
+    {
+        "name":  "해운대 암소갈비",
+        "photo":  {
+                      "imageUrl":  "https://upload.wikimedia.org/wikipedia/commons/5/56/Galbi-gui.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail_unscaled",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:Galbi-gui.jpg",
+                      "author":  "뚱표아빠의 세상사는 이야기",
+                      "license":  "CC BY 4.0",
+                      "depicts":  "돌판 위에 먹기 좋게 잘라 구운 소갈비와 갈빗대, 고추·마늘 곁들임 (파일 설명: Galbi-gui, grilled beef ribs). 해운대에서 찍은 사진이라는 설명은 없음."
+                  },
+        "summary":  "한우 암소갈비를 숯불에 구운 해운대 명물",
+        "category":  "고기 · 구이",
+        "mainIngredients":  "한우 암소 갈비, 간장·설탕·배·마늘·참기름 양념, 감자사리(감자면)",
+        "taste":  "양념이 달짝지근하면서 짭조름하고, 암소 한우 특유의 부드러운 육질과 고소한 육즙이 살아 있다",
+        "priceRange":  "1인분(180~200g) 50,000~62,000원",
+        "calories":  "약 600kcal (양념갈비 1인분 200g 기준)",
+        "origin":  "1964년 해운대에서 문을 연 해운대암소갈비집이 한우 암소 갈비에 다이아몬드 모양 칼집을 넣고 독특한 양념으로 구워내며 \u0027해운대 갈비\u0027라는 이름을 알렸다. 이후 해운대 일대에 암소갈비 전문점이 늘며 부산을 대표하는 고기 요리가 됐다.",
+        "howToEat":  [
+                         "한정 판매인 생갈비를 먼저 주문해 담백한 맛부터 본다",
+                         "이어서 양념갈비를 불판에 올려 타지 않게 뒤집으며 굽는다",
+                         "고기를 다 먹은 뒤 감자사리를 불판 육수에 끓여 양념에 적셔 먹는다",
+                         "갈빗대가 들어간 뚝배기 된장과 공깃밥으로 식사를 마무리한다"
+                     ],
+        "tip":  "생갈비는 일찍 품절되는 경우가 많으니 전화로 미리 예약하거나 문 여는 시간에 맞춰 가세요.",
+        "allergens":  [
+                          "쇠고기",
+                          "대두",
+                          "밀"
+                      ],
+        "allergenNote":  "양념과 된장찌개에 대두·밀이 들어가며, 감자사리 반죽과 양념 재료는 가게마다 다를 수 있습니다.",
+        "restaurants":  [
+                            {
+                                "name":  "해운대암소갈비집",
+                                "area":  "해운대구 중동",
+                                "signature":  "한우 생갈비, 양념갈비, 감자면 사리",
+                                "source":  "https://guide.michelin.com/kr/ko/busan-region/busan_1025838/restaurant/haeundae-rib-barbecue-restaurant"
+                            },
+                            {
+                                "name":  "해운대이름난암소갈비",
+                                "area":  "해운대구 중동",
+                                "signature":  "한우 암소 생갈비·양념갈비",
+                                "source":  "https://hotplacehunter.co.kr/sns/article/87222/"
+                            },
+                            {
+                                "name":  "일품한우",
+                                "area":  "해운대구 우동",
+                                "signature":  "한우 생갈비",
+                                "source":  "https://www.ktriptips.com/kor/food/851955"
+                            }
+                        ],
+        "notes":  "Commons에서 해운대 암소갈비 사진을 찾지 못해, 같은 요리인 구운 소갈비(갈비구이) 사진을 대신 썼습니다. \u0027해운대 소문난 암소갈비집\u0027은 해운대암소갈비집과 같은 곳(1964년 개업)으로 보여 따로 넣지 않았습니다. 확인된 식당이 3곳이라 3곳만 넣었습니다. [검증 수정] 사진 URL 200·image/jpeg, CC BY 4.0, 구운 소갈비 사진임을 직접 확인(원본 640px라 썸네일 대신 원본 URL). 미쉐린 가이드에서 해운대암소갈비집의 1964년 개업, 한정 생갈비, 감자면 사리, 갈빗대 뚝배기 된장을 확인해 대표 메뉴와 howToEat 4단계를 맞춤. 비즈한국 보도에 따라 origin의 \u0027촘촘한 칼집\u0027을 \u0027다이아몬드 모양 칼집\u0027으로 고침. 해운대이름난암소갈비는 달맞이길 22(중동), 일품한우는 해운대로570번길 49(우동)로 확인. 최근 소개글의 생갈비 180g 58,000~62,000원을 반영해 가격 상한을 62,000원으로 올림."
+    },
+    {
+        "name":  "청사포 조개구이",
+        "photo":  {
+                      "imageUrl":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Jogae-gui_4.jpg/960px-Jogae-gui_4.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:Jogae-gui_4.jpg",
+                      "author":  "bryan... (Flickr)",
+                      "license":  "CC BY-SA 2.0",
+                      "depicts":  "석쇠 위에서 굽고 있는 가리비와 백합 등 조개구이 (파일 설명: Jogae-gui, grilled clams). 촬영 장소는 나와 있지 않음."
+                  },
+        "summary":  "청사포 바다를 보며 굽는 조개구이",
+        "category":  "해산물 · 구이",
+        "mainIngredients":  "가리비, 키조개, 백합, 전복·소라, 치즈·버터·옥수수콘 토핑 (장어 추가 가능)",
+        "taste":  "불에 구워 짭조름한 바다 맛과 쫄깃한 조갯살에 치즈와 버터가 고소함을 더한다",
+        "priceRange":  "1인 30,000~40,000원 (2인 모둠 4~9만 원대)",
+        "calories":  "약 450kcal (1인분, 치즈·버터 토핑 포함)",
+        "origin":  "해운대와 송정 사이의 작은 어촌 청사포에 바다를 마주하고 조개와 장어를 구워 먹는 가게들이 모여들면서 부산의 대표 조개구이 거리가 됐다. 빨간·하얀 쌍둥이 등대와 다릿돌전망대 덕분에 바다 풍경과 함께 즐기는 저녁 코스로 사랑받는다.",
+        "howToEat":  [
+                         "조개 모둠 세트를 시키고 불판 위에 조개를 고르게 올린다",
+                         "입이 벌어지면 집게로 뒤집어 국물이 흘러내리지 않게 익힌다",
+                         "가리비와 키조개에는 치즈·버터·콘을 얹어 녹을 때까지 굽는다",
+                         "마지막에 조개 칼국수나 라면으로 마무리한다"
+                     ],
+        "tip":  "해 질 무렵 창가 자리에 앉으면 청사포 등대와 노을을 보며 먹을 수 있으니 조금 일찍 가세요.",
+        "allergens":  [
+                          "조개류(굴·전복·홍합 포함)",
+                          "우유",
+                          "난류"
+                      ],
+        "allergenNote":  "세트 구성에 따라 새우·꽃게·장어가 들어가고, 치즈·마요네즈 토핑과 마무리 칼국수·라면(밀)은 가게마다 다릅니다.",
+        "restaurants":  [
+                            {
+                                "name":  "수민이네",
+                                "area":  "해운대구 중동",
+                                "signature":  "조개모듬, 장어구이",
+                                "source":  "https://polle.com/place/40UrtK/%EC%88%98%EB%AF%BC%EC%9D%B4%EB%84%A4"
+                            },
+                            {
+                                "name":  "도희네",
+                                "area":  "해운대구 중동",
+                                "signature":  "모듬조개구이, 전복빠다야끼",
+                                "source":  "https://polle.com/place/5vVRgq/%EB%8F%84%ED%9D%AC%EB%84%A4"
+                            },
+                            {
+                                "name":  "조개뷰 해운대본점",
+                                "area":  "해운대구 중동",
+                                "signature":  "산해진미 조개구이(치즈), 가리비타워",
+                                "source":  "https://www.diningcode.com/profile.php?rid=8B8t3OFbD9PO"
+                            },
+                            {
+                                "name":  "제이제이가리비 청사포 본점",
+                                "area":  "해운대구 중동",
+                                "signature":  "가리비 조개구이 세트",
+                                "source":  "https://tour.yanolja.com/content/restaurants/55e97bcb-7ce4-4ae9-aea4-cf36dd42a35b"
+                            }
+                        ],
+        "notes":  "사진은 일반 조개구이(가리비·백합) 사진으로, 청사포에서 찍었는지는 확인되지 않았습니다. 청사포는 법정동으로 해운대구 중동에 속합니다. 가격과 영업시간은 가게마다 차이가 커서 방문 전 확인이 필요합니다. [검증 수정] 사진 URL 200·image/jpeg, CC BY-SA 2.0, 석쇠 위 가리비·백합 조개구이임을 직접 확인. 식당 주소 확인: 수민이네 청사포로58번길 118, 도희네 청사포로 157, 조개뷰 청사포로 153(지번 중동 520-1), 제이제이가리비 청사포로 139-4. 메뉴판에 맞춰 대표 메뉴 수정(수민이네 \u0027붕장어구이\u0027→장어구이·조개모듬, 도희네 전복빠다야끼 추가, 조개뷰 \u0027치즈 가리비\u0027→산해진미 조개구이·가리비타워). triple.guide 출처가 야놀자로 리다이렉트되어 최종 URL로 교체. 메뉴판상 모둠 가격(조개모듬 40,000~55,000원, 모듬 스페셜 90,000원)을 반영해 2인 가격을 4~9만 원대로 고침. 마무리 면 요리의 밀과 일부 가게의 꽃게를 allergenNote에 추가."
+    },
+    {
+        "name":  "냉채족발",
+        "photo":  {
+                      "imageUrl":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Jokbal_on_a_plate_2011.jpg/960px-Jokbal_on_a_plate_2011.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:Jokbal_on_a_plate_2011.jpg",
+                      "author":  "Nesnad",
+                      "license":  "CC BY-SA 3.0",
+                      "depicts":  "Sliced jokbal (족발) on a plate, with a dish of sauces on the right — 접시에 담은 일반 족발(편육과 발 부위, 마늘·고추)과 양념장 사진이며 냉채족발 자체는 아님"
+                  },
+        "summary":  "족발에 해파리·채소와 톡 쏘는 겨자소스를 버무린 부산식 족발",
+        "category":  "육류·안주",
+        "mainIngredients":  "얇게 썬 족발, 해파리, 오이·양파·당근 등 채소, 겨자소스(겨자·식초·설탕, 가게에 따라 굴소스·간장)",
+        "taste":  "쫄깃한 족발과 오도독한 해파리에 새콤달콤하면서 코끝이 찡한 겨자소스가 어우러져 시원하고 상큼하다",
+        "priceRange":  "35,000~45,000원 (소, 2~3인 기준)",
+        "calories":  "약 600kcal (1인분)",
+        "origin":  "1980년대 초반 중구 부평동 족발골목에서 탄생한 음식으로, 한국전쟁 뒤 부산에 정착한 실향민들의 족발 문화에 냉채를 결합한 것으로 전해집니다. 남포동 \u0027부산족발\u0027이 냉채족발을 처음 개발한 곳으로 알려져 있습니다.",
+        "howToEat":  [
+                         "상이 나오면 족발, 해파리, 채소를 겨자소스와 골고루 버무립니다.",
+                         "족발 한 점에 해파리와 오이를 함께 집어 한입에 먹습니다.",
+                         "소스가 모자라면 더 청해 족발에 넉넉히 적셔 먹습니다.",
+                         "시원한 소주나 맥주를 곁들여 안주로 즐깁니다."
+                     ],
+        "tip":  "부평동 족발골목은 저녁에 대기가 길어지니 이른 저녁에 가거나 포장해서 숙소에서 즐기는 것도 방법입니다.",
+        "allergens":  [
+                          "돼지고기",
+                          "대두",
+                          "밀",
+                          "새우",
+                          "조개류(굴·전복·홍합 포함)",
+                          "난류"
+                      ],
+        "allergenNote":  "소스에 굴소스·간장을 넣는지, 달걀지단을 올리는지, 새우젓을 곁들이는지는 가게마다 다릅니다.",
+        "restaurants":  [
+                            {
+                                "name":  "부산족발",
+                                "area":  "중구 부평동",
+                                "signature":  "냉채족발",
+                                "source":  "https://www.siksinhot.com/P/356793"
+                            },
+                            {
+                                "name":  "한양족발",
+                                "area":  "중구 부평동",
+                                "signature":  "냉채족발",
+                                "source":  "https://www.trazy.com/id/spot/798/hannyang-jokbal-%ED%95%9C%EC%96%91%EC%A1%B1%EB%B0%9C-restaurant-cafe"
+                            },
+                            {
+                                "name":  "부평족발",
+                                "area":  "중구 부평동",
+                                "signature":  "냉채족발",
+                                "source":  "https://www.koreatriptips.com/dining/1963007.html"
+                            },
+                            {
+                                "name":  "서대시장족발",
+                                "area":  "서구 서대신동",
+                                "signature":  "냉채족발",
+                                "source":  "https://www.ktriptips.com/kor/food/2867598"
+                            }
+                        ],
+        "notes":  "Wikimedia Commons에 냉채족발 사진이 없어 같은 재료인 일반 족발(접시에 썬 족발과 양념장, 촬영지 미상) 사진을 대신 썼습니다. 부산족발이 원조라는 이야기는 언론·맛집 정보에서 전하는 설명이라 학술 자료로 확인된 사실은 아닙니다. 한양족발 정보는 여행 사이트(Trazy)를 근거로 했고 동래구 수안동에도 같은 이름의 가게가 있으니 혼동하지 않도록 주의해야 합니다. 부평족발 주소(광복로 19-2)는 여행 정보 사이트 한 곳에서만 확인했습니다. [검증 수정] 이미지 URL 200/image/jpeg 확인, 라이선스 CC BY-SA 3.0 확인, 사진이 일반 족발임을 직접 확인. 기원을 \u0027한국전쟁 뒤 피란민\u0027에서 지역문화 자료(ncms.nculture.org) 기준 \u00271980년대 초반 부평동 탄생, 실향민 족발 문화와 연결\u0027로 고침. 같은 자료에 소스에 굴소스를 넣는다고 나와 알레르기에 조개류를 추가하고 주재료에서 확인되지 않은 달걀지단을 빼고 당근·양파를 넣음. 가격을 실제 소개 가격(냉채족발 35,000~38,000원 이상)에 맞춰 35,000~45,000원으로 올림. 근거가 약한 먹는 법 3단계(\u0027따뜻한 족발이나 국물과 번갈아\u0027)와 팁의 \u0027광복로에서 즐기기\u0027를 고침. 식당 4곳은 출처(식신 검색 요약, Trazy 부평동1가 35, 광복로 19-2, 서대신동2가 대영로 43-2)로 모두 확인함."
+    },
+    {
+        "name":  "기장 대게",
+        "photo":  {
+                      "imageUrl":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/Daege_Jjim%28Steamed_Snow_Crab%29%2C_Yeongdeok.jpg/960px-Daege_Jjim%28Steamed_Snow_Crab%29%2C_Yeongdeok.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:Daege_Jjim(Steamed_Snow_Crab),_Yeongdeok.jpg",
+                      "author":  "Studio 4cats",
+                      "license":  "KOGL Type 1",
+                      "depicts":  "Daege Jjim (Steamed Snow Crab), Yeongdeok — 바다가 보이는 식당에서 반찬과 함께 차린 대게찜(경북 영덕 촬영)"
+                  },
+        "summary":  "기장시장 수조에서 골라 바로 쪄 먹는 대게찜",
+        "category":  "해산물",
+        "mainIngredients":  "대게(주로 러시아산 수입 대게, 국내산은 제철에 한정), 게딱지 볶음밥용 밥·김·참기름",
+        "taste":  "짭조름한 바다 향에 달큰하고 촉촉한 다리 살, 고소하고 진한 게 내장 맛이 특징이다",
+        "priceRange":  "시세에 따라 다름 (kg당 약 60,000~100,000원, 상차림비 별도)",
+        "calories":  "약 400kcal (대게 1마리 약 1kg 기준)",
+        "origin":  "기장군 기장읍의 기장시장에는 수조에 있는 대게를 직접 고르면 바로 쪄 주는 대게 식당이 모여 있어 부산에서 대게를 먹으러 가는 곳으로 이름이 났습니다. 국내 유통 대게의 대부분을 차지하는 러시아산 대게를 비교적 저렴하게 먹을 수 있어 부산 시민과 여행객이 많이 찾습니다.",
+        "howToEat":  [
+                         "시장 수조에서 대게를 고르고 무게를 달아 가격을 확인한 뒤 찜을 맡깁니다.",
+                         "다리 관절을 반대로 꺾어 당기면 살이 통째로 빠져나오니 그대로 먹습니다.",
+                         "몸통 살을 발라 게딱지 안의 내장에 찍어 먹습니다.",
+                         "마지막으로 남은 게딱지에 밥을 넣어 볶음밥으로 마무리합니다."
+                     ],
+        "tip":  "주말에는 시장 주변 주차가 어려우니 동해선 기장역에서 걸어가는 편이 편하고, 찌기 전에 무게와 가격을 꼭 확인하세요.",
+        "allergens":  [
+                          "게"
+                      ],
+        "allergenNote":  "게딱지 볶음밥에 달걀이나 간장을 넣는지, 상차림 반찬(계란찜·새우튀김 등) 구성은 가게마다 다릅니다.",
+        "restaurants":  [
+                            {
+                                "name":  "기장시장대왕대게",
+                                "area":  "기장군 기장읍",
+                                "signature":  "대게찜(A급 대게)",
+                                "source":  "https://www.diningcode.com/profile.php?rid=2YGRZLv846b3"
+                            },
+                            {
+                                "name":  "조은대게",
+                                "area":  "기장군 기장읍",
+                                "signature":  "대게찜",
+                                "source":  "https://www.diningcode.com/profile.php?rid=6SNpPIWAUFsS"
+                            },
+                            {
+                                "name":  "대게만찬 기장점",
+                                "area":  "기장군 기장읍",
+                                "signature":  "대게찜",
+                                "source":  "https://www.diningcode.com/profile.php?rid=ISsPwxVgxGY3"
+                            },
+                            {
+                                "name":  "아빠대게",
+                                "area":  "기장군 기장읍",
+                                "signature":  "대게찜·대게볶음밥",
+                                "source":  "https://mom-mom.net/travel/places/6a0fc04d8866801954858445"
+                            }
+                        ],
+        "notes":  "Commons에 기장에서 찍은 대게 사진이 없어 같은 요리인 경북 영덕의 대게찜 사진(공공누리 제1유형)을 대신 썼습니다. 기장은 대게가 많이 잡히는 산지라기보다 수입 대게가 많이 유통되는 곳이므로, 화면 문구에 \u0027기장 앞바다에서 잡은\u0027처럼 쓰지 않도록 주의해야 합니다. 가격은 시세에 따라 크게 바뀝니다. [검증 수정] 이미지 URL 200/image/jpeg, 라이선스 KOGL Type 1, 사진 내용(대게찜 상차림) 직접 확인. 출처로 확인되지 않는 \u0027영덕·울진과 함께 꼽히는 대게 유통지\u0027 표현을 origin에서 뺌. 다이닝코드 확인 결과 대왕대게·조은대게는 기장시장 안(읍내로104번길 16)이지만 대게만찬 기장점은 기장시장이 아니라 기장해안로 266(시랑리, 더이스트인부산 3층)에 있어 상호를 \u0027대게만찬 기장점\u0027으로 정확히 적음(구·읍은 동일). 기장읍 차성동로67번길 12의 아빠대게(맘맘 소개 페이지 확인)를 네 번째 식당으로 추가함."
+    },
+    {
+        "name":  "꼼장어구이",
+        "photo":  {
+                      "imageUrl":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Korea-Busan-Haeundae_Market-Inshore_hagfish-Gomjangeo_gui-01.jpg/960px-Korea-Busan-Haeundae_Market-Inshore_hagfish-Gomjangeo_gui-01.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:Korea-Busan-Haeundae_Market-Inshore_hagfish-Gomjangeo_gui-01.jpg",
+                      "author":  "Junho Jung (Flickr, South Korea)",
+                      "license":  "CC BY-SA 3.0",
+                      "depicts":  "부산 해운대시장에서 휴대용 버너 위 은박 호일에 양파 등 채소와 함께 구운 곰장어(먹장어) 소금구이, 2009년 촬영"
+                  },
+        "summary":  "연탄·짚불에 구워 쫄깃하게 씹히는 부산 대표 술안주",
+        "category":  "해산물·구이",
+        "mainIngredients":  "먹장어(곰장어), 양파·대파, 소금 또는 고추장 양념",
+        "taste":  "쫄깃하면서 오독오독 씹히는 식감에 고소한 기름 맛이 나고, 양념구이는 매콤달콤하며 짚불구이는 불 향이 진하다",
+        "priceRange":  "20,000~35,000원 (1인분 또는 소 기준)",
+        "calories":  "약 450kcal (1인분)",
+        "origin":  "일제강점기 자갈치 인근에서 껍질을 벗겨 가죽 제품을 만들고 남은 먹장어 살을 구워 먹던 것이 시초로 전해지며, 한국전쟁 때 피란민들이 즐겨 먹으면서 자갈치 곰장어 골목이 생겨났습니다. 기장에서는 볏짚 불에 통째로 굽는 짚불곰장어가 유명합니다.",
+        "howToEat":  [
+                         "소금구이와 양념구이 중 하나를 고릅니다(짚불구이는 기장 전문점에서 맛볼 수 있습니다).",
+                         "석쇠나 호일 위에서 겉이 노릇하고 꼬들꼬들해질 때까지 충분히 익힙니다.",
+                         "소금구이는 기름장이나 소금에, 짚불구이는 탄 껍질을 벗겨 낸 뒤 소금장에 찍어 먹습니다.",
+                         "양념구이는 남은 양념에 밥을 볶아 마무리합니다."
+                     ],
+        "tip":  "처음이라면 곰장어 본연의 맛을 알 수 있는 소금구이를 먼저 먹고, 다음에 양념구이를 시켜 보세요.",
+        "allergens":  [
+                          "대두",
+                          "밀"
+                      ],
+        "allergenNote":  "소금구이는 의무 표시 알레르기 성분이 거의 없지만, 양념구이의 고추장·간장 양념에는 대두와 밀이 들어가며 양념 재료는 가게마다 다릅니다.",
+        "restaurants":  [
+                            {
+                                "name":  "동성장어구이",
+                                "area":  "서구 충무동",
+                                "signature":  "곰장어 연탄구이(소금·양념)",
+                                "source":  "https://hotplacehunter.co.kr/sns/article/69910/"
+                            },
+                            {
+                                "name":  "등대할매집",
+                                "area":  "서구 남부민동",
+                                "signature":  "곰장어 연탄구이",
+                                "source":  "https://hotplacehunter.co.kr/sns/article/69910/"
+                            },
+                            {
+                                "name":  "원조짚불곰장어 기장외가집",
+                                "area":  "기장군 기장읍",
+                                "signature":  "짚불곰장어",
+                                "source":  "https://hotplacehunter.co.kr/sns/article/55028/"
+                            },
+                            {
+                                "name":  "기장곰장어",
+                                "area":  "기장군 기장읍",
+                                "signature":  "곰장어 짚불구이",
+                                "source":  "https://hotplacehunter.co.kr/sns/article/55028/"
+                            }
+                        ],
+        "notes":  "사진은 부산 해운대시장에서 찍은 곰장어 소금구이라 실제 요리와 일치합니다. 꼼장어·곰장어·먹장어는 같은 생선을 부르는 이름입니다. 기원 설명은 신문 기사마다 시기가 조금씩 다릅니다. [검증 수정] 이미지 URL 200/image/jpeg, 라이선스 CC BY-SA 3.0(VRTS 허가 확인, 분류 \u0027Cuisine of Busan\u0027, \u0027Haeundae Market\u0027) 확인. 사진을 직접 보니 곁들인 채소가 주로 양파라 depicts의 \u0027대파\u0027를 \u0027양파 등 채소\u0027로 고치고 주재료 순서도 양파 우선으로 바꿈. 출처 기사 가격(동성장어구이 곰장어구이 소 35,000원·1인 24,000원, 기장 짚불곰장어 30,000원)에 맞춰 가격을 20,000~35,000원으로 고침. 동성장어구이 주소 \u0027서구 자갈치로 12-1\u0027은 주소 정보 사이트에서 충무동1가로 확인되어 추정이 아니게 됨. 기장곰장어(기장해안로 70), 기장외가집(공수2길 5-1), 등대할매집(등대로 107, 남부민동) 출처 확인 완료. 대체 후보 \u0027Kkomjangeo-gui.jpg\u0027(CC BY 2.0)는 굽기 전 생 곰장어라 채택하지 않음."
+    },
+    {
+        "name":  "동래파전",
+        "photo":  {
+                      "imageUrl":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Korean_pan_cake-Dongnae_pajeon-01.jpg/960px-Korean_pan_cake-Dongnae_pajeon-01.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:Korean_pan_cake-Dongnae_pajeon-01.jpg",
+                      "author":  "Jinho Jung (from South Korea)",
+                      "license":  "CC BY-SA 3.0",
+                      "depicts":  "A plate of Dongnae pajeon, a Busan-style pancake made with whole scallions, sliced chili pepper, chopped seafood and wheat flour batter — 통쪽파·홍고추·잘게 썬 해물을 올린 동래파전(경북 경주의 식당에서 촬영)"
+                  },
+        "summary":  "통쪽파와 해물을 쌀가루 반죽으로 지진 동래 향토 파전",
+        "category":  "전·안주",
+        "mainIngredients":  "통쪽파, 굴·홍합·조갯살·새우 등 해물, 쇠고기(가게에 따라), 찹쌀·멥쌀가루 반죽(밀가루를 섞기도 함), 멸치 육수, 달걀",
+        "taste":  "바삭하기보다 촉촉하고 쫀득하며, 쪽파의 단맛과 해물의 감칠맛이 진하고 초고추장과 잘 어울린다",
+        "priceRange":  "15,000~30,000원 (1판)",
+        "calories":  "약 500kcal (1인분, 1판의 약 1/2)",
+        "origin":  "동래 장터에서 팔던 향토 음식으로, 삼짇날 무렵 임금께 진상했다는 이야기가 주민들의 구술로 전해지지만 기록으로 확인되지는 않습니다. 1940년 무렵 동래 장터에서 장사를 시작했다고 알려진 \u0027동래할매파전\u0027이 4대째 이어 오며 널리 알려졌습니다.",
+        "howToEat":  [
+                         "쪽파를 가지런히 깔고 쌀가루 반죽을 부어 익힌 뒤 해물과 달걀을 올려 내오는 파전을 뜨거울 때 받습니다.",
+                         "젓가락이나 가위로 한입 크기로 나눠 쪽파와 해물을 함께 집습니다.",
+                         "간장 대신 초고추장에 찍어 먹는 것이 동래식입니다.",
+                         "막걸리나 동동주를 곁들여 즐깁니다."
+                     ],
+        "tip":  "동래할매파전 주변은 주차가 어려우니 지하철 4호선 수안역이나 1호선 동래역에서 걸어가는 것이 편합니다.",
+        "allergens":  [
+                          "밀",
+                          "난류",
+                          "조개류(굴·전복·홍합 포함)",
+                          "새우",
+                          "쇠고기",
+                          "대두"
+                      ],
+        "allergenNote":  "반죽의 밀가루·쌀가루 비율과 올리는 해물·쇠고기 종류는 가게마다 다르며, 초고추장에는 고추장에서 온 밀과 대두가 들어갑니다.",
+        "restaurants":  [
+                            {
+                                "name":  "동래할매파전",
+                                "area":  "동래구 복천동",
+                                "signature":  "동래파전",
+                                "source":  "https://www.siksinhot.com/P/89582"
+                            },
+                            {
+                                "name":  "원조동래파전",
+                                "area":  "동래구 명륜로94번길(동래할매파전 인근)",
+                                "signature":  "동래파전",
+                                "source":  "https://korean.visitkorea.or.kr/detail/rem_detail.do?cotid=3bba66df-1014-4e58-8f41-6726bdda90ab"
+                            },
+                            {
+                                "name":  "소문난동래파전",
+                                "area":  "동래구 온천동",
+                                "signature":  "동래파전",
+                                "source":  "https://polle.com/place/1sW8xE/%EC%86%8C%EB%AC%B8%EB%82%9C%20%EB%8F%99%EB%9E%98%ED%8C%8C%EC%A0%84"
+                            }
+                        ],
+        "notes":  "사진은 Commons 설명에 \u0027Dongnae pajeon\u0027이라고 적힌 동래파전이라 실제 요리와 일치합니다. 진상 이야기는 전해 내려오는 말일 뿐 사료로 확인되지 않았으니 화면에 사실처럼 단정해 쓰지 않는 것이 좋습니다. 원조동래파전은 \u0027명륜로94번길\u0027까지만 확인되어 동 이름을 쓰지 못했습니다. 웹 출처로 확인한 식당이 세 곳뿐이어서 세 곳만 넣었습니다. [검증 수정] 이미지 URL 200/image/jpeg, 라이선스 CC BY-SA 3.0(VRTS 허가 확인) 확인. Commons 설명을 다시 보니 이 사진은 부산이 아니라 경북 경주의 식당에서 찍은 동래파전이어서 depicts와 notes에 촬영지를 밝힘(같은 요리라 사진은 유지). 동래할매파전 창업 시기는 자료마다 달라(식신 1940년, 1997년 한국경제 기사 \u00274대째 70여 년\u0027) \u00271940년대 시작\u0027을 \u00271940년 무렵 시작했다고 알려진, 4대째\u0027로 고치고, 기원 문장에서 근거가 약한 \u0027제사 음식\u0027 표현을 뺌. 동래할매파전 주소는 명륜로94번길 43-10이며 1997년 기사의 \u0027복산동 367\u0027(복산동은 복천동을 포함하는 행정동)과 맞아 복천동을 유지함. 소문난동래파전 주소는 차밭골로50번길 25(온천동 일대)로 확인. 반죽은 쌀가루가 기본이고 밀가루는 가게에 따라 섞는다고 주재료를 고침."
+    },
+    {
+        "name":  "복국",
+        "photo":  {
+                      "imageUrl":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Korea-Busan-Bokguk-Pufferfish_soup-01.jpg/960px-Korea-Busan-Bokguk-Pufferfish_soup-01.jpg",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:Korea-Busan-Bokguk-Pufferfish_soup-01.jpg",
+                      "author":  "Junho Jung (Flickr, South Korea)",
+                      "license":  "CC BY-SA 3.0",
+                      "depicts":  "부산에서 촬영한 뚝배기 복국(맑은 복지리). 콩나물과 미나리 위에 복어 살 한 토막이 올라가 있고, 뒤로 밑반찬이 보인다."
+                  },
+        "summary":  "콩나물·미나리 넣고 맑게 끓인 부산 해장 복어국",
+        "category":  "국·탕 (해장국)",
+        "mainIngredients":  "복어(은복·까치복·밀복·참복), 콩나물, 미나리, 무, 마늘, 다시마 육수",
+        "taste":  "맑고 시원한 국물에 미나리 향이 산뜻하고, 복어 살은 담백하고 쫄깃하다. 식초를 조금 넣으면 국물 맛이 더 개운해진다.",
+        "priceRange":  "15,000~35,000원 (복어 종류에 따라 다름)",
+        "calories":  "약 550kcal (공기밥 포함 1인분)",
+        "origin":  "복어가 많이 잡히고 유통되는 부산에서는 복어를 맑게 끓인 복국이 해장국으로 자리 잡았습니다. 1970년 해운대에서 \u0027금수식장\u0027이라는 이름으로 문을 연 금수복국이 뚝배기에 1인분씩 끓여 낸 복국을 처음 선보인 곳으로 알려지면서 대중적인 부산 음식이 되었습니다.",
+        "howToEat":  [
+                         "복국이 나오면 먼저 국물을 맛본 뒤 식초를 두세 방울 떨어뜨려 국물 맛을 깔끔하게 만든다.",
+                         "국 속 콩나물과 미나리를 건져 밥 위에 올리고 양념장을 넣어 비벼 먹는다.",
+                         "복어 살은 발라서 와사비 간장(초간장)에 살짝 찍어 먹는다.",
+                         "남은 국물에 밥을 말아 뜨끈하게 마무리한다."
+                     ],
+        "tip":  "술 마신 다음 날 아침 해장으로 제격이고, 처음이라면 가격이 부담 없는 은복 지리부터 시작해 보세요.",
+        "allergens":  [
+                          "대두",
+                          "밀"
+                      ],
+        "allergenNote":  "콩나물과 간장 양념장 때문에 대두·밀이 들어가며, 집에 따라 매운탕식으로 고춧가루 양념을 쓰거나 해산물 육수를 쓰기도 합니다.",
+        "restaurants":  [
+                            {
+                                "name":  "금수복국 해운대본점",
+                                "area":  "해운대구 중동",
+                                "signature":  "활참복국(참복 지리)",
+                                "source":  "https://guide.michelin.com/kr/ko/busan-region/busan_1025838/restaurant/kumsu-bokguk"
+                            },
+                            {
+                                "name":  "초원복국 해운대점",
+                                "area":  "해운대구 중동",
+                                "signature":  "은복·까치복 복국(지리/매운탕)",
+                                "source":  "https://polle.com/place/16clqs/%EC%B4%88%EC%9B%90%EB%B3%B5%EA%B5%AD"
+                            },
+                            {
+                                "name":  "미포할매복국본가",
+                                "area":  "해운대구 중동",
+                                "signature":  "복국",
+                                "source":  "https://www.ktriptips.com/kor/food/2861178"
+                            }
+                        ],
+        "notes":  "사진은 부산에서 촬영한 실제 복국이다(Commons 파일명 기준). 4번째 식당은 현재 영업 여부를 확인할 수 있는 출처를 찾지 못해 3곳만 넣었다. 초원복국 해운대점 가격 기준 은복 16,000원, 까치복 23,000원, 참복 30,000원이다. 사진 URL은 Commons API가 준 thumburl(960px)에서 utm 추적 파라미터만 뺀 것이다. [검증] 사진 URL은 200(image/jpeg)으로 응답했고, Commons API로 CC BY-SA 3.0 라이선스와 작성자를 다시 확인했다. 내려받아 보니 콩나물·미나리·복어 살이 담긴 뚝배기 복국이 맞다. 금수복국 출처는 koreatriptips.com의 인증서 오류로 열리지 않아 미쉐린 가이드 페이지로 바꿨다(주소 중동1로43번길 23, 1970년 \u0027금수식장\u0027으로 개업). 초원복국(해운대해변로 329-2)과 미포할매복국본가(달맞이길62번길 27-1)의 주소와 복국 메뉴를 확인했다. origin은 \u0027처음 선보인 곳으로 알려진\u0027 정도로 표현을 약하게 바꾸고 개업 당시 상호를 넣었다. taste의 \u0027감칠맛\u0027 표현은 식초가 하는 역할에 맞게 \u0027개운해진다\u0027로 고쳤다. mainIngredients에 밀복을 넣었다. 서면의 진주복국집은 출처가 표본이 적은 리뷰 하나뿐이라 넣지 않았다."
+    },
+    {
+        "name":  "비빔당면",
+        "photo":  {
+                      "imageUrl":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/Bibim_Dangmyeon_20200523_001.jpg/960px-Bibim_Dangmyeon_20200523_001.jpg",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:Bibim_Dangmyeon_20200523_001.jpg",
+                      "author":  "Mobius6",
+                      "license":  "CC BY-SA 4.0",
+                      "depicts":  "부산에서 촬영한 비빔당면(파일 설명: \u0027비빔당면 (부산)\u0027). 노란 그릇에 담긴 당면 위에 부추, 단무지, 어묵채, 양념장과 깨가 올라가 있고, 옆에 어묵 국물이 함께 나와 있다."
+                  },
+        "summary":  "당면에 어묵·단무지·부추 얹어 비비는 시장 별미",
+        "category":  "분식 (시장 길거리 음식)",
+        "mainIngredients":  "당면(고구마 전분), 어묵, 단무지, 부추·시금치, 간장 양념장, 고춧가루, 깨",
+        "taste":  "쫄깃하고 매끈한 당면에 달큰짭짤한 양념이 배어 잡채처럼 고소하면서도 살짝 매콤하다.",
+        "priceRange":  "5,000~7,000원",
+        "calories":  "약 450kcal (1인분)",
+        "origin":  "한국전쟁 피란 시절 국제시장과 부평깡통시장 노점에서 허기를 달래던 음식으로 전해집니다. 잡채 대신 삶은 당면에 고명과 양념장만 얹어 싸게 팔던 것이 지금까지 이어진 부산 시장 음식입니다.",
+        "howToEat":  [
+                         "나온 그대로 젓가락으로 양념장과 당면을 골고루 비벼 색이 고르게 들 때까지 섞는다.",
+                         "어묵채, 단무지, 부추를 당면과 함께 한 번에 집어 먹는다.",
+                         "곁들여 나오는 어묵 국물을 중간중간 마셔 입안을 정리한다.",
+                         "충무김밥이나 물떡을 같이 시켜 시장식으로 곁들인다."
+                     ],
+        "tip":  "깡통시장 야시장이 열리는 저녁에 가면 비빔당면, 물떡, 유부주머니를 한 번에 맛볼 수 있습니다.",
+        "allergens":  [
+                          "밀",
+                          "대두"
+                      ],
+        "allergenNote":  "어묵과 간장 양념에 밀·대두가 들어가며, 어묵 종류나 고명(김치, 달걀 등)은 가게마다 다릅니다.",
+        "restaurants":  [
+                            {
+                                "name":  "사거리분식",
+                                "area":  "중구 부평동",
+                                "signature":  "비빔당면",
+                                "source":  "https://polle.com/place/1m0DEQ/%EC%82%AC%EA%B1%B0%EB%A6%AC%20%EB%B6%84%EC%8B%9D"
+                            },
+                            {
+                                "name":  "원조깡통비빔당면",
+                                "area":  "중구 부평동",
+                                "signature":  "비빔당면",
+                                "source":  "https://world.nol.com/en/content/articles/0ea9a262-dddb-41cb-a3bf-289e324eaa55"
+                            }
+                        ],
+        "notes":  "사진은 부산에서 촬영한 실제 비빔당면이다. 국제시장 먹자골목에 \u0027비빔당면 골목\u0027이 있지만 노점 좌판이라 가게 이름을 확인할 수 없어 넣지 않았다. 원조깡통비빔당면은 부평깡통시장에서 60년 넘게 영업했다고 소개된 곳이며, 정확한 번지는 출처에 없다. 사거리분식의 비빔당면은 6,000원이다. 피란 시절 유래는 KNN 기사 등에서 \u0027전해지는 이야기\u0027로 소개되는 수준이다. [검증] 사진 URL은 200(image/jpeg)으로 응답했고, Commons API로 CC BY-SA 4.0 라이선스와 파일 설명(\u0027비빔당면 (부산)\u0027)을 다시 확인했다. 내려받아 보니 설명과 같은 비빔당면이 맞다. 사거리분식(중구 부평2길 39, 비빔당면 6,000원)과 원조깡통비빔당면(부평깡통시장)을 출처에서 다시 확인했다. 국제시장 쪽 가게(충무명물김밥세상, 깡통시장 할머니 오댕 등)도 찾아봤지만 2007~2015년 자료뿐이라 현재 영업 여부를 확인하지 못해 넣지 않았다. 고친 내용은 없다."
+    },
+    {
+        "name":  "조방낙지",
+        "photo":  {
+                      "imageUrl":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Nakji-bokkeum.jpg/960px-Nakji-bokkeum.jpg",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:Nakji-bokkeum.jpg",
+                      "author":  "박家상민 (Park Sang-Min)",
+                      "license":  "CC BY 4.0",
+                      "depicts":  "흰 접시에 담긴 낙지볶음(nakji-bokkeum, stir-fried octopus). 고추장 양념에 볶은 낙지와 양파, 대파 위에 깨가 뿌려져 있다."
+                  },
+        "summary":  "국물 자작한 부산식 매운 낙지볶음, 밥에 비벼 먹는다",
+        "category":  "볶음·전골 (밥반찬)",
+        "mainIngredients":  "낙지, 양파, 대파, 당근, 고춧가루·고추장 양념, 육수 (낙곱새는 곱창·새우 추가)",
+        "taste":  "맵고 달큰한 양념 국물이 자작하고, 낙지는 탱글탱글하다. 밥에 비비면 매운맛이 부드러워진다.",
+        "priceRange":  "11,000~13,000원 (1인분, 밥 포함)",
+        "calories":  "약 750kcal (공기밥 포함 1인분)",
+        "origin":  "\u0027조방\u0027은 일제강점기 부산 범일동에 있던 조선방직의 줄임말로, 공장이 사라진 뒤에도 범일동 일대를 \u0027조방\u0027이라 부릅니다. 조선방직 앞 낙지집들에서 시작된 국물 자작한 낙지볶음이 \u0027조방낙지\u0027라는 이름으로 굳어졌습니다.",
+        "howToEat":  [
+                         "냄비나 팬에 담긴 낙지볶음을 불에 올려 국물이 보글보글 끓을 때까지 기다린다.",
+                         "큰 대접에 밥을 담고 김가루와 함께 나오는 콩나물·부추 무침을 올린다.",
+                         "끓은 낙지볶음을 국물째 밥 위에 넉넉히 부어 쓱쓱 비빈다.",
+                         "양념이 남으면 사리나 볶음밥을 추가해 마무리한다."
+                     ],
+        "tip":  "매운 걸 잘 못 먹으면 주문할 때 덜 맵게 해 달라고 하고, 낙지에 곱창·새우를 더한 \u0027낙곱새\u0027도 같이 고려해 보세요.",
+        "allergens":  [
+                          "대두",
+                          "밀"
+                      ],
+        "allergenNote":  "고추장·간장 양념에 대두·밀이 들어가고, 낙곱새로 주문하면 쇠고기(곱창)와 새우가 더해지니 메뉴 구성을 확인하세요.",
+        "restaurants":  [
+                            {
+                                "name":  "조방낙지 범일직영점",
+                                "area":  "동구 범일동",
+                                "signature":  "낙지볶음, 낙곱새볶음",
+                                "source":  "https://polle.com/place/12SsOP/%EC%A1%B0%EB%B0%A9%EB%82%99%EC%A7%80"
+                            },
+                            {
+                                "name":  "원조할매낙지",
+                                "area":  "부산진구 범천동",
+                                "signature":  "낙곱새(낙지+곱창+새우)",
+                                "source":  "https://polle.com/place/1qTA3T/%EC%9B%90%EC%A1%B0%20%ED%95%A0%EB%A7%A4%EB%82%99%EC%A7%80"
+                            },
+                            {
+                                "name":  "소문난 원조 조방낙지 본점",
+                                "area":  "동래구 명륜동",
+                                "signature":  "낙곱새",
+                                "source":  "https://polle.com/place/2cTtJF/%EC%86%8C%EB%AC%B8%EB%82%9C%20%EC%9B%90%EC%A1%B0%20%EC%A1%B0%EB%B0%A9%EB%82%99%EC%A7%80"
+                            },
+                            {
+                                "name":  "개미집 본점",
+                                "area":  "중구 신창동2가",
+                                "signature":  "낙곱새",
+                                "source":  "https://www.ktriptips.com/kor/food/2609623"
+                            }
+                        ],
+        "notes":  "Commons에 \u0027조방낙지\u0027라는 이름의 사진이 없어 일반 낙지볶음 사진을 대신 썼다. 부산식 조방낙지는 사진보다 국물이 자작하고 냄비에 끓여 나오는 경우가 많다. Korea.net의 \u0027Nakji-bokkeum, Stir-Fried Octopus\u0027 사진은 실제로는 오징어와 무를 볶은 것으로 보여 쓰지 않았다. 낙지 자체는 의무 표시 알레르기 목록에 없지만 연체동물 알레르기가 있으면 주의해야 한다. [검증] 사진 URL은 200(image/jpeg)으로 응답했고, Commons API로 CC BY 4.0 라이선스와 파일 설명(\u0027nakji-bokkeum (stir-fried octopus)\u0027)을 확인했다. 내려받아 보니 접시에 담긴 낙지볶음이 맞다. Commons를 \u0027조방낙지\u0027, \u0027낙곱새\u0027, \u0027nakgopsae\u0027로 다시 검색했지만 결과가 없었다. \u0027Nakji-jeongol-bokkeum-bap\u0027(볶음밥) 같은 다른 후보도 지금 사진보다 낫지 않았다. 식당 4곳의 주소를 출처에서 다시 확인했다. 범일직영점은 동구 조방로 21, 원조할매낙지는 부산진구 골드테마길 10(범천동), 소문난 원조 조방낙지는 동래구 명륜로94번길 37, 개미집 본점은 중구 중구로30번길 21-1(신창동2가)이다. 가격도 11,000~13,000원으로 맞다. origin은 경향신문 등의 설명에 맞춰 \u0027조선방직 앞 낙지집에서 시작\u0027으로 고쳤다. 노동자가 즐겨 먹었다는 단정은 확인되지 않아 뺐다."
+    },
+    {
+        "name":  "물떡",
+        "photo":  {
+                      "imageUrl":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Korea-Busan-Pupyeong_Market-Eomuk_and_tteokbokgi-01.jpg/960px-Korea-Busan-Pupyeong_Market-Eomuk_and_tteokbokgi-01.jpg",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:Korea-Busan-Pupyeong_Market-Eomuk_and_tteokbokgi-01.jpg",
+                      "author":  "Junho Jung (Flickr, South Korea)",
+                      "license":  "CC BY-SA 3.0",
+                      "depicts":  "부산 부평시장(깡통시장) 분식 노점. 어묵 국물 통에 꼬치 어묵이 담겨 있고, 뒤쪽 큰 쟁반에 가래떡 떡볶이가, 왼쪽 위에 유부주머니가 보인다. 물떡 꼬치 자체는 사진에서 구별되지 않는다."
+                  },
+        "summary":  "어묵 국물에 푹 불린 가래떡 꼬치, 부산 분식",
+        "category":  "분식 (길거리 간식)",
+        "mainIngredients":  "가래떡, 어묵 국물(멸치·다시마·무 육수), 간장 양념장",
+        "taste":  "어묵 국물을 머금어 겉은 말랑하고 속은 쫄깃하며, 은은하게 짭조름한 국물 맛이 밴다.",
+        "priceRange":  "꼬치 1개 약 1,000~1,500원",
+        "calories":  "약 200kcal (꼬치 1개)",
+        "origin":  "어묵 국물 통에 가래떡 꼬치를 넣어 오래 불려 먹는 부산 분식입니다. 언제 시작됐는지는 확실하지 않지만 부산 어묵과 함께 퍼졌고, 부산 사람에게는 익숙해도 다른 지역에서는 낯선 부산 음식으로 꼽힙니다.",
+        "howToEat":  [
+                         "어묵 통에서 국물에 오래 담겨 말랑해진 물떡 꼬치를 하나 집는다.",
+                         "그대로 먹거나 간장 양념장을 살짝 바르고, 떡볶이 소스에 찍어 먹기도 한다.",
+                         "종이컵에 어묵 국물을 따라 함께 마신다.",
+                         "다 먹은 꼬치는 버리지 말고 모아 두었다가 개수대로 계산한다."
+                     ],
+        "tip":  "국물에 오래 담가 둔 것일수록 말랑하니, 통 깊숙이 잠겨 있던 물떡을 고르세요.",
+        "allergens":  [
+                          "밀",
+                          "대두"
+                      ],
+        "allergenNote":  "함께 끓이는 어묵과 간장 양념 때문에 밀·대두가 들어가며, 어묵 종류에 따라 새우·게 같은 갑각류 성분이 섞일 수 있습니다.",
+        "restaurants":  [
+                            {
+                                "name":  "사거리분식",
+                                "area":  "중구 부평동",
+                                "signature":  "물떡",
+                                "source":  "https://polle.com/place/1m0DEQ/%EC%82%AC%EA%B1%B0%EB%A6%AC%20%EB%B6%84%EC%8B%9D"
+                            },
+                            {
+                                "name":  "상국이네",
+                                "area":  "해운대구 중동",
+                                "signature":  "떡볶이, 물떡, 튀김",
+                                "source":  "https://polle.com/place/53zioZ/%EC%83%81%EA%B5%AD%EC%9D%B4%EB%84%A4"
+                            },
+                            {
+                                "name":  "옥당분식",
+                                "area":  "동래구 사직동",
+                                "signature":  "물떡, 떡볶이",
+                                "source":  "https://korean.visitkorea.or.kr/detail/rem_detail.do?cotid=5c1179db-c1af-49a8-ab45-5e7ce8b76b34"
+                            },
+                            {
+                                "name":  "원조 꼬마김밥",
+                                "area":  "중구 남포동",
+                                "signature":  "꼬마김밥, 떡볶이, 물떡",
+                                "source":  "https://www.gqkorea.co.kr/?p=369171"
+                            }
+                        ],
+        "notes":  "Commons에서 물떡 자체를 찍은 무료 사진을 찾지 못했다(검색어: 물떡, 물떡꼬치, mul-tteok, garaetteok skewer 등). 그래서 물떡을 끓이는 바로 그 어묵 국물 통이 나온 부산 부평시장 사진을 대신 썼다. 사진 속에서 물떡은 구별되지 않으니, 사진 설명에 \u0027물떡을 끓이는 어묵 국물 통\u0027이라고 적는 편이 좋다. 상국이네(해운대구 구남로41번길 40-1)는 해운대시장 근처라 중동으로 적었지만, 법정동이 우동일 수도 있다. 옥당분식의 가격(작은 떡 300원, 큰 떡 500원)은 예전 여행기사 기준이고, 사거리분식은 물떡을 1인분 4,000원에 판다. [검증] 사진 URL은 200(image/jpeg)으로 응답했고, Commons API로 CC BY-SA 3.0 라이선스를 확인했다. 내려받아 보니 어묵 통, 떡볶이, 유부주머니가 보여 depicts에 맞게 \u0027철판\u0027을 \u0027쟁반\u0027으로 고치고 유부주머니를 더했다. Commons를 다시 검색했다(물떡, 가래떡 어묵, 떡 꼬치, eomuk, garaetteok, Bupyeong market food 등). \u0027Street eomuk\u0027, \u0027Eomuk-kkochi\u0027, \u0027Food vendor at the Bupyeong Kkangtong Night Market\u0027(실제로는 구운 빵류 노점) 같은 후보가 나왔지만 물떡이 보이는 사진은 없어 지금 사진을 그대로 쓴다. 상국이네는 식신에 해운대구 중동으로 나와 있어 \u0027중동\u0027이 맞는 것으로 확인했다. 메뉴의 \u0027어묵·물떡·유부 각 1개 1,500원\u0027도 확인했다. 옥당분식은 VisitKorea 기사(2021년 6월)에 동래구 사직북로28번길 101로 나온다. 원조 꼬마김밥은 GQ 기사에서 남포동의 24시간 포장마차로 물떡을 판다고 확인했다. 그 밖의 텍스트는 고칠 것이 없었다."
+    },
+    {
+        "name":  "유부주머니",
+        "photo":  {
+                      "imageUrl":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Korea-Busan-Pupyeong_Market-Eomuk_and_tteokbokgi-01.jpg/960px-Korea-Busan-Pupyeong_Market-Eomuk_and_tteokbokgi-01.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:Korea-Busan-Pupyeong_Market-Eomuk_and_tteokbokgi-01.jpg",
+                      "author":  "by Junho Jung at Flickr from South Korea",
+                      "license":  "CC BY-SA 3.0",
+                      "depicts":  "2009년 2월 부산 부평시장(깡통시장) 노점. 파일 제목은 \u0027어묵과 떡볶이\u0027지만, 왼쪽 위에 미나리로 묶은 유부주머니가 쌓여 있고 가운데 육수 칸에서도 유부주머니가 끓고 있다. 앞쪽에는 꼬치어묵, 오른쪽에는 떡볶이가 보인다."
+                  },
+        "summary":  "잡채 품은 유부를 미나리로 묶은 깡통시장 명물",
+        "category":  "분식·시장음식",
+        "mainIngredients":  "유부, 당면, 양파·당근·시금치·버섯 등 채소, 양념한 고기, 미나리(묶음끈), 맑은 육수",
+        "taste":  "짭조름한 육수를 머금은 쫄깃한 유부와 잡채 속이 어우러진 담백하고 따뜻한 맛",
+        "priceRange":  "6,000~9,000원",
+        "calories":  "약 350kcal (유부주머니 2개와 국물)",
+        "origin":  "1990년대 말 중구 부평동 깡통시장 포장마차에서 팔기 시작한 음식입니다. 깡통골목할매 유부전골은 1998년 포장마차로 시작해 2002년 유부주머니로 특허를 받은 곳으로 알려져 있습니다.",
+        "howToEat":  [
+                         "유부전골이나 어묵탕으로 주문하면 뜨거운 육수에 유부주머니가 담겨 나옵니다.",
+                         "국물부터 한 숟갈 떠서 시원한 맛을 봅니다.",
+                         "유부주머니를 젓가락으로 반 갈라 당면 속을 꺼내 간장 소스에 살짝 찍어 국물과 함께 먹습니다.",
+                         "비빔당면을 함께 시켜 깡통시장식 분식 한 상으로 즐깁니다."
+                     ],
+        "tip":  "속이 아주 뜨거우니 반으로 갈라 김을 한 번 빼고 드세요.",
+        "allergens":  [
+                          "대두",
+                          "밀"
+                      ],
+        "allergenNote":  "속에 넣는 고기 종류(돼지고기·쇠고기)가 가게마다 다르고, 어묵과 함께 끓이는 집은 게·새우 성분이 더해질 수 있습니다.",
+        "restaurants":  [
+                            {
+                                "name":  "깡통골목할매 유부전골 본점",
+                                "area":  "중구 부평동",
+                                "signature":  "유부전골(유부주머니), 할매 비빔당면",
+                                "source":  "https://www.kfnnews.kr/news/articleView.html?idxno=4174"
+                            },
+                            {
+                                "name":  "장우손부산어묵 깡통시장본점",
+                                "area":  "중구 부평동",
+                                "signature":  "유부주머니, 어묵",
+                                "source":  "https://www.esquirekorea.co.kr/article/83005"
+                            }
+                        ],
+        "notes":  "Commons에 \u0027유부주머니\u0027라는 이름의 사진은 없습니다. 그래서 부산 부평시장에서 찍은 노점 사진을 골랐고, 이 사진에 유부주머니가 또렷이 담겨 있습니다(파일 제목은 어묵·떡볶이). 깡통골목할매 본점은 출처에 따라 휴무일이 화요일 또는 수요일로 달라, 방문 전에 확인이 필요합니다. [검증 수정] 사진 URL 200·image/jpeg, CC BY-SA 3.0 재확인, 사진에 유부주머니가 보이는 것도 직접 확인했습니다. \u0027원조 깡통골목 비빔당면\u0027은 웹 검색으로 상호와 유부주머니 판매가 확인되지 않아 뺐습니다. 장우손부산어묵은 출처를 에스콰이어 기사(메뉴에 유부 주머니 명시)로 바꾸고, 확인되지 않은 \u0027유부동, 매콤비빔당면\u0027 대신 \u0027유부주머니, 어묵\u0027으로 고쳤습니다. 본점 속 재료가 잡채와 양념한 고기(당면·양파·당근·시금치·버섯·고기)로 확인되어 주재료를 고쳤고, 고기 종류가 출처마다 명시되지 않아 알레르기 안내에 반영했습니다. 확인되지 않은 \u0027멸치·다시마·무 육수\u0027 표기는 \u0027맑은 육수\u0027로 바꿨습니다. 부산역점·센텀점(2014년 개점 기사)은 지금도 영업하는지 확인되지 않아 넣지 않았습니다."
+    },
+    {
+        "name":  "소고기국밥",
+        "photo":  {
+                      "imageUrl":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/%EB%AF%B8%EB%9E%91%EC%86%8C%EA%B3%A0%EA%B8%B0%EA%B5%AD%EB%B0%A5_%EC%86%8C%EA%B3%A0%EA%B8%B0%EA%B5%AD%EB%B0%A5.jpg/960px-%EB%AF%B8%EB%9E%91%EC%86%8C%EA%B3%A0%EA%B8%B0%EA%B5%AD%EB%B0%A5_%EC%86%8C%EA%B3%A0%EA%B8%B0%EA%B5%AD%EB%B0%A5.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:%EB%AF%B8%EB%9E%91%EC%86%8C%EA%B3%A0%EA%B8%B0%EA%B5%AD%EB%B0%A5_%EC%86%8C%EA%B3%A0%EA%B8%B0%EA%B5%AD%EB%B0%A5.jpg",
+                      "author":  "기록을 남기는 기록을위한",
+                      "license":  "CC BY 4.0",
+                      "depicts":  "수원의 식당 \u0027미랑소고기국밥\u0027에서 찍은 소고기국밥입니다(2020년 12월). 고춧가루로 붉게 낸 국물에 결대로 찢은 소고기, 대파, 콩나물이 검은 뚝배기에 담겨 있고 뒤로 공깃밥이 보입니다."
+                  },
+        "summary":  "무·콩나물 넣고 얼큰하게 끓인 경상도식 국밥",
+        "category":  "국밥",
+        "mainIngredients":  "소고기(양지·사태), 무, 콩나물, 대파, 고춧가루, 국간장, 다진 마늘",
+        "taste":  "고춧가루로 낸 칼칼하고 시원한 국물에 무의 단맛과 푹 삶은 소고기의 감칠맛이 어우러진 맛",
+        "priceRange":  "9,500~12,000원",
+        "calories":  "약 600kcal (공깃밥 포함 1인분)",
+        "origin":  "소고기에 무와 콩나물, 고춧가루를 넣고 얼큰하게 끓이는 경상도식 소고기국이 국밥으로 자리 잡은 음식입니다. 부산에서는 1960년대 초부터 영업해 온 해운대원조할매국밥이 대표 노포로 꼽힙니다.",
+        "howToEat":  [
+                         "국물부터 맛보고, 싱거우면 소금이나 다진 양념을 조금씩 넣습니다.",
+                         "밥을 국에 말아 먹거나, 따로국밥은 밥을 한 숟갈씩 떠 넣어 먹습니다.",
+                         "고기, 콩나물, 무를 한 숟가락에 함께 떠서 먹습니다.",
+                         "깍두기나 무생채를 곁들여 개운하게 마무리합니다."
+                     ],
+        "tip":  "해장하러 오는 손님이 많아 점심시간을 피해 조금 일찍 가면 덜 기다립니다.",
+        "allergens":  [
+                          "쇠고기",
+                          "대두"
+                      ],
+        "allergenNote":  "양조간장이나 다대기를 쓰는 집은 밀이 들어갈 수 있고, 선지를 함께 넣는 집도 있습니다.",
+        "restaurants":  [
+                            {
+                                "name":  "해운대원조할매국밥",
+                                "area":  "해운대구 우동",
+                                "signature":  "소고기국밥",
+                                "source":  "https://www.sedaily.com/article/11414943"
+                            },
+                            {
+                                "name":  "다원정 한우소고기국밥 동아대병원점",
+                                "area":  "서구 대신동",
+                                "signature":  "한우국밥",
+                                "source":  "https://m.cafe.daum.net/pusangoodfood/CAUl/20716?svc=daumapp"
+                            },
+                            {
+                                "name":  "곰내연밭식당",
+                                "area":  "기장군 철마면",
+                                "signature":  "소고기국밥, 연잎수제비",
+                                "source":  "https://www.diningcode.com/profile.php?rid=U0oe04mQVBwv"
+                            },
+                            {
+                                "name":  "동래정 소고기해장국 연산본점",
+                                "area":  "연제구 연산동",
+                                "signature":  "소고기해장국(한우 보신국밥)",
+                                "source":  "https://polle.com/place/2R9YEK/%EB%8F%99%EB%9E%98%EC%A0%95%20%EC%86%8C%EA%B3%A0%EA%B8%B0%ED%95%B4%EC%9E%A5%EA%B5%AD"
+                            }
+                        ],
+        "notes":  "사진은 부산이 아닌 수원 식당에서 찍었지만, 부산에서 흔히 먹는 붉은 경상도식 소고기국밥과 생김새가 같습니다. 부산에서 찍은 사진(File:Sokogi_gukpap.JPG, CC BY-SA 3.0)도 있지만 조명이 어두워 대안으로만 남겨 둡니다. 해운대원조할매국밥은 본점(구남로21번길) 외에 좌동점도 있습니다. [검증 수정] 사진 URL 200·image/jpeg, CC BY 4.0, 설명(수원 미랑소고기국밥) 재확인했습니다. 해운대원조할매국밥(서울경제 기사: 구남로21번길 27, 소고기·콩나물·무), 다원정(다음 카페: 한우국밥 12,000원) 확인. 해운대원조할매국밥 창업 연도는 식신에 1962년으로 나와 \u00271960년대 초\u0027 표기를 유지했습니다. 곰내연밭식당은 원래 출처가 검색 목록 페이지여서, 식당 개별 페이지(다이닝코드 \u0027철마 소고기국밥, 수제비 맛집\u0027)로 바꿨고 대표 메뉴를 연잎수제비로 고쳤습니다. 네 번째 식당으로 동래정 소고기해장국 연산본점(연제구 월드컵대로111번길 4, 소고기해장국 12,000원)을 더했습니다. 반찬 표기는 리뷰에 자주 나오는 무생채로 바꿨습니다."
+    },
+    {
+        "name":  "기장 멸치쌈밥",
+        "photo":  {
+                      "imageUrl":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/Korean_cuisine-Myeolchi_bossam-02.jpg/960px-Korean_cuisine-Myeolchi_bossam-02.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:Korean_cuisine-Myeolchi_bossam-02.jpg",
+                      "author":  "creepyblues",
+                      "license":  "CC BY 2.0",
+                      "depicts":  "Commons에는 \u0027멸치보쌈(Myeolchi bossam)\u0027으로 올라 있는 사진입니다(2007년). 풋고추와 홍고추를 듬뿍 올려 빨갛게 조린 멸치를 냄비째 냈고, 앞쪽에서 손에 든 깻잎 쌈 위에 멸치 한 마리와 고추, 마늘을 올렸습니다."
+                  },
+        "summary":  "기장 봄멸치를 얼큰하게 조려 쌈 싸 먹는 별미",
+        "category":  "해산물·한식",
+        "mainIngredients":  "기장 대변항 생멸치(대멸), 우거지·시래기, 고춧가루, 된장, 마늘, 풋고추, 상추·배추·깻잎 쌈",
+        "taste":  "칼칼하고 짭조름한 양념에 부드럽고 고소한 생멸치 살과 아삭한 쌈채소가 어우러진 맛",
+        "priceRange":  "2인 기준 25,000~30,000원 (소 사이즈)",
+        "calories":  "약 650kcal (밥 포함 1인분)",
+        "origin":  "기장 대변항은 봄철 유자망으로 잡는 굵은 멸치로 유명한 국내 대표 멸치 산지입니다. 갓 잡은 생멸치를 우거지와 함께 얼큰하게 조려 쌈으로 먹던 어촌 음식이 대변항 횟집 골목의 대표 메뉴가 되었고, 매년 봄에는 기장멸치축제가 열립니다.",
+        "howToEat":  [
+                         "상추나 배추 잎에 밥을 한 숟갈 올립니다.",
+                         "멸치조림에서 멸치 한두 마리와 우거지를 건져 밥 위에 얹습니다.",
+                         "풋고추와 마늘을 곁들여 쌈을 싸서 한입에 먹습니다.",
+                         "남은 양념 국물에 밥을 비벼 마무리하고, 멸치회를 함께 시키면 더 좋습니다."
+                     ],
+        "tip":  "살이 가장 통통하게 오른 4~5월 봄멸치철에 가야 제맛을 볼 수 있습니다.",
+        "allergens":  [
+                          "대두",
+                          "밀"
+                      ],
+        "allergenNote":  "멸치는 표시 대상이 아니지만, 집마다 고추장·액젓 배합이 달라 밀이나 새우 성분이 들어갈 수 있습니다.",
+        "restaurants":  [
+                            {
+                                "name":  "장군멸치회촌",
+                                "area":  "기장군 기장읍",
+                                "signature":  "멸치회, 멸치찌개(쌈)",
+                                "source":  "https://hotplacehunter.co.kr/?p=76971"
+                            },
+                            {
+                                "name":  "남항횟집",
+                                "area":  "기장군 기장읍",
+                                "signature":  "멸치쌈밥세트",
+                                "source":  "https://info.koreacharts.com/tour/850179/contents.html"
+                            },
+                            {
+                                "name":  "이화장횟집",
+                                "area":  "기장군 기장읍",
+                                "signature":  "멸치회, 멸치찌개",
+                                "source":  "https://www.ktriptips.com/kor/food/2845027"
+                            },
+                            {
+                                "name":  "방파제횟집",
+                                "area":  "기장군 기장읍",
+                                "signature":  "멸치쌈밥, 멸치회",
+                                "source":  "https://www.diningcode.com/list.dc?query=%EB%8C%80%EB%B3%80%ED%95%AD+%EB%A9%B8%EC%B9%98%EC%8C%88%EB%B0%A5"
+                            }
+                        ],
+        "notes":  "Commons에는 \u0027멸치쌈밥\u0027이나 기장에서 찍은 사진이 없습니다. 그래서 같은 음식(조린 멸치를 쌈에 싸 먹는 방식)을 찍은 \u0027멸치보쌈\u0027 사진을 골랐고, 촬영 장소는 적혀 있지 않습니다. 네 식당은 모두 대변항(기장읍 대변리 일대)에 있습니다. [검증 수정] 사진 URL 200·image/jpeg, CC BY 2.0, 설명(멸치보쌈) 재확인했습니다. 다이닝코드 개별 페이지는 확인할 수 없어 장군멸치회촌 출처를 핫플레이스헌터(기장해안로 607, 1977년 개업, 멸치찌개(쌈) 25,000~45,000원)로, 남항횟집 출처를 코리아차트(기장해안로 572, 대표 메뉴 멸치쌈밥세트)로 바꿨습니다. 이화장횟집(기장해안로 560-5)은 출처 메뉴에 맞춰 대표 메뉴를 \u0027멸치회, 멸치찌개\u0027로 고쳤습니다. 방파제횟집(대변2길 1)은 멸치쌈밥 소 30,000원, 멸치회 소 25,000원으로 확인됩니다. 가격은 1인 가격이 출처로 확인되지 않아, 확인된 소 사이즈(2인 기준) 가격으로 바꿨습니다."
+    },
+    {
+        "name":  "영도 해녀촌 전복죽",
+        "photo":  {
+                      "imageUrl":  "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/17/Jeonbok-juk.jpg/960px-Jeonbok-juk.jpg?utm_source=commons.wikimedia.org\u0026utm_campaign=imageinfo\u0026utm_content=thumbnail",
+                      "filePage":  "https://commons.wikimedia.org/wiki/File:Jeonbok-juk.jpg",
+                      "author":  "bryan...",
+                      "license":  "CC BY-SA 2.0",
+                      "depicts":  "전복죽(Jeonbok-juk) 사진입니다(2018년, 촬영 장소 미상). 흰 그릇에 전복 내장을 넣어 초록빛이 도는 죽이 담겨 있고, 위에 얇게 썬 전복 살을 올렸습니다. 뒤로 김치, 김, 물김치 같은 반찬이 보입니다."
+                  },
+        "summary":  "해녀가 딴 전복을 내장째 끓인 초록빛 죽",
+        "category":  "죽·해산물",
+        "mainIngredients":  "전복(살과 내장), 불린 쌀, 참기름, 소금",
+        "taste":  "전복 내장에서 우러난 진한 바다 향과 고소한 참기름, 부드럽게 퍼진 쌀알이 어우러진 순한 맛",
+        "priceRange":  "12,000~15,000원",
+        "calories":  "약 400kcal (1그릇)",
+        "origin":  "영도 해녀는 대부분 제주에서 건너온 출향해녀와 그 후손이며, 1887년 무렵 제주 해녀가 영도에 들어온 것이 시작으로 전해집니다. 동삼동 중리 바닷가의 영도해녀문화전시관 1층 해녀촌에서는 해녀들이 그날 물질로 딴 전복·멍게·해삼 등을 바로 손질해 내 줍니다.",
+        "howToEat":  [
+                         "해녀촌에서 멍게·해삼·전복 등 해산물 모둠을 먼저 시킵니다.",
+                         "전복죽은 뜨거우니 그릇 가장자리부터 조금씩 떠 먹습니다.",
+                         "취향에 따라 김가루나 참기름을 더하거나 김치를 곁들입니다.",
+                         "해물라면이나 성게김밥과 번갈아 먹으며 바다 풍경을 즐깁니다."
+                     ],
+        "tip":  "날씨와 물질 사정에 따라 영업과 메뉴가 바뀔 수 있으니, 바람이 센 날에는 미리 전화로 확인하세요.",
+        "allergens":  [
+                          "조개류(굴·전복·홍합 포함)"
+                      ],
+        "allergenNote":  "국간장으로 간을 하거나 달걀·김가루를 올리는 집은 대두나 난류가 더해질 수 있습니다.",
+        "restaurants":  [
+                            {
+                                "name":  "영도해녀촌",
+                                "area":  "영도구 동삼동",
+                                "signature":  "자연산 전복, 해산물 모둠, 성게김밥",
+                                "source":  "https://www.visitbusan.net/index.do?menuCd=DOM_000000202008001000\u0026uc_seq=2097\u0026lang_cd=ko"
+                            }
+                        ],
+        "notes":  "Commons에는 영도 해녀촌에서 찍은 전복죽 사진이 없습니다. 그래서 촬영 장소를 알 수 없는 일반 전복죽 사진을 골랐고, 내장을 넣어 초록빛이 도는 해녀촌식 전복죽과 모양이 같습니다. [검증 수정] 사진 URL 200·image/jpeg, CC BY-SA 2.0, 설명(Jeonbok-juk) 재확인했습니다. 영도해녀촌(중리남로 2-35, 영도해녀문화전시관 1층, 051-419-4505, 매일 09:00~18:00)은 비짓부산 공식 페이지로 확인했지만, 공식 소개와 최근 메뉴판(전복(자연산) 소 30,000원, 멍게·소라·해삼·해물라면·김밥 등)에는 전복죽이 없고, 웹 검색에서도 영도에서 전복죽을 판다는 근거를 찾지 못했습니다. 그래서 대표 메뉴를 확인된 메뉴로 고치고, origin에서 \u0027해녀촌에서 전복죽을 내 왔다\u0027는 확인되지 않은 문장을 바꿨습니다. \u0027중리해녀촌\u0027은 같은 건물(가게 3곳 영업) 안의 가게로 보이며 별도 상호와 전복죽 판매가 확인되지 않아 뺐습니다. \u0027울산댁만남(감지해변 조개구이촌)\u0027도 상호와 전복죽 판매가 확인되지 않아 뺐습니다. 내장을 넣은 초록빛 전복죽을 해녀촌에서 판다는 기사·후기는 기장 연화리 해녀촌(예: 해녀 조씨 할매집, 하퍼스바자 기사)에서만 확인되므로, 이 항목은 이름을 \u0027해녀촌 전복죽\u0027으로 바꾸거나 기장 연화리 식당으로 바꾸는 것을 검토하길 권합니다. 가격은 출처로 확인되지 않아 통상 범위입니다."
+    }
+]

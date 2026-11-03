@@ -1,0 +1,303 @@
+<title>I EAT BUSAN 사이트맵</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: document header → global nav strip → horizontally scrollable IA tree → legend → page inventory table → key flows */
+:root {
+  --bg: #F5F2EC;        /* 한지 미색 */
+  --surface: #FFFFFF;   /* 백색 */
+  --beige: #E5D5C2;     /* 베이지 */
+  --blush: #F7E7DF;     /* 분홍빛 미색 */
+  --ink: #282622;       /* 먹색 */
+  --ink-2: #5F5850;
+  --ink-3: #8F8377;
+  --line: #B69C82;      /* 회갈색 */
+  --accent: #CC4936;    /* 다홍 */
+  --on-accent: #FFFFFF;
+  --ok: #3B7964;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-id: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1D1B18; --surface: #282622; --beige: #4A4036; --blush: #3A2A25;
+    --ink: #F5F2EC; --ink-2: #CFC6BB; --ink-3: #A39888; --line: #8A7663;
+    --accent: #E0644F; --on-accent: #1D1B18; --ok: #6DB39A; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1D1B18; --surface: #282622; --beige: #4A4036; --blush: #3A2A25;
+  --ink: #F5F2EC; --ink-2: #CFC6BB; --ink-3: #A39888; --line: #8A7663;
+  --accent: #E0644F; --on-accent: #1D1B18; --ok: #6DB39A; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 64px;
+}
+.wrap { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+h1, h2 { text-wrap: balance; margin: 0; }
+.id { font-family: var(--font-id); font-weight: 600; letter-spacing: .02em; }
+
+/* Header */
+.doc-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; align-items: flex-end; border-bottom: 2px solid var(--ink); padding-bottom: 20px; }
+.brand { font-weight: 700; font-size: 34px; line-height: 1.1; color: var(--accent); letter-spacing: -.01em; }
+.doc-title { font-size: 20px; font-weight: 600; margin-top: 6px; }
+.meta { display: grid; grid-template-columns: auto auto; gap: 2px 16px; font-size: 13px; color: var(--ink-2); }
+.meta dt { color: var(--ink-3); }
+.meta dd { margin: 0; font-variant-numeric: tabular-nums; }
+
+/* Global nav */
+.gnb { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.gnb > div { background: var(--surface); border: 1px solid var(--beige); border-radius: 10px; padding: 14px 16px; min-width: 0; }
+.label { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.gnb p { margin: 4px 0 0; font-size: 14px; }
+
+section > h2 { font-size: 18px; display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+section > h2 small { font-size: 13px; font-weight: 400; color: var(--ink-3); }
+
+/* Tree */
+.tree-scroll { overflow-x: auto; padding-bottom: 8px; -webkit-overflow-scrolling: touch; }
+.tree { width: max-content; padding: 4px 4px 12px; }
+.root { display: flex; justify-content: center; position: relative; padding-bottom: 28px; }
+.root::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 2px; height: 28px; background: var(--line); transform: translateX(-1px); }
+.cols { display: grid; grid-template-columns: repeat(6, 224px); gap: 26px; position: relative; padding-top: 26px; align-items: start; }
+.cols::before { content: ""; position: absolute; top: 0; height: 2px; background: var(--line); left: 112px; right: 112px; }
+.col { position: relative; }
+.col::before { content: ""; position: absolute; top: -26px; left: 50%; width: 2px; height: 26px; background: var(--line); transform: translateX(-1px); }
+
+.node { border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.node .id { font-size: 11px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.node .t { font-weight: 700; font-size: 15px; line-height: 1.35; }
+.node .d { font-size: 12px; line-height: 1.5; }
+.node.app { background: var(--ink); color: var(--bg); width: 300px; padding: 14px 16px; }
+.node.app .t { font-size: 18px; }
+.node.tab, .node.entry { padding: 13px 14px; }
+.node.tab { background: var(--accent); color: var(--on-accent); }
+.node.entry { background: var(--ink); color: var(--bg); }
+.node.tab .t, .node.entry .t { font-size: 17px; }
+.node.screen { background: var(--surface); border: 1px solid var(--beige); }
+.node.screen .id { color: var(--accent); }
+.node.screen .d { color: var(--ink-2); }
+.node.section { background: var(--blush); }
+.node.section .id { color: var(--accent); }
+.node.section .t { font-size: 13px; }
+.node.section .d { color: var(--ink-2); }
+.node.link, .node.planned { border: 1px dashed var(--line); color: var(--ink-2); }
+.node.link .id, .node.planned .id { color: var(--ink-3); }
+.node.planned .t { color: var(--ink-3); }
+.tag { font-family: var(--font-body); font-weight: 500; font-size: 10px; letter-spacing: 0; padding: 0 6px; border-radius: 4px; background: var(--beige); color: var(--ink-2); }
+
+ul.kids { list-style: none; margin: 0; padding: 0 0 0 22px; }
+ul.kids li { position: relative; margin-top: 10px; }
+ul.kids li::before { content: ""; position: absolute; left: -12px; top: 21px; width: 12px; height: 2px; background: var(--line); }
+ul.kids li::after { content: ""; position: absolute; left: -12px; top: -10px; width: 2px; background: var(--line); }
+ul.kids li:not(:last-child)::after { bottom: 0; }
+ul.kids li:last-child::after { height: 33px; }
+
+/* Legend */
+.legend { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; background: var(--surface); border: 1px solid var(--beige); border-radius: 10px; padding: 12px 16px; font-size: 13px; color: var(--ink-2); }
+.legend b { color: var(--ink); font-weight: 600; margin-right: 4px; }
+.sw { display: inline-block; width: 26px; height: 16px; border-radius: 4px; vertical-align: -3px; margin-right: 6px; }
+.sw.tab { background: var(--accent); } .sw.entry { background: var(--ink); }
+.sw.screen { background: var(--surface); border: 1px solid var(--beige); }
+.sw.section { background: var(--blush); }
+.sw.link { border: 1px dashed var(--line); }
+
+/* Stats */
+.stats { display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 14px; color: var(--ink-2); }
+.stats strong { color: var(--ink); font-size: 22px; font-weight: 700; margin-right: 4px; font-variant-numeric: tabular-nums; }
+
+/* Inventory table */
+.table-scroll { overflow-x: auto; border: 1px solid var(--beige); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 940px; font-size: 13px; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--beige); vertical-align: top; }
+th { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); background: var(--bg); position: sticky; top: 0; }
+tr:last-child td { border-bottom: 0; }
+td.id { white-space: nowrap; color: var(--accent); }
+td.frame { color: var(--ink-2); font-size: 12px; }
+tr.group td { background: var(--bg); font-weight: 600; color: var(--ink); font-size: 12px; letter-spacing: .02em; }
+.st { display: inline-block; font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
+.st.done { color: var(--ok); background: color-mix(in srgb, var(--ok) 14%, transparent); }
+.st.later { color: var(--ink-3); background: var(--beige); }
+
+/* Flows */
+.flows { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+.flow { background: var(--surface); border: 1px solid var(--beige); border-radius: 10px; padding: 14px 16px; min-width: 0; }
+.flow h3 { margin: 4px 0 10px; font-size: 15px; }
+.steps { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 13px; }
+.steps span.s { background: var(--bg); border-radius: 6px; padding: 3px 8px; }
+.steps span.s .id { color: var(--accent); font-size: 11px; margin-right: 4px; }
+.steps span.arr { color: var(--ink-3); }
+.note { font-size: 13px; color: var(--ink-3); margin: 0; }
+</style>
+
+<div class="wrap">
+  <header class="doc-head">
+    <div>
+      <div class="brand">I EAT BUSAN</div>
+      <h1 class="doc-title">사이트맵 · Information Architecture</h1>
+    </div>
+    <dl class="meta">
+      <dt>버전</dt><dd>v1.0 (시안)</dd>
+      <dt>작성일</dt><dd>2026.11.03</dd>
+      <dt>플랫폼</dt><dd>모바일 웹/앱 · 390 × 844</dd>
+      <dt>지원 언어</dt><dd>KO · EN · 中文 · 日本語</dd>
+    </dl>
+  </header>
+
+  <section aria-labelledby="gnb-h">
+    <h2 id="gnb-h">글로벌 내비게이션 <small>모든 메인 탭 화면 공통</small></h2>
+    <div class="gnb">
+      <div><span class="label">Global Header</span><p>로고 · 언어 버튼 → <span class="id">0.2</span> · 검색 → <span class="id">1.2</span> · 알림 → <span class="id">1.3</span></p></div>
+      <div><span class="label">Tab Bar</span><p>홈 <span class="id">1.0</span> · 지도 <span class="id">2.0</span> · 커뮤니티 <span class="id">3.0</span> · 찜 <span class="id">4.0</span> · 마이 <span class="id">5.0</span></p></div>
+      <div><span class="label">Sub Header</span><p>뒤로가기 · 화면 제목 · 보조 버튼 (공유·더보기·설정)</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="tree-h">
+    <h2 id="tree-h">구조도 <small>최대 깊이 3단계 · 좌우로 스크롤</small></h2>
+    <div class="tree-scroll">
+      <div class="tree">
+        <div class="root">
+          <div class="node app"><span class="id">APP</span><span class="t">I EAT BUSAN</span><span class="d">부산 음식 가이드 · 맛집 · 커뮤니티</span></div>
+        </div>
+        <div class="cols">
+          <div class="col">
+            <div class="node entry"><span class="id">0.0</span><span class="t">진입</span><span class="d">첫 실행 · 비로그인 진입</span></div>
+            <ul class="kids">
+              <li><div class="node screen"><span class="id">0.1</span><span class="t">로그인</span><span class="d">카카오 · 네이버 · Apple, 로그인 없이 둘러보기</span></div></li>
+              <li><div class="node screen"><span class="id">0.2</span><span class="t">언어 선택</span><span class="d">한국어 · English · 中文 · 日本語</span></div></li>
+            </ul>
+          </div>
+          <div class="col">
+            <div class="node tab"><span class="id">1.0</span><span class="t">홈</span><span class="d">부산 인기 음식 20 · 인기순</span></div>
+            <ul class="kids">
+              <li><div class="node screen"><span class="id">1.1</span><span class="t">음식 상세 ×20</span><span class="d">사진 + 섹션 칩으로 아래 섹션 이동</span></div>
+                <ul class="kids">
+                  <li><div class="node section"><span class="id">1.1-A</span><span class="t">상세 정보</span><span class="d">분류 · 주재료 · 맛 · 가격대 · 칼로리 · 유래</span></div></li>
+                  <li><div class="node section"><span class="id">1.1-B</span><span class="t">먹는 방법</span><span class="d">단계별 방법 + 로컬 팁</span></div></li>
+                  <li><div class="node section"><span class="id">1.1-C</span><span class="t">알레르기 정보</span><span class="d">유발 성분 + 주의 문구</span></div></li>
+                  <li><div class="node section"><span class="id">1.1-D</span><span class="t">식당 리스트</span><span class="d">음식을 파는 식당 목록</span></div></li>
+                  <li><div class="node screen"><span class="id">1.1.1</span><span class="t">식당 상세</span><span class="d">기본 정보 · 미니 지도 · 대표 메뉴 · 관련 게시글</span></div></li>
+                </ul>
+              </li>
+              <li><div class="node screen"><span class="id">1.2</span><span class="t">검색</span><span class="d">최근 검색어 · 인기 검색어</span></div>
+                <ul class="kids">
+                  <li><div class="node screen"><span class="id">1.2.1</span><span class="t">검색 결과</span><span class="d">전체 / 음식 / 식당 / 게시글</span></div></li>
+                </ul>
+              </li>
+              <li><div class="node screen"><span class="id">1.3</span><span class="t">알림</span><span class="d">댓글 · 좋아요 · 새 맛집 소식 · 공지</span></div></li>
+            </ul>
+          </div>
+          <div class="col">
+            <div class="node tab"><span class="id">2.0</span><span class="t">지도</span><span class="d">음식 칩 필터 · 핀 · 내 위치</span></div>
+            <ul class="kids">
+              <li><div class="node section"><span class="id">2.0-A</span><span class="t">식당 미리보기 (바텀시트)</span><span class="d">주변 맛집 목록</span></div></li>
+              <li><div class="node link"><span class="id">→ 1.1.1 <span class="tag">공용 화면</span></span><span class="t">식당 상세</span><span class="d">바텀시트 아이템에서 진입</span></div></li>
+            </ul>
+          </div>
+          <div class="col">
+            <div class="node tab"><span class="id">3.0</span><span class="t">커뮤니티</span><span class="d">인기 · 최신 · 맛집 후기 · 질문 · 자유</span></div>
+            <ul class="kids">
+              <li><div class="node screen"><span class="id">3.1</span><span class="t">게시글 상세</span><span class="d">본문 · 사진 · 댓글 · 댓글 입력</span></div></li>
+              <li><div class="node screen"><span class="id">3.2</span><span class="t">글쓰기</span><span class="d">카테고리 · 제목 · 본문 · 사진 · 음식 태그</span></div></li>
+            </ul>
+          </div>
+          <div class="col">
+            <div class="node tab"><span class="id">4.0</span><span class="t">찜</span><span class="d">음식 / 식당 탭</span></div>
+            <ul class="kids">
+              <li><div class="node link"><span class="id">→ 1.1 <span class="tag">공용 화면</span></span><span class="t">음식 상세</span><span class="d">찜한 음식에서 진입</span></div></li>
+              <li><div class="node link"><span class="id">→ 1.1.1 <span class="tag">공용 화면</span></span><span class="t">식당 상세</span><span class="d">찜한 식당에서 진입</span></div></li>
+            </ul>
+          </div>
+          <div class="col">
+            <div class="node tab"><span class="id">5.0</span><span class="t">마이</span><span class="d">프로필 · 활동 요약 · 메뉴</span></div>
+            <ul class="kids">
+              <li><div class="node screen"><span class="id">5.1</span><span class="t">프로필 수정</span><span class="d">닉네임 · 활동 지역 · 한 줄 소개</span></div></li>
+              <li><div class="node screen"><span class="id">5.2</span><span class="t">설정</span><span class="d">알림 · 언어 · 계정 · 서비스 정보</span></div>
+                <ul class="kids">
+                  <li><div class="node link"><span class="id">→ 0.2 <span class="tag">공용 화면</span></span><span class="t">언어 선택</span></div></li>
+                </ul>
+              </li>
+              <li><div class="node planned"><span class="id">5.3 <span class="tag">추후 설계</span></span><span class="t">나의 활동</span><span class="d">내가 쓴 글 · 댓글 · 최근 본 음식</span></div></li>
+              <li><div class="node planned"><span class="id">5.4 <span class="tag">추후 설계</span></span><span class="t">고객 지원</span><span class="d">공지사항 · 자주 묻는 질문 · 고객센터</span></div></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="legend" role="list" aria-label="범례">
+    <b>범례</b>
+    <span role="listitem"><i class="sw tab"></i>메인 탭</span>
+    <span role="listitem"><i class="sw entry"></i>진입 화면</span>
+    <span role="listitem"><i class="sw screen"></i>화면</span>
+    <span role="listitem"><i class="sw section"></i>화면 안의 섹션 · 상태</span>
+    <span role="listitem"><i class="sw link"></i>공용 화면으로 이동 / 추후 설계</span>
+  </div>
+
+  <div class="stats">
+    <span><strong>16</strong>화면 유형 설계 완료</span>
+    <span><strong>2</strong>추후 설계</span>
+    <span><strong>41</strong>Figma 프레임 (음식 상세 20 · 다국어 예시 6 포함)</span>
+    <span><strong>3</strong>최대 깊이</span>
+  </div>
+
+  <section aria-labelledby="inv-h">
+    <h2 id="inv-h">화면 목록 <small>화면 ID는 Figma 프레임 이름과 대응</small></h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>ID</th><th>화면명</th><th>유형</th><th>진입 경로</th><th>주요 기능</th><th>Figma 프레임</th><th>상태</th></tr>
+        </thead>
+        <tbody>
+          <tr class="group"><td colspan="7">0.0 진입</td></tr>
+          <tr><td class="id">0.1</td><td>로그인</td><td>진입</td><td>앱 실행</td><td>소셜 로그인 3종, 둘러보기, 언어 버튼</td><td class="frame">Login / 로그인</td><td><span class="st done">설계 완료</span></td></tr>
+          <tr><td class="id">0.2</td><td>언어 선택</td><td>진입</td><td>0.1 언어 버튼, 헤더 언어 버튼, 5.2 설정</td><td>KO · EN · 中文 · 日本語 선택, 확인</td><td class="frame">Language Select / 언어 선택</td><td><span class="st done">설계 완료</span></td></tr>
+          <tr class="group"><td colspan="7">1.0 홈</td></tr>
+          <tr><td class="id">1.0</td><td>홈</td><td>메인 탭</td><td>탭바, 로그인 후</td><td>인기 음식 20 리스트, 인기순 정렬</td><td class="frame">Home / 음식 리스트 (+ EN · ZH · JA)</td><td><span class="st done">설계 완료</span></td></tr>
+          <tr><td class="id">1.1</td><td>음식 상세 ×20</td><td>화면</td><td>홈 카드, 찜, 검색 결과</td><td>사진, 섹션 칩(상세 정보 · 먹는 방법 · 알레르기 · 식당 리스트), 지도 이동 버튼</td><td class="frame">Food Detail / 01–20 (+ EN · ZH · JA)</td><td><span class="st done">설계 완료</span></td></tr>
+          <tr><td class="id">1.1.1</td><td>식당 상세</td><td>화면</td><td>식당 리스트, 지도 바텀시트, 찜, 검색 결과</td><td>전화 · 길찾기 · 공유, 기본 정보, 미니 지도, 대표 메뉴, 관련 게시글</td><td class="frame">Restaurant Detail / 식당 상세</td><td><span class="st done">설계 완료</span></td></tr>
+          <tr><td class="id">1.2</td><td>검색</td><td>화면</td><td>헤더 검색 아이콘</td><td>최근 검색어, 인기 검색어 1–10위</td><td class="frame">Search / 검색</td><td><span class="st done">설계 완료</span></td></tr>
+          <tr><td class="id">1.2.1</td><td>검색 결과</td><td>화면</td><td>검색 실행, 인기 검색어</td><td>전체 / 음식 / 식당 / 게시글 탭</td><td class="frame">Search Results / 검색 결과</td><td><span class="st done">설계 완료</span></td></tr>
+          <tr><td class="id">1.3</td><td>알림</td><td>화면</td><td>헤더 알림 아이콘</td><td>댓글 · 좋아요 · 새 맛집 · 공지, 안 읽음 표시</td><td class="frame">Notifications / 알림</td><td><span class="st done">설계 완료</span></td></tr>
+          <tr class="group"><td colspan="7">2.0 지도</td></tr>
+          <tr><td class="id">2.0</td><td>지도</td><td>메인 탭</td><td>탭바, 음식 상세의 지도 이동 버튼</td><td>음식 칩 필터, 핀, 내 위치, 식당 미리보기 바텀시트</td><td class="frame">Map / 지도</td><td><span class="st done">설계 완료</span></td></tr>
+          <tr class="group"><td colspan="7">3.0 커뮤니티</td></tr>
+          <tr><td class="id">3.0</td><td>커뮤니티</td><td>메인 탭</td><td>탭바</td><td>카테고리 탭, 피드, 글쓰기 버튼</td><td class="frame">Community / 커뮤니티</td><td><span class="st done">설계 완료</span></td></tr>
+          <tr><td class="id">3.1</td><td>게시글 상세</td><td>화면</td><td>피드 게시글, 식당 상세의 관련 게시글</td><td>본문 · 사진 · 좋아요 · 댓글 · 댓글 입력</td><td class="frame">Post Detail / 게시글 상세</td><td><span class="st done">설계 완료</span></td></tr>
+          <tr><td class="id">3.2</td><td>글쓰기</td><td>화면</td><td>글쓰기 버튼</td><td>카테고리 · 제목 · 본문 · 사진 · 음식 태그</td><td class="frame">Write Post / 글쓰기</td><td><span class="st done">설계 완료</span></td></tr>
+          <tr class="group"><td colspan="7">4.0 찜</td></tr>
+          <tr><td class="id">4.0</td><td>찜</td><td>메인 탭</td><td>탭바</td><td>음식 / 식당 탭, 찜 해제</td><td class="frame">Favorites / 찜</td><td><span class="st done">설계 완료</span></td></tr>
+          <tr class="group"><td colspan="7">5.0 마이</td></tr>
+          <tr><td class="id">5.0</td><td>마이</td><td>메인 탭</td><td>탭바</td><td>프로필, 활동 요약, 메뉴</td><td class="frame">My / 마이</td><td><span class="st done">설계 완료</span></td></tr>
+          <tr><td class="id">5.1</td><td>프로필 수정</td><td>화면</td><td>프로필 수정 버튼</td><td>닉네임 · 활동 지역 · 한 줄 소개, 저장</td><td class="frame">Profile Edit / 프로필 수정</td><td><span class="st done">설계 완료</span></td></tr>
+          <tr><td class="id">5.2</td><td>설정</td><td>화면</td><td>마이 톱니바퀴</td><td>알림 토글, 언어, 계정, 서비스 정보, 회원 탈퇴</td><td class="frame">Settings / 설정</td><td><span class="st done">설계 완료</span></td></tr>
+          <tr><td class="id">5.3</td><td>나의 활동</td><td>화면</td><td>마이 메뉴</td><td>내가 쓴 글 · 내가 쓴 댓글 · 최근 본 음식</td><td class="frame">—</td><td><span class="st later">추후 설계</span></td></tr>
+          <tr><td class="id">5.4</td><td>고객 지원</td><td>화면</td><td>마이 메뉴</td><td>공지사항 · 자주 묻는 질문 · 고객센터</td><td class="frame">—</td><td><span class="st later">추후 설계</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="flow-h">
+    <h2 id="flow-h">핵심 사용자 동선</h2>
+    <div class="flows">
+      <div class="flow"><span class="label">Flow A</span><h3>음식 알아보고 식당 찾기</h3>
+        <div class="steps"><span class="s"><span class="id">1.0</span>홈</span><span class="arr">→</span><span class="s"><span class="id">1.1</span>음식 상세</span><span class="arr">→</span><span class="s"><span class="id">1.1-D</span>식당 리스트</span><span class="arr">→</span><span class="s"><span class="id">1.1.1</span>식당 상세</span></div></div>
+      <div class="flow"><span class="label">Flow B</span><h3>지도에서 주변 맛집 찾기</h3>
+        <div class="steps"><span class="s"><span class="id">2.0</span>지도</span><span class="arr">→</span><span class="s"><span class="id">2.0-A</span>바텀시트</span><span class="arr">→</span><span class="s"><span class="id">1.1.1</span>식당 상세</span></div></div>
+      <div class="flow"><span class="label">Flow C</span><h3>후기 읽고 글 남기기</h3>
+        <div class="steps"><span class="s"><span class="id">3.0</span>커뮤니티</span><span class="arr">→</span><span class="s"><span class="id">3.1</span>게시글 상세</span><span class="arr">/</span><span class="s"><span class="id">3.2</span>글쓰기</span></div></div>
+      <div class="flow"><span class="label">Flow D</span><h3>외국인 첫 실행</h3>
+        <div class="steps"><span class="s"><span class="id">0.1</span>로그인</span><span class="arr">→</span><span class="s"><span class="id">0.2</span>언어 선택</span><span class="arr">→</span><span class="s"><span class="id">1.0</span>홈 (선택한 언어)</span></div></div>
+    </div>
+  </section>
+
+  <p class="note">공용 화면(1.1 · 1.1.1 · 0.2)은 화면을 하나만 두고 여러 경로에서 진입합니다. 음식 · 식당 이름은 모든 언어에서 한국어 원문을 함께 표기합니다.</p>
+</div>

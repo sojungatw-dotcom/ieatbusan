@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="부산·경남 향토음식 정보와 커뮤니티 기능 시안">
+  <title>부산·경남 향토음식</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a href="#foods">부산·경남 향토음식</a>
+    <nav aria-label="주 메뉴">
+      <a href="#foods">음식 정보</a>
+      <a href="#community">커뮤니티</a>
+    </nav>
+  </header>
+  <main id="main">
+    <section id="foods-view" aria-labelledby="foods-title">
+      <h1 id="foods-title" tabindex="-1">부산·경남 향토음식</h1>
+      <p>음식을 선택하면 상세 정보와 먹는 법, 식당, 알레르기 및 주의사항을 볼 수 있습니다.</p>
+      <p class="note">기능 확인용 시안입니다. 음식 설명과 식당은 예시이며, 사진은 추후 등록합니다.</p>
+      <section class="featured" aria-labelledby="featured-title" aria-roledescription="캐러셀">
+        <h2 id="featured-title">추천 향토음식 5선</h2>
+        <p class="note" id="swipe-help">사진을 좌우로 밀거나 이전·다음 버튼으로 다른 음식을 확인하세요.</p>
+        <div id="featured-track" class="featured-track" tabindex="0" aria-label="추천 음식" aria-describedby="swipe-help"></div>
+        <div class="featured-controls">
+          <button id="featured-prev" type="button" aria-label="이전 음식" aria-controls="featured-track">이전</button>
+          <span id="featured-count" role="status" aria-live="polite" aria-atomic="true">1 / 5</span>
+          <button id="featured-next" type="button" aria-label="다음 음식" aria-controls="featured-track">다음</button>
+        </div>
+        <div id="featured-pages" class="featured-pages" role="group" aria-label="추천 음식 선택"></div>
+      </section>
+      <h2>음식 더 보기</h2>
+      <p>아래로 스크롤하며 음식 사진과 간단한 정보를 살펴보세요.</p>
+      <form id="search-form" class="filters" role="search">
+        <label>지역
+          <select id="region"><option value="전체">전체</option><option value="부산">부산</option><option value="경남">경남</option></select>
+        </label>
+        <label>음식 검색<input id="query" type="search" placeholder="음식명 또는 지역명"></label>
+        <button type="submit">검색</button>
+      </form>
+      <p id="result-count" role="status"></p>
+      <div id="food-list" class="food-grid"></div>
+    </section>
+
+    <section id="detail-view" aria-labelledby="detail-title" hidden>
+      <a href="#foods">← 음식 목록</a>
+      <h1 id="detail-title" tabindex="-1"></h1>
+      <p id="detail-region"></p>
+      <img id="detail-image" class="detail-image" alt="">
+      <!-- 사진 바로 아래에 위치하는 섹션 이동 버튼 -->
+      <nav id="detail-nav" class="section-nav" aria-label="음식 상세 섹션">
+        <button type="button" data-section="food-info">상세 정보</button>
+        <button type="button" data-section="food-how">먹는 법</button>
+        <button type="button" data-section="food-restaurants">판매 식당</button>
+        <button type="button" data-section="food-allergy">알레르기·주의사항</button>
+      </nav>
+      <section class="detail-section" aria-labelledby="food-info">
+        <h2 id="food-info" tabindex="-1">상세 정보</h2>
+        <p id="detail-description"></p><p id="detail-ingredients"></p>
+      </section>
+      <section class="detail-section" aria-labelledby="food-how">
+        <h2 id="food-how" tabindex="-1">먹는 법</h2><ol id="detail-how"></ol>
+      </section>
+      <section class="detail-section" aria-labelledby="food-restaurants">
+        <h2 id="food-restaurants" tabindex="-1">판매 식당</h2>
+        <p class="note">아래 식당명과 위치는 화면 구성용 가상 데이터입니다.</p>
+        <div id="restaurant-list"></div>
+        <a id="restaurant-search" target="_blank" rel="noopener noreferrer">지도에서 실제 식당 검색 (새 창)</a>
+      </section>
+      <section class="detail-section" aria-labelledby="food-allergy">
+        <h2 id="food-allergy" tabindex="-1">알레르기·주의사항</h2>
+        <p>알레르기 확인 대상 예시</p><ul id="detail-allergens"></ul>
+        <p id="detail-caution"></p>
+        <p class="note">알레르기 목록은 전체 성분을 보장하지 않습니다. 실제 재료·육수·양념과 조리 중 교차 접촉 여부는 주문 전 식당에 확인하세요.</p>
+      </section>
+    </section>
+
+    <section id="community-view" aria-labelledby="community-title" hidden>
+      <h1 id="community-title" tabindex="-1">커뮤니티</h1>
+      <p>부산·경남 향토음식에 대한 후기와 질문을 남겨보세요.</p>
+      <p class="note">게시글은 이 브라우저에만 저장됩니다. 다른 기기·사용자와 공유되지 않습니다.</p>
+      <form id="post-form">
+        <h2>글 작성</h2>
+        <label>분류<select name="category"><option>후기</option><option>질문</option><option>추천</option></select></label>
+        <label>닉네임<input name="author" required maxlength="20" autocomplete="nickname"></label>
+        <label>제목<input name="title" required maxlength="80"></label>
+        <label>내용<textarea name="body" required maxlength="2000" rows="5"></textarea></label>
+        <button type="submit">글 등록</button>
+      </form>
+      <p id="community-status" role="status"></p>
+      <h2>게시글 목록</h2>
+      <div id="post-list"></div>
+    </section>
+    <noscript>이 페이지의 음식 상세 정보와 커뮤니티를 이용하려면 JavaScript를 활성화하세요.</noscript>
+  </main>
+  <footer>부산·경남 향토음식 · 기능 확인용 기본 시안</footer>
+</body>
+</html>
