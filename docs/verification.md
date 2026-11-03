@@ -1,5 +1,14 @@
 # 검증 기록
 
+## 2026-11-03 Vercel 배포 설정
+
+- Framework `Other`, 설치 명령 없음, build `node tools/build-static.cjs`, output `dist`를 `vercel.json`으로 지정.
+- 빌드 시 프로덕션 HTML의 로컬 참조 파일 존재와 JS 문법을 검증하고, index.html/css/js/assets만 배포 폴더에 복사.
+- `node tools/build-static.cjs`, `node tests/deployment.cjs` 통과: 설정값, 배포 파일 구성, 모든 음식 사진과 JS/CSS 포함 확인.
+- 기존 자동 스와이프, 로그인/회원가입, 비동기 회귀 검사 모두 통과.
+- GitHub push까지 수행하는 요청이며, Vercel 계정에서 저장소 연결·실제 공개 배포 성공 여부는 이번 로컬 검사만으로 확인되지 않음.
+- 현재 계정·게시글은 브라우저 저장 방식이며, Supabase 인증 함수 배포가 자동 승인 검토에서 거부되어 DB 연결은 미완료. 이 정적 배포에는 미완성 DB 연결 코드를 포함하지 않음.
+
 ## 2026-11-03 홈 자동 넘김
 
 - 미조작 4초 후 다음 음식 이동, 마지막에서 첫 음식 반복. 터치 중 정지하고 pointerup/cancel 후 4초 재대기. 버튼·방향키·스크롤도 대기시간 재설정.

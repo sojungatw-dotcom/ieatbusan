@@ -11,6 +11,34 @@
 
 - **로컬:** 폴더를 정적 서버로 열면 됩니다. 예: VS Code의 Live Server 확장, 또는 `npx serve .` 지도와 폰트는 인터넷 연결이 필요합니다.
 
+## Vercel 배포
+
+1. Vercel의 **Add New → Project**에서 `sojungatw-dotcom/ieatbusan` 저장소를 Import합니다.
+2. **Root Directory는 저장소 루트(`./`)**, **Production Branch는 `main`**으로 선택합니다.
+3. Deploy를 누릅니다. 저장소의 `vercel.json`이 아래 설정을 적용합니다.
+
+| 설정 | 값 |
+|---|---|
+| Framework Preset | Other |
+| Install Command | 없음 |
+| Build Command | `node tools/build-static.cjs` |
+| Output Directory | `dist` |
+| Environment Variables | 현재 버전은 필요 없음 |
+
+추가 패키지를 설치하지 않고 HTML·CSS·JS·이미지만 `dist/`에 복사합니다. 작업 문서, 테스트, 이전 시안은 배포 결과물에 포함하지 않습니다. `#/home`, `#/signup` 같은 기존 해시 주소를 그대로 사용하므로 별도 SPA rewrite는 필요 없습니다. 최초 저장소 연결 이후에는 Vercel의 Git 자동 배포가 활성화된 경우 `main` push로 배포됩니다.
+
+배포 전 로컬 확인:
+
+```text
+node tools/build-static.cjs
+node tests/deployment.cjs
+node tests/home-carousel.cjs
+node tests/auth-regressions.cjs
+node tests/async-regressions.cjs
+```
+
+현재는 정적 시안 배포입니다. 계정·게시글은 브라우저별 저장이며 Supabase DB 연결은 아직 이 코드에 포함되어 있지 않습니다. 배포 도메인이 바뀌면 기존 로컬 파일이나 다른 도메인의 브라우저 저장 데이터는 공유되지 않습니다.
+
 ## 기능
 
 | 영역 | 기능 |

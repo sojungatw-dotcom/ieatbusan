@@ -1,5 +1,9 @@
 # Isolated browser checks
 
+## Vercel deployment checks
+
+Run `node tools/build-static.cjs`, then `node tests/deployment.cjs`. The build validates local HTML asset references and production JavaScript syntax. The check verifies that only runtime files are published and that all food images, scripts and styles are present. This does not replace checking a real Vercel deployment URL.
+
 ## Local account regression checks
 
 Run `node tests/auth-regressions.cjs`. Uses real Node Web Crypto and isolated in-memory storage to check ID/password validation, duplicate IDs, salted password verification (no plaintext), failed login, account-specific data, logout/reload/login, storage failure rollback, account deletion, and unavailable crypto. Production auth is a browser-local prototype, not server authentication.
