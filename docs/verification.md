@@ -32,3 +32,9 @@
 - 회원 탈퇴 완료 UI 및 내 위치 권한 허용 흐름은 미검증.
 - 공개 배포 후 전체 상호작용 재검증은 별도 필요.
 - 로그인·커뮤니티는 localStorage 기반 데모. 식당 좌표·번역·사진의 기존 시안 한계는 handoff.md 5장 참고.
+
+## Git 및 배포 상태
+
+- 구현 커밋 aaaa106을 sojungatw-dotcom/ieatbusan의 main에 푸시 완료.
+- 사용자 결정으로 GitHub Pages 배포는 보류. 공개 사이트 검증 완료로 간주하지 않음.
+- 재개 시 저장소 소유자가 Pages에서 main / (root)를 선택해 저장한 뒤 공개 URL과 주요 흐름을 검증할 것.

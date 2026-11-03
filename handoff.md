@@ -12,7 +12,8 @@
 - **실제 동작 확인:** 사진 게시글 작성, 댓글, 새로고침 후 유지, 프로필 저장, 찜 반영, 설정 토글 저장, 설정에서 언어 변경 후 복귀, 로그아웃. 테스트 게시글 삭제 후 커뮤니티에서 사라짐 확인.
 - **제한:** 회원 탈퇴는 확인창까지 확인했으나 브라우저 제어 중단으로 완료 후 화면을 검증하지 못함. Store.reset 로직은 별도 실행 검증 통과. 자동화가 멈춘 Chrome 테스트 탭에 확인창이 남아 있을 수 있음.
 - **GitHub 권한 해결:** kimjuncheol-ai 초대 수락 및 push=true 확인. 원격은 https://github.com/sojungatw-dotcom/ieatbusan.git, 브랜치는 main만 사용.
-- **배포:** 이번 코드와 문서를 푸시한 뒤 GitHub Pages를 main / (root)로 설정하고 공개 응답을 확인할 것. 현재 Pages API는 404로 미설정 상태.
+- **Git 반영 완료:** 수정 코드와 협업 문서를 main에 푸시함 (구현 커밋 aaaa106). 후속 문서 상태 커밋도 같은 브랜치에 포함.
+- **배포 보류 (사용자 결정, 2026-11-03):** 사용자가 "배포는 나중에 할게"라고 요청. 이번 작업에서 Pages를 활성화하지 않음. 다음 배포 시 저장소 소유자가 Settings → Pages → Deploy from a branch → main / (root) → Save. 공개 주소는 https://sojungatw-dotcom.github.io/ieatbusan/ 이며 아직 라이브 검증하지 않음. 현재 계정은 push 권한만 있고 Pages 활성화 API는 404로 거부됨.
 - **상세 검증 기록:** [docs/verification.md](docs/verification.md).
 - 로컬 서버: http://localhost:8765 (기존 임시 PowerShell HttpListener). 빌드 없는 정적 앱.
 
@@ -112,7 +113,9 @@
 8. 마이 → 프로필 수정 저장 / 설정 → 토글, 언어 변경, 로그아웃, 회원 탈퇴
 9. 언어를 EN·ZH·JA로 바꿔서 모든 화면 확인
 
-### 의심 지점
+### 점검 참고
+
+2026-11-03 갱신: 아래의 클릭 기본 동작과 지도 초기화 타이밍 문제는 수정·회귀 검증 완료. loginIntent 및 언어 선택 복귀도 동작 확인. 남은 미검증 항목은 0장과 docs/verification.md를 우선 참고.
 - **`app.addEventListener('click')`의 `preventDefault` 조건:** `data-act`가 붙은 `<a>`(글쓰기 FAB의 `needLogin`, 지도 시트의 `flyTo`)가 정상 이동하는지 확인하세요. 조건문이 복잡하니 단순하게 고치는 것을 권장합니다.
 - **`loginIntent`:** 로그인 상태에서 `#/login` 링크를 누를 때만 로그인 화면을 허용하는 플래그입니다. 마이의 "로그인하기" 버튼이 동작하는지 확인하세요.
 - **`A.confirmLang`:** 온보딩에서 확인을 누르면 홈으로, 설정에서 들어왔으면 뒤로 가야 합니다.
