@@ -14,7 +14,10 @@
    - 사소한 문제: `h1`이 없는 화면(지도·커뮤니티·검색)은 탭 제목이 `· I EAT BUSAN`으로 나옵니다.
    - 로컬 서버 스크립트: 임시 폴더의 `serve.ps1` (PowerShell HttpListener). 다른 정적 서버를 써도 됩니다.
 3. ~~빠진 파일 추가~~ **완료.** `README.md`, `CREDITS.md`, `.nojekyll`.
-4. **커밋 · 푸시:**
+4. **커밋 · 푸시:** 커밋은 **완료** (`0058955`, 로컬 `main`). **푸시 실패:** `Permission to sojungatw-dotcom/ieatbusan.git denied to kimjuncheol-ai` (403). 저장된 GitHub 계정 `kimjuncheol-ai`에 이 저장소 쓰기 권한이 없습니다.
+   - 해결 방법 ①: 저장소 주인(sojungatw-dotcom)이 Settings → Collaborators에서 `kimjuncheol-ai`를 초대하고, 초대를 수락한 뒤 `git push origin main`
+   - 해결 방법 ②: 권한이 있는 계정으로 Windows 자격 증명 관리자의 github.com 항목을 바꾼 뒤 다시 푸시
+   - 아래는 원래 적어 둔 메모입니다.
    - 원격 저장소: `https://github.com/sojungatw-dotcom/ieatbusan.git`, 브랜치 `main`
    - 아직 **아무것도 커밋하지 않았습니다.** 기존 파일 4개를 `archive/codex-prototype/`로 옮긴 `git mv`만 staged 상태입니다.
    - `gh` CLI가 없습니다. 자격 증명은 Git Credential Manager(`credential.helper=manager`)를 씁니다. 푸시할 때 로그인 창이 뜰 수 있으니, 실패하면 사용자에게 직접 로그인을 부탁하세요.
