@@ -326,8 +326,7 @@ Figma 변수 컬렉션 `I EAT BUSAN / Color` (모드 1개: `Default`). 모든 �
 
 ---
 
-## 11. 로컬 실행 · 배포
+## 11. 로컬 실행
 
 - **로컬:** `index.html`을 브라우저로 열면 바로 동작합니다. 빌드와 설치가 필요 없고, 지도와 폰트만 인터넷 연결이 필요합니다.
-- **GitHub Pages:** 저장소 Settings → Pages → Branch `main` / `(root)`로 설정하면 `https://sojungatw-dotcom.github.io/ieatbusan/`에서 열립니다.
 - **이전 시안:** 팀원이 먼저 올린 Codex 시안은 [`archive/codex-prototype/`](../archive/codex-prototype/)에 그대로 보관했습니다.
