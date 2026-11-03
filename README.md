@@ -9,7 +9,6 @@
 
 빌드나 설치가 필요 없습니다.
 
-- **온라인:** GitHub Pages를 켜면 `https://sojungatw-dotcom.github.io/ieatbusan/` 에서 열립니다. Settings → Pages → Branch `main` / `(root)`로 설정하세요.
 - **로컬:** 폴더를 정적 서버로 열면 됩니다. 예: VS Code의 Live Server 확장, 또는 `npx serve .` 지도와 폰트는 인터넷 연결이 필요합니다.
 
 ## 기능
