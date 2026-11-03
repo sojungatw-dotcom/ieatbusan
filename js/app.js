@@ -8,7 +8,6 @@
   const FOODS = window.FOODS;
   const FOOD = Object.fromEntries(FOODS.map(f => [f.id, f]));
   const PROVIDERS = { kakao: 'Kakao', naver: 'Naver', apple: 'Apple' };
-  const DEFAULT_NICK = { ko: '부산토박이', en: 'Busan Foodie', zh: '釜山吃货', ja: '釜山グルメ' };
 
   /* ---------- helpers ---------- */
   const lang = () => S().lang || 'ko';
@@ -120,6 +119,7 @@
   /* ---------- views ---------- */
   const V = {};
   let homeFeaturedId = null;
+  let homeAutoplayPaused = false;
 
   function homeFoodCard(f, { rank = 0, eager = false, slide = false, count = 5 } = {}) {
     const saved = S().savedFoods.includes(f.id);
@@ -131,16 +131,27 @@
     </article>`;
   }
 
-  V.login = () => `<main class="screen login">
-    <a class="lang-pill top-right" href="#/lang">${icon('globe')}<span>${esc(t('lang.name'))} · ${esc(t('lang.code'))}</span></a>
+  let registeredId = '';
+  function authScreen(signup) {
+    return `<main class="screen login auth-screen">
     <div class="login-hero"><div class="app-icon">IEB</div><div class="logo">I EAT BUSAN</div><p class="sub" style="margin:0">${esc(t('app.tagline'))}</p></div>
-    <div class="login-buttons">
-      <button class="btn btn-primary btn-block" data-act="login" data-p="kakao">${esc(t('login.kakao'))}</button>
-      <button class="btn btn-outline btn-block" data-act="login" data-p="naver">${esc(t('login.naver'))}</button>
-      <button class="btn btn-outline btn-block" data-act="login" data-p="apple">${esc(t('login.apple'))}</button>
-    </div>
-    <div class="login-foot"><button data-act="guest">${esc(t('login.browse'))}</button><span>${esc(t('login.terms'))}</span><span>${esc(t('login.demo'))}</span></div>
+    <form class="auth-form" data-form="${signup ? 'signup' : 'login'}">
+      <h1>${esc(t(signup ? 'auth.signup' : 'auth.login'))}</h1>
+      <div class="field"><label for="auth-username">${esc(t('auth.username'))}</label>
+        <input class="input" id="auth-username" name="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required minlength="4" maxlength="20" pattern="[A-Za-z0-9_]{4,20}" value="${signup ? '' : esc(registeredId)}" ${signup ? 'aria-describedby="auth-id-help"' : ''}>
+        ${signup ? `<span class="helper" id="auth-id-help">${esc(t('auth.idHelp'))}</span>` : ''}</div>
+      <div class="field"><label for="auth-password">${esc(t('auth.password'))}</label>
+        <input class="input" id="auth-password" name="password" type="password" autocomplete="${signup ? 'new-password' : 'current-password'}" required minlength="8" maxlength="72" ${signup ? 'aria-describedby="auth-password-help"' : ''}>
+        ${signup ? `<span class="helper" id="auth-password-help">${esc(t('auth.passwordHelp'))}</span>` : ''}</div>
+      <p class="auth-error" role="alert" id="auth-error" hidden></p>
+      <button class="btn btn-primary btn-block" type="submit">${esc(t(signup ? 'auth.signup' : 'auth.login'))}</button>
+      <a class="auth-switch" href="${signup ? '#/login' : '#/signup'}">${esc(t(signup ? 'auth.haveAccount' : 'auth.createAccount'))}</a>
+    </form>
+    <div class="login-foot">${signup ? '' : `<button data-act="guest">${esc(t('login.browse'))}</button>`}<span>${esc(t('auth.localNotice'))}</span></div>
   </main>`;
+  }
+  V.login = () => authScreen(false);
+  V.signup = () => authScreen(true);
 
   V.lang = () => {
     const cur = lang();
@@ -173,6 +184,7 @@
           <span class="home-count" aria-live="polite" aria-atomic="true">1 / ${featured.length}</span>
           <button class="icon-btn home-next" type="button" aria-label="${esc(t('home.next'))}">${icon('chevronRight')}</button>
         </div>
+        <button class="text-btn home-autoplay" type="button" aria-pressed="false">${esc(t('home.pause'))}</button>
       </section>
       <div class="band"></div>
       <div class="home-toolbar"><h1>${esc(t('home.title'))}</h1>
@@ -180,12 +192,27 @@
       <div class="food-list">${list.map((f, i) => homeFoodCard(f, { rank: sort === 'popular' ? i + 1 : 0 })).join('')}</div>${tabbar('home')}</main>`;
   };
   V.home.mount = () => {
+    const carousel = app.querySelector('.home-carousel');
     const track = app.querySelector('.home-track');
     const slides = [...track.children];
     const pages = [...app.querySelectorAll('[data-slide]')];
     const prev = app.querySelector('.home-prev'), next = app.querySelector('.home-next');
     const counter = app.querySelector('.home-count');
+    const autoplay = app.querySelector('.home-autoplay');
+    const pointers = new Set();
+    let timer = null, paused = homeAutoplayPaused, disposed = false, touching = false;
     let index = Math.max(0, slides.findIndex(slide => slide.dataset.foodId === homeFeaturedId));
+    const stop = () => { clearTimeout(timer); timer = null; };
+    const schedule = () => {
+      stop();
+      if (disposed || paused || touching || pointers.size || document.hidden) return;
+      timer = setTimeout(() => {
+        if (disposed || paused || touching || pointers.size || document.hidden) return;
+        // 마지막 음식에서는 첫 음식으로 돌아가 반복합니다.
+        move((index + 1) % slides.length, index === slides.length - 1);
+        schedule();
+      }, 4000);
+    };
     const update = () => {
       homeFeaturedId = slides[index].dataset.foodId;
       prev.disabled = index === 0;
@@ -202,21 +229,61 @@
       if (!track.clientWidth) return;
       const nearest = Math.max(0, Math.min(slides.length - 1, Math.round(track.scrollLeft / track.clientWidth)));
       if (nearest !== index) { index = nearest; update(); }
+      schedule();
     };
     const onKey = event => {
       const delta = event.key === 'ArrowLeft' ? -1 : event.key === 'ArrowRight' ? 1 : 0;
-      if (delta) { event.preventDefault(); move(index + delta); }
+      if (delta) { event.preventDefault(); move(index + delta); schedule(); }
     };
     const onResize = () => move(index, true);
-    prev.addEventListener('click', () => move(index - 1));
-    next.addEventListener('click', () => move(index + 1));
-    pages.forEach((page, i) => page.addEventListener('click', () => move(i)));
+    const onPointerDown = event => { pointers.add(event.pointerId); stop(); };
+    const onPointerEnd = event => { if (pointers.delete(event.pointerId)) schedule(); };
+    // 네이티브 터치 스크롤의 pointercancel 뒤에도 손가락을 뗄 때까지 대기합니다.
+    const onTouchStart = () => { touching = true; stop(); };
+    const onTouchEnd = event => { if (touching) { touching = event.touches.length > 0; schedule(); } };
+    const onVisibility = () => { if (document.hidden) { pointers.clear(); touching = false; } schedule(); };
+    const onPause = () => {
+      paused = !paused;
+      homeAutoplayPaused = paused;
+      autoplay.setAttribute('aria-pressed', String(paused));
+      autoplay.textContent = t(paused ? 'home.resume' : 'home.pause');
+      counter.setAttribute('aria-live', paused ? 'polite' : 'off');
+      schedule();
+    };
+    prev.addEventListener('click', () => { move(index - 1); schedule(); });
+    next.addEventListener('click', () => { move(index + 1); schedule(); });
+    pages.forEach((page, i) => page.addEventListener('click', () => { move(i); schedule(); }));
+    autoplay.addEventListener('click', onPause);
+    carousel.addEventListener('pointerdown', onPointerDown, { passive: true });
+    carousel.addEventListener('touchstart', onTouchStart, { passive: true });
+    carousel.addEventListener('wheel', schedule, { passive: true });
+    window.addEventListener('pointerup', onPointerEnd, { passive: true });
+    window.addEventListener('pointercancel', onPointerEnd, { passive: true });
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
+    window.addEventListener('touchcancel', onTouchEnd, { passive: true });
+    document.addEventListener('visibilitychange', onVisibility);
     track.addEventListener('scroll', onScroll, { passive: true });
     track.addEventListener('keydown', onKey);
     window.addEventListener('resize', onResize);
     update();
+    autoplay.setAttribute('aria-pressed', String(paused));
+    autoplay.textContent = t(paused ? 'home.resume' : 'home.pause');
+    counter.setAttribute('aria-live', paused ? 'polite' : 'off');
     move(index, true);
+    schedule();
     cleanup.push(() => {
+      disposed = true;
+      stop();
+      pointers.clear();
+      autoplay.removeEventListener('click', onPause);
+      carousel.removeEventListener('pointerdown', onPointerDown);
+      carousel.removeEventListener('touchstart', onTouchStart);
+      carousel.removeEventListener('wheel', schedule);
+      window.removeEventListener('pointerup', onPointerEnd);
+      window.removeEventListener('pointercancel', onPointerEnd);
+      window.removeEventListener('touchend', onTouchEnd);
+      window.removeEventListener('touchcancel', onTouchEnd);
+      document.removeEventListener('visibilitychange', onVisibility);
       track.removeEventListener('scroll', onScroll);
       track.removeEventListener('keydown', onKey);
       window.removeEventListener('resize', onResize);
@@ -576,7 +643,7 @@
     const tog = (k, label, desc) => `<div class="toggle-row"><span class="t"><span>${esc(label)}</span>${desc ? `<small>${esc(desc)}</small>` : ''}</span>
       <label class="switch"><input type="checkbox" data-setting="${k}" ${s[k] ? 'checked' : ''} aria-label="${esc(label)}"><span></span></label></div>`;
     const row = (href, label, val = '', act = '') => `<${href ? `a href="${href}"` : `button type="button" data-act="${act}"`} class="menu-row"><span>${esc(label)}</span>${val ? `<span class="val">${esc(val)}</span>` : ''}${href ? icon('chevronRight') : ''}</${href ? 'a' : 'button'}>`;
-    const acct = st.user ? t('set.provider', { p: PROVIDERS[st.user.provider] || st.user.provider }) : t('set.guestNow');
+    const acct = st.user ? (st.user.username || t('set.provider', { p: PROVIDERS[st.user.provider] || st.user.provider })) : t('set.guestNow');
     return `<main class="screen">${pageHeader(t('set.title'), { fallback: '#/my' })}
       <div class="menu-group-title">${esc(t('set.noti'))}</div>
       ${tog('comments', t('set.comments'), t('set.commentsDesc'))}${tog('likes', t('set.likes'))}${tog('newPlaces', t('set.newPlaces'), t('set.newPlacesDesc'))}${tog('events', t('set.events'))}
@@ -614,7 +681,7 @@
 
   /* ---------- router ---------- */
   const ROUTES = [
-    [/^#\/login$/, 'login'], [/^#\/lang$/, 'lang'], [/^#\/home$/, 'home'],
+    [/^#\/login$/, 'login'], [/^#\/signup$/, 'signup'], [/^#\/lang$/, 'lang'], [/^#\/home$/, 'home'],
     [/^#\/food\/([\w-]+)$/, 'food', ['id']], [/^#\/place\/([\w-]+)\/(\d+)$/, 'place', ['id', 'i']],
     [/^#\/search$/, 'search'], [/^#\/results\/([^/]+)(?:\/(all|foods|places|posts))?$/, 'results', ['q', 'tab']],
     [/^#\/notifications$/, 'notifications'], [/^#\/map(?:\/([\w-]+))?$/, 'map', ['id']],
@@ -625,7 +692,7 @@
     [/^#\/settings$/, 'settings'], [/^#\/notices$/, 'notices'], [/^#\/faq$/, 'faq'], [/^#\/contact$/, 'contact'],
     [/^#\/terms$/, 'terms'], [/^#\/privacy$/, 'privacy'], [/^#\/credits$/, 'credits'],
   ];
-  const OPEN = ['login', 'lang', 'terms', 'privacy', 'credits'];
+  const OPEN = ['login', 'signup', 'lang', 'terms', 'privacy', 'credits'];
   let cleanup = [];
   const stack = [];
   function route() {
@@ -647,7 +714,7 @@
     if (screen) {
       if (!screen.querySelector('.app-header, .page-header')) screen.insertAdjacentHTML('afterbegin', appHeader());
       if (!screen.querySelector('.tabbar')) {
-        const active = ['food', 'search', 'results'].includes(name) ? 'home' : name === 'place' ? 'map' : ['post', 'write'].includes(name) ? 'community' : ['login', 'lang'].includes(name) ? '' : 'my';
+        const active = ['food', 'search', 'results'].includes(name) ? 'home' : name === 'place' ? 'map' : ['post', 'write'].includes(name) ? 'community' : ['login', 'signup', 'lang'].includes(name) ? '' : 'my';
         screen.insertAdjacentHTML('beforeend', tabbar(active));
       }
     }
@@ -666,11 +733,6 @@
   function rerender() { const y = window.scrollY; route(); window.scrollTo(0, y); }
   const A = {
     back: el => back(el.dataset.fallback),
-    login: el => {
-      const lg = lang();
-      Store.set({ user: { provider: el.dataset.p, nickname: DEFAULT_NICK[lg], area: 8, bio: '', joined: new Date().toISOString().slice(0, 10).replace(/-/g, '.') }, guest: false });
-      go(S().langChosen ? '#/home' : '#/lang');
-    },
     guest: () => { Store.set({ guest: true }); go(S().langChosen ? '#/home' : '#/lang'); },
     pickLang: el => { Store.set({ lang: el.dataset.code }); rerender(); },
     confirmLang: () => { Store.set({ langChosen: true }); if (stack.length > 1 && (S().user || S().guest) && !stack[stack.length - 2].startsWith('#/login')) history.back(); else go(S().user || S().guest ? '#/home' : '#/login'); },
@@ -727,8 +789,8 @@
       toast(t('post.deleted')); location.replace('#/community'); stack.pop();
     },
     rmPhoto: el => { draftPhotos.splice(Number(el.dataset.i), 1); renderPhotos(); },
-    logout: () => { Store.set({ user: null, guest: false }); toast(t('set.loggedOut')); stack.length = 0; location.replace('#/login'); },
-    withdraw: () => { if (!confirm(t('set.withdrawConfirm'))) return; const lg = S().lang; Store.reset(); Store.set({ lang: lg }); stack.length = 0; location.replace('#/login'); },
+    logout: () => { if (!Store.signOut()) { toast(t('auth.storage')); return; } toast(t('set.loggedOut')); stack.length = 0; location.replace('#/login'); },
+    withdraw: () => { if (!confirm(t('set.withdrawConfirm'))) return; if (!Store.removeCurrentAccount()) { toast(t('auth.storage')); return; } stack.length = 0; location.replace('#/login'); },
   };
   app.addEventListener('click', e => {
     const el = e.target.closest('[data-act]');
@@ -747,10 +809,47 @@
     const k = e.target.dataset.setting;
     if (k) Store.update(s => { s.settings[k] = e.target.checked; });
   });
-  app.addEventListener('submit', e => {
+  app.addEventListener('submit', async e => {
     const f = e.target; e.preventDefault();
     const kind = f.dataset.form;
-    if (kind === 'search') {
+    if (kind === 'login' || kind === 'signup') {
+      if (f.dataset.busy) return;
+      const username = f.elements.username.value.trim(), password = f.elements.password.value;
+      const error = f.querySelector('.auth-error'), submit = f.querySelector('[type="submit"]');
+      f.dataset.busy = 'true';
+      error.hidden = true;
+      submit.disabled = true;
+      submit.textContent = t('auth.processing');
+      try {
+        if (kind === 'signup') {
+          await Auth.register(username, password);
+          if (!f.isConnected) return;
+          registeredId = username;
+          f.elements.password.value = '';
+          loginIntent = true;
+          go('#/login');
+          toast(t('auth.registered'));
+        } else {
+          const id = await Auth.verify(username, password);
+          if (!f.isConnected) return;
+          if (!Store.signIn(id)) throw new Error('auth.storage');
+          f.elements.password.value = '';
+          registeredId = '';
+          stack.length = 0;
+          go(S().langChosen ? '#/home' : '#/lang');
+        }
+      } catch (errorValue) {
+        if (!f.isConnected) return;
+        error.textContent = t(errorValue.message?.startsWith('auth.') ? errorValue.message : 'auth.failure');
+        error.hidden = false;
+        f.elements.password.value = '';
+      } finally {
+        delete f.dataset.busy;
+        submit.disabled = false;
+        submit.textContent = t(kind === 'signup' ? 'auth.signup' : 'auth.login');
+      }
+      return;
+    } else if (kind === 'search') {
       const q = f.q.value.trim(); if (!q) return;
       Store.update(s => { s.recentSearches = [q, ...s.recentSearches.filter(x => x !== q)].slice(0, 10); });
       go('#/results/' + encodeURIComponent(q));

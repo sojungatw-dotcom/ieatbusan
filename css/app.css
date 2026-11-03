@@ -157,6 +157,15 @@ a { color: inherit; text-decoration: none; }
 .login-buttons { width: 100%; display: grid; gap: 10px; }
 .login-foot { display: grid; gap: 12px; margin-top: 18px; font-size: 12px; color: var(--ink-3); }
 .login-foot button { color: var(--ink-2); font-size: 14px; text-decoration: underline; }
+.auth-screen { padding-bottom: 24px; }
+.auth-screen .login-hero { flex: none; padding: 32px 0 24px; }
+.auth-form { display: grid; gap: 16px; width: 100%; max-width: 380px; text-align: left; }
+.auth-form h1 { margin: 0; font-size: 22px; }
+.auth-form .field { gap: 6px; }
+.auth-form .helper { line-height: 1.5; }
+.auth-switch { display: block; min-height: 44px; padding: 10px 0; text-align: center; color: var(--accent); font-size: 14px; }
+.auth-error { margin: 0; color: var(--error); font-size: 13px; }
+.auth-screen .login-foot { max-width: 380px; margin-bottom: 24px; }
 .intro { padding: 24px 20px 16px; }
 .intro h1 { font-size: 22px; margin: 0 0 4px; }
 .options { display: grid; gap: 10px; padding: 0 20px; }
@@ -197,6 +206,7 @@ a { color: inherit; text-decoration: none; }
 .home-pages button span { width: 6px; height: 6px; border-radius: 50%; background: var(--beige); }
 .home-pages button[aria-current="true"] span { width: 18px; border-radius: 6px; background: var(--accent); }
 .home-count { min-width: 34px; text-align: center; font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.home-autoplay { display: block; min-height: 44px; padding: 0 12px; margin: 0 auto; }
 .home-summary { margin: 0; color: var(--ink-2); font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
 .home-toolbar { display: flex; align-items: center; justify-content: space-between; padding: 16px 16px 4px; }
 .home-toolbar h1 { font-size: 17px; margin: 0; }

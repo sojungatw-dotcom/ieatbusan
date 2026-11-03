@@ -1,6 +1,12 @@
 # Isolated browser checks
 
+## Local account regression checks
+
+Run `node tests/auth-regressions.cjs`. Uses real Node Web Crypto and isolated in-memory storage to check ID/password validation, duplicate IDs, salted password verification (no plaintext), failed login, account-specific data, logout/reload/login, storage failure rollback, account deletion, and unavailable crypto. Production auth is a browser-local prototype, not server authentication.
+
 ## Home carousel regression checks
+
+Autoplay checks use a fake clock to verify a full 4-second idle delay, wrapping, touch hold/release/cancel, manual timer reset, pause/resume, background visibility and cleanup without real-time waits.
 
 Run `node tests/home-carousel.cjs`. Checks all four languages and both sorts, five featured slides and twenty list cards, scroll state, navigation boundaries, keyboard controls, restoring the selected food after rerender, resizing, and listener cleanup. Native touch gestures still require a device check.
 
