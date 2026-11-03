@@ -382,6 +382,24 @@ details.faq p { margin: 0 0 16px; color: var(--ink-2); font-size: 14px; }
 .credit { padding: 12px 20px; border-bottom: 1px solid var(--border); font-size: 13px; display: flex; gap: 12px; align-items: center; }
 .credit a { color: var(--info); word-break: break-all; }
 
+/* Every route shares the same viewport-anchored navigation. */
+.persistent-nav { --header-h: calc(64px + env(safe-area-inset-top, 0px)); --footer-h: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px)); }
+.persistent-nav > main { padding-top: var(--header-h); padding-bottom: var(--footer-h); }
+.persistent-nav .app-header, .persistent-nav .page-header {
+  position: fixed; top: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 430px; height: var(--header-h); min-height: var(--header-h);
+  padding-top: calc(8px + env(safe-area-inset-top, 0px)); z-index: 1000;
+}
+.persistent-nav .tabbar { bottom: 0; border-radius: 0; z-index: 1000; }
+.persistent-nav .has-cta { padding-bottom: calc(var(--footer-h) + 88px); }
+.persistent-nav main:has(.comment-bar) { padding-bottom: calc(var(--footer-h) + 96px) !important; }
+.persistent-nav .fixed-cta, .persistent-nav .comment-bar { bottom: var(--footer-h); border-radius: 0; }
+.persistent-nav .section-chips, .persistent-nav .search-bar { top: var(--header-h); }
+.persistent-nav .login > .top-right { display: none; }
+.persistent-nav .map-screen { height: 100dvh; }
+@media (min-width: 600px) { .persistent-nav .map-screen { height: calc(100dvh - 24px); } }
+.persistent-nav .fab { bottom: calc(var(--footer-h) + 16px); }
+
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }
 }

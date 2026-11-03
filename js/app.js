@@ -2,6 +2,7 @@
 (function () {
   'use strict';
   const app = document.getElementById('app');
+  app.classList.add('persistent-nav');
   const toastEl = document.getElementById('toast');
   const S = () => Store.get();
   const FOODS = window.FOODS;
@@ -197,7 +198,7 @@
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver(entries => {
         entries.filter(e => e.isIntersecting).forEach(e => setActive(e.target.id.replace('sec-', '')));
-      }, { rootMargin: '-70px 0px -65% 0px' });
+      }, { rootMargin: `-${(app.querySelector('header')?.offsetHeight || 0) + (app.querySelector('.section-chips')?.offsetHeight || 0) + 8}px 0px -50% 0px` });
       app.querySelectorAll('.detail-section').forEach(s => io.observe(s));
       cleanup.push(() => io.disconnect());
     }
@@ -580,6 +581,14 @@
     cleanup.forEach(fn => { try { fn(); } catch (e) {} }); cleanup = [];
     document.documentElement.lang = lang();
     app.innerHTML = V[name](params);
+    const screen = app.querySelector('main');
+    if (screen) {
+      if (!screen.querySelector('.app-header, .page-header')) screen.insertAdjacentHTML('afterbegin', appHeader());
+      if (!screen.querySelector('.tabbar')) {
+        const active = ['food', 'search', 'results'].includes(name) ? 'home' : name === 'place' ? 'map' : ['post', 'write'].includes(name) ? 'community' : ['login', 'lang'].includes(name) ? '' : 'my';
+        screen.insertAdjacentHTML('beforeend', tabbar(active));
+      }
+    }
     const titleKeys = { map: 'tab.map', community: 'tab.community', search: 'search.placeholder' };
     const pageTitle = app.querySelector('h1')?.textContent || (titleKeys[name] ? t(titleKeys[name]) : '');
     document.title = name === 'home' || name === 'login' || !pageTitle ? 'I EAT BUSAN' : `${pageTitle} · I EAT BUSAN`;
@@ -617,7 +626,8 @@
     jump: el => {
       const sec = document.getElementById('sec-' + el.dataset.sec); if (!sec) return;
       const chips = app.querySelector('.section-chips');
-      const y = sec.getBoundingClientRect().top + window.scrollY - (chips ? chips.offsetHeight : 0) - 8;
+      const header = app.querySelector('.app-header, .page-header');
+      const y = sec.getBoundingClientRect().top + window.scrollY - (chips ? chips.offsetHeight : 0) - (header ? header.offsetHeight : 0) - 8;
       window.scrollTo({ top: y, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
       app.querySelectorAll('.section-chips .chip').forEach(c => c.classList.toggle('active', c === el));
     },
