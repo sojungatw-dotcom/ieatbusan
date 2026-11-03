@@ -41,7 +41,7 @@
     clearTimeout(toast._t); toast._t = setTimeout(() => { toastEl.hidden = true; }, 2200);
   }
   const loggedIn = () => !!S().user;
-  function requireLogin() { if (loggedIn()) return true; toast(t('toast.loginRequired')); go('#/login'); return false; }
+  function requireLogin() { if (loggedIn()) return true; toast(t('toast.loginRequired')); loginIntent = true; go('#/login'); return false; }
   const go = h => { if (location.hash === h) route(); else location.hash = h; };
   const initial = name => esc(String(name || '?').trim().charAt(0).toUpperCase());
 
@@ -331,7 +331,7 @@
     const el = document.getElementById('map'); if (!el || !window.L) return;
     const sel = id && FOOD[id] ? id : null;
     const places = sel ? FOOD[sel].places.map((_, i) => placeOf(sel, i)) : allPlaces();
-    mapRef = window.L.map(el, { zoomControl: false }).setView([35.155, 129.07], 11);
+    mapRef = window.L.map(el, { zoomControl: false, zoomAnimation: false }).setView([35.155, 129.07], 11);
     tiles().addTo(mapRef);
     window.L.control.zoom({ position: 'topright' }).addTo(mapRef);
     markers = {};
@@ -342,8 +342,8 @@
     });
     if (places.length) mapRef.fitBounds(window.L.latLngBounds(places.map(p => [p.lat, p.lng])).pad(0.15), { maxZoom: 15 });
     const ref = mapRef;
-    setTimeout(() => ref.invalidateSize(), 60);
-    cleanup.push(() => { ref.remove(); if (mapRef === ref) mapRef = null; });
+    const resizeTimer = setTimeout(() => ref.invalidateSize(), 60);
+    cleanup.push(() => { clearTimeout(resizeTimer); ref.remove(); if (mapRef === ref) mapRef = null; });
   };
 
   /* ---------- community ---------- */
@@ -571,7 +571,9 @@
     cleanup.forEach(fn => { try { fn(); } catch (e) {} }); cleanup = [];
     document.documentElement.lang = lang();
     app.innerHTML = V[name](params);
-    document.title = name === 'home' || name === 'login' ? 'I EAT BUSAN' : `${(app.querySelector('h1') || {}).textContent || ''} · I EAT BUSAN`;
+    const titleKeys = { map: 'tab.map', community: 'tab.community', search: 'search.placeholder' };
+    const pageTitle = app.querySelector('h1')?.textContent || (titleKeys[name] ? t(titleKeys[name]) : '');
+    document.title = name === 'home' || name === 'login' || !pageTitle ? 'I EAT BUSAN' : `${pageTitle} · I EAT BUSAN`;
     window.scrollTo(0, 0);
     if (V[name].mount) V[name].mount(params);
   }
@@ -649,7 +651,10 @@
     const el = e.target.closest('[data-act]');
     if (!el || !app.contains(el)) return;
     const fn = A[el.dataset.act]; if (!fn) return;
-    if (el.tagName === 'BUTTON' || el.dataset.act !== 'needLogin') { if (el.tagName !== 'A' || el.dataset.act !== 'needLogin') e.preventDefault(); }
+    // Preserve native navigation for links inside actionable map rows.
+    const link = e.target.closest('a');
+    if (link && link !== el) return;
+    if (el.dataset.act !== 'needLogin') e.preventDefault();
     fn(el, e);
   });
   app.addEventListener('keydown', e => {

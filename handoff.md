@@ -5,26 +5,23 @@
 
 ---
 
-## 0. 지금 바로 할 일 (순서대로)
+## 0. 현재 상태와 다음 작업
 
-1. ~~로컬 테스트~~ **완료.** 로컬 서버(`http://localhost:8765`)에서 모든 라우트(28개)를 한 번씩 열어 봤고 콘솔 오류는 0건입니다. 로그인 → 언어 → 홈 흐름과 지도(핀 69개, 일본어 UI)도 확인했습니다.
-   - 고친 버그: `js/app.js`의 다국어 헬퍼 `L`이 Leaflet 전역 `L`을 가려서 지도가 안 뜨던 문제. Leaflet 호출을 전부 `window.L.*`로 바꿨습니다.
-   - 아직 손으로 눌러 보지 않은 것: 글쓰기(사진 첨부) → 댓글 → 삭제, 프로필 저장, 회원 탈퇴. 3장 체크리스트로 확인하세요.
-2. **오류 수정:** 오류가 나면 `js/app.js`를 고칩니다. 의심 지점은 3장에 있습니다.
-   - 사소한 문제: `h1`이 없는 화면(지도·커뮤니티·검색)은 탭 제목이 `· I EAT BUSAN`으로 나옵니다.
-   - 로컬 서버 스크립트: 임시 폴더의 `serve.ps1` (PowerShell HttpListener). 다른 정적 서버를 써도 됩니다.
-3. ~~빠진 파일 추가~~ **완료.** `README.md`, `CREDITS.md`, `.nojekyll`.
-4. **커밋 · 푸시:** 커밋은 **완료** (`0058955`, 로컬 `main`). **푸시 실패:** `Permission to sojungatw-dotcom/ieatbusan.git denied to kimjuncheol-ai` (403). 저장된 GitHub 계정 `kimjuncheol-ai`에 이 저장소 쓰기 권한이 없습니다.
-   - 해결 방법 ①: 저장소 주인(sojungatw-dotcom)이 Settings → Collaborators에서 `kimjuncheol-ai`를 초대하고, 초대를 수락한 뒤 `git push origin main`
-   - 해결 방법 ②: 권한이 있는 계정으로 Windows 자격 증명 관리자의 github.com 항목을 바꾼 뒤 다시 푸시
-   - 아래는 원래 적어 둔 메모입니다.
-   - 원격 저장소: `https://github.com/sojungatw-dotcom/ieatbusan.git`, 브랜치 `main`
-   - 아직 **아무것도 커밋하지 않았습니다.** 기존 파일 4개를 `archive/codex-prototype/`로 옮긴 `git mv`만 staged 상태입니다.
-   - `gh` CLI가 없습니다. 자격 증명은 Git Credential Manager(`credential.helper=manager`)를 씁니다. 푸시할 때 로그인 창이 뜰 수 있으니, 실패하면 사용자에게 직접 로그인을 부탁하세요.
-   - 커밋 메시지 끝에 붙일 줄: `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>` (Claude가 커밋할 때만)
-5. **GitHub Pages 켜기:** 저장소 Settings → Pages → Deploy from branch → `main` / `(root)`. API 토큰이 없으면 사용자에게 클릭을 부탁합니다.
-   - 주소: `https://sojungatw-dotcom.github.io/ieatbusan/`
-6. **라이브 확인:** 배포된 주소로 3장의 흐름을 다시 확인합니다.
+- **2026-11-03 로컬 검증 완료:** KO/EN/ZH/JA 각각 28개 화면, 총 112개 렌더 검사 통과. 지도 빠른 전환 30회도 콘솔 오류 0건.
+- **이번 수정:** 게스트 글쓰기의 로그인 리다이렉트, 지도 목록 상세 링크 클릭, 지도 제거 뒤 남은 초기화 타이머/확대 애니메이션, 지도·커뮤니티·검색의 빈 탭 제목.
+- **실제 동작 확인:** 사진 게시글 작성, 댓글, 새로고침 후 유지, 프로필 저장, 찜 반영, 설정 토글 저장, 설정에서 언어 변경 후 복귀, 로그아웃. 테스트 게시글 삭제 후 커뮤니티에서 사라짐 확인.
+- **제한:** 회원 탈퇴는 확인창까지 확인했으나 브라우저 제어 중단으로 완료 후 화면을 검증하지 못함. Store.reset 로직은 별도 실행 검증 통과. 자동화가 멈춘 Chrome 테스트 탭에 확인창이 남아 있을 수 있음.
+- **GitHub 권한 해결:** kimjuncheol-ai 초대 수락 및 push=true 확인. 원격은 https://github.com/sojungatw-dotcom/ieatbusan.git, 브랜치는 main만 사용.
+- **배포:** 이번 코드와 문서를 푸시한 뒤 GitHub Pages를 main / (root)로 설정하고 공개 응답을 확인할 것. 현재 Pages API는 404로 미설정 상태.
+- **상세 검증 기록:** [docs/verification.md](docs/verification.md).
+- 로컬 서버: http://localhost:8765 (기존 임시 PowerShell HttpListener). 빌드 없는 정적 앱.
+
+### 협업 문서 사용 규칙
+
+- 현재 상태·막힌 점·바로 할 일은 이 파일의 0장에 유지.
+- 실행한 검증과 한계는 docs/verification.md에 기록. 미검증 사항을 완료로 쓰지 않기.
+- 디자인 계약은 docs/design-handoff.md, 실행법은 README.md, 출처는 CREDITS.md에서 관리.
+- 작업 종료 시 코드와 문서를 함께 커밋·푸시하고, 문서의 상태와 원격 실제 상태를 일치시킬 것.
 
 ---
 
