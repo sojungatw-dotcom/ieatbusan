@@ -29,7 +29,7 @@ window.I18N = {
     'auth.invalidId': '아이디는 영문, 숫자, 밑줄(_)로 4~20자 입력해 주세요.', 'auth.invalidPassword': '비밀번호는 공백만으로 구성할 수 없으며 8~72자여야 합니다.',
     'auth.duplicate': '이미 사용 중인 아이디입니다.', 'auth.invalidCredentials': '아이디 또는 비밀번호가 일치하지 않습니다.',
     'auth.storage': '저장하지 못했어요. 브라우저 저장소 설정과 여유 공간을 확인해 주세요.', 'auth.crypto': '이 브라우저에서는 로그인 처리를 지원하지 않습니다. 최신 브라우저에서 로컬 파일 또는 HTTPS로 열어 주세요.', 'auth.failure': '처리하지 못했어요. 다시 시도해 주세요.',
-    'home.featured': '추천 향토음식 5선', 'home.swipe': '좌우로 넘겨보고, 아래로 내려 더 많은 음식을 만나보세요.', 'home.previous': '이전 음식', 'home.next': '다음 음식',
+    'home.featured': '추천 향토음식 4선', 'home.swipe': '좌우로 넘겨보고, 아래로 내려 더 많은 음식을 만나보세요.', 'home.previous': '이전 음식', 'home.next': '다음 음식',
     'food.badge': '부산 대표 음식', 'food.places': '식당 {n}곳',
     'food.sec.info': '상세 정보', 'food.sec.how': '먹는 방법', 'food.sec.allergy': '알레르기', 'food.sec.places': '식당 리스트',
     'food.h.info': '상세 정보', 'food.h.how': '먹는 방법', 'food.h.allergy': '알레르기 정보', 'food.h.places': '식당 리스트',
