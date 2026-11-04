@@ -19,12 +19,13 @@
   const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const L = f => (lang() !== 'ko' && f[lang()]) ? f[lang()] : f.ko;
   const fname = f => L(f).name;
-  const img = id => `assets/food/${id}.jpg`;
+  const img = id => FOOD[id]?.photo || `assets/food/${id}.jpg`;
+  const hasCoordinates = p => Number.isFinite(p.lat) && Number.isFinite(p.lng);
   const placeKey = (fid, i) => `${fid}:${i}`;
   const placeOf = (fid, i) => {
     const f = FOOD[fid]; if (!f || !f.places[i]) return null;
     const lp = (L(f).restaurants || [])[i] || f.ko.restaurants[i];
-    return { food: f, i, name: f.places[i].name, lat: f.places[i].lat, lng: f.places[i].lng, area: lp.area, signature: lp.signature, areaKo: f.ko.restaurants[i].area };
+    return { food: f, i, name: f.places[i].name, lat: f.places[i].lat, lng: f.places[i].lng, area: lp.area, signature: lp.signature, areaKo: f.ko.restaurants[i].area, research: f.manuscript?.restaurants[i] };
   };
   const allPlaces = () => FOODS.flatMap(f => f.places.map((_, i) => placeOf(f.id, i)));
   const foodLikes = f => f.likes + (S().savedFoods.includes(f.id) ? 1 : 0);
@@ -88,7 +89,7 @@
     return `<div class="list-item">
       <a href="#/food/${f.id}" style="display:contents"><img class="thumb" src="${img(f.id)}" alt="" loading="lazy">
       <span class="li-body"><span class="li-title">${esc(fname(f))}</span><span class="li-sub">${esc(L(f).summary)}</span>
-      <span class="li-meta">♥ ${foodLikes(f)} · ${esc(t('saved.places.count', { n: f.places.length }))}</span></span></a>
+      <span class="li-meta">${f.manuscript ? '' : '♥ ' + foodLikes(f) + ' · '}${esc(t('saved.places.count', { n: f.places.length }))}</span></span></a>
       ${save ? `<button class="save-btn" data-act="saveFood" data-id="${f.id}" aria-pressed="${saved}" aria-label="♥">${icon('heart', saved)}</button>` : ''}
     </div>`;
   }
@@ -123,7 +124,7 @@
     return `<article class="food-card${slide ? ' home-slide' : ''}"${slide ? ` role="group" aria-roledescription="slide" aria-label="${rank} / ${count}: ${esc(fname(f))}" data-food-id="${f.id}"` : ''}>
       <a href="#/food/${f.id}"><div class="photo"><img src="${img(f.id)}" alt="${esc(fname(f))}" loading="${eager ? 'eager' : 'lazy'}">${rank ? `<span class="rank">${rank}</span>` : ''}</div></a>
       <div class="info"><a class="names" href="#/food/${f.id}"><div class="name">${esc(fname(f))}</div>${lang() !== 'ko' ? `<div class="orig">${esc(f.ko.name)}</div>` : ''}</a>
-        <button class="like-btn" data-act="saveFood" data-id="${f.id}" aria-pressed="${saved}" aria-label="♥ ${foodLikes(f)}">${icon('heart', saved)}<span>${foodLikes(f)}</span></button></div>
+        <button class="like-btn" data-act="saveFood" data-id="${f.id}" aria-pressed="${saved}" aria-label="♥${f.manuscript ? '' : ' ' + foodLikes(f)}">${icon('heart', saved)}${f.manuscript ? '' : `<span>${foodLikes(f)}</span>`}</button></div>
       <p class="home-summary">${esc(L(f).summary)}</p>
     </article>`;
   }
@@ -287,8 +288,27 @@
     });
   };
 
+  function manuscriptFood(f) {
+    const d = L(f), saved = S().savedFoods.includes(f.id);
+    const secs = [['info', 'food.sec.info'], ['how', 'food.sec.how'], ['allergy', 'food.sec.allergy'], ['places', 'food.sec.places']];
+    const pending = { ko: '', en: 'Detailed content is currently available in Korean. Translations are under review.', zh: '详细内容目前为韩语，翻译审核中。', ja: '詳細は現在韓国語で表示しています。翻訳は確認中です。' };
+    return `<main class="screen has-cta">
+      <div class="hero"><img src="${img(f.id)}" alt="${f.credit ? esc(d.name) : '사진 준비 중'}">
+        <div class="hero-nav"><button class="circle-btn" data-act="back" data-fallback="#/home" aria-label="${esc(t('common.back'))}">${icon('back')}</button><span class="grow"></span>
+        <button class="circle-btn" data-act="share" data-title="${esc(d.name)}" aria-label="${esc(t('common.share'))}">${icon('share')}</button>
+        <button class="circle-btn" data-act="saveFood" data-id="${f.id}" aria-pressed="${saved}" aria-label="♥">${icon('heart', saved)}</button></div></div>
+      <nav class="section-chips" aria-label="sections">${secs.map(([k,label],i)=>`<button class="chip ${i===0?'active':''}" data-act="jump" data-sec="${k}">${esc(t(label))}</button>`).join('')}</nav>
+      <div class="title-block"><span class="eyebrow" lang="ko">${esc(f.ko.category)}</span><h1>${esc(d.name)}</h1>
+      ${lang()!=='ko'?`<p class="orig-line" lang="ko">${esc(f.ko.name)}</p><p class="muted">${esc(pending[lang()])}</p>`:''}
+      <p class="summary" lang="ko">${esc(f.ko.summary)}</p></div>
+      ${secs.map(([key,label],i)=>`<section class="detail-section manuscript" id="sec-${key}" lang="ko"><h2>${esc(I18N.ko[label])}${key==='allergy'?'·식단 정보':''}</h2>${f.manuscript.sections[i]}</section>`).join('')}
+      <div class="fixed-cta"><a class="btn btn-primary btn-block" href="#/map/${f.id}">${esc(t('food.cta'))}${icon('arrowRight')}</a></div>
+    </main>`;
+  }
+
   V.food = ({ id }) => {
     const f = FOOD[id]; if (!f) return V.notFound();
+    if (f.manuscript) return manuscriptFood(f);
     const d = L(f), saved = S().savedFoods.includes(f.id);
     const secs = [['info', 'food.sec.info'], ['how', 'food.sec.how'], ['allergy', 'food.sec.allergy'], ['places', 'food.sec.places']];
     return `<main class="screen has-cta">
@@ -333,6 +353,10 @@
   V.place = ({ id, i }) => {
     const p = placeOf(id, Number(i)); if (!p) return V.notFound();
     const key = placeKey(id, p.i), saved = S().savedPlaces.includes(key);
+    if (p.research) return `<main class="screen">${pageHeader(p.name, { fallback: '#/food/' + id })}
+      <section class="detail-section manuscript" lang="ko"><h1>${esc(p.name)}</h1>${p.research.html}
+      <button class="btn btn-block" data-act="savePlace" data-key="${key}" aria-pressed="${saved}">${icon('heart',saved)} ${esc(t('tab.saved'))}</button></section>
+      <div class="card">${foodRow(p.food)}</div></main>`;
     const related = allPosts().filter(x => x.food === id);
     const q = encodeURIComponent(p.name);
     return `<main class="screen">
@@ -366,7 +390,7 @@
   };
   V.place.mount = ({ id, i }) => {
     const p = placeOf(id, Number(i)); const el = document.getElementById('mini-map');
-    if (!p || !el || !window.L) return;
+    if (!p || !el || !window.L || !hasCoordinates(p)) return;
     const m = window.L.map(el, { zoomControl: false, dragging: false, scrollWheelZoom: false, doubleClickZoom: false, touchZoom: false, attributionControl: true }).setView([p.lat, p.lng], 15);
     tiles().addTo(m); window.L.marker([p.lat, p.lng], { icon: pinIcon(true) }).addTo(m);
     cleanup.push(() => m.remove());
@@ -445,7 +469,7 @@
     const places = sel ? FOOD[sel].places.map((_, i) => placeOf(sel, i)) : allPlaces();
     return `<main class="map-screen">${appHeader()}
       <div class="chip-row" role="toolbar">${['', ...FOODS.map(f => f.id)].map(fid => `<a class="chip ${fid === (sel || '') ? 'active' : ''}" href="#/map${fid ? '/' + fid : ''}" ${fid === (sel || '') ? 'aria-current="true"' : ''}>${esc(fid ? fname(FOOD[fid]) : t('map.all'))}</a>`).join('')}</div>
-      <div class="map-wrap"><div id="map">${window.L ? '' : `<div class="map-fallback">${esc(t('map.offline'))}</div>`}</div>
+      <div class="map-wrap">${places.some(p => !hasCoordinates(p)) ? '<p class="map-research-note" lang="ko">좌표 미확인 식당은 지도 핀 대신 아래 목록과 주소 검색으로 확인하세요.</p>' : ''}<div id="map">${window.L ? '' : `<div class="map-fallback">${esc(t('map.offline'))}</div>`}</div>
         <button class="locate-btn" data-act="locate" style="bottom:calc(132px + 16px)" aria-label="${esc(t('map.locate'))}">${icon('locate')}</button>
         <section class="sheet collapsed" id="sheet"><button class="sheet-handle" data-act="sheet" aria-expanded="false"><span class="sheet-title">${esc(sel ? fname(FOOD[sel]) + ' · ' : '')}${esc(t('map.nearby', { n: places.length }))}</span></button>
           <div class="sheet-list">${places.map(p => `<div class="list-item" data-act="flyTo" data-key="${placeKey(p.food.id, p.i)}" role="button" tabindex="0"><img class="thumb sm" src="${img(p.food.id)}" alt="" loading="lazy">
@@ -462,12 +486,13 @@
     tiles().addTo(mapRef);
     window.L.control.zoom({ position: 'topright' }).addTo(mapRef);
     markers = {};
-    places.forEach(p => {
+    const mappedPlaces = places.filter(hasCoordinates);
+    mappedPlaces.forEach(p => {
       const k = placeKey(p.food.id, p.i);
       markers[k] = window.L.marker([p.lat, p.lng], { icon: pinIcon(!!sel) }).addTo(mapRef)
         .bindPopup(`<b lang="ko">${esc(p.name)}</b>${esc(fname(p.food))} · ${esc(p.area)}<br><a href="#/place/${p.food.id}/${p.i}">${esc(t('map.detail'))} →</a>`);
     });
-    if (places.length) mapRef.fitBounds(window.L.latLngBounds(places.map(p => [p.lat, p.lng])).pad(0.15), { maxZoom: 15 });
+    if (mappedPlaces.length) mapRef.fitBounds(window.L.latLngBounds(mappedPlaces.map(p => [p.lat, p.lng])).pad(0.15), { maxZoom: 15 });
     const ref = mapRef;
     const resizeTimer = setTimeout(() => ref.invalidateSize(), 60);
     cleanup.push(() => { clearTimeout(resizeTimer); ref.remove(); if (mapRef === ref) { mapRef = null; locationMarker = null; } });
@@ -765,6 +790,9 @@
     removeRecent: el => { Store.update(s => { s.recentSearches = s.recentSearches.filter(x => x !== el.dataset.q); }); rerender(); },
     sheet: el => { const sh = document.getElementById('sheet'); const open = sh.classList.toggle('collapsed') === false; el.setAttribute('aria-expanded', open); const lb = app.querySelector('.locate-btn'); if (lb) lb.style.bottom = open ? 'calc(62% + 16px)' : 'calc(132px + 16px)'; },
     flyTo: (el, e) => {
+      const [foodId, placeIndex] = el.dataset.key.split(':');
+      const place = placeOf(foodId, Number(placeIndex));
+      if (place && !hasCoordinates(place)) { go(`#/place/${foodId}/${placeIndex}`); return; }
       if (e.target.closest('a')) return;
       const m = markers[el.dataset.key]; if (!m || !mapRef) return;
       mapRef.flyTo(m.getLatLng(), 16, { duration: 0.6 }); setTimeout(() => m.openPopup(), 650);
