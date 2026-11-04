@@ -25,7 +25,7 @@
   const placeOf = (fid, i) => {
     const f = FOOD[fid]; if (!f || !f.places[i]) return null;
     const lp = (L(f).restaurants || [])[i] || f.ko.restaurants[i];
-    return { food: f, i, name: f.places[i].name, lat: f.places[i].lat, lng: f.places[i].lng, area: lp.area, signature: lp.signature, areaKo: f.ko.restaurants[i].area, research: f.manuscript?.restaurants[i] };
+    return { food: f, i, name: f.places[i].name, lat: f.places[i].lat, lng: f.places[i].lng, area: lp.area, signature: lp.signature, areaKo: f.ko.restaurants[i].area, research: f.places[i].research };
   };
   const allPlaces = () => FOODS.flatMap(f => f.places.map((_, i) => placeOf(f.id, i)));
   const foodLikes = f => f.likes + (S().savedFoods.includes(f.id) ? 1 : 0);
@@ -301,7 +301,7 @@
       <div class="title-block"><span class="eyebrow" lang="ko">${esc(f.ko.category)}</span><h1>${esc(d.name)}</h1>
       ${lang()!=='ko'?`<p class="orig-line" lang="ko">${esc(f.ko.name)}</p><p class="muted">${esc(pending[lang()])}</p>`:''}
       <p class="summary" lang="ko">${esc(f.ko.summary)}</p></div>
-      ${secs.map(([key,label],i)=>`<section class="detail-section manuscript" id="sec-${key}" lang="ko"><h2>${esc(I18N.ko[label])}${key==='allergy'?'·식단 정보':''}</h2>${f.manuscript.sections[i]}</section>`).join('')}
+      ${secs.map(([key,label],i)=>`<section class="detail-section manuscript" id="sec-${key}" lang="ko"><h2>${esc(I18N.ko[label])}${key==='allergy'?'·식단 정보':''}${key==='places'?` <small>${esc(t('food.count',{n:f.places.length}))}</small>`:''}</h2>${key === 'places' ? `<div class="place-list">${f.places.map((_, index) => placeRow(placeOf(f.id, index))).join('') || `<p class="muted">이번 원고에서 확인한 식당 자료가 없습니다.</p>`}</div><details><summary>식당 자료 확인 안내</summary>${f.manuscript.placesIntro}</details>` : f.manuscript.sections[i]}</section>`).join('')}
       <div class="fixed-cta"><a class="btn btn-primary btn-block" href="#/map/${f.id}">${esc(t('food.cta'))}${icon('arrowRight')}</a></div>
     </main>`;
   }
@@ -353,34 +353,38 @@
   V.place = ({ id, i }) => {
     const p = placeOf(id, Number(i)); if (!p) return V.notFound();
     const key = placeKey(id, p.i), saved = S().savedPlaces.includes(key);
-    if (p.research) return `<main class="screen">${pageHeader(p.name, { fallback: '#/food/' + id })}
-      <section class="detail-section manuscript" lang="ko"><h1>${esc(p.name)}</h1>${p.research.html}
-      <button class="btn btn-block" data-act="savePlace" data-key="${key}" aria-pressed="${saved}">${icon('heart',saved)} ${esc(t('tab.saved'))}</button></section>
-      <div class="card">${foodRow(p.food)}</div></main>`;
     const related = allPosts().filter(x => x.food === id);
-    const q = encodeURIComponent(p.name);
+    const q = encodeURIComponent(p.research ? p.name + ' ' + p.area : p.name);
+    const research = p.research;
+    const menuParts = research ? research.signature.split(' / ') : [];
+    const menuPrice = menuParts.length > 1 ? menuParts.pop() : '확인 필요';
+    const menuName = menuParts.join(' / ') || p.signature;
+    const directions = hasCoordinates(p) ? 'https://www.google.com/maps/dir/?api=1&destination=' + p.lat + ',' + p.lng : 'https://www.google.com/maps/search/?api=1&query=' + q;
     return `<main class="screen">
       <div class="hero" style="height:260px"><img src="${img(id)}" alt="">
         <div class="hero-nav"><button class="circle-btn" data-act="back" data-fallback="#/food/${id}" aria-label="${esc(t('common.back'))}">${icon('back')}</button><span class="grow"></span>
           <button class="circle-btn" data-act="share" data-title="${esc(p.name)}" aria-label="${esc(t('common.share'))}">${icon('share')}</button>
           <button class="circle-btn ${saved ? 'on' : ''}" data-act="savePlace" data-key="${key}" aria-pressed="${saved}" aria-label="♥">${icon('heart', saved)}</button></div></div>
-      <div class="title-block"><span class="eyebrow">${esc(t('place.signature'))} · ${esc(p.signature)}</span><h1 lang="ko">${esc(p.name)}</h1>
+      <div class="title-block"><span class="eyebrow">${esc(t('place.signature'))} · ${esc(research ? menuName : p.signature)}</span><h1 lang="ko">${esc(p.name)}</h1>
         <span class="orig-line">${esc(p.area)}</span>
-        <div class="meta-line">${icon('heart', true)}<span>${placeLikes(p)}</span></div></div>
+        ${research ? `<p class="muted" lang="ko">${research.matchType === 'similar' ? '유사 메뉴 게시 자료' : '해당 메뉴 게시 자료'} · 조사일 ${esc(research.date)} · 방문 전 확인 필요</p>` : `<div class="meta-line">${icon('heart', true)}<span>${placeLikes(p)}</span></div>`}</div>
       <div class="actions-row">
         <a class="action" href="https://map.naver.com/p/search/${q}" target="_blank" rel="noopener">${icon('map')}${esc(t('place.naver'))}</a>
         <a class="action" href="https://map.kakao.com/?q=${q}" target="_blank" rel="noopener">${icon('pin')}${esc(t('place.kakao'))}</a>
-        <a class="action" href="https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}" target="_blank" rel="noopener">${icon('navigation')}${esc(t('place.directions'))}</a>
+        <a class="action" href="${esc(directions)}" target="_blank" rel="noopener">${icon('navigation')}${esc(t('place.directions'))}</a>
       </div>
       <div class="band"></div>
       <div class="section-head"><h2>${esc(t('food.h.info'))}</h2></div>
       <div class="rows">
         <div class="row">${icon('pin')}<span>${esc(p.area)}${lang() !== 'ko' ? ` <span class="muted" lang="ko">(${esc(p.areaKo)})</span>` : ''}</span></div>
-        <div class="row">${icon('utensils')}<span>${esc(t('place.signature'))} · ${esc(p.signature)}</span></div>
-        <div class="row">${icon('clock')}<span class="sub">${esc(t('place.notice'))}</span></div>
+        ${research ? '' : `<div class="row">${icon('utensils')}<span>${esc(t('place.signature'))} · ${esc(p.signature)}</span></div>`}
+        <div class="row">${icon('clock')}<span class="sub">${research ? '게시 영업시간: ' + esc(research.hours) : esc(t('place.notice'))}</span></div>
+        ${research ? `<div class="row">${icon('info')}<span>게시 정기휴무: ${esc(research.holiday)}</span></div>` : ''}
       </div>
-      <div class="mini-map" id="mini-map" role="img" aria-label="${esc(p.name)}"></div>
+      ${hasCoordinates(p) ? `<div class="mini-map" id="mini-map" role="img" aria-label="${esc(p.name)}"></div>` : `<div class="mini-map map-fallback"><p lang="ko">지도 좌표 미확인</p><a href="https://map.naver.com/p/search/${q}" target="_blank" rel="noopener">${esc(t('place.naver'))}</a></div>`}
       <div class="band"></div>
+      ${research ? `<section class="detail-section" lang="ko"><h2>대표 메뉴</h2><dl class="info-card"><div class="info-row"><dt>${esc(menuName)}</dt><dd>${esc(menuPrice)}</dd></div></dl><p class="muted">${esc(research.priceNote)}</p></section>
+      <div class="band"></div><section class="detail-section manuscript" lang="ko"><h2>방문 전 확인</h2><p>${esc(research.visitNote)}</p><p><strong>미확인:</strong> ${esc(research.unverified)}</p><p><strong>출처:</strong> ${research.sourcesHtml}</p><p><strong>조사일:</strong> ${esc(research.date)}</p></section><div class="band"></div>` : ''}
       <div class="section-head"><h2>${esc(t('place.servesFood'))}</h2></div>
       <div class="card" style="margin:0 16px">${foodRow(p.food)}</div>
       <div class="section-head"><h2>${esc(t('place.related'))}</h2></div>

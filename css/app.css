@@ -443,3 +443,6 @@ details.faq p { margin: 0 0 16px; color: var(--ink-2); font-size: 14px; }
 .manuscript blockquote { margin: 16px 0; padding: 12px; border-left: 3px solid var(--accent); }
 .manuscript a { text-decoration: underline; }
 .map-research-note { position: absolute; top: 8px; left: 12px; right: 12px; z-index: 450; background: var(--paper, #fff); padding: 12px; font-size: 12px; border-radius: 8px; }
+
+/* The missing-coordinate panel stays inside the restaurant detail flow. */
+.mini-map.map-fallback { position: relative; inset: auto; }
