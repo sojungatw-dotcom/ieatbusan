@@ -57,3 +57,18 @@ assert.equal(missing.hasCoordinates({lat:NaN,lng:129}),false);
 assert.equal(missing.hasCoordinates({lat:91,lng:129}),false);
 assert.equal(missing.hasCoordinates({lat:0,lng:0}),true);
 console.log('PASS stable district IDs, explicit overrides, invalid selections, real route matching/building, legacy IDs and missing/invalid data');
+
+// Display full source addresses and schedules even when area labels are translated.
+const infoFood={id:'detail-fixture', ko:{restaurants:[{area:'중구 남포동'}]}, en:{restaurants:[{area:'Nampo-dong'}]}, places:[{name:'상세 식당',research:{area:'부산 중구 대청로141번길 15-1',hours:'월요일 10:00 - 19:30 / 일요일 휴무',holiday:'일요일'}}]};
+const infoData=ctx.IEBMapData.create([infoFood],()=> 'en');
+assert.equal(infoData.placeOf('detail-fixture',0).address,'부산 중구 대청로141번길 15-1');
+assert.equal(infoData.placeOf('detail-fixture',0).hours,infoFood.places[0].research.hours);
+assert.equal(infoData.placeOf('detail-fixture',0).holiday,'일요일');
+infoFood.places[0]={name:'직접 등록 식당',address:'부산 중구 구덕로 10',hours:'화~일 11:00 - 20:00',holiday:'월요일'};
+assert.equal(infoData.placeOf('detail-fixture',0).address,'부산 중구 구덕로 10');
+assert.equal(infoData.placeOf('detail-fixture',0).hours,'화~일 11:00 - 20:00');
+assert.equal(infoData.placeOf('detail-fixture',0).holiday,'월요일');
+assert.equal(data.placeOf('milmyeon',0).address,'');
+assert.equal(data.placeOf('milmyeon',0).hours,'');
+assert.equal(data.placeOf('milmyeon',0).holiday,'');
+console.log('PASS full restaurant addresses, source/direct schedules, and unknown legacy metadata');

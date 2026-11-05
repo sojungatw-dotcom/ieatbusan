@@ -1,0 +1,19 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..'),read=file=>fs.readFileSync(path.join(root,file),'utf8'),source=read('js/app.js');
+const ctx=vm.createContext({console});ctx.window=ctx;
+for(const f of ['js/i18n.js','js/data/foods.js','js/data/community.js'])vm.runInContext(read(f),ctx);
+assert.ok(ctx.FOODS.every(f=>f.likes===0));assert.ok(ctx.SEED.posts.every(p=>p.likes===0));assert.equal(Object.keys(ctx.SEED.comments).length,0);assert.equal(ctx.I18N.ko['home.featured'],'추천 향토음식 5선');
+ctx.state={savedFoods:['dwaeji-gukbap'],savedPlaces:[],postLikes:{}};ctx.S=()=>ctx.state;ctx.L=f=>f.ko;ctx.fname=f=>f.ko.name;ctx.img=id=>'assets/food/'+id+'.jpg';ctx.esc=value=>String(value??'');ctx.icon=()=>'<svg></svg>';ctx.placeKey=(id,i)=>id+':'+i;ctx.commentsOf=()=>[];ctx.initial=()=>'';ctx.ago=()=>'';ctx.catLabel=()=>'';ctx.t=(key,vars)=>{let value=ctx.I18N.ko[key]||key;for(const [k,v]of Object.entries(vars||{}))value=value.replaceAll('{'+k+'}',v);return value;};
+vm.runInContext(source.slice(source.indexOf('  const foodLikes'),source.indexOf('  function ago')),ctx);
+vm.runInContext(source.match(/  const postLikes = [^\n]+/)[0],ctx);
+vm.runInContext(source.slice(source.indexOf('  function foodRow'),source.indexOf('  /* ---------- views')),ctx);
+assert.equal(vm.runInContext('foodLikes(FOODS[0])',ctx),0,'Bookmark cannot fabricate aggregate likes');
+for(const food of ctx.FOODS){const row=ctx.foodRow(food);assert.ok(!/♥ 0|<span>0<\/span>/.test(row));}
+const sample={id:'real',author:'사용자',area:'',createdAt:0,cat:'review',title:'실제 글',body:'내용',photos:[],likes:0};
+const zero=ctx.postCard(sample);assert.match(zero, /class=\"like \">[\s\S]*?<\/svg><\/span>/, 'Hide zero likes in the heart counter');
+const actual=ctx.postCard({...sample,likes:2});assert.ok(actual.includes('</svg>2</span>'),'Keep real database likes visible');
+ctx.state.postLikes.real=true;const own=ctx.postCard({...sample,likes:2});assert.ok(own.includes('</svg>3</span>'),'Count current user like exactly once');
+assert.ok(!read('supabase/seed.sql').includes('insert into public.ieb_comments'));
+assert.ok(!read('server/backend.cjs').includes('post.seed_likes +'));
+console.log('PASS zero static metrics, hidden zero display, real like counts, bookmark distinction, no example comments in seed, and five-food title');

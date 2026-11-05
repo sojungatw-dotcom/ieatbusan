@@ -7,12 +7,13 @@ const records = data.allPlaces();
 assert.equal(records.length, ctx.FOODS.reduce((n, food) => n + food.places.length, 0));
 for (const food of ctx.FOODS.filter(food => food.manuscript)) {
   food.places.forEach((source, i) => {
-    const record = data.placeOf(food.id, i), research = food.manuscript.restaurants[i];
+    const record = data.placeOf(food.id, i), research = source.research;
+    if (!research) { assert.equal(record.research, undefined); return; }
     assert.equal(record.research, research, 'Preserve teammate restaurant detail content');
     const name = research.area.match(/^부산(?:광역시|시)?\s+(\S+)/)?.[1];
     const district = data.districts.find(item => item.name === name);
     assert.equal(record.districtId, district?.id || null, food.id + ':' + i + ' must use its new source address');
-    assert.equal(data.hasCoordinates(record), false, 'Never invent research coordinates');
+    assert.equal(data.hasCoordinates(record), Number.isFinite(source.lat)&&Number.isFinite(source.lng), 'Preserve source coordinates without inventing them');
   });
 }
 const moved = { id: 'milmyeon', manuscript: { restaurants: [{area: '부산광역시 수영구 수영로 1'}] },
