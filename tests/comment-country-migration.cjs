@@ -1,0 +1,14 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const countries=require('../js/countries.js');
+const sql=fs.readFileSync(path.join(__dirname,'../supabase/migrations/20261105_comment_country_snapshot.sql'),'utf8');
+const statements=sql.replace(/--[^\n]*/g,'');
+assert.ok(!/\bUPDATE\s+public\.|\bDELETE\s+FROM|\bTRUNCATE\b/i.test(statements),'Do not rewrite historical content');
+assert.ok(/add column if not exists country_code text\s*;/i.test(statements),'Legacy comments stay NULL: no default or NOT NULL');
+assert.ok(!/alter table public\.(ieb_posts|ieb_profiles)/i.test(statements),'Existing profile/post data and schema are preserved');
+assert.ok(/before insert on public\.ieb_comments/i.test(statements));
+assert.ok(!/before update|after update/i.test(statements),'Profile changes cannot rewrite comment snapshots');
+assert.ok(sql.includes('grant insert(country_code) on public.ieb_comments to authenticated'));
+const check=sql.match(/ieb_comments_country_code_check check\(country_code in \(([^)]+)\)\)/);
+assert.deepEqual([...check[1].matchAll(/'([A-Z]{2})'/g)].map(match=>match[1]),[...countries.codes]);
+console.log('PASS additive comment snapshot SQL, nullable legacy records, insert-only trigger and unchanged historical data (DB execution pending)');

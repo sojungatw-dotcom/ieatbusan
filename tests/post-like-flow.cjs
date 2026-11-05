@@ -12,7 +12,7 @@ global.fetch=async(url,opts={})=>{
  if(u.pathname==='/rest/v1/ieb_profiles')return reply([{id:uid,username:'tester',nickname:'Tester',area:8,bio:'',country_code:'KR',created_at:'2026-11-05T00:00:00Z'}]);
  if(u.pathname==='/rest/v1/ieb_preferences'||u.pathname==='/rest/v1/ieb_comments')return reply([]);
  if(u.pathname==='/rest/v1/ieb_posts')return reply(u.searchParams.get('country_code')==='neq.KR'?[]:[{...post,like_count:likes.length,liked_user_ids:likes.map(l=>l.user_id)}]);
- if(u.pathname==='/rest/v1/ieb_foods')return reply([{id:'dwaeji-gukbap',name:'DB 음식 이름',summary:'DB 소개',category:'국밥',image_asset:'dwaeji-gukbap.jpg',content:{ko:{name:'이전 이름'},places:[]},like_count:foodLikes.length,liked_user_ids:foodLikes}]);
+ if(u.pathname==='/rest/v1/ieb_foods')return reply([{id:'dwaeji-gukbap',name:'DB 음식 이름',summary:'DB 소개',category:'국밥',image_asset:'dwaeji-gukbap.jpg',content:{ko:{name:'이전 이름'},places:[{name:'수변최고돼지국밥 민락본점',lat:35.1555,lng:129.1335}]},like_count:foodLikes.length,liked_user_ids:foodLikes}]);
  if(u.pathname==='/rest/v1/rpc/ieb_set_food_like'){
   assert.equal(body.target_id,'dwaeji-gukbap');assert.equal(Object.hasOwn(body,'user_id'),false);
   foodLikes=body.is_liked?[...new Set([...foodLikes,uid])]:foodLikes.filter(id=>id!==uid);return reply({like_count:foodLikes.length});
@@ -47,9 +47,10 @@ const total=()=>{const s=ctx.Store.get(),p=s.posts.find(p=>p.id===post.id);retur
  await ctx.Cloud.foodLike('dwaeji-gukbap',true);assert.equal(ctx.Store.get().foods[0].likes,1);assert.equal(ctx.Store.get().foodLikes['dwaeji-gukbap'],true);
  await ctx.Store.load();assert.equal(ctx.Store.get().foods[0].likes,1,'Food likes survive refresh');
  await ctx.Cloud.foodLike('dwaeji-gukbap',false);assert.equal(ctx.Store.get().foods[0].likes,0);assert.equal(ctx.Store.get().foodLikes['dwaeji-gukbap'],undefined);
- ctx.FOODS=[{id:'dwaeji-gukbap',ko:{name:'Static old name'},likes:0}];ctx.FOOD={'dwaeji-gukbap':ctx.FOODS[0]};ctx.mapData={byId:{'dwaeji-gukbap':ctx.FOODS[0]}};
+ ctx.FOODS=[{id:'dwaeji-gukbap',ko:{name:'Static old name'},likes:0,places:[{name:'수변최고돼지국밥 민락본점',naverUrl:'https://naver.me/GdymdeQF'}]}];ctx.FOOD={'dwaeji-gukbap':ctx.FOODS[0]};ctx.mapData={byId:{'dwaeji-gukbap':ctx.FOODS[0]}};
  vm.runInContext(app.slice(app.indexOf('  function syncFoodCatalog()'),app.indexOf('  const placeLikes')),ctx);
  ctx.syncFoodCatalog();assert.equal(ctx.FOOD['dwaeji-gukbap'].ko.name,'DB 음식 이름');assert.equal(ctx.FOOD['dwaeji-gukbap'].photo,'assets/food/dwaeji-gukbap.jpg');assert.equal(ctx.mapData.byId['dwaeji-gukbap'],ctx.FOODS[0]);
+ assert.equal(ctx.FOOD['dwaeji-gukbap'].places[0].naverUrl,'https://naver.me/GdymdeQF','DB refresh preserves the explicit Naver destination');
  ctx.requireLogin=()=>false;const before=writes;await ctx.clickLike({dataset:{id:post.id}});assert.equal(writes,before,'Guests cannot submit likes');
  console.log('PASS consolidated post/food like RPCs, DB catalog and filename assets; production handler → Cloud → API → bootstrap → Store: add, reload, cancel, actual totals, no seed inflation, owner-only delete, guest guard');
 })().catch(e=>{console.error(e);process.exitCode=1;}).finally(()=>{global.fetch=originalFetch;for(const k of ['SUPABASE_URL','SUPABASE_PUBLISHABLE_KEY']){if(oldEnv[k]===undefined)delete process.env[k];else process.env[k]=oldEnv[k];}});
