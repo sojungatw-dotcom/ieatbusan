@@ -2,7 +2,7 @@
 .map-screen { height: 100dvh; display: flex; flex-direction: column; padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px)); }
 @media (min-width: 600px) { .map-screen { height: calc(100dvh - 48px); } }
 .map-wrap { position: relative; flex: 1; min-height: 0; }
-#map { position: absolute; inset: 0; background: var(--beige); }
+#map { position: absolute; inset: 0 0 132px; background: var(--beige); }
 .map-fallback { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; color: var(--ink-3); padding: 24px; }
 .locate-btn { position: absolute; right: 16px; z-index: 500; width: 44px; height: 44px; border-radius: 50%; background: var(--surface); box-shadow: var(--shadow); display: grid; place-items: center; }
 .locate-btn svg { width: 22px; height: 22px; }
@@ -70,3 +70,9 @@
 .map-warning { position: absolute; top: 12px; left: 12px; right: 56px; z-index: 700; padding: 10px 12px; border-radius: 8px; background: var(--surface); color: var(--error); box-shadow: var(--shadow); font-size: 12px; }
 .map-inline-status { margin: -12px 20px 20px; color: var(--error); font-size: 12px; }
 .map-region-list { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px; }
+
+/* Google attribution/controls remain visible; style only app-owned pin and popup. */
+.google-place-pin { width: 30px; height: 36px; filter: drop-shadow(0 1px 2px rgba(0,0,0,.25)); }
+.gm-style .gm-style-iw { font-family: var(--font); font-size: 13px; }
+.gm-style .gm-style-iw b { display: block; font-size: 14px; }
+.gm-style .gm-style-iw a { color: var(--accent); font-weight: 700; }

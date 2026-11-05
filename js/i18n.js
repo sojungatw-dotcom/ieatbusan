@@ -317,3 +317,11 @@ Object.assign(window.I18N.ko, {"place.businessHours":"영업일·시간","place.
 Object.assign(window.I18N.en, {"place.businessHours":"Opening days and hours","place.holidays":"Closed on"});
 Object.assign(window.I18N.zh, {"place.businessHours":"营业日与时间","place.holidays":"休息日"});
 Object.assign(window.I18N.ja, {"place.businessHours":"営業日・時間","place.holidays":"定休日"});
+
+/* Google map setup and authorization failures. */
+for (const [language, copy] of Object.entries({
+  ko: {'map.keyMissing':'Google 지도 키를 설정한 뒤 화면을 새로고침해 주세요.','map.googleAuthError':'Google 지도 인증에 실패했어요. 키와 허용 주소 설정을 확인해 주세요.'},
+  en: {'map.keyMissing':'Set the Google Maps key, then reload this screen.','map.googleAuthError':'Google Maps authorization failed. Check the key and allowed website addresses.'},
+  zh: {'map.keyMissing':'请设置 Google 地图密钥，然后刷新页面。','map.googleAuthError':'Google 地图授权失败，请检查密钥和允许的网站地址。'},
+  ja: {'map.keyMissing':'Google マップのキーを設定し、画面を再読み込みしてください。','map.googleAuthError':'Google マップの認証に失敗しました。キーと許可するサイトの設定を確認してください。'},
+})) Object.assign(window.I18N[language], copy);

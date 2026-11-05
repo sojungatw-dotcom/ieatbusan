@@ -1,3 +1,7 @@
+# Google Maps integration
+
+Run `node tests/google-maps.cjs`. Uses a fake Google SDK to verify lazy loading, configuration errors, authorization, advanced markers, camera/bounds, location replacement and cleanup. Real key/map loading requires the setup in [docs/google-maps.md](../docs/google-maps.md).
+
 # Isolated browser checks
 
 ## Member country checks

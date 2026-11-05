@@ -39,13 +39,13 @@
           if (session.disposed || !warning) return;
           const status = code || (missingCoordinates ? 'coordinates' : null);
           warning.hidden = !status;
-          warning.textContent = status === 'coordinates' ? renderer.mt('noCoordinates') : status ? t('map.offline') : '';
+          warning.textContent = status === 'coordinates' ? renderer.mt('noCoordinates') : status === 'authorization' ? t('map.googleAuthError') : status ? t('map.offline') : '';
         };
-        function failed() {
+        function failed(error) {
           if (session.disposed) return;
           session.map?.dispose(); session.map = null;
           if (warning) warning.hidden = true;
-          showMessage(t('map.offline'));
+          showMessage(t(['map.keyMissing', 'map.googleAuthError'].includes(error?.message) ? error.message : 'map.offline'));
         }
         function initialize() {
           if (session.disposed) return;
@@ -101,6 +101,9 @@
         if (!panel || !button) return;
         const open = !panel.classList.toggle('collapsed');
         button.setAttribute('aria-expanded', open);
+        const canvas = document.getElementById('map');
+        if (canvas?.style) canvas.style.bottom = open ? '62%' : '132px';
+        current?.map?.resize();
         const locateButton = root.querySelector('.locate-btn');
         if (locateButton) locateButton.style.bottom = open ? 'calc(62% + 16px)' : 'calc(132px + 16px)';
       }

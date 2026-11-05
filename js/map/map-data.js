@@ -29,7 +29,7 @@
           : research || place.address ? addressDistrict(place.address || research?.area)
           : catalog.placeDistricts[placeKey(foodId, index)];
         return { food, i: index, key: placeKey(foodId, index), districtId: hasDistrict(candidate) ? candidate : null,
-          research,
+          research, naverUrl: place.naverUrl || '',
           name: place.name || '', lat: place.lat, lng: place.lng, area: restaurant.area || original.area || '',
           signature: restaurant.signature || original.signature || '', areaKo: original.area || '',
           address: place.address || research?.area || original.address || restaurant.address || '',

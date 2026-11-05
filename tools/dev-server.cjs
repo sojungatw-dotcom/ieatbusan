@@ -3,12 +3,22 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const http = require('node:http');
+const { parseEnv } = require('node:util');
 const root = path.resolve(__dirname, '..');
 if (fs.existsSync(path.join(root, '.env.local'))) process.loadEnvFile(path.join(root, '.env.local'));
 const handler = require('../api/service.js');
+const mapsConfig = require('../api/maps-config.js');
 const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'application/javascript; charset=utf-8', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml' };
 http.createServer(async (req, res) => {
   const pathname = new URL(req.url, 'http://localhost').pathname;
+  if (pathname === '/api/maps-config') {
+    // Read only browser map settings afresh so terminal key entry needs no restart.
+    let local = {};
+    try { local = parseEnv(fs.readFileSync(path.join(root, '.env.local'), 'utf8')); }
+    catch (error) { if (error.code !== 'ENOENT') { res.writeHead(503).end(); return; } }
+    mapsConfig(req, res, { ...process.env, ...local });
+    return;
+  }
   if (pathname === '/api/service') {
     let body = '';
     for await (const chunk of req) { body += chunk; if (Buffer.byteLength(body) > 4000000) { res.writeHead(413); res.end(); return; } }

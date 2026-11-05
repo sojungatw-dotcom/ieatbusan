@@ -55,6 +55,7 @@ window.FOODS = [
         "places":  [
                        {
                            "name":  "수변최고돼지국밥 민락본점",
+                           "naverUrl":  "https://naver.me/GdymdeQF",
                            "lat":  35.1555,
                            "lng":  129.1335
                        },

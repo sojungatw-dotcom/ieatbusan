@@ -353,6 +353,7 @@
     const hours = p.hours || t('food.unconfirmed');
     const holiday = p.holiday || t('food.unconfirmed');
     const q = encodeURIComponent(p.name + (p.address ? ' ' + p.address : ''));
+    const naverUrl = p.naverUrl || `https://map.naver.com/p/search/${q}`;
     const research = p.research;
     const menuParts = research ? research.signature.split(' / ') : [];
     const menuPrice = menuParts.length > 1 ? menuParts.pop() : '확인 필요';
@@ -367,7 +368,7 @@
         <span class="orig-line">${esc(p.area)}</span>
         ${research ? `<p class="muted" lang="ko">${research.matchType === 'similar' ? '유사 메뉴 게시 자료' : '해당 메뉴 게시 자료'} · 조사일 ${esc(research.date)} · 방문 전 확인 필요</p>` : `<div class="meta-line">${icon('heart', true)}<span>${placeLikes(p)}</span></div>`}</div>
       <div class="actions-row">
-        <a class="action" href="https://map.naver.com/p/search/${q}" target="_blank" rel="noopener">${icon('map')}${esc(t('place.naver'))}</a>
+        <a class="action" href="${esc(naverUrl)}" target="_blank" rel="noopener">${icon('map')}${esc(t('place.naver'))}</a>
         <a class="action" href="https://map.kakao.com/?q=${q}" target="_blank" rel="noopener">${icon('pin')}${esc(t('place.kakao'))}</a>
         <a class="action" href="${esc(directions)}" target="_blank" rel="noopener">${icon('navigation')}${esc(t('place.directions'))}</a>
       </div>
@@ -380,7 +381,7 @@
           <span>${esc(t('place.holidays'))}: <span${p.holiday ? ' lang="ko"' : ''}>${esc(holiday)}</span></span>
         </span></div>
       </div>
-      ${hasCoordinates(p) ? `<div class="mini-map" id="mini-map" role="img" aria-label="${esc(p.name)}"></div>` : `<div class="mini-map map-fallback"><p lang="ko">지도 좌표 미확인</p><a href="https://map.naver.com/p/search/${q}" target="_blank" rel="noopener">${esc(t('place.naver'))}</a></div>`}
+      ${hasCoordinates(p) ? `<div class="mini-map" id="mini-map" role="img" aria-label="${esc(p.name)}"></div>` : `<div class="mini-map map-fallback"><p lang="ko">지도 좌표 미확인</p><a href="${esc(naverUrl)}" target="_blank" rel="noopener">${esc(t('place.naver'))}</a></div>`}
       <div class="band"></div>
       ${research ? `<section class="detail-section" lang="ko"><h2>대표 메뉴</h2><dl class="info-card"><div class="info-row"><dt>${esc(menuName)}</dt><dd>${esc(menuPrice)}</dd></div></dl><p class="muted">${esc(research.priceNote)}</p></section>
       <div class="band"></div><section class="detail-section manuscript" lang="ko"><h2>방문 전 확인</h2><p>${esc(research.visitNote)}</p><p><strong>미확인:</strong> ${esc(research.unverified)}</p><p><strong>조사일:</strong> ${esc(research.date)}</p></section><div class="band"></div>` : ''}
@@ -456,7 +457,7 @@
 
   /* ---------- map ---------- */
   const mapView = window.IEBMapView.create({
-    data: mapData, provider: window.IEBMapProvider.create(), root: app, document, navigator,
+    data: mapData, provider: (window.IEBGoogleMapProvider || window.IEBMapProvider).create(), root: app, document, navigator,
     t, esc, fname, img, icon, appHeader, tabbar, toast, getLanguage: lang, districtName,
     setTimeout: window.setTimeout.bind(window), clearTimeout: window.clearTimeout.bind(window),
   });
