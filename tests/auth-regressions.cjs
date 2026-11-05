@@ -4,9 +4,11 @@ const root=path.resolve(__dirname,'..'),read=file=>fs.readFileSync(path.join(roo
 (async()=>{
  const view=vm.createContext({});view.window=view;vm.runInContext(read('js/i18n.js'),view);
  let language='ko';view.t=key=>view.I18N[language][key];view.esc=String;view.icon=()=>'';
- const source=read('js/app.js');vm.runInContext(source.slice(source.indexOf('  const V = {};'),source.indexOf('  V.lang =')),view);
+ const source=read('js/app.js');vm.runInContext(read('js/countries.js'),view);view.lang=()=>language;
+ vm.runInContext(source.slice(source.indexOf('  const Countries ='),source.indexOf('  const img =')),view);
+ vm.runInContext(source.slice(source.indexOf('  const V = {};'),source.indexOf('  V.lang =')),view);
  for(language of ['ko','en','zh','ja'])for(const screen of ['login','signup']){
-   const html=vm.runInContext(`V.${screen}()`,view);assert.equal((html.match(/<input /g)||[]).length,2);assert.ok(!html.includes('undefined'));
+   const html=vm.runInContext(`V.${screen}()`,view);assert.equal((html.match(/<input /g)||[]).length,2);assert.equal(html.includes('name="countryCode"'),screen==='signup');assert.ok(!html.includes('undefined'));
  }
  const storage=new Map([['ieatbusan.v1',JSON.stringify({user:{nickname:'legacy'},accounts:[{id:'old-id',hash:'old-hash'}]})]]);
  const localStorage={getItem:key=>storage.get(key)||null,setItem:(key,value)=>storage.set(key,value)};

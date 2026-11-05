@@ -258,3 +258,11 @@ window.DISTRICTS = {
   zh: ['中区', '西区', '东区', '影岛区', '釜山镇区', '东莱区', '南区', '北区', '海云台区', '沙下区', '金井区', '江西区', '莲堤区', '水营区', '沙上区', '机张郡'],
   ja: ['中区', '西区', '東区', '影島区', '釜山鎮区', '東莱区', '南区', '北区', '海雲台区', '沙下区', '金井区', '江西区', '蓮堤区', '水営区', '沙上区', '機張郡'],
 };
+
+/* Member country and account privacy settings. */
+for (const [language, copy] of Object.entries({
+  ko: {'country.label':'국가','country.help':'국가는 이름 옆에 표시되며 같은 국가의 게시글을 먼저 보여드려요. 화면 언어는 별도로 설정할 수 있어요.','country.personal':'개인정보 설정','country.saved':'국가를 변경했어요.','country.feedFirst':'{country} 회원이 작성한 게시글을 먼저 보여드려요.','profile.invalidCountry':'목록에서 국가를 선택해 주세요.'},
+  en: {'country.label':'Country','country.help':'Your country appears beside your name and prioritizes community posts. You can set the display language separately.','country.personal':'Personal information','country.saved':'Country updated.','country.feedFirst':'Posts written by members from {country} appear first.','profile.invalidCountry':'Please select a country from the list.'},
+  zh: {'country.label':'国家／地区','country.help':'国家或地区将显示在姓名旁，并优先展示同一国家或地区的帖子。界面语言可单独设置。','country.personal':'个人信息设置','country.saved':'国家或地区已更新。','country.feedFirst':'优先展示来自{country}的会员发布的帖子。','profile.invalidCountry':'请从列表中选择国家或地区。'},
+  ja: {'country.label':'国・地域','country.help':'国・地域は名前の横に表示され、同じ国・地域の投稿を優先します。表示言語は別に設定できます。','country.personal':'個人情報設定','country.saved':'国・地域を変更しました。','country.feedFirst':'{country}の会員が書いた投稿を優先して表示します。','profile.invalidCountry':'一覧から国・地域を選択してください。'},
+})) Object.assign(window.I18N[language], copy);

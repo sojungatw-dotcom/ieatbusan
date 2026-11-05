@@ -7,6 +7,8 @@
 
 ## 실행
 
+회원 국가 기능의 로컬 작업과 **DB 적용 전 확인 사항**은 [회원 국가 개발 안내](docs/member-country.md)를 참고하세요.
+
 프레임워크나 외부 패키지를 설치할 필요가 없습니다. 인증·DB 기능은 Vercel 서버 API와 함께 실행합니다.
 
 - **로컬:** `.env.example`을 `.env.local`로 복사하고 값을 입력한 뒤 Node.js 22 이상에서 `node tools/dev-server.cjs`를 실행합니다. `http://127.0.0.1:8779/`에서 확인할 수 있습니다. 단순 file://나 정적 서버에서는 인증·DB API가 실행되지 않습니다.

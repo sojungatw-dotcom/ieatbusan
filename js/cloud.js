@@ -23,5 +23,6 @@
     async like(postId, on) { await this.call('like', { postId, on }); await Store.load(); },
     async deletePost(id) { await this.call('deletePost', { id }); await Store.load(); },
     async profile(data) { await this.call('profile', data); await Store.load(); },
+    async country(countryCode) { await this.call('country', { countryCode }); await Store.load(); },
   };
 })();

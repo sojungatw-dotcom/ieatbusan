@@ -1,5 +1,21 @@
 # Isolated browser checks
 
+## Member country checks
+
+Run `node tests/member-country-migration.cjs` to check preservation of the existing signup function/RLS,
+matching country allowlists/defaults and column grants. This is not a PostgreSQL execution/RLS test.
+
+Run `node tests/public-entry.cjs` for anonymous home entry, the header login link, language confirmation
+without forced login, explicit login access and protected member-only routes.
+
+Run `node tests/member-country.cjs` and `node tests/member-country-api.cjs` for translated country names,
+KR defaults, signup payloads, profile badges, country settings, stable community priority, guest activity
+guards, server-side validation and own-user country updates. API responses are mocked.
+
+Run `node tests/member-country-preview.cjs` to inspect the production UI at `http://127.0.0.1:8781/`
+using synthetic in-memory accounts/posts. This fixture never calls Supabase. See docs/member-country.md
+for the pending SQL migration and required real-DB verification before deployment.
+
 ## Map module checks
 
 Run `node tests/map-integration.cjs` for the current main catalog: source-address district assignment,

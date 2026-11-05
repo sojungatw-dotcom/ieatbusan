@@ -19,6 +19,12 @@
   const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const L = f => (lang() !== 'ko' && f[lang()]) ? f[lang()] : f.ko;
   const fname = f => L(f).name;
+  const Countries = window.IEBCountries;
+  const countryOptions = value => Countries.list(lang()).map(item => `<option value="${item.code}" ${item.code === Countries.normalize(value) ? 'selected' : ''}>${esc(item.name)}</option>`).join('');
+  const countryBadge = value => {
+    const code = Countries.normalize(value), name = esc(Countries.name(code, lang()));
+    return `<span class="country-badge" lang="en" title="${name}" aria-label="${name}">${code}</span>`;
+  };
   const img = id => FOOD[id]?.photo || `assets/food/${id}.jpg`;
   const mapData = window.IEBMapData.create(FOODS, lang);
   const { placeKey, placeOf, allPlaces } = mapData;
@@ -62,7 +68,7 @@
       <div class="header-actions">
         <a class="lang-pill" href="#/lang" aria-label="${esc(t('set.language'))}">${icon('globe')}<span>${esc(t('lang.code'))}</span></a>
         <a class="icon-btn" href="#/search" aria-label="${esc(t('search.placeholder'))}">${icon('search')}</a>
-        <a class="icon-btn" href="#/notifications" aria-label="${esc(t('noti.title'))}">${icon('bell')}${hasUnread() ? '<span class="dot"></span>' : ''}</a>
+        ${loggedIn() ? `<a class="icon-btn" href="#/notifications" aria-label="${esc(t('noti.title'))}">${icon('bell')}${hasUnread() ? '<span class="dot"></span>' : ''}</a>` : `<a class="header-login" href="#/login">${esc(t('auth.login'))}</a>`}
       </div>
     </header>`;
   }
@@ -100,7 +106,7 @@
     const n = commentsOf(p.id).length;
     return `<a class="post-card" href="#/post/${p.id}">
       <div class="post-head"><span class="avatar">${initial(p.author)}</span>
-        <span class="who"><b>${esc(p.author)}</b><span>${esc(p.areaLabel || p.area)} · ${esc(ago(p.createdAt))}</span></span>
+        <span class="who"><b>${countryBadge(p.authorCountryCode)}${esc(p.author)}</b><span>${esc(p.areaLabel || p.area)} · ${esc(ago(p.createdAt))}</span></span>
         <span class="badge">${esc(catLabel(p.cat))}</span></div>
       <div class="post-content"><div class="post-text"><h3>${esc(p.title)}</h3><p>${esc(p.body)}</p></div>
         ${p.photos && p.photos[0] ? `<img class="thumb" src="${esc(p.photos[0])}" alt="" loading="lazy">` : ''}</div>
@@ -135,6 +141,7 @@
       <div class="field"><label for="auth-password">${esc(t('auth.password'))}</label>
         <input class="input" id="auth-password" name="password" type="password" autocomplete="${signup ? 'new-password' : 'current-password'}" required minlength="8" maxlength="72" ${signup ? 'aria-describedby="auth-password-help"' : ''}>
         ${signup ? `<span class="helper" id="auth-password-help">${esc(t('auth.passwordHelp'))}</span>` : ''}</div>
+      ${signup ? `<div class="field"><label for="auth-country">${esc(t('country.label'))}</label><select class="select" id="auth-country" name="countryCode" required>${countryOptions('KR')}</select><span class="helper">${esc(t('country.help'))}</span></div>` : ''}
       <p class="auth-error" role="alert" id="auth-error" hidden></p>
       <button class="btn btn-primary btn-block" type="submit">${esc(t(signup ? 'auth.signup' : 'auth.login'))}</button>
       <a class="auth-switch" href="${signup ? '#/login' : '#/signup'}">${esc(t(signup ? 'auth.haveAccount' : 'auth.createAccount'))}</a>
@@ -460,9 +467,17 @@
     if (tab === 'popular') list.sort((a, b) => postLikes(b) - postLikes(a));
     else if (tab === 'latest') list.sort((a, b) => b.createdAt - a.createdAt);
     else list = list.filter(p => p.cat === tab).sort((a, b) => b.createdAt - a.createdAt);
+    const viewer = S().user;
+    if (viewer) {
+      const country = Countries.normalize(viewer.countryCode);
+      // Stable partition retains popular/latest order within both country groups.
+      list = [...list.filter(post => Countries.normalize(post.countryCode) === country),
+        ...list.filter(post => Countries.normalize(post.countryCode) !== country)];
+    }
     const tabs = [['popular', t('com.tab.popular')], ['latest', t('com.tab.latest')], ['review', t('cat.review')], ['question', t('cat.question')], ['free', t('cat.free')]];
     return `<main class="screen has-tabbar">${appHeader()}
       <div class="section-head"><h1 class="page-title">${esc(t('tab.community'))}</h1><button class="text-btn" data-act="refreshCommunity">${esc(t('db.refresh'))}</button></div>
+      ${viewer ? `<p class="country-feed-note">${esc(t('country.feedFirst', {country: Countries.name(viewer.countryCode, lang())}))}</p>` : ''}
       <nav class="seg" aria-label="categories">${tabs.map(([k, label]) => `<a href="#/community/${k}" ${k === tab ? 'aria-current="page"' : ''} style="padding:12px 2px 10px;white-space:nowrap;border-bottom:2px solid ${k === tab ? 'var(--accent)' : 'transparent'};color:${k === tab ? 'var(--ink)' : 'var(--ink-3)'};font-weight:${k === tab ? 700 : 400}">${esc(label)}</a>`).join('')}</nav>
       ${list.length ? list.map(postCard).join('') : empty(t('com.empty'), 'community')}
       <div style="height:72px"></div>
@@ -477,7 +492,7 @@
     return `<main class="screen" style="padding-bottom:96px">${pageHeader(t('post.header'), { fallback: '#/community', right })}
       <article class="post-body">
         <div class="post-head"><span class="avatar" style="width:40px;height:40px">${initial(p.author)}</span>
-          <span class="who"><b style="font-size:15px">${esc(p.author)}</b><span style="font-size:12px">${esc(p.areaLabel || p.area)} · ${esc(ago(p.createdAt))}</span></span>
+          <span class="who"><b style="font-size:15px">${countryBadge(p.authorCountryCode)}${esc(p.author)}</b><span style="font-size:12px">${esc(p.areaLabel || p.area)} · ${esc(ago(p.createdAt))}</span></span>
           <span class="badge">${esc(catLabel(p.cat))}</span></div>
         <h1>${esc(p.title)}</h1>
         <p class="content">${esc(p.body)}</p>
@@ -489,7 +504,7 @@
       <div class="band"></div>
       <div class="group-title">${esc(t('post.comments', { n: cs.length }))}</div>
       ${cs.map(c => `<div class="comment"><span class="avatar" style="width:32px;height:32px;font-size:13px">${initial(c.author)}</span><div class="c-body">
-        <div class="c-meta"><b style="font-weight:500">${esc(c.author)}</b><span>${esc(ago(c.createdAt))}</span></div><p>${esc(c.text)}</p>
+        <div class="c-meta"><b style="font-weight:500">${countryBadge(c.authorCountryCode)}${esc(c.author)}</b><span>${esc(ago(c.createdAt))}</span></div><p>${esc(c.text)}</p>
         <span class="muted" style="font-size:12px">♡ ${c.likes || 0}</span></div></div>`).join('')}
       <form class="comment-bar" data-form="comment" data-id="${id}"><input id="comment-input" name="text" maxlength="300" autocomplete="off" placeholder="${esc(t('post.placeholder'))}" aria-label="${esc(t('post.placeholder'))}"><button type="submit">${esc(t('post.submit'))}</button></form>
     </main>`;
@@ -571,24 +586,26 @@
   V.my = () => {
     const st = S(), u = st.user;
     const menu = (href, label, val = '') => `<a class="menu-row" href="${href}"><span>${esc(label)}</span>${val ? `<span class="val">${esc(val)}</span>` : ''}${icon('chevronRight')}</a>`;
-    const top = u ? `<div class="profile"><span class="avatar lg">${initial(u.nickname)}</span><div class="who"><b>${esc(u.nickname)}</b><span class="muted" style="font-size:13px">${esc(t('my.joined', { area: districtName(u.area), date: u.joined }))}</span>${u.bio ? `<div class="sub" style="font-size:13px">${esc(u.bio)}</div>` : ''}</div>
+    const top = u ? `<div class="profile"><span class="avatar lg">${initial(u.nickname)}</span><div class="who"><b>${countryBadge(u.countryCode)}${esc(u.nickname)}</b><span class="muted" style="font-size:13px">${esc(t('my.joined', { area: districtName(u.area), date: u.joined }))}</span>${u.bio ? `<div class="sub" style="font-size:13px">${esc(u.bio)}</div>` : ''}</div>
         <a class="btn btn-outline btn-sm" href="#/profile">${esc(t('my.edit'))}</a></div>
       <div class="stats"><a href="#/my/posts"><b>${st.posts.filter(post => post.mine).length}</b><span>${esc(t('my.posts'))}</span></a><i></i><a href="#/my/comments"><b>${myComments().length}</b><span>${esc(t('my.comments'))}</span></a><i></i><a href="#/saved"><b>${st.savedFoods.length + st.savedPlaces.length}</b><span>${esc(t('my.saved'))}</span></a></div>`
       : `<div class="login-card"><b>${esc(t('my.loginTitle'))}</b><span class="sub" style="font-size:14px">${esc(t('my.loginDesc'))}</span><a class="btn btn-primary" href="#/login">${esc(t('my.login'))}</a></div>`;
     return `<main class="screen has-tabbar">${pageHeader(t('my.title'), { back: false, right: `<a class="icon-btn" href="#/settings" aria-label="${esc(t('set.title'))}">${icon('settings')}</a>` })}
       ${top}<div class="band"></div>
-      <div class="menu-group-title">${esc(t('my.activity'))}</div>
+      ${u ? `<div class="menu-group-title">${esc(t('my.activity'))}</div>
       ${menu('#/my/posts', t('my.myPosts'))}${menu('#/my/comments', t('my.myComments'))}${menu('#/my/recent', t('my.recent'))}
-      <div class="band"></div>
+      <div class="band"></div>` : ''}
       <div class="menu-group-title">${esc(t('my.support'))}</div>
       ${menu('#/notices', t('my.notices'))}${menu('#/faq', t('my.faq'))}${menu('#/contact', t('my.contact'))}
       ${tabbar('my')}</main>`;
   };
   V.myPosts = () => {
+    if (!S().user) return V.login();
     const list = allPosts().filter(p => p.mine);
     return `<main class="screen">${pageHeader(t('my.myPosts'), { fallback: '#/my' })}${list.length ? list.map(postCard).join('') : empty(t('my.emptyPosts'), 'pencil', `<a class="btn btn-primary btn-sm" href="#/write">${esc(t('com.write'))}</a>`)}</main>`;
   };
   V.myComments = () => {
+    if (!S().user) return V.login();
     const list = myComments().sort((a, b) => b.createdAt - a.createdAt);
     return `<main class="screen">${pageHeader(t('my.myComments'), { fallback: '#/my' })}${list.length ? list.map(c => {
       const p = postById(c.pid);
@@ -596,6 +613,7 @@
     }).join('') : empty(t('my.emptyComments'), 'comment')}</main>`;
   };
   V.myRecent = () => {
+    if (!S().user) return V.login();
     const list = S().recentFoods.map(id => FOOD[id]).filter(Boolean);
     return `<main class="screen">${pageHeader(t('my.recent'), { fallback: '#/my' })}${list.length ? list.map(f => foodRow(f)).join('') : empty(t('my.emptyRecent'), 'clock')}</main>`;
   };
@@ -629,12 +647,22 @@
       <div class="band"></div><div class="menu-group-title">${esc(t('set.app'))}</div>
       ${row('#/lang', t('set.language'), t('lang.name'))}
       <div class="band"></div><div class="menu-group-title">${esc(t('set.account'))}</div>
-      <div class="menu-row"><span>${esc(t('set.accountInfo'))}</span><span class="val">${esc(acct)}</span></div>
+      <div class="menu-row"><span>${esc(t('set.accountInfo'))}</span><span class="val">${st.user ? countryBadge(st.user.countryCode) : ''}${esc(acct)}</span></div>
+      ${st.user ? row('#/settings/privacy', t('country.personal'), Countries.name(st.user.countryCode, lang())) : ''}
       ${st.user || st.guest ? row('', t('set.logout'), '', 'logout') : row('#/login', t('my.login'))}
       <div class="band"></div><div class="menu-group-title">${esc(t('set.info'))}</div>
       ${row('#/terms', t('set.terms'))}${row('#/privacy', t('set.privacy'))}${row('#/credits', t('set.credits'))}
       <div class="menu-row"><span>${esc(t('set.version'))}</span><span class="val">1.0.0</span></div>
       <div class="danger-link"><button data-act="withdraw">${esc(t('set.withdraw'))}</button></div></main>`;
+  };
+
+  V.accountPrivacy = () => {
+    const user = S().user; if (!user) return V.login();
+    return `<main class="screen">${pageHeader(t('country.personal'), {fallback:'#/settings'})}
+      <form class="form" data-form="country" id="country-form"><div class="field"><label for="account-country">${esc(t('country.label'))}</label>
+      <select class="select" id="account-country" name="countryCode" required>${countryOptions(user.countryCode)}</select>
+      <span class="helper">${esc(t('country.help'))}</span></div></form>
+      <div class="bottom-cta"><button type="submit" form="country-form" class="btn btn-primary btn-block">${esc(t('common.save'))}</button></div></main>`;
   };
 
   V.notices = () => `<main class="screen">${pageHeader(t('notice.title'), { fallback: '#/my' })}${SEED.notices.map(n => {
@@ -669,10 +697,10 @@
     [/^#\/post\/([\w-]+)$/, 'post', ['id']], [/^#\/write$/, 'write'],
     [/^#\/saved(?:\/(foods|places))?$/, 'saved', ['tab']], [/^#\/my$/, 'my'], [/^#\/my\/posts$/, 'myPosts'],
     [/^#\/my\/comments$/, 'myComments'], [/^#\/my\/recent$/, 'myRecent'], [/^#\/profile$/, 'profile'],
-    [/^#\/settings$/, 'settings'], [/^#\/notices$/, 'notices'], [/^#\/faq$/, 'faq'], [/^#\/contact$/, 'contact'],
+    [/^#\/settings\/privacy$/, 'accountPrivacy'], [/^#\/settings$/, 'settings'], [/^#\/notices$/, 'notices'], [/^#\/faq$/, 'faq'], [/^#\/contact$/, 'contact'],
     [/^#\/terms$/, 'terms'], [/^#\/privacy$/, 'privacy'], [/^#\/credits$/, 'credits'],
   ];
-  const OPEN = ['login', 'signup', 'lang', 'terms', 'privacy', 'credits'];
+  const MEMBER_ONLY = ['write', 'profile', 'accountPrivacy', 'myPosts', 'myComments', 'myRecent'];
   let cleanup = [];
   const stack = [];
   function route() {
@@ -683,8 +711,8 @@
       if (m) { name = n; (keys || []).forEach((k, i) => { if (m[i + 1] !== undefined) params[k] = decodeURIComponent(m[i + 1]); }); break; }
     }
     const st = S();
-    if (!st.user && !st.guest && !OPEN.includes(name)) { location.replace('#/login'); return; }
-    if (name === 'login' && (st.user || st.guest) && !loginIntent) { location.replace('#/home'); return; }
+    if (!st.user && MEMBER_ONLY.includes(name)) { loginIntent = true; location.replace('#/login'); return; }
+    if (name === 'login' && st.user && !loginIntent) { location.replace('#/home'); return; }
     loginIntent = false;
     if (stack[stack.length - 2] === hash) stack.pop(); else if (stack[stack.length - 1] !== hash) stack.push(hash);
     cleanup.forEach(fn => { try { fn(); } catch (e) {} }); cleanup = [];
@@ -715,7 +743,7 @@
     back: el => back(el.dataset.fallback),
     guest: () => { Store.set({ guest: true }); go(S().langChosen ? '#/home' : '#/lang'); },
     pickLang: el => { Store.set({ lang: el.dataset.code }); rerender(); },
-    confirmLang: () => { Store.set({ langChosen: true }); if (stack.length > 1 && (S().user || S().guest) && !stack[stack.length - 2].startsWith('#/login')) history.back(); else go(S().user || S().guest ? '#/home' : '#/login'); },
+    confirmLang: () => { Store.set({ langChosen: true }); if (stack.length > 1 && !stack[stack.length - 2].startsWith('#/login')) history.back(); else go('#/home'); },
     sort: () => { Store.set({ sort: S().sort === 'popular' ? 'name' : 'popular' }); rerender(); },
     saveFood: async el => {
       if (!requireLogin()) return;
@@ -797,7 +825,7 @@
       submit.textContent = t('auth.processing');
       try {
         if (kind === 'signup') {
-          await Auth.register(username, password);
+          await Auth.register(username, password, f.elements.countryCode.value);
           if (!f.isConnected) return;
           registeredId = username;
           f.elements.password.value = '';
@@ -841,6 +869,13 @@
       const id = await Cloud.createPost({ title, body, cat: f.cat.value, food: f.food.value || null, photos: draftPhotos.slice() });
       if (!f.isConnected) return;
       toast(t('write.done')); stack.pop(); location.replace('#/post/' + id);
+    } else if (kind === 'country') {
+      if (!requireLogin()) return;
+      const code = f.elements.countryCode.value;
+      if (!Countries.isValid(code)) { toast(t('profile.invalidCountry')); return; }
+      await Cloud.country(code);
+      if (!f.isConnected) return;
+      toast(t('country.saved')); back('#/settings');
     } else if (kind === 'profile') {
       if (!requireLogin()) return;
       const nick = f.nickname.value.trim();
