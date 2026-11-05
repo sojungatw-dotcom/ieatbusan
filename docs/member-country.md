@@ -1,10 +1,25 @@
-## 2026-11-05 PR 통합 진행
+# 회원 국가 기능 — PR 통합 및 운영 DB 확인
 
-사용자 요청으로 최신 main의 공통 음식 상세·주소·영업시간·휴무 표시를 보존하여 충돌을 해결했습니다.
-예시 좋아요 수는 0으로 정리하고, 화면의 하트 옆에는 0도 표시합니다. 실제 사용자 좋아요 행은 유지합니다.
-DB 적용 순서: `supabase/migrations/20261105_member_country.sql` 다음
-`supabase/migrations/20261105_zero_example_likes.sql`. 두 번째 SQL은 댓글이나 게시글을 삭제하지 않습니다.
-로컬 빌드 및 18개 자동 검사 통과. 실제 DB 적용과 계정 검증 결과는 아래 이력과 구분하여 기록합니다.
+## 2026-11-05 통합 결과
+
+사용자 요청으로 최신 main의 공통 음식 상세·주소·영업시간·휴무 표시를 보존하여 PR #3을 병합했습니다.
+PR #5는 국가 표시 기능을 유지하고, 화면의 하트 옆에는 0도 표시하도록 충돌을 해결했습니다.
+서버는 예시 seed_likes를 가산하지 않으며 실제 사용자 좋아요만 계산합니다.
+
+운영 대상은 사용자가 지정한 `ljg9809-dotcom's Org`의 `IEATBUSAN`입니다.
+조회 시 국가 컬럼 2개는 이미 NOT NULL·KR 기본값으로 존재했고 국가 트리거 2개도 적용되어 있었습니다.
+기존 국가 마이그레이션을 중복 실행하지 않았습니다.
+`supabase/migrations/20261105_zero_example_likes.sql`을 Supabase SQL Editor에서 실제 실행했습니다.
+예시 좋아요와 향후 기본값은 0입니다. 변경 전후 프로필 3개·게시글 9개·댓글 1개·실제 좋아요 0개를 유지했습니다.
+게시글·댓글·계정 및 실제 좋아요 행 삭제는 실행하지 않았습니다.
+
+로컬 빌드 및 18개 자동 검사 통과. 실제 계정 신규 가입/국가 변경 및 운영 RLS의 쓰기 검사는 이번 확인에 포함되지 않습니다.
+운영 DB 조회·SQL 실행 확인 화면: [verification-db-zero-likes.jpg](verification-db-zero-likes.jpg).
+
+신규 DB 적용 순서: `supabase/schema.sql` 다음 `supabase/migrations/20261105_member_country.sql`,
+`supabase/migrations/20261105_zero_example_likes.sql`. 기존 DB에는 schema.sql을 재실행하지 마세요.
+
+## 최초 구현 당시 기록 — 아래 적용 대기 상태는 과거 기록
 
 # 회원 국가 기능 — DB 구조 대조 완료·적용 대기
 
