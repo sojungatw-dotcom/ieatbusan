@@ -77,6 +77,15 @@ a { color: inherit; text-decoration: none; }
 .page-header { padding-left: 6px; }
 .logo { font-family: var(--font-logo); font-weight: 800; font-size: 20px; color: var(--accent); letter-spacing: -.01em; white-space: nowrap; }
 .header-actions { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+.header-login { display:inline-flex; align-items:center; justify-content:center; min-height:32px; padding:0 10px; border:1px solid var(--accent); border-radius:7px; color:var(--accent); font-size:13px; font-weight:700; white-space:nowrap; }
+.header-login:hover { background:var(--accent); color:#fff; }
+@media(max-width:380px) {
+  .app-header .logo { font-size:16px; }
+  .app-header .header-actions { gap:3px; }
+  .app-header .header-actions .icon-btn { width:32px; height:32px; }
+  .app-header .lang-pill { padding:0 6px; }
+  .app-header .header-login { padding:0 8px; font-size:12px; }
+}
 .page-title { flex: 1; font-size: 17px; font-weight: 700; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .icon-btn { width: 40px; height: 40px; display: inline-grid; place-items: center; border-radius: 50%; position: relative; flex: none; }
 .icon-btn:hover { background: rgba(40, 38, 34, .06); }
@@ -423,6 +432,9 @@ details.faq p { margin: 0 0 16px; color: var(--ink-2); font-size: 14px; }
 .manuscript a { text-decoration: underline; }
 .map-research-note { position: absolute; top: 8px; left: 12px; right: 12px; z-index: 450; background: var(--paper, #fff); padding: 12px; font-size: 12px; border-radius: 8px; }
 
+/* Member country label: text codes remain consistent across devices. */
+.country-badge{display:inline-flex;align-items:center;justify-content:center;min-width:27px;height:20px;padding:0 4px;margin-right:6px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--ink-2);font:700 10px/1 Inter,system-ui,sans-serif;letter-spacing:.3px;vertical-align:middle;white-space:nowrap}
+.country-feed-note{margin:0;padding:0 20px 12px;color:var(--ink-3);font-size:12px;line-height:1.6}
 /* The missing-coordinate panel stays inside the restaurant detail flow. */
 .mini-map.map-fallback { position: relative; inset: auto; }
 
