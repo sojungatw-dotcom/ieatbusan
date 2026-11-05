@@ -49,7 +49,7 @@ for(const food of items){
     assert.ok(!detail.includes('출처:')&&!detail.includes('SRC-'));
     assert.ok(detail.includes('<h2>대표 메뉴</h2>'));
     const mapBlock=detail.includes('id="mini-map"');
-    assert.equal(mapBlock,Number.isFinite(place.lat)&&Number.isFinite(place.lng));
+    assert.equal(mapBlock,true,'Manuscript restaurants mount the Google mini-map for coordinates or address lookup');
    }
   }
   if(lang!=='ko')assert.ok(html.includes('class="muted"'));

@@ -427,7 +427,8 @@
           <span>${esc(t('place.holidays'))}: <span${p.holiday ? ' lang="ko"' : ''}>${esc(holiday)}</span></span>
         </span></div>
       </div>
-      ${hasCoordinates(p) ? `<div class="mini-map" id="mini-map" role="img" aria-label="${esc(p.name)}"></div>` : `<div class="mini-map map-fallback"><p lang="ko">지도 좌표 미확인</p><a href="${esc(naverUrl)}" target="_blank" rel="noopener">${esc(t('place.naver'))}</a></div>`}
+      <div class="mini-map" id="mini-map" role="img" aria-label="${esc(p.name)}"></div>
+      ${!hasCoordinates(p) ? `<p class="map-inline-status"><a href="${esc(directions)}" target="_blank" rel="noopener">${esc(t('place.google'))}</a></p>` : ''}
       <div class="band"></div>
       ${research ? `<section class="detail-section" lang="ko"><h2>대표 메뉴</h2><dl class="info-card"><div class="info-row"><dt>${esc(menuName)}</dt><dd>${esc(menuPrice)}</dd></div></dl><p class="muted">${esc(research.priceNote)}</p></section>
       <div class="band"></div><section class="detail-section manuscript" lang="ko"><h2>방문 전 확인</h2><p>${esc(research.visitNote)}</p><p><strong>미확인:</strong> ${esc(research.unverified)}</p><p><strong>조사일:</strong> ${esc(research.date)}</p></section><div class="band"></div>` : ''}

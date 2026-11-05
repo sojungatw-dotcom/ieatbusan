@@ -1,7 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const root=path.resolve(__dirname,'..'),read=file=>fs.readFileSync(path.join(root,file),'utf8');
-const context=vm.createContext({URL,console,window:{}});
+const context=vm.createContext({URL,console,window:{setTimeout,clearTimeout}});
 for(const file of ['js/map/google-loader.js','js/map/google-provider.js'])vm.runInContext(read(file),context);
 function loaderHarness({missing=false,existing=false}={}) {
   const host={},nodes=[],timers=new Map();let sdk=existing?{Map(){},marker:{AdvancedMarkerElement(){}}}:null,requests=0,next=0;
@@ -45,6 +45,20 @@ const flush=()=>new Promise(resolve=>setImmediate(resolve));
   map.dispose();map.dispose();assert.equal(unsubscribed,1);assert.equal(records.pins[0].map,null);assert.equal(records.circles[1].map,null);assert.ok(element.cleared);assert.ok(records.maps[0].cleared);
   map.focusPlace('milmyeon:2');map.showLocation([0,0]);assert.equal(records.circles.length,2);
   const mini=provider.create({replaceChildren(){}},{interactive:false});assert.equal(records.maps[1].options.gestureHandling,'none');mini.dispose();
+  let geocodes=0;
+  sdk.Geocoder=class {async geocode(request){geocodes++;assert.equal(request.address,'부산 사하구 낙동대로450번길 12');assert.equal(request.componentRestrictions.country,'KR');return {results:[{geometry:{location_type:'ROOFTOP',location:{lat:()=>35.1,lng:()=>128.9}}}]};}};
+  const unresolved={...place,lat:null,lng:null,address:'부산 사하구 낙동대로450번길 12'};
+  const located=await provider.resolvePlace(unresolved);
+  assert.equal(located.lat,35.1);assert.equal(located.lng,128.9);assert.equal(unresolved.lat,null,'Do not write geocoded coordinates into source/DB data');
+  await provider.resolvePlace(unresolved);assert.equal(geocodes,1,'Repeated visits reuse the address result for this page session');
+  assert.equal(await provider.resolvePlace({...unresolved,address:''}),null,'Do not guess coordinates from a district or name');
+  sdk.Geocoder=class {async geocode(){return {results:[{partial_match:true,geometry:{location:{lat:()=>35,lng:()=>129}}}]};}};
+  assert.equal(await provider.resolvePlace({...unresolved,address:'다른 주소'}),null,'Partial address matches must not produce a misleading pin');
+  let expire;
+  sdk.Geocoder=class {geocode(){return new Promise(()=>{});}};
+  const timed=context.window.IEBGoogleMapProvider.create({getSDK:()=>sdk,loader:{load:async()=>sdk},setTimeout:fn=>{expire=fn;return 1;},clearTimeout(){}});
+  const pendingAddress=timed.resolvePlace({...unresolved,address:'응답 지연 주소'});await flush();expire();
+  await assert.rejects(pendingAddress,/map.addressUnavailable/,'Address lookup must not leave the mini-map loading forever');
   const endpoint=require('../api/maps-config.js');
   function request(env,method='GET'){const headers={};const res={setHeader:(k,v)=>headers[k]=v,end(value){this.data=JSON.parse(value);}};endpoint({method},res,env);return {...res,headers};}
   assert.equal(request({}).statusCode,503);assert.equal(request({}).data.error,'map.keyMissing');
