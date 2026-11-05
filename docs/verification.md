@@ -1,3 +1,11 @@
+## 2026-11-05 식당 주소 기반 Google 미니지도
+
+- main 6fd3487 pull 후 fix/restaurant-map-fallback에서 로컬 수정. 기존 국가/좋아요/DB 카탈로그 통합 유지.
+- 좌표 없는 상세 화면도 미니지도 컨트롤러를 연결. Google Geocoding으로 주소 조회 후 표시하며 원본/DB에는 좌표를 기록하지 않음.
+- 부분 주소 일치/지역 수준의 대략 좌표는 거절. 세션 내 주소 결과 재사용, 10초 제한, 화면 이탈 후 응답 무시 및 실패 시 Google 검색 링크 유지.
+- 전체 23개 검사/빌드 통과. 실제 목구멍 하단점 화면은 로컬 키 미설정으로 지도 타일/실제 주소 조회 미검증. 키 설정 안내/Google 검색 링크와 콘솔 오류 없음을 확인.
+- 실제 사용 전 Maps JavaScript API와 Geocoding API 활성화/키 제한 확인 필요. SQL·Supabase 데이터 변경 및 commit/push 없음.
+
 ## 2026-11-05 country-snapshots PR 제출 전 검증
 
 - 최신 origin/main 591604d와 기준 일치. 국가 미선택(NULL/빈 문자열/공백)의 KR 기본값을 API에서 검증.

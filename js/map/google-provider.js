@@ -2,10 +2,38 @@
 (function () {
   'use strict';
   window.IEBGoogleMapProvider = {
-    create({ getSDK = () => window.google?.maps, loader = window.IEBGoogleMapSDK.create(), document = window.document } = {}) {
+    create({ getSDK = () => window.google?.maps, loader = window.IEBGoogleMapSDK.create(), document = window.document,
+      setTimeout: delay = window.setTimeout, clearTimeout: cancel = window.clearTimeout } = {}) {
+      const addresses = new Map();
       return {
         available: () => loader.ready(),
         load: () => loader.load(),
+        async resolvePlace(place) {
+          const address = String(place.address || '').trim();
+          if (!address) return null;
+          if (!addresses.has(address)) {
+            const request = (async () => {
+              await loader.load();
+              const maps = getSDK();
+              const { Geocoder } = maps.Geocoder ? maps : await maps.importLibrary('geocoding');
+              const response = await new Promise((resolve, reject) => {
+                const timer = delay(() => reject(new Error('map.addressUnavailable')), 10000);
+                Promise.resolve().then(() => new Geocoder().geocode({ address, componentRestrictions: { country: 'KR' } }))
+                  .then(resolve, reject).finally(() => cancel(timer));
+              });
+              const result = response.results?.find(item => !item.partial_match && item.geometry?.location_type !== 'APPROXIMATE');
+              const location = result?.geometry?.location;
+              const lat = location?.lat(), lng = location?.lng();
+              return Number.isFinite(lat) && Number.isFinite(lng) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180 ? { lat, lng } : null;
+            })();
+            addresses.set(address, request);
+          }
+          try {
+            const coordinates = await addresses.get(address);
+            if (!coordinates) addresses.delete(address);
+            return coordinates ? { ...place, ...coordinates } : null;
+          } catch (error) { addresses.delete(address); throw error; }
+        },
         create(element, { interactive = true, center = [35.155, 129.07], zoom = 11, onStatus = () => {} } = {}) {
           const maps = getSDK(), markers = new Map(), handles = [];
           let map, popup, locationCircle, unsubscribe = () => {}, disposed = false;

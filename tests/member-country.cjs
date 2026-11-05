@@ -30,6 +30,12 @@ ctx.Auth={register:async(...args)=>calls.push(['register',...args])};
 ctx.Cloud={profile:async(data)=>calls.push(['profile',data])};
 vm.runInContext(read('js/app.js').replace(/\}\)\(\);\s*$/, 'window.memberTest={V,submitForm};})();'),ctx);
 const {V,submitForm}=ctx.memberTest;
+const addressFood=ctx.FOODS.find(food=>(food.places||[]).some(place=>!Number.isFinite(place.lat)&&place.research?.area));
+const addressIndex=addressFood.places.findIndex(place=>!Number.isFinite(place.lat)&&place.research?.area);
+const addressPage=V.place({id:addressFood.id,i:addressIndex});
+assert.ok(addressPage.includes('id="mini-map"'),'Coordinate-less restaurant must mount the Google map controller');
+assert.ok(!addressPage.includes('지도 좌표 미확인'),'Address lookup replaces the static missing-coordinate placeholder');
+assert.ok(addressPage.includes('class="map-inline-status"><a href="https://www.google.com/maps/search/'),'Unavailable maps retain a Google search link');
 for (const lang of ['ko','en','zh','ja']) {
   state.lang=lang;
   const html=V.signup();

@@ -84,3 +84,6 @@ Run `node tests/async-regressions.cjs`. No packages are required. The two checks
 
 Run `node tests/featured-foods.cjs` for unique random sampling, stable two-hour windows, exact expiry, order/like independence and small catalogs.
 Run `node tests/home-carousel.cjs` for live expiry, background-tab catch-up, cleanup, swiping and the existing four-second autoplay.
+# 식당 주소 미니지도
+
+`node tests/google-maps.cjs`, `node tests/map-lifecycle.cjs`, `node tests/member-country.cjs`에서 주소 좌표 조회·세션 내 재사용·부분 일치 거절·10초 제한·화면 이탈·상세 화면 Google 대체 링크를 검증합니다. 실제 Google 키/Geocoding 권한·지도 표시는 별도 확인이 필요합니다.

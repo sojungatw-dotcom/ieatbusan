@@ -93,7 +93,24 @@
       function mountMini({ id, i }) {
         const place = data.placeOf(id, i), element = document.getElementById('mini-map');
         if (!place || !element) return () => {};
-        if (!data.hasCoordinates(place)) { element.textContent = renderer.mt('noCoordinates'); return () => {}; }
+        if (!data.hasCoordinates(place)) {
+          let disposed = false, stop = () => {};
+          element.classList?.add('map-status');
+          const unavailable = error => {
+            if (disposed) return;
+            element.textContent = ['map.keyMissing', 'map.googleAuthError'].includes(error?.message)
+              ? t(error.message) : renderer.mt('addressUnavailable');
+          };
+          if (place.address && provider.resolvePlace) {
+            element.textContent = renderer.mt('loading');
+            Promise.resolve().then(() => disposed ? null : provider.resolvePlace(place)).then(located => {
+              if (disposed) return;
+              if (!data.hasCoordinates(located)) { unavailable(); return; }
+              stop = startMap(element, [located], { interactive: false, center: [located.lat, located.lng], zoom: 15 }, { mini: true }).dispose;
+            }).catch(unavailable);
+          } else unavailable();
+          return () => { disposed = true; stop(); };
+        }
         return startMap(element, [place], { interactive: false, center: [place.lat, place.lng], zoom: 15 }, { mini: true }).dispose;
       }
       function sheet(button) {
