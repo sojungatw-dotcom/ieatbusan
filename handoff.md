@@ -7,6 +7,14 @@
 
 ## 0. 현재 상태와 다음 작업
 
+- **지도 브랜치 통합/PR 준비 (2026-11-05, 아래 로컬 전용 지시보다 우선):** 사용자가 별도 브랜치 push→최신 main 연결/검증→PR 준비를 승인. 지도 작업 복구 커밋 `1161d90`을 origin/feature/map-renewal에 먼저 push. origin/main `703899d`를 지도 브랜치에 통합하며 app.js 충돌 해결. 원본 foods.js와 팀원 원고 상세 UI 유지, map-data가 research/원본 주소를 연결하고 좌표 없는 행은 상세 이동. main의 45음식/135식당(100항목 좌표 미확인) 기준 검사·빌드 14개 및 브라우저 검증 통과. max-branch의 미병합 커밋은 미포함. main 직접 push/병합하지 않음. 로컬 백업 브랜치 backup/map-before-main-20261105와 ../.local-backups/map-before-main-integration-20261105/ 보관. 세부 내용 docs/map-development.md.
+
+- **지도 코드 정리 (2026-11-04, 아래 과거 기록보다 우선):** `js/map/`를 catalog(고정 지역/식당 연결), data(변환·필터), routes(주소·검증), renderer(HTML), loader(SDK/CSS 지연 로딩), provider(외부 지도 조작), view(화면 수명·상호작용)로 분리. 구역 SVG에서는 Leaflet 요청 없음. 지역 판별은 표시 문구가 아닌 고정 ID 사용. SDK/타일 실패, 잘못된 주소·좌표, 비동기 로딩 중 이탈 처리. 음식/식당은 여전히 foods.js의 로컬 자료이며 Supabase 데이터 흐름은 미변경. 자세한 협업 범위와 확인 명령은 docs/map-development.md 참고. 사용자 지시로 commit/push/원격 변경 금지, HEAD ad60428 유지.
+
+- **구역 지도 로컬 임시 시안 (2026-11-04):** 사용자 지시로 commit/push/원격 변경 금지. `#/map`을 도로 없는 부산 16개 구·군 SVG로 변경. 지역 선택→음식 목록→상세 지도 핀/식당 목록, 구역 지도 복귀 시 지역 유지. 상세 지도는 현재 Leaflet/OSM이며 새 API 미연결. KOSTAT 2013 단순화 경계를 로컬 에셋으로 사용(과거 경계 시안, 최신 경계 보증 아님). 전용 js/map 내부와 지도 라우트/로더만 확장. 원본 음식/식당 순번 유지. 저장소 밖 `../.local-backups/`에 패치와 새 파일 백업. 비상 pull 전 미추적 파일까지 stash하는 절차는 docs/map-development.md 참고. 새 화면 증거 docs/district-preview.png.
+
+- **지도 모듈 분리 (2026-11-04, feature/map-renewal):** 최신 main `ad60428`에서 분리 작업. `js/map/map-data.js`(음식/식당 연결), `map-view.js`(화면·필터·목록·위치 수명), `map-provider.js`(현재 Leaflet SDK), `css/map.css`로 이동. app.js는 지도 연결부만 유지. 메인/미니 지도와 기존 `foodId:index`·해시 주소 보존. 지도 팝업 타이머 취소 보완. API 키는 팀장에게 받을 예정으로 공급자 교체·구역 SVG 화면은 아직 미구현. 환경변수 예시는 예약 단계이며 자동 전환되지 않음. 담당 범위·키 관리·다음 단계는 `docs/map-development.md` 참고. 자동 검사 8개 스크립트와 로컬 브라우저 지도→식당 상세→지도 복귀 확인. 아직 커밋/push하지 않음. 이 대화의 사용자 지시에 따라 앞으로 작업 브랜치와 PR을 사용하며, 아래 과거 기록의 main 직접 push 규칙은 적용하지 않음.
+
 - **운영 배포 저장소 불일치 확인:** Vercel `ljg9809-7416/ieatbusan-wdra`가 `ljg9809-dotcom/ieatbusan`의 초기 커밋 `67bb052`를 배포하고 있어, 최신 `sojungatw-dotcom/ieatbusan` 연결 코드가 반영되지 않음. 환경변수 3개는 Production에 등록 확인. Git 연결 해제는 자동 검토에서 명시 승인 필요로 거부되어 취소했으며 기존 연결 유지. 저장소 연결 변경은 사용자 승인 대기. 로컬 전용 계정 제거 마이그레이션 추가.
 
 - **Supabase + Vercel API 전환 (2026-11-03):** 사용자 환경변수 등록 후 연결 코드 추가 요청. 브라우저는 `/api/service`만 호출하고 서버에서 SUPABASE_URL/PUBLISHABLE_KEY/SECRET_KEY를 사용. 아이디+비밀번호 가입/로그인 유지, Supabase Auth 검증·HttpOnly 쿠키·갱신·로그아웃·본인 탈퇴, 게시글/댓글/좋아요/프로필/찜/설정 DB 저장, 사진 비공개 Storage 업로드·서명 URL. 기존 로컬 시안 계정은 재가입 필요하며 원래 저장소 데이터는 보존. 예시 커뮤니티 데이터를 DB에 초기 등록. 이번 구성은 이전에 거부된 JWT 검증 없는 공개 Edge Function을 배포하지 않고 Vercel 서버의 신원 검증·CSRF·요청 제한과 RLS를 사용함. `/api/service?action=status`로 배포 버전·DB 연결을 확인. 실제 배포 검증 상태는 docs/verification.md의 최신 항목 확인.

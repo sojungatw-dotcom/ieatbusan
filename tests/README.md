@@ -1,5 +1,24 @@
 # Isolated browser checks
 
+## Map module checks
+
+Run `node tests/map-integration.cjs` for the current main catalog: source-address district assignment,
+preserved manuscript restaurant details, explicit region overrides and coordinate-less row navigation.
+Run `node tests/food-manuscript.cjs` for the teammate's food detail content and map coordinate exclusion.
+
+Run `node tests/map-contracts.cjs`, `node tests/map-loader.cjs` and `node tests/map-lifecycle.cjs`
+for stable district/place IDs, validated map routes, coordinate/translation fallbacks, lazy SDK/CSS
+loading, shared concurrent requests, retry/timeout and navigation during asynchronous initialization.
+`map-context.cjs` is a fixture helper loading production scripts in the index.html order, not a standalone test.
+
+Run `node tests/map-regressions.cjs` and `node tests/map-provider.cjs`.
+Run `node tests/map-districts.cjs` for the local district SVG, region/food filtering, no-SDK overview,
+four-language labels, empty-region notices and backwards-compatible map links.
+These cover food/place projections, stable saved-place IDs and detail routes, four languages,
+food filtering, list-to-pin selection, mini maps, stale/out-of-order location callbacks,
+popup cancellation and map disposal. The SDK boundary is mocked; real map rendering and
+provider keys/domains need browser verification. Map CSS is loaded separately in the browser fixture.
+
 ## Vercel deployment checks
 
 Run `node tools/build-static.cjs`, then `node tests/deployment.cjs`. The build validates local HTML asset references and production JavaScript syntax. The check verifies that only runtime files are published and that all food images, scripts and styles are present. This does not replace checking a real Vercel deployment URL.
@@ -34,4 +53,4 @@ Production `index.html` never loads these adapters. Keep native browser confirma
 
 ## Asynchronous regression checks
 
-Run `node tests/async-regressions.cjs`. No packages are required. The checks extract the exact production photo handler and location action into small VM fakes, then test cancellation, overlapping uploads, stale map callbacks, repeated markers, request ordering and failure notices. Use `--source path/to/older-app.js` to verify that an earlier implementation fails the regression cases. These checks do not replace browser interaction tests.
+Run `node tests/async-regressions.cjs`. No packages are required. The two checks extract the production photo handler into a VM fixture and test cancellation and overlapping uploads. Location lifetime checks moved to the map checks above because the location implementation is no longer inside app.js. Use `--source path/to/older-app.js` for the photo handler regression. These checks do not replace browser interaction tests.

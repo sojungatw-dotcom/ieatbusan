@@ -75,10 +75,16 @@ Vercel 환경변수는 Production에 등록하고 재배포해야 적용됩니�
 
 ## 구조
 
+지도 모듈의 담당 범위, 데이터 연결과 API 키 인수인계 방법은
+[지도 개발·협업 안내](docs/map-development.md)를 참고하세요.
+현재는 키 없는 Leaflet/OpenStreetMap을 유지하며 새 공급자의 키 환경변수는 아직 예약 단계입니다.
+
 ```
 index.html          진입점
 css/app.css         스타일 (디자인 토큰은 :root)
 js/app.js           라우터 · 화면 · 동작
+js/map/             지도 화면·데이터 연결·외부 SDK 경계 (메인/미니 지도)
+css/map.css         지도 전용 스타일
 js/i18n.js          UI 문구 4개 국어
 js/data/foods.js    음식 20종 데이터 (tools/gen-foods.ps1로 생성)
 js/data/community.js 예시 게시글 · 알림 · 공지

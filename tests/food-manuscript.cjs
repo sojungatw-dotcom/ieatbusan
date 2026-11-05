@@ -24,10 +24,11 @@ for(const food of items){
  }
 }
 // A missing restaurant coordinate must never reach Leaflet.
-const all=foods.flatMap(food=>food.places.map(p=>({...p,food})));
-let pins=0;const map={setView(){return this},fitBounds(){return this},invalidateSize(){},remove(){}};
-ctx.document={getElementById:()=>({})};ctx.tiles=()=>({addTo(){}});ctx.pinIcon=()=>'';ctx.hasCoordinates=p=>Number.isFinite(p.lat)&&Number.isFinite(p.lng);ctx.allPlaces=()=>all;ctx.cleanup=[];ctx.setTimeout=()=>1;ctx.clearTimeout=()=>{};
-ctx.window.L={map:()=>map,control:{zoom:()=>({addTo(){}})},marker(ll){assert.ok(ll.every(Number.isFinite));pins++;return {addTo(){return this},bindPopup(){return this}}},latLngBounds:()=>({pad(){return this}})};
-ctx.V.map={}; vm.runInContext('let mapRef, markers, locationMarker;'+app.slice(app.indexOf('  V.map.mount ='),app.indexOf('  /* ---------- community ---------- */')),ctx);
-ctx.placeKey=(id,i)=>id+":"+i; ctx.fname=f=>f.ko.name;ctx.V.map.mount({});assert.equal(pins,all.filter(ctx.hasCoordinates).length);
+const maps=require('./map-context.cjs')();
+const data=maps.IEBMapData.create(foods,()=> 'ko');let pins=0;
+const view=maps.IEBMapView.create({data,provider:{available:()=>true,create(){return {
+ addPlace(p){assert.ok(data.hasCoordinates(p));pins++;},fitPlaces(){},resize(){},dispose(){}};}},
+ root:{querySelector:()=>null},document:{getElementById:()=>({})},navigator:{},getLanguage:()=> 'ko',
+ t:k=>ctx.I18N.ko[k]||k,esc:ctx.esc,fname:f=>f.ko.name,img:ctx.img,icon:()=>'',appHeader:()=>'',tabbar:()=>'',toast(){},setTimeout:()=>1,clearTimeout(){}});
+view.mount({mode:'detail'})();assert.equal(pins,data.allPlaces().filter(data.hasCoordinates).length);
 console.log('PASS 34 complete sourced food details in 4 language modes, 100 restaurant records, image fallbacks, and no invented map coordinates');
