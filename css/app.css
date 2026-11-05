@@ -314,6 +314,7 @@ html[lang="en"] .info-row { grid-template-columns: 96px 1fr; }
 
 /* ---------- Community ---------- */
 .post-card { display: grid; gap: 10px; padding: 16px; border-bottom: 1px solid var(--border); text-align: left; width: 100%; }
+.post-card-link { display: grid; gap: 10px; min-width: 0; }
 .post-head { display: flex; align-items: center; gap: 8px; }
 .post-head .who { flex: 1; min-width: 0; display: grid; line-height: 1.35; }
 .post-head .who b { font-weight: 500; font-size: 13px; }

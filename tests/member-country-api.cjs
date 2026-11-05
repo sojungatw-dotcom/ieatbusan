@@ -20,9 +20,9 @@ global.fetch=async(url,options={})=>{
   }
   if(parsed.pathname==='/rest/v1/ieb_posts') {
     if(options.method==='POST')return reply(null);
-    const base={user_id:uid,title:'글',body:'내용',category:'free',food:null,photos:[],created_at:'2026-11-01T00:00:00Z',seed_likes:99,
+    const base={user_id:uid,title:'글',body:'내용',category:'free',food:null,photos:[],created_at:'2026-11-01T00:00:00Z',seed_likes:99,liked_user_ids:[],like_count:0,
       ieb_profiles:{nickname:'작성자',area:8,country_code:country}};
-    const rows=[{...base,id:'kr',country_code:'KR'},{...base,id:'jp',country_code:'JP'}];
+    const rows=[{...base,id:'kr',country_code:'KR'},{...base,id:'jp',country_code:'JP',liked_user_ids:[uid,'another-user'],like_count:2}];
     const filter=parsed.searchParams.get('country_code');
     return reply(filter?.startsWith('eq.')?rows.filter(row=>row.country_code===filter.slice(3))
       :filter?.startsWith('neq.')?rows.filter(row=>row.country_code!==filter.slice(4)):rows);
@@ -31,7 +31,7 @@ global.fetch=async(url,options={})=>{
     if(options.method==='POST'){savedComments.push({...body,seed_likes:0,created_at:'2026-11-05T00:00:00Z'});return reply(null);}
     return reply(savedComments.map(comment=>({...comment,ieb_profiles:{nickname:'작성자',country_code:country}})));
   }
-  if(parsed.pathname==='/rest/v1/ieb_post_likes')return reply([{post_id:'jp',user_id:uid},{post_id:'jp',user_id:'another-user'}]);
+  if(parsed.pathname==='/rest/v1/ieb_foods')return reply([]);
   if(parsed.pathname==='/rest/v1/ieb_preferences')return reply([]);
   throw new Error('Unexpected mock URL '+parsed.pathname);
 };

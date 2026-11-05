@@ -79,3 +79,8 @@ Production `index.html` never loads these adapters. Keep native browser confirma
 ## Asynchronous regression checks
 
 Run `node tests/async-regressions.cjs`. No packages are required. The two checks extract the production photo handler into a VM fixture and test cancellation and overlapping uploads. Location lifetime checks moved to the map checks above because the location implementation is no longer inside app.js. Use `--source path/to/older-app.js` for the photo handler regression. These checks do not replace browser interaction tests.
+
+## Two-hour featured foods
+
+Run `node tests/featured-foods.cjs` for unique random sampling, stable two-hour windows, exact expiry, order/like independence and small catalogs.
+Run `node tests/home-carousel.cjs` for live expiry, background-tab catch-up, cleanup, swiping and the existing four-second autoplay.

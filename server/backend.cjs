@@ -104,26 +104,28 @@ async function snapshot(cfg, session) {
     rest(cfg, 'ieb_posts', query + '&country_code=eq.' + country, opts),
     rest(cfg, 'ieb_posts', query + '&country_code=neq.' + country, opts),
   ]).then(([same, other]) => [...same, ...other].slice(0, 500)) : rest(cfg, 'ieb_posts', query, opts);
-  const [posts, comments, likes] = await Promise.all([
+  const [posts, comments, foods] = await Promise.all([
     feed,
     rest(cfg, 'ieb_comments', '?select=*,ieb_profiles(nickname)&order=created_at.asc&limit=5000', opts),
-    rest(cfg, 'ieb_post_likes', '?select=post_id,user_id&limit=10000', opts),
+    rest(cfg, 'ieb_foods', '?select=*&order=display_order.asc,id.asc&limit=1000', opts),
   ]);
   const paths = [...new Set(posts.flatMap(post => post.photos))];
   let signed = [];
   if (paths.length) signed = await upstream(cfg, '/storage/v1/object/sign/ieb-community', { ...opts, method: 'POST', body: { paths, expiresIn: 3600 } });
   const images = Object.fromEntries((signed || []).filter(item => item.signedURL).map(item => [item.path, item.signedURL.startsWith('https://') ? item.signedURL : cfg.url + '/storage/v1' + item.signedURL]));
   const uid = session.user?.id;
-  const postLikes = Object.fromEntries(likes.filter(like => like.user_id === uid).map(like => [like.post_id, true]));
+  const postLikes = Object.fromEntries(posts.filter(post => uid && post.liked_user_ids?.includes(uid)).map(post => [post.id, true]));
+  const foodLikes = Object.fromEntries(foods.filter(food => uid && food.liked_user_ids?.includes(uid)).map(food => [food.id, true]));
   return {
     user: current ? { id: current.id, username: current.username, provider: 'supabase', nickname: current.nickname, countryCode: country, area: current.area, bio: current.bio, joined: current.created_at.slice(0, 10).replaceAll('-', '.') } : null,
-    preferences: preferences[0]?.data || {}, postLikes,
+    preferences: preferences[0]?.data || {}, postLikes, foodLikes,
+    foods: foods.map(food => ({ id: food.id, name: food.name, summary: food.summary, category: food.category, imageAsset: food.image_asset, content: food.content, likes: food.like_count })),
     posts: posts.map(post => ({ id: post.id, title: post.title, body: post.body, cat: post.category, food: post.food,
       author: post.ieb_profiles?.nickname || post.seed_author || '', area: districts[post.ieb_profiles?.area] || post.seed_area || '',
       countryCode: savedCountry(post.country_code), authorCountryCode: savedCountry(post.country_code),
       createdAt: Date.parse(post.created_at), mine: !!uid && post.user_id === uid,
       photos: post.photos.map(photo => images[photo]).filter(Boolean),
-      likes: likes.filter(like => like.post_id === post.id && like.user_id !== uid).length })),
+      likes: Math.max(0, (post.like_count || 0) - (postLikes[post.id] ? 1 : 0)) })),
     comments: comments.reduce((result, comment) => {
       (result[comment.post_id] ||= []).push({ id: comment.id, author: comment.ieb_profiles?.nickname || comment.seed_author || '',
         countryCode: savedCountry(comment.country_code), authorCountryCode: savedCountry(comment.country_code),
@@ -175,7 +177,7 @@ async function createPost(cfg, session, body) {
 async function action(cfg, req, res, name, body) {
   if (name === 'status') {
     await rest(cfg, 'ieb_profiles', '?select=id&limit=1');
-    return { database: 'connected', signupConfigured: !!cfg.secret, version: '20261103-supabase' };
+    return { database: 'connected', signupConfigured: !!cfg.secret, version: '20261105-unified-likes' };
   }
   if (name === 'signup') return signup(cfg, req, body);
   if (name === 'login') {
@@ -201,8 +203,13 @@ async function action(cfg, req, res, name, body) {
   if (name === 'like') {
     const postId = checkedText(body.postId, 1, 80);
     if (typeof body.on !== 'boolean') fail('db.validation');
-    await rest(cfg, 'ieb_post_likes', body.on ? '' : '?post_id=eq.' + encodeURIComponent(postId) + '&user_id=eq.' + uid,
-      { token, method: body.on ? 'POST' : 'DELETE', ...(body.on ? { headers: { Prefer: 'resolution=ignore-duplicates' }, body: { post_id: postId, user_id: uid } } : {}) });
+    await rest(cfg, 'rpc/ieb_set_post_like', '', { token, method: 'POST', body: { target_id: postId, is_liked: body.on } });
+    return { saved: true };
+  }
+  if (name === 'foodLike') {
+    const foodId = checkedText(body.foodId, 1, 80);
+    if (!/^[a-z0-9][a-z0-9-]*$/.test(foodId) || typeof body.on !== 'boolean') fail('db.validation');
+    await rest(cfg, 'rpc/ieb_set_food_like', '', { token, method: 'POST', body: { target_id: foodId, is_liked: body.on } });
     return { saved: true };
   }
   if (name === 'deletePost') {
