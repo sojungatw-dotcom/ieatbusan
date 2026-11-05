@@ -7,8 +7,8 @@
   <title>I EAT BUSAN — isolated browser checks</title>
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
   <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/map.css">
   <style>
     #fixture-panel{position:fixed;left:12px;top:12px;z-index:10000;width:280px;max-height:calc(100dvh - 24px);overflow:auto;padding:12px;background:#fff;border:2px solid #3A7291;border-radius:12px;box-shadow:0 4px 20px #0002;font:12px/1.5 system-ui,sans-serif}
     #fixture-panel h2{margin:0;font-size:15px}#fixture-panel p{margin:7px 0}#fixture-panel label{display:block;margin-top:9px}#fixture-panel select,#fixture-panel button{border:1px solid #b8c6cc;background:#f5f8fa;border-radius:5px;padding:5px;margin-top:3px;font:inherit}#fixture-panel input[type=checkbox]{vertical-align:middle}#fixture-panel output{display:block;white-space:pre-wrap;overflow-wrap:anywhere;margin-top:10px;padding:7px;background:#eff5f8}#fixture-log{max-height:180px;overflow:auto;margin:6px 0 0;white-space:pre-wrap;font:11px/1.4 monospace}#fixture-panel[data-collapsed=true]{width:auto}#fixture-panel[data-collapsed=true] .fixture-body{display:none}
@@ -38,7 +38,6 @@
   <div id="app" class="app" aria-live="polite"></div>
   <div id="toast" class="toast" role="status" hidden></div>
   <script src="tests/fixtures.js"></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="js/i18n.js"></script>
   <script src="js/data/foods.js"></script>
   <script src="js/data/community.js"></script>
@@ -46,6 +45,15 @@
   <script src="js/store.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/icons.js"></script>
+  <script src="js/map/district-shapes.js"></script>
+  <script src="js/map/map-i18n.js"></script>
+  <script src="js/map/map-catalog.js"></script>
+  <script src="js/map/map-data.js"></script>
+  <script src="js/map/map-routes.js"></script>
+  <script src="js/map/map-loader.js"></script>
+  <script src="js/map/map-provider.js"></script>
+  <script src="js/map/map-renderer.js"></script>
+  <script src="js/map/map-view.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

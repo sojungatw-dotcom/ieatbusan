@@ -20,13 +20,8 @@
   const L = f => (lang() !== 'ko' && f[lang()]) ? f[lang()] : f.ko;
   const fname = f => L(f).name;
   const img = id => `assets/food/${id}.jpg`;
-  const placeKey = (fid, i) => `${fid}:${i}`;
-  const placeOf = (fid, i) => {
-    const f = FOOD[fid]; if (!f || !f.places[i]) return null;
-    const lp = (L(f).restaurants || [])[i] || f.ko.restaurants[i];
-    return { food: f, i, name: f.places[i].name, lat: f.places[i].lat, lng: f.places[i].lng, area: lp.area, signature: lp.signature, areaKo: f.ko.restaurants[i].area };
-  };
-  const allPlaces = () => FOODS.flatMap(f => f.places.map((_, i) => placeOf(f.id, i)));
+  const mapData = window.IEBMapData.create(FOODS, lang);
+  const { placeKey, placeOf, allPlaces } = mapData;
   const foodLikes = f => f.likes + (S().savedFoods.includes(f.id) ? 1 : 0);
   const placeLikes = p => Math.max(12, Math.round(p.food.likes * (0.45 - p.i * 0.08))) + (S().savedPlaces.includes(placeKey(p.food.id, p.i)) ? 1 : 0);
   function ago(ts) {
@@ -365,11 +360,7 @@
     </main>`;
   };
   V.place.mount = ({ id, i }) => {
-    const p = placeOf(id, Number(i)); const el = document.getElementById('mini-map');
-    if (!p || !el || !window.L) return;
-    const m = window.L.map(el, { zoomControl: false, dragging: false, scrollWheelZoom: false, doubleClickZoom: false, touchZoom: false, attributionControl: true }).setView([p.lat, p.lng], 15);
-    tiles().addTo(m); window.L.marker([p.lat, p.lng], { icon: pinIcon(true) }).addTo(m);
-    cleanup.push(() => m.remove());
+    cleanup.push(mapView.mountMini({ id, i }));
   };
 
   V.search = () => {
@@ -432,46 +423,13 @@
   V.notifications.mount = () => Store.set({ notiReadAt: Date.now() });
 
   /* ---------- map ---------- */
-  function tiles() {
-    return window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' });
-  }
-  function pinIcon(sel) {
-    const fill = sel ? '#CC4936' : '#FFFFFF', dot = sel ? '#FFFFFF' : '#CC4936';
-    return window.L.divIcon({ className: 'pin', iconSize: [30, 30], iconAnchor: [15, 28], popupAnchor: [0, -26],
-      html: `<svg viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" fill="${fill}" stroke="#CC4936" stroke-width="1.6"/><circle cx="12" cy="10" r="3" fill="${dot}"/></svg>` });
-  }
-  V.map = ({ id }) => {
-    const sel = id && FOOD[id] ? id : null;
-    const places = sel ? FOOD[sel].places.map((_, i) => placeOf(sel, i)) : allPlaces();
-    return `<main class="map-screen">${appHeader()}
-      <div class="chip-row" role="toolbar">${['', ...FOODS.map(f => f.id)].map(fid => `<a class="chip ${fid === (sel || '') ? 'active' : ''}" href="#/map${fid ? '/' + fid : ''}" ${fid === (sel || '') ? 'aria-current="true"' : ''}>${esc(fid ? fname(FOOD[fid]) : t('map.all'))}</a>`).join('')}</div>
-      <div class="map-wrap"><div id="map">${window.L ? '' : `<div class="map-fallback">${esc(t('map.offline'))}</div>`}</div>
-        <button class="locate-btn" data-act="locate" style="bottom:calc(132px + 16px)" aria-label="${esc(t('map.locate'))}">${icon('locate')}</button>
-        <section class="sheet collapsed" id="sheet"><button class="sheet-handle" data-act="sheet" aria-expanded="false"><span class="sheet-title">${esc(sel ? fname(FOOD[sel]) + ' · ' : '')}${esc(t('map.nearby', { n: places.length }))}</span></button>
-          <div class="sheet-list">${places.map(p => `<div class="list-item" data-act="flyTo" data-key="${placeKey(p.food.id, p.i)}" role="button" tabindex="0"><img class="thumb sm" src="${img(p.food.id)}" alt="" loading="lazy">
-            <span class="li-body"><span class="li-title" lang="ko">${esc(p.name)}</span><span class="li-sub">${esc(p.area)}</span><span class="li-meta">${esc(fname(p.food))} · ${esc(p.signature)}</span></span>
-            <a class="save-btn" href="#/place/${p.food.id}/${p.i}" aria-label="${esc(t('map.detail'))}">${icon('chevronRight')}</a></div>`).join('')}</div></section>
-      </div>${tabbar('map')}</main>`;
-  };
-  let mapRef = null, markers = {}, locationMarker = null, locationRequest = 0;
-  V.map.mount = ({ id }) => {
-    const el = document.getElementById('map'); if (!el || !window.L) return;
-    const sel = id && FOOD[id] ? id : null;
-    const places = sel ? FOOD[sel].places.map((_, i) => placeOf(sel, i)) : allPlaces();
-    mapRef = window.L.map(el, { zoomControl: false, zoomAnimation: false }).setView([35.155, 129.07], 11);
-    tiles().addTo(mapRef);
-    window.L.control.zoom({ position: 'topright' }).addTo(mapRef);
-    markers = {};
-    places.forEach(p => {
-      const k = placeKey(p.food.id, p.i);
-      markers[k] = window.L.marker([p.lat, p.lng], { icon: pinIcon(!!sel) }).addTo(mapRef)
-        .bindPopup(`<b lang="ko">${esc(p.name)}</b>${esc(fname(p.food))} · ${esc(p.area)}<br><a href="#/place/${p.food.id}/${p.i}">${esc(t('map.detail'))} →</a>`);
-    });
-    if (places.length) mapRef.fitBounds(window.L.latLngBounds(places.map(p => [p.lat, p.lng])).pad(0.15), { maxZoom: 15 });
-    const ref = mapRef;
-    const resizeTimer = setTimeout(() => ref.invalidateSize(), 60);
-    cleanup.push(() => { clearTimeout(resizeTimer); ref.remove(); if (mapRef === ref) { mapRef = null; locationMarker = null; } });
-  };
+  const mapView = window.IEBMapView.create({
+    data: mapData, provider: window.IEBMapProvider.create(), root: app, document, navigator,
+    t, esc, fname, img, icon, appHeader, tabbar, toast, getLanguage: lang, districtName,
+    setTimeout: window.setTimeout.bind(window), clearTimeout: window.clearTimeout.bind(window),
+  });
+  V.map = params => mapView.render(params);
+  V.map.mount = params => cleanup.push(mapView.mount(params));
 
   /* ---------- community ---------- */
   V.community = ({ tab = 'popular' }) => {
@@ -682,7 +640,8 @@
     [/^#\/login$/, 'login'], [/^#\/signup$/, 'signup'], [/^#\/lang$/, 'lang'], [/^#\/home$/, 'home'],
     [/^#\/food\/([\w-]+)$/, 'food', ['id']], [/^#\/place\/([\w-]+)\/(\d+)$/, 'place', ['id', 'i']],
     [/^#\/search$/, 'search'], [/^#\/results\/([^/]+)(?:\/(all|foods|places|posts))?$/, 'results', ['q', 'tab']],
-    [/^#\/notifications$/, 'notifications'], [/^#\/map(?:\/([\w-]+))?$/, 'map', ['id']],
+    [/^#\/notifications$/, 'notifications'],
+    ...window.IEBMapRoutes.definitions,
     [/^#\/community(?:\/(popular|latest|review|question|free))?$/, 'community', ['tab']],
     [/^#\/post\/([\w-]+)$/, 'post', ['id']], [/^#\/write$/, 'write'],
     [/^#\/saved(?:\/(foods|places))?$/, 'saved', ['tab']], [/^#\/my$/, 'my'], [/^#\/my\/posts$/, 'myPosts'],
@@ -763,24 +722,9 @@
     copyText: async el => { try { await navigator.clipboard.writeText(el.dataset.text); toast(t('toast.copied')); } catch (e) { toast(el.dataset.text); } },
     clearRecent: () => { Store.set({ recentSearches: [] }); rerender(); },
     removeRecent: el => { Store.update(s => { s.recentSearches = s.recentSearches.filter(x => x !== el.dataset.q); }); rerender(); },
-    sheet: el => { const sh = document.getElementById('sheet'); const open = sh.classList.toggle('collapsed') === false; el.setAttribute('aria-expanded', open); const lb = app.querySelector('.locate-btn'); if (lb) lb.style.bottom = open ? 'calc(62% + 16px)' : 'calc(132px + 16px)'; },
-    flyTo: (el, e) => {
-      if (e.target.closest('a')) return;
-      const m = markers[el.dataset.key]; if (!m || !mapRef) return;
-      mapRef.flyTo(m.getLatLng(), 16, { duration: 0.6 }); setTimeout(() => m.openPopup(), 650);
-      const sh = document.getElementById('sheet'); if (sh && !sh.classList.contains('collapsed')) A.sheet(app.querySelector('.sheet-handle'));
-    },
-    locate: () => {
-      if (!navigator.geolocation || !mapRef) { toast(t('map.locFail')); return; }
-      const ref = mapRef, request = ++locationRequest;
-      navigator.geolocation.getCurrentPosition(pos => {
-        if (mapRef !== ref || request !== locationRequest) return;
-        const ll = [pos.coords.latitude, pos.coords.longitude];
-        if (locationMarker) locationMarker.remove();
-        locationMarker = window.L.circleMarker(ll, { radius: 8, color: '#fff', weight: 3, fillColor: '#3A7291', fillOpacity: 1 }).addTo(ref);
-        ref.flyTo(ll, 14);
-      }, () => { if (mapRef === ref && request === locationRequest) toast(t('map.locFail')); }, { timeout: 8000 });
-    },
+    sheet: el => mapView.sheet(el),
+    flyTo: (el, event) => mapView.flyTo(el, event),
+    locate: () => mapView.locate(),
     needLogin: (el, e) => { if (!loggedIn()) { e.preventDefault(); requireLogin(); } },
     refreshCommunity: async el => { await Cloud.refresh(); if (app.contains(el)) rerender(); },
     likePost: async el => { if (!requireLogin()) return; await Cloud.like(el.dataset.id, !S().postLikes[el.dataset.id]); if (app.contains(el)) rerender(); },
