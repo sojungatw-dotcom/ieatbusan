@@ -22,7 +22,8 @@
   const Countries = window.IEBCountries;
   const countryOptions = value => Countries.list(lang()).map(item => `<option value="${item.code}" ${item.code === Countries.normalize(value) ? 'selected' : ''}>${esc(item.name)}</option>`).join('');
   const countryBadge = value => {
-    const code = Countries.normalize(value), name = esc(Countries.name(code, lang()));
+    if (!Countries.isValid(value)) return '';
+    const code = value, name = esc(Countries.name(code, lang()));
     return `<span class="country-badge" lang="en" title="${name}" aria-label="${name}">${code}</span>`;
   };
   const img = id => FOOD[id]?.photo || `assets/food/${id}.jpg`;
@@ -108,7 +109,7 @@
     const n = commentsOf(p.id).length;
     return `<a class="post-card" href="#/post/${p.id}">
       <div class="post-head"><span class="avatar">${initial(p.author)}</span>
-        <span class="who"><b>${countryBadge(p.authorCountryCode)}${esc(p.author)}</b><span>${esc(p.areaLabel || p.area)} · ${esc(ago(p.createdAt))}</span></span>
+        <span class="who"><b>${countryBadge(p.countryCode)}${esc(p.author)}</b><span>${esc(p.areaLabel || p.area)} · ${esc(ago(p.createdAt))}</span></span>
         <span class="badge">${esc(catLabel(p.cat))}</span></div>
       <div class="post-content"><div class="post-text"><h3>${esc(p.title)}</h3><p>${esc(p.body)}</p></div>
         ${p.photos && p.photos[0] ? `<img class="thumb" src="${esc(p.photos[0])}" alt="" loading="lazy">` : ''}</div>
@@ -368,9 +369,9 @@
         <span class="orig-line">${esc(p.area)}</span>
         ${research ? `<p class="muted" lang="ko">${research.matchType === 'similar' ? '유사 메뉴 게시 자료' : '해당 메뉴 게시 자료'} · 조사일 ${esc(research.date)} · 방문 전 확인 필요</p>` : `<div class="meta-line">${icon('heart', true)}<span>${placeLikes(p)}</span></div>`}</div>
       <div class="actions-row">
+        <a class="action" href="${esc(directions)}" target="_blank" rel="noopener">${icon('navigation')}${esc(t('place.google'))}</a>
         <a class="action" href="${esc(naverUrl)}" target="_blank" rel="noopener">${icon('map')}${esc(t('place.naver'))}</a>
         <a class="action" href="https://map.kakao.com/?q=${q}" target="_blank" rel="noopener">${icon('pin')}${esc(t('place.kakao'))}</a>
-        <a class="action" href="${esc(directions)}" target="_blank" rel="noopener">${icon('navigation')}${esc(t('place.directions'))}</a>
       </div>
       <div class="band"></div>
       <div class="section-head"><h2>${esc(t('food.h.info'))}</h2></div>
@@ -474,8 +475,8 @@
     if (viewer) {
       const country = Countries.normalize(viewer.countryCode);
       // Stable partition retains popular/latest order within both country groups.
-      list = [...list.filter(post => Countries.normalize(post.countryCode) === country),
-        ...list.filter(post => Countries.normalize(post.countryCode) !== country)];
+      list = [...list.filter(post => post.countryCode === country),
+        ...list.filter(post => post.countryCode !== country)];
     }
     const tabs = [['popular', t('com.tab.popular')], ['latest', t('com.tab.latest')], ['review', t('cat.review')], ['question', t('cat.question')], ['free', t('cat.free')]];
     return `<main class="screen has-tabbar">${appHeader()}
@@ -495,7 +496,7 @@
     return `<main class="screen" style="padding-bottom:96px">${pageHeader(t('post.header'), { fallback: '#/community', right })}
       <article class="post-body">
         <div class="post-head"><span class="avatar" style="width:40px;height:40px">${initial(p.author)}</span>
-          <span class="who"><b style="font-size:15px">${countryBadge(p.authorCountryCode)}${esc(p.author)}</b><span style="font-size:12px">${esc(p.areaLabel || p.area)} · ${esc(ago(p.createdAt))}</span></span>
+          <span class="who"><b style="font-size:15px">${countryBadge(p.countryCode)}${esc(p.author)}</b><span style="font-size:12px">${esc(p.areaLabel || p.area)} · ${esc(ago(p.createdAt))}</span></span>
           <span class="badge">${esc(catLabel(p.cat))}</span></div>
         <h1>${esc(p.title)}</h1>
         <p class="content">${esc(p.body)}</p>
@@ -507,7 +508,7 @@
       <div class="band"></div>
       <div class="group-title">${esc(t('post.comments', { n: cs.length }))}</div>
       ${cs.map(c => `<div class="comment"><span class="avatar" style="width:32px;height:32px;font-size:13px">${initial(c.author)}</span><div class="c-body">
-        <div class="c-meta"><b style="font-weight:500">${countryBadge(c.authorCountryCode)}${esc(c.author)}</b><span>${esc(ago(c.createdAt))}</span></div><p>${esc(c.text)}</p>
+        <div class="c-meta"><b style="font-weight:500">${countryBadge(c.countryCode)}${esc(c.author)}</b><span>${esc(ago(c.createdAt))}</span></div><p>${esc(c.text)}</p>
         <span class="muted" style="font-size:12px">♡ ${c.likes || 0}</span></div></div>`).join('')}
       <form class="comment-bar" data-form="comment" data-id="${id}"><input id="comment-input" name="text" maxlength="300" autocomplete="off" placeholder="${esc(t('post.placeholder'))}" aria-label="${esc(t('post.placeholder'))}"><button type="submit">${esc(t('post.submit'))}</button></form>
     </main>`;
@@ -623,15 +624,14 @@
 
   V.profile = () => {
     const u = S().user; if (!u) return V.login();
-    const ds = DISTRICTS[lang()] || DISTRICTS.ko;
-    return `<main class="screen">${pageHeader(t('profile.title'), { fallback: '#/my' })}
+    return `<main class="screen has-cta">${pageHeader(t('profile.title'), { fallback: '#/my' })}
       <form class="form" data-form="profile" id="profile-form">
         <div style="display:grid;justify-items:center;padding:8px 0"><span class="avatar xl">${initial(u.nickname)}</span></div>
         <div class="field"><label for="p-nick">${esc(t('profile.nickname'))}</label><input class="input" id="p-nick" name="nickname" value="${esc(u.nickname)}" minlength="2" maxlength="10" required><span class="helper">${esc(t('profile.nickHelp'))}</span></div>
-        <div class="field"><label for="p-area">${esc(t('profile.area'))}</label><select class="select" id="p-area" name="area">${ds.map((d, i) => `<option value="${i}" ${i === u.area ? 'selected' : ''}>${esc(d)}</option>`).join('')}</select></div>
+        <div class="field"><label for="p-country">${esc(t('country.change'))}</label><select class="select" id="p-country" name="countryCode" required>${countryOptions(u.countryCode)}</select><span class="helper">${esc(t('country.profileHelp'))}</span></div>
         <div class="field"><label for="p-bio">${esc(t('profile.bio'))}</label><input class="input" id="p-bio" name="bio" value="${esc(u.bio || '')}" maxlength="30"><span class="helper"><span></span><span id="bio-count">${(u.bio || '').length}/30</span></span></div>
       </form><div class="grow"></div>
-      <div class="bottom-cta"><button class="btn btn-primary btn-block" type="submit" form="profile-form">${esc(t('common.save'))}</button></div></main>`;
+      <div class="fixed-cta"><button class="btn btn-primary btn-block" type="submit" form="profile-form">${esc(t('common.save'))}</button></div></main>`;
   };
   V.profile.mount = () => {
     const bio = document.getElementById('p-bio');
@@ -651,7 +651,6 @@
       ${row('#/lang', t('set.language'), t('lang.name'))}
       <div class="band"></div><div class="menu-group-title">${esc(t('set.account'))}</div>
       <div class="menu-row"><span>${esc(t('set.accountInfo'))}</span><span class="val">${st.user ? countryBadge(st.user.countryCode) : ''}${esc(acct)}</span></div>
-      ${st.user ? row('#/settings/privacy', t('country.personal'), Countries.name(st.user.countryCode, lang())) : ''}
       ${st.user || st.guest ? row('', t('set.logout'), '', 'logout') : row('#/login', t('my.login'))}
       <div class="band"></div><div class="menu-group-title">${esc(t('set.info'))}</div>
       ${row('#/terms', t('set.terms'))}${row('#/privacy', t('set.privacy'))}${row('#/credits', t('set.credits'))}
@@ -659,14 +658,9 @@
       <div class="danger-link"><button data-act="withdraw">${esc(t('set.withdraw'))}</button></div></main>`;
   };
 
-  V.accountPrivacy = () => {
-    const user = S().user; if (!user) return V.login();
-    return `<main class="screen">${pageHeader(t('country.personal'), {fallback:'#/settings'})}
-      <form class="form" data-form="country" id="country-form"><div class="field"><label for="account-country">${esc(t('country.label'))}</label>
-      <select class="select" id="account-country" name="countryCode" required>${countryOptions(user.countryCode)}</select>
-      <span class="helper">${esc(t('country.help'))}</span></div></form>
-      <div class="bottom-cta"><button type="submit" form="country-form" class="btn btn-primary btn-block">${esc(t('common.save'))}</button></div></main>`;
-  };
+  // Keep old bookmarked links usable; country editing now belongs to the profile form.
+  V.accountPrivacy = () => V.profile();
+  V.accountPrivacy.mount = V.profile.mount;
 
   V.notices = () => `<main class="screen">${pageHeader(t('notice.title'), { fallback: '#/my' })}${SEED.notices.map(n => {
     const [title, body] = n[lang()] || n.ko;
@@ -872,18 +866,13 @@
       const id = await Cloud.createPost({ title, body, cat: f.cat.value, food: f.food.value || null, photos: draftPhotos.slice() });
       if (!f.isConnected) return;
       toast(t('write.done')); stack.pop(); location.replace('#/post/' + id);
-    } else if (kind === 'country') {
-      if (!requireLogin()) return;
-      const code = f.elements.countryCode.value;
-      if (!Countries.isValid(code)) { toast(t('profile.invalidCountry')); return; }
-      await Cloud.country(code);
-      if (!f.isConnected) return;
-      toast(t('country.saved')); back('#/settings');
     } else if (kind === 'profile') {
       if (!requireLogin()) return;
       const nick = f.nickname.value.trim();
       if (nick.length < 2 || nick.length > 10) { toast(t('profile.invalid')); return; }
-      await Cloud.profile({ nickname: nick, area: Number(f.area.value), bio: f.bio.value.trim() });
+      const countryCode = f.elements.countryCode.value;
+      if (!Countries.isValid(countryCode)) { toast(t('profile.invalidCountry')); return; }
+      await Cloud.profile({ nickname: nick, bio: f.bio.value.trim(), countryCode });
       if (!f.isConnected) return;
       toast(t('profile.saved')); back('#/my');
     }

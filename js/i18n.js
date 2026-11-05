@@ -36,7 +36,7 @@ window.I18N = {
     'food.row.category': '분류', 'food.row.ingredients': '주재료', 'food.row.taste': '맛', 'food.row.price': '가격대', 'food.row.calories': '칼로리',
     'food.origin': '이 음식의 유래', 'food.tip': '로컬 팁', 'food.allergyTitle': '알레르기 유발 성분', 'food.count': '{n}곳',
     'food.cta': '지도에서 식당 찾기', 'food.saved': '찜 목록에 담았어요', 'food.unsaved': '찜 목록에서 뺐어요',
-    'place.signature': '대표 메뉴', 'place.area': '위치', 'place.naver': '네이버 지도', 'place.kakao': '카카오맵', 'place.directions': '길찾기',
+    'place.signature': '대표 메뉴', 'place.area': '위치', 'place.google': 'Google 지도', 'place.naver': '네이버 지도', 'place.kakao': '카카오맵', 'place.directions': '길찾기',
     'place.notice': '영업시간·휴무일·가격은 바뀔 수 있으니 방문 전에 지도 앱에서 확인하세요.', 'place.related': '이 식당 이야기', 'place.noRelated': '아직 이 음식에 대한 글이 없어요.', 'place.servesFood': '이 집에서 먹을 수 있는 음식',
     'search.placeholder': '음식이나 식당을 검색해 보세요', 'search.recent': '최근 검색어', 'search.clear': '전체 삭제', 'search.popular': '인기 검색어', 'search.noRecent': '최근 검색어가 없어요.',
     'search.tab.all': '전체', 'search.tab.foods': '음식', 'search.tab.places': '식당', 'search.tab.posts': '게시글', 'search.empty': '"{q}"에 대한 결과가 없어요.', 'search.seeAll': '모두 보기',
@@ -97,7 +97,7 @@ window.I18N = {
     'food.row.category': 'Type', 'food.row.ingredients': 'Ingredients', 'food.row.taste': 'Taste', 'food.row.price': 'Price', 'food.row.calories': 'Calories',
     'food.origin': 'Origin', 'food.tip': 'Local tip', 'food.allergyTitle': 'Contains', 'food.count': '{n}',
     'food.cta': 'Find places on the map', 'food.saved': 'Saved to your list', 'food.unsaved': 'Removed from your list',
-    'place.signature': 'Signature', 'place.area': 'Area', 'place.naver': 'Naver Map', 'place.kakao': 'Kakao Map', 'place.directions': 'Directions',
+    'place.signature': 'Signature', 'place.area': 'Area', 'place.google': 'Google Maps', 'place.naver': 'Naver Map', 'place.kakao': 'Kakao Map', 'place.directions': 'Directions',
     'place.notice': 'Hours, closing days and prices can change. Please check a map app before you go.', 'place.related': 'Stories from the community', 'place.noRelated': 'No posts about this dish yet.', 'place.servesFood': 'Dish served here',
     'search.placeholder': 'Search dishes or restaurants', 'search.recent': 'Recent searches', 'search.clear': 'Clear all', 'search.popular': 'Popular searches', 'search.noRecent': 'No recent searches.',
     'search.tab.all': 'All', 'search.tab.foods': 'Dishes', 'search.tab.places': 'Places', 'search.tab.posts': 'Posts', 'search.empty': 'No results for "{q}".', 'search.seeAll': 'See all',
@@ -158,7 +158,7 @@ window.I18N = {
     'food.row.category': '分类', 'food.row.ingredients': '主要食材', 'food.row.taste': '口味', 'food.row.price': '价格', 'food.row.calories': '热量',
     'food.origin': '由来', 'food.tip': '本地人小贴士', 'food.allergyTitle': '过敏原', 'food.count': '{n}家',
     'food.cta': '在地图上查找餐厅', 'food.saved': '已加入收藏', 'food.unsaved': '已取消收藏',
-    'place.signature': '招牌菜', 'place.area': '位置', 'place.naver': 'Naver 地图', 'place.kakao': 'Kakao 地图', 'place.directions': '路线',
+    'place.signature': '招牌菜', 'place.area': '位置', 'place.google': 'Google 地图', 'place.naver': 'Naver 地图', 'place.kakao': 'Kakao 地图', 'place.directions': '路线',
     'place.notice': '营业时间、休息日和价格可能变动，出发前请在地图应用中确认。', 'place.related': '社区里的故事', 'place.noRelated': '还没有关于这道菜的帖子。', 'place.servesFood': '这家店的美食',
     'search.placeholder': '搜索美食或餐厅', 'search.recent': '最近搜索', 'search.clear': '全部删除', 'search.popular': '热门搜索', 'search.noRecent': '没有最近搜索记录。',
     'search.tab.all': '全部', 'search.tab.foods': '美食', 'search.tab.places': '餐厅', 'search.tab.posts': '帖子', 'search.empty': '没有找到"{q}"的结果。', 'search.seeAll': '查看全部',
@@ -219,7 +219,7 @@ window.I18N = {
     'food.row.category': '分類', 'food.row.ingredients': '主な材料', 'food.row.taste': '味', 'food.row.price': '価格帯', 'food.row.calories': 'カロリー',
     'food.origin': '由来', 'food.tip': 'ローカルのコツ', 'food.allergyTitle': 'アレルギー物質', 'food.count': '{n}店',
     'food.cta': '地図でお店を探す', 'food.saved': 'お気に入りに追加しました', 'food.unsaved': 'お気に入りから外しました',
-    'place.signature': '看板メニュー', 'place.area': '場所', 'place.naver': 'Naverマップ', 'place.kakao': 'Kakaoマップ', 'place.directions': '経路',
+    'place.signature': '看板メニュー', 'place.area': '場所', 'place.google': 'Googleマップ', 'place.naver': 'Naverマップ', 'place.kakao': 'Kakaoマップ', 'place.directions': '経路',
     'place.notice': '営業時間・定休日・価格は変わることがあります。お出かけ前に地図アプリでご確認ください。', 'place.related': 'コミュニティの投稿', 'place.noRelated': 'この料理の投稿はまだありません。', 'place.servesFood': 'このお店で食べられる料理',
     'search.placeholder': '料理やお店を検索', 'search.recent': '最近の検索', 'search.clear': 'すべて削除', 'search.popular': '人気の検索', 'search.noRecent': '最近の検索はありません。',
     'search.tab.all': 'すべて', 'search.tab.foods': '料理', 'search.tab.places': 'お店', 'search.tab.posts': '投稿', 'search.empty': '「{q}」の検索結果はありません。', 'search.seeAll': 'すべて見る',
@@ -324,4 +324,12 @@ for (const [language, copy] of Object.entries({
   en: {'map.keyMissing':'Set the Google Maps key, then reload this screen.','map.googleAuthError':'Google Maps authorization failed. Check the key and allowed website addresses.'},
   zh: {'map.keyMissing':'请设置 Google 地图密钥，然后刷新页面。','map.googleAuthError':'Google 地图授权失败，请检查密钥和允许的网站地址。'},
   ja: {'map.keyMissing':'Google マップのキーを設定し、画面を再読み込みしてください。','map.googleAuthError':'Google マップの認証に失敗しました。キーと許可するサイトの設定を確認してください。'},
+})) Object.assign(window.I18N[language], copy);
+
+/* Editing a profile affects future content only. */
+for (const [language, copy] of Object.entries({
+  ko: {'country.change':'국가 변경','country.profileHelp':'변경한 국가는 앞으로 작성할 글·댓글에 적용돼요. 기존 글·댓글의 국가는 바뀌지 않아요.'},
+  en: {'country.change':'Change country','country.profileHelp':'Your new country applies to future posts and comments. Existing posts and comments keep their original country.'},
+  zh: {'country.change':'更改国家／地区','country.profileHelp':'新国家或地区仅用于今后发布的帖子和评论，已有内容保持原来的记录。'},
+  ja: {'country.change':'国・地域を変更','country.profileHelp':'変更は今後の投稿・コメントに適用されます。既存の投稿・コメントの国・地域は変わりません。'},
 })) Object.assign(window.I18N[language], copy);
