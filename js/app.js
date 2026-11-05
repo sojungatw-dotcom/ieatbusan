@@ -22,8 +22,10 @@
   const img = id => FOOD[id]?.photo || `assets/food/${id}.jpg`;
   const mapData = window.IEBMapData.create(FOODS, lang);
   const { placeKey, placeOf, allPlaces } = mapData;
-  const foodLikes = f => f.likes + (S().savedFoods.includes(f.id) ? 1 : 0);
-  const placeLikes = p => Math.max(12, Math.round(p.food.likes * (0.45 - p.i * 0.08))) + (S().savedPlaces.includes(placeKey(p.food.id, p.i)) ? 1 : 0);
+  const hasCoordinates = mapData.hasCoordinates;
+
+  const foodLikes = () => 0; // Saved foods are bookmarks, not aggregate likes.
+  const placeLikes = () => 0; // Restaurant totals are not stored in the database.
   function ago(ts) {
     const m = Math.max(0, Math.round((Date.now() - ts) / 60000));
     if (m < 1) return t('time.now');
@@ -83,7 +85,7 @@
     return `<div class="list-item">
       <a href="#/food/${f.id}" style="display:contents"><img class="thumb" src="${img(f.id)}" alt="" loading="lazy">
       <span class="li-body"><span class="li-title">${esc(fname(f))}</span><span class="li-sub">${esc(L(f).summary)}</span>
-      <span class="li-meta">${f.manuscript ? '' : '♥ ' + foodLikes(f) + ' · '}${esc(t('saved.places.count', { n: f.places.length }))}</span></span></a>
+      <span class="li-meta">${foodLikes(f) > 0 ? '♥ ' + foodLikes(f) + ' · ' : ''}${esc(t('saved.places.count', { n: f.places.length }))}</span></span></a>
       ${save ? `<button class="save-btn" data-act="saveFood" data-id="${f.id}" aria-pressed="${saved}" aria-label="♥">${icon('heart', saved)}</button>` : ''}
     </div>`;
   }
@@ -93,7 +95,7 @@
       <a href="#/place/${p.food.id}/${p.i}" style="display:contents"><img class="thumb sm" src="${img(p.food.id)}" alt="" loading="lazy">
       <span class="li-body"><span class="li-title">${esc(p.name)}</span><span class="li-sub">${esc(p.area)}</span>
       <span class="li-meta">${esc(showFood ? fname(p.food) + ' · ' : '')}${esc(t('place.signature'))} · ${esc(p.signature)}</span></span></a>
-      ${save ? `<button class="save-btn" data-act="savePlace" data-key="${key}" aria-pressed="${saved}" aria-label="♥">${icon('heart', saved)}</button>` : `<span class="like">${icon('heart')}${placeLikes(p)}</span>`}
+      ${save ? `<button class="save-btn" data-act="savePlace" data-key="${key}" aria-pressed="${saved}" aria-label="♥">${icon('heart', saved)}</button>` : `<span class="like">${icon('heart')}${placeLikes(p) > 0 ? placeLikes(p) : ''}</span>`}
     </div>`;
   }
   function postCard(p) {
@@ -104,7 +106,7 @@
         <span class="badge">${esc(catLabel(p.cat))}</span></div>
       <div class="post-content"><div class="post-text"><h3>${esc(p.title)}</h3><p>${esc(p.body)}</p></div>
         ${p.photos && p.photos[0] ? `<img class="thumb" src="${esc(p.photos[0])}" alt="" loading="lazy">` : ''}</div>
-      <div class="post-foot"><span class="like ${S().postLikes[p.id] ? 'on' : ''}">${icon('heart', !!S().postLikes[p.id])}${postLikes(p)}</span><span class="like">${icon('comment')}${n}</span></div>
+      <div class="post-foot"><span class="like ${S().postLikes[p.id] ? 'on' : ''}">${icon('heart', !!S().postLikes[p.id])}${postLikes(p) > 0 ? postLikes(p) : ''}</span><span class="like">${icon('comment')}${n}</span></div>
     </a>`;
   }
 
@@ -118,7 +120,7 @@
     return `<article class="food-card${slide ? ' home-slide' : ''}"${slide ? ` role="group" aria-roledescription="slide" aria-label="${rank} / ${count}: ${esc(fname(f))}" data-food-id="${f.id}"` : ''}>
       <a href="#/food/${f.id}"><div class="photo"><img src="${img(f.id)}" alt="${esc(fname(f))}" loading="${eager ? 'eager' : 'lazy'}">${rank ? `<span class="rank">${rank}</span>` : ''}</div></a>
       <div class="info"><a class="names" href="#/food/${f.id}"><div class="name">${esc(fname(f))}</div>${lang() !== 'ko' ? `<div class="orig">${esc(f.ko.name)}</div>` : ''}</a>
-        <button class="like-btn" data-act="saveFood" data-id="${f.id}" aria-pressed="${saved}" aria-label="♥${f.manuscript ? '' : ' ' + foodLikes(f)}">${icon('heart', saved)}${f.manuscript ? '' : `<span>${foodLikes(f)}</span>`}</button></div>
+        <button class="like-btn" data-act="saveFood" data-id="${f.id}" aria-pressed="${saved}" aria-label="♥">${icon('heart', saved)}${foodLikes(f) > 0 ? `<span>${foodLikes(f)}</span>` : ''}</button></div>
       <p class="home-summary">${esc(L(f).summary)}</p>
     </article>`;
   }
@@ -282,55 +284,47 @@
     });
   };
 
-  function manuscriptFood(f) {
-    const d = L(f), saved = S().savedFoods.includes(f.id);
-    const secs = [['info', 'food.sec.info'], ['how', 'food.sec.how'], ['allergy', 'food.sec.allergy'], ['places', 'food.sec.places']];
-    const pending = { ko: '', en: 'Detailed content is currently available in Korean. Translations are under review.', zh: '详细内容目前为韩语，翻译审核中。', ja: '詳細は現在韓国語で表示しています。翻訳は確認中です。' };
-    return `<main class="screen has-cta">
-      <div class="hero"><img src="${img(f.id)}" alt="${f.credit ? esc(d.name) : '사진 준비 중'}">
-        <div class="hero-nav"><button class="circle-btn" data-act="back" data-fallback="#/home" aria-label="${esc(t('common.back'))}">${icon('back')}</button><span class="grow"></span>
-        <button class="circle-btn" data-act="share" data-title="${esc(d.name)}" aria-label="${esc(t('common.share'))}">${icon('share')}</button>
-        <button class="circle-btn" data-act="saveFood" data-id="${f.id}" aria-pressed="${saved}" aria-label="♥">${icon('heart', saved)}</button></div></div>
-      <nav class="section-chips" aria-label="sections">${secs.map(([k,label],i)=>`<button class="chip ${i===0?'active':''}" data-act="jump" data-sec="${k}">${esc(t(label))}</button>`).join('')}</nav>
-      <div class="title-block"><span class="eyebrow" lang="ko">${esc(f.ko.category)}</span><h1>${esc(d.name)}</h1>
-      ${lang()!=='ko'?`<p class="orig-line" lang="ko">${esc(f.ko.name)}</p><p class="muted">${esc(pending[lang()])}</p>`:''}
-      <p class="summary" lang="ko">${esc(f.ko.summary)}</p></div>
-      ${secs.map(([key,label],i)=>`<section class="detail-section manuscript" id="sec-${key}" lang="ko"><h2>${esc(I18N.ko[label])}${key==='allergy'?'·식단 정보':''}</h2>${f.manuscript.sections[i]}</section>`).join('')}
-      <div class="fixed-cta"><a class="btn btn-primary btn-block" href="#/map/${f.id}">${esc(t('food.cta'))}${icon('arrowRight')}</a></div>
-    </main>`;
+  function foodDetailContent(f) {
+    const d = L(f), manuscript = f.manuscript;
+    const labels = [t('food.row.category'), t('food.row.region'), t('food.row.ingredients'), t('food.row.method'), t('food.row.taste'), t('food.row.spice'), t('food.row.season'), t('food.row.price')];
+    const values = manuscript ? manuscript.infoRows.map(row => row[1]) : [d.category, '', d.ingredients, '', d.taste, '', '', d.price];
+    const infoRows = labels.map((label, index) => [label, values[index] || t('food.unconfirmed')]);
+    const introduction = manuscript ? manuscript.introduction : (d.origin || d.summary);
+    const how = manuscript ? manuscript.sections[1] : `<ol class="steps">${d.steps.map(step => `<li><span>${esc(step)}</span></li>`).join('')}</ol>`;
+    const allergyNotes = manuscript ? manuscript.allergenInfo.notes : [d.allergenNote];
+    const allergy = `<strong>${esc(t('food.allergyTitle'))}</strong><div class="pills">${d.allergens.map(a=>`<span class="pill">${esc(a)}</span>`).join('')}</div>${allergyNotes.filter(Boolean).map(note=>`<p>※ ${esc(note)}</p>`).join('')}`;
+    return { infoRows, introduction, how, allergy, bodyLang: manuscript ? 'ko' : lang() };
   }
 
   V.food = ({ id }) => {
     const f = FOOD[id]; if (!f) return V.notFound();
-    if (f.manuscript) return manuscriptFood(f);
-    const d = L(f), saved = S().savedFoods.includes(f.id);
+    const d = L(f), saved = S().savedFoods.includes(f.id), content = foodDetailContent(f);
     const secs = [['info', 'food.sec.info'], ['how', 'food.sec.how'], ['allergy', 'food.sec.allergy'], ['places', 'food.sec.places']];
     return `<main class="screen has-cta">
-      <div class="hero"><img src="${img(f.id)}" alt="${esc(d.name)}">
+      <div class="hero"><img src="${img(f.id)}" alt="${f.photo?.includes('placeholder') ? '사진 준비 중' : esc(d.name)}">
         <div class="hero-nav"><button class="circle-btn" data-act="back" data-fallback="#/home" aria-label="${esc(t('common.back'))}">${icon('back')}</button><span class="grow"></span>
           <button class="circle-btn" data-act="share" data-title="${esc(d.name)}" aria-label="${esc(t('common.share'))}">${icon('share')}</button>
           <button class="circle-btn ${saved ? 'on' : ''}" data-act="saveFood" data-id="${f.id}" aria-pressed="${saved}" aria-label="♥">${icon('heart', saved)}</button></div></div>
-      <div class="title-block"><span class="eyebrow">${esc(t('food.badge'))} · ${esc(d.category)}</span><h1>${esc(d.name)}</h1>
-        ${lang() !== 'ko' ? `<span class="orig-line" lang="ko">${esc(f.ko.name)}${d.gloss ? ' · <span lang="' + lang() + '">' + esc(d.gloss) + '</span>' : ''}</span>` : ''}
-        <p class="summary">${esc(d.summary)}</p>
-        <div class="meta-line">${icon('heart', true)}<span>${foodLikes(f)} · ${esc(t('food.places', { n: f.places.length }))}</span></div></div>
-      <nav class="section-chips" aria-label="sections">${secs.map(([k, label], i) => `<button class="chip ${i === 0 ? 'active' : ''}" data-act="jump" data-sec="${k}">${esc(t(label))}</button>`).join('')}</nav>
+      <nav class="section-chips" aria-label="sections">${secs.map(([key,label],index)=>`<button class="chip ${index===0?'active':''}" data-act="jump" data-sec="${key}">${esc(t(label))}</button>`).join('')}</nav>
+      <div class="title-block"><span class="eyebrow">${esc(d.category)}</span><h1>${esc(d.name)}</h1>
+        ${lang()!=='ko'?`<span class="orig-line" lang="ko">${esc(f.ko.name)}</span>`:''}
+        ${f.manuscript && lang()!=='ko'?`<p class="muted">${esc(t('food.translationPending'))}</p>`:''}
+        <p class="summary" lang="${content.bodyLang}">${esc(d.summary)}</p></div>
       <section class="detail-section" id="sec-info"><h2>${esc(t('food.h.info'))}</h2>
-        <dl class="info-card">${[['category', d.category], ['ingredients', d.ingredients], ['taste', d.taste], ['price', d.price], ['calories', d.calories]].map(([k, v]) =>
-          `<div class="info-row"><dt>${esc(t('food.row.' + k))}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
-        <div class="origin"><h3>${esc(t('food.origin'))}</h3><p>${esc(d.origin)}</p></div></section>
+        <dl class="info-card" lang="${content.bodyLang}">${content.infoRows.map(([label,value])=>`<div class="info-row"><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`).join('')}</dl>
+        <div class="origin"><h3>${esc(t('food.introduction'))}</h3><p lang="${content.bodyLang}">${esc(content.introduction)}</p></div></section>
       <section class="detail-section" id="sec-how"><h2>${esc(t('food.h.how'))}</h2>
-        <ol class="steps">${d.steps.map(s => `<li><span>${esc(s)}</span></li>`).join('')}</ol>
-        <div class="tip-card"><strong>${esc(t('food.tip'))}</strong>${esc(d.tip)}</div></section>
+        <div class="how-card manuscript" lang="${content.bodyLang}">${content.how}</div></section>
       <section class="detail-section" id="sec-allergy"><h2>${esc(t('food.h.allergy'))}</h2>
-        <div class="allergen-card"><strong>${esc(t('food.allergyTitle'))}</strong>
-          <div class="pills">${d.allergens.map(a => `<span class="pill">${esc(a)}</span>`).join('')}</div><p>※ ${esc(d.allergenNote)}</p></div></section>
-      <section class="detail-section" id="sec-places"><h2>${esc(t('food.h.places'))} <small>${esc(t('food.count', { n: f.places.length }))}</small></h2>
-        <div class="place-list">${f.places.map((_, i) => placeRow(placeOf(f.id, i))).join('')}</div></section>
+        <div class="allergen-card manuscript" lang="${content.bodyLang}">${content.allergy}</div></section>
+      <section class="detail-section" id="sec-places"><h2>${esc(t('food.h.places'))} <small>${esc(t('food.count',{n:f.places.length}))}</small></h2>
+        <div class="place-list">${f.places.map((_,index)=>placeRow(placeOf(f.id,index))).join('') || `<p class="muted">${esc(t('food.noPlaces'))}</p>`}</div>
+        ${f.manuscript?`<details class="manuscript"><summary>${esc(t('food.placeReview'))}</summary><div lang="ko">${f.manuscript.placesIntro}</div></details>`:''}</section>
       <div style="height:24px"></div>
       <div class="fixed-cta"><a class="btn btn-primary btn-block" href="#/map/${f.id}">${esc(t('food.cta'))}${icon('arrowRight')}</a></div>
     </main>`;
   };
+
   V.food.mount = ({ id }) => {
     Store.update(s => { s.recentFoods = [id, ...s.recentFoods.filter(x => x !== id)].slice(0, 20); });
     const chips = [...app.querySelectorAll('.section-chips .chip')];
@@ -347,34 +341,42 @@
   V.place = ({ id, i }) => {
     const p = placeOf(id, Number(i)); if (!p) return V.notFound();
     const key = placeKey(id, p.i), saved = S().savedPlaces.includes(key);
-    if (p.research) return `<main class="screen">${pageHeader(p.name, { fallback: '#/food/' + id })}
-      <section class="detail-section manuscript" lang="ko"><h1>${esc(p.name)}</h1>${p.research.html}
-      <button class="btn btn-block" data-act="savePlace" data-key="${key}" aria-pressed="${saved}">${icon('heart',saved)} ${esc(t('tab.saved'))}</button></section>
-      <div class="card">${foodRow(p.food)}</div></main>`;
     const related = allPosts().filter(x => x.food === id);
-    const q = encodeURIComponent(p.name);
+    const address = p.address || p.area || t('food.unconfirmed');
+    const hours = p.hours || t('food.unconfirmed');
+    const holiday = p.holiday || t('food.unconfirmed');
+    const q = encodeURIComponent(p.name + (p.address ? ' ' + p.address : ''));
+    const research = p.research;
+    const menuParts = research ? research.signature.split(' / ') : [];
+    const menuPrice = menuParts.length > 1 ? menuParts.pop() : '확인 필요';
+    const menuName = menuParts.join(' / ') || p.signature;
+    const directions = hasCoordinates(p) ? 'https://www.google.com/maps/dir/?api=1&destination=' + p.lat + ',' + p.lng : 'https://www.google.com/maps/search/?api=1&query=' + q;
     return `<main class="screen">
       <div class="hero" style="height:260px"><img src="${img(id)}" alt="">
         <div class="hero-nav"><button class="circle-btn" data-act="back" data-fallback="#/food/${id}" aria-label="${esc(t('common.back'))}">${icon('back')}</button><span class="grow"></span>
           <button class="circle-btn" data-act="share" data-title="${esc(p.name)}" aria-label="${esc(t('common.share'))}">${icon('share')}</button>
           <button class="circle-btn ${saved ? 'on' : ''}" data-act="savePlace" data-key="${key}" aria-pressed="${saved}" aria-label="♥">${icon('heart', saved)}</button></div></div>
-      <div class="title-block"><span class="eyebrow">${esc(t('place.signature'))} · ${esc(p.signature)}</span><h1 lang="ko">${esc(p.name)}</h1>
+      <div class="title-block"><span class="eyebrow">${esc(t('place.signature'))} · ${esc(research ? menuName : p.signature)}</span><h1 lang="ko">${esc(p.name)}</h1>
         <span class="orig-line">${esc(p.area)}</span>
-        <div class="meta-line">${icon('heart', true)}<span>${placeLikes(p)}</span></div></div>
+        ${research ? `<p class="muted" lang="ko">${research.matchType === 'similar' ? '유사 메뉴 게시 자료' : '해당 메뉴 게시 자료'} · 조사일 ${esc(research.date)} · 방문 전 확인 필요</p>` : `<div class="meta-line">${icon('heart', true)}${placeLikes(p) > 0 ? `<span>${placeLikes(p)}</span>` : ''}</div>`}</div>
       <div class="actions-row">
         <a class="action" href="https://map.naver.com/p/search/${q}" target="_blank" rel="noopener">${icon('map')}${esc(t('place.naver'))}</a>
         <a class="action" href="https://map.kakao.com/?q=${q}" target="_blank" rel="noopener">${icon('pin')}${esc(t('place.kakao'))}</a>
-        <a class="action" href="https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}" target="_blank" rel="noopener">${icon('navigation')}${esc(t('place.directions'))}</a>
+        <a class="action" href="${esc(directions)}" target="_blank" rel="noopener">${icon('navigation')}${esc(t('place.directions'))}</a>
       </div>
       <div class="band"></div>
       <div class="section-head"><h2>${esc(t('food.h.info'))}</h2></div>
-      <div class="rows">
-        <div class="row">${icon('pin')}<span>${esc(p.area)}${lang() !== 'ko' ? ` <span class="muted" lang="ko">(${esc(p.areaKo)})</span>` : ''}</span></div>
-        <div class="row">${icon('utensils')}<span>${esc(t('place.signature'))} · ${esc(p.signature)}</span></div>
-        <div class="row">${icon('clock')}<span class="sub">${esc(t('place.notice'))}</span></div>
+      <div class="rows place-info">
+        <div class="row">${icon('pin')}<span${p.address ? ' lang="ko"' : ''}>${esc(address)}</span></div>
+        <div class="row">${icon('clock')}<span class="place-schedule">
+          <span>${esc(t('place.businessHours'))}: <span${p.hours ? ' lang="ko"' : ''}>${esc(hours)}</span></span>
+          <span>${esc(t('place.holidays'))}: <span${p.holiday ? ' lang="ko"' : ''}>${esc(holiday)}</span></span>
+        </span></div>
       </div>
-      <div class="mini-map" id="mini-map" role="img" aria-label="${esc(p.name)}"></div>
+      ${hasCoordinates(p) ? `<div class="mini-map" id="mini-map" role="img" aria-label="${esc(p.name)}"></div>` : `<div class="mini-map map-fallback"><p lang="ko">지도 좌표 미확인</p><a href="https://map.naver.com/p/search/${q}" target="_blank" rel="noopener">${esc(t('place.naver'))}</a></div>`}
       <div class="band"></div>
+      ${research ? `<section class="detail-section" lang="ko"><h2>대표 메뉴</h2><dl class="info-card"><div class="info-row"><dt>${esc(menuName)}</dt><dd>${esc(menuPrice)}</dd></div></dl><p class="muted">${esc(research.priceNote)}</p></section>
+      <div class="band"></div><section class="detail-section manuscript" lang="ko"><h2>방문 전 확인</h2><p>${esc(research.visitNote)}</p><p><strong>미확인:</strong> ${esc(research.unverified)}</p><p><strong>조사일:</strong> ${esc(research.date)}</p></section><div class="band"></div>` : ''}
       <div class="section-head"><h2>${esc(t('place.servesFood'))}</h2></div>
       <div class="card" style="margin:0 16px">${foodRow(p.food)}</div>
       <div class="section-head"><h2>${esc(t('place.related'))}</h2></div>
@@ -483,14 +485,14 @@
         <p class="content">${esc(p.body)}</p>
         ${p.photos && p.photos.length ? `<div class="post-photos">${p.photos.map(src => `<img src="${esc(src)}" alt="">`).join('')}</div>` : ''}
         ${p.food && FOOD[p.food] ? `<a class="card list-item" href="#/food/${p.food}" style="border:1px solid var(--border)"><img class="thumb sm" src="${img(p.food)}" alt=""><span class="li-body"><span class="li-meta">${esc(t('post.foodTag'))}</span><span class="li-title">${esc(fname(FOOD[p.food]))}</span></span>${icon('chevronRight')}</a>` : ''}
-        <div class="post-actions"><button class="like ${liked ? 'on' : ''}" data-act="likePost" data-id="${id}" aria-pressed="${liked}">${icon('heart', liked)}${esc(t('post.like', { n: postLikes(p) }))}</button>
+        <div class="post-actions"><button class="like ${liked ? 'on' : ''}" data-act="likePost" data-id="${id}" aria-pressed="${liked}">${icon('heart', liked)}${esc(t('post.like', { n: postLikes(p) > 0 ? postLikes(p) : '' }).trim())}</button>
           <span class="like">${icon('comment')}${esc(t('post.comments', { n: cs.length }))}</span></div>
       </article>
       <div class="band"></div>
       <div class="group-title">${esc(t('post.comments', { n: cs.length }))}</div>
       ${cs.map(c => `<div class="comment"><span class="avatar" style="width:32px;height:32px;font-size:13px">${initial(c.author)}</span><div class="c-body">
         <div class="c-meta"><b style="font-weight:500">${esc(c.author)}</b><span>${esc(ago(c.createdAt))}</span></div><p>${esc(c.text)}</p>
-        <span class="muted" style="font-size:12px">♡ ${c.likes || 0}</span></div></div>`).join('')}
+        ${c.likes > 0 ? `<span class="muted" style="font-size:12px">♡ ${c.likes}</span>` : ''}</div></div>`).join('')}
       <form class="comment-bar" data-form="comment" data-id="${id}"><input id="comment-input" name="text" maxlength="300" autocomplete="off" placeholder="${esc(t('post.placeholder'))}" aria-label="${esc(t('post.placeholder'))}"><button type="submit">${esc(t('post.submit'))}</button></form>
     </main>`;
   };

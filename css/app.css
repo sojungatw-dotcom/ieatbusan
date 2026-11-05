@@ -422,3 +422,16 @@ details.faq p { margin: 0 0 16px; color: var(--ink-2); font-size: 14px; }
 .manuscript blockquote { margin: 16px 0; padding: 12px; border-left: 3px solid var(--accent); }
 .manuscript a { text-decoration: underline; }
 .map-research-note { position: absolute; top: 8px; left: 12px; right: 12px; z-index: 450; background: var(--paper, #fff); padding: 12px; font-size: 12px; border-radius: 8px; }
+
+/* The missing-coordinate panel stays inside the restaurant detail flow. */
+.mini-map.map-fallback { position: relative; inset: auto; }
+
+/* Shared eating-method card for every food detail page. */
+.how-card { background: var(--surface); border-radius: 12px; padding: 16px; display: grid; gap: 14px; }
+.how-card > :first-child { margin-top: 0; }
+.how-card > :last-child { margin-bottom: 0; }
+.how-card p { margin: 0; }
+
+/* Restaurant details share the same address and schedule rows. */
+.place-info .row > span { min-width: 0; overflow-wrap: anywhere; }
+.place-schedule { display: grid; gap: 6px; line-height: 1.7; }
