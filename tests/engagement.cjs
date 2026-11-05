@@ -11,9 +11,12 @@ vm.runInContext(source.slice(source.indexOf('  function foodRow'),source.indexOf
 assert.equal(vm.runInContext('foodLikes(FOODS[0])',ctx),0,'Bookmark cannot fabricate aggregate likes');
 for(const food of ctx.FOODS){const row=ctx.foodRow(food);assert.ok(row.includes('♥ 0')); }
 const sample={id:'real',author:'사용자',area:'',createdAt:0,cat:'review',title:'실제 글',body:'내용',photos:[],likes:0};
-const zero=ctx.postCard(sample);assert.ok(zero.includes('</svg>0</span>'), 'Display zero likes in the heart counter');
-const actual=ctx.postCard({...sample,likes:2});assert.ok(actual.includes('</svg>2</span>'),'Keep real database likes visible');
-ctx.state.postLikes.real=true;const own=ctx.postCard({...sample,likes:2});assert.ok(own.includes('</svg>3</span>'),'Count current user like exactly once');
+const zero=ctx.postCard(sample);
+assert.ok(zero.includes('<article class="post-card">'));
+assert.ok(zero.includes('data-act="likePost" data-id="real" aria-pressed="false"'));
+assert.ok(zero.indexOf('</a>') < zero.indexOf('<button'), 'Like button must not be nested inside the post navigation link');assert.ok(zero.includes('</svg>0</button>'), 'Display zero likes in the heart counter');
+const actual=ctx.postCard({...sample,likes:2});assert.ok(actual.includes('</svg>2</button>'),'Keep real database likes visible');
+ctx.state.postLikes.real=true;const own=ctx.postCard({...sample,likes:2});assert.ok(own.includes('</svg>3</button>'),'Count current user like exactly once');
 assert.ok(!read('supabase/seed.sql').includes('insert into public.ieb_comments'));
 assert.ok(!read('server/backend.cjs').includes('post.seed_likes +'));
 console.log('PASS zero static metrics, visible zero display, real like counts, bookmark distinction, no example comments in seed, and five-food title');

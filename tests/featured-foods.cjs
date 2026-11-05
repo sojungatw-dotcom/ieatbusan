@@ -1,0 +1,17 @@
+'use strict';
+const assert=require('node:assert/strict');
+const featured=require('../js/featured-foods.js');
+const foods=Array.from({length:45},(_,i)=>({id:'food-'+i,likes:i}));
+const ids=rows=>rows.map(f=>f.id),normalized=rows=>Array.from(rows);
+const first=ids(featured.select(foods,0));
+assert.equal(first.length,5);assert.equal(new Set(first).size,5);
+assert.deepEqual(ids(featured.select(foods,featured.intervalMs-1)),first,'Keep recommendations during a two-hour window');
+assert.deepEqual(ids(featured.select([...foods].reverse().map(f=>({...f,likes:999-f.likes})),100)),first,'Input order and like totals cannot change the selection');
+assert.notDeepEqual(ids(featured.select(foods,featured.intervalMs)),first,'Refresh on the exact two-hour boundary');
+assert.deepEqual(ids(foods),Array.from({length:45},(_,i)=>'food-'+i),'Do not shuffle the source catalog');
+assert.equal(featured.nextRefreshAt(0),7200000);assert.equal(featured.nextRefreshAt(7199999),7200000);assert.equal(featured.nextRefreshAt(7200000),14400000);
+assert.deepEqual(featured.select([],0),[]);assert.equal(featured.select(foods.slice(0,3),0).length,3);
+assert.equal(featured.select([...foods,foods[0]],0).filter(f=>f.id===foods[0].id).length<=1,true);
+const sampled=new Set();for(let i=0;i<200;i++)for(const f of featured.select(foods,i*featured.intervalMs))sampled.add(f.id);
+assert.equal(sampled.size,45,'Every food can be recommended across time windows');
+console.log('PASS random unique five, stable two-hour windows, exact boundary, unchanged catalog, order/like independence, small/empty catalogs and full selection pool');

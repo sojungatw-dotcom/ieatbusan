@@ -30,7 +30,22 @@
   const { placeKey, placeOf, allPlaces } = mapData;
   const hasCoordinates = mapData.hasCoordinates;
 
-  const foodLikes = () => 0; // Saved foods are bookmarks, not aggregate likes.
+  function syncFoodCatalog() {
+    const entries = S().foods;
+    if (!Array.isArray(entries)) return; // No DB payload: retain the offline catalog.
+    const ids = new Set(entries.map(row => row.id));
+    for (let i = FOODS.length - 1; i >= 0; i--) if (!ids.has(FOODS[i].id)) { delete FOOD[FOODS[i].id]; delete mapData.byId[FOODS[i].id]; FOODS.splice(i, 1); }
+    for (const row of entries) {
+      let food = FOOD[row.id];
+      if (!food) { food = { id: row.id }; FOODS.push(food); FOOD[row.id] = food; mapData.byId[row.id] = food; }
+      Object.assign(food, row.content || {}, { id: row.id, likes: row.likes || 0 });
+      food.ko = { allergens: [], steps: [], restaurants: [], ...food.ko, name: row.name, summary: row.summary, category: row.category };
+      food.places ||= [];
+      food.photo = row.imageAsset === 'food-placeholder.svg' ? 'assets/food-placeholder.svg' : 'assets/food/' + row.imageAsset;
+    }
+    FOODS.sort((a, b) => entries.findIndex(row => row.id === a.id) - entries.findIndex(row => row.id === b.id));
+  }
+  const foodLikes = f => Number.isInteger(f.likes) ? Math.max(0, f.likes) : 0;
   const placeLikes = () => 0; // Restaurant totals are not stored in the database.
   function ago(ts) {
     const m = Math.max(0, Math.round((Date.now() - ts) / 60000));
@@ -87,7 +102,7 @@
   }
   const empty = (msg, ic = 'info', extra = '') => `<div class="empty">${icon(ic)}<p>${esc(msg)}</p>${extra}</div>`;
   function foodRow(f, { save = true } = {}) {
-    const saved = S().savedFoods.includes(f.id);
+    const saved = !!S().foodLikes?.[f.id];
     return `<div class="list-item">
       <a href="#/food/${f.id}" style="display:contents"><img class="thumb" src="${img(f.id)}" alt="" loading="lazy">
       <span class="li-body"><span class="li-title">${esc(fname(f))}</span><span class="li-sub">${esc(L(f).summary)}</span>
@@ -105,24 +120,28 @@
     </div>`;
   }
   function postCard(p) {
-    const n = commentsOf(p.id).length;
-    return `<a class="post-card" href="#/post/${p.id}">
-      <div class="post-head"><span class="avatar">${initial(p.author)}</span>
-        <span class="who"><b>${countryBadge(p.authorCountryCode)}${esc(p.author)}</b><span>${esc(p.areaLabel || p.area)} · ${esc(ago(p.createdAt))}</span></span>
-        <span class="badge">${esc(catLabel(p.cat))}</span></div>
-      <div class="post-content"><div class="post-text"><h3>${esc(p.title)}</h3><p>${esc(p.body)}</p></div>
-        ${p.photos && p.photos[0] ? `<img class="thumb" src="${esc(p.photos[0])}" alt="" loading="lazy">` : ''}</div>
-      <div class="post-foot"><span class="like ${S().postLikes[p.id] ? 'on' : ''}">${icon('heart', !!S().postLikes[p.id])}${postLikes(p)}</span><span class="like">${icon('comment')}${n}</span></div>
-    </a>`;
+    const n = commentsOf(p.id).length, liked = !!S().postLikes[p.id];
+    const href = '#/post/' + encodeURIComponent(p.id);
+    return `<article class="post-card">
+      <a class="post-card-link" href="${href}">
+        <div class="post-head"><span class="avatar">${initial(p.author)}</span>
+          <span class="who"><b>${countryBadge(p.authorCountryCode)}${esc(p.author)}</b><span>${esc(p.areaLabel || p.area)} · ${esc(ago(p.createdAt))}</span></span>
+          <span class="badge">${esc(catLabel(p.cat))}</span></div>
+        <div class="post-content"><div class="post-text"><h3>${esc(p.title)}</h3><p>${esc(p.body)}</p></div>
+          ${p.photos && p.photos[0] ? `<img class="thumb" src="${esc(p.photos[0])}" alt="" loading="lazy">` : ''}</div>
+      </a>
+      <div class="post-foot"><button type="button" class="like ${liked ? 'on' : ''}" data-act="likePost" data-id="${esc(p.id)}" aria-pressed="${liked}" aria-label="${esc(t('post.like', { n: postLikes(p) }))}">${icon('heart', liked)}${postLikes(p)}</button><a class="like" href="${href}" aria-label="${esc(t('post.comments', { n }))}">${icon('comment')}${n}</a></div>
+    </article>`;
   }
 
   /* ---------- views ---------- */
   const V = {};
   let homeFeaturedId = null;
+  let homeFeaturedPeriod = null;
   let homeAutoplayPaused = false;
 
   function homeFoodCard(f, { rank = 0, eager = false, slide = false, count = 5 } = {}) {
-    const saved = S().savedFoods.includes(f.id);
+    const saved = !!S().foodLikes?.[f.id];
     return `<article class="food-card${slide ? ' home-slide' : ''}"${slide ? ` role="group" aria-roledescription="slide" aria-label="${rank} / ${count}: ${esc(fname(f))}" data-food-id="${f.id}"` : ''}>
       <a href="#/food/${f.id}"><div class="photo"><img src="${img(f.id)}" alt="${esc(fname(f))}" loading="${eager ? 'eager' : 'lazy'}">${rank ? `<span class="rank">${rank}</span>` : ''}</div></a>
       <div class="info"><a class="names" href="#/food/${f.id}"><div class="name">${esc(fname(f))}</div>${lang() !== 'ko' ? `<div class="orig">${esc(f.ko.name)}</div>` : ''}</a>
@@ -169,7 +188,11 @@
   V.home = () => {
     const sort = S().sort;
     const list = [...FOODS];
-    const featured = [...FOODS].sort((a, b) => b.likes - a.likes).slice(0, 5);
+    const featuredAt = Date.now();
+    const period = window.IEBFeaturedFoods.periodAt(featuredAt);
+    if (period !== homeFeaturedPeriod) homeFeaturedId = null;
+    homeFeaturedPeriod = period;
+    const featured = window.IEBFeaturedFoods.select(FOODS, featuredAt);
     if (sort === 'name') list.sort((a, b) => fname(a).localeCompare(fname(b), lang()));
     else list.sort((a, b) => foodLikes(b) - foodLikes(a));
     return `<main class="screen has-tabbar home-screen">${appHeader()}
@@ -195,13 +218,30 @@
   V.home.mount = () => {
     const carousel = app.querySelector('.home-carousel');
     const track = app.querySelector('.home-track');
+    if (!track) return;
     const slides = [...track.children];
+    if (!slides.length) return;
     const pages = [...app.querySelectorAll('[data-slide]')];
     const prev = app.querySelector('.home-prev'), next = app.querySelector('.home-next');
     const counter = app.querySelector('.home-count');
     const autoplay = app.querySelector('.home-autoplay');
     const pointers = new Set();
     let timer = null, paused = homeAutoplayPaused, disposed = false, touching = false;
+    let featuredTimer = null;
+    const mountedPeriod = homeFeaturedPeriod;
+    const refreshFeatured = () => {
+      if (disposed || document.hidden) return false;
+      if (window.IEBFeaturedFoods.periodAt() === mountedPeriod) return false;
+      homeFeaturedId = null;
+      rerender();
+      return true;
+    };
+    const scheduleFeatured = () => {
+      clearTimeout(featuredTimer);
+      featuredTimer = setTimeout(() => {
+        if (!refreshFeatured() && !disposed) scheduleFeatured();
+      }, Math.max(1, window.IEBFeaturedFoods.nextRefreshAt() - Date.now()));
+    };
     let index = Math.max(0, slides.findIndex(slide => slide.dataset.foodId === homeFeaturedId));
     const stop = () => { clearTimeout(timer); timer = null; };
     const schedule = () => {
@@ -242,7 +282,7 @@
     // 네이티브 터치 스크롤의 pointercancel 뒤에도 손가락을 뗄 때까지 대기합니다.
     const onTouchStart = () => { touching = true; stop(); };
     const onTouchEnd = event => { if (touching) { touching = event.touches.length > 0; schedule(); } };
-    const onVisibility = () => { if (document.hidden) { pointers.clear(); touching = false; } schedule(); };
+    const onVisibility = () => { if (!document.hidden && refreshFeatured()) return; if (document.hidden) { pointers.clear(); touching = false; } schedule(); };
     const onPause = () => {
       paused = !paused;
       homeAutoplayPaused = paused;
@@ -272,9 +312,11 @@
     counter.setAttribute('aria-live', paused ? 'polite' : 'off');
     move(index, true);
     schedule();
+    scheduleFeatured();
     cleanup.push(() => {
       disposed = true;
       stop();
+      clearTimeout(featuredTimer);
       pointers.clear();
       autoplay.removeEventListener('click', onPause);
       carousel.removeEventListener('pointerdown', onPointerDown);
@@ -305,7 +347,7 @@
 
   V.food = ({ id }) => {
     const f = FOOD[id]; if (!f) return V.notFound();
-    const d = L(f), saved = S().savedFoods.includes(f.id), content = foodDetailContent(f);
+    const d = L(f), saved = !!S().foodLikes?.[f.id], content = foodDetailContent(f);
     const secs = [['info', 'food.sec.info'], ['how', 'food.sec.how'], ['allergy', 'food.sec.allergy'], ['places', 'food.sec.places']];
     return `<main class="screen has-cta">
       <div class="hero"><img src="${img(f.id)}" alt="${f.photo?.includes('placeholder') ? '사진 준비 중' : esc(d.name)}">
@@ -706,6 +748,7 @@
   let cleanup = [];
   const stack = [];
   function route() {
+    syncFoodCatalog();
     const hash = location.hash || '#/home';
     let name = 'notFound', params = {};
     for (const [re, n, keys] of ROUTES) {
@@ -749,9 +792,12 @@
     sort: () => { Store.set({ sort: S().sort === 'popular' ? 'name' : 'popular' }); rerender(); },
     saveFood: async el => {
       if (!requireLogin()) return;
-      const id = el.dataset.id; let on;
-      Store.update(s => { on = !s.savedFoods.includes(id); s.savedFoods = on ? [id, ...s.savedFoods] : s.savedFoods.filter(x => x !== id); });
-      await Store.flush(); if (!app.contains(el)) return; toast(t(on ? 'food.saved' : 'food.unsaved')); rerender();
+      const id = el.dataset.id, on = !S().foodLikes?.[id];
+      await Cloud.foodLike(id, on);
+      // Keep the existing saved-food page in sync with newly pressed food hearts.
+      Store.update(s => { s.savedFoods = on ? [id, ...s.savedFoods.filter(x => x !== id)] : s.savedFoods.filter(x => x !== id); });
+      await Store.flush(); if (!app.contains(el)) return;
+      toast(t(on ? 'food.saved' : 'food.unsaved')); rerender();
     },
     savePlace: async el => {
       if (!requireLogin()) return;

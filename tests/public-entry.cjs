@@ -3,7 +3,7 @@ const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),asse
 const source=fs.readFileSync(path.join(__dirname,'../js/app.js'),'utf8');
 let state={user:null,guest:false},rendered=null;
 const redirects=[];
-const ctx=vm.createContext({
+const ctx=vm.createContext({syncFoodCatalog:()=>{},
   S:()=>state,lang:()=> 'ko',loggedIn:()=>!!state.user,
   location:{hash:'',replace(href){redirects.push(href);}},
   app:{querySelector:()=>null},document:{documentElement:{}},
