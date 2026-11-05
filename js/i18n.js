@@ -29,7 +29,7 @@ window.I18N = {
     'auth.invalidId': '아이디는 영문, 숫자, 밑줄(_)로 4~20자 입력해 주세요.', 'auth.invalidPassword': '비밀번호는 공백만으로 구성할 수 없으며 8~72자여야 합니다.',
     'auth.duplicate': '이미 사용 중인 아이디입니다.', 'auth.invalidCredentials': '아이디 또는 비밀번호가 일치하지 않습니다.',
     'auth.storage': '저장하지 못했어요. 브라우저 저장소 설정과 여유 공간을 확인해 주세요.', 'auth.crypto': '이 브라우저에서는 로그인 처리를 지원하지 않습니다. 최신 브라우저에서 로컬 파일 또는 HTTPS로 열어 주세요.', 'auth.failure': '처리하지 못했어요. 다시 시도해 주세요.',
-    'home.featured': '추천 향토음식 4선', 'home.swipe': '좌우로 넘겨보고, 아래로 내려 더 많은 음식을 만나보세요.', 'home.previous': '이전 음식', 'home.next': '다음 음식',
+    'home.featured': '추천 향토음식 5선', 'home.swipe': '좌우로 넘겨보고, 아래로 내려 더 많은 음식을 만나보세요.', 'home.previous': '이전 음식', 'home.next': '다음 음식',
     'food.badge': '부산 대표 음식', 'food.places': '식당 {n}곳',
     'food.sec.info': '상세 정보', 'food.sec.how': '먹는 방법', 'food.sec.allergy': '알레르기', 'food.sec.places': '식당 리스트',
     'food.h.info': '상세 정보', 'food.h.how': '먹는 방법', 'food.h.allergy': '알레르기 정보', 'food.h.places': '식당 리스트',
@@ -266,3 +266,54 @@ for (const [language, copy] of Object.entries({
   zh: {'country.label':'国家／地区','country.help':'国家或地区将显示在姓名旁，并优先展示同一国家或地区的帖子。界面语言可单独设置。','country.personal':'个人信息设置','country.saved':'国家或地区已更新。','country.feedFirst':'优先展示来自{country}的会员发布的帖子。','profile.invalidCountry':'请从列表中选择国家或地区。'},
   ja: {'country.label':'国・地域','country.help':'国・地域は名前の横に表示され、同じ国・地域の投稿を優先します。表示言語は別に設定できます。','country.personal':'個人情報設定','country.saved':'国・地域を変更しました。','country.feedFirst':'{country}の会員が書いた投稿を優先して表示します。','profile.invalidCountry':'一覧から国・地域を選択してください。'},
 })) Object.assign(window.I18N[language], copy);
+/* Shared food detail labels. */
+Object.assign(window.I18N.ko, {
+  "food.row.region": "대표 지역",
+  "food.row.method": "조리 방식",
+  "food.row.spice": "매운맛",
+  "food.row.season": "계절",
+  "food.introduction": "음식 소개·유래",
+  "food.unconfirmed": "확인 필요",
+  "food.translationPending": "상세 내용은 현재 한국어로 제공하며 번역 검수 중입니다.",
+  "food.noPlaces": "현재 등록된 식당 자료가 없습니다.",
+  "food.placeReview": "식당 자료 확인 안내"
+});
+Object.assign(window.I18N.en, {
+  "food.row.region": "Region",
+  "food.row.method": "Cooking method",
+  "food.row.spice": "Spiciness",
+  "food.row.season": "Season",
+  "food.introduction": "About this dish and its origins",
+  "food.unconfirmed": "To be confirmed",
+  "food.translationPending": "Detailed content is currently available in Korean. Translations are under review.",
+  "food.noPlaces": "No restaurant information is currently registered.",
+  "food.placeReview": "Restaurant information notes"
+});
+Object.assign(window.I18N.zh, {
+  "food.row.region": "代表地区",
+  "food.row.method": "烹饪方式",
+  "food.row.spice": "辣度",
+  "food.row.season": "季节",
+  "food.introduction": "美食介绍与起源",
+  "food.unconfirmed": "待确认",
+  "food.translationPending": "详细内容目前为韩语，翻译审核中。",
+  "food.noPlaces": "暂无已登记的餐厅资料。",
+  "food.placeReview": "餐厅资料说明"
+});
+Object.assign(window.I18N.ja, {
+  "food.row.region": "代表地域",
+  "food.row.method": "調理方法",
+  "food.row.spice": "辛さ",
+  "food.row.season": "季節",
+  "food.introduction": "料理の紹介と由来",
+  "food.unconfirmed": "要確認",
+  "food.translationPending": "詳細は現在韓国語で表示しています。翻訳は確認中です。",
+  "food.noPlaces": "現在登録されている店舗情報はありません。",
+  "food.placeReview": "店舗情報の確認事項"
+});
+
+/* Restaurant schedule labels. */
+Object.assign(window.I18N.ko, {"place.businessHours":"영업일·시간","place.holidays":"휴무일"});
+Object.assign(window.I18N.en, {"place.businessHours":"Opening days and hours","place.holidays":"Closed on"});
+Object.assign(window.I18N.zh, {"place.businessHours":"营业日与时间","place.holidays":"休息日"});
+Object.assign(window.I18N.ja, {"place.businessHours":"営業日・時間","place.holidays":"定休日"});

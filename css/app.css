@@ -435,3 +435,15 @@ details.faq p { margin: 0 0 16px; color: var(--ink-2); font-size: 14px; }
 /* Member country label: text codes remain consistent across devices. */
 .country-badge{display:inline-flex;align-items:center;justify-content:center;min-width:27px;height:20px;padding:0 4px;margin-right:6px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--ink-2);font:700 10px/1 Inter,system-ui,sans-serif;letter-spacing:.3px;vertical-align:middle;white-space:nowrap}
 .country-feed-note{margin:0;padding:0 20px 12px;color:var(--ink-3);font-size:12px;line-height:1.6}
+/* The missing-coordinate panel stays inside the restaurant detail flow. */
+.mini-map.map-fallback { position: relative; inset: auto; }
+
+/* Shared eating-method card for every food detail page. */
+.how-card { background: var(--surface); border-radius: 12px; padding: 16px; display: grid; gap: 14px; }
+.how-card > :first-child { margin-top: 0; }
+.how-card > :last-child { margin-bottom: 0; }
+.how-card p { margin: 0; }
+
+/* Restaurant details share the same address and schedule rows. */
+.place-info .row > span { min-width: 0; overflow-wrap: anywhere; }
+.place-schedule { display: grid; gap: 6px; line-height: 1.7; }

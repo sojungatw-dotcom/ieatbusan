@@ -19,15 +19,16 @@ global.fetch=async(url,options={})=>{
   }
   if(parsed.pathname==='/rest/v1/ieb_posts') {
     if(options.method==='POST')return reply(null);
-    const base={user_id:uid,title:'글',body:'내용',category:'free',food:null,photos:[],created_at:'2026-11-01T00:00:00Z',seed_likes:0,
+    const base={user_id:uid,title:'글',body:'내용',category:'free',food:null,photos:[],created_at:'2026-11-01T00:00:00Z',seed_likes:99,
       ieb_profiles:{nickname:'작성자',area:8,country_code:country}};
     const rows=[{...base,id:'kr',country_code:'KR'},{...base,id:'jp',country_code:'JP'}];
     const filter=parsed.searchParams.get('country_code');
     return reply(filter?.startsWith('eq.')?rows.filter(row=>row.country_code===filter.slice(3))
       :filter?.startsWith('neq.')?rows.filter(row=>row.country_code!==filter.slice(4)):rows);
   }
-  if(parsed.pathname==='/rest/v1/ieb_comments')return reply([{id:'c1',post_id:'jp',user_id:uid,body:'댓글',seed_likes:0,created_at:'2026-11-01T00:00:00Z',ieb_profiles:{nickname:'작성자',country_code:country}}]);
-  if(parsed.pathname==='/rest/v1/ieb_preferences'||parsed.pathname==='/rest/v1/ieb_post_likes')return reply([]);
+  if(parsed.pathname==='/rest/v1/ieb_comments')return reply([{id:'c1',post_id:'jp',user_id:uid,body:'댓글',seed_likes:99,created_at:'2026-11-01T00:00:00Z',ieb_profiles:{nickname:'작성자',country_code:country}}]);
+  if(parsed.pathname==='/rest/v1/ieb_post_likes')return reply([{post_id:'jp',user_id:uid},{post_id:'jp',user_id:'another-user'}]);
+  if(parsed.pathname==='/rest/v1/ieb_preferences')return reply([]);
   throw new Error('Unexpected mock URL '+parsed.pathname);
 };
 async function request(action,body,cookie='') {
@@ -70,6 +71,10 @@ async function request(action,body,cookie='') {
   assert.equal(bootstrap.data.posts.find(post=>post.id==='kr').authorCountryCode,'JP');
   assert.equal(bootstrap.data.posts.find(post=>post.id==='kr').countryCode,'KR','Country at posting remains distinct from current author country');
   assert.equal(bootstrap.data.comments.jp[0].authorCountryCode,'JP');
+  assert.equal(bootstrap.data.comments.jp[0].likes,0,'Ignore legacy example comment likes');
+  assert.equal(bootstrap.data.posts.find(post=>post.id==='jp').likes,1,'Keep only other real user likes, excluding fabricated seed count');
+  assert.equal(bootstrap.data.posts.find(post=>post.id==='kr').likes,0);
+  assert.equal(bootstrap.data.postLikes.jp,true,'Own real like remains separately counted exactly once');
   const filters=calls.filter(call=>call.url.pathname==='/rest/v1/ieb_posts').map(call=>call.url.searchParams.get('country_code'));
   assert.ok(filters.includes('eq.JP')&&filters.includes('neq.JP'),'Apply country priority before feed limit');
   await request('post',{title:'제목',body:'내용',cat:'free',photos:[],countryCode:'KR',user_id:'other-user'},cookie);

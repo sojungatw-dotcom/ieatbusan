@@ -14,11 +14,11 @@ for (const district of data.districts) {
   assert.ok(shape?.path.startsWith('M'), district.name + ' polygon missing');
   assert.ok(shape.label.every(Number.isFinite));
 }
-assert.equal(data.placesForSelection({districtId:'haeundae'}).length, 17);
+assert.equal(data.placesForSelection({districtId:'haeundae'}).length, 18);
 assert.equal(data.placesForSelection({districtId:'haeundae',foodId:'bokguk'}).length, 3);
 assert.equal(data.placesForSelection({districtId:'haeundae',foodId:'jagalchi-hoe'}).length, 0);
 assert.equal(data.placesForSelection({districtId:'buk'}).length, 0);
-assert.equal(data.foodCounts('haeundae').length, 10);
+assert.equal(data.foodCounts('haeundae').length, 11);
 assert.equal(data.foodCounts('haeundae').find(item => item.food.id === 'bokguk').count, 3);
 assert.equal(data.placesForSelection({foodId:'milmyeon'})[2].i, 2, 'Filtering must preserve legacy indices');
 let creates = 0;

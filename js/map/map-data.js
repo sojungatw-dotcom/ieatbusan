@@ -24,14 +24,17 @@
         const original = food.ko?.restaurants?.[index] || {};
         const content = food[getLanguage()] || food.ko || {};
         const restaurant = content.restaurants?.[index] || original;
-        const research = place.research || food.manuscript?.restaurants?.[index];
+        const research = place.research || (food.manuscript?.placeRecordsMerged ? undefined : food.manuscript?.restaurants?.[index]);
         const candidate = Object.hasOwn(place, 'districtId') ? place.districtId
           : research || place.address ? addressDistrict(place.address || research?.area)
-          : food.manuscript ? null : catalog.placeDistricts[placeKey(foodId, index)];
+          : catalog.placeDistricts[placeKey(foodId, index)];
         return { food, i: index, key: placeKey(foodId, index), districtId: hasDistrict(candidate) ? candidate : null,
           research,
           name: place.name || '', lat: place.lat, lng: place.lng, area: restaurant.area || original.area || '',
-          signature: restaurant.signature || original.signature || '', areaKo: original.area || '' };
+          signature: restaurant.signature || original.signature || '', areaKo: original.area || '',
+          address: place.address || research?.area || original.address || restaurant.address || '',
+          hours: place.hours || research?.hours || original.hours || restaurant.hours || '',
+          holiday: place.holiday || research?.holiday || original.holiday || restaurant.holiday || '' };
       }
       const placesFor = id => hasFood(id) ? (byId[id].places || []).map((_, i) => placeOf(id, i)).filter(Boolean) : [];
       const allPlaces = () => foods.flatMap(food => placesFor(food.id));
