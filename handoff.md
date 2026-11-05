@@ -7,6 +7,8 @@
 
 ## 0. 현재 상태와 다음 작업
 
+- **작성 국가 고정·프로필 국가 변경 (2026-11-05, feature/country-snapshots):** 사용자 요청으로 최신 main dfd5c16 pull 완료 후 새 브랜치. 글·댓글은 저장된 country_code로 배지 표시, 기존 댓글의 국가가 없으면 추정/백필 없이 숨김. 새 댓글 서버 국가 저장과 추가 SQL 20261105_comment_country_snapshot.sql 준비(실제 DB 미실행). 프로필 활동 지역 선택을 국가 변경으로 교체, 닉네임/소개/국가 단일 PATCH이며 기존 area 유지. 설정 국가 메뉴 제거, 이전 주소는 프로필 호환 뷰. 합성 데이터에서 JP 글/댓글 작성 후 프로필 US 변경에도 JP 배지 유지 확인. 기존 데이터 변경/commit/push 없음. 이전 archive 삭제 4개는 별도.
+
 - **회원 국가 기능 브랜치 보관 승인 (2026-11-05, 아래 로컬 전용 기록보다 우선):** 사용자가 feature/member-country 푸시 승인. main은 지도 PR #4의 dd5c5bf이며 현재 기능 기준과 동일. 국가 가입·배지·설정·피드·활동 제한·메인 우선 진입과 상단 로그인, 엑셀 구조 대조 및 추가 SQL 포함. DB 적용/실제 계정 검증이 남아 있으므로 main 병합 금지. 이전 archive 이동에 따른 로컬 삭제 4개는 기능 커밋에서 제외. 기존 가입 함수/RLS 유지. 실제 DB 변경 없음. 상세 docs/member-country.md.
 
 - **회원 국가 기능 로컬 구현 (2026-11-05, feature/member-country):** 사용자 승인으로 가입 국가명 선택/기본 KR, 이름 앞 코드 배지, 설정→개인정보 국가 변경, 같은 국가 글 우선, 비로그인 활동 메뉴/직접 접근 제한 구현. js/countries.js를 프론트/서버 허용값으로 공유. supabase/migrations/20261105_member_country.sql 준비했으나 실제 DB 구조를 사용자께서 요청 중이며 적용/운영 검증 대기. 합성 데이터 전용 확인 서버 tests/member-country-preview.cjs(8781), 관련 검사 2개. commit/push/DB 변경하지 않음. 상세 docs/member-country.md. 작업 전 사용자가 옮긴 archive 파일 4개 삭제는 별개이므로 커밋 시 분리할 것.

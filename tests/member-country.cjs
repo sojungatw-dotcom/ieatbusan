@@ -27,7 +27,7 @@ for (const [, src] of read('index.html').matchAll(/<script src="([^"]+)"/g)) {
   vm.runInContext(read(file),ctx,{filename:file});
 }
 ctx.Auth={register:async(...args)=>calls.push(['register',...args])};
-ctx.Cloud={country:async(code)=>calls.push(['country',code])};
+ctx.Cloud={profile:async(data)=>calls.push(['profile',data])};
 vm.runInContext(read('js/app.js').replace(/\}\)\(\);\s*$/, 'window.memberTest={V,submitForm};})();'),ctx);
 const {V,submitForm}=ctx.memberTest;
 for (const lang of ['ko','en','zh','ja']) {
@@ -48,7 +48,10 @@ state.user={id:'u1',nickname:'회원',username:'member',countryCode:'JP',area:8,
 assert.ok(V.my().includes('country-badge'));
 assert.ok(V.my().includes('>JP</span>'));
 assert.ok(V.my().includes('href="#/my/posts"'));
-assert.ok(V.settings().includes('href="#/settings/privacy"'));
+assert.ok(!V.settings().includes('href="#/settings/privacy"'),'Country editing moves out of settings');
+assert.ok(!V.profile().includes('name="area"'),'Replace the activity-area control');
+assert.ok(V.profile().includes('name="countryCode"'));
+assert.ok(V.profile().includes('value="JP" selected'));
 assert.ok(V.accountPrivacy().includes('value="JP" selected'));
 state.posts=[
   {id:'kr',title:'한국 글',body:'내용',author:'작성자',countryCode:'KR',authorCountryCode:'KR',createdAt:30,likes:100,cat:'review',photos:[]},
@@ -61,6 +64,15 @@ for (const tab of ['latest','popular','review']) {
 }
 assert.ok(V.community({tab:'latest'}).indexOf('#/post/jp-new')<V.community({tab:'latest'}).indexOf('#/post/jp-old'));
 assert.ok(V.community({tab:'popular'}).indexOf('#/post/jp-old')<V.community({tab:'popular'}).indexOf('#/post/jp-new'));
+state.posts[0].authorCountryCode='US';
+state.comments={kr:[
+  {id:'legacy',author:'이전댓글',text:'기존 데이터',countryCode:null,authorCountryCode:'US',createdAt:1},
+  {id:'new',author:'새댓글',text:'작성 시 국가',countryCode:'JP',authorCountryCode:'US',createdAt:2},
+]};
+const postHtml=V.post({id:'kr'});
+assert.ok(postHtml.includes('>KR</span>')&&postHtml.includes('>JP</span>'));
+assert.ok(!postHtml.includes('>US</span>'),'Post/comment badges cannot follow current profile country');
+assert.equal((postHtml.match(/class="country-badge"/g)||[]).length,2,'Legacy comment without a snapshot has no invented badge');
 state.user=null;
 assert.ok(V.community({tab:'latest'}).indexOf('#/post/kr')<V.community({tab:'latest'}).indexOf('#/post/jp-new'), 'Guest ordering must not assume nationality');
 (async()=>{
@@ -70,7 +82,8 @@ assert.ok(V.community({tab:'latest'}).indexOf('#/post/kr')<V.community({tab:'lat
   await submitForm({target:form,preventDefault(){}});
   assert.deepEqual(calls[0],['register','tester','test-password','JP']);
   state.user={id:'u1',countryCode:'KR'};
-  await submitForm({target:{dataset:{form:'country'},elements:{countryCode:{value:'US'}},isConnected:false},preventDefault(){}});
-  assert.deepEqual(calls[1],['country','US']);
+  await submitForm({target:{dataset:{form:'profile'},nickname:{value:'새닉네임'},bio:{value:'소개'},elements:{countryCode:{value:'US'}},isConnected:false},preventDefault(){}});
+  assert.equal(calls[1][0],'profile');
+  assert.deepEqual(JSON.parse(JSON.stringify(calls[1][1])),{nickname:'새닉네임',bio:'소개',countryCode:'US'});
   console.log('PASS 249 countries, translated names/default KR, signup payload, badges, country settings, stable feed priority and guest activity guards');
 })().catch(error=>{console.error(error);process.exitCode=1;});

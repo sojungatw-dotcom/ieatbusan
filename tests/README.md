@@ -6,6 +6,11 @@ Run `node tests/google-maps.cjs`. Uses a fake Google SDK to verify lazy loading,
 
 ## Member country checks
 
+Run `node tests/comment-country-migration.cjs` for the additive, nullable comment snapshot migration
+without historical backfills. The member UI/API checks also verify atomic profile country editing,
+preserved post/comment countries after changing profile, and missing badges on unsnapshotted legacy comments.
+These checks do not execute SQL against PostgreSQL.
+
 Run `node tests/member-country-migration.cjs` to check preservation of the existing signup function/RLS,
 matching country allowlists/defaults and column grants. This is not a PostgreSQL execution/RLS test.
 

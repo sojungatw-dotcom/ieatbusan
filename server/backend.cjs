@@ -76,8 +76,15 @@ const checkedText = (value, min, max, code = 'db.validation') => {
   return value.trim();
 };
 function checkedCountry(value = 'KR') {
+  if (value === null || (typeof value === 'string' && value.trim() === '')) return 'KR';
   if (!countries.isValid(value)) fail('profile.invalidCountry');
   return value;
+}
+const savedCountry = value => countries.isValid(value) ? value : null;
+async function postingCountry(cfg, session) {
+  const rows = await rest(cfg, 'ieb_profiles', '?id=eq.' + session.user.id + '&select=country_code', { token: session.token });
+  if (!rows[0]) fail('db.forbidden', 403);
+  return checkedCountry(rows[0].country_code);
 }
 function credentials(body) {
   const username = String(body.username || '').trim().toLowerCase();
@@ -92,14 +99,14 @@ async function snapshot(cfg, session) {
     session.user ? rest(cfg, 'ieb_preferences', '?user_id=eq.' + session.user.id + '&select=data', opts) : [],
   ]);
   const current = profile[0], country = countries.normalize(current?.country_code);
-  const query = '?select=*,ieb_profiles!ieb_posts_user_id_fkey(nickname,area,country_code)&order=created_at.desc&limit=500';
+  const query = '?select=*,ieb_profiles!ieb_posts_user_id_fkey(nickname,area)&order=created_at.desc&limit=500';
   const feed = current ? Promise.all([
     rest(cfg, 'ieb_posts', query + '&country_code=eq.' + country, opts),
     rest(cfg, 'ieb_posts', query + '&country_code=neq.' + country, opts),
   ]).then(([same, other]) => [...same, ...other].slice(0, 500)) : rest(cfg, 'ieb_posts', query, opts);
   const [posts, comments, likes] = await Promise.all([
     feed,
-    rest(cfg, 'ieb_comments', '?select=*,ieb_profiles(nickname,country_code)&order=created_at.asc&limit=5000', opts),
+    rest(cfg, 'ieb_comments', '?select=*,ieb_profiles(nickname)&order=created_at.asc&limit=5000', opts),
     rest(cfg, 'ieb_post_likes', '?select=post_id,user_id&limit=10000', opts),
   ]);
   const paths = [...new Set(posts.flatMap(post => post.photos))];
@@ -113,13 +120,13 @@ async function snapshot(cfg, session) {
     preferences: preferences[0]?.data || {}, postLikes,
     posts: posts.map(post => ({ id: post.id, title: post.title, body: post.body, cat: post.category, food: post.food,
       author: post.ieb_profiles?.nickname || post.seed_author || '', area: districts[post.ieb_profiles?.area] || post.seed_area || '',
-      countryCode: countries.normalize(post.country_code), authorCountryCode: countries.normalize(post.ieb_profiles?.country_code),
+      countryCode: savedCountry(post.country_code), authorCountryCode: savedCountry(post.country_code),
       createdAt: Date.parse(post.created_at), mine: !!uid && post.user_id === uid,
       photos: post.photos.map(photo => images[photo]).filter(Boolean),
       likes: likes.filter(like => like.post_id === post.id && like.user_id !== uid).length })),
     comments: comments.reduce((result, comment) => {
       (result[comment.post_id] ||= []).push({ id: comment.id, author: comment.ieb_profiles?.nickname || comment.seed_author || '',
-        authorCountryCode: countries.normalize(comment.ieb_profiles?.country_code),
+        countryCode: savedCountry(comment.country_code), authorCountryCode: savedCountry(comment.country_code),
         text: comment.body, createdAt: Date.parse(comment.created_at), likes: 0, mine: !!uid && comment.user_id === uid });
       return result;
     }, {}),
@@ -145,9 +152,7 @@ async function createPost(cfg, session, body) {
   if (!['review','question','free'].includes(body.cat)) fail('db.validation');
   if (body.food && (typeof body.food !== 'string' || !/^[\w-]{1,80}$/.test(body.food))) fail('db.validation');
   if (!Array.isArray(body.photos) || body.photos.length > 4) fail('db.validation');
-  const profiles = await rest(cfg, 'ieb_profiles', '?id=eq.' + session.user.id + '&select=country_code', { token: session.token });
-  if (!profiles[0]) fail('db.forbidden', 403);
-  const countryCode = countries.normalize(profiles[0].country_code);
+  const countryCode = await postingCountry(cfg, session);
   const photos = [];
   try {
     for (const photo of body.photos) {
@@ -189,7 +194,8 @@ async function action(cfg, req, res, name, body) {
   if (name === 'post') return createPost(cfg, session, body);
   if (name === 'comment') {
     const post_id = checkedText(body.postId, 1, 80), text = checkedText(body.text, 1, 300);
-    await rest(cfg, 'ieb_comments', '', { token, method: 'POST', body: { id: randomUUID(), user_id: uid, post_id, body: text } });
+    const countryCode = await postingCountry(cfg, session);
+    await rest(cfg, 'ieb_comments', '', { token, method: 'POST', body: { id: randomUUID(), user_id: uid, post_id, body: text, country_code: countryCode } });
     return { saved: true };
   }
   if (name === 'like') {
@@ -224,8 +230,14 @@ async function action(cfg, req, res, name, body) {
   }
   if (name === 'profile') {
     const nickname = checkedText(body.nickname, 2, 10, 'profile.invalid');
-    if (!Number.isInteger(body.area) || body.area < 0 || body.area > 15 || typeof body.bio !== 'string' || body.bio.length > 30) fail('db.validation');
-    await rest(cfg, 'ieb_profiles', '?id=eq.' + uid, { token, method: 'PATCH', body: { nickname, area: body.area, bio: body.bio } });
+    if (typeof body.bio !== 'string' || body.bio.length > 30) fail('db.validation');
+    const patch = { nickname, bio: body.bio };
+    if (Object.hasOwn(body, 'area')) {
+      if (!Number.isInteger(body.area) || body.area < 0 || body.area > 15) fail('db.validation');
+      patch.area = body.area;
+    }
+    if (Object.hasOwn(body, 'countryCode')) patch.country_code = checkedCountry(body.countryCode);
+    await rest(cfg, 'ieb_profiles', '?id=eq.' + uid, { token, method: 'PATCH', body: patch });
     return { saved: true };
   }
   if (name === 'country') {
