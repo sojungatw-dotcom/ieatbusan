@@ -103,10 +103,10 @@ async function snapshot(cfg, session) {
       author: post.ieb_profiles?.nickname || post.seed_author || '', area: districts[post.ieb_profiles?.area] || post.seed_area || '',
       createdAt: Date.parse(post.created_at), mine: !!uid && post.user_id === uid,
       photos: post.photos.map(photo => images[photo]).filter(Boolean),
-      likes: post.seed_likes + likes.filter(like => like.post_id === post.id && like.user_id !== uid).length })),
+      likes: likes.filter(like => like.post_id === post.id && like.user_id !== uid).length })),
     comments: comments.reduce((result, comment) => {
       (result[comment.post_id] ||= []).push({ id: comment.id, author: comment.ieb_profiles?.nickname || comment.seed_author || '',
-        text: comment.body, createdAt: Date.parse(comment.created_at), likes: comment.seed_likes, mine: !!uid && comment.user_id === uid });
+        text: comment.body, createdAt: Date.parse(comment.created_at), likes: 0, mine: !!uid && comment.user_id === uid });
       return result;
     }, {}),
   };

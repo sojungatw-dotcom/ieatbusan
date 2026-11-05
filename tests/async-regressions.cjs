@@ -1,6 +1,6 @@
 /* Dependency-free checks against exact production function source, using VM fakes.
  * Run: node tests/async-regressions.cjs [--source path/to/app.js]
- * These test asynchronous lifetimes, not browser rendering or native permissions.
+ * Photo lifetimes only. Location/SDK cases now live in map-regressions.cjs and map-provider.cjs.
  */
 'use strict';
 const fs = require('node:fs');
@@ -52,39 +52,8 @@ function photoHarness(mountSource, fileCount = 2) {
   };
 }
 
-function geoHarness(locateSource) {
-  const requests = [];
-  const activeMarkers = new Set();
-  const movements = [];
-  const toasts = [];
-  const createMap = id => ({ id, flyTo: ll => movements.push({ map: id, ll: Array.from(ll) }) });
-  const context = vm.createContext({
-    mapRef: createMap('A'),
-    locationMarker: null,
-    locationRequest: 0,
-    navigator: { geolocation: { getCurrentPosition: (success, error) => requests.push({ success, error }) } },
-    window: {
-      L: {
-        circleMarker: ll => ({
-          ll: Array.from(ll),
-          addTo(map) { this.map = map.id; activeMarkers.add(this); return this; },
-          remove() { activeMarkers.delete(this); },
-        }),
-      },
-    },
-    toast: message => toasts.push(message),
-    t: key => key,
-  });
-  vm.runInContext(`var locate = ${locateSource};`, context);
-  return {
-    context, requests, activeMarkers, movements, toasts, createMap,
-    success: (index, latitude = 35.1796, longitude = 129.0756) => requests[index].success({ coords: { latitude, longitude } }),
-  };
-}
-
 async function run(source, { quiet = false } = {}) {
   const mountSource = extract(source, /V\.write\.mount = (\(\) => \{[\s\S]*?\r?\n  \});/, 'V.write.mount');
-  const locateSource = extract(source, /    locate: (\(\) => \{[\s\S]*?\r?\n    \}),\r?\n    needLogin/, 'A.locate');
   const results = [];
   async function test(name, fn) {
     try { await fn(); results.push({ name, passed: true }); }
@@ -103,38 +72,6 @@ async function run(source, { quiet = false } = {}) {
     const h = photoHarness(mountSource, 3);
     await h.finish([h.change(), h.change()]);
     assert.equal(h.context.draftPhotos.length, 4);
-  });
-  await test('location result cannot modify a replacement map', () => {
-    const h = geoHarness(locateSource);
-    h.context.locate();
-    h.context.mapRef = h.createMap('B');
-    h.success(0);
-    assert.equal(h.activeMarkers.size, 0);
-    assert.equal(h.movements.length, 0);
-  });
-  await test('repeated location requests retain one location marker', () => {
-    const h = geoHarness(locateSource);
-    for (let i = 0; i < 3; i++) { h.context.locate(); h.success(i); }
-    assert.equal(h.activeMarkers.size, 1);
-    assert.equal(h.movements.length, 3);
-  });
-  await test('a newer location request wins over late older responses', () => {
-    const h = geoHarness(locateSource);
-    h.context.locate(); h.context.locate();
-    h.success(1, 35.18, 129.08); h.success(0, 35.1, 129.1);
-    assert.equal(h.movements.length, 1);
-    assert.deepEqual(h.movements[0].ll, [35.18, 129.08]);
-  });
-  await test('location failure from a removed map stays silent', () => {
-    const h = geoHarness(locateSource);
-    h.context.locate(); h.context.mapRef = null;
-    h.requests[0].error({ code: 1 });
-    assert.equal(h.toasts.length, 0);
-  });
-  await test('current location failures show the error notice', () => {
-    const h = geoHarness(locateSource);
-    h.context.locate(); h.requests[0].error({ code: 3 });
-    assert.deepEqual(h.toasts, ['map.locFail']);
   });
   const failed = results.filter(result => !result.passed);
   if (!quiet) {
