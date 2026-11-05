@@ -33,12 +33,12 @@ for (const language of ['ko', 'en', 'zh', 'ja']) {
     ctx.state.sort = sort;
     const html = vm.runInContext('V.home()', ctx);
     assert.equal((html.match(/class="food-card home-slide"/g) || []).length, 5);
-    assert.equal((html.match(/class="food-card"/g) || []).length, 20);
+    assert.equal((html.match(/class="food-card"/g) || []).length, ctx.FOODS.length);
     assert.equal((html.match(/data-slide=/g) || []).length, 5);
     assert.ok(!html.includes('undefined'), 'Missing translation or data');
   }
 }
-console.log('PASS 4 languages and both sorts retain 5 slides and 20 food cards');
+console.log('PASS 4 languages and both sorts retain 5 slides and the complete food catalog');
 
 class Element {
   constructor(dataset = {}) { this.dataset = dataset; this.events = {}; this.attrs = {}; }

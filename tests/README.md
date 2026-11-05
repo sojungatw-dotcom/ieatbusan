@@ -2,6 +2,10 @@
 
 ## Map module checks
 
+Run `node tests/map-integration.cjs` for the current main catalog: source-address district assignment,
+preserved manuscript restaurant details, explicit region overrides and coordinate-less row navigation.
+Run `node tests/food-manuscript.cjs` for the teammate's food detail content and map coordinate exclusion.
+
 Run `node tests/map-contracts.cjs`, `node tests/map-loader.cjs` and `node tests/map-lifecycle.cjs`
 for stable district/place IDs, validated map routes, coordinate/translation fallbacks, lazy SDK/CSS
 loading, shared concurrent requests, retry/timeout and navigation during asynchronous initialization.

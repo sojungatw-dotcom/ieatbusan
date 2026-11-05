@@ -14,11 +14,11 @@ for (const district of data.districts) {
   assert.ok(shape?.path.startsWith('M'), district.name + ' polygon missing');
   assert.ok(shape.label.every(Number.isFinite));
 }
-assert.equal(data.placesForSelection({districtId:'haeundae'}).length, 13);
+assert.equal(data.placesForSelection({districtId:'haeundae'}).length, 17);
 assert.equal(data.placesForSelection({districtId:'haeundae',foodId:'bokguk'}).length, 3);
-assert.equal(data.placesForSelection({districtId:'haeundae',foodId:'milmyeon'}).length, 0);
+assert.equal(data.placesForSelection({districtId:'haeundae',foodId:'jagalchi-hoe'}).length, 0);
 assert.equal(data.placesForSelection({districtId:'buk'}).length, 0);
-assert.equal(data.foodCounts('haeundae').length, 6);
+assert.equal(data.foodCounts('haeundae').length, 10);
 assert.equal(data.foodCounts('haeundae').find(item => item.food.id === 'bokguk').count, 3);
 assert.equal(data.placesForSelection({foodId:'milmyeon'})[2].i, 2, 'Filtering must preserve legacy indices');
 let creates = 0;
@@ -46,7 +46,7 @@ for(language of ['ko','en','zh','ja']){
   assert.equal(creates,0,'Overview must not initialize an external map');
   const selected=view.render({district:'haeundae'});
   assert.ok(selected.includes('href="#/map/region/haeundae/detail/bokguk"'));
-  assert.ok(!selected.includes('href="#/map/region/haeundae/detail/milmyeon"'));
+  assert.ok(!selected.includes('href="#/map/region/haeundae/detail/jagalchi-hoe"'));
   assert.ok(selected.includes('aria-current="true"'));
   assert.ok(!selected.includes('undefined'));
   const detail=view.render({district:'haeundae',mode:'detail',id:'bokguk'});
@@ -76,5 +76,5 @@ regionPicker.value='invalid'; pickerEvents.change();
 assert.equal(navigations.length,2,'Invalid region cannot navigate');
 dispose();
 assert.equal(pickerEvents.change,undefined,'Region listener is removed with the map screen');
-assert.equal((view.render({id:'milmyeon'}).match(/data-act="flyTo"/g)||[]).length,4,'Legacy food map route still opens detail');
+assert.equal((view.render({id:'milmyeon'}).match(/data-act="flyTo"/g)||[]).length,data.placesFor('milmyeon').length,'Legacy food map route still opens detail with the current source data');
 console.log('PASS 16 district shapes, local-only overview, four languages, region/food filters, empty regions, state links and legacy detail routes');

@@ -11,6 +11,11 @@
       const placeKey = (foodId, index) => `${foodId}:${index}`;
       const hasCoordinates = place => Number.isFinite(place?.lat) && Number.isFinite(place?.lng)
         && Math.abs(place.lat) <= 90 && Math.abs(place.lng) <= 180;
+      // Adapt source addresses from main's manuscript data; never parse translated display labels.
+      function addressDistrict(address) {
+        const name = String(address || '').trim().match(/^부산(?:광역시|시)?\s+(\S+)/)?.[1];
+        return districts.find(district => district.name === name)?.id || null;
+      }
       function placeOf(foodId, value) {
         const index = Number(value);
         if (!hasFood(foodId) || !Number.isInteger(index) || index < 0) return null;
@@ -19,8 +24,12 @@
         const original = food.ko?.restaurants?.[index] || {};
         const content = food[getLanguage()] || food.ko || {};
         const restaurant = content.restaurants?.[index] || original;
-        const candidate = Object.hasOwn(place, 'districtId') ? place.districtId : catalog.placeDistricts[placeKey(foodId, index)];
+        const research = place.research || food.manuscript?.restaurants?.[index];
+        const candidate = Object.hasOwn(place, 'districtId') ? place.districtId
+          : research || place.address ? addressDistrict(place.address || research?.area)
+          : food.manuscript ? null : catalog.placeDistricts[placeKey(foodId, index)];
         return { food, i: index, key: placeKey(foodId, index), districtId: hasDistrict(candidate) ? candidate : null,
+          research,
           name: place.name || '', lat: place.lat, lng: place.lng, area: restaurant.area || original.area || '',
           signature: restaurant.signature || original.signature || '', areaKo: original.area || '' };
       }

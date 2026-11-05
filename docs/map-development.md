@@ -1,6 +1,11 @@
 # 지도 개발·협업 및 API 키 인수인계
 
-기준: 2026-11-04, 작업 브랜치 `feature/map-renewal`.
+기준: 2026-11-05, 작업 브랜치 `feature/map-renewal`.
+
+사용자 승인으로 지도 브랜치 푸시와 PR 준비를 진행합니다. 아래 과거의 로컬 전용 지시를 대체합니다.
+`main` 병합은 담당자 검토 후 진행하며 `max-branch`의 미병합 커밋은 포함하지 않습니다.
+최신 main `703899d`를 지도 브랜치에 통합했습니다. 통합 전 복구 기준은 `1161d90`
+(`backup/map-before-main-20261105` 로컬 브랜치), 파일 백업은 `../.local-backups/map-before-main-integration-20261105/`입니다.
 
 ## 현재 구현 범위
 
@@ -63,6 +68,14 @@ SDK는 구역 지도에서는 요청하지 않고 상세/미니 지도에서 처
   기존 69개 음식별 식당 항목은 `map-catalog.js`의 `foodId:index` 연결표로 지역을 결정합니다.
   새 식당은 원본 `place.districtId`를 명시하는 방식을 권장하며 명시된 값이 연결표보다 우선합니다.
   지원하는 ID는 같은 파일의 districts 목록을 따릅니다. 현재 자료에 식당이 없는 지역은 빈 목록 안내를 표시합니다.
+- main 원고 자료의 `place.research` 또는 `food.manuscript.restaurants[index]`는 상세 페이지로 그대로 전달합니다.
+  이 자료는 `districtId`가 없으면 원본 research.area의 부산 주소에서 구·군을 연결합니다.
+  새 데이터의 `place.address`도 같은 방식으로 지원합니다. 번역된 표시 문구는 지역 판별에 쓰지 않습니다.
+  새 원고 자료에는 기존 순번의 지역을 재사용하지 않으며 부산 외/불명확 주소는 임의 배정하지 않습니다.
+  권장 입력은 여전히 명시적인 `districtId`입니다.
+- 현재 main 원본은 음식 45종/식당 항목 135개이며 100개 항목은 좌표 미확인입니다.
+  구별 목록은 좌표 유무와 무관하게 표시합니다. 좌표가 없는 행을 누르면 상세로 이동합니다.
+  식당이 없는 음식 6종은 지도 음식 목록에 표시하지 않습니다(홈 목록에는 유지).
 - 잘못된 지역/음식 주소는 전체 식당으로 조용히 대체하지 않고 오류 화면을 표시합니다.
 - 상세 지도 상단의 `구역 지도`는 선택 지역을 유지해 복귀하고, `부산 전체 지도`는 지역·음식 선택을
   모두 해제한 `#/map/detail`로 이동합니다.
@@ -133,7 +146,7 @@ MAP_BROWSER_KEY=팀장님에게_별도로_받은_웹용_키
 - `css/app.css`에서 지도 스타일을 옮겼습니다. 앞으로 지도 스타일은 map.css에서 수정합니다.
 - 로그인·Store·Cloud·Supabase 스키마·기존 API handler는 이번 작업에서 수정하지 않습니다.
 - 다른 기능 담당자는 음식/식당 ID와 배열 순서를 바꿔야 할 때 지도 담당자와 먼저 공유합니다.
-- 별도 브랜치에 push하고 PR로 main에 병합합니다. 이번 분리 작업은 아직 push하지 않았습니다.
+- 별도 브랜치에 push하고 PR로 main에 병합합니다. 지도 브랜치는 푸시하며 main은 검토자가 병합합니다.
 
 ## 확인 명령
 
@@ -144,6 +157,8 @@ node tests/map-provider.cjs
 node tests/map-contracts.cjs
 node tests/map-loader.cjs
 node tests/map-lifecycle.cjs
+node tests/map-integration.cjs
+node tests/food-manuscript.cjs
 node tests/async-regressions.cjs
 node tests/home-carousel.cjs
 node tests/auth-regressions.cjs
@@ -157,7 +172,10 @@ API/인증 검사는 Supabase 모의 응답을 사용합니다. 실제 운영 DB
 
 ## 비상시 최신 main을 받아야 할 때
 
-사용자 지시로 현재 변경은 로컬 전용이며 commit/push하지 않습니다.
+통합 전 상태는 `1161d90` 커밋과 로컬 백업 브랜치/파일 사본으로 보관했습니다.
+진행 중 작업을 되돌릴 때는 먼저 현재 변경을 보관하고 별도 복구 브랜치에서 해당 커밋을 확인하세요.
+PR 병합 후 취소는 공유 main을 강제로 되감지 말고 revert PR을 사용합니다.
+아래는 이전 미커밋 작업을 보관할 때의 일반 절차입니다.
 최신 코드를 받아야 할 경우 먼저 아래 순서로 전체 로컬 변경(미추적 파일 포함)을 보관합니다.
 일반 git pull만 실행하거나 reset/clean으로 로컬 시안을 삭제하지 마세요.
 

@@ -413,3 +413,12 @@ details.faq p { margin: 0 0 16px; color: var(--ink-2); font-size: 14px; }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* Long-form sourced food copy; inherit the existing visual design. */
+.manuscript { overflow-wrap: anywhere; }
+.manuscript h3 { margin: 24px 0 10px; font-size: 16px; }
+.manuscript p, .manuscript li { line-height: 1.8; }
+.manuscript ul { padding-left: 20px; }
+.manuscript blockquote { margin: 16px 0; padding: 12px; border-left: 3px solid var(--accent); }
+.manuscript a { text-decoration: underline; }
+.map-research-note { position: absolute; top: 8px; left: 12px; right: 12px; z-index: 450; background: var(--paper, #fff); padding: 12px; font-size: 12px; border-radius: 8px; }

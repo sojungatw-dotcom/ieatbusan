@@ -105,7 +105,11 @@
         if (locateButton) locateButton.style.bottom = open ? 'calc(62% + 16px)' : 'calc(132px + 16px)';
       }
       function flyTo(element, event) {
-        if (event.target.closest('a') || !current?.map) return;
+        if (event.target.closest('a')) return;
+        const [foodId, index] = element.dataset.key.split(':');
+        const place = data.placeOf(foodId, index);
+        if (place && !data.hasCoordinates(place)) { navigate(routes.place(place)); return; }
+        if (!current?.map) return;
         current.map.focusPlace(element.dataset.key);
         const panel = document.getElementById('sheet');
         if (panel && !panel.classList.contains('collapsed')) sheet(root.querySelector('.sheet-handle'));

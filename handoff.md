@@ -7,6 +7,8 @@
 
 ## 0. 현재 상태와 다음 작업
 
+- **지도 브랜치 통합/PR 준비 (2026-11-05, 아래 로컬 전용 지시보다 우선):** 사용자가 별도 브랜치 push→최신 main 연결/검증→PR 준비를 승인. 지도 작업 복구 커밋 `1161d90`을 origin/feature/map-renewal에 먼저 push. origin/main `703899d`를 지도 브랜치에 통합하며 app.js 충돌 해결. 원본 foods.js와 팀원 원고 상세 UI 유지, map-data가 research/원본 주소를 연결하고 좌표 없는 행은 상세 이동. main의 45음식/135식당(100항목 좌표 미확인) 기준 검사·빌드 14개 및 브라우저 검증 통과. max-branch의 미병합 커밋은 미포함. main 직접 push/병합하지 않음. 로컬 백업 브랜치 backup/map-before-main-20261105와 ../.local-backups/map-before-main-integration-20261105/ 보관. 세부 내용 docs/map-development.md.
+
 - **지도 코드 정리 (2026-11-04, 아래 과거 기록보다 우선):** `js/map/`를 catalog(고정 지역/식당 연결), data(변환·필터), routes(주소·검증), renderer(HTML), loader(SDK/CSS 지연 로딩), provider(외부 지도 조작), view(화면 수명·상호작용)로 분리. 구역 SVG에서는 Leaflet 요청 없음. 지역 판별은 표시 문구가 아닌 고정 ID 사용. SDK/타일 실패, 잘못된 주소·좌표, 비동기 로딩 중 이탈 처리. 음식/식당은 여전히 foods.js의 로컬 자료이며 Supabase 데이터 흐름은 미변경. 자세한 협업 범위와 확인 명령은 docs/map-development.md 참고. 사용자 지시로 commit/push/원격 변경 금지, HEAD ad60428 유지.
 
 - **구역 지도 로컬 임시 시안 (2026-11-04):** 사용자 지시로 commit/push/원격 변경 금지. `#/map`을 도로 없는 부산 16개 구·군 SVG로 변경. 지역 선택→음식 목록→상세 지도 핀/식당 목록, 구역 지도 복귀 시 지역 유지. 상세 지도는 현재 Leaflet/OSM이며 새 API 미연결. KOSTAT 2013 단순화 경계를 로컬 에셋으로 사용(과거 경계 시안, 최신 경계 보증 아님). 전용 js/map 내부와 지도 라우트/로더만 확장. 원본 음식/식당 순번 유지. 저장소 밖 `../.local-backups/`에 패치와 새 파일 백업. 비상 pull 전 미추적 파일까지 stash하는 절차는 docs/map-development.md 참고. 새 화면 증거 docs/district-preview.png.
