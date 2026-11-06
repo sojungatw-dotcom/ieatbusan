@@ -31,7 +31,7 @@ global.fetch=async(url,options={})=>{
     if(options.method==='POST'){savedComments.push({...body,seed_likes:0,created_at:'2026-11-05T00:00:00Z'});return reply(null);}
     return reply(savedComments.map(comment=>({...comment,ieb_profiles:{nickname:'작성자',country_code:country}})));
   }
-  if(parsed.pathname==='/rest/v1/ieb_foods')return reply([]);
+  if(parsed.pathname==='/rest/v1/ieb_foods'||parsed.pathname==='/rest/v1/ieb_restaurant')return reply([]);
   if(parsed.pathname==='/rest/v1/ieb_preferences')return reply([]);
   throw new Error('Unexpected mock URL '+parsed.pathname);
 };

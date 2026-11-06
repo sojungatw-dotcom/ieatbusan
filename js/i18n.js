@@ -333,3 +333,9 @@ for (const [language, copy] of Object.entries({
   zh: {'country.change':'更改国家／地区','country.profileHelp':'新国家或地区仅用于今后发布的帖子和评论，已有内容保持原来的记录。'},
   ja: {'country.change':'国・地域を変更','country.profileHelp':'変更は今後の投稿・コメントに適用されます。既存の投稿・コメントの国・地域は変わりません。'},
 })) Object.assign(window.I18N[language], copy);
+
+/* Profile photo controls. */
+Object.assign(window.I18N.ko, {"profile.photo":"프로필 사진","profile.photoChoose":"사진 선택","profile.photoRemove":"기본 이미지로 변경","profile.photoHelp":"10MB 이하의 사진을 선택해 주세요.","profile.photoInvalid":"이 기기에서 열 수 있는 사진 파일을 선택해 주세요.","profile.photoTooLarge":"사진은 10MB 이하로 선택해 주세요.","profile.photoBusy":"사진을 준비하고 있어요. 잠시 후 저장해 주세요."});
+Object.assign(window.I18N.en, {"profile.photo":"Profile photo","profile.photoChoose":"Choose photo","profile.photoRemove":"Use default image","profile.photoHelp":"Choose a photo up to 10 MB.","profile.photoInvalid":"Choose an image this device can open.","profile.photoTooLarge":"Choose a photo up to 10 MB.","profile.photoBusy":"Preparing your photo. Please wait before saving."});
+Object.assign(window.I18N.zh, {"profile.photo":"头像","profile.photoChoose":"选择照片","profile.photoRemove":"使用默认头像","profile.photoHelp":"请选择不超过10MB的照片。","profile.photoInvalid":"请选择此设备可打开的照片。","profile.photoTooLarge":"照片大小不能超过10MB。","profile.photoBusy":"照片处理中，请稍后保存。"});
+Object.assign(window.I18N.ja, {"profile.photo":"プロフィール写真","profile.photoChoose":"写真を選択","profile.photoRemove":"初期画像に戻す","profile.photoHelp":"10MB以下の写真を選んでください。","profile.photoInvalid":"この端末で開ける写真を選んでください。","profile.photoTooLarge":"写真は10MB以下にしてください。","profile.photoBusy":"写真を準備しています。完了後に保存してください。"});

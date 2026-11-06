@@ -32,7 +32,7 @@ global.fetch = async (url, options = {}) => {
     if (select?.includes('ieb_profiles(')) return reply({ code: 'PGRST201' }, 300);
     return reply([]);
   }
-  if (path === '/rest/v1/ieb_comments' || path === '/rest/v1/ieb_foods') return reply([]);
+  if (path === '/rest/v1/ieb_comments' || path === '/rest/v1/ieb_foods' || path === '/rest/v1/ieb_restaurant') return reply([]);
   if (path === '/auth/v1/logout' || path.startsWith('/rest/v1/')) return reply({});
   throw new Error('Unexpected upstream endpoint: ' + path);
 };

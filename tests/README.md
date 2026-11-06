@@ -87,3 +87,11 @@ Run `node tests/home-carousel.cjs` for live expiry, background-tab catch-up, cle
 # 식당 주소 미니지도
 
 `node tests/google-maps.cjs`, `node tests/map-lifecycle.cjs`, `node tests/member-country.cjs`에서 주소 좌표 조회·세션 내 재사용·부분 일치 거절·10초 제한·화면 이탈·상세 화면 Google 대체 링크를 검증합니다. 실제 Google 키/Geocoding 권한·지도 표시는 별도 확인이 필요합니다.
+
+## Profile photos
+
+Run `node tests/profile-avatar.cjs` for local image preparation, stale selection/navigation guards, authenticated private uploads, signed bootstrap reload, replacement/removal, failed-save cleanup and account cleanup. API/Storage responses are mocked; see [profile photo setup and DB verification](../docs/profile-photo.md).
+
+## Restaurant master data
+
+Run `node tests/restaurant-data.cjs` for shared restaurant records, stable food/place links, per-food menu preservation, full address/hour projection, explicit map links and real like counts. See [restaurant schema and import verification](../docs/restaurants.md).

@@ -448,3 +448,16 @@ details.faq p { margin: 0 0 16px; color: var(--ink-2); font-size: 14px; }
 /* Restaurant details share the same address and schedule rows. */
 .place-info .row > span { min-width: 0; overflow-wrap: anywhere; }
 .place-schedule { display: grid; gap: 6px; line-height: 1.7; }
+
+/* Local photo selection and circular profile previews. */
+.avatar { position: relative; overflow: hidden; }
+.avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+.profile-photo-editor { display: grid; justify-items: center; gap: 12px; padding: 8px 0; }
+.profile-photo-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; }
+.profile-photo-editor .helper { margin: 0; text-align: center; }
+
+/* Supplied logo originals stay intact; crop their outer margins in layout. */
+.app-header .brand-logo { position: relative; display: block; flex: 0 0 112px; width: 112px; height: 48px; overflow: hidden; }
+.brand-logo img { position: absolute; left: 50%; top: calc(50% + 2px); width: 174px; height: auto; max-width: none; transform: translate(-50%, -50%); }
+.auth-logo { position: relative; width: 160px; height: 160px; overflow: hidden; border-radius: 40px; }
+.auth-logo img { position: absolute; left: 50%; top: 50%; width: 236px; height: 236px; max-width: none; transform: translate(-50%, -50%); }
