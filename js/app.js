@@ -367,7 +367,6 @@
       <nav class="section-chips" aria-label="${esc(t('food.sections'))}">${secs.map(([key,label],index)=>`<button class="chip ${index===0?'active':''}" data-act="jump" data-sec="${key}">${esc(t(label))}</button>`).join('')}</nav>
       <div class="title-block"><span class="eyebrow" lang="${content.infoLang}">${esc(content.infoRows[0][1])}</span><h1>${esc(d.name)}</h1>
         ${lang()!=='ko'?`<span class="orig-line" lang="ko">${esc(f.ko.name)}</span>`:''}
-        ${f.manuscript && lang()!=='ko'?`<p class="muted">${esc(t('food.translationPending'))}</p>`:''}
         <p class="summary" lang="${lang()}">${esc(d.summary)}</p></div>
       <section class="detail-section" id="sec-info"><h2>${esc(t('food.h.info'))}</h2>
         <dl class="info-card">${content.infoRows.map(([label,value])=>`<div class="info-row"><dt>${esc(label)}</dt><dd lang="${content.infoLang}">${esc(value)}</dd></div>`).join('')}</dl>
@@ -383,6 +382,9 @@
       <div class="fixed-cta"><a class="btn btn-primary btn-block" href="#/map/${f.id}">${esc(t('food.cta'))}${icon('arrowRight')}</a></div>
     </main>`;
   };
+
+  const originalFoodView = V.food;
+  V.food = params => window.IEBFoodLocale.html(originalFoodView(params), lang(), { preserveOriginalName: true });
 
   V.food.mount = ({ id }) => {
     Store.update(s => { s.recentFoods = [id, ...s.recentFoods.filter(x => x !== id)].slice(0, 20); });
@@ -437,7 +439,7 @@
       ${!hasCoordinates(p) ? `<p class="map-inline-status"><a href="${esc(directions)}" target="_blank" rel="noopener">${esc(t('place.google'))}</a></p>` : ''}
       <div class="band"></div>
       ${research ? `<section class="detail-section"><h2>${esc(t('place.menu'))}</h2><dl class="info-card"><div class="info-row"><dt lang="ko">${esc(menuName)}</dt><dd>${esc(menuPrice)}</dd></div></dl><p class="muted" lang="ko">${esc(research.priceNote)}</p></section>
-      <div class="band"></div><section class="detail-section manuscript"><h2>${esc(t('place.beforeVisit'))}</h2>${lang() !== 'ko' ? `<p class="muted">${esc(t('source.korean'))}</p>` : ''}<p lang="ko">${esc(research.visitNote)}</p><p><strong>${esc(t('place.unverified'))}:</strong> <span lang="ko">${esc(research.unverified)}</span></p><p><strong>${esc(t('place.researched'))}:</strong> ${esc(research.date)}</p></section><div class="band"></div>` : ''}
+      <div class="band"></div><section class="detail-section manuscript"><h2>${esc(t('place.beforeVisit'))}</h2><p lang="ko">${esc(research.visitNote)}</p><p><strong>${esc(t('place.unverified'))}:</strong> <span lang="ko">${esc(research.unverified)}</span></p><p><strong>${esc(t('place.researched'))}:</strong> ${esc(research.date)}</p></section><div class="band"></div>` : ''}
       <div class="section-head"><h2>${esc(t('place.servesFood'))}</h2></div>
       <div class="card" style="margin:0 16px">${foodRow(p.food)}</div>
       <div class="section-head"><h2>${esc(t('place.related'))}</h2></div>
@@ -445,6 +447,9 @@
       <div style="height:24px"></div>
     </main>`;
   };
+  const originalPlaceView = V.place;
+  V.place = params => window.IEBFoodLocale.html(originalPlaceView(params), lang());
+
   V.place.mount = ({ id, i }) => {
     cleanup.push(mapView.mountMini({ id, i }));
   };

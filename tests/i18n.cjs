@@ -74,7 +74,7 @@ for (const language of ['ko','en','zh','ja']) {
     assert.ok(!html.includes('aria-label="♥"'));
     if(food.manuscript){
       assert.ok(html.includes('<dt>'+t('food.row.region')+'</dt><dd lang="'+language+'">'),'Information row values use selected language');
-      if(language!=='ko')assert.ok(html.includes(t('food.translationPending')));
+      assert.ok(!html.includes(t('food.translationPending')),'Remove obsolete translation-pending notice');
     }
     food.places.forEach((place,i)=>{
       const html=V.place({id:food.id,i});pages++;
@@ -108,3 +108,5 @@ for(const language of ['en','zh','ja']){
  assert.ok(!/[가-힣]/.test(table),'Information values stay translated after DB hydration');
 }
 console.log('PASS all 43 food summaries and eight information rows in four languages, original Korean names and source facts, and DB hydration');
+
+module.exports = { ctx, state };

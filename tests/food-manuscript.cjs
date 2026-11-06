@@ -1,7 +1,7 @@
 /* node tests/food-manuscript.cjs */
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(read('js/data/foods.js'),ctx);vm.runInContext(read('js/i18n.js'),ctx);vm.runInContext(read('js/data/food-info-translations.js'),ctx);
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(read('js/data/foods.js'),ctx);vm.runInContext(read('js/i18n.js'),ctx);vm.runInContext(read('js/data/food-info-translations.js'),ctx);vm.runInContext(read('js/data/food-detail-locales.js'),ctx);
 ctx.I18N=ctx.window.I18N; const foods=ctx.window.FOODS,items=foods.filter(f=>f.manuscript),app=read('js/app.js');
 assert.equal(items.length,32);assert.equal(new Set(foods.map(f=>f.id)).size,foods.length);assert.ok(foods.every(f=>f.id));
 assert.equal(items.reduce((n,f)=>n+f.manuscript.restaurants.length,0),103);
@@ -40,19 +40,19 @@ for(const food of items){
    const projected=data.placeOf(food.id,i);
    const info=detail.slice(detail.indexOf('class="rows place-info"'),detail.indexOf('<div class="mini-map'));
    assert.equal((info.match(/class="row"/g)||[]).length,2,'Address and schedule rows only');
-   assert.ok(info.includes(ctx.esc(projected.address||projected.area||ctx.I18N[lang]['food.unconfirmed'])));
-   assert.ok(info.includes(ctx.esc(projected.hours||ctx.I18N[lang]['food.unconfirmed'])));
-   assert.ok(info.includes(ctx.esc(projected.holiday||ctx.I18N[lang]['food.unconfirmed'])));
+   assert.ok(info.includes(ctx.esc(ctx.window.IEBFoodLocale.text(projected.address||projected.area||ctx.I18N[lang]['food.unconfirmed'],lang))));
+   assert.ok(info.includes(ctx.esc(ctx.window.IEBFoodLocale.text(projected.hours||ctx.I18N[lang]['food.unconfirmed'],lang))));
+   assert.ok(info.includes(ctx.esc(ctx.window.IEBFoodLocale.text(projected.holiday||ctx.I18N[lang]['food.unconfirmed'],lang))));
    assert.ok(!/destination=null|null,null|undefined|NaN/.test(detail));
    if(place.research){
-    for(const value of [place.research.area,place.research.hours,place.research.holiday,place.research.date])assert.ok(detail.includes(ctx.esc(value)));
+    for(const value of [place.research.area,place.research.hours,place.research.holiday,place.research.date])assert.ok(detail.includes(ctx.esc(ctx.window.IEBFoodLocale.text(value,lang))));
     assert.ok(!detail.includes('출처:')&&!detail.includes('SRC-'));
     assert.ok(detail.includes('<h2>'+ctx.esc(ctx.I18N[lang]['place.menu'])+'</h2>'));
     const mapBlock=detail.includes('id="mini-map"');
     assert.equal(mapBlock,true,'Manuscript restaurants mount the Google mini-map for coordinates or address lookup');
    }
   }
-  if(lang!=='ko')assert.ok(html.includes('class="muted"'));
+  if(lang!=='ko')assert.ok(!html.includes(ctx.I18N[lang]['food.translationPending']));
  }
 }
 // Both legacy and manuscript foods use exactly the same detail shell.
