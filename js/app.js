@@ -24,7 +24,7 @@
   const countryBadge = value => {
     if (!Countries.isValid(value)) return '';
     const code = value, name = esc(Countries.name(code, lang()));
-    return `<span class="country-badge" lang="en" title="${name}" aria-label="${name}">${code}</span>`;
+    return `<span class="country-badge" title="${name}" aria-label="${name}"><span lang="en" aria-hidden="true">${code}</span></span>`;
   };
   const img = id => FOOD[id]?.photo || `assets/food/${id}.jpg`;
   const mapData = window.IEBMapData.create(FOODS, lang);
@@ -88,7 +88,7 @@
   /* ---------- shared UI ---------- */
   function appHeader() {
     return `<header class="app-header">
-      <a class="logo brand-logo" href="#/home" aria-label="무보소 · I Eat Busan 홈"><img src="assets/brand/muboso-header.png" width="1672" height="941" alt="무보소 · I Eat Busan"></a>
+      <a class="logo brand-logo" href="#/home" aria-label="${esc(t('brand.home'))}"><img src="assets/brand/muboso-header.png" width="1672" height="941" alt="무보소 · I Eat Busan"></a>
       <div class="header-actions">
         <a class="lang-pill" href="#/lang" aria-label="${esc(t('set.language'))}">${icon('globe')}<span>${esc(t('lang.code'))}</span></a>
         <a class="icon-btn" href="#/search" aria-label="${esc(t('search.placeholder'))}">${icon('search')}</a>
@@ -104,7 +104,7 @@
   }
   function tabbar(active) {
     const tabs = [['home', 'home', '#/home'], ['map', 'map', '#/map'], ['community', 'community', '#/community'], ['saved', 'heart', '#/saved'], ['my', 'user', '#/my']];
-    return `<nav class="tabbar" aria-label="Main">${tabs.map(([k, ic, href]) =>
+    return `<nav class="tabbar" aria-label="${esc(t('nav.main'))}">${tabs.map(([k, ic, href]) =>
       `<a class="tab" href="${href}" ${k === active ? 'aria-current="page"' : ''}>${icon(ic)}<span>${esc(t('tab.' + k))}</span></a>`).join('')}</nav>`;
   }
   const empty = (msg, ic = 'info', extra = '') => `<div class="empty">${icon(ic)}<p>${esc(msg)}</p>${extra}</div>`;
@@ -112,18 +112,18 @@
     const saved = !!S().foodLikes?.[f.id];
     return `<div class="list-item">
       <a href="#/food/${f.id}" style="display:contents"><img class="thumb" src="${img(f.id)}" alt="" loading="lazy">
-      <span class="li-body"><span class="li-title">${esc(fname(f))}</span><span class="li-sub">${esc(L(f).summary)}</span>
+      <span class="li-body"><span class="li-title">${esc(fname(f))}</span><span class="li-sub" lang="${f.manuscript ? 'ko' : lang()}">${esc(L(f).summary)}</span>
       <span class="li-meta">♥ ${foodLikes(f)} · ${esc(t('saved.places.count', { n: f.places.length }))}</span></span></a>
-      ${save ? `<button class="save-btn" data-act="saveFood" data-id="${f.id}" aria-pressed="${saved}" aria-label="♥">${icon('heart', saved)}</button>` : ''}
+      ${save ? `<button class="save-btn" data-act="saveFood" data-id="${f.id}" aria-pressed="${saved}" aria-label="${esc(t(saved ? 'common.unlike' : 'common.like'))}">${icon('heart', saved)}</button>` : ''}
     </div>`;
   }
   function placeRow(p, { save = true, showFood = false } = {}) {
     const key = placeKey(p.food.id, p.i), saved = S().savedPlaces.includes(key);
     return `<div class="list-item">
       <a href="#/place/${p.food.id}/${p.i}" style="display:contents"><img class="thumb sm" src="${img(p.food.id)}" alt="" loading="lazy">
-      <span class="li-body"><span class="li-title">${esc(p.name)}</span><span class="li-sub">${esc(p.area)}</span>
+      <span class="li-body"><span class="li-title" lang="ko">${esc(p.name)}</span><span class="li-sub">${esc(p.area)}</span>
       <span class="li-meta">${esc(showFood ? fname(p.food) + ' · ' : '')}${esc(t('place.signature'))} · ${esc(p.signature)}</span></span></a>
-      ${save ? `<button class="save-btn" data-act="savePlace" data-key="${key}" aria-pressed="${saved}" aria-label="♥">${icon('heart', saved)}</button>` : `<span class="like">${icon('heart')}${placeLikes(p)}</span>`}
+      ${save ? `<button class="save-btn" data-act="savePlace" data-key="${key}" aria-pressed="${saved}" aria-label="${esc(t(saved ? 'common.unsaveItem' : 'common.saveItem'))}">${icon('heart', saved)}</button>` : `<span class="like">${icon('heart')}${placeLikes(p)}</span>`}
     </div>`;
   }
   function postCard(p) {
@@ -149,11 +149,11 @@
 
   function homeFoodCard(f, { rank = 0, eager = false, slide = false, count = 5 } = {}) {
     const saved = !!S().foodLikes?.[f.id];
-    return `<article class="food-card${slide ? ' home-slide' : ''}"${slide ? ` role="group" aria-roledescription="slide" aria-label="${rank} / ${count}: ${esc(fname(f))}" data-food-id="${f.id}"` : ''}>
+    return `<article class="food-card${slide ? ' home-slide' : ''}"${slide ? ` role="group" aria-roledescription="${esc(t('home.slide'))}" aria-label="${rank} / ${count}: ${esc(fname(f))}" data-food-id="${f.id}"` : ''}>
       <a href="#/food/${f.id}"><div class="photo"><img src="${img(f.id)}" alt="${esc(fname(f))}" loading="${eager ? 'eager' : 'lazy'}">${rank ? `<span class="rank">${rank}</span>` : ''}</div></a>
-      <div class="info"><a class="names" href="#/food/${f.id}"><div class="name">${esc(fname(f))}</div>${lang() !== 'ko' ? `<div class="orig">${esc(f.ko.name)}</div>` : ''}</a>
-        <button class="like-btn" data-act="saveFood" data-id="${f.id}" aria-pressed="${saved}" aria-label="♥">${icon('heart', saved)}<span>${foodLikes(f)}</span></button></div>
-      <p class="home-summary">${esc(L(f).summary)}</p>
+      <div class="info"><a class="names" href="#/food/${f.id}"><div class="name">${esc(fname(f))}</div>${lang() !== 'ko' ? `<div class="orig" lang="ko">${esc(f.ko.name)}</div>` : ''}</a>
+        <button class="like-btn" data-act="saveFood" data-id="${f.id}" aria-pressed="${saved}" aria-label="${esc(t(saved ? 'common.unlike' : 'common.like'))}">${icon('heart', saved)}<span>${foodLikes(f)}</span></button></div>
+      <p class="home-summary" lang="${f.manuscript ? 'ko' : lang()}">${esc(L(f).summary)}</p>
     </article>`;
   }
 
@@ -184,8 +184,8 @@
     const cur = lang();
     return `<main class="screen">${pageHeader(t('lang.header'), { fallback: loggedIn() || S().guest ? '#/home' : '#/login' })}
       <div class="intro"><h1>${esc(t('lang.title'))}</h1><p class="sub" style="margin:0">${esc(t('lang.sub'))}</p></div>
-      <div class="options" role="radiogroup">${LANGS.map(l => `<button class="option" role="radio" aria-checked="${l.code === cur}" data-act="pickLang" data-code="${l.code}" lang="${l.code}">
-        <span><span class="native">${esc(l.native)}</span><br><span class="eng">${esc(l.eng)}</span></span><span class="radio"></span></button>`).join('')}</div>
+      <div class="options" role="group" aria-label="${esc(t('lang.title'))}">${LANGS.map(l => `<button class="option" aria-pressed="${l.code === cur}" data-act="pickLang" data-code="${l.code}" lang="${l.code}">
+        <span><span class="native">${esc(l.native)}</span><br><span class="eng" lang="en">${esc(l.eng)}</span></span><span class="radio"></span></button>`).join('')}</div>
       <div class="note-card"><strong>${esc(t('lang.noteTitle'))}</strong>${esc(t('lang.note'))}</div>
       <div class="grow"></div>
       <div class="bottom-cta"><button class="btn btn-primary btn-block" data-act="confirmLang">${esc(t('common.confirm'))}</button></div>
@@ -203,7 +203,7 @@
     if (sort === 'name') list.sort((a, b) => fname(a).localeCompare(fname(b), lang()));
     else list.sort((a, b) => foodLikes(b) - foodLikes(a));
     return `<main class="screen has-tabbar home-screen">${appHeader()}
-      <section class="home-carousel" aria-labelledby="home-featured-title" aria-roledescription="carousel">
+      <section class="home-carousel" aria-labelledby="home-featured-title" aria-roledescription="${esc(t('home.carousel'))}">
         <div class="section-head"><h2 id="home-featured-title">${esc(t('home.featured'))}</h2></div>
         <p class="home-swipe-hint" id="home-swipe-hint">${esc(t('home.swipe'))}</p>
         <div class="home-track" tabindex="0" aria-label="${esc(t('home.featured'))}" aria-describedby="home-swipe-hint">
@@ -220,6 +220,7 @@
       <div class="band"></div>
       <div class="home-toolbar"><h1>${esc(t('home.title'))}</h1>
         <button class="sort-btn" data-act="sort">${esc(t(sort === 'name' ? 'home.sort.name' : 'home.sort.popular'))}${icon('chevronDown')}</button></div>
+      ${lang() !== 'ko' ? `<p class="pad muted source-note">${esc(t('source.korean'))}</p>` : ''}
       <div class="food-list">${list.map((f, i) => homeFoodCard(f, { rank: sort === 'popular' ? i + 1 : 0 })).join('')}</div>${tabbar('home')}</main>`;
   };
   V.home.mount = () => {
@@ -348,7 +349,7 @@
     const introduction = manuscript ? manuscript.introduction : (d.origin || d.summary);
     const how = manuscript ? manuscript.sections[1] : `<ol class="steps">${d.steps.map(step => `<li><span>${esc(step)}</span></li>`).join('')}</ol>`;
     const allergyNotes = manuscript ? manuscript.allergenInfo.notes : [d.allergenNote];
-    const allergy = `<strong>${esc(t('food.allergyTitle'))}</strong><div class="pills">${d.allergens.map(a=>`<span class="pill">${esc(a)}</span>`).join('')}</div>${allergyNotes.filter(Boolean).map(note=>`<p>※ ${esc(note)}</p>`).join('')}`;
+    const allergy = `<strong lang="${lang()}">${esc(t('food.allergyTitle'))}</strong><div class="pills">${d.allergens.map(a=>`<span class="pill">${esc(a)}</span>`).join('')}</div>${allergyNotes.filter(Boolean).map(note=>`<p>※ ${esc(note)}</p>`).join('')}`;
     return { infoRows, introduction, how, allergy, bodyLang: manuscript ? 'ko' : lang() };
   }
 
@@ -357,17 +358,17 @@
     const d = L(f), saved = !!S().foodLikes?.[f.id], content = foodDetailContent(f);
     const secs = [['info', 'food.sec.info'], ['how', 'food.sec.how'], ['allergy', 'food.sec.allergy'], ['places', 'food.sec.places']];
     return `<main class="screen has-cta">
-      <div class="hero"><img src="${img(f.id)}" alt="${f.photo?.includes('placeholder') ? '사진 준비 중' : esc(d.name)}">
+      <div class="hero"><img src="${img(f.id)}" alt="${f.photo?.includes('placeholder') ? esc(t('food.photoPending')) : esc(d.name)}">
         <div class="hero-nav"><button class="circle-btn" data-act="back" data-fallback="#/home" aria-label="${esc(t('common.back'))}">${icon('back')}</button><span class="grow"></span>
           <button class="circle-btn" data-act="share" data-title="${esc(d.name)}" aria-label="${esc(t('common.share'))}">${icon('share')}</button>
-          <button class="circle-btn ${saved ? 'on' : ''}" data-act="saveFood" data-id="${f.id}" aria-pressed="${saved}" aria-label="♥">${icon('heart', saved)}</button></div></div>
-      <nav class="section-chips" aria-label="sections">${secs.map(([key,label],index)=>`<button class="chip ${index===0?'active':''}" data-act="jump" data-sec="${key}">${esc(t(label))}</button>`).join('')}</nav>
-      <div class="title-block"><span class="eyebrow">${esc(d.category)}</span><h1>${esc(d.name)}</h1>
+          <button class="circle-btn ${saved ? 'on' : ''}" data-act="saveFood" data-id="${f.id}" aria-pressed="${saved}" aria-label="${esc(t(saved ? 'common.unlike' : 'common.like'))}">${icon('heart', saved)}</button></div></div>
+      <nav class="section-chips" aria-label="${esc(t('food.sections'))}">${secs.map(([key,label],index)=>`<button class="chip ${index===0?'active':''}" data-act="jump" data-sec="${key}">${esc(t(label))}</button>`).join('')}</nav>
+      <div class="title-block"><span class="eyebrow" lang="${content.bodyLang}">${esc(d.category)}</span><h1>${esc(d.name)}</h1>
         ${lang()!=='ko'?`<span class="orig-line" lang="ko">${esc(f.ko.name)}</span>`:''}
         ${f.manuscript && lang()!=='ko'?`<p class="muted">${esc(t('food.translationPending'))}</p>`:''}
         <p class="summary" lang="${content.bodyLang}">${esc(d.summary)}</p></div>
       <section class="detail-section" id="sec-info"><h2>${esc(t('food.h.info'))}</h2>
-        <dl class="info-card" lang="${content.bodyLang}">${content.infoRows.map(([label,value])=>`<div class="info-row"><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`).join('')}</dl>
+        <dl class="info-card">${content.infoRows.map(([label,value])=>`<div class="info-row"><dt>${esc(label)}</dt><dd lang="${content.bodyLang}">${esc(value)}</dd></div>`).join('')}</dl>
         <div class="origin"><h3>${esc(t('food.introduction'))}</h3><p lang="${content.bodyLang}">${esc(content.introduction)}</p></div></section>
       <section class="detail-section" id="sec-how"><h2>${esc(t('food.h.how'))}</h2>
         <div class="how-card manuscript" lang="${content.bodyLang}">${content.how}</div></section>
@@ -405,17 +406,17 @@
     const naverUrl = p.naverUrl || `https://map.naver.com/p/search/${q}`;
     const research = p.research;
     const menuParts = research ? research.signature.split(' / ') : [];
-    const menuPrice = menuParts.length > 1 ? menuParts.pop() : '확인 필요';
+    const menuPrice = menuParts.length > 1 ? menuParts.pop() : t('food.unconfirmed');
     const menuName = menuParts.join(' / ') || p.signature;
     const directions = hasCoordinates(p) ? 'https://www.google.com/maps/dir/?api=1&destination=' + p.lat + ',' + p.lng : 'https://www.google.com/maps/search/?api=1&query=' + q;
     return `<main class="screen">
       <div class="hero" style="height:260px"><img src="${img(id)}" alt="">
         <div class="hero-nav"><button class="circle-btn" data-act="back" data-fallback="#/food/${id}" aria-label="${esc(t('common.back'))}">${icon('back')}</button><span class="grow"></span>
           <button class="circle-btn" data-act="share" data-title="${esc(p.name)}" aria-label="${esc(t('common.share'))}">${icon('share')}</button>
-          <button class="circle-btn ${saved ? 'on' : ''}" data-act="savePlace" data-key="${key}" aria-pressed="${saved}" aria-label="♥">${icon('heart', saved)}</button></div></div>
+          <button class="circle-btn ${saved ? 'on' : ''}" data-act="savePlace" data-key="${key}" aria-pressed="${saved}" aria-label="${esc(t(saved ? 'common.unsaveItem' : 'common.saveItem'))}">${icon('heart', saved)}</button></div></div>
       <div class="title-block"><span class="eyebrow">${esc(t('place.signature'))} · ${esc(research ? menuName : p.signature)}</span><h1 lang="ko">${esc(p.name)}</h1>
         <span class="orig-line">${esc(p.area)}</span>
-        ${research ? `<p class="muted" lang="ko">${research.matchType === 'similar' ? '유사 메뉴 게시 자료' : '해당 메뉴 게시 자료'} · 조사일 ${esc(research.date)} · 방문 전 확인 필요</p>` : `<div class="meta-line">${icon('heart', true)}<span>${placeLikes(p)}</span></div>`}</div>
+        ${research ? `<p class="muted">${esc(t(research.matchType === 'similar' ? 'place.similar' : 'place.exact'))} · ${esc(t('place.researched'))} ${esc(research.date)} · ${esc(t('place.checkFirst'))}</p>` : `<div class="meta-line">${icon('heart', true)}<span>${placeLikes(p)}</span></div>`}</div>
       <div class="actions-row">
         <a class="action" href="${esc(directions)}" target="_blank" rel="noopener">${icon('navigation')}${esc(t('place.google'))}</a>
         <a class="action" href="${esc(naverUrl)}" target="_blank" rel="noopener">${icon('map')}${esc(t('place.naver'))}</a>
@@ -433,8 +434,8 @@
       <div class="mini-map" id="mini-map" role="img" aria-label="${esc(p.name)}"></div>
       ${!hasCoordinates(p) ? `<p class="map-inline-status"><a href="${esc(directions)}" target="_blank" rel="noopener">${esc(t('place.google'))}</a></p>` : ''}
       <div class="band"></div>
-      ${research ? `<section class="detail-section" lang="ko"><h2>대표 메뉴</h2><dl class="info-card"><div class="info-row"><dt>${esc(menuName)}</dt><dd>${esc(menuPrice)}</dd></div></dl><p class="muted">${esc(research.priceNote)}</p></section>
-      <div class="band"></div><section class="detail-section manuscript" lang="ko"><h2>방문 전 확인</h2><p>${esc(research.visitNote)}</p><p><strong>미확인:</strong> ${esc(research.unverified)}</p><p><strong>조사일:</strong> ${esc(research.date)}</p></section><div class="band"></div>` : ''}
+      ${research ? `<section class="detail-section"><h2>${esc(t('place.menu'))}</h2><dl class="info-card"><div class="info-row"><dt lang="ko">${esc(menuName)}</dt><dd>${esc(menuPrice)}</dd></div></dl><p class="muted" lang="ko">${esc(research.priceNote)}</p></section>
+      <div class="band"></div><section class="detail-section manuscript"><h2>${esc(t('place.beforeVisit'))}</h2>${lang() !== 'ko' ? `<p class="muted">${esc(t('source.korean'))}</p>` : ''}<p lang="ko">${esc(research.visitNote)}</p><p><strong>${esc(t('place.unverified'))}:</strong> <span lang="ko">${esc(research.unverified)}</span></p><p><strong>${esc(t('place.researched'))}:</strong> ${esc(research.date)}</p></section><div class="band"></div>` : ''}
       <div class="section-head"><h2>${esc(t('place.servesFood'))}</h2></div>
       <div class="card" style="margin:0 16px">${foodRow(p.food)}</div>
       <div class="section-head"><h2>${esc(t('place.related'))}</h2></div>
@@ -498,7 +499,7 @@
       <span><p>${esc(n[lang()] || n.ko)}</p><span class="muted" style="font-size:12px">${esc(ago(n.createdAt))}</span></span></a>`;
     const today = list.filter(n => n.createdAt >= dayAgo), earlier = list.filter(n => n.createdAt < dayAgo);
     const html = `<main class="screen">${pageHeader(t('noti.title'), { right: `<a class="icon-btn" href="#/settings" aria-label="${esc(t('set.title'))}">${icon('settings')}</a>` })}
-      ${list.length ? '' : empty(t('noti.empty'), 'bell')}
+      <p class="pad muted">${esc(t('noti.example'))}</p>${list.length ? '' : empty(t('noti.empty'), 'bell')}
       ${today.length ? `<div class="group-title">${esc(t('noti.today'))}</div>${today.map(item).join('')}` : ''}
       ${earlier.length ? `<div class="group-title">${esc(t('noti.earlier'))}</div>${earlier.map(item).join('')}` : ''}</main>`;
     return html;
@@ -531,7 +532,7 @@
     return `<main class="screen has-tabbar">${appHeader()}
       <div class="section-head"><h1 class="page-title">${esc(t('tab.community'))}</h1><button class="text-btn" data-act="refreshCommunity">${esc(t('db.refresh'))}</button></div>
       ${viewer ? `<p class="country-feed-note">${esc(t('country.feedFirst', {country: Countries.name(viewer.countryCode, lang())}))}</p>` : ''}
-      <nav class="seg" aria-label="categories">${tabs.map(([k, label]) => `<a href="#/community/${k}" ${k === tab ? 'aria-current="page"' : ''} style="padding:12px 2px 10px;white-space:nowrap;border-bottom:2px solid ${k === tab ? 'var(--accent)' : 'transparent'};color:${k === tab ? 'var(--ink)' : 'var(--ink-3)'};font-weight:${k === tab ? 700 : 400}">${esc(label)}</a>`).join('')}</nav>
+      <nav class="seg" aria-label="${esc(t('com.categories'))}">${tabs.map(([k, label]) => `<a href="#/community/${k}" ${k === tab ? 'aria-current="page"' : ''} style="padding:12px 2px 10px;white-space:nowrap;border-bottom:2px solid ${k === tab ? 'var(--accent)' : 'transparent'};color:${k === tab ? 'var(--ink)' : 'var(--ink-3)'};font-weight:${k === tab ? 700 : 400}">${esc(label)}</a>`).join('')}</nav>
       ${list.length ? list.map(postCard).join('') : empty(t('com.empty'), 'community')}
       <div style="height:72px"></div>
       <a class="fab" href="#/write" data-act="needLogin">${icon('pencil')}${esc(t('com.write'))}</a>
@@ -572,11 +573,11 @@
         <h1 class="page-title" style="text-align:center">${esc(t('write.title'))}</h1><button form="write-form" type="submit" style="font-weight:700;color:var(--accent);padding:0 8px">${esc(t('write.submit'))}</button></header>
       <form class="form" id="write-form" data-form="write">
         <div class="field"><span class="label">${esc(t('write.category'))}</span>
-          <div style="display:flex;gap:8px" role="radiogroup">${['review', 'question', 'free'].map((c, i) => `<label class="chip ${i === 0 ? 'active' : ''}" data-cat-chip><input type="radio" name="cat" value="${c}" ${i === 0 ? 'checked' : ''} class="sr-only">${esc(catLabel(c))}</label>`).join('')}</div></div>
+          <div style="display:flex;gap:8px" role="radiogroup" aria-label="${esc(t('write.category'))}">${['review', 'question', 'free'].map((c, i) => `<label class="chip ${i === 0 ? 'active' : ''}" data-cat-chip><input type="radio" name="cat" value="${c}" ${i === 0 ? 'checked' : ''} class="sr-only">${esc(catLabel(c))}</label>`).join('')}</div></div>
         <input class="input title-input" id="w-title" name="title" maxlength="60" placeholder="${esc(t('write.titlePh'))}" aria-label="${esc(t('write.titlePh'))}">
         <textarea class="textarea" id="w-body" name="body" maxlength="2000" placeholder="${esc(t('write.bodyPh'))}" aria-label="${esc(t('write.bodyPh'))}"></textarea>
         <div class="field"><span class="label">${esc(t('write.photos'))}</span>
-          <div class="photo-row" id="photo-row"><label class="add-photo">${icon('camera')}<span id="photo-count">0/4</span><input type="file" id="w-photos" accept="image/*" multiple class="sr-only"></label></div></div>
+          <div class="photo-row" id="photo-row"><label class="add-photo">${icon('camera')}<span id="photo-count">0/4</span><input aria-label="${esc(t('write.addPhotos'))}" type="file" id="w-photos" accept="image/*" multiple class="sr-only"></label></div></div>
         <div class="field"><label for="w-food">${esc(t('write.foodTag'))}</label>
           <select class="select" id="w-food" name="food"><option value="">${esc(t('write.noTag'))}</option>${FOODS.map(f => `<option value="${f.id}">${esc(fname(f))}</option>`).join('')}</select></div>
       </form></main>`;
@@ -725,7 +726,7 @@
     const row = (href, label, val = '', act = '') => `<${href ? `a href="${href}"` : `button type="button" data-act="${act}"`} class="menu-row"><span>${esc(label)}</span>${val ? `<span class="val">${esc(val)}</span>` : ''}${href ? icon('chevronRight') : ''}</${href ? 'a' : 'button'}>`;
     const acct = st.user ? (st.user.username || t('set.provider', { p: PROVIDERS[st.user.provider] || st.user.provider })) : t('set.guestNow');
     return `<main class="screen">${pageHeader(t('set.title'), { fallback: '#/my' })}
-      <div class="menu-group-title">${esc(t('set.noti'))}</div>
+      <div class="menu-group-title">${esc(t('set.noti'))}</div><p class="pad muted" style="margin-top:0">${esc(t('set.notiHelp'))}</p>
       ${tog('comments', t('set.comments'), t('set.commentsDesc'))}${tog('likes', t('set.likes'))}${tog('newPlaces', t('set.newPlaces'), t('set.newPlacesDesc'))}${tog('events', t('set.events'))}
       <div class="band"></div><div class="menu-group-title">${esc(t('set.app'))}</div>
       ${row('#/lang', t('set.language'), t('lang.name'))}
@@ -735,7 +736,7 @@
       <div class="band"></div><div class="menu-group-title">${esc(t('set.info'))}</div>
       ${row('#/terms', t('set.terms'))}${row('#/privacy', t('set.privacy'))}${row('#/credits', t('set.credits'))}
       <div class="menu-row"><span>${esc(t('set.version'))}</span><span class="val">1.0.0</span></div>
-      <div class="danger-link"><button data-act="withdraw">${esc(t('set.withdraw'))}</button></div></main>`;
+      ${st.user ? `<div class="danger-link"><button data-act="withdraw">${esc(t('set.withdraw'))}</button></div>` : ''}</main>`;
   };
 
   // Keep old bookmarked links usable; country editing now belongs to the profile form.
@@ -748,12 +749,68 @@
   }).join('')}</main>`;
   V.faq = () => `<main class="screen">${pageHeader(t('faq.title'), { fallback: '#/my' })}${(SEED.faq[lang()] || SEED.faq.ko).map(([q, a]) => `<details class="faq"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</main>`;
   V.contact = () => `<main class="screen">${pageHeader(t('contact.title'), { fallback: '#/my' })}<div class="prose"><p>${esc(t('contact.desc'))}</p>
-    <p><b style="color:var(--ink);user-select:all">help@ieatbusan.example</b></p><button class="btn btn-outline btn-sm" data-act="copyText" data-text="help@ieatbusan.example">Copy</button></div></main>`;
+    <p><b style="color:var(--ink);user-select:all">help@ieatbusan.example</b></p><button class="btn btn-outline btn-sm" data-act="copyText" data-text="help@ieatbusan.example">${esc(t('common.copy'))}</button></div></main>`;
   const LEGAL = {
-    terms: { ko: ['이 서비스는 팀 프로젝트용 시안입니다.', '음식·식당 정보는 참고용이며 실제와 다를 수 있습니다.', '커뮤니티 글은 작성한 브라우저에만 저장됩니다.', '타인을 비방하거나 광고성 글을 올리지 마세요.'],
-      en: ['This service is a prototype for a team project.', 'Food and restaurant info is for reference and may differ from reality.', 'Community posts are stored only in the browser where they were written.', 'Please do not post abusive or promotional content.'] },
-    privacy: { ko: ['로그인 계정과 프로필, 글, 댓글, 찜 기록은 서비스 서버에 저장됩니다.', '언어 등 화면 설정은 이 기기의 브라우저에 저장됩니다.', '서비스 이용 통계를 위해 Google Analytics가 쿠키와 기기 정보, 방문 화면, 게시물 조회, 로그인 상태를 수집합니다. 로그인한 경우 내부 계정 식별자를 연결하며 로그아웃하면 연결을 해제합니다.', '아이디, 닉네임, 비밀번호, 게시물 본문과 검색어는 분석 이벤트에 포함하지 않습니다.', '내 위치 기능은 지도에 현재 위치를 표시할 때만 사용하며 저장하지 않습니다.', '설정 > 회원 탈퇴로 서비스 계정과 연결된 콘텐츠를 삭제할 수 있습니다.'],
-      en: ['Accounts, profiles, posts, comments and saved items are stored on the service server.', 'Display preferences such as language are stored in this browser.', 'Google Analytics collects cookies, device information, screen visits, post views and login status for service statistics. An internal account ID is linked while signed in and cleared on sign-out.', 'Usernames, nicknames, passwords, post bodies and search terms are not included in analytics events.', 'Your location is used only to show it on the map and is never stored.', 'Settings > Delete account lets you remove your service account and associated content.'] },
+    "terms": {
+      "ko": [
+        "이 서비스는 팀 프로젝트용 시안입니다.",
+        "음식·식당 정보는 참고용이며 실제와 다를 수 있습니다.",
+        "커뮤니티에 게시한 글·댓글·사진은 서버에 저장되며 다른 이용자에게 공개됩니다.",
+        "타인을 비방하거나 광고성 글을 올리지 마세요."
+      ],
+      "en": [
+        "This service is a team project prototype.",
+        "Food and restaurant information is for reference and may differ from current conditions.",
+        "Community posts, comments and photos are stored on the server and are visible to other users.",
+        "Do not post abusive content, spam or advertisements."
+      ],
+      "zh": [
+        "本服务是团队项目的原型。",
+        "美食及餐厅信息仅供参考，可能与实际情况有所不同。",
+        "社区帖子、评论和照片保存在服务器上，其他用户可以查看。",
+        "请勿发布辱骂、垃圾信息或广告内容。"
+      ],
+      "ja": [
+        "このサービスはチームプロジェクトの試作版です。",
+        "料理・店舗情報は参考情報であり、実際の状況と異なる場合があります。",
+        "コミュニティの投稿・コメント・写真はサーバーに保存され、他の利用者に公開されます。",
+        "誹謗中傷、スパム、広告の投稿はお控えください。"
+      ]
+    },
+    "privacy": {
+      "ko": [
+        "계정 인증은 Supabase Auth로 처리하며, 프로필·게시글·댓글·사진·찜과 회원 설정은 서버에 저장됩니다.",
+        "이 브라우저에는 언어·정렬·게스트 이용 설정 등이 저장됩니다. 브라우저 데이터를 지워도 서버에 저장된 글은 삭제되지 않습니다.",
+        "서비스 이용 통계를 위해 Google Analytics가 쿠키와 기기 정보, 방문 화면, 게시물 조회, 로그인 상태를 수집합니다. 로그인한 경우 내부 계정 식별자를 연결하며 로그아웃하면 연결을 해제합니다.",
+        "아이디, 닉네임, 비밀번호, 게시물 본문과 검색어는 분석 이벤트에 포함하지 않습니다.",
+        "현재 위치는 이용자가 허용할 때 지도 기능에 사용합니다. 앱은 현재 좌표를 계정 기록에 저장하지 않으며, 지도 표시에는 외부 지도 서비스가 사용됩니다.",
+        "설정 > 회원 탈퇴에서 현재 계정과 그 계정의 게시글·댓글·사진·찜 등 연결된 데이터를 삭제할 수 있습니다."
+      ],
+      "en": [
+        "Supabase Auth handles account authentication. Profiles, posts, comments, photos, saved items and member preferences are stored on the server.",
+        "This browser stores preferences such as language, sorting and guest access. Clearing browser data does not delete posts stored on the server.",
+        "Google Analytics collects cookies, device information, screen visits, post views and login status for service statistics. An internal account ID is linked while logged in and cleared on logout.",
+        "Usernames, nicknames, passwords, post bodies and search terms are not included in analytics events.",
+        "With your permission, your current location is used for map features. The app does not save your current coordinates to your account history. Maps use external map services.",
+        "Settings > Delete account removes your current account and its associated data, including posts, comments, photos and saved items."
+      ],
+      "zh": [
+        "账号认证由 Supabase Auth 处理。个人资料、帖子、评论、照片、收藏及会员设置保存在服务器上。",
+        "本浏览器会保存语言、排序及游客访问等设置。清除浏览器数据不会删除服务器上的帖子。",
+        "为统计服务使用情况，Google Analytics 会收集 Cookie、设备信息、访问页面、帖子浏览及登录状态。登录时会关联内部账号标识，退出登录后会解除关联。",
+        "用户名、昵称、密码、帖子正文和搜索词不会包含在分析事件中。",
+        "获得定位许可后，当前位置用于地图功能。应用不会将当前坐标保存到账号记录中。地图显示使用第三方地图服务。",
+        "通过“设置 > 注销账号”可删除当前账号及其关联的帖子、评论、照片、收藏等数据。"
+      ],
+      "ja": [
+        "アカウント認証にはSupabase Authを使用します。プロフィール・投稿・コメント・写真・お気に入り・会員設定はサーバーに保存されます。",
+        "このブラウザーには言語・並び順・ゲスト利用などの設定を保存します。ブラウザーのデータを消去しても、サーバー上の投稿は削除されません。",
+        "サービスの利用状況の集計にGoogle Analyticsを使用し、Cookie、端末情報、閲覧画面、投稿の閲覧、ログイン状態を収集します。ログイン中は内部アカウントIDを関連付け、ログアウト時に解除します。",
+        "ユーザーID、ニックネーム、パスワード、投稿本文、検索語は分析イベントに含めません。",
+        "位置情報の利用を許可した場合、現在地を地図機能に使用します。現在の座標はアカウントの履歴に保存しません。地図の表示には外部の地図サービスを使用します。",
+        "「設定 > 退会する」から、現在のアカウントと、それに紐づく投稿・コメント・写真・お気に入りなどのデータを削除できます。"
+      ]
+    }
   };
   const legal = (k, title) => () => `<main class="screen">${pageHeader(title(), { fallback: '#/settings' })}<div class="prose"><ol>${(LEGAL[k][lang()] || LEGAL[k].en).map(x => `<li>${esc(x)}</li>`).join('')}</ol></div></main>`;
   V.terms = legal('terms', () => t('set.terms'));
@@ -761,7 +818,7 @@
   V.credits = () => `<main class="screen">${pageHeader(t('credits.title'), { fallback: '#/settings' })}<p class="pad sub" style="font-size:14px">${esc(t('credits.desc'))}</p>
     ${FOODS.map(f => `<div class="credit"><img class="thumb sm" src="${img(f.id)}" alt=""><div><b>${esc(fname(f))}</b><br><span class="sub">${esc(f.credit.author)} · ${esc(f.credit.license)}</span><br><a href="${esc(f.credit.url)}" target="_blank" rel="noopener">${esc(f.credit.file)}</a></div></div>`).join('')}
     <div class="credit"><span class="sub">Map data © OpenStreetMap contributors · Icons: Lucide (ISC)</span></div></main>`;
-  V.notFound = () => `<main class="screen">${pageHeader('404')}${empty('Not found')}</main>`;
+  V.notFound = () => `<main class="screen">${pageHeader('404')}${empty(t('common.notFound'))}</main>`;
 
   /* ---------- router ---------- */
   const ROUTES = [
@@ -825,7 +882,7 @@
   const A = {
     back: el => back(el.dataset.fallback),
     guest: () => { Store.set({ guest: true }); go(S().langChosen ? '#/home' : '#/lang'); },
-    pickLang: el => { Store.set({ lang: el.dataset.code }); rerender(); },
+    pickLang: el => { const code = el.dataset.code; Store.set({ lang: code }); rerender(); app.querySelector(`[data-act="pickLang"][data-code="${code}"]`)?.focus(); },
     confirmLang: () => { Store.set({ langChosen: true }); if (stack.length > 1 && !stack[stack.length - 2].startsWith('#/login')) history.back(); else go('#/home'); },
     sort: () => { Store.set({ sort: S().sort === 'popular' ? 'name' : 'popular' }); rerender(); },
     saveFood: async el => {
@@ -856,7 +913,7 @@
       try { if (navigator.share) { await navigator.share(data); return; } } catch (e) { if (e && e.name === 'AbortError') return; }
       try { await navigator.clipboard.writeText(location.href); toast(t('toast.copied')); } catch (e) { toast(location.href); }
     },
-    copyText: async el => { try { await navigator.clipboard.writeText(el.dataset.text); toast(t('toast.copied')); } catch (e) { toast(el.dataset.text); } },
+    copyText: async el => { try { await navigator.clipboard.writeText(el.dataset.text); toast(t('toast.textCopied')); } catch (e) { toast(el.dataset.text); } },
     clearRecent: () => { Store.set({ recentSearches: [] }); rerender(); },
     removeRecent: el => { Store.update(s => { s.recentSearches = s.recentSearches.filter(x => x !== el.dataset.q); }); rerender(); },
     sheet: el => mapView.sheet(el),

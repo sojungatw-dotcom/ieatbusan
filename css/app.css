@@ -26,6 +26,7 @@
 html[lang="zh"] { --font: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", var(--font-ko); }
 html[lang="ja"] { --font: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", var(--font-ko); }
 html[lang="en"] { --font: "Noto Sans KR", system-ui, -apple-system, "Segoe UI", sans-serif; }
+[lang="ko"] { font-family: var(--font-ko); }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; }
@@ -179,12 +180,12 @@ a { color: inherit; text-decoration: none; }
 .intro h1 { font-size: 22px; margin: 0 0 4px; }
 .options { display: grid; gap: 10px; padding: 0 20px; }
 .option { display: flex; align-items: center; gap: 12px; padding: 16px 18px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); text-align: left; width: 100%; }
-.option[aria-checked="true"] { border: 1.5px solid var(--accent); }
+.option[aria-pressed="true"] { border: 1.5px solid var(--accent); }
 .option .native { font-weight: 700; font-size: 17px; }
 .option .eng { font-size: 13px; color: var(--ink-3); }
 .radio { flex: none; margin-left: auto; width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--muted); display: grid; place-items: center; }
-.option[aria-checked="true"] .radio { background: var(--accent); border-color: var(--accent); }
-.option[aria-checked="true"] .radio::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--on-accent); }
+.option[aria-pressed="true"] .radio { background: var(--accent); border-color: var(--accent); }
+.option[aria-pressed="true"] .radio::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--on-accent); }
 .note-card { margin: 16px 20px 0; padding: 14px 16px; border-radius: 12px; background: var(--blush); font-size: 13px; color: var(--ink-2); }
 .note-card strong { display: block; color: var(--accent); font-size: 12px; margin-bottom: 2px; }
 .bottom-cta { padding: 12px 20px calc(24px + env(safe-area-inset-bottom, 0px)); }
@@ -221,8 +222,8 @@ a { color: inherit; text-decoration: none; }
 .home-toolbar h1 { font-size: 17px; margin: 0; }
 .sort-btn { display: inline-flex; align-items: center; gap: 2px; font-size: 13px; color: var(--ink-2); }
 .sort-btn svg { width: 16px; height: 16px; }
-.food-list { display: grid; gap: 24px; padding: 12px 16px 32px; }
-.food-card { display: grid; gap: 8px; }
+.food-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 12px 16px 32px; }
+.food-card { display: grid; grid-template-columns: minmax(0, 1fr); min-width: 0; gap: 8px; }
 .food-card .photo { position: relative; aspect-ratio: 16 / 10; border-radius: 10px; overflow: hidden; background: var(--beige); }
 .food-card .photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s; }
 .food-card a:hover .photo img { transform: scale(1.03); }
@@ -455,6 +456,16 @@ details.faq p { margin: 0 0 16px; color: var(--ink-2); font-size: 14px; }
 .profile-photo-editor { display: grid; justify-items: center; gap: 12px; padding: 8px 0; }
 .profile-photo-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; }
 .profile-photo-editor .helper { margin: 0; text-align: center; }
+
+/* Allow translated labels and long account/source text to wrap on small screens. */
+.menu-row > span, .credit > div { min-width: 0; overflow-wrap: anywhere; }
+.menu-row .val { max-width: 55%; }
+.profile { flex-wrap: wrap; }
+.profile .btn { flex: none; max-width: 100%; margin-left: auto; min-height: 34px; height: auto; padding-top: 8px; padding-bottom: 8px; text-align: center; }
+.profile .who { flex: 1 1 160px; overflow-wrap: anywhere; }
+.tab { min-width: 0; text-align: center; overflow-wrap: anywhere; }
+.actions-row .action { min-width: 0; overflow-wrap: anywhere; text-align: center; }
+.source-note { margin: 0 0 12px; font-size: 13px; }
 
 /* Supplied logo originals stay intact; crop their outer margins in layout. */
 .app-header .brand-logo { position: relative; display: block; flex: 0 0 112px; width: 112px; height: 48px; overflow: hidden; }

@@ -2,6 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..'),read=file=>fs.readFileSync(path.join(root,file),'utf8'),source=read('js/app.js');
 const ctx=vm.createContext({console});ctx.window=ctx;
+ctx.lang=()=> 'ko';
 for(const f of ['js/i18n.js','js/data/foods.js','js/data/community.js'])vm.runInContext(read(f),ctx);
 assert.ok(ctx.FOODS.every(f=>f.likes===0));assert.ok(ctx.SEED.posts.every(p=>p.likes===0));assert.equal(Object.keys(ctx.SEED.comments).length,0);assert.equal(ctx.I18N.ko['home.featured'],'추천 향토음식 5선');
 ctx.state={savedFoods:['dwaeji-gukbap'],savedPlaces:[],postLikes:{}};ctx.S=()=>ctx.state;ctx.L=f=>f.ko;ctx.fname=f=>f.ko.name;ctx.img=id=>'assets/food/'+id+'.jpg';ctx.esc=value=>String(value??'');ctx.icon=()=>'<svg></svg>';ctx.countryBadge=code=>'<span class="country-badge">'+(code||'KR')+'</span>';ctx.placeKey=(id,i)=>id+':'+i;ctx.commentsOf=()=>[];ctx.initial=()=>'';ctx.ago=()=>'';ctx.catLabel=()=>'';ctx.t=(key,vars)=>{let value=ctx.I18N.ko[key]||key;for(const [k,v]of Object.entries(vars||{}))value=value.replaceAll('{'+k+'}',v);return value;};

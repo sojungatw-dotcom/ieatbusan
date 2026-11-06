@@ -58,7 +58,7 @@ for(language of ['ko','en','zh','ja']){
   assert.equal((detail.match(/data-act="flyTo"/g)||[]).length,3);
   assert.ok(detail.includes('href="#/map/region/haeundae"'));
   assert.ok(detail.includes('href="#/map/detail"'), 'Regional detail must offer an unfiltered Busan detail map');
-  const allMapLabels = {ko:'부산 전체 지도',en:'All Busan map',zh:'釜山全域地图',ja:'釜山全域地図'};
+  const allMapLabels = {ko:'부산 전체 지도',en:'Busan city map',zh:'釜山全域地图',ja:'釜山全域の地図'};
   assert.ok(detail.includes(allMapLabels[language]), 'Whole-city map button must be translated');
   assert.ok(detail.includes('href="#/place/bokguk/0"'));
   const empty=view.render({district:'buk'});

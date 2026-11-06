@@ -47,7 +47,7 @@ for(const food of items){
    if(place.research){
     for(const value of [place.research.area,place.research.hours,place.research.holiday,place.research.date])assert.ok(detail.includes(ctx.esc(value)));
     assert.ok(!detail.includes('출처:')&&!detail.includes('SRC-'));
-    assert.ok(detail.includes('<h2>대표 메뉴</h2>'));
+    assert.ok(detail.includes('<h2>'+ctx.esc(ctx.I18N[lang]['place.menu'])+'</h2>'));
     const mapBlock=detail.includes('id="mini-map"');
     assert.equal(mapBlock,true,'Manuscript restaurants mount the Google mini-map for coordinates or address lookup');
    }
