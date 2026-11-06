@@ -1,0 +1,502 @@
+[
+  {
+    "id": "busan-wandang",
+    "name": "부산 완당",
+    "sourceFile": "사진_25장/01_부산_완당.gif",
+    "asset": "busan-wandang.gif",
+    "photo": "assets/food/busan-wandang.gif",
+    "archived": false,
+    "bytes": 176803,
+    "sha256": "5fb3b32f3d8293a1efdd5b27e11a81e8ce75855041db613ddc1cec79d96d06ab",
+    "credit": {
+      "file": "01_부산_완당.gif",
+      "author": "부산시보 부산이라좋다, 민경순 기사(2011-01-11)",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.busan.go.kr/news/totalnews01/view?dataNo=31903&gugun=Next",
+      "rightsNote": "기사 하단 무단 전재·복사·배포 금지. 재사용 허가 미확인.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "pohang-mulhoe",
+    "name": "포항물회",
+    "sourceFile": "사진_25장/02_포항물회.jpg",
+    "asset": "pohang-mulhoe.jpg",
+    "photo": "assets/food/pohang-mulhoe.jpg",
+    "archived": false,
+    "bytes": 79115,
+    "sha256": "5f44b1853f45c20fbac44de5e5b6e715d1c9fdfa96668c5d521ce3ecc939cb80",
+    "credit": {
+      "file": "02_포항물회.jpg",
+      "author": "포항시 제공 / 뉴시스(2024-08-01)",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.newsis.com/view/NISX20240801_0002834364",
+      "rightsNote": "포항시 제공은 확인. 개별 공개 라이선스 미확인, 뉴시스 무단 전재·재배포 금지.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "gwamegi",
+    "name": "과메기",
+    "sourceFile": "사진_25장/03_과메기.jpg",
+    "asset": "gwamegi.jpg",
+    "photo": "assets/food/gwamegi.jpg",
+    "archived": false,
+    "bytes": 100723,
+    "sha256": "aeabb3003f61177531106861a1ebf7a3b7f4ff2c2d06e84d14d913361b3d35a7",
+    "credit": {
+      "file": "03_과메기.jpg",
+      "author": "포항시 제공 / 프레시안(2022-10-12)",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://v.daum.net/v/Xm3khi4IF2",
+      "rightsNote": "개별 공개 라이선스 미확인. 기사 무단전재·재배포 금지.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "mungtigi",
+    "name": "뭉티기",
+    "sourceFile": "사진_25장/04_뭉티기.jpg",
+    "asset": "mungtigi.jpg",
+    "photo": "assets/food/mungtigi.jpg",
+    "archived": false,
+    "bytes": 124668,
+    "sha256": "00bae822a129678246b9bc14a6188621b87e918d9e602dca15963a766a5fbe9e",
+    "credit": {
+      "file": "04_뭉티기.jpg",
+      "author": "@alkongdalkon_daddy / 대구관광 공식 블로그(2023-03-23)",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://visitdaegu2011.blogspot.com/2023/03/korea-daegu-local-food-trip-travel.html",
+      "rightsNote": "촬영자 계정은 명시. 개별 공개 라이선스 미확인.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "andong-jjimdak",
+    "name": "안동찜닭",
+    "sourceFile": "사진_25장/05_안동찜닭.jpg",
+    "asset": "andong-jjimdak.jpg",
+    "photo": "assets/food/andong-jjimdak.jpg",
+    "archived": false,
+    "bytes": 174906,
+    "sha256": "d4041599cd10473674783e82fe9ae252ec4bdfaeef7e43b75ccc1ace570cd295",
+    "credit": {
+      "file": "05_안동찜닭.jpg",
+      "author": "코리아넷/해외문화홍보원, 사진 위택환·이하나(2016-04-11)",
+      "license": "공공누리 표기·원문 조건 추가 확인 필요",
+      "url": "https://www.korean-culture.org/koreanet/view.do?seq=5520",
+      "rightsNote": "동일 사진의 Commons 파일 설명은 공공누리 제1유형(출처표시). 현재 원문은 저작권 정책을 코리아넷에 문의하도록 안내하므로 외부 게시 전 확인 권장.",
+      "usageNote": "Commons의 공공누리 제1유형 표시와 현재 원문의 저작권 안내를 함께 확인해야 합니다. 이 모음은 재게시 권한 확보를 보증하지 않습니다. 확인 전 재게시 보류.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "andong-godeungeo",
+    "name": "안동간고등어",
+    "sourceFile": "사진_25장/06_안동간고등어.jpg",
+    "asset": "andong-godeungeo.jpg",
+    "photo": "assets/food/andong-godeungeo.jpg",
+    "archived": false,
+    "bytes": 214786,
+    "sha256": "567fdd5e9f356f12d289604bd40127e742d163bb7b69891a684648afd55c7648",
+    "credit": {
+      "file": "06_안동간고등어.jpg",
+      "author": "코리아넷/해외문화홍보원, 사진 위택환·이하나(2016-04-11)",
+      "license": "공공누리 표기·원문 조건 추가 확인 필요",
+      "url": "https://www.korean-culture.org/koreanet/view.do?seq=5520",
+      "rightsNote": "동일 사진의 Commons 파일 설명은 공공누리 제1유형(출처표시). 현재 원문은 저작권 정책을 코리아넷에 문의하도록 안내하므로 외부 게시 전 확인 권장.",
+      "usageNote": "Commons의 공공누리 제1유형 표시와 현재 원문의 저작권 안내를 함께 확인해야 합니다. 이 모음은 재게시 권한 확보를 보증하지 않습니다. 확인 전 재게시 보류.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "yeongdeok-uljin-daege",
+    "name": "영덕·울진 대게",
+    "sourceFile": "사진_25장/07_영덕·울진_대게.jpg",
+    "asset": "yeongdeok-uljin-daege.jpg",
+    "photo": "assets/food/yeongdeok-uljin-daege.jpg",
+    "archived": false,
+    "bytes": 63389,
+    "sha256": "c21406c43e65aa56473dc0baf4dff501302a5b7438ac4d795fbde79364f916ec",
+    "credit": {
+      "file": "07_영덕·울진_대게.jpg",
+      "author": "한국관광공사 포토코리아 / 스튜디오 4cats",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://news.nate.com/view/20260504n14053",
+      "rightsNote": "게시 사진 크레딧 확인, 이 게시본의 개별 공개 라이선스 미확인. 기사 무단전재·재배포 금지. 별도로 Commons에 영덕 대게찜 공공누리 1유형 후보가 있음.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "daegu-kongguk",
+    "name": "대구콩국",
+    "sourceFile": "사진_25장/08_대구콩국.jpg",
+    "asset": "daegu-kongguk.jpg",
+    "photo": "assets/food/daegu-kongguk.jpg",
+    "archived": false,
+    "bytes": 75935,
+    "sha256": "4f122b7a0f232629c9a9e4bef98c1ec1ddf13b5923042e958edd937088256275",
+    "credit": {
+      "file": "08_대구콩국.jpg",
+      "author": "Instagram 'tyche__ha' / 인사이트(2019-07-02)",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.insight.co.kr/news/234917",
+      "rightsNote": "원 촬영자 계정 명시, 공개 라이선스 미확인. 인사이트 무단전재·재배포 금지.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "cheongdo-minari-samgyeopsal",
+    "name": "청도미나리삼겹살",
+    "sourceFile": "사진_25장/09_청도미나리삼겹살.jpg",
+    "asset": "cheongdo-minari-samgyeopsal.jpg",
+    "photo": "assets/food/cheongdo-minari-samgyeopsal.jpg",
+    "archived": false,
+    "bytes": 404843,
+    "sha256": "b92e8927234239c90941d587dc8905b7a30470a7775721505e325ebdd9962441",
+    "credit": {
+      "file": "09_청도미나리삼겹살.jpg",
+      "author": "매일신문, 문화식객 이춘호의 미각기행(2024-03-01). 별도 촬영자 표기는 확인 못 함.",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.imaeil.com/page/view/2024022710263369216",
+      "rightsNote": "공개 라이선스 미확인. 재게시·상업사용 전 허가 필요.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "yonggung-sundae",
+    "name": "예천 용궁순대",
+    "sourceFile": "사진_25장/10_예천_용궁순대.jpg",
+    "asset": "yonggung-sundae.jpg",
+    "photo": "assets/food/yonggung-sundae.jpg",
+    "archived": true,
+    "bytes": 142156,
+    "sha256": "af87f5335db916dc682232e24603fd6a6f63d2a9458f68345a93662b5b42fd38",
+    "credit": {
+      "file": "10_예천_용궁순대.jpg",
+      "author": "예천군 제공 / 국민일보",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.kmib.co.kr/article/view.asp?arcid=0029709620",
+      "rightsNote": "자유 재사용 라이선스 미확인. 예천군 제공이라는 크레딧은 확인했으나 그것만으로 공공누리 허가로 볼 수 없음. 공개·상업 재게시 전 권리자 확인 필요.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "daegu-makchang",
+    "name": "대구 막창구이",
+    "sourceFile": "사진_25장/11_대구_막창구이.webp",
+    "asset": "daegu-makchang.webp",
+    "photo": "assets/food/daegu-makchang.webp",
+    "archived": false,
+    "bytes": 99298,
+    "sha256": "71e9ec6490ff2984043df0e693a1412c563d4b18ea77292813184fde96bfa212",
+    "credit": {
+      "file": "11_대구_막창구이.webp",
+      "author": "다이닝코드 효목골막창 방문사진 / 개별 촬영자 미확인",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.diningcode.com/profile.php?rid=52Hp1Op5KgDn",
+      "rightsNote": "서비스 약관상 회원 게시물의 권리는 게시 회원에게 있고, 회사 게시물은 회사 권리. 제3자 자유이용 허가는 확인되지 않아 재게시 허가 필요.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "daegu-napjak-mandu",
+    "name": "대구 납작만두",
+    "sourceFile": "사진_25장/12_대구_납작만두.jpg",
+    "asset": "daegu-napjak-mandu.jpg",
+    "photo": "assets/food/daegu-napjak-mandu.jpg",
+    "archived": false,
+    "bytes": 292018,
+    "sha256": "dded418cd9e655b1414673f3e0db5aec6029f0e340e44484d656142e370444b8",
+    "credit": {
+      "file": "12_대구_납작만두.jpg",
+      "author": "트리플 미성당 납작 만두 본점 사진 / 개별 촬영자 미확인",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://triple.guide/restaurants/be27531d-9ea5-43fd-9089-536280e9be13",
+      "rightsNote": "트리플 약관 제16조는 게시물 저작권을 게시 이용자에게 귀속. 제17조는 사전승낙 없는 영리 목적 복제·배포 등을 제한. 별도 자유 재사용 허가 없음.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "andong-heotjesatbap",
+    "name": "안동 헛제삿밥",
+    "sourceFile": "사진_25장/13_안동_헛제삿밥.jpg",
+    "asset": "andong-heotjesatbap.jpg",
+    "photo": "assets/food/andong-heotjesatbap.jpg",
+    "archived": true,
+    "bytes": 232090,
+    "sha256": "e0e5e7c210fa37a36f86fb25039954f025d37d4584197fa84d2af76c67900be5",
+    "credit": {
+      "file": "13_안동_헛제삿밥.jpg",
+      "author": "경상북도 경북음식이야기",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.gb.go.kr/Main/page.do?F_Code=F_WTUC07063&cmd=2&keyword=food&mnu_uid=3710&srch_Area=&srch_Order=Reg&srch_Producer=&srch_Season=&srch_Word=",
+      "rightsNote": "경상북도 정책상 개별 자료의 공공누리 표시 확인 후 이용, 표시 없는 자료는 사전 협의. 이 음식 페이지의 사진별 KOGL 유형은 확인하지 못했으므로 자유이용으로 확정하지 않음.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "eonyang-bulgogi",
+    "name": "언양불고기",
+    "sourceFile": "사진_25장/14_언양불고기.jpg",
+    "asset": "eonyang-bulgogi.jpg",
+    "photo": "assets/food/eonyang-bulgogi.jpg",
+    "archived": false,
+    "bytes": 128207,
+    "sha256": "a1c332e7fa1d1abc4f5b2007929aa8f72f4353da06c66511b02524c171748590",
+    "credit": {
+      "file": "14_언양불고기.jpg",
+      "author": "문화체육관광부 / Korea.net, 글 Sung Ji Yeon, 사진작가 미확인",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.mcst.go.kr/english/useful/month202312.jsp",
+      "rightsNote": "문체부 정책은 개별 공공누리 표시 확인, 표시가 없으면 사전협의 요구. 해당 영어 음식 페이지에 사진별 개방표시를 확인하지 못해 허가 상태 미확인.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "gorae-gogi",
+    "name": "고래고기",
+    "sourceFile": "사진_25장/15_고래고기.jpg",
+    "asset": "gorae-gogi.jpg",
+    "photo": "assets/food/gorae-gogi.jpg",
+    "archived": false,
+    "bytes": 188789,
+    "sha256": "cb85fdcfc394dd61c3a30d90ff082e6b4ce6ea5ea6be9884583b1077024b0273",
+    "credit": {
+      "file": "15_고래고기.jpg",
+      "author": "뉴시스 배병수",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://mobile.newsis.com/view_amp.html?ar_id=NISX20191218_0000864594",
+      "rightsNote": "자유 재사용 라이선스 없음/미확인. 언론사 저작물, 재게시 전 뉴시스 허가 필요. 워터마크 제거·가리기 금지.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "jinju-naengmyeon",
+    "name": "진주냉면",
+    "sourceFile": "사진_25장/16_진주냉면.jpeg",
+    "asset": "jinju-naengmyeon.jpeg",
+    "photo": "assets/food/jinju-naengmyeon.jpeg",
+    "archived": false,
+    "bytes": 455232,
+    "sha256": "f60ce55a04ef1634f0eed13f4c6667736dda9eeea1fe2c2e5447ebac1192f9a9",
+    "credit": {
+      "file": "16_진주냉면.jpeg",
+      "author": "홍차넷 Beer Inside",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://redtea.kr/taste/1292",
+      "rightsNote": "게시글에 CC/자유재사용 허가 표기를 찾지 못함. 게시자 저작권 확인 및 재게시 허가 필요.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "masan-bokguk",
+    "name": "마산복국",
+    "sourceFile": "사진_25장/17_마산복국.jpg",
+    "asset": "masan-bokguk.jpg",
+    "photo": "assets/food/masan-bokguk.jpg",
+    "archived": false,
+    "bytes": 63417,
+    "sha256": "e4010749be4046d51d513d1ad599b728ef9d8426e3b317c94140ba0e447ddff3",
+    "credit": {
+      "file": "17_마산복국.jpg",
+      "author": "디지틀조선일보·dizzo.com 미디어취재팀",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://digitalchosun.dizzo.com/site/data/html_dir/2015/06/03/2015060312020.html",
+      "rightsNote": "원문 Copyright ⓒ 디지틀조선일보&dizzo.com 표기. 사진별 자유재사용 허가 미확인, 재게시 허가 필요.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "hadong-jaecheopguk",
+    "name": "하동재첩국",
+    "sourceFile": "사진_25장/18_하동재첩국.jpg",
+    "asset": "hadong-jaecheopguk.jpg",
+    "photo": "assets/food/hadong-jaecheopguk.jpg",
+    "archived": false,
+    "bytes": 103108,
+    "sha256": "b3baceaf0f6e466a7ffe6921b12eed03ad3a169a4c3ddfc8a7e42c4edb774fa1",
+    "credit": {
+      "file": "18_하동재첩국.jpg",
+      "author": "한국관광공사 VISITKOREA / 부흥재첩식당",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://english.visitkorea.or.kr/svc/whereToGo/locIntrdn/rgnContentsView.do?vcontsId=217045",
+      "rightsNote": "개별 사진의 자유 재사용 조건 미확인. 관광공사 워터마크 있음.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "namhae-myeolchi-ssambap",
+    "name": "남해 멸치쌈밥",
+    "sourceFile": "사진_25장/19_남해_멸치쌈밥.jpg",
+    "asset": "namhae-myeolchi-ssambap.jpg",
+    "photo": "assets/food/namhae-myeolchi-ssambap.jpg",
+    "archived": false,
+    "bytes": 48318,
+    "sha256": "ed5df509f1d01bbef658988733c42806423f993c5f8f2e1625ed15bde11ce18b",
+    "credit": {
+      "file": "19_남해_멸치쌈밥.jpg",
+      "author": "경상남도 남해군, 경남_남해_남해음식(멸치쌈밥)",
+      "license": "공공누리 제1유형 (제공 안내 기준)",
+      "url": "https://www.kogl.or.kr/recommend/recommendDivView.do?division=img&recommendIdx=57155",
+      "rightsNote": "공공누리 제1유형(출처표시). 상업·비상업 이용 및 변경 가능. 저장 파일은 공개 미리보기이며 원본 아님.",
+      "usageNote": "공공누리 제1유형. 출처표시 필요. 기관·저작물명·원문 링크를 함께 남기세요.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "masan-agujjim",
+    "name": "마산아구찜",
+    "sourceFile": "사진_25장/20_마산아구찜.jpg",
+    "asset": "masan-agujjim.jpg",
+    "photo": "assets/food/masan-agujjim.jpg",
+    "archived": false,
+    "bytes": 246907,
+    "sha256": "0767da9ccd78a8ff9310e19fc05ebd88274c8ce79d5ff731c3b88872cd2f30ec",
+    "credit": {
+      "file": "20_마산아구찜.jpg",
+      "author": "경남일보, 못 나서 맛나서 입이 딱 벌어지는 아구 만나보소",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.gnnews.co.kr/news/articleView.html?idxno=169303",
+      "rightsNote": "자유 재사용 라이선스 미확인. 촬영자 미확인.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "chungmu-gimbap",
+    "name": "통영 충무김밥",
+    "sourceFile": "사진_25장/21_통영_충무김밥.jpg",
+    "asset": "chungmu-gimbap.jpg",
+    "photo": "assets/food/chungmu-gimbap.jpg",
+    "archived": false,
+    "bytes": 293243,
+    "sha256": "a167bbc96cc2f64e97e08f11bdd33e8c07ee98f57aeaf35e126d1987aede1a10",
+    "credit": {
+      "file": "21_통영_충무김밥.jpg",
+      "author": "한국관광공사 VISITKOREA, Extraordinary Gimbap Gourmet Tour",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://english.visitkorea.or.kr/svc/contents/contentsView.do?dataSetId=76&menuSn=508&vcontsId=138109",
+      "rightsNote": "개별 사진 자유 재사용 조건 미확인.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "meongge-bibimbap",
+    "name": "통영 멍게비빔밥",
+    "sourceFile": "사진_25장/22_통영_멍게비빔밥.jpg",
+    "asset": "meongge-bibimbap.jpg",
+    "photo": "assets/food/meongge-bibimbap.jpg",
+    "archived": false,
+    "bytes": 470068,
+    "sha256": "036a83b14fdd71c1ef897dd3265e49c56da9c2ba7b6f161811a04c2333475519",
+    "credit": {
+      "file": "22_통영_멍게비빔밥.jpg",
+      "author": "홍기표 / 오마이뉴스, 2021-03-20",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://v.daum.net/v/20210320171500455?from=tgt",
+      "rightsNote": "무단 전재 및 재배포 금지 명시. 재사용 시 허가 필요.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "dodari-ssukguk",
+    "name": "통영 도다리쑥국",
+    "sourceFile": "사진_25장/23_통영_도다리쑥국.jpg",
+    "asset": "dodari-ssukguk.jpg",
+    "photo": "assets/food/dodari-ssukguk.jpg",
+    "archived": false,
+    "bytes": 377065,
+    "sha256": "4a9d5d5c0bdded21145675fcec587854cc7efa71aae83fda9041fd9fe1160daa",
+    "credit": {
+      "file": "23_통영_도다리쑥국.jpg",
+      "author": "김숙귀 / 오마이뉴스, 2026-02-27",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.ohmynews.com/NWS_Web/View/img_pg.aspx?CNTN_CD=IE003587202",
+      "rightsNote": "All rights reserved. 자유 재사용 허가 미확인.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "jinju-bibimbap",
+    "name": "진주비빔밥",
+    "sourceFile": "사진_25장/24_진주비빔밥.jpg",
+    "asset": "jinju-bibimbap.jpg",
+    "photo": "assets/food/jinju-bibimbap.jpg",
+    "archived": false,
+    "bytes": 8745707,
+    "sha256": "d4764a7e73cea019c1faea2fc2a929d19df9095a3699c08ce6c616c9eb00bbbc",
+    "credit": {
+      "file": "24_진주비빔밥.jpg",
+      "author": "전북일보, [신팔도명물] 경남 진주비빔밥, 슥슥 비벼 한 입 뜨면 꿀맛",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.jjan.kr/article/20230309580171",
+      "rightsNote": "자유 재사용 라이선스·촬영자 미확인.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "uiryeong-manggaetteok",
+    "name": "의령 망개떡",
+    "sourceFile": "사진_25장/25_의령_망개떡.jpg",
+    "asset": "uiryeong-manggaetteok.jpg",
+    "photo": "assets/food/uiryeong-manggaetteok.jpg",
+    "archived": false,
+    "bytes": 81377,
+    "sha256": "add0af86e7d57b360150ea2aaa2fb7e37d1053f9ce1d0f75049b29f65b4700cf",
+    "credit": {
+      "file": "25_의령_망개떡.jpg",
+      "author": "구례로컬푸드 상품 사진",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://guryelocalfood.com/product/%EC%9D%98%EB%A0%B9-%EB%A7%9D%EA%B0%9C%EB%96%A1-%ED%8C%A5-%EA%B2%AC%EA%B3%BC-%EC%A0%84%ED%86%B5-%EB%A7%9D%EA%B0%9C%EB%96%A1-40%EA%B0%9C-%ED%86%A0%EB%B3%B5%EB%A0%B9-%EC%9D%98%EB%A0%B9%ED%8A%B9%EC%82%B0%EB%AC%BC/994/",
+      "rightsNote": "자유 재사용 라이선스·촬영자 미확인.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  }
+]
