@@ -752,8 +752,8 @@
   const LEGAL = {
     terms: { ko: ['이 서비스는 팀 프로젝트용 시안입니다.', '음식·식당 정보는 참고용이며 실제와 다를 수 있습니다.', '커뮤니티 글은 작성한 브라우저에만 저장됩니다.', '타인을 비방하거나 광고성 글을 올리지 마세요.'],
       en: ['This service is a prototype for a team project.', 'Food and restaurant info is for reference and may differ from reality.', 'Community posts are stored only in the browser where they were written.', 'Please do not post abusive or promotional content.'] },
-    privacy: { ko: ['로그인은 데모 기능으로, 실제 계정 정보를 받거나 서버로 보내지 않습니다.', '닉네임, 글, 댓글, 찜 기록은 이 기기의 브라우저 저장소에만 저장됩니다.', '내 위치 기능은 지도에 현재 위치를 표시할 때만 사용하며 저장하지 않습니다.', '설정 > 회원 탈퇴를 누르면 저장된 데이터가 모두 삭제됩니다.'],
-      en: ['Sign-in is a demo; no real account data is collected or sent to a server.', 'Nickname, posts, comments and saved items are stored only in this browser.', 'Your location is used only to show it on the map and is never stored.', 'Settings > Delete account removes all stored data.'] },
+    privacy: { ko: ['로그인 계정과 프로필, 글, 댓글, 찜 기록은 서비스 서버에 저장됩니다.', '언어 등 화면 설정은 이 기기의 브라우저에 저장됩니다.', '서비스 이용 통계를 위해 Google Analytics가 쿠키와 기기 정보, 방문 화면, 게시물 조회, 로그인 상태를 수집합니다. 로그인한 경우 내부 계정 식별자를 연결하며 로그아웃하면 연결을 해제합니다.', '아이디, 닉네임, 비밀번호, 게시물 본문과 검색어는 분석 이벤트에 포함하지 않습니다.', '내 위치 기능은 지도에 현재 위치를 표시할 때만 사용하며 저장하지 않습니다.', '설정 > 회원 탈퇴로 서비스 계정과 연결된 콘텐츠를 삭제할 수 있습니다.'],
+      en: ['Accounts, profiles, posts, comments and saved items are stored on the service server.', 'Display preferences such as language are stored in this browser.', 'Google Analytics collects cookies, device information, screen visits, post views and login status for service statistics. An internal account ID is linked while signed in and cleared on sign-out.', 'Usernames, nicknames, passwords, post bodies and search terms are not included in analytics events.', 'Your location is used only to show it on the map and is never stored.', 'Settings > Delete account lets you remove your service account and associated content.'] },
   };
   const legal = (k, title) => () => `<main class="screen">${pageHeader(title(), { fallback: '#/settings' })}<div class="prose"><ol>${(LEGAL[k][lang()] || LEGAL[k].en).map(x => `<li>${esc(x)}</li>`).join('')}</ol></div></main>`;
   V.terms = legal('terms', () => t('set.terms'));
@@ -809,6 +809,11 @@
     document.title = name === 'home' || name === 'login' || !pageTitle ? 'I EAT BUSAN' : `${pageTitle} · I EAT BUSAN`;
     window.scrollTo(0, 0);
     if (V[name].mount) V[name].mount(params);
+    const measuredPost = name === 'post' ? postById(params.id) : null;
+    window.IEBAnalytics?.view(name, params, {
+      validContent: name === 'post' ? !!measuredPost : !!FOOD[params.id],
+      category: measuredPost?.cat,
+    });
   }
   let loginIntent = false;
   function back(fallback) {
@@ -867,7 +872,7 @@
       toast(t('post.deleted')); location.replace('#/community'); stack.pop();
     },
     rmPhoto: el => { draftPhotos.splice(Number(el.dataset.i), 1); renderPhotos(); },
-    logout: async () => { await Store.signOut(); toast(t('set.loggedOut')); stack.length = 0; location.replace('#/login'); },
+    logout: async () => { await Store.signOut(); window.IEBAnalytics?.auth('logout'); toast(t('set.loggedOut')); stack.length = 0; location.replace('#/login'); },
     withdraw: async () => { if (!confirm(t('set.withdrawConfirm'))) return; await Store.removeCurrentAccount(); stack.length = 0; location.replace('#/login'); },
   };
   app.addEventListener('error', event => {
@@ -910,6 +915,7 @@
       try {
         if (kind === 'signup') {
           await Auth.register(username, password, f.elements.countryCode.value);
+          window.IEBAnalytics?.auth('sign_up');
           if (!f.isConnected) return;
           registeredId = username;
           f.elements.password.value = '';
@@ -920,6 +926,7 @@
           const id = await Auth.verify(username, password);
           if (!f.isConnected) return;
           await Store.signIn(id);
+          window.IEBAnalytics?.auth('login');
           f.elements.password.value = '';
           registeredId = '';
           stack.length = 0;

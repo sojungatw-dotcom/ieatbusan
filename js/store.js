@@ -40,6 +40,7 @@
   }
   function clearUser() {
     state = { ...defaults(), lang: state.lang, langChosen: state.langChosen, sort: state.sort };
+    window.IEBAnalytics?.identity(null);
     persistUI();
   }
   window.Store = {
@@ -59,6 +60,7 @@
           return { ...post, photos: post.photos.length ? post.photos : seed?.img ? ['assets/food/' + seed.img + '.jpg'] : [] };
         }), comments: payload.comments, postLikes: payload.postLikes, foods: Array.isArray(payload.foods) ? payload.foods : null, foodLikes: payload.foodLikes || {} };
       persistUI();
+      window.IEBAnalytics?.identity(state.user);
       return true;
     },
     async signIn() { return this.load(); },

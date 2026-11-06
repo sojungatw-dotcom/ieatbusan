@@ -103,6 +103,8 @@ archive/            이전 시안 보관
 
 ## 문서
 
+- [docs/analytics-ga4.md](docs/analytics-ga4.md): GA4 연결, 로그인 상태·게시물 KPI 및 관리 화면 설정
+
 - [handoff.md](handoff.md): 작업 인수인계. 다음 작업자가 여기서부터 시작합니다.
 - [docs/design-handoff.md](docs/design-handoff.md): 디자인 → 개발 핸드오프 (토큰, 컴포넌트, 화면 스펙)
 - [docs/sitemap.html](docs/sitemap.html): 사이트맵
