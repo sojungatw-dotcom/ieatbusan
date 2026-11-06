@@ -9,6 +9,7 @@ process.env.SUPABASE_SECRET_KEY = 'server-secret-test-value';
 const uid = '11111111-1111-4111-8111-111111111111';
 const calls = [];
 let wrongPassword = false, duplicate = false, expired = false, foreignPost = false;
+let catalogRows = [];
 global.fetch = async (url, options = {}) => {
   const path = new URL(url).pathname;
   const body = options.body && typeof options.body === 'string' ? JSON.parse(options.body) : options.body;
@@ -32,7 +33,8 @@ global.fetch = async (url, options = {}) => {
     if (select?.includes('ieb_profiles(')) return reply({ code: 'PGRST201' }, 300);
     return reply([]);
   }
-  if (path === '/rest/v1/ieb_comments' || path === '/rest/v1/ieb_foods' || path === '/rest/v1/ieb_restaurant') return reply([]);
+  if (path === '/rest/v1/ieb_foods') return reply(catalogRows);
+  if (path === '/rest/v1/ieb_comments' || path === '/rest/v1/ieb_restaurant') return reply([]);
   if (path === '/auth/v1/logout' || path.startsWith('/rest/v1/')) return reply({});
   throw new Error('Unexpected upstream endpoint: ' + path);
 };
@@ -71,6 +73,16 @@ async function request(action, body, { cookie = '', origin = 'https://site.verce
   assert.equal(data.data.user.id, uid);
   assert.ok(!JSON.stringify(data.data).includes('server-secret'));
   assert.equal(data.headers['Cache-Control'], 'no-store');
+  catalogRows = [
+    { id: 'retained', name: 'Retained', content: { places: [] } },
+    { id: 'legacy', name: 'Legacy', content: {} },
+    { id: 'excluded', name: 'Excluded', content: { catalogStatus: 'archived', places: [] } },
+  ];
+  const catalog = await request('bootstrap');
+  assert.equal(catalog.status, 200);
+  assert.deepEqual(catalog.data.foods.map(food => food.id), ['retained', 'legacy']);
+  assert.equal(catalogRows[2].content.catalogStatus, 'archived', 'Exclusion must preserve the DB row for restoration');
+  catalogRows = [];
   await request('post', { user_id: 'spoofed', title: 'Test', body: 'body', cat: 'review', photos: [] }, { cookie });
   const post = calls.find(call => call.path === '/rest/v1/ieb_posts' && call.method === 'POST');
   assert.equal(post.parsed.user_id, uid);

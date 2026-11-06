@@ -148,7 +148,7 @@ async function snapshot(cfg, session) {
   return {
     user: current ? { id: current.id, username: current.username, provider: 'supabase', avatarUrl, nickname: current.nickname, countryCode: country, area: current.area, bio: current.bio, joined: current.created_at.slice(0, 10).replaceAll('-', '.') } : null,
     preferences: preferences[0]?.data || {}, postLikes, foodLikes,
-    foods: foods.map(food => ({ id: food.id, name: food.name, summary: food.summary, category: food.category, imageAsset: food.image_asset, content: food.content, likes: food.like_count })),
+    foods: foods.filter(food => food.content?.catalogStatus !== 'archived').map(food => ({ id: food.id, name: food.name, summary: food.summary, category: food.category, imageAsset: food.image_asset, content: food.content, likes: food.like_count })),
     posts: posts.map(post => ({ id: post.id, title: post.title, body: post.body, cat: post.category, food: post.food,
       author: post.ieb_profiles?.nickname || post.seed_author || '', area: districts[post.ieb_profiles?.area] || post.seed_area || '',
       countryCode: savedCountry(post.country_code), authorCountryCode: savedCountry(post.country_code),

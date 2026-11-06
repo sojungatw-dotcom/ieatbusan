@@ -95,3 +95,5 @@ Run `node tests/profile-avatar.cjs` for local image preparation, stale selection
 ## Restaurant master data
 
 Run `node tests/restaurant-data.cjs` for shared restaurant records, stable food/place links, per-food menu preservation, full address/hour projection, explicit map links and real like counts. See [restaurant schema and import verification](../docs/restaurants.md).
+
+The catalog now contains 43 visible foods and 164 food/place links. `node tests/food-manuscript.cjs` checks the four added Busan restaurant lists in the existing detail template. `node tests/api-regressions.cjs` also verifies that `content.catalogStatus: archived` removes a food from bootstrap while retaining legacy and ordinary rows and preserving the archived DB record for restoration. These API tests use mocked upstream responses.
