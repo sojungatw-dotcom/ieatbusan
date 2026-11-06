@@ -50,7 +50,7 @@
     FOODS.sort((a, b) => entries.findIndex(row => row.id === a.id) - entries.findIndex(row => row.id === b.id));
   }
   const foodLikes = f => Number.isInteger(f.likes) ? Math.max(0, f.likes) : 0;
-  const placeLikes = () => 0; // Restaurant totals are not stored in the database.
+  const placeLikes = p => Number.isInteger(p.likes) ? Math.max(0, p.likes) : 0;
   function ago(ts) {
     const m = Math.max(0, Math.round((Date.now() - ts) / 60000));
     if (m < 1) return t('time.now');
@@ -66,6 +66,9 @@
   function requireLogin() { if (loggedIn()) return true; toast(t('toast.loginRequired')); loginIntent = true; go('#/login'); return false; }
   const go = h => { if (location.hash === h) route(); else location.hash = h; };
   const initial = name => esc(String(name || '?').trim().charAt(0).toUpperCase());
+  function profileAvatar(user, size = '') {
+    return `<span class="avatar ${size}"><span>${initial(user.nickname)}</span>${user.avatarUrl ? `<img src="${esc(user.avatarUrl)}" alt="${esc(t('profile.photo'))}">` : ''}</span>`;
+  }
 
   /* ---------- community data ---------- */
   const seedTime = mins => S().seededAt - mins * 60000;
@@ -85,7 +88,7 @@
   /* ---------- shared UI ---------- */
   function appHeader() {
     return `<header class="app-header">
-      <a class="logo" href="#/home">I EAT BUSAN</a>
+      <a class="logo brand-logo" href="#/home" aria-label="무보소 · I Eat Busan 홈"><img src="assets/brand/muboso-header.png" width="1672" height="941" alt="무보소 · I Eat Busan"></a>
       <div class="header-actions">
         <a class="lang-pill" href="#/lang" aria-label="${esc(t('set.language'))}">${icon('globe')}<span>${esc(t('lang.code'))}</span></a>
         <a class="icon-btn" href="#/search" aria-label="${esc(t('search.placeholder'))}">${icon('search')}</a>
@@ -157,7 +160,7 @@
   let registeredId = '';
   function authScreen(signup) {
     return `<main class="screen login auth-screen">
-    <div class="login-hero"><div class="app-icon">IEB</div><div class="logo">I EAT BUSAN</div><p class="sub" style="margin:0">${esc(t('app.tagline'))}</p></div>
+    <div class="login-hero"><div class="auth-logo"><img src="assets/brand/muboso-login.png" width="1254" height="1254" alt="무보소 · I Eat Busan"></div><p class="sub" style="margin:0">${esc(t('app.tagline'))}</p></div>
     <form class="auth-form" data-form="${signup ? 'signup' : 'login'}">
       <h1>${esc(t(signup ? 'auth.signup' : 'auth.login'))}</h1>
       <div class="field"><label for="auth-username">${esc(t('auth.username'))}</label>
@@ -636,7 +639,7 @@
   V.my = () => {
     const st = S(), u = st.user;
     const menu = (href, label, val = '') => `<a class="menu-row" href="${href}"><span>${esc(label)}</span>${val ? `<span class="val">${esc(val)}</span>` : ''}${icon('chevronRight')}</a>`;
-    const top = u ? `<div class="profile"><span class="avatar lg">${initial(u.nickname)}</span><div class="who"><b>${countryBadge(u.countryCode)}${esc(u.nickname)}</b><span class="muted" style="font-size:13px">${esc(t('my.joined', { area: districtName(u.area), date: u.joined }))}</span>${u.bio ? `<div class="sub" style="font-size:13px">${esc(u.bio)}</div>` : ''}</div>
+    const top = u ? `<div class="profile">${profileAvatar(u, 'lg')}<div class="who"><b>${countryBadge(u.countryCode)}${esc(u.nickname)}</b><span class="muted" style="font-size:13px">${esc(t('my.joined', { area: districtName(u.area), date: u.joined }))}</span>${u.bio ? `<div class="sub" style="font-size:13px">${esc(u.bio)}</div>` : ''}</div>
         <a class="btn btn-outline btn-sm" href="#/profile">${esc(t('my.edit'))}</a></div>
       <div class="stats"><a href="#/my/posts"><b>${st.posts.filter(post => post.mine).length}</b><span>${esc(t('my.posts'))}</span></a><i></i><a href="#/my/comments"><b>${myComments().length}</b><span>${esc(t('my.comments'))}</span></a><i></i><a href="#/saved"><b>${st.savedFoods.length + st.savedPlaces.length}</b><span>${esc(t('my.saved'))}</span></a></div>`
       : `<div class="login-card"><b>${esc(t('my.loginTitle'))}</b><span class="sub" style="font-size:14px">${esc(t('my.loginDesc'))}</span><a class="btn btn-primary" href="#/login">${esc(t('my.login'))}</a></div>`;
@@ -672,16 +675,47 @@
     const u = S().user; if (!u) return V.login();
     return `<main class="screen has-cta">${pageHeader(t('profile.title'), { fallback: '#/my' })}
       <form class="form" data-form="profile" id="profile-form">
-        <div style="display:grid;justify-items:center;padding:8px 0"><span class="avatar xl">${initial(u.nickname)}</span></div>
+        <div class="profile-photo-editor">
+          <div id="p-photo-preview">${profileAvatar(u, 'xl')}</div>
+          <input type="file" id="p-photo" accept="image/*" aria-label="${esc(t('profile.photo'))}" hidden>
+          <div class="profile-photo-actions"><button type="button" class="btn btn-outline btn-sm" id="p-photo-choose">${esc(t('profile.photoChoose'))}</button><button type="button" class="text-btn" id="p-photo-remove" ${u.avatarUrl ? '' : 'hidden'}>${esc(t('profile.photoRemove'))}</button></div>
+          <p class="helper" id="p-photo-help">${esc(t('profile.photoHelp'))}</p>
+        </div>
         <div class="field"><label for="p-nick">${esc(t('profile.nickname'))}</label><input class="input" id="p-nick" name="nickname" value="${esc(u.nickname)}" minlength="2" maxlength="10" required><span class="helper">${esc(t('profile.nickHelp'))}</span></div>
         <div class="field"><label for="p-country">${esc(t('country.change'))}</label><select class="select" id="p-country" name="countryCode" required>${countryOptions(u.countryCode)}</select><span class="helper">${esc(t('country.profileHelp'))}</span></div>
         <div class="field"><label for="p-bio">${esc(t('profile.bio'))}</label><input class="input" id="p-bio" name="bio" value="${esc(u.bio || '')}" maxlength="30"><span class="helper"><span></span><span id="bio-count">${(u.bio || '').length}/30</span></span></div>
       </form><div class="grow"></div>
-      <div class="fixed-cta"><button class="btn btn-primary btn-block" type="submit" form="profile-form">${esc(t('common.save'))}</button></div></main>`;
+      <div class="fixed-cta"><button class="btn btn-primary btn-block" type="submit" form="profile-form" id="profile-save">${esc(t('common.save'))}</button></div></main>`;
   };
   V.profile.mount = () => {
+    const form = document.getElementById('profile-form'), input = document.getElementById('p-photo');
     const bio = document.getElementById('p-bio');
     if (bio) bio.addEventListener('input', () => { document.getElementById('bio-count').textContent = `${bio.value.length}/30`; });
+    if (!form || !input) return;
+    const choose = document.getElementById('p-photo-choose'), remove = document.getElementById('p-photo-remove');
+    const preview = document.getElementById('p-photo-preview'), save = document.getElementById('profile-save');
+    let version = 0, active = true;
+    const busy = value => { form.dataset.avatarBusy = String(value); save.disabled = value; };
+    const setPreview = url => { preview.innerHTML = profileAvatar({ ...S().user, avatarUrl: url }, 'xl'); remove.hidden = !url; };
+    choose.addEventListener('click', () => { if (!form.dataset.submitting) input.click(); });
+    remove.addEventListener('click', () => {
+      if (form.dataset.submitting) return;
+      version++; input.value = ''; form.avatarChange = null; busy(false); setPreview('');
+    });
+    input.addEventListener('change', async () => {
+      const file = input.files?.[0]; if (!file || form.dataset.submitting) return;
+      const currentVersion = ++version; busy(true);
+      try {
+        const photo = await window.IEBProfileImage.prepare(file);
+        if (!active || currentVersion !== version || !form.isConnected) return;
+        form.avatarChange = photo; setPreview(photo);
+      } catch (error) {
+        if (active && currentVersion === version && form.isConnected) toast(t(error.message || 'profile.photoInvalid'));
+      } finally {
+        if (active && currentVersion === version && form.isConnected) { busy(false); input.value = ''; }
+      }
+    });
+    cleanup.push(() => { active = false; version++; });
   };
 
   V.settings = () => {
@@ -836,6 +870,9 @@
     logout: async () => { await Store.signOut(); toast(t('set.loggedOut')); stack.length = 0; location.replace('#/login'); },
     withdraw: async () => { if (!confirm(t('set.withdrawConfirm'))) return; await Store.removeCurrentAccount(); stack.length = 0; location.replace('#/login'); },
   };
+  app.addEventListener('error', event => {
+    if (event.target.matches?.('.avatar img')) event.target.hidden = true;
+  }, true);
   app.addEventListener('click', e => {
     const el = e.target.closest('[data-act]');
     if (!el || !app.contains(el)) return;
@@ -922,7 +959,10 @@
       if (nick.length < 2 || nick.length > 10) { toast(t('profile.invalid')); return; }
       const countryCode = f.elements.countryCode.value;
       if (!Countries.isValid(countryCode)) { toast(t('profile.invalidCountry')); return; }
-      await Cloud.profile({ nickname: nick, bio: f.bio.value.trim(), countryCode });
+      if (f.dataset.avatarBusy === 'true') { toast(t('profile.photoBusy')); return; }
+      const profileData = { nickname: nick, bio: f.bio.value.trim(), countryCode };
+      if (Object.hasOwn(f, 'avatarChange')) profileData.avatar = f.avatarChange;
+      await Cloud.profile(profileData);
       if (!f.isConnected) return;
       toast(t('profile.saved')); back('#/my');
     }

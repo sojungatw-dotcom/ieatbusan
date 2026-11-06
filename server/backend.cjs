@@ -92,6 +92,25 @@ function credentials(body) {
   if (typeof body.password !== 'string' || body.password.length < 8 || body.password.length > 72 || !body.password.trim()) fail('auth.invalidPassword');
   return { username, password: body.password, email: username + '@accounts.ieatbusan.invalid' };
 }
+function applyRestaurantData(foods, restaurants) {
+  const byId = new Map(foods.map(food => [food.id, food]));
+  for (const row of restaurants) {
+    for (const link of Array.isArray(row.food_links) ? row.food_links : []) {
+      const food = byId.get(link.food_id), index = link.place_index;
+      if (!food || !Number.isInteger(index) || index < 0) continue;
+      const place = food.content?.places?.[index]; if (!place) continue;
+      Object.assign(place, { restaurantId: row.id, name: row.name, address: row.address,
+        hours: row.opening_hours, holiday: row.closed_days, phone: row.phone,
+        lat: row.latitude, lng: row.longitude, likes: row.like_count || 0,
+        naverUrl: row.naver_url || place.naverUrl || '' });
+      if (place.research) Object.assign(place.research, { name: row.name, area: row.address, hours: row.opening_hours, holiday: row.closed_days });
+      for (const language of ['ko', 'en', 'zh', 'ja']) {
+        const info = food.content[language]?.restaurants?.[index];
+        if (info) info.area = row.address;
+      }
+    }
+  }
+}
 async function snapshot(cfg, session) {
   const opts = { token: session.token };
   const [profile, preferences] = await Promise.all([
@@ -104,20 +123,30 @@ async function snapshot(cfg, session) {
     rest(cfg, 'ieb_posts', query + '&country_code=eq.' + country, opts),
     rest(cfg, 'ieb_posts', query + '&country_code=neq.' + country, opts),
   ]).then(([same, other]) => [...same, ...other].slice(0, 500)) : rest(cfg, 'ieb_posts', query, opts);
-  const [posts, comments, foods] = await Promise.all([
+  const [posts, comments, foods, restaurants] = await Promise.all([
     feed,
     rest(cfg, 'ieb_comments', '?select=*,ieb_profiles(nickname)&order=created_at.asc&limit=5000', opts),
     rest(cfg, 'ieb_foods', '?select=*&order=display_order.asc,id.asc&limit=1000', opts),
+    rest(cfg, 'ieb_restaurant', '?select=id,name,address,opening_hours,closed_days,phone,naver_url,latitude,longitude,food_links,like_count&limit=1000', opts),
   ]);
+  applyRestaurantData(foods, restaurants);
   const paths = [...new Set(posts.flatMap(post => post.photos))];
   let signed = [];
   if (paths.length) signed = await upstream(cfg, '/storage/v1/object/sign/ieb-community', { ...opts, method: 'POST', body: { paths, expiresIn: 3600 } });
   const images = Object.fromEntries((signed || []).filter(item => item.signedURL).map(item => [item.path, item.signedURL.startsWith('https://') ? item.signedURL : cfg.url + '/storage/v1' + item.signedURL]));
+  let avatarUrl = '';
+  if (current?.avatar_path) {
+    try {
+      const signedAvatar = await upstream(cfg, '/storage/v1/object/sign/ieb-avatars/' + current.avatar_path, { ...opts, method: 'POST', body: { expiresIn: 3600 } });
+      const url = signedAvatar?.signedURL || signedAvatar?.signedUrl;
+      if (url) avatarUrl = url.startsWith('https://') ? url : cfg.url + '/storage/v1' + url;
+    } catch { /* A missing image must not prevent account/feed loading. */ }
+  }
   const uid = session.user?.id;
   const postLikes = Object.fromEntries(posts.filter(post => uid && post.liked_user_ids?.includes(uid)).map(post => [post.id, true]));
   const foodLikes = Object.fromEntries(foods.filter(food => uid && food.liked_user_ids?.includes(uid)).map(food => [food.id, true]));
   return {
-    user: current ? { id: current.id, username: current.username, provider: 'supabase', nickname: current.nickname, countryCode: country, area: current.area, bio: current.bio, joined: current.created_at.slice(0, 10).replaceAll('-', '.') } : null,
+    user: current ? { id: current.id, username: current.username, provider: 'supabase', avatarUrl, nickname: current.nickname, countryCode: country, area: current.area, bio: current.bio, joined: current.created_at.slice(0, 10).replaceAll('-', '.') } : null,
     preferences: preferences[0]?.data || {}, postLikes, foodLikes,
     foods: foods.map(food => ({ id: food.id, name: food.name, summary: food.summary, category: food.category, imageAsset: food.image_asset, content: food.content, likes: food.like_count })),
     posts: posts.map(post => ({ id: post.id, title: post.title, body: post.body, cat: post.category, food: post.food,
@@ -173,6 +202,51 @@ async function createPost(cfg, session, body) {
     if (photos.length) await upstream(cfg, '/storage/v1/object/ieb-community', { token: session.token, method: 'DELETE', body: { prefixes: photos } }).catch(() => {});
     throw error;
   }
+}
+async function saveProfile(cfg, session, body) {
+  const nickname = checkedText(body.nickname, 2, 10, 'profile.invalid');
+  if (typeof body.bio !== 'string' || body.bio.length > 30) fail('db.validation');
+  const patch = { nickname, bio: body.bio }, token = session.token, uid = session.user.id;
+  if (Object.hasOwn(body, 'area')) {
+    if (!Number.isInteger(body.area) || body.area < 0 || body.area > 15) fail('db.validation');
+    patch.area = body.area;
+  }
+  if (Object.hasOwn(body, 'countryCode')) patch.country_code = checkedCountry(body.countryCode);
+  const changed = Object.hasOwn(body, 'avatar');
+  let bytes, previous = null, uploaded = null;
+  if (changed) {
+    if (body.avatar !== null) {
+      if (typeof body.avatar !== 'string' || body.avatar.length > 350000) fail('profile.photoInvalid');
+      const match = body.avatar.match(/^data:image\/jpeg;base64,([A-Za-z0-9+/]+={0,2})$/);
+      if (!match || match[1].length % 4 !== 0) fail('profile.photoInvalid');
+      bytes = Buffer.from(match[1], 'base64');
+      if (bytes.length > 262144 || bytes.length < 5 || bytes[0] !== 0xff || bytes[1] !== 0xd8 || bytes[2] !== 0xff || bytes.at(-2) !== 0xff || bytes.at(-1) !== 0xd9) fail('profile.photoInvalid');
+    }
+    const rows = await rest(cfg, 'ieb_profiles', '?id=eq.' + uid + '&select=avatar_path', { token });
+    if (!rows.length) fail('db.forbidden', 403);
+    previous = rows[0].avatar_path || null;
+    patch.avatar_path = null;
+    if (bytes) {
+      uploaded = uid + '/' + randomUUID() + '.jpg';
+      try {
+        await upstream(cfg, '/storage/v1/object/ieb-avatars/' + uploaded, { token, method: 'POST', raw: true, body: bytes, headers: { 'Content-Type': 'image/jpeg', 'x-upsert': 'false' } });
+      } catch (error) {
+        await upstream(cfg, '/storage/v1/object/ieb-avatars', { token, method: 'DELETE', body: { prefixes: [uploaded] } }).catch(() => {});
+        throw error;
+      }
+      patch.avatar_path = uploaded;
+    }
+  }
+  try {
+    await rest(cfg, 'ieb_profiles', '?id=eq.' + uid, { token, method: 'PATCH', body: patch });
+  } catch (error) {
+    if (uploaded) await upstream(cfg, '/storage/v1/object/ieb-avatars', { token, method: 'DELETE', body: { prefixes: [uploaded] } }).catch(() => {});
+    throw error;
+  }
+  if (changed && previous && previous !== uploaded && previous.startsWith(uid + '/')) {
+    await upstream(cfg, '/storage/v1/object/ieb-avatars', { token, method: 'DELETE', body: { prefixes: [previous] } }).catch(() => {});
+  }
+  return { saved: true };
 }
 async function action(cfg, req, res, name, body) {
   if (name === 'status') {
@@ -235,18 +309,7 @@ async function action(cfg, req, res, name, body) {
     await rest(cfg, 'ieb_preferences', '?on_conflict=user_id', { token, method: 'POST', headers: { Prefer: 'resolution=merge-duplicates' }, body: { user_id: uid, data, updated_at: new Date().toISOString() } });
     return { saved: true };
   }
-  if (name === 'profile') {
-    const nickname = checkedText(body.nickname, 2, 10, 'profile.invalid');
-    if (typeof body.bio !== 'string' || body.bio.length > 30) fail('db.validation');
-    const patch = { nickname, bio: body.bio };
-    if (Object.hasOwn(body, 'area')) {
-      if (!Number.isInteger(body.area) || body.area < 0 || body.area > 15) fail('db.validation');
-      patch.area = body.area;
-    }
-    if (Object.hasOwn(body, 'countryCode')) patch.country_code = checkedCountry(body.countryCode);
-    await rest(cfg, 'ieb_profiles', '?id=eq.' + uid, { token, method: 'PATCH', body: patch });
-    return { saved: true };
-  }
+  if (name === 'profile') return saveProfile(cfg, session, body);
   if (name === 'country') {
     if (body.countryCode === undefined) fail('profile.invalidCountry');
     const countryCode = checkedCountry(body.countryCode);
@@ -257,10 +320,12 @@ async function action(cfg, req, res, name, body) {
     if (!cfg.secret) fail('db.configuration', 503);
     // Verify identity above; never accept a user ID from request data.
     await upstream(cfg, '/auth/v1/logout?scope=global', { token, method: 'POST' });
-    for (;;) {
-      const files = await upstream(cfg, '/storage/v1/object/list/ieb-community', { admin: true, method: 'POST', body: { prefix: uid, limit: 100 } });
-      if (!files.length) break;
-      await upstream(cfg, '/storage/v1/object/ieb-community', { admin: true, method: 'DELETE', body: { prefixes: files.map(file => uid + '/' + file.name) } });
+    for (const bucket of ['ieb-community', 'ieb-avatars']) {
+      for (;;) {
+        const files = await upstream(cfg, '/storage/v1/object/list/' + bucket, { admin: true, method: 'POST', body: { prefix: uid, limit: 100 } });
+        if (!files.length) break;
+        await upstream(cfg, '/storage/v1/object/' + bucket, { admin: true, method: 'DELETE', body: { prefixes: files.map(file => uid + '/' + file.name) } });
+      }
     }
     await upstream(cfg, '/auth/v1/admin/users/' + uid, { admin: true, method: 'DELETE' });
     setSession(req, res, null); return { deleted: true };

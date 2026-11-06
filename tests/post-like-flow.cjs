@@ -12,6 +12,7 @@ global.fetch=async(url,opts={})=>{
  if(u.pathname==='/rest/v1/ieb_profiles')return reply([{id:uid,username:'tester',nickname:'Tester',area:8,bio:'',country_code:'KR',created_at:'2026-11-05T00:00:00Z'}]);
  if(u.pathname==='/rest/v1/ieb_preferences'||u.pathname==='/rest/v1/ieb_comments')return reply([]);
  if(u.pathname==='/rest/v1/ieb_posts')return reply(u.searchParams.get('country_code')==='neq.KR'?[]:[{...post,like_count:likes.length,liked_user_ids:likes.map(l=>l.user_id)}]);
+ if(u.pathname==='/rest/v1/ieb_restaurant')return reply([]);
  if(u.pathname==='/rest/v1/ieb_foods')return reply([{id:'dwaeji-gukbap',name:'DB 음식 이름',summary:'DB 소개',category:'국밥',image_asset:'dwaeji-gukbap.jpg',content:{ko:{name:'이전 이름'},places:[{name:'수변최고돼지국밥 민락본점',lat:35.1555,lng:129.1335}]},like_count:foodLikes.length,liked_user_ids:foodLikes}]);
  if(u.pathname==='/rest/v1/rpc/ieb_set_food_like'){
   assert.equal(body.target_id,'dwaeji-gukbap');assert.equal(Object.hasOwn(body,'user_id'),false);
