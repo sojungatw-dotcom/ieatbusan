@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   window.IEBMapRenderer = {
-    create({ data, routes, shapes, messages, getLanguage, districtName, t, esc, fname, img, icon,
+    create({ data, routes, shapes, messages, getLanguage, districtName, t, esc, fname, img, placeImg = p => img(p.food.id), icon,
       appHeader, tabbar, mapAvailable }) {
       const region = id => data.districtById[id];
       const selection = id => data.hasFood(id) ? id : null;
@@ -64,7 +64,7 @@
             <div class="map-warning" id="map-warning" role="status" hidden></div>
             <button class="locate-btn" data-act="locate" style="bottom:calc(132px + 16px)" aria-label="${esc(t('map.locate'))}">${icon('locate')}</button>
             <section class="sheet collapsed" id="sheet"><button class="sheet-handle" data-act="sheet" aria-expanded="false"><span class="sheet-title">${esc(selected ? fname(data.byId[selected]) + ' · ' : '')}${esc(t('map.nearby', { n: places.length }))}</span></button>
-              <div class="sheet-list">${places.map(p => `<div class="list-item" data-act="flyTo" data-key="${data.placeKey(p.food.id, p.i)}" role="button" tabindex="0"><img class="thumb sm" src="${img(p.food.id)}" alt="" loading="lazy">
+              <div class="sheet-list">${places.map(p => `<div class="list-item" data-act="flyTo" data-key="${data.placeKey(p.food.id, p.i)}" role="button" tabindex="0"><img class="thumb sm" src="${esc(placeImg(p))}" data-image-fallback="${esc(img(p.food.id))}" alt="${esc(p.name)}" loading="lazy">
                 <span class="li-body"><span class="li-title" lang="ko">${esc(p.name)}</span><span class="li-sub">${esc(p.area)}</span><span class="li-meta">${esc(fname(p.food))} · ${esc(p.signature)}</span></span>
                 <a class="save-btn" href="${detailLink(p)}" aria-label="${esc(t('map.detail'))}">${icon('chevronRight')}</a></div>`).join('')}</div></section>
           </div>${tabbar('map')}</main>`;

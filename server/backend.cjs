@@ -101,7 +101,7 @@ function applyRestaurantData(foods, restaurants) {
       const place = food.content?.places?.[index]; if (!place) continue;
       Object.assign(place, { restaurantId: row.id, name: row.name, address: row.address,
         hours: row.opening_hours, holiday: row.closed_days, phone: row.phone,
-        lat: row.latitude, lng: row.longitude, likes: row.like_count || 0,
+        lat: row.latitude, lng: row.longitude, likes: row.like_count || 0, imageAsset: row.image_asset || null,
         naverUrl: row.naver_url || place.naverUrl || '' });
       if (place.research) Object.assign(place.research, { name: row.name, area: row.address, hours: row.opening_hours, holiday: row.closed_days });
       for (const language of ['ko', 'en', 'zh', 'ja']) {
@@ -127,7 +127,7 @@ async function snapshot(cfg, session) {
     feed,
     rest(cfg, 'ieb_comments', '?select=*,ieb_profiles(nickname)&order=created_at.asc&limit=5000', opts),
     rest(cfg, 'ieb_foods', '?select=*&order=display_order.asc,id.asc&limit=1000', opts),
-    rest(cfg, 'ieb_restaurant', '?select=id,name,address,opening_hours,closed_days,phone,naver_url,latitude,longitude,food_links,like_count&limit=1000', opts),
+    rest(cfg, 'ieb_restaurant', '?select=id,name,address,opening_hours,closed_days,phone,naver_url,latitude,longitude,food_links,like_count,image_asset&limit=1000', opts),
   ]);
   applyRestaurantData(foods, restaurants);
   const paths = [...new Set(posts.flatMap(post => post.photos))];
