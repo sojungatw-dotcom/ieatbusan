@@ -1,7 +1,7 @@
 /* node tests/food-manuscript.cjs */
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(read('js/data/foods.js'),ctx);vm.runInContext(read('js/i18n.js'),ctx);
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(read('js/data/foods.js'),ctx);vm.runInContext(read('js/i18n.js'),ctx);vm.runInContext(read('js/data/food-info-translations.js'),ctx);
 ctx.I18N=ctx.window.I18N; const foods=ctx.window.FOODS,items=foods.filter(f=>f.manuscript),app=read('js/app.js');
 assert.equal(items.length,32);assert.equal(new Set(foods.map(f=>f.id)).size,foods.length);assert.ok(foods.every(f=>f.id));
 assert.equal(items.reduce((n,f)=>n+f.manuscript.restaurants.length,0),103);
@@ -27,7 +27,7 @@ for(const food of items){
   ctx.language=lang;const html=ctx.V.food({id:food.id});
   for(const id of ['info','how','allergy','places'])assert.ok(html.includes(`id="sec-${id}"`));
   assert.ok(!/undefined|NaN|<script|<iframe|javascript:/.test(html));
-  assert.ok(html.includes('식당별 메뉴 가격 참고'));
+  assert.ok(html.includes(ctx.esc(ctx.window.IEBFoodInfo.rows(food,lang)[7])));
   assert.ok(!html.includes('kcal')&&!html.includes('팀 내부 메모'));
   const section=html.slice(html.indexOf('id="sec-places"'));
   assert.equal((section.match(/class="list-item"/g)||[]).length,food.places.length);

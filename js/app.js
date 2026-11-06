@@ -346,13 +346,13 @@
   function foodDetailContent(f) {
     const d = L(f), manuscript = f.manuscript;
     const labels = [t('food.row.category'), t('food.row.region'), t('food.row.ingredients'), t('food.row.method'), t('food.row.taste'), t('food.row.spice'), t('food.row.season'), t('food.row.price')];
-    const values = manuscript ? manuscript.infoRows.map(row => row[1]) : [d.category, '', d.ingredients, '', d.taste, '', '', d.price];
+    const values = manuscript ? window.IEBFoodInfo.rows(f, lang()) : [d.category, '', d.ingredients, '', d.taste, '', '', d.price];
     const infoRows = labels.map((label, index) => [label, values[index] || t('food.unconfirmed')]);
     const introduction = manuscript ? manuscript.introduction : (d.origin || d.summary);
     const how = manuscript ? manuscript.sections[1] : `<ol class="steps">${d.steps.map(step => `<li><span>${esc(step)}</span></li>`).join('')}</ol>`;
     const allergyNotes = manuscript ? manuscript.allergenInfo.notes : [d.allergenNote];
     const allergy = `<strong lang="${lang()}">${esc(t('food.allergyTitle'))}</strong><div class="pills">${d.allergens.map(a=>`<span class="pill">${esc(a)}</span>`).join('')}</div>${allergyNotes.filter(Boolean).map(note=>`<p>※ ${esc(note)}</p>`).join('')}`;
-    return { infoRows, introduction, how, allergy, bodyLang: manuscript ? 'ko' : lang() };
+    return { infoRows, infoLang: lang(), introduction, how, allergy, bodyLang: manuscript ? 'ko' : lang() };
   }
 
   V.food = ({ id }) => {
@@ -365,12 +365,12 @@
           <button class="circle-btn" data-act="share" data-title="${esc(d.name)}" aria-label="${esc(t('common.share'))}">${icon('share')}</button>
           <button class="circle-btn ${saved ? 'on' : ''}" data-act="saveFood" data-id="${f.id}" aria-pressed="${saved}" aria-label="${esc(t(saved ? 'common.unlike' : 'common.like'))}">${icon('heart', saved)}</button></div></div>
       <nav class="section-chips" aria-label="${esc(t('food.sections'))}">${secs.map(([key,label],index)=>`<button class="chip ${index===0?'active':''}" data-act="jump" data-sec="${key}">${esc(t(label))}</button>`).join('')}</nav>
-      <div class="title-block"><span class="eyebrow" lang="${content.bodyLang}">${esc(d.category)}</span><h1>${esc(d.name)}</h1>
+      <div class="title-block"><span class="eyebrow" lang="${content.infoLang}">${esc(content.infoRows[0][1])}</span><h1>${esc(d.name)}</h1>
         ${lang()!=='ko'?`<span class="orig-line" lang="ko">${esc(f.ko.name)}</span>`:''}
         ${f.manuscript && lang()!=='ko'?`<p class="muted">${esc(t('food.translationPending'))}</p>`:''}
         <p class="summary" lang="${lang()}">${esc(d.summary)}</p></div>
       <section class="detail-section" id="sec-info"><h2>${esc(t('food.h.info'))}</h2>
-        <dl class="info-card">${content.infoRows.map(([label,value])=>`<div class="info-row"><dt>${esc(label)}</dt><dd lang="${content.bodyLang}">${esc(value)}</dd></div>`).join('')}</dl>
+        <dl class="info-card">${content.infoRows.map(([label,value])=>`<div class="info-row"><dt>${esc(label)}</dt><dd lang="${content.infoLang}">${esc(value)}</dd></div>`).join('')}</dl>
         <div class="origin"><h3>${esc(t('food.introduction'))}</h3><p lang="${content.bodyLang}">${esc(content.introduction)}</p></div></section>
       <section class="detail-section" id="sec-how"><h2>${esc(t('food.h.how'))}</h2>
         <div class="how-card manuscript" lang="${content.bodyLang}">${content.how}</div></section>
