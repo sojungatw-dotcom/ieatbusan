@@ -819,13 +819,6 @@
     "holiday": "확인 필요 (지도 및 2024년 후기 기준, 최신 휴무일 확인 필요)"
   },
   {
-    "food": "yeongdeok-uljin-daege",
-    "index": 2,
-    "name": "소화식당 수영점",
-    "hours": "확인 필요",
-    "holiday": "확인 필요"
-  },
-  {
     "food": "ssiat-hotteok",
     "index": 4,
     "name": "승기 씨앗호떡",

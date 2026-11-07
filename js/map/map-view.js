@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   window.IEBMapView = {
-    create({ data, provider, root, document, navigator, t, esc, fname, img, icon,
+    create({ data, provider, root, document, navigator, t, esc, fname, img, placeImg, icon,
       appHeader, tabbar, toast, setTimeout: delay, clearTimeout: cancel,
       shapes = window.IEBDistrictShapes, messages = window.IEBMapText,
       getLanguage = () => document.documentElement?.lang || 'ko',
@@ -11,7 +11,7 @@
       let current = null;
       const routes = window.IEBMapRoutes.create(data);
       const renderer = window.IEBMapRenderer.create({ data, routes, shapes, messages, getLanguage,
-        districtName, t, esc, fname, img, icon, appHeader, tabbar, mapAvailable: provider.available });
+        districtName, t, esc, fname, img, placeImg, icon, appHeader, tabbar, mapAvailable: provider.available });
       const render = params => renderer.render(routes.resolve(params));
 
       function startMap(element, places, options, { warning, release = () => {}, mini = false } = {}) {

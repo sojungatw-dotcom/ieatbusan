@@ -16,7 +16,7 @@ for (const [,src] of read('index.html').matchAll(/<script src="([^"]+)"/g)) {
   vm.runInContext(read(file),ctx,{filename:file});
 }
 ctx.Auth={};ctx.Cloud={};
-vm.runInContext(read('js/app.js').replace(/\}\)\(\);\s*$/, 'window.localeTest={V,t,appHeader,tabbar};})();'),ctx);
+vm.runInContext(read('js/app.js').replace(/\}\)\(\);\s*$/, 'window.localeTest={V,t,appHeader,tabbar,syncFoodCatalog,homeFoodCard,foodRow,esc};})();'),ctx);
 const {V,t,appHeader,tabbar}=ctx.localeTest;
 const keys=Object.keys(ctx.I18N.ko).sort();
 const placeholders=text=>[...text.matchAll(/\{(\w+)\}/g)].map(m=>m[1]).sort();
@@ -60,10 +60,21 @@ for (const language of ['ko','en','zh','ja']) {
   for(const food of ctx.FOODS){
     const html=V.food({id:food.id});pages++;
     assert.ok(html.includes('aria-label="'+t('food.sections')+'"'));
+    const table=html.match(/<dl class="info-card">([\s\S]*?)<\/dl>/)[1];
+    const cells=[...table.matchAll(/<dd lang="([^"]+)">([^<]*)<\/dd>/g)];
+    assert.equal(cells.length,8,'Eight information rows: '+food.id);
+    for(const cell of cells){assert.equal(cell[1],language);if(language!=='ko')assert.ok(!/[가-힣]/.test(cell[2]),'Untranslated info cell: '+language+' '+food.id+' '+cell[2]);}
+    if(food.manuscript){const values=ctx.IEBFoodInfo.rows(food,language);assert.equal(values.length,8);if(language==='ko')assert.deepEqual(Array.from(values),Array.from(food.manuscript.infoRows,row=>row[1]));}
+    const summary = (language === 'ko' ? food.ko : food[language]).summary;
+    assert.ok(summary && (language === 'ko' || !/[가-힣]/.test(summary)), 'Translated summary: '+language+' '+food.id);
+    assert.ok(html.includes('<p class="summary" lang="'+language+'">'+ctx.localeTest.esc(summary)+'</p>'), 'Detail summary uses chosen language');
+    const card=ctx.localeTest.homeFoodCard(food),row=ctx.localeTest.foodRow(food);
+    assert.ok(card.includes(ctx.localeTest.esc(summary)) && row.includes(ctx.localeTest.esc(summary)), 'Home and list descriptions are translated');
+    if(language!=='ko')assert.ok(card.includes('<div class="orig" lang="ko">'+food.ko.name+'</div>'), 'Keep original Korean food name');
     assert.ok(!html.includes('aria-label="♥"'));
     if(food.manuscript){
-      assert.ok(html.includes('<dt>'+t('food.row.region')+'</dt><dd lang="ko">'),'UI labels must inherit chosen language separately from original values');
-      if(language!=='ko')assert.ok(html.includes(t('food.translationPending')));
+      assert.ok(html.includes('<dt>'+t('food.row.region')+'</dt><dd lang="'+language+'">'),'Information row values use selected language');
+      assert.ok(!html.includes(t('food.translationPending')),'Remove obsolete translation-pending notice');
     }
     food.places.forEach((place,i)=>{
       const html=V.place({id:food.id,i});pages++;
@@ -83,3 +94,19 @@ for (const language of ['ko','en','zh','ja']) {
 }
 assert.equal(JSON.stringify(ctx.FOODS),baseline,'Rendering must preserve catalog facts, order and archive state');
 console.log(`PASS ${keys.length} keys in four locales, interpolation, accessible controls, legal/support copy, source-language separation and ${pages} view renders`);
+
+// A DB bootstrap can contain the old Korean text in all locales. Reapply translations after hydration.
+const sourceFood=ctx.FOODS.find(f=>f.id==='masan-bokguk');
+const oldContent=JSON.parse(JSON.stringify(sourceFood));
+for(const l of ['en','zh','ja'])oldContent[l].summary=oldContent.ko.summary;
+state.foods=ctx.FOODS.map(f=>({id:f.id,name:f.ko.name,summary:f.ko.summary,category:f.ko.category,imageAsset:f.id+'.jpg',content:f.id===sourceFood.id?oldContent:f,likes:f.likes}));
+ctx.localeTest.syncFoodCatalog();
+for(const l of ['en','zh','ja'])assert.ok(!/[가-힣]/.test(sourceFood[l].summary),'Preserve translated descriptions after DB hydration');
+for(const language of ['en','zh','ja']){
+ state.lang=language;
+ const table=V.food({id:sourceFood.id}).match(/<dl class="info-card">([\s\S]*?)<\/dl>/)[1];
+ assert.ok(!/[가-힣]/.test(table),'Information values stay translated after DB hydration');
+}
+console.log('PASS all 43 food summaries and eight information rows in four languages, original Korean names and source facts, and DB hydration');
+
+module.exports = { ctx, state };
