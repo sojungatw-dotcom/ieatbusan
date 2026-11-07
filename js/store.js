@@ -4,7 +4,7 @@
   const KEY = 'ieatbusan.ui.v2';
   const fields = ['savedFoods','savedPlaces','recentSearches','recentFoods','notiReadAt','settings','sort','lang','langChosen'];
   const defaults = () => ({ lang: null, langChosen: false, user: null, guest: false,
-    savedFoods: [], savedPlaces: [], recentSearches: [], recentFoods: [], posts: [], comments: {}, postLikes: {}, deletedPosts: [],
+    savedFoods: [], savedPlaces: [], recentSearches: [], recentFoods: [], posts: [], comments: {}, postLikes: {}, foods: null, foodLikes: {}, deletedPosts: [],
     notiReadAt: 0, settings: { comments: true, likes: true, newPlaces: true, events: false }, sort: 'popular', seededAt: Date.now() });
   let saved = {};
   try {
@@ -75,6 +75,7 @@
     accountVersion++; revision++; queuedPreferences = null;
     state = { ...defaults(), lang: state.lang, langChosen: state.langChosen, sort: state.sort };
     confirmedPreferences = preferenceData(); lastPreferences = JSON.stringify(confirmedPreferences);
+    window.IEBAnalytics?.identity(null);
     persistUI();
   }
   async function flush() {
@@ -125,8 +126,9 @@
           posts: payload.posts.map(post => {
             const seed = SEED.posts.find(item => item.id === post.id);
             return { ...post, photos: post.photos.length ? post.photos : seed?.img ? ['assets/food/' + seed.img + '.jpg'] : [] };
-          }), comments: payload.comments, postLikes: payload.postLikes };
+          }), comments: payload.comments, postLikes: payload.postLikes, foods: Array.isArray(payload.foods) ? payload.foods : null, foodLikes: payload.foodLikes || {} };
         persistUI();
+        window.IEBAnalytics?.identity(state.user);
         confirmedPreferences = preferenceData(); lastPreferences = JSON.stringify(confirmedPreferences);
         return true;
       })().finally(() => { loading = null; });

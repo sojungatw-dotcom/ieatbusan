@@ -55,6 +55,7 @@ window.FOODS = [
         "places":  [
                        {
                            "name":  "수변최고돼지국밥 민락본점",
+                           "naverUrl":  "https://naver.me/GdymdeQF",
                            "lat":  35.1555,
                            "lng":  129.1335
                        },
@@ -5703,10 +5704,29 @@ window.FOODS = [
       "<dl class=\"info-card\"><div class=\"info-row\"><dt>분류</dt><dd>염장 생선·구이</dd></div><div class=\"info-row\"><dt>대표 지역</dt><dd>경북 안동</dd></div><div class=\"info-row\"><dt>주재료</dt><dd>고등어 · 소금</dd></div><div class=\"info-row\"><dt>조리 방식</dt><dd>염장 후 굽거나 조림</dd></div><div class=\"info-row\"><dt>맛·식감</dt><dd>짭짤하고 기름진 생선살</dd></div><div class=\"info-row\"><dt>매운맛</dt><dd>구이 낮음, 조림은 양념별 차이</dd></div><div class=\"info-row\"><dt>계절</dt><dd>연중 유통 사례, 업소 판매 확인</dd></div><div class=\"info-row\"><dt>가격</dt><dd>식당별 메뉴 가격 참고</dd></div></dl>\n<h3>음식 소개·유래</h3>\n<p>고등어를 소금에 절여 보관·유통해 온 안동의 생선 운송·염장 문화에서 이어진 음식입니다. 주로 구이나 조림으로 밥과 먹으며, 일반 고등어구이와 구분해 간고등어 제품 사용 여부를 확인해야 합니다.</p>\n<p>재료 변형: 생선, 염장 후 가열</p>",
       "<p>보통 이렇게 즐깁니다. 양념·밥·곁들임은 개인 취향과 식당 제공 방식에 따라 달라집니다.</p>\n<ol class=\"steps\"><li><span>구이 또는 조림으로 익혀 나온 생선을 접시에서 먹기 좋은 부분부터 나눕니다.</span></li><li><span>등뼈와 잔가시를 골라내며 살을 발라냅니다. 작은 조각도 가시가 남아 있는지 확인합니다.</span></li><li><span>생선살을 먼저 맛봅니다. 이미 소금에 절인 생선이므로 간장을 더하기 전에 간을 확인합니다.</span></li><li><span>밥과 반찬을 곁들여 먹습니다. 조림이라면 뜨거운 양념과 채소도 조금씩 덜어 먹습니다.</span></li></ol>",
       "<ul><li><strong>일반적으로 확인할 재료:</strong> 고등어 · 생선</li><li><strong>가게·메뉴별 가변 재료:</strong> 밀 · 대두</li></ul>\n<p>고등어·생선을 우선 표시합니다. 간장이나 조림 양념에는 대두·밀 성분이 쓰일 수 있습니다. 고등어의 가시는 알레르기와 별개로 먹을 때 확인해야 합니다.</p>\n<ul><li><strong>생식·특수 재료:</strong> 생선, 염장 후 가열</li><li><strong>채식:</strong> 일반 조리법은 동물성 재료 포함</li><li><strong>종교 식단:</strong> 원료·육수·양념·조리환경 및 필요한 인증 확인 필요</li></ul>\n<p>일반적인 조리법을 기준으로 한 안내입니다. 실제 재료·육수·소스와 공용 조리도구는 식당에 확인하세요. 미확인은 불포함이나 안전함을 뜻하지 않습니다.</p>",
-      "<p>해당 메뉴 게시 자료 <strong>0곳</strong>, 유사 메뉴 자료 <strong>0곳</strong>. 현재 영업 직접 확인 <strong>0곳</strong>. 공개 전 재확인이 필요한 후보이며 추천 순위가 아닙니다.</p>"
+      "<p>부산 소재 해당 메뉴 게시 자료 <strong>1곳</strong>. 전화·현장 영업 확인은 수행하지 않았습니다. 방문 전 매장에 확인하세요.</p>\n<h3>해당 메뉴 게시 자료</h3>\n<h3>신공항식당</h3>\n<ul><li><strong>주소:</strong> 부산 강서구 가덕해안로 735</li><li><strong>실제 메뉴 / 게시 가격:</strong> 안동 간고등어정식 / 가격 확인 필요</li><li><strong>게시 영업시간:</strong> 확인 필요</li><li><strong>게시 정기휴무:</strong> 확인 필요</li><li><strong>외국인 방문 참고:</strong> 안동 간고등어정식 게시 메뉴와 부산 주소를 확인했습니다. 일부 플랫폼에는 이전 상호인 연대봉포차로 등록되어 있어 방문 전 상호·영업 여부를 문의하세요.</li><li><strong>조사일:</strong> 2026-11-06</li></ul>"
     ],
-    "placesIntro": "<p>해당 메뉴 게시 자료 <strong>0곳</strong>, 유사 메뉴 자료 <strong>0곳</strong>. 현재 영업 직접 확인 <strong>0곳</strong>. 공개 전 재확인이 필요한 후보이며 추천 순위가 아닙니다.</p>",
-    "restaurants": []
+    "placesIntro": "<p>부산 소재 해당 메뉴 게시 자료 <strong>1곳</strong>. 전화·현장 영업 확인은 수행하지 않았습니다. 방문 전 매장에 확인하세요.</p>",
+    "restaurants": [
+      {
+        "name": "신공항식당",
+        "area": "부산 강서구 가덕해안로 735",
+        "signature": "안동 간고등어정식 / 가격 확인 필요",
+        "hours": "확인 필요",
+        "holiday": "확인 필요",
+        "priceNote": "공개 안내에 게시된 메뉴 기준입니다. 현재 가격·판매 여부는 매장에 확인하세요.",
+        "visitNote": "안동 간고등어정식 게시 메뉴와 부산 주소를 확인했습니다. 일부 플랫폼에는 이전 상호인 연대봉포차로 등록되어 있어 방문 전 상호·영업 여부를 문의하세요.",
+        "unverified": "현재 정상 영업 직접 확인 · 당일 재고 · 외국어 메뉴 · 실제 알레르기 성분 · 정확한 지도 좌표",
+        "date": "2026-11-06",
+        "linksHtml": "<a href=\"https://www.diningcode.com/profile.php?rid=RuZTxSO0uzVS\" target=\"_blank\" rel=\"noopener noreferrer\">확인 자료 1</a> / <a href=\"https://www.placeview.co.kr/id/MTY3Njk5MDA4MyAg\" target=\"_blank\" rel=\"noopener noreferrer\">확인 자료 2</a>",
+        "matchType": "exact",
+        "sourceUrls": [
+          "https://www.diningcode.com/profile.php?rid=RuZTxSO0uzVS",
+          "https://www.placeview.co.kr/id/MTY3Njk5MDA4MyAg"
+        ],
+        "html": "<ul><li><strong>주소:</strong> 부산 강서구 가덕해안로 735</li><li><strong>실제 메뉴 / 게시 가격:</strong> 안동 간고등어정식 / 가격 확인 필요</li><li><strong>게시 영업시간:</strong> 확인 필요</li><li><strong>게시 정기휴무:</strong> 확인 필요</li><li><strong>외국인 방문 참고:</strong> 안동 간고등어정식 게시 메뉴와 부산 주소를 확인했습니다. 일부 플랫폼에는 이전 상호인 연대봉포차로 등록되어 있어 방문 전 상호·영업 여부를 문의하세요.</li><li><strong>조사일:</strong> 2026-11-06</li></ul>"
+      }
+    ]
   },
   {
     "id": "yeongdeok-uljin-daege",
@@ -5776,7 +5796,7 @@ window.FOODS = [
       "<dl class=\"info-card\"><div class=\"info-row\"><dt>분류</dt><dd>갑각류 찜</dd></div><div class=\"info-row\"><dt>대표 지역</dt><dd>경북 영덕·울진</dd></div><div class=\"info-row\"><dt>주재료</dt><dd>대게</dd></div><div class=\"info-row\"><dt>조리 방식</dt><dd>통째 찐 뒤 손질</dd></div><div class=\"info-row\"><dt>맛·식감</dt><dd>달고 섬세한 살, 단단한 껍질</dd></div><div class=\"info-row\"><dt>매운맛</dt><dd>기본 낮음</dd></div><div class=\"info-row\"><dt>계절</dt><dd>국내산은 계절·금어기 영향, 수입산 연중 사례</dd></div><div class=\"info-row\"><dt>가격</dt><dd>식당별 메뉴 가격 참고</dd></div></dl>\n<h3>음식 소개·유래</h3>\n<p>영덕·울진 항구의 어업·유통 문화와 연결되는 대게 요리로, 주로 쪄서 다리와 몸통의 살을 발라 먹습니다. 메뉴의 지역명과 실제 어획 원산지는 별개이므로 원산지·중량·총가격을 확인해야 합니다.</p>\n<p>재료 변형: 갑각류, 내장 제공 가능</p>",
       "<p>보통 이렇게 즐깁니다. 양념·밥·곁들임은 개인 취향과 식당 제공 방식에 따라 달라집니다.</p>\n<ol class=\"steps\"><li><span>찜으로 익힌 대게를 손질해 주는지 확인합니다. 도구 사용이 익숙하지 않으면 직원에게 방법을 보여 달라고 요청합니다.</span></li><li><span>다리 껍질을 열어 살을 꺼냅니다. 껍질과 가위의 날카로운 부분을 조심합니다.</span></li><li><span>몸통의 먹을 수 있는 살을 발라 먹습니다. 먹는 부위가 헷갈리면 직원에게 확인합니다.</span></li><li><span>게딱지밥 등 추가 메뉴가 있다면 재료와 요금을 확인한 뒤 선택합니다. 대게찜에 자동으로 포함되는 구성은 아닙니다.</span></li></ol>",
       "<ul><li><strong>일반적으로 확인할 재료:</strong> 게(갑각류)</li><li><strong>가게·메뉴별 가변 재료:</strong> 밀 · 대두 · 달걀</li></ul>\n<p>게·갑각류가 기본입니다. 볶음밥·곁들임·소스에 달걀·대두·밀 등이 들어갈 수 있습니다. 껍질을 제거해도 게 성분이 제거되는 것은 아닙니다.</p>\n<ul><li><strong>생식·특수 재료:</strong> 갑각류, 내장 제공 가능</li><li><strong>채식:</strong> 일반 조리법은 동물성 재료 포함</li><li><strong>종교 식단:</strong> 원료·육수·양념·조리환경 및 필요한 인증 확인 필요</li></ul>\n<p>일반적인 조리법을 기준으로 한 안내입니다. 실제 재료·육수·소스와 공용 조리도구는 식당에 확인하세요. 미확인은 불포함이나 안전함을 뜻하지 않습니다.</p>",
-      "<p>해당 메뉴 게시 자료 <strong>0곳</strong>, 유사 메뉴 자료 <strong>3곳</strong>. 현재 영업 직접 확인 <strong>0곳</strong>. 공개 전 재확인이 필요한 후보이며 추천 순위가 아닙니다.</p>\n<h3>유사 메뉴·지역식 또는 산지 미확정</h3>\n<h3>천성중앙횟집</h3>\n<ul><li><strong>주소:</strong> 부산 강서구 가덕해안로 783</li><li><strong>실제 메뉴 / 게시 가격:</strong> 박달대게세트 / 140,000원</li><li><strong>가격 기준:</strong> 게시 메뉴 표기 그대로. 중량·인분·최저가 여부 별도 확인. 현재 가격 미확인.</li><li><strong>게시 영업시간:</strong> 월요일 10:00 - 19:00 / 화요일 10:00 - 19:00 / 수요일 10:00 - 19:00 / 목요일 10:00 - 19:00 / 금요일 10:00 - 20:30 / 토요일 10:00 - 21:30 / 일요일 10:00 - 21:30</li><li><strong>게시 정기휴무:</strong> 확인 필요</li><li><strong>외국인 방문 참고:</strong> 지점명·주소를 함께 제시. 외국어 메뉴·결제수단·최소주문·대기·휴무는 방문 전 문의.</li><li><strong>미확인:</strong> 현재 정상 영업 · 1인 방문 · 최소 주문량 · 외국어 메뉴 · 지도 장소·좌표 · 사진 이용 권한 · 실제 알레르기 성분</li><li><strong>지도 검색:</strong> <a href=\"https://map.naver.com/p/search/%EB%B6%80%EC%82%B0%20%EC%B2%9C%EC%84%B1%EC%A4%91%EC%95%99%ED%9A%9F%EC%A7%91%20%EB%B6%80%EC%82%B0%20%EA%B0%95%EC%84%9C%EA%B5%AC%20%EA%B0%80%EB%8D%95%ED%95%B4%EC%95%88%EB%A1%9C%20783\" target=\"_blank\" rel=\"noopener noreferrer\">네이버 검색</a> / <a href=\"https://map.kakao.com/?q=%EB%B6%80%EC%82%B0%20%EC%B2%9C%EC%84%B1%EC%A4%91%EC%95%99%ED%9A%9F%EC%A7%91%20%EB%B6%80%EC%82%B0%20%EA%B0%95%EC%84%9C%EA%B5%AC%20%EA%B0%80%EB%8D%95%ED%95%B4%EC%95%88%EB%A1%9C%20783\" target=\"_blank\" rel=\"noopener noreferrer\">카카오 검색</a> / <a href=\"https://www.google.com/maps/search/?api=1&amp;query=%EB%B6%80%EC%82%B0%20%EC%B2%9C%EC%84%B1%EC%A4%91%EC%95%99%ED%9A%9F%EC%A7%91%20%EB%B6%80%EC%82%B0%20%EA%B0%95%EC%84%9C%EA%B5%AC%20%EA%B0%80%EB%8D%95%ED%95%B4%EC%95%88%EB%A1%9C%20783\" target=\"_blank\" rel=\"noopener noreferrer\">구글 검색</a></li><li><strong>조사일:</strong> 2026-11-03</li></ul>\n<h3>소화식당</h3>\n<ul><li><strong>주소:</strong> 부산 사상구 주례로9번길 26</li><li><strong>실제 메뉴 / 게시 가격:</strong> 대게 내장 비빔밥 / 7,900원</li><li><strong>가격 기준:</strong> 게시 메뉴 표기 그대로. 중량·인분·최저가 여부 별도 확인. 현재 가격 미확인.</li><li><strong>게시 영업시간:</strong> 게시 요일 공통 17:00 - 03:30</li><li><strong>게시 정기휴무:</strong> 확인 필요</li><li><strong>외국인 방문 참고:</strong> 지점명·주소를 함께 제시. 외국어 메뉴·결제수단·최소주문·대기·휴무는 방문 전 문의.</li><li><strong>미확인:</strong> 현재 정상 영업 · 1인 방문 · 최소 주문량 · 외국어 메뉴 · 지도 장소·좌표 · 사진 이용 권한 · 실제 알레르기 성분</li><li><strong>지도 검색:</strong> <a href=\"https://map.naver.com/p/search/%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EB%B6%80%EC%82%B0%20%EC%82%AC%EC%83%81%EA%B5%AC%20%EC%A3%BC%EB%A1%80%EB%A1%9C9%EB%B2%88%EA%B8%B8%2026\" target=\"_blank\" rel=\"noopener noreferrer\">네이버 검색</a> / <a href=\"https://map.kakao.com/?q=%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EB%B6%80%EC%82%B0%20%EC%82%AC%EC%83%81%EA%B5%AC%20%EC%A3%BC%EB%A1%80%EB%A1%9C9%EB%B2%88%EA%B8%B8%2026\" target=\"_blank\" rel=\"noopener noreferrer\">카카오 검색</a> / <a href=\"https://www.google.com/maps/search/?api=1&amp;query=%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EB%B6%80%EC%82%B0%20%EC%82%AC%EC%83%81%EA%B5%AC%20%EC%A3%BC%EB%A1%80%EB%A1%9C9%EB%B2%88%EA%B8%B8%2026\" target=\"_blank\" rel=\"noopener noreferrer\">구글 검색</a></li><li><strong>조사일:</strong> 2026-11-03</li></ul>\n<h3>소화식당 수영점</h3>\n<ul><li><strong>주소:</strong> 부산 수영구 광일로29번가길 17</li><li><strong>실제 메뉴 / 게시 가격:</strong> 대게내장비빔밥 / 6,900원</li><li><strong>가격 기준:</strong> 게시 메뉴 표기 그대로. 중량·인분·최저가 여부 별도 확인. 현재 가격 미확인.</li><li><strong>게시 영업시간:</strong> 확인 필요</li><li><strong>게시 정기휴무:</strong> 확인 필요</li><li><strong>외국인 방문 참고:</strong> 지점명·주소를 함께 제시. 외국어 메뉴·결제수단·최소주문·대기·휴무는 방문 전 문의.</li><li><strong>미확인:</strong> 현재 정상 영업 · 1인 방문 · 최소 주문량 · 외국어 메뉴 · 지도 장소·좌표 · 사진 이용 권한 · 실제 알레르기 성분</li><li><strong>지도 검색:</strong> <a href=\"https://map.naver.com/p/search/%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EC%88%98%EC%98%81%EC%A0%90%20%EB%B6%80%EC%82%B0%20%EC%88%98%EC%98%81%EA%B5%AC%20%EA%B4%91%EC%9D%BC%EB%A1%9C29%EB%B2%88%EA%B0%80%EA%B8%B8%2017\" target=\"_blank\" rel=\"noopener noreferrer\">네이버 검색</a> / <a href=\"https://map.kakao.com/?q=%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EC%88%98%EC%98%81%EC%A0%90%20%EB%B6%80%EC%82%B0%20%EC%88%98%EC%98%81%EA%B5%AC%20%EA%B4%91%EC%9D%BC%EB%A1%9C29%EB%B2%88%EA%B0%80%EA%B8%B8%2017\" target=\"_blank\" rel=\"noopener noreferrer\">카카오 검색</a> / <a href=\"https://www.google.com/maps/search/?api=1&amp;query=%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EC%88%98%EC%98%81%EC%A0%90%20%EB%B6%80%EC%82%B0%20%EC%88%98%EC%98%81%EA%B5%AC%20%EA%B4%91%EC%9D%BC%EB%A1%9C29%EB%B2%88%EA%B0%80%EA%B8%B8%2017\" target=\"_blank\" rel=\"noopener noreferrer\">구글 검색</a></li><li><strong>조사일:</strong> 2026-11-03</li></ul>"
+      "<p>해당 메뉴 게시 자료 <strong>0곳</strong>, 유사 메뉴 자료 <strong>3곳</strong>. 현재 영업 직접 확인 <strong>0곳</strong>. 공개 전 재확인이 필요한 후보이며 추천 순위가 아닙니다.</p>\n<h3>유사 메뉴·지역식 또는 산지 미확정</h3>\n<h3>천성중앙횟집</h3>\n<ul><li><strong>주소:</strong> 부산 강서구 가덕해안로 783</li><li><strong>실제 메뉴 / 게시 가격:</strong> 박달대게세트 / 140,000원</li><li><strong>가격 기준:</strong> 게시 메뉴 표기 그대로. 중량·인분·최저가 여부 별도 확인. 현재 가격 미확인.</li><li><strong>게시 영업시간:</strong> 월요일 10:00 - 19:00 / 화요일 10:00 - 19:00 / 수요일 10:00 - 19:00 / 목요일 10:00 - 19:00 / 금요일 10:00 - 20:30 / 토요일 10:00 - 21:30 / 일요일 10:00 - 21:30</li><li><strong>게시 정기휴무:</strong> 확인 필요</li><li><strong>외국인 방문 참고:</strong> 지점명·주소를 함께 제시. 외국어 메뉴·결제수단·최소주문·대기·휴무는 방문 전 문의.</li><li><strong>미확인:</strong> 현재 정상 영업 · 1인 방문 · 최소 주문량 · 외국어 메뉴 · 지도 장소·좌표 · 사진 이용 권한 · 실제 알레르기 성분</li><li><strong>지도 검색:</strong> <a href=\"https://map.naver.com/p/search/%EB%B6%80%EC%82%B0%20%EC%B2%9C%EC%84%B1%EC%A4%91%EC%95%99%ED%9A%9F%EC%A7%91%20%EB%B6%80%EC%82%B0%20%EA%B0%95%EC%84%9C%EA%B5%AC%20%EA%B0%80%EB%8D%95%ED%95%B4%EC%95%88%EB%A1%9C%20783\" target=\"_blank\" rel=\"noopener noreferrer\">네이버 검색</a> / <a href=\"https://map.kakao.com/?q=%EB%B6%80%EC%82%B0%20%EC%B2%9C%EC%84%B1%EC%A4%91%EC%95%99%ED%9A%9F%EC%A7%91%20%EB%B6%80%EC%82%B0%20%EA%B0%95%EC%84%9C%EA%B5%AC%20%EA%B0%80%EB%8D%95%ED%95%B4%EC%95%88%EB%A1%9C%20783\" target=\"_blank\" rel=\"noopener noreferrer\">카카오 검색</a> / <a href=\"https://www.google.com/maps/search/?api=1&amp;query=%EB%B6%80%EC%82%B0%20%EC%B2%9C%EC%84%B1%EC%A4%91%EC%95%99%ED%9A%9F%EC%A7%91%20%EB%B6%80%EC%82%B0%20%EA%B0%95%EC%84%9C%EA%B5%AC%20%EA%B0%80%EB%8D%95%ED%95%B4%EC%95%88%EB%A1%9C%20783\" target=\"_blank\" rel=\"noopener noreferrer\">구글 검색</a></li><li><strong>조사일:</strong> 2026-11-03</li></ul>\n<h3>소화식당</h3>\n<ul><li><strong>주소:</strong> 부산 사상구 주례로9번길 26</li><li><strong>실제 메뉴 / 게시 가격:</strong> 대게 내장 비빔밥 / 7,900원</li><li><strong>가격 기준:</strong> 게시 메뉴 표기 그대로. 중량·인분·최저가 여부 별도 확인. 현재 가격 미확인.</li><li><strong>게시 영업시간:</strong> 게시 요일 공통 17:00 - 03:30</li><li><strong>게시 정기휴무:</strong> 확인 필요</li><li><strong>외국인 방문 참고:</strong> 지점명·주소를 함께 제시. 외국어 메뉴·결제수단·최소주문·대기·휴무는 방문 전 문의.</li><li><strong>미확인:</strong> 현재 정상 영업 · 1인 방문 · 최소 주문량 · 외국어 메뉴 · 지도 장소·좌표 · 사진 이용 권한 · 실제 알레르기 성분</li><li><strong>지도 검색:</strong> <a href=\"https://map.naver.com/p/search/%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EB%B6%80%EC%82%B0%20%EC%82%AC%EC%83%81%EA%B5%AC%20%EC%A3%BC%EB%A1%80%EB%A1%9C9%EB%B2%88%EA%B8%B8%2026\" target=\"_blank\" rel=\"noopener noreferrer\">네이버 검색</a> / <a href=\"https://map.kakao.com/?q=%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EB%B6%80%EC%82%B0%20%EC%82%AC%EC%83%81%EA%B5%AC%20%EC%A3%BC%EB%A1%80%EB%A1%9C9%EB%B2%88%EA%B8%B8%2026\" target=\"_blank\" rel=\"noopener noreferrer\">카카오 검색</a> / <a href=\"https://www.google.com/maps/search/?api=1&amp;query=%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EB%B6%80%EC%82%B0%20%EC%82%AC%EC%83%81%EA%B5%AC%20%EC%A3%BC%EB%A1%80%EB%A1%9C9%EB%B2%88%EA%B8%B8%2026\" target=\"_blank\" rel=\"noopener noreferrer\">구글 검색</a></li><li><strong>조사일:</strong> 2026-11-03</li></ul>\n"
     ],
     "placesIntro": "<p>해당 메뉴 게시 자료 <strong>0곳</strong>, 유사 메뉴 자료 <strong>3곳</strong>. 현재 영업 직접 확인 <strong>0곳</strong>. 공개 전 재확인이 필요한 후보이며 추천 순위가 아닙니다.</p>",
     "restaurants": [
@@ -5807,20 +5827,6 @@ window.FOODS = [
         "linksHtml": "<a href=\"https://map.naver.com/p/search/%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EB%B6%80%EC%82%B0%20%EC%82%AC%EC%83%81%EA%B5%AC%20%EC%A3%BC%EB%A1%80%EB%A1%9C9%EB%B2%88%EA%B8%B8%2026\" target=\"_blank\" rel=\"noopener noreferrer\">네이버 검색</a> / <a href=\"https://map.kakao.com/?q=%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EB%B6%80%EC%82%B0%20%EC%82%AC%EC%83%81%EA%B5%AC%20%EC%A3%BC%EB%A1%80%EB%A1%9C9%EB%B2%88%EA%B8%B8%2026\" target=\"_blank\" rel=\"noopener noreferrer\">카카오 검색</a> / <a href=\"https://www.google.com/maps/search/?api=1&amp;query=%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EB%B6%80%EC%82%B0%20%EC%82%AC%EC%83%81%EA%B5%AC%20%EC%A3%BC%EB%A1%80%EB%A1%9C9%EB%B2%88%EA%B8%B8%2026\" target=\"_blank\" rel=\"noopener noreferrer\">구글 검색</a>",
         "matchType": "similar",
         "html": "<ul><li><strong>주소:</strong> 부산 사상구 주례로9번길 26</li><li><strong>실제 메뉴 / 게시 가격:</strong> 대게 내장 비빔밥 / 7,900원</li><li><strong>가격 기준:</strong> 게시 메뉴 표기 그대로. 중량·인분·최저가 여부 별도 확인. 현재 가격 미확인.</li><li><strong>게시 영업시간:</strong> 게시 요일 공통 17:00 - 03:30</li><li><strong>게시 정기휴무:</strong> 확인 필요</li><li><strong>외국인 방문 참고:</strong> 지점명·주소를 함께 제시. 외국어 메뉴·결제수단·최소주문·대기·휴무는 방문 전 문의.</li><li><strong>미확인:</strong> 현재 정상 영업 · 1인 방문 · 최소 주문량 · 외국어 메뉴 · 지도 장소·좌표 · 사진 이용 권한 · 실제 알레르기 성분</li><li><strong>지도 검색:</strong> <a href=\"https://map.naver.com/p/search/%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EB%B6%80%EC%82%B0%20%EC%82%AC%EC%83%81%EA%B5%AC%20%EC%A3%BC%EB%A1%80%EB%A1%9C9%EB%B2%88%EA%B8%B8%2026\" target=\"_blank\" rel=\"noopener noreferrer\">네이버 검색</a> / <a href=\"https://map.kakao.com/?q=%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EB%B6%80%EC%82%B0%20%EC%82%AC%EC%83%81%EA%B5%AC%20%EC%A3%BC%EB%A1%80%EB%A1%9C9%EB%B2%88%EA%B8%B8%2026\" target=\"_blank\" rel=\"noopener noreferrer\">카카오 검색</a> / <a href=\"https://www.google.com/maps/search/?api=1&amp;query=%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EB%B6%80%EC%82%B0%20%EC%82%AC%EC%83%81%EA%B5%AC%20%EC%A3%BC%EB%A1%80%EB%A1%9C9%EB%B2%88%EA%B8%B8%2026\" target=\"_blank\" rel=\"noopener noreferrer\">구글 검색</a></li><li><strong>조사일:</strong> 2026-11-03</li></ul>"
-      },
-      {
-        "name": "소화식당 수영점",
-        "area": "부산 수영구 광일로29번가길 17",
-        "signature": "대게내장비빔밥 / 6,900원",
-        "hours": "확인 필요",
-        "holiday": "확인 필요",
-        "priceNote": "게시 메뉴 표기 그대로. 중량·인분·최저가 여부 별도 확인. 현재 가격 미확인.",
-        "visitNote": "지점명·주소를 함께 제시. 외국어 메뉴·결제수단·최소주문·대기·휴무는 방문 전 문의.",
-        "unverified": "현재 정상 영업 · 1인 방문 · 최소 주문량 · 외국어 메뉴 · 지도 장소·좌표 · 사진 이용 권한 · 실제 알레르기 성분",
-        "date": "2026-11-03",
-        "linksHtml": "<a href=\"https://map.naver.com/p/search/%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EC%88%98%EC%98%81%EC%A0%90%20%EB%B6%80%EC%82%B0%20%EC%88%98%EC%98%81%EA%B5%AC%20%EA%B4%91%EC%9D%BC%EB%A1%9C29%EB%B2%88%EA%B0%80%EA%B8%B8%2017\" target=\"_blank\" rel=\"noopener noreferrer\">네이버 검색</a> / <a href=\"https://map.kakao.com/?q=%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EC%88%98%EC%98%81%EC%A0%90%20%EB%B6%80%EC%82%B0%20%EC%88%98%EC%98%81%EA%B5%AC%20%EA%B4%91%EC%9D%BC%EB%A1%9C29%EB%B2%88%EA%B0%80%EA%B8%B8%2017\" target=\"_blank\" rel=\"noopener noreferrer\">카카오 검색</a> / <a href=\"https://www.google.com/maps/search/?api=1&amp;query=%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EC%88%98%EC%98%81%EC%A0%90%20%EB%B6%80%EC%82%B0%20%EC%88%98%EC%98%81%EA%B5%AC%20%EA%B4%91%EC%9D%BC%EB%A1%9C29%EB%B2%88%EA%B0%80%EA%B8%B8%2017\" target=\"_blank\" rel=\"noopener noreferrer\">구글 검색</a>",
-        "matchType": "similar",
-        "html": "<ul><li><strong>주소:</strong> 부산 수영구 광일로29번가길 17</li><li><strong>실제 메뉴 / 게시 가격:</strong> 대게내장비빔밥 / 6,900원</li><li><strong>가격 기준:</strong> 게시 메뉴 표기 그대로. 중량·인분·최저가 여부 별도 확인. 현재 가격 미확인.</li><li><strong>게시 영업시간:</strong> 확인 필요</li><li><strong>게시 정기휴무:</strong> 확인 필요</li><li><strong>외국인 방문 참고:</strong> 지점명·주소를 함께 제시. 외국어 메뉴·결제수단·최소주문·대기·휴무는 방문 전 문의.</li><li><strong>미확인:</strong> 현재 정상 영업 · 1인 방문 · 최소 주문량 · 외국어 메뉴 · 지도 장소·좌표 · 사진 이용 권한 · 실제 알레르기 성분</li><li><strong>지도 검색:</strong> <a href=\"https://map.naver.com/p/search/%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EC%88%98%EC%98%81%EC%A0%90%20%EB%B6%80%EC%82%B0%20%EC%88%98%EC%98%81%EA%B5%AC%20%EA%B4%91%EC%9D%BC%EB%A1%9C29%EB%B2%88%EA%B0%80%EA%B8%B8%2017\" target=\"_blank\" rel=\"noopener noreferrer\">네이버 검색</a> / <a href=\"https://map.kakao.com/?q=%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EC%88%98%EC%98%81%EC%A0%90%20%EB%B6%80%EC%82%B0%20%EC%88%98%EC%98%81%EA%B5%AC%20%EA%B4%91%EC%9D%BC%EB%A1%9C29%EB%B2%88%EA%B0%80%EA%B8%B8%2017\" target=\"_blank\" rel=\"noopener noreferrer\">카카오 검색</a> / <a href=\"https://www.google.com/maps/search/?api=1&amp;query=%EB%B6%80%EC%82%B0%20%EC%86%8C%ED%99%94%EC%8B%9D%EB%8B%B9%20%EC%88%98%EC%98%81%EC%A0%90%20%EB%B6%80%EC%82%B0%20%EC%88%98%EC%98%81%EA%B5%AC%20%EA%B4%91%EC%9D%BC%EB%A1%9C29%EB%B2%88%EA%B0%80%EA%B8%B8%2017\" target=\"_blank\" rel=\"noopener noreferrer\">구글 검색</a></li><li><strong>조사일:</strong> 2026-11-03</li></ul>"
       }
     ]
   },
@@ -5893,10 +5899,29 @@ window.FOODS = [
       "<dl class=\"info-card\"><div class=\"info-row\"><dt>분류</dt><dd>따뜻한 콩국</dd></div><div class=\"info-row\"><dt>대표 지역</dt><dd>대구</dd></div><div class=\"info-row\"><dt>주재료</dt><dd>대두 · 물 · 튀긴 반죽</dd></div><div class=\"info-row\"><dt>조리 방식</dt><dd>콩을 갈아 끓인 국에 반죽을 곁들임</dd></div><div class=\"info-row\"><dt>맛·식감</dt><dd>고소하고 걸쭉하며 곁들임이 쫀득함</dd></div><div class=\"info-row\"><dt>매운맛</dt><dd>기본 낮음</dd></div><div class=\"info-row\"><dt>계절</dt><dd>연중 판매 사례, 부산 판매처 미확인</dd></div><div class=\"info-row\"><dt>가격</dt><dd>식당별 메뉴 가격 참고</dd></div></dl>\n<h3>음식 소개·유래</h3>\n<p>따뜻한 콩국에 튀긴 반죽 등을 곁들여 먹는 대구의 간식입니다. 콩국 전문점과 야식 문화가 확인되지만 화교 전래의 구체적인 경로·시기는 명확하지 않으며, 부산 판매처는 이번 조사에서 확보하지 못했습니다.</p>\n<p>재료 변형: 콩국수와 다른 메뉴, 반죽 원료 변동</p>",
       "<p>보통 이렇게 즐깁니다. 양념·밥·곁들임은 개인 취향과 식당 제공 방식에 따라 달라집니다.</p>\n<ol class=\"steps\"><li><span>따뜻한 콩국을 숟가락으로 조금 떠 식혀 맛봅니다. 기본 간과 온도를 확인합니다.</span></li><li><span>튀긴 반죽이 함께 담겨 있거나 따로 나오면 콩국과 함께 조금씩 먹습니다.</span></li><li><span>반죽을 국물에 적셔 부드럽게 먹거나 씹히는 식감을 살려 먹습니다. 얼마나 적실지는 취향에 따라 선택합니다.</span></li><li><span>설탕이나 소금 등 추가 양념이 제공된다면 소량씩 넣습니다. 가게마다 기본 맛과 제공 양념이 다를 수 있습니다.</span></li></ol>",
       "<ul><li><strong>일반적으로 확인할 재료:</strong> 대두</li><li><strong>가게·메뉴별 가변 재료:</strong> 밀 · 우유 · 달걀 · 땅콩</li></ul>\n<p>대두가 기본입니다. 튀긴 반죽의 밀·달걀, 콩국의 우유·견과 혼합 여부, 튀김기 공용 사용 여부는 가게 확인이 필요합니다.</p>\n<ul><li><strong>생식·특수 재료:</strong> 콩국수와 다른 메뉴, 반죽 원료 변동</li><li><strong>채식:</strong> 가능성 있으나 반죽·소·기름·곁들임 확인 필요</li><li><strong>종교 식단:</strong> 원료·육수·양념·조리환경 및 필요한 인증 확인 필요</li></ul>\n<p>일반적인 조리법을 기준으로 한 안내입니다. 실제 재료·육수·소스와 공용 조리도구는 식당에 확인하세요. 미확인은 불포함이나 안전함을 뜻하지 않습니다.</p>",
-      "<p>해당 메뉴 게시 자료 <strong>0곳</strong>, 유사 메뉴 자료 <strong>0곳</strong>. 현재 영업 직접 확인 <strong>0곳</strong>. 공개 전 재확인이 필요한 후보이며 추천 순위가 아닙니다.</p>"
+      "<p>부산 소재 해당 메뉴 게시 자료 <strong>1곳</strong>. 전화·현장 영업 확인은 수행하지 않았습니다. 방문 전 매장에 확인하세요.</p>\n<h3>해당 메뉴 게시 자료</h3>\n<h3>대한콩국 센텀점</h3>\n<ul><li><strong>주소:</strong> 부산 해운대구 재반로112번길 12-23 1층</li><li><strong>실제 메뉴 / 게시 가격:</strong> 찹쌀콩국 / 6,900원 · 단팥콩국 / 7,400원</li><li><strong>게시 영업시간:</strong> 매일 09:00–17:00</li><li><strong>게시 정기휴무:</strong> 정기휴무 없음 (매일 영업 안내 기준)</li><li><strong>외국인 방문 참고:</strong> 네이버 플레이스에서 부산 주소와 대구식 찹쌀콩국 메뉴를 확인했습니다. 메뉴 가격은 2026-01-04 게시 기준이며 방문 전 최신 가격과 임시휴무를 확인하세요.</li><li><strong>조사일:</strong> 2026-11-06</li></ul>"
     ],
-    "placesIntro": "<p>해당 메뉴 게시 자료 <strong>0곳</strong>, 유사 메뉴 자료 <strong>0곳</strong>. 현재 영업 직접 확인 <strong>0곳</strong>. 공개 전 재확인이 필요한 후보이며 추천 순위가 아닙니다.</p>",
-    "restaurants": []
+    "placesIntro": "<p>부산 소재 해당 메뉴 게시 자료 <strong>1곳</strong>. 전화·현장 영업 확인은 수행하지 않았습니다. 방문 전 매장에 확인하세요.</p>",
+    "restaurants": [
+      {
+        "name": "대한콩국 센텀점",
+        "area": "부산 해운대구 재반로112번길 12-23 1층",
+        "signature": "찹쌀콩국 / 6,900원 · 단팥콩국 / 7,400원",
+        "hours": "매일 09:00–17:00",
+        "holiday": "정기휴무 없음 (매일 영업 안내 기준)",
+        "priceNote": "공개 안내에 게시된 메뉴 기준입니다. 현재 가격·판매 여부는 매장에 확인하세요.",
+        "visitNote": "네이버 플레이스에서 부산 주소와 대구식 찹쌀콩국 메뉴를 확인했습니다. 메뉴 가격은 2026-01-04 게시 기준이며 방문 전 최신 가격과 임시휴무를 확인하세요.",
+        "unverified": "현재 정상 영업 직접 확인 · 당일 재고 · 외국어 메뉴 · 실제 알레르기 성분 · 정확한 지도 좌표",
+        "date": "2026-11-06",
+        "linksHtml": "<a href=\"https://pcmap.place.naver.com/restaurant/2059504850/home\" target=\"_blank\" rel=\"noopener noreferrer\">확인 자료 1</a> / <a href=\"https://pcmap.place.naver.com/restaurant/2059504850/menu/list\" target=\"_blank\" rel=\"noopener noreferrer\">확인 자료 2</a>",
+        "matchType": "exact",
+        "sourceUrls": [
+          "https://pcmap.place.naver.com/restaurant/2059504850/home",
+          "https://pcmap.place.naver.com/restaurant/2059504850/menu/list"
+        ],
+        "html": "<ul><li><strong>주소:</strong> 부산 해운대구 재반로112번길 12-23 1층</li><li><strong>실제 메뉴 / 게시 가격:</strong> 찹쌀콩국 / 6,900원 · 단팥콩국 / 7,400원</li><li><strong>게시 영업시간:</strong> 매일 09:00–17:00</li><li><strong>게시 정기휴무:</strong> 정기휴무 없음 (매일 영업 안내 기준)</li><li><strong>외국인 방문 참고:</strong> 네이버 플레이스에서 부산 주소와 대구식 찹쌀콩국 메뉴를 확인했습니다. 메뉴 가격은 2026-01-04 게시 기준이며 방문 전 최신 가격과 임시휴무를 확인하세요.</li><li><strong>조사일:</strong> 2026-11-06</li></ul>"
+      }
+    ]
   },
   {
     "id": "cheongdo-minari-samgyeopsal",
@@ -5986,79 +6011,6 @@ window.FOODS = [
         "html": "<ul><li><strong>주소:</strong> 부산 사하구 낙동대로450번길 12</li><li><strong>실제 메뉴 / 게시 가격:</strong> 청도 한재로 미나리 / 5,000원</li><li><strong>가격 기준:</strong> 게시 메뉴 표기 그대로. 중량·인분·최저가 여부 별도 확인. 현재 가격 미확인.</li><li><strong>게시 영업시간:</strong> 게시 요일 공통 16:30 - 02:00</li><li><strong>게시 정기휴무:</strong> 확인 필요</li><li><strong>외국인 방문 참고:</strong> 지점명·주소를 함께 제시. 외국어 메뉴·결제수단·최소주문·대기·휴무는 방문 전 문의.</li><li><strong>미확인:</strong> 현재 정상 영업 · 1인 방문 · 최소 주문량 · 외국어 메뉴 · 지도 장소·좌표 · 사진 이용 권한 · 실제 알레르기 성분</li><li><strong>지도 검색:</strong> <a href=\"https://map.naver.com/p/search/%EB%B6%80%EC%82%B0%20%EB%AA%A9%EA%B5%AC%EB%A9%8D%20%ED%95%98%EB%8B%A8%EC%A0%90%20%EB%B6%80%EC%82%B0%20%EC%82%AC%ED%95%98%EA%B5%AC%20%EB%82%99%EB%8F%99%EB%8C%80%EB%A1%9C450%EB%B2%88%EA%B8%B8%2012\" target=\"_blank\" rel=\"noopener noreferrer\">네이버 검색</a> / <a href=\"https://map.kakao.com/?q=%EB%B6%80%EC%82%B0%20%EB%AA%A9%EA%B5%AC%EB%A9%8D%20%ED%95%98%EB%8B%A8%EC%A0%90%20%EB%B6%80%EC%82%B0%20%EC%82%AC%ED%95%98%EA%B5%AC%20%EB%82%99%EB%8F%99%EB%8C%80%EB%A1%9C450%EB%B2%88%EA%B8%B8%2012\" target=\"_blank\" rel=\"noopener noreferrer\">카카오 검색</a> / <a href=\"https://www.google.com/maps/search/?api=1&amp;query=%EB%B6%80%EC%82%B0%20%EB%AA%A9%EA%B5%AC%EB%A9%8D%20%ED%95%98%EB%8B%A8%EC%A0%90%20%EB%B6%80%EC%82%B0%20%EC%82%AC%ED%95%98%EA%B5%AC%20%EB%82%99%EB%8F%99%EB%8C%80%EB%A1%9C450%EB%B2%88%EA%B8%B8%2012\" target=\"_blank\" rel=\"noopener noreferrer\">구글 검색</a></li><li><strong>조사일:</strong> 2026-11-03</li></ul>"
       }
     ]
-  },
-  {
-    "id": "yonggung-sundae",
-    "sourceId": "IEB-FOOD-019",
-    "name": "예천 용궁순대",
-    "summary": "두툼한 돼지 막창에 속을 채워 쪄낸 예천 용궁의 순대.",
-    "category": "경북 예천 용궁면 · 순대·국밥",
-    "ingredients": "돼지막창 · 선지 · 채소 · 곡류",
-    "taste": "두툼하고 쫄깃하며 고소함",
-    "price": "식당별 메뉴 가격 참고",
-    "names": [
-      "Yecheon Yonggung Blood Sausage",
-      "醴泉龙宫血肠",
-      "醴泉・龍宮スンデ"
-    ],
-    "introduction": "돼지막창에 선지·채소·곡류 등의 속을 채워 두툼하고 쫄깃하게 즐기는 예천 용궁의 지역 순대입니다. 용궁시장과 영남대로의 장터·교통문화에 연결되며, 부산 판매처는 이번 조사에서 확보하지 못했습니다.",
-    "infoRows": [
-      [
-        "분류",
-        "순대·국밥"
-      ],
-      [
-        "대표 지역",
-        "경북 예천 용궁면"
-      ],
-      [
-        "주재료",
-        "돼지막창 · 선지 · 채소 · 곡류"
-      ],
-      [
-        "조리 방식",
-        "막창에 속을 채워 찜"
-      ],
-      [
-        "맛·식감",
-        "두툼하고 쫄깃하며 고소함"
-      ],
-      [
-        "매운맛",
-        "기본 낮음, 곁들임은 매울 수 있음"
-      ],
-      [
-        "계절",
-        "연중 사례, 부산 판매처 미확인"
-      ],
-      [
-        "가격",
-        "식당별 메뉴 가격 참고"
-      ]
-    ],
-    "allergenInfo": {
-      "allergens": [
-        "돼지고기",
-        "대두",
-        "밀",
-        "달걀"
-      ],
-      "notes": [
-        "돼지 내장·선지를 포함한 돼지고기 성분이 기본입니다. 곡류·양념·곁들임의 밀·대두·달걀 등은 제조법별로 확인해야 합니다.",
-        "생식·특수 재료: 돼지 내장·피",
-        "채식: 일반 조리법은 동물성 재료 포함",
-        "종교 식단: 원료·육수·양념·조리환경 및 필요한 인증 확인 필요",
-        "일반적인 조리법을 기준으로 한 안내입니다. 실제 재료·육수·소스와 공용 조리도구는 식당에 확인하세요. 미확인은 불포함이나 안전함을 뜻하지 않습니다."
-      ]
-    },
-    "sections": [
-      "<dl class=\"info-card\"><div class=\"info-row\"><dt>분류</dt><dd>순대·국밥</dd></div><div class=\"info-row\"><dt>대표 지역</dt><dd>경북 예천 용궁면</dd></div><div class=\"info-row\"><dt>주재료</dt><dd>돼지막창 · 선지 · 채소 · 곡류</dd></div><div class=\"info-row\"><dt>조리 방식</dt><dd>막창에 속을 채워 찜</dd></div><div class=\"info-row\"><dt>맛·식감</dt><dd>두툼하고 쫄깃하며 고소함</dd></div><div class=\"info-row\"><dt>매운맛</dt><dd>기본 낮음, 곁들임은 매울 수 있음</dd></div><div class=\"info-row\"><dt>계절</dt><dd>연중 사례, 부산 판매처 미확인</dd></div><div class=\"info-row\"><dt>가격</dt><dd>식당별 메뉴 가격 참고</dd></div></dl>\n<h3>음식 소개·유래</h3>\n<p>돼지막창에 선지·채소·곡류 등의 속을 채워 두툼하고 쫄깃하게 즐기는 예천 용궁의 지역 순대입니다. 용궁시장과 영남대로의 장터·교통문화에 연결되며, 부산 판매처는 이번 조사에서 확보하지 못했습니다.</p>\n<p>재료 변형: 돼지 내장·피</p>",
-      "<p>보통 이렇게 즐깁니다. 양념·밥·곁들임은 개인 취향과 식당 제공 방식에 따라 달라집니다.</p>\n<ol class=\"steps\"><li><span>순대가 뜨겁다면 한 조각을 접시에 덜어 식힙니다. 겉의 피가 두툼한 내장 부위임을 알고 맛봅니다.</span></li><li><span>먼저 한 조각을 그대로 먹어 속과 피의 식감을 확인합니다. 피까지 함께 먹는 형태입니다.</span></li><li><span>소금이나 장 등 양념이 제공되면 조금 찍어 먹습니다. 특정 양념만이 정답은 아닙니다.</span></li><li><span>국밥으로 주문했다면 순대와 국물·밥을 함께 먹습니다. 모둠 내장은 순대 속과 별도 재료일 수 있으므로 구성을 확인합니다.</span></li></ol>",
-      "<ul><li><strong>일반적으로 확인할 재료:</strong> 돼지고기</li><li><strong>가게·메뉴별 가변 재료:</strong> 대두 · 밀 · 달걀</li></ul>\n<p>돼지 내장·선지를 포함한 돼지고기 성분이 기본입니다. 곡류·양념·곁들임의 밀·대두·달걀 등은 제조법별로 확인해야 합니다.</p>\n<ul><li><strong>생식·특수 재료:</strong> 돼지 내장·피</li><li><strong>채식:</strong> 일반 조리법은 동물성 재료 포함</li><li><strong>종교 식단:</strong> 원료·육수·양념·조리환경 및 필요한 인증 확인 필요</li></ul>\n<p>일반적인 조리법을 기준으로 한 안내입니다. 실제 재료·육수·소스와 공용 조리도구는 식당에 확인하세요. 미확인은 불포함이나 안전함을 뜻하지 않습니다.</p>",
-      "<p>해당 메뉴 게시 자료 <strong>0곳</strong>, 유사 메뉴 자료 <strong>0곳</strong>. 현재 영업 직접 확인 <strong>0곳</strong>. 공개 전 재확인이 필요한 후보이며 추천 순위가 아닙니다.</p>"
-    ],
-    "placesIntro": "<p>해당 메뉴 게시 자료 <strong>0곳</strong>, 유사 메뉴 자료 <strong>0곳</strong>. 현재 영업 직접 확인 <strong>0곳</strong>. 공개 전 재확인이 필요한 후보이며 추천 순위가 아닙니다.</p>",
-    "restaurants": []
   },
   {
     "id": "daegu-makchang",
@@ -6253,82 +6205,6 @@ window.FOODS = [
         "html": "<ul><li><strong>주소:</strong> 부산 중구 부평2길 37-1</li><li><strong>실제 메뉴 / 게시 가격:</strong> 오징어무침납작만두 / 7,000원</li><li><strong>가격 기준:</strong> 게시 메뉴 표기 그대로. 중량·인분·최저가 여부 별도 확인. 현재 가격 미확인.</li><li><strong>게시 영업시간:</strong> 게시 요일 공통 09:00 - 19:30</li><li><strong>게시 정기휴무:</strong> 확인 필요</li><li><strong>외국인 방문 참고:</strong> 지점명·주소를 함께 제시. 외국어 메뉴·결제수단·최소주문·대기·휴무는 방문 전 문의.</li><li><strong>미확인:</strong> 현재 정상 영업 · 1인 방문 · 최소 주문량 · 외국어 메뉴 · 지도 장소·좌표 · 사진 이용 권한 · 실제 알레르기 성분</li><li><strong>지도 검색:</strong> <a href=\"https://map.naver.com/p/search/%EB%B6%80%EC%82%B0%20%EB%8B%A4%EB%9E%98%EB%B6%84%EC%8B%9D%20%EB%B6%80%EC%82%B0%20%EC%A4%91%EA%B5%AC%20%EB%B6%80%ED%8F%892%EA%B8%B8%2037-1\" target=\"_blank\" rel=\"noopener noreferrer\">네이버 검색</a> / <a href=\"https://map.kakao.com/?q=%EB%B6%80%EC%82%B0%20%EB%8B%A4%EB%9E%98%EB%B6%84%EC%8B%9D%20%EB%B6%80%EC%82%B0%20%EC%A4%91%EA%B5%AC%20%EB%B6%80%ED%8F%892%EA%B8%B8%2037-1\" target=\"_blank\" rel=\"noopener noreferrer\">카카오 검색</a> / <a href=\"https://www.google.com/maps/search/?api=1&amp;query=%EB%B6%80%EC%82%B0%20%EB%8B%A4%EB%9E%98%EB%B6%84%EC%8B%9D%20%EB%B6%80%EC%82%B0%20%EC%A4%91%EA%B5%AC%20%EB%B6%80%ED%8F%892%EA%B8%B8%2037-1\" target=\"_blank\" rel=\"noopener noreferrer\">구글 검색</a></li><li><strong>조사일:</strong> 2026-11-03</li></ul>"
       }
     ]
-  },
-  {
-    "id": "andong-heotjesatbap",
-    "sourceId": "IEB-FOOD-022",
-    "name": "안동 헛제삿밥",
-    "summary": "제사상 방식의 나물·밥과 전·탕 등을 차린 안동의 정식.",
-    "category": "경북 안동 · 나물밥·정식",
-    "ingredients": "쌀 · 나물 · 간장 · 전 · 탕",
-    "taste": "담백하고 나물 향이 나며 간장으로 간함",
-    "price": "식당별 메뉴 가격 참고",
-    "names": [
-      "Andong Ceremonial-style Bibimbap",
-      "安东祭祀风味拌饭",
-      "安東ホッチェサバプ"
-    ],
-    "introduction": "안동의 제례 음식문화를 바탕으로 나물밥에 전·탕 등을 곁들여 차리는 정식입니다. 실제 제례에 참여해야 먹는 음식은 아니며, 제사를 꾸며 먹었다는 이야기는 확정된 유래로 보지 않습니다.",
-    "infoRows": [
-      [
-        "분류",
-        "나물밥·정식"
-      ],
-      [
-        "대표 지역",
-        "경북 안동"
-      ],
-      [
-        "주재료",
-        "쌀 · 나물 · 간장 · 전 · 탕"
-      ],
-      [
-        "조리 방식",
-        "나물과 밥을 차리고 전·탕 등을 함께 제공"
-      ],
-      [
-        "맛·식감",
-        "담백하고 나물 향이 나며 간장으로 간함"
-      ],
-      [
-        "매운맛",
-        "일반적으로 낮음"
-      ],
-      [
-        "계절",
-        "연중 사례, 부산 판매처 미확인"
-      ],
-      [
-        "가격",
-        "식당별 메뉴 가격 참고"
-      ]
-    ],
-    "allergenInfo": {
-      "allergens": [
-        "대두",
-        "생선",
-        "소고기",
-        "돼지고기",
-        "달걀",
-        "밀",
-        "조개류"
-      ],
-      "notes": [
-        "간장의 대두·밀과 전·탕·생선 반찬의 달걀·생선·육류·조개류 등을 개별 확인합니다. 나물만 보인다고 채식으로 분류할 수 없습니다.",
-        "생식·특수 재료: 생선·고기·달걀은 상차림에 따라 포함",
-        "채식: 일반 조리법은 동물성 재료 포함",
-        "종교 식단: 원료·육수·양념·조리환경 및 필요한 인증 확인 필요",
-        "일반적인 조리법을 기준으로 한 안내입니다. 실제 재료·육수·소스와 공용 조리도구는 식당에 확인하세요. 미확인은 불포함이나 안전함을 뜻하지 않습니다."
-      ]
-    },
-    "sections": [
-      "<dl class=\"info-card\"><div class=\"info-row\"><dt>분류</dt><dd>나물밥·정식</dd></div><div class=\"info-row\"><dt>대표 지역</dt><dd>경북 안동</dd></div><div class=\"info-row\"><dt>주재료</dt><dd>쌀 · 나물 · 간장 · 전 · 탕</dd></div><div class=\"info-row\"><dt>조리 방식</dt><dd>나물과 밥을 차리고 전·탕 등을 함께 제공</dd></div><div class=\"info-row\"><dt>맛·식감</dt><dd>담백하고 나물 향이 나며 간장으로 간함</dd></div><div class=\"info-row\"><dt>매운맛</dt><dd>일반적으로 낮음</dd></div><div class=\"info-row\"><dt>계절</dt><dd>연중 사례, 부산 판매처 미확인</dd></div><div class=\"info-row\"><dt>가격</dt><dd>식당별 메뉴 가격 참고</dd></div></dl>\n<h3>음식 소개·유래</h3>\n<p>안동의 제례 음식문화를 바탕으로 나물밥에 전·탕 등을 곁들여 차리는 정식입니다. 실제 제례에 참여해야 먹는 음식은 아니며, 제사를 꾸며 먹었다는 이야기는 확정된 유래로 보지 않습니다.</p>\n<p>재료 변형: 생선·고기·달걀은 상차림에 따라 포함</p>",
-      "<p>보통 이렇게 즐깁니다. 양념·밥·곁들임은 개인 취향과 식당 제공 방식에 따라 달라집니다.</p>\n<ol class=\"steps\"><li><span>밥·나물과 곁들임을 확인합니다. 전·구이·탕은 비빌 재료인지 따로 먹는 반찬인지 식당 안내에 따라 구분합니다.</span></li><li><span>밥과 나물을 가볍게 섞어 맛봅니다. 간장이 별도로 제공되면 조금씩 넣어 간을 맞춥니다.</span></li><li><span>나물밥을 먹으며 전이나 생선 등 반찬을 곁들입니다. 생선이 있다면 가시를 발라냅니다.</span></li><li><span>탕은 뜨거운 국물을 식혀 함께 먹습니다. 추가 고추장이나 다른 양념은 제공 여부와 취향에 따라 선택합니다.</span></li></ol>",
-      "<ul><li><strong>일반적으로 확인할 재료:</strong> 대두</li><li><strong>가게·메뉴별 가변 재료:</strong> 생선 · 소고기 · 돼지고기 · 달걀 · 밀 · 조개류</li></ul>\n<p>간장의 대두·밀과 전·탕·생선 반찬의 달걀·생선·육류·조개류 등을 개별 확인합니다. 나물만 보인다고 채식으로 분류할 수 없습니다.</p>\n<ul><li><strong>생식·특수 재료:</strong> 생선·고기·달걀은 상차림에 따라 포함</li><li><strong>채식:</strong> 일반 조리법은 동물성 재료 포함</li><li><strong>종교 식단:</strong> 원료·육수·양념·조리환경 및 필요한 인증 확인 필요</li></ul>\n<p>일반적인 조리법을 기준으로 한 안내입니다. 실제 재료·육수·소스와 공용 조리도구는 식당에 확인하세요. 미확인은 불포함이나 안전함을 뜻하지 않습니다.</p>",
-      "<p>해당 메뉴 게시 자료 <strong>0곳</strong>, 유사 메뉴 자료 <strong>0곳</strong>. 현재 영업 직접 확인 <strong>0곳</strong>. 공개 전 재확인이 필요한 후보이며 추천 순위가 아닙니다.</p>"
-    ],
-    "placesIntro": "<p>해당 메뉴 게시 자료 <strong>0곳</strong>, 유사 메뉴 자료 <strong>0곳</strong>. 현재 영업 직접 확인 <strong>0곳</strong>. 공개 전 재확인이 필요한 후보이며 추천 순위가 아닙니다.</p>",
-    "restaurants": []
   },
   {
     "id": "eonyang-bulgogi",
@@ -6751,10 +6627,28 @@ window.FOODS = [
       "<dl class=\"info-card\"><div class=\"info-row\"><dt>분류</dt><dd>복어국</dd></div><div class=\"info-row\"><dt>대표 지역</dt><dd>경남 창원 마산</dd></div><div class=\"info-row\"><dt>주재료</dt><dd>식용 복어 · 콩나물 · 미나리 · 마늘</dd></div><div class=\"info-row\"><dt>조리 방식</dt><dd>적절히 손질된 복어를 채소와 끓임</dd></div><div class=\"info-row\"><dt>맛·식감</dt><dd>맑고 시원한 국물, 탄력 있는 살</dd></div><div class=\"info-row\"><dt>매운맛</dt><dd>지리 낮음, 매운탕 높음</dd></div><div class=\"info-row\"><dt>계절</dt><dd>연중 사례, 부산의 마산식 판매처 미확인</dd></div><div class=\"info-row\"><dt>가격</dt><dd>식당별 메뉴 가격 참고</dd></div></dl>\n<h3>음식 소개·유래</h3>\n<p>복어와 콩나물·미나리 등을 끓여 먹는 마산 오동동 복요리거리의 국물 음식입니다. 복어독은 일반적인 가열만으로 안전이 보장되지 않으므로 적절한 자격과 관리가 확인되는 업소인지 확인해야 합니다.</p>\n<p>재료 변형: 복어, 부위별 식용 관리 필요</p>",
       "<p>보통 이렇게 즐깁니다. 양념·밥·곁들임은 개인 취향과 식당 제공 방식에 따라 달라집니다.</p>\n<ol class=\"steps\"><li><span>조리되어 나온 국물과 채소를 숟가락에 덜어 식혀 먹습니다. 직접 손질하거나 추가로 익혀 독을 없애려는 음식으로 안내하지 않습니다.</span></li><li><span>복어살을 접시에 덜고 큰 뼈와 잔가시를 살피며 살을 발라냅니다.</span></li><li><span>생선살·콩나물·미나리를 국물과 함께 먹습니다. 추가 양념이 있으면 기본 맛을 본 뒤 선택합니다.</span></li><li><span>밥을 곁들이거나 국물에 조금씩 말아 먹습니다. 공깃밥 포함 여부는 가게에 확인합니다.</span></li></ol>",
       "<ul><li><strong>일반적으로 확인할 재료:</strong> 생선</li><li><strong>가게·메뉴별 가변 재료:</strong> 대두 · 밀 · 조개류</li></ul>\n<p>복어 등 생선과 육수·소스의 조개류·대두·밀 등을 확인합니다. 복어독은 알레르기와 다른 위해이므로 별도 주의 항목으로 표시해야 합니다.</p>\n<ul><li><strong>생식·특수 재료:</strong> 복어, 부위별 식용 관리 필요</li><li><strong>채식:</strong> 일반 조리법은 동물성 재료 포함</li><li><strong>종교 식단:</strong> 원료·육수·양념·조리환경 및 필요한 인증 확인 필요</li></ul>\n<p>일반적인 조리법을 기준으로 한 안내입니다. 실제 재료·육수·소스와 공용 조리도구는 식당에 확인하세요. 미확인은 불포함이나 안전함을 뜻하지 않습니다.</p>",
-      "<p>해당 메뉴 게시 자료 <strong>0곳</strong>, 유사 메뉴 자료 <strong>0곳</strong>. 현재 영업 직접 확인 <strong>0곳</strong>. 공개 전 재확인이 필요한 후보이며 추천 순위가 아닙니다.</p>"
+      "<p>부산 소재 유사 메뉴 게시 자료 <strong>1곳</strong>. 전화·현장 영업 확인은 수행하지 않았습니다. 방문 전 매장에 확인하세요.</p>\n<h3>해당 메뉴 게시 자료</h3>\n<p>해당 지역의 생산·조리 방식은 확인하지 못했으며 아래는 유사 메뉴 자료입니다.</p>\n<h3>유사 메뉴 게시 자료</h3>\n<h3>마산복국</h3>\n<ul><li><strong>주소:</strong> 부산 금정구 서부곡로5번길 20</li><li><strong>실제 메뉴 / 게시 가격:</strong> 복어요리 / 메뉴·가격 확인 필요</li><li><strong>게시 영업시간:</strong> 확인 필요</li><li><strong>게시 정기휴무:</strong> 확인 필요</li><li><strong>외국인 방문 참고:</strong> 네이버 플레이스에서 마산복국 상호·복어요리 업종과 부산 주소를 확인했습니다. 구체적인 복국 메뉴와 마산식 조리 방식, 현재 영업은 방문 전 문의하세요.</li><li><strong>조사일:</strong> 2026-11-06</li></ul>"
     ],
-    "placesIntro": "<p>해당 메뉴 게시 자료 <strong>0곳</strong>, 유사 메뉴 자료 <strong>0곳</strong>. 현재 영업 직접 확인 <strong>0곳</strong>. 공개 전 재확인이 필요한 후보이며 추천 순위가 아닙니다.</p>",
-    "restaurants": []
+    "placesIntro": "<p>부산 소재 유사 메뉴 게시 자료 <strong>1곳</strong>. 전화·현장 영업 확인은 수행하지 않았습니다. 방문 전 매장에 확인하세요.</p>",
+    "restaurants": [
+      {
+        "name": "마산복국",
+        "area": "부산 금정구 서부곡로5번길 20",
+        "signature": "복어요리 / 메뉴·가격 확인 필요",
+        "hours": "확인 필요",
+        "holiday": "확인 필요",
+        "priceNote": "공개 안내에 게시된 메뉴 기준입니다. 현재 가격·판매 여부는 매장에 확인하세요.",
+        "visitNote": "네이버 플레이스에서 마산복국 상호·복어요리 업종과 부산 주소를 확인했습니다. 구체적인 복국 메뉴와 마산식 조리 방식, 현재 영업은 방문 전 문의하세요.",
+        "unverified": "현재 정상 영업 직접 확인 · 당일 재고 · 외국어 메뉴 · 실제 알레르기 성분 · 정확한 지도 좌표",
+        "date": "2026-11-06",
+        "linksHtml": "<a href=\"https://pcmap.place.naver.com/restaurant/16896703/home\" target=\"_blank\" rel=\"noopener noreferrer\">확인 자료 1</a>",
+        "matchType": "similar",
+        "sourceUrls": [
+          "https://pcmap.place.naver.com/restaurant/16896703/home"
+        ],
+        "html": "<ul><li><strong>주소:</strong> 부산 금정구 서부곡로5번길 20</li><li><strong>실제 메뉴 / 게시 가격:</strong> 복어요리 / 메뉴·가격 확인 필요</li><li><strong>게시 영업시간:</strong> 확인 필요</li><li><strong>게시 정기휴무:</strong> 확인 필요</li><li><strong>외국인 방문 참고:</strong> 네이버 플레이스에서 마산복국 상호·복어요리 업종과 부산 주소를 확인했습니다. 구체적인 복국 메뉴와 마산식 조리 방식, 현재 영업은 방문 전 문의하세요.</li><li><strong>조사일:</strong> 2026-11-06</li></ul>"
+      }
+    ]
   },
   {
     "id": "hadong-jaecheopguk",
@@ -7713,10 +7607,28 @@ window.FOODS = [
       "<dl class=\"info-card\"><div class=\"info-row\"><dt>분류</dt><dd>떡·간식</dd></div><div class=\"info-row\"><dt>대표 지역</dt><dd>경남 의령</dd></div><div class=\"info-row\"><dt>주재료</dt><dd>멥쌀 · 팥소 · 망개잎</dd></div><div class=\"info-row\"><dt>조리 방식</dt><dd>쌀가루를 쪄 팥소를 넣고 잎으로 포장</dd></div><div class=\"info-row\"><dt>맛·식감</dt><dd>쫄깃하고 부드러우며 팥소가 달콤함</dd></div><div class=\"info-row\"><dt>매운맛</dt><dd>기본 맵지 않음</dd></div><div class=\"info-row\"><dt>계절</dt><dd>연중 생산 사례, 부산 상시 판매처 미확인</dd></div><div class=\"info-row\"><dt>가격</dt><dd>식당별 메뉴 가격 참고</dd></div></dl>\n<h3>음식 소개·유래</h3>\n<p>멥쌀 떡에 달콤한 팥소를 넣고 망개잎으로 감싼 의령의 지역 특산 떡입니다. 잎은 포장과 향을 위한 것이므로 떼어내고, 쫄깃한 떡피와 부드러운 팥소를 함께 먹습니다.</p>\n<p>재료 변형: 식물성 기본 재료이나 첨가물 확인</p>",
       "<p>보통 이렇게 즐깁니다. 양념·밥·곁들임은 개인 취향과 식당 제공 방식에 따라 달라집니다.</p>\n<ol class=\"steps\"><li><span>떡을 감싼 망개잎을 천천히 떼어냅니다. 잎은 먹지 않습니다.</span></li><li><span>떡을 먹기 좋은 크기로 나눕니다. 쫄깃한 떡을 한 번에 크게 삼키지 않습니다.</span></li><li><span>떡피와 팥소를 함께 충분히 씹어 먹습니다. 차나 물은 취향에 따라 곁들입니다.</span></li><li><span>남은 떡은 제품에 표시된 보관 방법과 소비기한을 따릅니다. 공통된 상온 보관 기간을 임의로 적용하지 않습니다.</span></li></ol>",
       "<ul><li><strong>일반적으로 확인할 재료:</strong> 대표 표시 성분 확정 안 됨. 아래 설명 확인</li><li><strong>가게·메뉴별 가변 재료:</strong> 땅콩 · 호두 · 잣 · 우유 · 대두 · 밀</li></ul>\n<p>기본 재료는 쌀·팥이지만 이것만으로 알레르기 없음으로 표시하지 않습니다. 소의 견과·우유·대두, 제조 환경의 밀 등과 교차접촉 여부를 제품별로 확인하세요.</p>\n<ul><li><strong>생식·특수 재료:</strong> 식물성 기본 재료이나 첨가물 확인</li><li><strong>채식:</strong> 가능성 있으나 반죽·소·기름·곁들임 확인 필요</li><li><strong>종교 식단:</strong> 원료·육수·양념·조리환경 및 필요한 인증 확인 필요</li></ul>\n<p>일반적인 조리법을 기준으로 한 안내입니다. 실제 재료·육수·소스와 공용 조리도구는 식당에 확인하세요. 미확인은 불포함이나 안전함을 뜻하지 않습니다.</p>",
-      "<p>해당 메뉴 게시 자료 <strong>0곳</strong>, 유사 메뉴 자료 <strong>0곳</strong>. 현재 영업 직접 확인 <strong>0곳</strong>. 공개 전 재확인이 필요한 후보이며 추천 순위가 아닙니다.</p>"
+      "<p>부산 소재 유사 메뉴 게시 자료 <strong>1곳</strong>. 전화·현장 영업 확인은 수행하지 않았습니다. 방문 전 매장에 확인하세요.</p>\n<h3>해당 메뉴 게시 자료</h3>\n<p>해당 지역의 생산·조리 방식은 확인하지 못했으며 아래는 유사 메뉴 자료입니다.</p>\n<h3>유사 메뉴 게시 자료</h3>\n<h3>남천동망개떡</h3>\n<ul><li><strong>주소:</strong> 부산 수영구 황령대로 499 1층</li><li><strong>실제 메뉴 / 게시 가격:</strong> 망개떡 / 가격 확인 필요</li><li><strong>게시 영업시간:</strong> 월~토 08:00–18:00 (재료 소진 시 조기 마감)</li><li><strong>게시 정기휴무:</strong> 일요일·공휴일</li><li><strong>외국인 방문 참고:</strong> 매장 공식 홈페이지에서 부산 매장과 망개떡 판매를 확인했습니다. 부산 매장에서 제조하는 망개떡으로, 의령 생산·직송이나 지리적표시 인증을 확인한 것은 아닙니다.</li><li><strong>조사일:</strong> 2026-11-06</li></ul>"
     ],
-    "placesIntro": "<p>해당 메뉴 게시 자료 <strong>0곳</strong>, 유사 메뉴 자료 <strong>0곳</strong>. 현재 영업 직접 확인 <strong>0곳</strong>. 공개 전 재확인이 필요한 후보이며 추천 순위가 아닙니다.</p>",
-    "restaurants": []
+    "placesIntro": "<p>부산 소재 유사 메뉴 게시 자료 <strong>1곳</strong>. 전화·현장 영업 확인은 수행하지 않았습니다. 방문 전 매장에 확인하세요.</p>",
+    "restaurants": [
+      {
+        "name": "남천동망개떡",
+        "area": "부산 수영구 황령대로 499 1층",
+        "signature": "망개떡 / 가격 확인 필요",
+        "hours": "월~토 08:00–18:00 (재료 소진 시 조기 마감)",
+        "holiday": "일요일·공휴일",
+        "priceNote": "공개 안내에 게시된 메뉴 기준입니다. 현재 가격·판매 여부는 매장에 확인하세요.",
+        "visitNote": "매장 공식 홈페이지에서 부산 매장과 망개떡 판매를 확인했습니다. 부산 매장에서 제조하는 망개떡으로, 의령 생산·직송이나 지리적표시 인증을 확인한 것은 아닙니다.",
+        "unverified": "현재 정상 영업 직접 확인 · 당일 재고 · 외국어 메뉴 · 실제 알레르기 성분 · 정확한 지도 좌표",
+        "date": "2026-11-06",
+        "linksHtml": "<a href=\"https://manggae5475.github.io/\" target=\"_blank\" rel=\"noopener noreferrer\">확인 자료 1</a>",
+        "matchType": "similar",
+        "sourceUrls": [
+          "https://manggae5475.github.io/"
+        ],
+        "html": "<ul><li><strong>주소:</strong> 부산 수영구 황령대로 499 1층</li><li><strong>실제 메뉴 / 게시 가격:</strong> 망개떡 / 가격 확인 필요</li><li><strong>게시 영업시간:</strong> 월~토 08:00–18:00 (재료 소진 시 조기 마감)</li><li><strong>게시 정기휴무:</strong> 일요일·공휴일</li><li><strong>외국인 방문 참고:</strong> 매장 공식 홈페이지에서 부산 매장과 망개떡 판매를 확인했습니다. 부산 매장에서 제조하는 망개떡으로, 의령 생산·직송이나 지리적표시 인증을 확인한 것은 아닙니다.</li><li><strong>조사일:</strong> 2026-11-06</li></ul>"
+      }
+    ]
   }
 ];
  for (const item of entries) {
@@ -7738,4 +7650,495 @@ window.FOODS = [
    restaurants: originalPlaces.map(p => p.info) };
   for (const [i, language] of ['en','zh','ja'].entries()) food[language] = { ...food.ko, name: item.names[i] || item.name, gloss: '' };
  }
+})();
+
+/* Verified Busan place links for previously empty restaurant lists (2026-11-06). */
+(function () {
+ const places = [
+  {
+    "id": "andong-godeungeo",
+    "place": {
+      "name": "신공항식당",
+      "lat": null,
+      "lng": null,
+      "research": {
+        "name": "신공항식당",
+        "area": "부산 강서구 가덕해안로 735",
+        "signature": "안동 간고등어정식 / 가격 확인 필요",
+        "hours": "확인 필요",
+        "holiday": "확인 필요",
+        "priceNote": "공개 안내에 게시된 메뉴 기준입니다. 현재 가격·판매 여부는 매장에 확인하세요.",
+        "visitNote": "안동 간고등어정식 게시 메뉴와 부산 주소를 확인했습니다. 일부 플랫폼에는 이전 상호인 연대봉포차로 등록되어 있어 방문 전 상호·영업 여부를 문의하세요.",
+        "unverified": "현재 정상 영업 직접 확인 · 당일 재고 · 외국어 메뉴 · 실제 알레르기 성분 · 정확한 지도 좌표",
+        "date": "2026-11-06",
+        "linksHtml": "<a href=\"https://www.diningcode.com/profile.php?rid=RuZTxSO0uzVS\" target=\"_blank\" rel=\"noopener noreferrer\">확인 자료 1</a> / <a href=\"https://www.placeview.co.kr/id/MTY3Njk5MDA4MyAg\" target=\"_blank\" rel=\"noopener noreferrer\">확인 자료 2</a>",
+        "matchType": "exact",
+        "sourceUrls": [
+          "https://www.diningcode.com/profile.php?rid=RuZTxSO0uzVS",
+          "https://www.placeview.co.kr/id/MTY3Njk5MDA4MyAg"
+        ],
+        "html": "<ul><li><strong>주소:</strong> 부산 강서구 가덕해안로 735</li><li><strong>실제 메뉴 / 게시 가격:</strong> 안동 간고등어정식 / 가격 확인 필요</li><li><strong>게시 영업시간:</strong> 확인 필요</li><li><strong>게시 정기휴무:</strong> 확인 필요</li><li><strong>외국인 방문 참고:</strong> 안동 간고등어정식 게시 메뉴와 부산 주소를 확인했습니다. 일부 플랫폼에는 이전 상호인 연대봉포차로 등록되어 있어 방문 전 상호·영업 여부를 문의하세요.</li><li><strong>조사일:</strong> 2026-11-06</li></ul>"
+      },
+      "address": "부산 강서구 가덕해안로 735",
+      "hours": "확인 필요",
+      "holiday": "확인 필요",
+      "phone": "051-971-8955"
+    }
+  },
+  {
+    "id": "daegu-kongguk",
+    "place": {
+      "name": "대한콩국 센텀점",
+      "lat": null,
+      "lng": null,
+      "research": {
+        "name": "대한콩국 센텀점",
+        "area": "부산 해운대구 재반로112번길 12-23 1층",
+        "signature": "찹쌀콩국 / 6,900원 · 단팥콩국 / 7,400원",
+        "hours": "매일 09:00–17:00",
+        "holiday": "정기휴무 없음 (매일 영업 안내 기준)",
+        "priceNote": "공개 안내에 게시된 메뉴 기준입니다. 현재 가격·판매 여부는 매장에 확인하세요.",
+        "visitNote": "네이버 플레이스에서 부산 주소와 대구식 찹쌀콩국 메뉴를 확인했습니다. 메뉴 가격은 2026-01-04 게시 기준이며 방문 전 최신 가격과 임시휴무를 확인하세요.",
+        "unverified": "현재 정상 영업 직접 확인 · 당일 재고 · 외국어 메뉴 · 실제 알레르기 성분 · 정확한 지도 좌표",
+        "date": "2026-11-06",
+        "linksHtml": "<a href=\"https://pcmap.place.naver.com/restaurant/2059504850/home\" target=\"_blank\" rel=\"noopener noreferrer\">확인 자료 1</a> / <a href=\"https://pcmap.place.naver.com/restaurant/2059504850/menu/list\" target=\"_blank\" rel=\"noopener noreferrer\">확인 자료 2</a>",
+        "matchType": "exact",
+        "sourceUrls": [
+          "https://pcmap.place.naver.com/restaurant/2059504850/home",
+          "https://pcmap.place.naver.com/restaurant/2059504850/menu/list"
+        ],
+        "html": "<ul><li><strong>주소:</strong> 부산 해운대구 재반로112번길 12-23 1층</li><li><strong>실제 메뉴 / 게시 가격:</strong> 찹쌀콩국 / 6,900원 · 단팥콩국 / 7,400원</li><li><strong>게시 영업시간:</strong> 매일 09:00–17:00</li><li><strong>게시 정기휴무:</strong> 정기휴무 없음 (매일 영업 안내 기준)</li><li><strong>외국인 방문 참고:</strong> 네이버 플레이스에서 부산 주소와 대구식 찹쌀콩국 메뉴를 확인했습니다. 메뉴 가격은 2026-01-04 게시 기준이며 방문 전 최신 가격과 임시휴무를 확인하세요.</li><li><strong>조사일:</strong> 2026-11-06</li></ul>"
+      },
+      "address": "부산 해운대구 재반로112번길 12-23 1층",
+      "hours": "매일 09:00–17:00",
+      "holiday": "정기휴무 없음 (매일 영업 안내 기준)",
+      "phone": "0507-1330-4340",
+      "naverUrl": "https://map.naver.com/p/entry/place/2059504850"
+    }
+  },
+  {
+    "id": "masan-bokguk",
+    "place": {
+      "name": "마산복국",
+      "lat": null,
+      "lng": null,
+      "research": {
+        "name": "마산복국",
+        "area": "부산 금정구 서부곡로5번길 20",
+        "signature": "복어요리 / 메뉴·가격 확인 필요",
+        "hours": "확인 필요",
+        "holiday": "확인 필요",
+        "priceNote": "공개 안내에 게시된 메뉴 기준입니다. 현재 가격·판매 여부는 매장에 확인하세요.",
+        "visitNote": "네이버 플레이스에서 마산복국 상호·복어요리 업종과 부산 주소를 확인했습니다. 구체적인 복국 메뉴와 마산식 조리 방식, 현재 영업은 방문 전 문의하세요.",
+        "unverified": "현재 정상 영업 직접 확인 · 당일 재고 · 외국어 메뉴 · 실제 알레르기 성분 · 정확한 지도 좌표",
+        "date": "2026-11-06",
+        "linksHtml": "<a href=\"https://pcmap.place.naver.com/restaurant/16896703/home\" target=\"_blank\" rel=\"noopener noreferrer\">확인 자료 1</a>",
+        "matchType": "similar",
+        "sourceUrls": [
+          "https://pcmap.place.naver.com/restaurant/16896703/home"
+        ],
+        "html": "<ul><li><strong>주소:</strong> 부산 금정구 서부곡로5번길 20</li><li><strong>실제 메뉴 / 게시 가격:</strong> 복어요리 / 메뉴·가격 확인 필요</li><li><strong>게시 영업시간:</strong> 확인 필요</li><li><strong>게시 정기휴무:</strong> 확인 필요</li><li><strong>외국인 방문 참고:</strong> 네이버 플레이스에서 마산복국 상호·복어요리 업종과 부산 주소를 확인했습니다. 구체적인 복국 메뉴와 마산식 조리 방식, 현재 영업은 방문 전 문의하세요.</li><li><strong>조사일:</strong> 2026-11-06</li></ul>"
+      },
+      "address": "부산 금정구 서부곡로5번길 20",
+      "hours": "확인 필요",
+      "holiday": "확인 필요",
+      "phone": "",
+      "naverUrl": "https://map.naver.com/p/entry/place/16896703"
+    }
+  },
+  {
+    "id": "uiryeong-manggaetteok",
+    "place": {
+      "name": "남천동망개떡",
+      "lat": null,
+      "lng": null,
+      "research": {
+        "name": "남천동망개떡",
+        "area": "부산 수영구 황령대로 499 1층",
+        "signature": "망개떡 / 가격 확인 필요",
+        "hours": "월~토 08:00–18:00 (재료 소진 시 조기 마감)",
+        "holiday": "일요일·공휴일",
+        "priceNote": "공개 안내에 게시된 메뉴 기준입니다. 현재 가격·판매 여부는 매장에 확인하세요.",
+        "visitNote": "매장 공식 홈페이지에서 부산 매장과 망개떡 판매를 확인했습니다. 부산 매장에서 제조하는 망개떡으로, 의령 생산·직송이나 지리적표시 인증을 확인한 것은 아닙니다.",
+        "unverified": "현재 정상 영업 직접 확인 · 당일 재고 · 외국어 메뉴 · 실제 알레르기 성분 · 정확한 지도 좌표",
+        "date": "2026-11-06",
+        "linksHtml": "<a href=\"https://manggae5475.github.io/\" target=\"_blank\" rel=\"noopener noreferrer\">확인 자료 1</a>",
+        "matchType": "similar",
+        "sourceUrls": [
+          "https://manggae5475.github.io/"
+        ],
+        "html": "<ul><li><strong>주소:</strong> 부산 수영구 황령대로 499 1층</li><li><strong>실제 메뉴 / 게시 가격:</strong> 망개떡 / 가격 확인 필요</li><li><strong>게시 영업시간:</strong> 월~토 08:00–18:00 (재료 소진 시 조기 마감)</li><li><strong>게시 정기휴무:</strong> 일요일·공휴일</li><li><strong>외국인 방문 참고:</strong> 매장 공식 홈페이지에서 부산 매장과 망개떡 판매를 확인했습니다. 부산 매장에서 제조하는 망개떡으로, 의령 생산·직송이나 지리적표시 인증을 확인한 것은 아닙니다.</li><li><strong>조사일:</strong> 2026-11-06</li></ul>"
+      },
+      "address": "부산 수영구 황령대로 499 1층",
+      "hours": "월~토 08:00–18:00 (재료 소진 시 조기 마감)",
+      "holiday": "일요일·공휴일",
+      "phone": "051-611-5475"
+    }
+  }
+];
+ for (const item of places) {
+  const food = window.FOODS.find(food => food.id === item.id);
+  if (food?.places?.[0]?.name === item.place.name) Object.assign(food.places[0], item.place);
+ }
+})();
+
+/* User-supplied food photos (2026-11-06). Original files and rights notes preserved. */
+(function () {
+  const photos = [
+  {
+    "id": "busan-wandang",
+    "photo": "assets/food/busan-wandang.gif",
+    "credit": {
+      "file": "01_부산_완당.gif",
+      "author": "부산시보 부산이라좋다, 민경순 기사(2011-01-11)",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.busan.go.kr/news/totalnews01/view?dataNo=31903&gugun=Next",
+      "rightsNote": "기사 하단 무단 전재·복사·배포 금지. 재사용 허가 미확인.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "pohang-mulhoe",
+    "photo": "assets/food/pohang-mulhoe.jpg",
+    "credit": {
+      "file": "02_포항물회.jpg",
+      "author": "포항시 제공 / 뉴시스(2024-08-01)",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.newsis.com/view/NISX20240801_0002834364",
+      "rightsNote": "포항시 제공은 확인. 개별 공개 라이선스 미확인, 뉴시스 무단 전재·재배포 금지.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "gwamegi",
+    "photo": "assets/food/gwamegi.jpg",
+    "credit": {
+      "file": "03_과메기.jpg",
+      "author": "포항시 제공 / 프레시안(2022-10-12)",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://v.daum.net/v/Xm3khi4IF2",
+      "rightsNote": "개별 공개 라이선스 미확인. 기사 무단전재·재배포 금지.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "mungtigi",
+    "photo": "assets/food/mungtigi.jpg",
+    "credit": {
+      "file": "04_뭉티기.jpg",
+      "author": "@alkongdalkon_daddy / 대구관광 공식 블로그(2023-03-23)",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://visitdaegu2011.blogspot.com/2023/03/korea-daegu-local-food-trip-travel.html",
+      "rightsNote": "촬영자 계정은 명시. 개별 공개 라이선스 미확인.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "andong-jjimdak",
+    "photo": "assets/food/andong-jjimdak.jpg",
+    "credit": {
+      "file": "05_안동찜닭.jpg",
+      "author": "코리아넷/해외문화홍보원, 사진 위택환·이하나(2016-04-11)",
+      "license": "공공누리 표기·원문 조건 추가 확인 필요",
+      "url": "https://www.korean-culture.org/koreanet/view.do?seq=5520",
+      "rightsNote": "동일 사진의 Commons 파일 설명은 공공누리 제1유형(출처표시). 현재 원문은 저작권 정책을 코리아넷에 문의하도록 안내하므로 외부 게시 전 확인 권장.",
+      "usageNote": "Commons의 공공누리 제1유형 표시와 현재 원문의 저작권 안내를 함께 확인해야 합니다. 이 모음은 재게시 권한 확보를 보증하지 않습니다. 확인 전 재게시 보류.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "andong-godeungeo",
+    "photo": "assets/food/andong-godeungeo.jpg",
+    "credit": {
+      "file": "06_안동간고등어.jpg",
+      "author": "코리아넷/해외문화홍보원, 사진 위택환·이하나(2016-04-11)",
+      "license": "공공누리 표기·원문 조건 추가 확인 필요",
+      "url": "https://www.korean-culture.org/koreanet/view.do?seq=5520",
+      "rightsNote": "동일 사진의 Commons 파일 설명은 공공누리 제1유형(출처표시). 현재 원문은 저작권 정책을 코리아넷에 문의하도록 안내하므로 외부 게시 전 확인 권장.",
+      "usageNote": "Commons의 공공누리 제1유형 표시와 현재 원문의 저작권 안내를 함께 확인해야 합니다. 이 모음은 재게시 권한 확보를 보증하지 않습니다. 확인 전 재게시 보류.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "yeongdeok-uljin-daege",
+    "photo": "assets/food/yeongdeok-uljin-daege.jpg",
+    "credit": {
+      "file": "07_영덕·울진_대게.jpg",
+      "author": "한국관광공사 포토코리아 / 스튜디오 4cats",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://news.nate.com/view/20260504n14053",
+      "rightsNote": "게시 사진 크레딧 확인, 이 게시본의 개별 공개 라이선스 미확인. 기사 무단전재·재배포 금지. 별도로 Commons에 영덕 대게찜 공공누리 1유형 후보가 있음.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "daegu-kongguk",
+    "photo": "assets/food/daegu-kongguk.jpg",
+    "credit": {
+      "file": "08_대구콩국.jpg",
+      "author": "Instagram 'tyche__ha' / 인사이트(2019-07-02)",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.insight.co.kr/news/234917",
+      "rightsNote": "원 촬영자 계정 명시, 공개 라이선스 미확인. 인사이트 무단전재·재배포 금지.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "cheongdo-minari-samgyeopsal",
+    "photo": "assets/food/cheongdo-minari-samgyeopsal.jpg",
+    "credit": {
+      "file": "09_청도미나리삼겹살.jpg",
+      "author": "매일신문, 문화식객 이춘호의 미각기행(2024-03-01). 별도 촬영자 표기는 확인 못 함.",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.imaeil.com/page/view/2024022710263369216",
+      "rightsNote": "공개 라이선스 미확인. 재게시·상업사용 전 허가 필요.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "yonggung-sundae",
+    "photo": "assets/food/yonggung-sundae.jpg",
+    "credit": {
+      "file": "10_예천_용궁순대.jpg",
+      "author": "예천군 제공 / 국민일보",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.kmib.co.kr/article/view.asp?arcid=0029709620",
+      "rightsNote": "자유 재사용 라이선스 미확인. 예천군 제공이라는 크레딧은 확인했으나 그것만으로 공공누리 허가로 볼 수 없음. 공개·상업 재게시 전 권리자 확인 필요.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "daegu-makchang",
+    "photo": "assets/food/daegu-makchang.webp",
+    "credit": {
+      "file": "11_대구_막창구이.webp",
+      "author": "다이닝코드 효목골막창 방문사진 / 개별 촬영자 미확인",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.diningcode.com/profile.php?rid=52Hp1Op5KgDn",
+      "rightsNote": "서비스 약관상 회원 게시물의 권리는 게시 회원에게 있고, 회사 게시물은 회사 권리. 제3자 자유이용 허가는 확인되지 않아 재게시 허가 필요.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "daegu-napjak-mandu",
+    "photo": "assets/food/daegu-napjak-mandu.jpg",
+    "credit": {
+      "file": "12_대구_납작만두.jpg",
+      "author": "트리플 미성당 납작 만두 본점 사진 / 개별 촬영자 미확인",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://triple.guide/restaurants/be27531d-9ea5-43fd-9089-536280e9be13",
+      "rightsNote": "트리플 약관 제16조는 게시물 저작권을 게시 이용자에게 귀속. 제17조는 사전승낙 없는 영리 목적 복제·배포 등을 제한. 별도 자유 재사용 허가 없음.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "andong-heotjesatbap",
+    "photo": "assets/food/andong-heotjesatbap.jpg",
+    "credit": {
+      "file": "13_안동_헛제삿밥.jpg",
+      "author": "경상북도 경북음식이야기",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.gb.go.kr/Main/page.do?F_Code=F_WTUC07063&cmd=2&keyword=food&mnu_uid=3710&srch_Area=&srch_Order=Reg&srch_Producer=&srch_Season=&srch_Word=",
+      "rightsNote": "경상북도 정책상 개별 자료의 공공누리 표시 확인 후 이용, 표시 없는 자료는 사전 협의. 이 음식 페이지의 사진별 KOGL 유형은 확인하지 못했으므로 자유이용으로 확정하지 않음.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "eonyang-bulgogi",
+    "photo": "assets/food/eonyang-bulgogi.jpg",
+    "credit": {
+      "file": "14_언양불고기.jpg",
+      "author": "문화체육관광부 / Korea.net, 글 Sung Ji Yeon, 사진작가 미확인",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.mcst.go.kr/english/useful/month202312.jsp",
+      "rightsNote": "문체부 정책은 개별 공공누리 표시 확인, 표시가 없으면 사전협의 요구. 해당 영어 음식 페이지에 사진별 개방표시를 확인하지 못해 허가 상태 미확인.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "gorae-gogi",
+    "photo": "assets/food/gorae-gogi.jpg",
+    "credit": {
+      "file": "15_고래고기.jpg",
+      "author": "뉴시스 배병수",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://mobile.newsis.com/view_amp.html?ar_id=NISX20191218_0000864594",
+      "rightsNote": "자유 재사용 라이선스 없음/미확인. 언론사 저작물, 재게시 전 뉴시스 허가 필요. 워터마크 제거·가리기 금지.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "jinju-naengmyeon",
+    "photo": "assets/food/jinju-naengmyeon.jpeg",
+    "credit": {
+      "file": "16_진주냉면.jpeg",
+      "author": "홍차넷 Beer Inside",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://redtea.kr/taste/1292",
+      "rightsNote": "게시글에 CC/자유재사용 허가 표기를 찾지 못함. 게시자 저작권 확인 및 재게시 허가 필요.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "masan-bokguk",
+    "photo": "assets/food/masan-bokguk.jpg",
+    "credit": {
+      "file": "17_마산복국.jpg",
+      "author": "디지틀조선일보·dizzo.com 미디어취재팀",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://digitalchosun.dizzo.com/site/data/html_dir/2015/06/03/2015060312020.html",
+      "rightsNote": "원문 Copyright ⓒ 디지틀조선일보&dizzo.com 표기. 사진별 자유재사용 허가 미확인, 재게시 허가 필요.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "hadong-jaecheopguk",
+    "photo": "assets/food/hadong-jaecheopguk.jpg",
+    "credit": {
+      "file": "18_하동재첩국.jpg",
+      "author": "한국관광공사 VISITKOREA / 부흥재첩식당",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://english.visitkorea.or.kr/svc/whereToGo/locIntrdn/rgnContentsView.do?vcontsId=217045",
+      "rightsNote": "개별 사진의 자유 재사용 조건 미확인. 관광공사 워터마크 있음.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "namhae-myeolchi-ssambap",
+    "photo": "assets/food/namhae-myeolchi-ssambap.jpg",
+    "credit": {
+      "file": "19_남해_멸치쌈밥.jpg",
+      "author": "경상남도 남해군, 경남_남해_남해음식(멸치쌈밥)",
+      "license": "공공누리 제1유형 (제공 안내 기준)",
+      "url": "https://www.kogl.or.kr/recommend/recommendDivView.do?division=img&recommendIdx=57155",
+      "rightsNote": "공공누리 제1유형(출처표시). 상업·비상업 이용 및 변경 가능. 저장 파일은 공개 미리보기이며 원본 아님.",
+      "usageNote": "공공누리 제1유형. 출처표시 필요. 기관·저작물명·원문 링크를 함께 남기세요.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "masan-agujjim",
+    "photo": "assets/food/masan-agujjim.jpg",
+    "credit": {
+      "file": "20_마산아구찜.jpg",
+      "author": "경남일보, 못 나서 맛나서 입이 딱 벌어지는 아구 만나보소",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.gnnews.co.kr/news/articleView.html?idxno=169303",
+      "rightsNote": "자유 재사용 라이선스 미확인. 촬영자 미확인.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "chungmu-gimbap",
+    "photo": "assets/food/chungmu-gimbap.jpg",
+    "credit": {
+      "file": "21_통영_충무김밥.jpg",
+      "author": "한국관광공사 VISITKOREA, Extraordinary Gimbap Gourmet Tour",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://english.visitkorea.or.kr/svc/contents/contentsView.do?dataSetId=76&menuSn=508&vcontsId=138109",
+      "rightsNote": "개별 사진 자유 재사용 조건 미확인.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "meongge-bibimbap",
+    "photo": "assets/food/meongge-bibimbap.jpg",
+    "credit": {
+      "file": "22_통영_멍게비빔밥.jpg",
+      "author": "홍기표 / 오마이뉴스, 2021-03-20",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://v.daum.net/v/20210320171500455?from=tgt",
+      "rightsNote": "무단 전재 및 재배포 금지 명시. 재사용 시 허가 필요.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "dodari-ssukguk",
+    "photo": "assets/food/dodari-ssukguk.jpg",
+    "credit": {
+      "file": "23_통영_도다리쑥국.jpg",
+      "author": "김숙귀 / 오마이뉴스, 2026-02-27",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.ohmynews.com/NWS_Web/View/img_pg.aspx?CNTN_CD=IE003587202",
+      "rightsNote": "All rights reserved. 자유 재사용 허가 미확인.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "jinju-bibimbap",
+    "photo": "assets/food/jinju-bibimbap.jpg",
+    "credit": {
+      "file": "24_진주비빔밥.jpg",
+      "author": "전북일보, [신팔도명물] 경남 진주비빔밥, 슥슥 비벼 한 입 뜨면 꿀맛",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://www.jjan.kr/article/20230309580171",
+      "rightsNote": "자유 재사용 라이선스·촬영자 미확인.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  },
+  {
+    "id": "uiryeong-manggaetteok",
+    "photo": "assets/food/uiryeong-manggaetteok.jpg",
+    "credit": {
+      "file": "25_의령_망개떡.jpg",
+      "author": "구례로컬푸드 상품 사진",
+      "license": "재사용 허가 미확인 (제공 안내 기준)",
+      "url": "https://guryelocalfood.com/product/%EC%9D%98%EB%A0%B9-%EB%A7%9D%EA%B0%9C%EB%96%A1-%ED%8C%A5-%EA%B2%AC%EA%B3%BC-%EC%A0%84%ED%86%B5-%EB%A7%9D%EA%B0%9C%EB%96%A1-40%EA%B0%9C-%ED%86%A0%EB%B3%B5%EB%A0%B9-%EC%9D%98%EB%A0%B9%ED%8A%B9%EC%82%B0%EB%AC%BC/994/",
+      "rightsNote": "자유 재사용 라이선스·촬영자 미확인.",
+      "usageNote": "재게시 권한 미확보. 허가 전 외부 게시·배포·상업 사용 보류. 출처표시만으로 재사용할 수 없습니다.",
+      "source": "사용자 제공 사진·출처 안내",
+      "modified": false
+    }
+  }
+];
+  const foods = new Map(window.FOODS.map(food => [food.id, food]));
+  for (const item of photos) {
+    const food = foods.get(item.id);
+    if (food) Object.assign(food, { photo: item.photo, credit: item.credit });
+  }
 })();

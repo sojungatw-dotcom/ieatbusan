@@ -189,7 +189,7 @@ window.SEED = {
       ],
       [
         "내 글은 어디에 저장되나요?",
-        "이 시안에서는 지금 쓰는 브라우저에만 저장돼요. 브라우저 데이터를 지우면 함께 지워져요."
+        "로그인 후 작성한 글·댓글·사진은 서버에 저장돼요. 다른 기기에서도 같은 계정으로 볼 수 있고, 브라우저 데이터를 지워도 삭제되지 않아요."
       ]
     ],
     "en": [
@@ -203,11 +203,11 @@ window.SEED = {
       ],
       [
         "How do I change the language?",
-        "Use the language button at the top of Home, or My > Settings > Language."
+        "Use the language button at the top of Home, or Account > Settings > Language."
       ],
       [
         "Where are my posts stored?",
-        "In this prototype, only in your current browser. Clearing browser data removes them."
+        "Posts, comments and photos you add while logged in are stored on the server. You can access them with the same account on another device. Clearing browser data does not delete them."
       ]
     ],
     "zh": [
@@ -225,7 +225,7 @@ window.SEED = {
       ],
       [
         "我的帖子保存在哪里？",
-        "在此原型中只保存在当前浏览器里，清除浏览器数据后会一并删除。"
+        "登录后发布的帖子、评论和照片保存在服务器上，使用同一账号可在其他设备查看。清除浏览器数据不会删除这些内容。"
       ]
     ],
     "ja": [
@@ -239,11 +239,11 @@ window.SEED = {
       ],
       [
         "言語はどう変えますか？",
-        "ホーム上部の言語ボタン、または マイ > 設定 > 言語 から変更できます。"
+        "ホーム上部の言語ボタン、または マイページ > 設定 > 言語 から変更できます。"
       ],
       [
         "自分の投稿はどこに保存されますか？",
-        "このプロトタイプでは、今お使いのブラウザにのみ保存されます。ブラウザのデータを消すと一緒に消えます。"
+        "ログインして投稿した記事・コメント・写真はサーバーに保存されます。同じアカウントで別の端末からも閲覧できます。ブラウザーのデータを消去しても削除されません。"
       ]
     ]
   }

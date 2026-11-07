@@ -7,7 +7,7 @@ const deferred = () => { let resolve, reject; const promise = new Promise((a,b) 
 const tick = () => new Promise(resolve => setImmediate(resolve));
 async function fixture() {
   const calls = [], events = [], waits = [];
-  let payload = { user: { id:'test-user', nickname:'Tester' }, preferences:{lang:'ko'}, posts:[{id:'p1',photos:[],likes:2}], comments:{},postLikes:{} };
+  let payload = { user: { id:'test-user', nickname:'Tester',countryCode:'JP' }, preferences:{lang:'ko'}, posts:[{id:'p1',photos:[],likes:2}], comments:{},postLikes:{},foods:[{id:'food-one',likes:2}],foodLikes:{} };
   const ctx = vm.createContext({ location:{protocol:'http:'}, crypto:{randomUUID}, SEED:{posts:[]},
     localStorage:{getItem:()=>null,setItem:()=>{}}, CustomEvent:class { constructor(type, props) { this.type=type;this.detail=props?.detail; } },
     fetch:async (url, options) => {
@@ -34,6 +34,7 @@ async function fixture() {
   await assert.rejects(unlike); assert.equal(ctx.Store.get().postLikes.p1,true,'Failed unlike rolls back');
   const comment=ctx.Cloud.comment('p1','hello');
   assert.equal(ctx.Store.get().comments.p1[0].pending,true,'Comment is immediately visible');
+  assert.equal(ctx.Store.get().comments.p1[0].countryCode,'JP','Optimistic comment keeps the member country badge');
   const duplicate=ctx.Cloud.comment('p1','hello'); assert.equal(duplicate,comment);
   await tick(); settle(2,{comment:{id:'canonical-id',text:'hello',createdAt:123}}); await comment;
   assert.equal(ctx.Store.get().comments.p1.length,1);
@@ -70,6 +71,23 @@ async function fixture() {
   assert.equal(bootstrapCalls,2,'Refresh retries once after an overlapping mutation');
   assert.equal(waits.length,8);
 
+  const foodFixture=await fixture(), foodStore=foodFixture.ctx.Store;
+  const saved=foodFixture.ctx.Cloud.foodLike('food-one',true);
+  assert.equal(foodStore.get().foods[0].likes,3,'Food aggregate increases immediately exactly once');
+  assert.equal(foodStore.get().foodLikes['food-one'],true);
+  assert.equal(foodStore.get().savedFoods[0],'food-one','Saved page updates in the same optimistic edit');
+  assert.equal(foodFixture.ctx.Cloud.foodLike('food-one',false),saved,'Food double click shares the pending mutation');
+  await tick(); foodFixture.settle(0); await saved; await tick();
+  foodFixture.settle(1); await foodStore.flush();
+  assert.equal(foodFixture.calls.filter(call=>call.action==='preferences').length,1);
+  const failedFood=foodFixture.ctx.Cloud.foodLike('food-one',false);
+  assert.equal(foodStore.get().foods[0].likes,2);
+  await tick();foodFixture.settle(2,{error:'db.failure'},false);await assert.rejects(failedFood);await foodStore.flush();
+  assert.equal(foodStore.get().foods[0].likes,3,'Failed food unlike restores aggregate');
+  assert.equal(foodStore.get().foodLikes['food-one'],true);
+  assert.equal(foodStore.get().savedFoods[0],'food-one','Failed food unlike restores bookmark');
+  assert.ok(foodFixture.calls.every(call=>call.action!=='bootstrap'),'Food like never reloads the entire catalog');
+
   const routing=vm.createContext({location:{hash:'#/write'},renderCount:0});
   routing.window=routing; routing.rerender=()=>routing.renderCount++;
   routing.addEventListener=(name,fn)=>{routing.listener=fn;};
@@ -81,5 +99,15 @@ async function fixture() {
   assert.equal(routing.renderCount,0,'Late writes cannot erase an unrelated editor/search form');
   routing.location.hash='#/post/p1';routing.listener({detail:'comment:p1'});
   assert.equal(routing.renderCount,1,'Relevant post still refreshes on acknowledgement');
+  routing.location.hash='#/results/food';routing.listener({detail:'foodLike:food-one'});
+  assert.equal(routing.renderCount,2,'Food hearts also refresh search results immediately');
+  let historyWrites=0;
+  const mounting=vm.createContext({V:{food:()=>{}},app:{querySelectorAll:()=>[]},Store:{update:()=>historyWrites++}});
+  mounting.window=mounting;
+  vm.runInContext(app.slice(app.indexOf('  V.food.mount ='),app.indexOf('  V.place =')),mounting);
+  mounting.V.food.mount({id:'food-one',refreshing:true});
+  assert.equal(historyWrites,0,'Failure rollback rerender must not retry a recent-food write forever');
+  mounting.V.food.mount({id:'food-one'});
+  assert.equal(historyWrites,1,'A real food navigation still records history');
   console.log('PASS immediate feedback, duplicate suppression, canonical comments, rollback, coalesced preferences, refresh deduplication and stale-response protection');
 })().catch(error=>{console.error(error);process.exitCode=1;});

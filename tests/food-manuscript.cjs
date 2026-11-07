@@ -1,11 +1,11 @@
 /* node tests/food-manuscript.cjs */
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(read('js/data/foods.js'),ctx);vm.runInContext(read('js/i18n.js'),ctx);
+const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(read('js/data/foods.js'),ctx);vm.runInContext(read('js/i18n.js'),ctx);vm.runInContext(read('js/data/food-info-translations.js'),ctx);vm.runInContext(read('js/data/food-detail-locales.js'),ctx);
 ctx.I18N=ctx.window.I18N; const foods=ctx.window.FOODS,items=foods.filter(f=>f.manuscript),app=read('js/app.js');
-assert.equal(items.length,34);assert.equal(new Set(foods.map(f=>f.id)).size,foods.length);assert.ok(foods.every(f=>f.id));
-assert.equal(items.reduce((n,f)=>n+f.manuscript.restaurants.length,0),100);
-Object.assign(ctx,{FOODS:foods,FOOD:Object.fromEntries(foods.map(f=>[f.id,f])),V:{},S:()=>({savedFoods:[],savedPlaces:[]}),language:'ko',lang:()=>ctx.language,esc:v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),L:f=>f[ctx.language]||f.ko,t:k=>ctx.I18N[ctx.language][k]??ctx.I18N.ko[k]??k,img:id=>ctx.FOOD[id].photo||`assets/food/${id}.jpg`,icon:()=>'',foodLikes:f=>f.likes});
+assert.equal(items.length,32);assert.equal(new Set(foods.map(f=>f.id)).size,foods.length);assert.ok(foods.every(f=>f.id));
+assert.equal(items.reduce((n,f)=>n+f.manuscript.restaurants.length,0),103);
+Object.assign(ctx,{FOODS:foods,FOOD:Object.fromEntries(foods.map(f=>[f.id,f])),V:{},S:()=>({savedFoods:[],savedPlaces:[]}),language:'ko',lang:()=>ctx.language,esc:v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),L:f=>f[ctx.language]||f.ko,t:k=>ctx.I18N[ctx.language][k]??ctx.I18N.ko[k]??k,img:id=>ctx.FOOD[id].photo||`assets/food/${id}.jpg`,placeImg:p=>ctx.img(p.food.id),icon:()=>'',foodLikes:f=>f.likes});
 const maps=require('./map-context.cjs')();
 const data=maps.IEBMapData.create(foods,()=>ctx.language);
 Object.assign(ctx,{placeKey:data.placeKey,placeOf:data.placeOf,allPlaces:data.allPlaces});
@@ -27,7 +27,7 @@ for(const food of items){
   ctx.language=lang;const html=ctx.V.food({id:food.id});
   for(const id of ['info','how','allergy','places'])assert.ok(html.includes(`id="sec-${id}"`));
   assert.ok(!/undefined|NaN|<script|<iframe|javascript:/.test(html));
-  assert.ok(html.includes('식당별 메뉴 가격 참고'));
+  assert.ok(html.includes(ctx.esc(ctx.window.IEBFoodInfo.rows(food,lang)[7])));
   assert.ok(!html.includes('kcal')&&!html.includes('팀 내부 메모'));
   const section=html.slice(html.indexOf('id="sec-places"'));
   assert.equal((section.match(/class="list-item"/g)||[]).length,food.places.length);
@@ -40,19 +40,19 @@ for(const food of items){
    const projected=data.placeOf(food.id,i);
    const info=detail.slice(detail.indexOf('class="rows place-info"'),detail.indexOf('<div class="mini-map'));
    assert.equal((info.match(/class="row"/g)||[]).length,2,'Address and schedule rows only');
-   assert.ok(info.includes(ctx.esc(projected.address||projected.area||ctx.I18N[lang]['food.unconfirmed'])));
-   assert.ok(info.includes(ctx.esc(projected.hours||ctx.I18N[lang]['food.unconfirmed'])));
-   assert.ok(info.includes(ctx.esc(projected.holiday||ctx.I18N[lang]['food.unconfirmed'])));
+   assert.ok(info.includes(ctx.esc(ctx.window.IEBFoodLocale.text(projected.address||projected.area||ctx.I18N[lang]['food.unconfirmed'],lang))));
+   assert.ok(info.includes(ctx.esc(ctx.window.IEBFoodLocale.text(projected.hours||ctx.I18N[lang]['food.unconfirmed'],lang))));
+   assert.ok(info.includes(ctx.esc(ctx.window.IEBFoodLocale.text(projected.holiday||ctx.I18N[lang]['food.unconfirmed'],lang))));
    assert.ok(!/destination=null|null,null|undefined|NaN/.test(detail));
    if(place.research){
-    for(const value of [place.research.area,place.research.hours,place.research.holiday,place.research.date])assert.ok(detail.includes(ctx.esc(value)));
+    for(const value of [place.research.area,place.research.hours,place.research.holiday,place.research.date])assert.ok(detail.includes(ctx.esc(ctx.window.IEBFoodLocale.text(value,lang))));
     assert.ok(!detail.includes('출처:')&&!detail.includes('SRC-'));
-    assert.ok(detail.includes('<h2>대표 메뉴</h2>'));
+    assert.ok(detail.includes('<h2>'+ctx.esc(ctx.I18N[lang]['place.menu'])+'</h2>'));
     const mapBlock=detail.includes('id="mini-map"');
-    assert.equal(mapBlock,Number.isFinite(place.lat)&&Number.isFinite(place.lng));
+    assert.equal(mapBlock,true,'Manuscript restaurants mount the Google mini-map for coordinates or address lookup');
    }
   }
-  if(lang!=='ko')assert.ok(html.includes('class="muted"'));
+  if(lang!=='ko')assert.ok(!html.includes(ctx.I18N[lang]['food.translationPending']));
  }
 }
 // Both legacy and manuscript foods use exactly the same detail shell.
@@ -77,7 +77,7 @@ for(const food of foods){
  }
 }
 assert.equal(signatures.size,1);
-console.log('PASS all 45 foods use one template with 8 info rows, combined introduction, white eating-method card, allergen card, and restaurant banners');
+console.log('PASS all 43 foods use one template with 8 info rows, combined introduction, white eating-method card, allergen card, and restaurant banners');
 // A missing restaurant coordinate must never reach the map provider.
 let pins=0;
 const view=maps.IEBMapView.create({data,provider:{available:()=>true,create(){return {
@@ -85,4 +85,4 @@ const view=maps.IEBMapView.create({data,provider:{available:()=>true,create(){re
  root:{querySelector:()=>null},document:{getElementById:()=>({})},navigator:{},getLanguage:()=> 'ko',
  t:k=>ctx.I18N.ko[k]||k,esc:ctx.esc,fname:f=>f.ko.name,img:ctx.img,icon:()=>'',appHeader:()=>'',tabbar:()=>'',toast(){},setTimeout:()=>1,clearTimeout(){}});
 view.mount({mode:'detail'})();assert.equal(pins,data.allPlaces().filter(data.hasCoordinates).length);
-console.log('PASS 34 complete sourced food details in 4 language modes, 100 restaurant records, image fallbacks, and no invented map coordinates');
+console.log('PASS 32 complete sourced food details in 4 language modes, 103 restaurant records, image fallbacks, and no invented map coordinates');

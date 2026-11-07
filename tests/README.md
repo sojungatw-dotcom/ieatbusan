@@ -1,3 +1,7 @@
+# Google Maps integration
+
+Run `node tests/google-maps.cjs`. Uses a fake Google SDK to verify lazy loading, configuration errors, authorization, advanced markers, camera/bounds, location replacement and cleanup. Real key/map loading requires the setup in [docs/google-maps.md](../docs/google-maps.md).
+
 # Isolated browser checks
 
 ## Engagement latency checks
@@ -8,6 +12,26 @@ Run `node tests/engagement-browser.cjs`, then open `http://127.0.0.1:8781/#/post
 for an isolated test account with an eight-second fake API delay and success/failure controls.
 It never connects to Supabase. Stop the server after testing. See `docs/engagement-performance.md`
 for observations, production measurements and the limits of the verification.
+## Member country checks
+
+Run `node tests/comment-country-migration.cjs` for the additive, nullable comment snapshot migration
+without historical backfills. The member UI/API checks also verify atomic profile country editing,
+preserved post/comment countries after changing profile, and missing badges on unsnapshotted legacy comments.
+These checks do not execute SQL against PostgreSQL.
+
+Run `node tests/member-country-migration.cjs` to check preservation of the existing signup function/RLS,
+matching country allowlists/defaults and column grants. This is not a PostgreSQL execution/RLS test.
+
+Run `node tests/public-entry.cjs` for anonymous home entry, the header login link, language confirmation
+without forced login, explicit login access and protected member-only routes.
+
+Run `node tests/member-country.cjs` and `node tests/member-country-api.cjs` for translated country names,
+KR defaults, signup payloads, profile badges, country settings, stable community priority, guest activity
+guards, server-side validation and own-user country updates. API responses are mocked.
+
+Run `node tests/member-country-preview.cjs` to inspect the production UI at `http://127.0.0.1:8781/`
+using synthetic in-memory accounts/posts. This fixture never calls Supabase. See docs/member-country.md
+for the pending SQL migration and required real-DB verification before deployment.
 
 ## Map module checks
 
@@ -63,3 +87,21 @@ Production `index.html` never loads these adapters. Keep native browser confirma
 ## Asynchronous regression checks
 
 Run `node tests/async-regressions.cjs`. No packages are required. The two checks extract the production photo handler into a VM fixture and test cancellation and overlapping uploads. Location lifetime checks moved to the map checks above because the location implementation is no longer inside app.js. Use `--source path/to/older-app.js` for the photo handler regression. These checks do not replace browser interaction tests.
+
+## Two-hour featured foods
+
+Run `node tests/featured-foods.cjs` for unique random sampling, stable two-hour windows, exact expiry, order/like independence and small catalogs.
+Run `node tests/home-carousel.cjs` for live expiry, background-tab catch-up, cleanup, swiping and the existing four-second autoplay.
+# 식당 주소 미니지도
+
+`node tests/google-maps.cjs`, `node tests/map-lifecycle.cjs`, `node tests/member-country.cjs`에서 주소 좌표 조회·세션 내 재사용·부분 일치 거절·10초 제한·화면 이탈·상세 화면 Google 대체 링크를 검증합니다. 실제 Google 키/Geocoding 권한·지도 표시는 별도 확인이 필요합니다.
+
+## Profile photos
+
+Run `node tests/profile-avatar.cjs` for local image preparation, stale selection/navigation guards, authenticated private uploads, signed bootstrap reload, replacement/removal, failed-save cleanup and account cleanup. API/Storage responses are mocked; see [profile photo setup and DB verification](../docs/profile-photo.md).
+
+## Restaurant master data
+
+Run `node tests/restaurant-data.cjs` for shared restaurant records, stable food/place links, per-food menu preservation, full address/hour projection, explicit map links and real like counts. See [restaurant schema and import verification](../docs/restaurants.md).
+
+The catalog now contains 43 visible foods and 164 food/place links. `node tests/food-manuscript.cjs` checks the four added Busan restaurant lists in the existing detail template. `node tests/api-regressions.cjs` also verifies that `content.catalogStatus: archived` removes a food from bootstrap while retaining legacy and ordinary rows and preserving the archived DB record for restoration. These API tests use mocked upstream responses.

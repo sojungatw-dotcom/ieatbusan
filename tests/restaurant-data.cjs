@@ -1,0 +1,14 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');
+const source=fs.readFileSync(path.join(__dirname,'../server/backend.cjs'),'utf8');
+const ctx=vm.createContext({});vm.runInContext(source.slice(source.indexOf('function applyRestaurantData('),source.indexOf('async function snapshot(')),ctx);
+const foods=[{id:'food-a',content:{places:[{name:'옛 이름',naverUrl:'https://map.naver.com/original',research:{signature:'메뉴 A / 10,000원',priceNote:'가격 미확인'}},{name:'다른 식당'}],ko:{restaurants:[{area:'옛 지역',signature:'메뉴 A'}]},en:{restaurants:[{area:'Old area'}]}}},{id:'food-b',content:{places:[{name:'옛 이름',research:{signature:'메뉴 B / 12,000원'}}],ko:{restaurants:[{area:'옛 지역',signature:'메뉴 B'}]}}}];
+const row={id:'shared-restaurant',name:'현재 식당명',address:'부산 사상구 광장로 34',opening_hours:'월~토 10:00 - 20:00',closed_days:'일요일',phone:'051-000-0000',naver_url:'',latitude:35.1,longitude:129.1,like_count:7,food_links:[{food_id:'food-a',place_index:0},{food_id:'food-b',place_index:0},{food_id:'missing',place_index:0},{food_id:'food-a',place_index:-1}]};
+const other=foods[0].content.places[1];ctx.applyRestaurantData(foods,[row]);
+for(const food of foods){const p=food.content.places[0];assert.equal(p.name,row.name);assert.equal(p.address,row.address);assert.equal(p.hours,row.opening_hours);assert.equal(p.holiday,row.closed_days);assert.equal(p.likes,7);assert.equal(p.restaurantId,row.id);assert.equal(food.content.ko.restaurants[0].area,row.address);}
+assert.equal(foods[0].content.places[0].research.signature,'메뉴 A / 10,000원');assert.equal(foods[1].content.places[0].research.signature,'메뉴 B / 12,000원');assert.equal(foods[0].content.places[0].research.priceNote,'가격 미확인');assert.equal(foods[0].content.places[0].naverUrl,'https://map.naver.com/original');assert.equal(foods[0].content.places[1],other);assert.equal(other.name,'다른 식당');
+assert.equal(foods[0].content.en.restaurants[0].area,row.address);
+row.naver_url='https://map.naver.com/updated';row.like_count=0;row.latitude=row.longitude=null;ctx.applyRestaurantData(foods,[row]);assert.equal(foods[0].content.places[0].naverUrl,row.naver_url);assert.equal(foods[0].content.places[0].lat,null);assert.equal(foods[0].content.places[0].likes,0);
+const before=JSON.stringify(foods);ctx.applyRestaurantData(foods,[]);assert.equal(JSON.stringify(foods),before);
+const maps=require('./map-context.cjs')();const data=maps.IEBMapData.create(foods.map(f=>({id:f.id,...f.content})),()=> 'ko');const p=data.placeOf('food-a',0);assert.equal(p.restaurantId,row.id);assert.equal(p.likes,0);assert.equal(p.address,row.address);assert.equal(data.hasCoordinates(p),false);
+console.log('PASS restaurant master projection, shared stores across foods, stable indices, per-food menu preservation, full addresses/hours, explicit map overrides and actual like counts');

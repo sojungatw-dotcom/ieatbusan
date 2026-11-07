@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   window.IEBMapView = {
-    create({ data, provider, root, document, navigator, t, esc, fname, img, icon,
+    create({ data, provider, root, document, navigator, t, esc, fname, img, placeImg, icon,
       appHeader, tabbar, toast, setTimeout: delay, clearTimeout: cancel,
       shapes = window.IEBDistrictShapes, messages = window.IEBMapText,
       getLanguage = () => document.documentElement?.lang || 'ko',
@@ -11,7 +11,7 @@
       let current = null;
       const routes = window.IEBMapRoutes.create(data);
       const renderer = window.IEBMapRenderer.create({ data, routes, shapes, messages, getLanguage,
-        districtName, t, esc, fname, img, icon, appHeader, tabbar, mapAvailable: provider.available });
+        districtName, t, esc, fname, img, placeImg, icon, appHeader, tabbar, mapAvailable: provider.available });
       const render = params => renderer.render(routes.resolve(params));
 
       function startMap(element, places, options, { warning, release = () => {}, mini = false } = {}) {
@@ -39,13 +39,13 @@
           if (session.disposed || !warning) return;
           const status = code || (missingCoordinates ? 'coordinates' : null);
           warning.hidden = !status;
-          warning.textContent = status === 'coordinates' ? renderer.mt('noCoordinates') : status ? t('map.offline') : '';
+          warning.textContent = status === 'coordinates' ? renderer.mt('noCoordinates') : status === 'authorization' ? t('map.googleAuthError') : status ? t('map.offline') : '';
         };
-        function failed() {
+        function failed(error) {
           if (session.disposed) return;
           session.map?.dispose(); session.map = null;
           if (warning) warning.hidden = true;
-          showMessage(t('map.offline'));
+          showMessage(t(['map.keyMissing', 'map.googleAuthError'].includes(error?.message) ? error.message : 'map.offline'));
         }
         function initialize() {
           if (session.disposed) return;
@@ -93,7 +93,24 @@
       function mountMini({ id, i }) {
         const place = data.placeOf(id, i), element = document.getElementById('mini-map');
         if (!place || !element) return () => {};
-        if (!data.hasCoordinates(place)) { element.textContent = renderer.mt('noCoordinates'); return () => {}; }
+        if (!data.hasCoordinates(place)) {
+          let disposed = false, stop = () => {};
+          element.classList?.add('map-status');
+          const unavailable = error => {
+            if (disposed) return;
+            element.textContent = ['map.keyMissing', 'map.googleAuthError'].includes(error?.message)
+              ? t(error.message) : renderer.mt('addressUnavailable');
+          };
+          if (place.address && provider.resolvePlace) {
+            element.textContent = renderer.mt('loading');
+            Promise.resolve().then(() => disposed ? null : provider.resolvePlace(place)).then(located => {
+              if (disposed) return;
+              if (!data.hasCoordinates(located)) { unavailable(); return; }
+              stop = startMap(element, [located], { interactive: false, center: [located.lat, located.lng], zoom: 15 }, { mini: true }).dispose;
+            }).catch(unavailable);
+          } else unavailable();
+          return () => { disposed = true; stop(); };
+        }
         return startMap(element, [place], { interactive: false, center: [place.lat, place.lng], zoom: 15 }, { mini: true }).dispose;
       }
       function sheet(button) {
@@ -101,6 +118,9 @@
         if (!panel || !button) return;
         const open = !panel.classList.toggle('collapsed');
         button.setAttribute('aria-expanded', open);
+        const canvas = document.getElementById('map');
+        if (canvas?.style) canvas.style.bottom = open ? '62%' : '132px';
+        current?.map?.resize();
         const locateButton = root.querySelector('.locate-btn');
         if (locateButton) locateButton.style.bottom = open ? 'calc(62% + 16px)' : 'calc(132px + 16px)';
       }

@@ -135,6 +135,6 @@ language = 'ko';
   assert.equal(h.maps[0].fitted.length,3);
   assert.equal(h.nodes['map-warning'].hidden,false);
   h.view.mountMini({id:'jagalchi-hoe',i:'0'})();
-  assert.ok(h.nodes['mini-map'].textContent.includes('위치 정보'));
+  assert.ok(h.nodes['mini-map'].textContent.includes('Google'),'Missing coordinates without address lookup support retain Google search guidance');
 }
 console.log('PASS map data/legacy IDs, four-language routes, food filtering, list/pin links, mini map, location ordering, disposal and SDK fallback');

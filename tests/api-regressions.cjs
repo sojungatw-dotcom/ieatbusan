@@ -9,6 +9,7 @@ process.env.SUPABASE_SECRET_KEY = 'server-secret-test-value';
 const uid = '11111111-1111-4111-8111-111111111111';
 const calls = [];
 let wrongPassword = false, duplicate = false, expired = false, foreignPost = false;
+let catalogRows = [];
 global.fetch = async (url, options = {}) => {
   const path = new URL(url).pathname;
   const body = options.body && typeof options.body === 'string' ? JSON.parse(options.body) : options.body;
@@ -33,7 +34,8 @@ global.fetch = async (url, options = {}) => {
     return reply([]);
   }
   if (path === '/rest/v1/ieb_comments' && options.method === 'POST') return reply([{id:body.id,body:body.body,created_at:'2026-11-08T00:00:00Z'}]);
-  if (path === '/rest/v1/ieb_comments' || path === '/rest/v1/ieb_post_likes') return reply([]);
+  if (path === '/rest/v1/ieb_foods') return reply(catalogRows);
+  if (path === '/rest/v1/ieb_comments' || path === '/rest/v1/ieb_restaurant') return reply([]);
   if (path === '/auth/v1/logout' || path.startsWith('/rest/v1/')) return reply({});
   throw new Error('Unexpected upstream endpoint: ' + path);
 };
@@ -79,9 +81,19 @@ async function request(action, body, { cookie = '', origin = 'https://site.verce
   assert.equal(comment.data.comment.text,'hello');
   assert.equal(comment.data.comment.createdAt,Date.parse('2026-11-08T00:00:00Z'));
   const commentCalls=calls.slice(commentStart);
-  assert.deepEqual(commentCalls.map(call=>call.path),['/auth/v1/user','/rest/v1/ieb_comments']);
-  assert.equal(commentCalls[1].headers.Prefer,'return=representation');
-  assert.equal(commentCalls[1].parsed.id,comment.data.comment.id);
+  assert.deepEqual(commentCalls.map(call=>call.path),['/auth/v1/user','/rest/v1/ieb_profiles','/rest/v1/ieb_comments']);
+  assert.equal(commentCalls[2].headers.Prefer,'return=representation');
+  assert.equal(commentCalls[2].parsed.id,comment.data.comment.id);
+  catalogRows = [
+    { id: 'retained', name: 'Retained', content: { places: [] } },
+    { id: 'legacy', name: 'Legacy', content: {} },
+    { id: 'excluded', name: 'Excluded', content: { catalogStatus: 'archived', places: [] } },
+  ];
+  const catalog = await request('bootstrap');
+  assert.equal(catalog.status, 200);
+  assert.deepEqual(catalog.data.foods.map(food => food.id), ['retained', 'legacy']);
+  assert.equal(catalogRows[2].content.catalogStatus, 'archived', 'Exclusion must preserve the DB row for restoration');
+  catalogRows = [];
   await request('post', { user_id: 'spoofed', title: 'Test', body: 'body', cat: 'review', photos: [] }, { cookie });
   const post = calls.find(call => call.path === '/rest/v1/ieb_posts' && call.method === 'POST');
   assert.equal(post.parsed.user_id, uid);

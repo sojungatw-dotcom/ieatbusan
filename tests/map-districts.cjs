@@ -14,11 +14,12 @@ for (const district of data.districts) {
   assert.ok(shape?.path.startsWith('M'), district.name + ' polygon missing');
   assert.ok(shape.label.every(Number.isFinite));
 }
-assert.equal(data.placesForSelection({districtId:'haeundae'}).length, 18);
+assert.equal(data.placesForSelection({districtId:'haeundae'}).length, 19);
 assert.equal(data.placesForSelection({districtId:'haeundae',foodId:'bokguk'}).length, 3);
 assert.equal(data.placesForSelection({districtId:'haeundae',foodId:'jagalchi-hoe'}).length, 0);
 assert.equal(data.placesForSelection({districtId:'buk'}).length, 0);
-assert.equal(data.foodCounts('haeundae').length, 11);
+assert.equal(data.foodCounts('haeundae').length, 12);
+assert.equal(data.placesForSelection({districtId:'haeundae',foodId:'daegu-kongguk'})[0].name, '대한콩국 센텀점');
 assert.equal(data.foodCounts('haeundae').find(item => item.food.id === 'bokguk').count, 3);
 assert.equal(data.placesForSelection({foodId:'milmyeon'})[2].i, 2, 'Filtering must preserve legacy indices');
 let creates = 0;
@@ -57,7 +58,7 @@ for(language of ['ko','en','zh','ja']){
   assert.equal((detail.match(/data-act="flyTo"/g)||[]).length,3);
   assert.ok(detail.includes('href="#/map/region/haeundae"'));
   assert.ok(detail.includes('href="#/map/detail"'), 'Regional detail must offer an unfiltered Busan detail map');
-  const allMapLabels = {ko:'부산 전체 지도',en:'All Busan map',zh:'釜山全域地图',ja:'釜山全域地図'};
+  const allMapLabels = {ko:'부산 전체 지도',en:'Busan city map',zh:'釜山全域地图',ja:'釜山全域の地図'};
   assert.ok(detail.includes(allMapLabels[language]), 'Whole-city map button must be translated');
   assert.ok(detail.includes('href="#/place/bokguk/0"'));
   const empty=view.render({district:'buk'});
