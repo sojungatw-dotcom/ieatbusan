@@ -10,7 +10,7 @@ function config() {
   if (missing.length) fail('db.configuration', 503);
   const url = values.SUPABASE_URL.replace(/\/$/, '');
   if (!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(url)) fail('db.configuration', 503);
-  return { url, key: values.SUPABASE_PUBLISHABLE_KEY, secret: process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY };
+  return { url, key: values.SUPABASE_PUBLISHABLE_KEY, secret: process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY, timings: [] };
 }
 function cookies(req) {
   return Object.fromEntries((req.headers.cookie || '').split(';').filter(Boolean).map(part => {
@@ -27,6 +27,14 @@ function setSession(req, res, session) {
   ]);
 }
 async function upstream(cfg, endpoint, { token, admin = false, method = 'GET', body, headers = {}, raw = false } = {}) {
+  const started = performance.now();
+  try { return await upstreamRequest(cfg, endpoint, { token, admin, method, body, headers, raw }); }
+  finally {
+    const name = endpoint.startsWith('/auth/') ? 'auth' : endpoint.startsWith('/storage/') ? 'storage' : 'db';
+    cfg.timings.push({ name, duration: performance.now() - started });
+  }
+}
+async function upstreamRequest(cfg, endpoint, { token, admin, method, body, headers, raw }) {
   if (admin && !cfg.secret) fail('db.configuration', 503);
   const response = await fetch(cfg.url + endpoint, {
     method, signal: AbortSignal.timeout(15000),
@@ -96,6 +104,8 @@ async function snapshot(cfg, session) {
   const uid = session.user?.id;
   const current = profile[0];
   const postLikes = Object.fromEntries(likes.filter(like => like.user_id === uid).map(like => [like.post_id, true]));
+  const otherLikes = new Map();
+  for (const like of likes) if (like.user_id !== uid) otherLikes.set(like.post_id, (otherLikes.get(like.post_id) || 0) + 1);
   return {
     user: current ? { id: current.id, username: current.username, provider: 'supabase', nickname: current.nickname, area: current.area, bio: current.bio, joined: current.created_at.slice(0, 10).replaceAll('-', '.') } : null,
     preferences: preferences[0]?.data || {}, postLikes,
@@ -103,7 +113,7 @@ async function snapshot(cfg, session) {
       author: post.ieb_profiles?.nickname || post.seed_author || '', area: districts[post.ieb_profiles?.area] || post.seed_area || '',
       createdAt: Date.parse(post.created_at), mine: !!uid && post.user_id === uid,
       photos: post.photos.map(photo => images[photo]).filter(Boolean),
-      likes: likes.filter(like => like.post_id === post.id && like.user_id !== uid).length })),
+      likes: otherLikes.get(post.id) || 0 })),
     comments: comments.reduce((result, comment) => {
       (result[comment.post_id] ||= []).push({ id: comment.id, author: comment.ieb_profiles?.nickname || comment.seed_author || '',
         text: comment.body, createdAt: Date.parse(comment.created_at), likes: 0, mine: !!uid && comment.user_id === uid });
@@ -169,8 +179,10 @@ async function action(cfg, req, res, name, body) {
   if (name === 'post') return createPost(cfg, session, body);
   if (name === 'comment') {
     const post_id = checkedText(body.postId, 1, 80), text = checkedText(body.text, 1, 300);
-    await rest(cfg, 'ieb_comments', '', { token, method: 'POST', body: { id: randomUUID(), user_id: uid, post_id, body: text } });
-    return { saved: true };
+    const rows = await rest(cfg, 'ieb_comments', '?select=id,body,created_at', { token, method: 'POST',
+      headers: { Prefer: 'return=representation' }, body: { id: randomUUID(), user_id: uid, post_id, body: text } });
+    const comment = rows[0];
+    return { saved: true, comment: { id: comment.id, text: comment.body, createdAt: Date.parse(comment.created_at) } };
   }
   if (name === 'like') {
     const postId = checkedText(body.postId, 1, 80);
@@ -223,6 +235,12 @@ async function action(cfg, req, res, name, body) {
   fail('db.notFound', 404);
 }
 module.exports = async function handler(req, res) {
+  const started = performance.now();
+  let cfg;
+  function timing() {
+    const entries = (cfg?.timings || []).map((entry, i) => `${entry.name}${i};dur=${entry.duration.toFixed(1)}`);
+    res.setHeader('Server-Timing', [...entries, `total;dur=${(performance.now() - started).toFixed(1)}`].join(', '));
+  }
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
   res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -240,9 +258,12 @@ module.exports = async function handler(req, res) {
       body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body || {};
       if (Buffer.byteLength(JSON.stringify(body)) > 4000000) fail('db.photoSize', 413);
     }
-    const result = await action(config(), req, res, name, body);
+    cfg = config();
+    const result = await action(cfg, req, res, name, body);
+    timing();
     res.statusCode = 200; res.end(JSON.stringify(result));
   } catch (error) {
+    timing();
     res.statusCode = error.status || 503;
     const code = /^(db|auth|profile)\./.test(error.message) ? error.message : 'db.failure';
     // Deliberately exclude credentials, tokens, upstream payloads and env values.

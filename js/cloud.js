@@ -19,8 +19,26 @@
     },
     async refresh() { return Store.load(); },
     async createPost(data) { const result = await this.call('post', data); await Store.load(); return result.id; },
-    async comment(postId, text) { await this.call('comment', { postId, text }); await Store.load(); },
-    async like(postId, on) { await this.call('like', { postId, on }); await Store.load(); },
+    comment(postId, text) {
+      const user = Store.get().user;
+      const temporary = { id: 'pending-' + crypto.randomUUID(), author: user.nickname, text,
+        createdAt: Date.now(), likes: 0, mine: true, pending: true };
+      return Store.mutate('comment:' + postId,
+        state => { (state.comments[postId] ||= []).push(temporary); },
+        () => this.call('comment', { postId, text }),
+        (state, result) => {
+          const list = state.comments[postId] || [], index = list.findIndex(item => item.id === temporary.id);
+          if (index >= 0) list[index] = { ...temporary, ...result.comment, pending: false };
+        },
+        state => { state.comments[postId] = (state.comments[postId] || []).filter(item => item.id !== temporary.id); });
+    },
+    like(postId, on) {
+      const previous = !!Store.get().postLikes[postId];
+      return Store.mutate('like:' + postId,
+        state => { state.postLikes[postId] = on; },
+        () => this.call('like', { postId, on }), null,
+        state => { state.postLikes[postId] = previous; });
+    },
     async deletePost(id) { await this.call('deletePost', { id }); await Store.load(); },
     async profile(data) { await this.call('profile', data); await Store.load(); },
   };

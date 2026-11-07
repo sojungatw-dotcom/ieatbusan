@@ -1,5 +1,14 @@
 # Isolated browser checks
 
+## Engagement latency checks
+
+Run `node tests/engagement-latency.cjs` for immediate updates, rollback, duplicate suppression,
+preference write coalescing, stale bootstrap protection and unrelated editor preservation.
+Run `node tests/engagement-browser.cjs`, then open `http://127.0.0.1:8781/#/post/fixture-post`
+for an isolated test account with an eight-second fake API delay and success/failure controls.
+It never connects to Supabase. Stop the server after testing. See `docs/engagement-performance.md`
+for observations, production measurements and the limits of the verification.
+
 ## Map module checks
 
 Run `node tests/map-integration.cjs` for the current main catalog: source-address district assignment,
