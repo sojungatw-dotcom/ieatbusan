@@ -52,7 +52,7 @@ body { background: var(--bg); padding: 0; }
 .category-section { padding-bottom: 16px; }
 .category-all { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; font-size: 13px; color: var(--ink-2); flex: none; }
 .category-all svg { width: 16px; height: 16px; }
-.category-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px 8px; padding: 8px 16px 20px; }
+.category-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px 8px; padding: 8px 16px 20px; }
 .category-tile { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 0; text-align: center; font-size: 12px; line-height: 1.4; }
 .category-tile > span:last-child { max-width: 100%; overflow-wrap: anywhere; }
 .category-art { display: grid; place-items: center; width: min(100%, 64px); aspect-ratio: 1; border-radius: 16px; background: transparent; }
@@ -90,7 +90,7 @@ body { background: var(--bg); padding: 0; }
 .map-food-card, .action, .option, .info-card { box-shadow: none; }
 .toast { z-index: 1600; }
 @media (max-width: 359px) {
-  .category-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px 6px; padding-inline: 12px; }
+  .category-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px 6px; padding-inline: 12px; }
   .category-tile { font-size: 11px; }
   .food-list { gap: 24px 10px; padding-left: 16px; padding-right: 16px; }
   .food-list .like-btn { flex-direction: column; gap: 0; min-width: 28px; }
@@ -140,7 +140,7 @@ body { background: var(--bg); padding: 0; }
   .home-slide .name { font-size: 24px; }
   .home-slide .home-summary { grid-column: 2; grid-row: 2; align-self: start; font-size: 15px; line-height: 1.7; padding-right: 16px; -webkit-line-clamp: 4; }
   .home-toolbar { padding: 24px 32px 12px; }
-  .category-grid { grid-template-columns: repeat(10, minmax(0, 1fr)); padding: 8px 32px 24px; gap: 16px; }
+  .category-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); padding: 8px 32px 24px; gap: 16px; }
   .category-tile { font-size: 14px; }
   .category-art { width: min(100%, 80px); }
   .category-filters { padding-inline: 32px; }

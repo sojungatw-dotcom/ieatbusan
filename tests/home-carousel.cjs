@@ -37,7 +37,7 @@ for (const language of ['ko', 'en', 'zh', 'ja']) {
     const html = vm.runInContext('V.home()', ctx);
     assert.equal((html.match(/class="food-card home-slide"/g) || []).length, 5);
     assert.equal((html.match(/class="food-card"/g) || []).length, 0, 'Home uses category illustrations');
-    assert.equal((html.match(/class="category-tile"/g) || []).length, 10);
+    assert.equal((html.match(/class="category-tile"/g) || []).length, 8);
     assert.equal((vm.runInContext("V.category({id:'all'})", ctx).match(/class="food-card"/g)||[]).length,ctx.FOODS.length);
     assert.equal((html.match(/data-slide=/g) || []).length, 5);
     assert.ok(!/home-prev|home-next|home-count/.test(html),'No visible arrows or fraction counter');

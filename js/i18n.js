@@ -357,8 +357,8 @@ ja: {'home.discover':'釜山のおいしいを、もっと身近に','home.disco
 })) Object.assign(window.I18N[language], copy);
 
 for (const [language, copy] of Object.entries({
-ko:{'category.title':'음식 카테고리','category.all':'모든 음식','category.count':'음식 {n}가지','category.veganNote':'현재 비건 원료·조리가 확인된 메뉴가 없습니다. 식물성 기본 재료만으로 비건으로 분류하지 않으며, 확인된 메뉴가 생기면 연결합니다.'},
-en:{'category.title':'Explore by category','category.all':'All dishes','category.count':'Dishes: {n}','category.veganNote':'No menus currently have verified vegan ingredients and preparation. Plant-based main ingredients alone are not enough; menus will be added once verified.'},
-zh:{'category.title':'按分类找美食','category.all':'全部美食','category.count':'共{n}种美食','category.veganNote':'目前尚无已确认原料和制作方式均为纯素的菜单。仅主要原料为植物性并不代表纯素，核实后会加入此分类。'},
-ja:{'category.title':'カテゴリーから探す','category.all':'すべての料理','category.count':'料理 {n}品','category.veganNote':'現在、原材料と調理方法の両方をヴィーガンと確認できたメニューはありません。主な材料が植物性というだけでは分類せず、確認後に追加します。'},
+ko:{'category.title':'음식 카테고리','category.all':'모든 음식','category.count':'음식 {n}가지'},
+en:{'category.title':'Explore by category','category.all':'All dishes','category.count':'Dishes: {n}'},
+zh:{'category.title':'按分类找美食','category.all':'全部美食','category.count':'共{n}种美食'},
+ja:{'category.title':'カテゴリーから探す','category.all':'すべての料理','category.count':'料理 {n}品'},
 })) Object.assign(window.I18N[language], copy);

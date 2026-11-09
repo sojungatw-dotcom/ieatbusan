@@ -226,7 +226,6 @@
     else list.sort((a, b) => foodLikes(b) - foodLikes(a));
     return `<main class="screen category-screen">${pageHeader(group ? categories.name(group, lang()) : t('category.all'), {fallback:'#/home'})}
       <nav class="category-filters" aria-label="${esc(t('category.title'))}"><a class="chip ${id === 'all' ? 'active' : ''}" href="#/category/all" ${id === 'all' ? 'aria-current="page"' : ''}>${esc(t('common.all'))}</a>${categories.groups.map(item => `<a class="chip ${item.id === id ? 'active' : ''}" href="#/category/${item.id}" ${item.id === id ? 'aria-current="page"' : ''}>${esc(categories.name(item, lang()))}</a>`).join('')}</nav>
-      ${id === 'vegan' ? `<p class="pad muted category-note">${esc(t('category.veganNote'))}</p>` : ''}
       <div class="home-toolbar"><p class="category-count">${esc(t('category.count', {n:list.length}))}</p><button class="sort-btn" data-act="sort">${esc(t(sort === 'name' ? 'home.sort.name' : 'home.sort.popular'))}${icon('chevronDown')}</button></div>
       <div class="food-list">${list.map(f => homeFoodCard(f)).join('')}</div>${tabbar('home')}</main>`;
   };
