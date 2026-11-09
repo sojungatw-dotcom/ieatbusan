@@ -211,10 +211,8 @@
           ${featured.map((f, i) => homeFoodCard(f, { rank: i + 1, eager: i === 0, slide: true, count: featured.length })).join('')}
         </div>
         <div class="home-carousel-controls">
-          <button class="icon-btn home-prev" type="button" aria-label="${esc(t('home.previous'))}">${icon('back')}</button>
           <div class="home-pages" role="group" aria-label="${esc(t('home.featured'))}">${featured.map((f, i) => `<button type="button" data-slide="${i}" aria-label="${i + 1}: ${esc(fname(f))}"><span></span></button>`).join('')}</div>
-          <span class="home-count" aria-live="polite" aria-atomic="true">1 / ${featured.length}</span>
-          <button class="icon-btn home-next" type="button" aria-label="${esc(t('home.next'))}">${icon('chevronRight')}</button>
+          <span class="sr-only home-status" aria-live="polite" aria-atomic="true">1 / ${featured.length}</span>
         </div>
       </section>
       <div class="band"></div>
@@ -240,8 +238,7 @@
     const slides = [...track.children];
     if (!slides.length) return;
     const pages = [...app.querySelectorAll('[data-slide]')];
-    const prev = app.querySelector('.home-prev'), next = app.querySelector('.home-next');
-    const counter = app.querySelector('.home-count');
+    const counter = app.querySelector('.home-status');
     const pointers = new Set();
     let timer = null, paused = false, disposed = false, touching = false;
     let featuredTimer = null;
@@ -273,8 +270,6 @@
     };
     const update = () => {
       homeFeaturedId = slides[index].dataset.foodId;
-      prev.disabled = index === 0;
-      next.disabled = index === slides.length - 1;
       counter.textContent = `${index + 1} / ${slides.length}`;
       pages.forEach((page, i) => page.setAttribute('aria-current', String(i === index)));
     };
@@ -300,8 +295,6 @@
     const onTouchStart = () => { touching = true; stop(); };
     const onTouchEnd = event => { if (touching) { touching = event.touches.length > 0; schedule(); } };
     const onVisibility = () => { if (!document.hidden && refreshFeatured()) return; if (document.hidden) { pointers.clear(); touching = false; } schedule(); };
-    prev.addEventListener('click', () => { move(index - 1); schedule(); });
-    next.addEventListener('click', () => { move(index + 1); schedule(); });
     pages.forEach((page, i) => page.addEventListener('click', () => { move(i); schedule(); }));
     carousel.addEventListener('pointerdown', onPointerDown, { passive: true });
     carousel.addEventListener('touchstart', onTouchStart, { passive: true });
