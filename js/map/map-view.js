@@ -78,17 +78,10 @@
           navigate(routes.detail(picker.value));
         };
         picker?.addEventListener('change', onRegionChange);
-        const wide = window.matchMedia?.('(min-width: 960px)');
-        const handle = root.querySelector('.sheet-handle');
-        const syncHandle = () => {
-          if (!wide || !handle) return;
-          handle.disabled = wide.matches;
-          handle.setAttribute('aria-expanded', String(wide.matches || !root.querySelector('#sheet')?.classList.contains('collapsed')));
-        };
-        syncHandle(); wide?.addEventListener?.('change', syncHandle);
+        let sheetControl = null;
         const release = () => {
           picker?.removeEventListener('change', onRegionChange);
-          wide?.removeEventListener?.('change', syncHandle);
+          sheetControl?.dispose();
         };
         const element = document.getElementById('map');
         if (!element) return release;
@@ -99,6 +92,11 @@
         current = startMap(element, places, { interactive: true, selected: !!foodId,
           ...(shape ? { center: shape.center, zoom: 12 } : {}) },
         { warning: document.getElementById('map-warning'), release });
+        sheetControl = window.IEBMapSheet.create({
+          panel: document.getElementById('sheet'), handle: root.querySelector('.sheet-handle'),
+          canvas: element, locate: root.querySelector('.locate-btn'), onResize: () => current?.map?.resize(),
+        });
+        current.sheet = sheetControl;
         return current.dispose;
       }
       function mountMini({ id, i }) {
@@ -124,16 +122,8 @@
         }
         return startMap(element, [place], { interactive: false, center: [place.lat, place.lng], zoom: 15 }, { mini: true }).dispose;
       }
-      function sheet(button) {
-        const panel = document.getElementById('sheet');
-        if (!panel || !button) return;
-        const open = !panel.classList.toggle('collapsed');
-        button.setAttribute('aria-expanded', open);
-        const canvas = document.getElementById('map');
-        if (canvas?.style) canvas.style.bottom = open ? '62%' : '132px';
-        current?.map?.resize();
-        const locateButton = root.querySelector('.locate-btn');
-        if (locateButton) locateButton.style.bottom = open ? 'calc(62% + 16px)' : 'calc(132px + 16px)';
+      function sheet() {
+        current?.sheet?.toggle();
       }
       function flyTo(element, event) {
         if (event.target.closest('a')) return;
@@ -142,8 +132,7 @@
         if (place && !data.hasCoordinates(place)) { navigate(routes.place(place)); return; }
         if (!current?.map) return;
         current.map.focusPlace(element.dataset.key);
-        const panel = document.getElementById('sheet');
-        if (panel && !panel.classList.contains('collapsed')) sheet(root.querySelector('.sheet-handle'));
+        current.sheet?.collapse();
       }
       function locate() {
         if (!navigator.geolocation || !current?.map) { toast(t('map.locFail')); return; }
