@@ -70,6 +70,7 @@ grant insert(id,user_id,title,body,category,food,photos) on public.ieb_posts to 
 grant delete on public.ieb_posts to authenticated;
 grant insert(id,post_id,user_id,body) on public.ieb_comments to authenticated;
 grant delete on public.ieb_comments to authenticated;
+grant update(body) on public.ieb_comments to authenticated;
 grant insert,delete on public.ieb_post_likes to authenticated;
 grant select,insert,update on public.ieb_preferences to authenticated;
 grant all on public.ieb_profiles, public.ieb_posts, public.ieb_comments, public.ieb_post_likes, public.ieb_preferences, public.ieb_signup_limits to service_role;
@@ -81,6 +82,7 @@ create policy posts_insert_own on public.ieb_posts for insert to authenticated w
 create policy posts_delete_own on public.ieb_posts for delete to authenticated using ((select auth.uid())=user_id);
 create policy comments_read on public.ieb_comments for select to anon, authenticated using (true);
 create policy comments_insert_own on public.ieb_comments for insert to authenticated with check ((select auth.uid())=user_id);
+create policy comments_update_own on public.ieb_comments for update to authenticated using ((select auth.uid())=user_id) with check ((select auth.uid())=user_id);
 create policy comments_delete_own on public.ieb_comments for delete to authenticated using ((select auth.uid())=user_id);
 create policy likes_read on public.ieb_post_likes for select to anon, authenticated using (true);
 create policy likes_insert_own on public.ieb_post_likes for insert to authenticated with check ((select auth.uid())=user_id);

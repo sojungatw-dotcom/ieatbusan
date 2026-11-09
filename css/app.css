@@ -469,3 +469,9 @@ details.faq p { margin: 0 0 16px; color: var(--ink-2); font-size: 14px; }
 .brand-logo img { position: absolute; left: 50%; top: calc(50% + 2px); width: 174px; height: auto; max-width: none; transform: translate(-50%, -50%); }
 .auth-logo { position: relative; width: 160px; height: 160px; overflow: hidden; border-radius: 40px; }
 .auth-logo img { position: absolute; left: 50%; top: 50%; width: 236px; height: 236px; max-width: none; transform: translate(-50%, -50%); }
+
+.comment-controls { display:flex; gap:12px; justify-content:flex-end; }
+.comment-controls button { min-height:40px; padding:4px 8px; font-size:13px; color:var(--ink-3); }
+.comment-controls button:disabled { opacity:.5; }
+.comment-edit { display:grid; gap:4px; }
+.comment-edit textarea { width:100%; resize:vertical; }

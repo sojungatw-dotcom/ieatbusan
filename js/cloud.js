@@ -32,6 +32,21 @@
         },
         state => { state.comments[postId] = (state.comments[postId] || []).filter(item => item.id !== temporary.id); });
     },
+    editComment(postId, id, text) {
+      const previous = Store.get().comments[postId]?.find(item => item.id === id)?.text;
+      return Store.mutate('commentChange:' + id,
+        state => { const item = state.comments[postId]?.find(item => item.id === id); if (item) item.text = text; },
+        () => this.call('editComment', { postId, id, text }),
+        (state, result) => { const item = state.comments[postId]?.find(item => item.id === id); if (item) item.text = result.text; },
+        state => { const item = state.comments[postId]?.find(item => item.id === id); if (item) item.text = previous; });
+    },
+    deleteComment(postId, id) {
+      const list = Store.get().comments[postId] || [], index = list.findIndex(item => item.id === id), previous = list[index];
+      return Store.mutate('commentChange:' + id,
+        state => { state.comments[postId] = (state.comments[postId] || []).filter(item => item.id !== id); },
+        () => this.call('deleteComment', { postId, id }), null,
+        state => { if (previous) (state.comments[postId] ||= []).splice(index, 0, previous); });
+    },
     like(postId, on) {
       const previous = !!Store.get().postLikes[postId];
       return Store.mutate('like:' + postId,

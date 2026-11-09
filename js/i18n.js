@@ -362,3 +362,9 @@ en:{'category.title':'Explore by category','category.all':'All dishes','category
 zh:{'category.title':'按分类找美食','category.all':'全部美食','category.count':'共{n}种美食'},
 ja:{'category.title':'カテゴリーから探す','category.all':'すべての料理','category.count':'料理 {n}品'},
 })) Object.assign(window.I18N[language], copy);
+
+// Comment owner controls.
+Object.assign(I18N.ko, {"comment.edit":"수정","comment.deleteConfirm":"댓글을 삭제하시겠습니까?","comment.edited":"댓글을 수정했어요","comment.deleted":"댓글을 삭제했어요"});
+Object.assign(I18N.en, {"comment.edit":"Edit","comment.deleteConfirm":"Delete this comment?","comment.edited":"Comment updated","comment.deleted":"Comment deleted"});
+Object.assign(I18N.zh, {"comment.edit":"编辑","comment.deleteConfirm":"确定要删除这条评论吗？","comment.edited":"评论已更新","comment.deleted":"评论已删除"});
+Object.assign(I18N.ja, {"comment.edit":"編集","comment.deleteConfirm":"このコメントを削除しますか？","comment.edited":"コメントを更新しました","comment.deleted":"コメントを削除しました"});

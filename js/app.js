@@ -539,8 +539,11 @@
       ${tabbar('community')}</main>`;
   };
 
+  let commentDraft = null;
+  const ownComment = (postId, id) => loggedIn() && commentsOf(postId).find(c => c.id === id && c.mine && !c.pending);
   V.post = ({ id }) => {
     const p = postById(id); if (!p) return `<main class="screen">${pageHeader(t('post.header'), { fallback: '#/community' })}${empty(t('post.notFound'))}</main>`;
+    if (commentDraft && (commentDraft.postId !== id || !ownComment(id, commentDraft.id))) commentDraft = null;
     const cs = commentsOf(id), liked = !!S().postLikes[id];
     const right = p.mine ? `<button class="icon-btn" data-act="deletePost" data-id="${id}" aria-label="${esc(t('common.delete'))}">${icon('trash')}</button>` : `<button class="icon-btn" data-act="share" data-title="${esc(p.title)}" aria-label="${esc(t('common.share'))}">${icon('share')}</button>`;
     return `<main class="screen" style="padding-bottom:96px">${pageHeader(t('post.header'), { fallback: '#/community', right })}
@@ -558,8 +561,13 @@
       <div class="band"></div>
       <div class="group-title">${esc(t('post.comments', { n: cs.length }))}</div>
       ${cs.map(c => `<div class="comment" ${c.pending ? 'aria-busy="true" style="opacity:.6"' : ''}><span class="avatar" style="width:32px;height:32px;font-size:13px">${initial(c.author)}</span><div class="c-body">
-        <div class="c-meta"><b style="font-weight:500">${countryBadge(c.countryCode)}${esc(c.author)}</b><span>${esc(ago(c.createdAt))}</span></div><p>${esc(c.text)}</p>
-        <span class="muted" style="font-size:12px">♡ ${c.likes || 0}</span></div></div>`).join('')}
+        <div class="c-meta"><b style="font-weight:500">${countryBadge(c.countryCode)}${esc(c.author)}</b><span>${esc(ago(c.createdAt))}</span></div><p ${commentDraft?.id === c.id && commentDraft.postId === id ? 'hidden' : ''}>${esc(c.text)}</p>
+        <span class="muted" style="font-size:12px">♡ ${c.likes || 0}</span>
+        ${c.mine && loggedIn() && !c.pending ? (commentDraft?.id === c.id && commentDraft.postId === id ? `
+          <form class="comment-edit" data-form="editComment" data-id="${esc(c.id)}" data-post-id="${esc(id)}">
+            <textarea class="input" name="text" rows="3" required maxlength="300" ${Store.isPending('commentChange:' + c.id) ? 'disabled' : ''} aria-label="${esc(t('comment.edit'))}">${esc(commentDraft.text)}</textarea>
+            <div class="comment-controls"><button type="button" data-act="cancelCommentEdit">${esc(t('common.cancel'))}</button><button type="submit" ${Store.isPending('commentChange:' + c.id) ? 'disabled' : ''}>${esc(t('common.save'))}</button></div>
+          </form>` : `<div class="comment-controls"><button type="button" data-act="editComment" data-id="${esc(c.id)}" data-post-id="${esc(id)}" ${Store.isPending('commentChange:' + c.id) ? 'disabled' : ''}>${esc(t('comment.edit'))}</button><button type="button" data-act="deleteComment" data-id="${esc(c.id)}" data-post-id="${esc(id)}" ${Store.isPending('commentChange:' + c.id) ? 'disabled' : ''}>${esc(t('common.delete'))}</button></div>`) : ''}</div></div>`).join('')}
       <form class="comment-bar" data-form="comment" data-id="${id}"><input id="comment-input" name="text" maxlength="300" autocomplete="off" placeholder="${esc(t('post.placeholder'))}" aria-label="${esc(t('post.placeholder'))}"><button type="submit" ${Store.isPending('comment:' + id) ? 'disabled aria-busy="true"' : ''}>${esc(t('post.submit'))}</button></form>
     </main>`;
   };
@@ -934,6 +942,23 @@
     needLogin: (el, e) => { if (!loggedIn()) { e.preventDefault(); requireLogin(); } },
     refreshCommunity: async el => { await Cloud.refresh(); if (app.contains(el)) rerender(); },
     likePost: el => { if (!requireLogin()) return; return Cloud.like(el.dataset.id, !S().postLikes[el.dataset.id]); },
+    editComment: el => {
+      const postId = el.dataset.postId, id = el.dataset.id, comment = ownComment(postId, id);
+      if (!comment || Store.isPending('commentChange:' + id)) return;
+      commentDraft = { postId, id, text: comment.text }; rerender();
+      app.querySelector('.comment-edit textarea')?.focus();
+    },
+    cancelCommentEdit: () => {
+      if (commentDraft && Store.isPending('commentChange:' + commentDraft.id)) return;
+      commentDraft = null; rerender();
+    },
+    deleteComment: async el => {
+      const postId = el.dataset.postId, id = el.dataset.id;
+      if (!ownComment(postId, id) || Store.isPending('commentChange:' + id)) return;
+      if (!confirm(t('comment.deleteConfirm'))) return;
+      await Cloud.deleteComment(postId, id);
+      toast(t('comment.deleted'));
+    },
     deletePost: async el => {
       if (!confirm(t('post.deleteConfirm'))) return;
       await Cloud.deletePost(el.dataset.id);
@@ -967,6 +992,10 @@
   });
   app.addEventListener('keydown', e => {
     if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[role="button"][data-act]')) { e.preventDefault(); A[e.target.dataset.act](e.target, e); }
+  });
+  app.addEventListener('input', e => {
+    const form = e.target.closest('form[data-form="editComment"]');
+    if (form && commentDraft?.id === form.dataset.id) commentDraft.text = e.target.value;
   });
   app.addEventListener('change', e => {
     const k = e.target.dataset.setting;
@@ -1018,6 +1047,14 @@
       const q = f.q.value.trim(); if (!q) return;
       Store.update(s => { s.recentSearches = [q, ...s.recentSearches.filter(x => x !== q)].slice(0, 10); });
       go('#/results/' + encodeURIComponent(q));
+    } else if (kind === 'editComment') {
+      if (!requireLogin()) return;
+      const postId = f.dataset.postId, id = f.dataset.id, draft = commentDraft;
+      if (!ownComment(postId, id) || Store.isPending('commentChange:' + id)) return;
+      const text = f.elements.text.value.trim(); if (!text) return;
+      await Cloud.editComment(postId, id, text);
+      if (commentDraft === draft) commentDraft = null;
+      if (location.hash === '#/post/' + postId) { rerender(); toast(t('comment.edited')); }
     } else if (kind === 'comment') {
       if (!requireLogin()) return;
       const postId = f.dataset.id;
