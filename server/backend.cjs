@@ -284,6 +284,16 @@ async function action(cfg, req, res, name, body) {
     const comment = rows[0];
     return { saved: true, comment: { id: comment.id, text: comment.body, createdAt: Date.parse(comment.created_at), countryCode: savedCountry(comment.country_code), authorCountryCode: savedCountry(comment.country_code) } };
   }
+  if (name === 'editComment' || name === 'deleteComment') {
+    const id = checkedText(body.id, 1, 80), postId = checkedText(body.postId, 1, 80);
+    const query = '?id=eq.' + encodeURIComponent(id) + '&post_id=eq.' + encodeURIComponent(postId) + '&user_id=eq.' + uid;
+    const patch = name === 'editComment' ? { body: checkedText(body.text, 1, 300) } : undefined;
+    const rows = await rest(cfg, 'ieb_comments', query + '&select=id,body', {
+      token, method: patch ? 'PATCH' : 'DELETE', headers: { Prefer: 'return=representation' }, body: patch
+    });
+    if (!rows?.length) fail('db.forbidden', 403);
+    return patch ? { saved: true, text: rows[0].body } : { deleted: true };
+  }
   if (name === 'like') {
     const postId = checkedText(body.postId, 1, 80);
     if (typeof body.on !== 'boolean') fail('db.validation');
