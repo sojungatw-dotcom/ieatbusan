@@ -56,10 +56,8 @@ for(language of ['ko','en','zh','ja']){
   assert.equal((picker[1].match(/<option /g)||[]).length,17,'All Busan plus 16 districts');
   assert.ok(picker[1].includes('value="haeundae" selected'));
   assert.equal((detail.match(/data-act="flyTo"/g)||[]).length,3);
-  assert.ok(detail.includes('href="#/map/region/haeundae"'));
-  assert.ok(detail.includes('href="#/map/detail"'), 'Regional detail must offer an unfiltered Busan detail map');
-  const allMapLabels = {ko:'부산 전체 지도',en:'Busan city map',zh:'釜山全域地图',ja:'釜山全域の地図'};
-  assert.ok(detail.includes(allMapLabels[language]), 'Whole-city map button must be translated');
+  assert.ok(detail.includes('data-fallback="#/map/region/haeundae"'), 'Back navigation retains the selected region overview');
+  assert.ok(picker[1].includes('<option value="" '), 'The region selector retains access to the whole-city detail map');
   assert.ok(detail.includes('href="#/place/bokguk/0"'));
   const empty=view.render({district:'buk'});
   assert.equal((empty.match(/class="map-food-card"/g)||[]).length,0);

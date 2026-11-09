@@ -1,0 +1,28 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
+const root=path.resolve(__dirname,'..'),{ctx,state}=require('./i18n.cjs');
+const api=ctx.IEBStructuredData,origin='https://ieatbusan-eight.vercel.app/';
+const plain=v=>JSON.parse(JSON.stringify(v));
+const decode=s=>String(s||'').replace(/<[^>]*>/g,'').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&gt;/g,'>').replace(/&lt;/g,'<').replace(/&amp;/g,'&').replace(/\s+/g,' ').trim();
+const field=(html,re)=>decode(html.match(re)?.[1]);
+const img=html=>html.match(/<img src="([^"]+)"/)?.[1];
+const snapshot=(html,name,language,url)=>({name,language,url,valid:true,title:field(html,/<h1[^>]*>([\s\S]*?)<\/h1>/),description:field(html,/<p class="summary"[^>]*>([\s\S]*?)<\/p>/),alternateName:name==='food'?field(html,/<span class="orig-line"[^>]*>([\s\S]*?)<\/span>/):'',image:img(html)});
+const baseline=JSON.stringify(ctx.FOODS);let foodChecks=0,placeChecks=0,listChecks=0;
+for(const language of ['ko','en','zh','ja']){
+ state.lang=language;state.user=null;
+ for(const f of ctx.FOODS){
+  const html=ctx.localeTest.V.food({id:f.id}),s=snapshot(html,'food',language,origin+'#/food/'+f.id),graph=plain(api.build(s)),page=graph['@graph'][1];
+  assert.equal(page.name,s.title);assert.equal(page.inLanguage,language);assert.equal(page.mainEntity.description,s.description);assert.equal(page.mainEntity.image,new URL(s.image,origin).href);assert.equal(page.mainEntity['@type'],'Thing');assert.equal(page.mainEntity.alternateName,language==='ko'?undefined:f.ko.name);foodChecks++;
+  f.places.forEach((p,i)=>{const html=ctx.localeTest.V.place({id:f.id,i}),s=snapshot(html,'place',language,origin+'#/place/'+f.id+'/'+i);s.address=field(html.split('class="rows place-info"')[1]||'',/<span[^>]*>([^<]*)<\/span>/);const e=plain(api.build(s))['@graph'][1].mainEntity;assert.equal(e.name,s.title);if(language==='ko')assert.equal(e.name,p.name);assert.equal(e['@type'],'Restaurant');if(s.address&&!/확인|unconfirmed|未確認|未确认/i.test(s.address))assert.equal(e.address.streetAddress,s.address);assert.ok(e.image,'Visible restaurant or food fallback image must be retained');placeChecks++;});
+ }
+ for(const sort of ['popular','name'])for(const group of ctx.IEBFoodCategories.groups){state.sort=sort;const html=ctx.localeTest.V.category({id:group.id});const cards=[...html.matchAll(/<article class="food-card"[^>]*>([\s\S]*?)<\/article>/g)].map(m=>m[1]);const items=cards.map(card=>({name:field(card,/<div class="name">([\s\S]*?)<\/div>/),url:origin+card.match(/href="([^"]+)"/)[1],image:img(card),description:field(card,/<p class="home-summary"[^>]*>([\s\S]*?)<\/p>/)}));const graph=plain(api.build({name:'category',valid:true,language,title:field(html,/<h1[^>]*>([\s\S]*?)<\/h1>/),url:origin+'#/category/'+group.id,items}));const list=graph['@graph'][1].mainEntity;assert.equal(list.numberOfItems,cards.length);assert.equal(list.numberOfItems,ctx.IEBFoodCategories.foods(group.id,ctx.FOODS).length);assert.deepEqual(list.itemListElement.map(x=>x.item.name),items.map(x=>x.name));assert.deepEqual(list.itemListElement.map(x=>x.position),items.map((_,i)=>i+1));listChecks++;}
+}
+assert.equal(JSON.stringify(ctx.FOODS),baseline,'Schema must not edit catalog records');
+const html=fs.readFileSync(path.join(root,'index.html'),'utf8');const initial=JSON.parse(html.match(/<script id="ieb-structured-data" type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);assert.deepEqual(plain(api.build()),initial,'No-JS site identity and runtime identity must agree');
+for(const name of ['results','search','saved','my','profile','accountPrivacy','write','post','login','signup','notFound'])assert.equal(api.build({name,valid:true,title:'private user input',url:origin+'#/'+name})['@graph'].length,1,'No personalized/search/auth content: '+name);
+for(const url of ['javascript:alert(1)','https://example.org/#/food/test',origin+'?email=private@example.org#/home',origin+'food/test',origin+'#/results/private'])assert.equal(api.build({name:'food',valid:true,title:'Dish',url})['@graph'].length,1,'Reject non-public or unresolvable URLs');
+const malicious='Dish </script><script>alert(1)</script>\u2028';const data=api.build({name:'food',valid:true,title:malicious,url:origin+'#/food/example',image:'https://example.org/signed-photo?token=private',aggregateRating:5,offers:{price:1},author:'not visible'});const serialized=api.serialize(data);assert.ok(!serialized.includes('<'));assert.equal(JSON.parse(serialized)['@graph'][1].name,malicious.trim());assert.ok(!serialized.includes('signed-photo'));for(const key of ['aggregateRating','offers','author','Recipe','VeganDiet','openingHours'])assert.ok(!serialized.includes(key),'Do not invent '+key);
+const script={textContent:''};ctx.document.getElementById=id=>id==='ieb-structured-data'?script:null;ctx.location.hash='#/food/example';
+const foodRoot={querySelector:s=>s==='.section-chips'?{}:s==='.title-block h1'?{textContent:'Visible dish'}:s==='.title-block .summary'?{textContent:'Visible summary'}:s==='.hero img'?{getAttribute:()=> 'assets/food/dwaeji-gukbap.jpg'}:null};
+api.update({name:'food',root:foodRoot,language:'en'});assert.equal(JSON.parse(script.textContent)['@graph'][1].mainEntity.name,'Visible dish');api.update({name:'my',root:{},language:'en'});assert.deepEqual(JSON.parse(script.textContent),initial,'Navigating away must remove the old food/restaurant entity');
+console.log(`PASS structured data matches rendered markup: ${foodChecks} food, ${placeChecks} restaurant, ${listChecks} category/sort/locale cases; privacy, safe serialization and stale-route cleanup`);

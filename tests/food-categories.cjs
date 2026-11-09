@@ -10,7 +10,7 @@ assert.equal(new Set(api.groups.map(g=>g.id)).size,10);
 const covered=new Set();
 for(const group of api.groups){
  assert.equal(new Set(group.foods).size,group.foods.length);
- assert.ok(group.foods.length>0);
+ assert.ok(group.id==='vegan'||group.foods.length>0);
  for(const id of group.foods){assert.ok(ids.has(id),'Unknown or archived dish: '+id);covered.add(id);}
  for(const lang of ['ko','en','zh','ja'])assert.ok(api.name(group,lang).trim());
  const svg=fs.readFileSync(path.join(root,group.image.split('?')[0]),'utf8');
@@ -20,6 +20,16 @@ for(const group of api.groups){
  assert.equal(api.foods(group.id,foods).map(f=>f.id).join(),expected.map(f=>f.id).join());
 }
 assert.equal(covered.size,ids.size,'Every active dish has a discovery group');
+assert.deepEqual(Array.from(api.groups,g=>api.name(g,'ko')),['육류','해산물','찜','탕','면 요리','밥·죽','분식','간식','매운맛','비건']);
+assert.equal(api.foods('vegan',foods).length,0,'No restaurant menu is verified vegan in the supplied catalog');
+for(const [id,expected] of Object.entries({
+ 'dwaeji-gukbap':['meat','soups','rice'],
+ 'masan-agujjim':['seafood','steamed','spicy'],
+ 'andong-jjimdak':['meat','steamed','spicy'],
+ 'gijang-daege':['seafood','steamed'],
+ 'bibim-dangmyeon':['noodles','street'],
+ 'uiryeong-manggaetteok':['snacks'],
+}))assert.deepEqual(Array.from(api.groups.filter(g=>g.foods.includes(id)),g=>g.id).sort(),expected.sort(),id+' must be connected to the correct overlapping groups');
 assert.ok(api.byId('seafood').foods.includes('bokguk')&&api.byId('soups').foods.includes('bokguk'),'Overlapping categories are intentional');
 assert.equal(api.foods('all',foods).length,foods.length);
 assert.equal(api.foods('missing',foods).length,0);
