@@ -33,7 +33,7 @@ body { background: var(--bg); padding: 0; }
 .home-carousel-controls { justify-content: center; margin: 0; }
 .home-autoplay { margin: 8px 0 0 auto; padding: 0 4px; font-size: 12px; }
 .home-swipe-hint { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; clip-path: inset(50%); overflow: hidden; }
-.home-slide { gap: 8px; }
+.home-slide { gap: 2px; }
 .home-slide .photo { aspect-ratio: 16 / 9; }
 .home-slide .name { white-space: normal; font-size: 18px; line-height: 1.4; font-weight: 600; }
 .home-slide .home-summary { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 42px; }
@@ -42,9 +42,9 @@ body { background: var(--bg); padding: 0; }
 .home-toolbar h2 { font-size: 20px; margin: 0; }
 .sort-btn { flex: none; min-height: 44px; }
 .food-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 12px; padding: 8px 20px 32px; }
-.food-list .food-card { align-content: start; gap: 8px; }
+.food-list .food-card { align-content: start; gap: 2px; }
 .food-list .photo { aspect-ratio: 1.2; }
-.food-list .info { align-items: flex-start; gap: 4px; }
+.food-list .info { align-items: center; gap: 4px; }
 .food-list .name { white-space: normal; font-size: 15px; line-height: 1.45; overflow-wrap: anywhere; }
 .food-list .home-summary { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 12px; }
 .food-list .like-btn { min-width: 36px; min-height: 36px; padding: 4px 2px; }
