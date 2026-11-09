@@ -90,7 +90,8 @@
   /* ---------- shared UI ---------- */
   function appHeader() {
     return `<header class="app-header">
-      <a class="logo brand-logo" href="#/home" aria-label="${esc(t('brand.home'))}"><img src="assets/brand/muboso-header.png" width="1672" height="941" alt="무보소 · I Eat Busan"></a>
+      <a class="logo brand-logo" href="#/home" aria-label="${esc(t('brand.home'))}"><svg viewBox="330 190 1020 530" aria-hidden="true" focusable="false"><image href="assets/brand/muboso-header.png" width="1672" height="941"/></svg></a>
+      <form class="desktop-search" data-form="search" role="search">${icon('search')}<input name="q" type="search" required autocomplete="off" placeholder="${esc(t('search.placeholder'))}" aria-label="${esc(t('search.placeholder'))}"></form>
       <div class="header-actions">
         <a class="lang-pill" href="#/lang" aria-label="${esc(t('set.language'))}">${icon('globe')}<span>${esc(t('lang.code'))}</span></a>
         <a class="icon-btn" href="#/search" aria-label="${esc(t('search.placeholder'))}">${icon('search')}</a>
@@ -106,8 +107,8 @@
   }
   function tabbar(active) {
     const tabs = [['home', 'home', '#/home'], ['map', 'map', '#/map'], ['community', 'community', '#/community'], ['saved', 'heart', '#/saved'], ['my', 'user', '#/my']];
-    return `<nav class="tabbar" aria-label="${esc(t('nav.main'))}">${tabs.map(([k, ic, href]) =>
-      `<a class="tab" href="${href}" ${k === active ? 'aria-current="page"' : ''}>${icon(ic)}<span>${esc(t('tab.' + k))}</span></a>`).join('')}</nav>`;
+    return `<nav class="tabbar" aria-label="${esc(t('nav.main'))}"><a class="nav-brand" href="#/home" aria-label="${esc(t('brand.home'))}"><svg viewBox="330 190 1020 530" aria-hidden="true" focusable="false"><image href="assets/brand/muboso-header.png" width="1672" height="941"/></svg></a>${tabs.map(([k, ic, href]) =>
+      `<a class="tab" href="${href}" ${k === active ? 'aria-current="page"' : ''}>${icon(ic)}<span>${esc(t('tab.' + k))}</span></a>`).join('')}<div class="nav-tools"><a href="#/search">${icon('search')}${esc(t('search.placeholder'))}</a><a href="#/settings">${icon('settings')}${esc(t('set.title'))}</a></div></nav>`;
   }
   const empty = (msg, ic = 'info', extra = '') => `<div class="empty">${icon(ic)}<p>${esc(msg)}</p>${extra}</div>`;
   function foodRow(f, { save = true } = {}) {
@@ -147,7 +148,6 @@
   const V = {};
   let homeFeaturedId = null;
   let homeFeaturedPeriod = null;
-  let homeAutoplayPaused = false;
 
   function homeFoodCard(f, { rank = 0, eager = false, slide = false, count = 5 } = {}) {
     const saved = !!S().foodLikes?.[f.id];
@@ -195,16 +195,15 @@
   };
 
   V.home = () => {
-    const sort = S().sort;
-    const list = [...FOODS];
     const featuredAt = Date.now();
     const period = window.IEBFeaturedFoods.periodAt(featuredAt);
     if (period !== homeFeaturedPeriod) homeFeaturedId = null;
     homeFeaturedPeriod = period;
     const featured = window.IEBFeaturedFoods.select(FOODS, featuredAt);
-    if (sort === 'name') list.sort((a, b) => fname(a).localeCompare(fname(b), lang()));
-    else list.sort((a, b) => foodLikes(b) - foodLikes(a));
     return `<main class="screen has-tabbar home-screen">${appHeader()}
+      <section class="home-intro"><h1>${esc(t('home.discover'))}</h1><p>${esc(t('home.discoverSub'))}</p>
+        <form class="discover-search" data-form="search" role="search">${icon('search')}<input name="q" type="search" required autocomplete="off" enterkeyhint="search" placeholder="${esc(t('search.placeholder'))}" aria-label="${esc(t('search.placeholder'))}"></form>
+      </section>
       <section class="home-carousel" aria-labelledby="home-featured-title" aria-roledescription="${esc(t('home.carousel'))}">
         <div class="section-head"><h2 id="home-featured-title">${esc(t('home.featured'))}</h2></div>
         <p class="home-swipe-hint" id="home-swipe-hint">${esc(t('home.swipe'))}</p>
@@ -217,13 +216,22 @@
           <span class="home-count" aria-live="polite" aria-atomic="true">1 / ${featured.length}</span>
           <button class="icon-btn home-next" type="button" aria-label="${esc(t('home.next'))}">${icon('chevronRight')}</button>
         </div>
-        <button class="text-btn home-autoplay" type="button" aria-pressed="false">${esc(t('home.pause'))}</button>
       </section>
       <div class="band"></div>
-      <div class="home-toolbar"><h1>${esc(t('home.title'))}</h1>
-        <button class="sort-btn" data-act="sort">${esc(t(sort === 'name' ? 'home.sort.name' : 'home.sort.popular'))}${icon('chevronDown')}</button></div>
-      ${lang() !== 'ko' ? `<p class="pad muted source-note">${esc(t('source.korean'))}</p>` : ''}
-      <div class="food-list">${list.map((f, i) => homeFoodCard(f, { rank: sort === 'popular' ? i + 1 : 0 })).join('')}</div>${tabbar('home')}</main>`;
+      <section class="category-section" aria-labelledby="category-title"><div class="home-toolbar"><h2 id="category-title">${esc(t('category.title'))}</h2><a class="category-all" href="#/category/all">${esc(t('search.seeAll'))}${icon('chevronRight')}</a></div>
+        <div class="category-grid">${window.IEBFoodCategories.groups.map(group => `<a class="category-tile" href="#/category/${group.id}"><span class="category-art"><img src="${group.image}" width="72" height="72" alt="" loading="lazy"></span><span>${esc(window.IEBFoodCategories.name(group, lang()))}</span></a>`).join('')}</div>
+      </section>${tabbar('home')}</main>`;
+  };
+  V.category = ({ id = 'all' }) => {
+    const categories = window.IEBFoodCategories, group = categories.byId(id);
+    if (!group && id !== 'all') return V.notFound();
+    const list = categories.foods(id, FOODS), sort = S().sort;
+    if (sort === 'name') list.sort((a, b) => fname(a).localeCompare(fname(b), lang()));
+    else list.sort((a, b) => foodLikes(b) - foodLikes(a));
+    return `<main class="screen category-screen">${pageHeader(group ? categories.name(group, lang()) : t('category.all'), {fallback:'#/home'})}
+      <nav class="category-filters" aria-label="${esc(t('category.title'))}"><a class="chip ${id === 'all' ? 'active' : ''}" href="#/category/all" ${id === 'all' ? 'aria-current="page"' : ''}>${esc(t('common.all'))}</a>${categories.groups.map(item => `<a class="chip ${item.id === id ? 'active' : ''}" href="#/category/${item.id}" ${item.id === id ? 'aria-current="page"' : ''}>${esc(categories.name(item, lang()))}</a>`).join('')}</nav>
+      <div class="home-toolbar"><p class="category-count">${esc(t('category.count', {n:list.length}))}</p><button class="sort-btn" data-act="sort">${esc(t(sort === 'name' ? 'home.sort.name' : 'home.sort.popular'))}${icon('chevronDown')}</button></div>
+      <div class="food-list">${list.map(f => homeFoodCard(f)).join('')}</div>${tabbar('home')}</main>`;
   };
   V.home.mount = () => {
     const carousel = app.querySelector('.home-carousel');
@@ -234,9 +242,8 @@
     const pages = [...app.querySelectorAll('[data-slide]')];
     const prev = app.querySelector('.home-prev'), next = app.querySelector('.home-next');
     const counter = app.querySelector('.home-count');
-    const autoplay = app.querySelector('.home-autoplay');
     const pointers = new Set();
-    let timer = null, paused = homeAutoplayPaused, disposed = false, touching = false;
+    let timer = null, paused = false, disposed = false, touching = false;
     let featuredTimer = null;
     const mountedPeriod = homeFeaturedPeriod;
     const refreshFeatured = () => {
@@ -293,18 +300,9 @@
     const onTouchStart = () => { touching = true; stop(); };
     const onTouchEnd = event => { if (touching) { touching = event.touches.length > 0; schedule(); } };
     const onVisibility = () => { if (!document.hidden && refreshFeatured()) return; if (document.hidden) { pointers.clear(); touching = false; } schedule(); };
-    const onPause = () => {
-      paused = !paused;
-      homeAutoplayPaused = paused;
-      autoplay.setAttribute('aria-pressed', String(paused));
-      autoplay.textContent = t(paused ? 'home.resume' : 'home.pause');
-      counter.setAttribute('aria-live', paused ? 'polite' : 'off');
-      schedule();
-    };
     prev.addEventListener('click', () => { move(index - 1); schedule(); });
     next.addEventListener('click', () => { move(index + 1); schedule(); });
     pages.forEach((page, i) => page.addEventListener('click', () => { move(i); schedule(); }));
-    autoplay.addEventListener('click', onPause);
     carousel.addEventListener('pointerdown', onPointerDown, { passive: true });
     carousel.addEventListener('touchstart', onTouchStart, { passive: true });
     carousel.addEventListener('wheel', schedule, { passive: true });
@@ -317,18 +315,22 @@
     track.addEventListener('keydown', onKey);
     window.addEventListener('resize', onResize);
     update();
-    autoplay.setAttribute('aria-pressed', String(paused));
-    autoplay.textContent = t(paused ? 'home.resume' : 'home.pause');
-    counter.setAttribute('aria-live', paused ? 'polite' : 'off');
     move(index, true);
+    const onFocus = () => { paused = true; stop(); counter.setAttribute('aria-live', 'polite'); };
+    const onBlur = event => { if (!carousel.contains(event.relatedTarget)) { paused = matchMedia('(prefers-reduced-motion: reduce)').matches; counter.setAttribute('aria-live', paused ? 'polite' : 'off'); schedule(); } };
+    carousel.addEventListener('focusin', onFocus);
+    carousel.addEventListener('focusout', onBlur);
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) paused = true;
+    counter.setAttribute('aria-live', paused ? 'polite' : 'off');
     schedule();
     scheduleFeatured();
     cleanup.push(() => {
+      carousel.removeEventListener('focusin', onFocus);
+      carousel.removeEventListener('focusout', onBlur);
       disposed = true;
       stop();
       clearTimeout(featuredTimer);
       pointers.clear();
-      autoplay.removeEventListener('click', onPause);
       carousel.removeEventListener('pointerdown', onPointerDown);
       carousel.removeEventListener('touchstart', onTouchStart);
       carousel.removeEventListener('wheel', schedule);
@@ -830,6 +832,7 @@
   /* ---------- router ---------- */
   const ROUTES = [
     [/^#\/login$/, 'login'], [/^#\/signup$/, 'signup'], [/^#\/lang$/, 'lang'], [/^#\/home$/, 'home'],
+    [/^#\/category\/([\w-]+)$/, 'category', ['id']],
     [/^#\/food\/([\w-]+)$/, 'food', ['id']], [/^#\/place\/([\w-]+)\/(\d+)$/, 'place', ['id', 'i']],
     [/^#\/search$/, 'search'], [/^#\/results\/([^/]+)(?:\/(all|foods|places|posts))?$/, 'results', ['q', 'tab']],
     [/^#\/notifications$/, 'notifications'],

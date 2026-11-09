@@ -49,7 +49,7 @@ for (const language of ['ko','en','zh','ja']) {
   for (const member of [false,true]) {
     state.user=member?{id:'member',username:'long_member_username',nickname:'ABCDEFGHIJ',countryCode:'US',area:8,joined:'2026.11.06',bio:'A long profile biography'}:null;
     assert.equal(V.settings().includes('data-act="withdraw"'),member,'Account deletion is available only to members');
-    for (const name of ['home','login','signup','lang','search','notifications','community','saved','my','myPosts','myComments','myRecent','profile','settings','notices','faq','contact','terms','privacy','credits','notFound','write','results','map']) {
+    for (const name of ['home','category','login','signup','lang','search','notifications','community','saved','my','myPosts','myComments','myRecent','profile','settings','notices','faq','contact','terms','privacy','credits','notFound','write','results','map']) {
       const html=V[name]({q:'no-match',tab:undefined});pages++;
       assert.ok(html.includes('<main'),name);
       assert.ok(!/undefined|NaN|\{(?:n|q|country|area|date)\}/.test(html),language+' '+name);

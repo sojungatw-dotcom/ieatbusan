@@ -78,7 +78,18 @@
           navigate(routes.detail(picker.value));
         };
         picker?.addEventListener('change', onRegionChange);
-        const release = () => picker?.removeEventListener('change', onRegionChange);
+        const wide = window.matchMedia?.('(min-width: 960px)');
+        const handle = root.querySelector('.sheet-handle');
+        const syncHandle = () => {
+          if (!wide || !handle) return;
+          handle.disabled = wide.matches;
+          handle.setAttribute('aria-expanded', String(wide.matches || !root.querySelector('#sheet')?.classList.contains('collapsed')));
+        };
+        syncHandle(); wide?.addEventListener?.('change', syncHandle);
+        const release = () => {
+          picker?.removeEventListener('change', onRegionChange);
+          wide?.removeEventListener?.('change', syncHandle);
+        };
         const element = document.getElementById('map');
         if (!element) return release;
         const { foodId, districtId } = state;

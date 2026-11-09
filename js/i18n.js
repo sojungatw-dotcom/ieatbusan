@@ -347,3 +347,18 @@ for (const [language, copy] of Object.entries({
   zh: {'nav.main':'主导航','brand.home':'Muboso · I EAT BUSAN 首页','food.sections':'美食详情导航','com.categories':'帖子分类','common.like':'点赞','common.unlike':'取消点赞','common.saveItem':'收藏','common.unsaveItem':'取消收藏','common.copy':'复制','common.notFound':'找不到该页面。','toast.textCopied':'已复制','write.addPhotos':'添加照片','place.menu':'招牌菜单','place.beforeVisit':'到店前须知','place.unverified':'尚未核实','place.researched':'资料查询日期','place.similar':'资料中列有类似菜品','place.exact':'资料中列有此菜品','place.checkFirst':'请在到店前确认','source.korean':'部分详细资料以韩语原文提供。','food.photoPending':'照片准备中','home.carousel':'美食轮播','home.slide':'幻灯片','set.notiHelp':'通知偏好会被保存，推送通知功能尚未开放。','noti.example':'此处显示的通知仅为示例。'},
   ja: {'nav.main':'メインナビゲーション','brand.home':'Muboso · I EAT BUSAN ホーム','food.sections':'料理の詳細メニュー','com.categories':'投稿カテゴリー','common.like':'いいね','common.unlike':'いいねを取り消す','common.saveItem':'お気に入りに追加','common.unsaveItem':'お気に入りから削除','common.copy':'コピー','common.notFound':'ページが見つかりません。','toast.textCopied':'コピーしました','write.addPhotos':'写真を追加','place.menu':'看板メニュー','place.beforeVisit':'来店前の確認事項','place.unverified':'未確認の情報','place.researched':'調査日','place.similar':'類似メニューの掲載情報','place.exact':'この料理の掲載情報','place.checkFirst':'来店前にご確認ください','source.korean':'一部の詳細情報は韓国語の原文で提供しています。','food.photoPending':'写真を準備中','home.carousel':'料理のカルーセル','home.slide':'スライド','set.notiHelp':'通知設定は保存されます。プッシュ通知はまだご利用いただけません。','noti.example':'ここに表示している通知はサンプルです。'},
 })) Object.assign(window.I18N[language], copy);
+
+/* Responsive discovery entry. */
+for (const [language, copy] of Object.entries({
+ko: {'home.discover':'부산의 맛을, 가까이','home.discoverSub':'먹고 싶은 음식부터 가보고 싶은 식당까지'},
+en: {'home.discover':'Find your next taste of Busan','home.discoverSub':'Discover local dishes and find a place to try them'},
+zh: {'home.discover':'发现身边的釜山美味','home.discoverSub':'从想吃的美食，找到想去的餐厅'},
+ja: {'home.discover':'釜山のおいしいを、もっと身近に','home.discoverSub':'気になる料理から、行ってみたいお店へ'},
+})) Object.assign(window.I18N[language], copy);
+
+for (const [language, copy] of Object.entries({
+ko:{'category.title':'음식 카테고리','category.all':'모든 음식','category.count':'음식 {n}가지'},
+en:{'category.title':'Explore by category','category.all':'All dishes','category.count':'Dishes: {n}'},
+zh:{'category.title':'按分类找美食','category.all':'全部美食','category.count':'共{n}种美食'},
+ja:{'category.title':'カテゴリーから探す','category.all':'すべての料理','category.count':'料理 {n}品'},
+})) Object.assign(window.I18N[language], copy);

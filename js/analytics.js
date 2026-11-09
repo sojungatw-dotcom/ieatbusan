@@ -6,7 +6,7 @@
   const enabled = location.hostname === 'ieatbusan-eight.vercel.app' || debug;
   let ready = false, started = false, userId = null, lastView = null, previousLocation = '';
   const titles = {
-    home: '홈', login: '로그인', signup: '회원가입', lang: '언어', food: '음식 상세',
+    home: '홈', category: '음식 카테고리', login: '로그인', signup: '회원가입', lang: '언어', food: '음식 상세',
     place: '식당 상세', search: '검색', results: '검색 결과', notifications: '알림',
     map: '지도', community: '커뮤니티', post: '게시물 상세', write: '글쓰기',
     saved: '찜', my: '마이', myPosts: '내 게시글', myComments: '내 댓글',
