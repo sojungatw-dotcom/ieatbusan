@@ -40,6 +40,8 @@ for (const language of ['ko', 'en', 'zh', 'ja']) {
     assert.equal((html.match(/class="category-tile"/g) || []).length, 10);
     assert.equal((vm.runInContext("V.category({id:'all'})", ctx).match(/class="food-card"/g)||[]).length,ctx.FOODS.length);
     assert.equal((html.match(/data-slide=/g) || []).length, 5);
+    assert.ok(!/home-prev|home-next|home-count/.test(html),'No visible arrows or fraction counter');
+    assert.ok(html.includes('class="sr-only home-status"'),'Keep a hidden screen-reader announcement');
     assert.ok(!html.includes('undefined'), 'Missing translation or data');
   }
 }
@@ -56,8 +58,8 @@ const pages = Array.from({ length: 5 }, () => new Element());
 const track = new Element();
 Object.assign(track, { children: slides, clientWidth: 358, scrollLeft: 0 });
 track.scrollTo = ({ left }) => { track.scrollLeft = left; track.events.scroll?.(); };
-const prev = new Element(), next = new Element(), counter = new Element(), carousel = new Element(), autoplay = new Element();
-const elements = { '.home-track': track, '.home-prev': prev, '.home-next': next, '.home-count': counter,
+const counter = new Element(), carousel = new Element(), autoplay = new Element();
+const elements = { '.home-track': track, '.home-status': counter,
   '.home-carousel': carousel, '.home-autoplay': autoplay };
 ctx.app = { querySelector: selector => elements[selector], querySelectorAll: () => pages };
 ctx.cleanup = [];
@@ -89,13 +91,11 @@ const mount = () => vm.runInContext('V.home.mount()', ctx);
 const unmount = () => { ctx.cleanup.forEach(fn => fn()); ctx.cleanup = []; };
 mount();
 assert.equal(counter.textContent, '1 / 5');
-assert.ok(prev.disabled);
-next.events.click();
+pages[1].events.click();
 assert.equal(counter.textContent, '2 / 5');
 track.scrollLeft = track.clientWidth * 4;
 track.events.scroll();
 assert.equal(counter.textContent, '5 / 5');
-assert.ok(next.disabled);
 assert.equal(pages[4].attrs['aria-current'], 'true');
 track.events.keydown({ key: 'ArrowLeft', preventDefault() {} });
 assert.equal(counter.textContent, '4 / 5');
