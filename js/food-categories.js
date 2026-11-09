@@ -12,7 +12,7 @@
     ['snacks', ['간식·디저트','Snacks','点心','おやつ'], ['ssiat-hotteok','eomuk','multteok','daegu-kongguk','daegu-napjak-mandu','uiryeong-manggaetteok']],
     ['dumplings', ['만두·완당','Dumplings','饺子·云吞','餃子・ワンタン'], ['busan-wandang','daegu-napjak-mandu','yubu-jumeoni']],
     ['spicy', ['매콤한 맛','Spicy','香辣','ピリ辛'], ['nakgopsae','kkomjangeo','jobang-nakji','masan-agujjim','sogogi-gukbap','pohang-mulhoe']],
-  ].map(([id, names, foods]) => Object.freeze({ id, names: Object.freeze(names), foods: Object.freeze(foods), image: 'assets/categories/' + id + '.svg' }));
+  ].map(([id, names, foods]) => Object.freeze({ id, names: Object.freeze(names), foods: Object.freeze(foods), image: 'assets/categories/' + id + '.svg?v=20261109-line-icons' }));
   const languageIndex = {ko:0,en:1,zh:2,ja:3};
   window.IEBFoodCategories = Object.freeze({
     groups: Object.freeze(groups),

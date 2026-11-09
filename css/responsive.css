@@ -25,9 +25,6 @@ body { background: var(--bg); padding: 0; }
 .home-intro { padding: 16px 20px 8px; }
 .home-intro h1 { margin: 0 0 8px; font-size: clamp(24px, 5vw, 32px); font-weight: 600; line-height: 1.35; word-break: keep-all; overflow-wrap: anywhere; }
 .home-intro p { margin: 0; color: var(--ink-2); font-size: 14px; }
-.discover-search { margin-top: 12px; display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 0 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
-.discover-search > svg { width: 20px; height: 20px; flex: none; color: var(--ink-2); }
-.discover-search input { width: 100%; min-width: 0; border: 0; background: transparent; padding: 14px 0; outline-offset: 3px; font-size: 15px; }
 .home-shortcuts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 .home-shortcuts a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 13px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
 .home-shortcuts svg { width: 18px; height: 18px; color: var(--accent); }
@@ -58,7 +55,7 @@ body { background: var(--bg); padding: 0; }
 .category-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px 8px; padding: 8px 16px 20px; }
 .category-tile { display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 0; text-align: center; font-size: 12px; line-height: 1.4; }
 .category-tile > span:last-child { max-width: 100%; overflow-wrap: anywhere; }
-.category-art { display: grid; place-items: center; width: min(100%, 64px); aspect-ratio: 1; border-radius: 20px; background: var(--surface); }
+.category-art { display: grid; place-items: center; width: min(100%, 64px); aspect-ratio: 1; border-radius: 16px; background: transparent; }
 .category-art img { width: 100%; height: 100%; padding: 3px; }
 .category-tile:hover .category-art, .category-tile:focus-visible .category-art { background: var(--blush); }
 .category-filters { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 12px 20px; position: sticky; top: var(--header-h); z-index: 20; background: var(--bg); border-bottom: 1px solid var(--border); }
@@ -129,11 +126,10 @@ body { background: var(--bg); padding: 0; }
   .desktop-search svg { width: 20px; height: 20px; flex: none; }
   .desktop-search span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .desktop-search input { min-width: 0; width: 100%; padding: 10px 0; font: inherit; border: 0; background: transparent; }
-  .home-intro .discover-search, .home-intro .home-shortcuts, .app-header .header-actions a[href="#/search"] { display: none; }
+  .home-intro .home-shortcuts, .app-header .header-actions a[href="#/search"] { display: none; }
   .home-intro { padding: 24px 32px 16px; }
   .home-intro h1 { font-size: 32px; }
   .home-intro > p { font-size: 15px; }
-  .discover-search { max-width: 680px; }
   .home-carousel { padding: 0 32px 12px; }
   .home-carousel .section-head { padding-top: 8px; padding-bottom: 8px; }
   .home-swipe-hint { display: none; }

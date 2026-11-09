@@ -13,7 +13,7 @@ for(const group of api.groups){
  assert.ok(group.foods.length>0);
  for(const id of group.foods){assert.ok(ids.has(id),'Unknown or archived dish: '+id);covered.add(id);}
  for(const lang of ['ko','en','zh','ja'])assert.ok(api.name(group,lang).trim());
- const svg=fs.readFileSync(path.join(root,group.image),'utf8');
+ const svg=fs.readFileSync(path.join(root,group.image.split('?')[0]),'utf8');
  assert.ok(svg.includes('viewBox="0 0 72 72"'));
  assert.ok(!/<script|<foreignObject|https?:|<text/.test(svg.replace('http://www.w3.org/2000/svg','')),'Icons contain only original vector artwork');
  const expected=foods.filter(f=>group.foods.includes(f.id));

@@ -201,9 +201,7 @@
     homeFeaturedPeriod = period;
     const featured = window.IEBFeaturedFoods.select(FOODS, featuredAt);
     return `<main class="screen has-tabbar home-screen">${appHeader()}
-      <section class="home-intro"><h1>${esc(t('home.discover'))}</h1><p>${esc(t('home.discoverSub'))}</p>
-        <form class="discover-search" data-form="search" role="search">${icon('search')}<input name="q" type="search" required autocomplete="off" enterkeyhint="search" placeholder="${esc(t('search.placeholder'))}" aria-label="${esc(t('search.placeholder'))}"></form>
-      </section>
+      <section class="home-intro"><h1>${esc(t('home.discover'))}</h1><p>${esc(t('home.discoverSub'))}</p></section>
       <section class="home-carousel" aria-labelledby="home-featured-title" aria-roledescription="${esc(t('home.carousel'))}">
         <div class="section-head"><h2 id="home-featured-title">${esc(t('home.featured'))}</h2></div>
         <p class="home-swipe-hint" id="home-swipe-hint">${esc(t('home.swipe'))}</p>
