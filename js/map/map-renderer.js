@@ -51,15 +51,15 @@
       function detail({ id, district } = {}) {
         const selected = selection(id), places = selectedPlaces(selected, district);
         return `<main class="map-screen">${appHeader()}
-          <div class="map-detail-tools"><div class="map-detail-links">
-            <a href="${overviewLink(district)}">${icon('back')}${esc(mt('back'))}</a>
-            <a href="${detailHref()}" ${!region(district) && !selected ? 'aria-current="page"' : ''}>${icon('globe')}${esc(mt('allMap'))}</a>
-          </div><label class="map-region-picker"><span class="sr-only">${esc(mt('chooseRegion'))}</span>
-            <select data-map-region aria-label="${esc(mt('chooseRegion'))}">
-              <option value="" ${!region(district) ? 'selected' : ''}>${esc(mt('all'))}</option>
-              ${data.districts.map(d => `<option value="${d.id}" ${d.id === district ? 'selected' : ''}>${esc(districtName(d.index))}</option>`).join('')}
-            </select></label></div>
-          <div class="chip-row" role="toolbar">${['', ...data.foodCounts(district).map(item => item.food.id)].map(fid => `<a class="chip ${fid === (selected || '') ? 'active' : ''}" href="${detailHref(district, fid)}" ${fid === (selected || '') ? 'aria-current="true"' : ''}>${esc(fid ? fname(data.byId[fid]) : t('map.all'))}</a>`).join('')}</div>
+          <div class="map-detail-tools">
+            <button class="icon-btn map-back" type="button" data-act="back" data-fallback="${overviewLink(district)}" aria-label="${esc(t('common.back'))}">${icon('back')}</button>
+            <label class="map-region-picker"><span class="sr-only">${esc(mt('chooseRegion'))}</span>
+              <select data-map-region aria-label="${esc(mt('chooseRegion'))}">
+                <option value="" ${!region(district) ? 'selected' : ''}>${esc(mt('all'))}</option>
+                ${data.districts.map(d => `<option value="${d.id}" ${d.id === district ? 'selected' : ''}>${esc(districtName(d.index))}</option>`).join('')}
+              </select>
+            </label>
+          </div>
           <div class="map-wrap"><div id="map">${mapAvailable() ? '' : `<div class="map-fallback">${esc(mt('loading'))}</div>`}</div>
             <div class="map-warning" id="map-warning" role="status" hidden></div>
             <button class="locate-btn" data-act="locate" style="bottom:calc(132px + 16px)" aria-label="${esc(t('map.locate'))}">${icon('locate')}</button>
