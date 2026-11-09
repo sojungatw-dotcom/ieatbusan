@@ -33,6 +33,7 @@ global.fetch = async (url, options = {}) => {
     if (select?.includes('ieb_profiles(')) return reply({ code: 'PGRST201' }, 300);
     return reply([]);
   }
+  if (path === '/rest/v1/ieb_comments' && options.method === 'POST') return reply([{id:body.id,body:body.body,created_at:'2026-11-08T00:00:00Z'}]);
   if (path === '/rest/v1/ieb_foods') return reply(catalogRows);
   if (path === '/rest/v1/ieb_comments' || path === '/rest/v1/ieb_restaurant') return reply([]);
   if (path === '/auth/v1/logout' || path.startsWith('/rest/v1/')) return reply({});
@@ -73,6 +74,16 @@ async function request(action, body, { cookie = '', origin = 'https://site.verce
   assert.equal(data.data.user.id, uid);
   assert.ok(!JSON.stringify(data.data).includes('server-secret'));
   assert.equal(data.headers['Cache-Control'], 'no-store');
+  assert.match(data.headers['Server-Timing'], /total;dur=/);
+  const commentStart = calls.length;
+  const comment = await request('comment', { postId:'p1', text:'hello' }, { cookie });
+  assert.equal(comment.status,200);
+  assert.equal(comment.data.comment.text,'hello');
+  assert.equal(comment.data.comment.createdAt,Date.parse('2026-11-08T00:00:00Z'));
+  const commentCalls=calls.slice(commentStart);
+  assert.deepEqual(commentCalls.map(call=>call.path),['/auth/v1/user','/rest/v1/ieb_profiles','/rest/v1/ieb_comments']);
+  assert.equal(commentCalls[2].headers.Prefer,'return=representation');
+  assert.equal(commentCalls[2].parsed.id,comment.data.comment.id);
   catalogRows = [
     { id: 'retained', name: 'Retained', content: { places: [] } },
     { id: 'legacy', name: 'Legacy', content: {} },

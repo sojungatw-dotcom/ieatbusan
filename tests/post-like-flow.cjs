@@ -31,17 +31,18 @@ async function appFetch(url,opts={}){
  await handler({url,method:opts.method||'GET',body:opts.body,headers:{host:'site.vercel.app',origin:'https://site.vercel.app',cookie:'ieb_access=verified','content-type':'application/json'}},res);
  return new Response(res.text,{status:res.statusCode});
 }
-const ctx=vm.createContext({console,fetch:appFetch,location:{protocol:'https:'},localStorage:{getItem(){return null;},setItem(){}},SEED:{posts:[]}});ctx.window=ctx;
+const ctx=vm.createContext({console,fetch:appFetch,location:{protocol:'https:'},localStorage:{getItem(){return null;},setItem(){}},SEED:{posts:[]},CustomEvent:class{constructor(type,opts){this.type=type;this.detail=opts?.detail;}}});ctx.window=ctx;
+ctx.dispatchEvent=event=>{if(event.type==='ieb:change')renders++;};
 vm.runInContext(read('js/store.js'),ctx);vm.runInContext(read('js/cloud.js'),ctx);
-const app=read('js/app.js'),action=app.match(/likePost: async el => \{([^\n]+)\},/);assert.ok(action,'Production like handler missing');
+const app=read('js/app.js'),action=app.match(/likePost: (?:async )?el => \{([^\n]+)\},/);assert.ok(action,'Production like handler missing');
 Object.assign(ctx,{S:()=>ctx.Store.get(),requireLogin:()=>!!ctx.Store.get().user,app:{contains:()=>true},rerender:()=>renders++});
 vm.runInContext('var clickLike=async el=>{'+action[1]+'};',ctx);
 const total=()=>{const s=ctx.Store.get(),p=s.posts.find(p=>p.id===post.id);return p.likes+(s.postLikes[p.id]?1:0);};
 (async()=>{
  await ctx.Store.load();assert.equal(total(),0,'Ignore arbitrary seed likes');
- await ctx.clickLike({dataset:{id:post.id}});assert.equal(writes,1);assert.equal(likes.length,1);assert.equal(total(),1);assert.equal(ctx.Store.get().postLikes[post.id],true);assert.equal(renders,1);
+ await ctx.clickLike({dataset:{id:post.id}});assert.equal(writes,1);assert.equal(likes.length,1);assert.equal(total(),1);assert.equal(ctx.Store.get().postLikes[post.id],true);assert.equal(renders,2,'Optimistic display and acknowledgement both notify the UI');
  await ctx.Store.load();assert.equal(total(),1,'Like survives state reload');
- await ctx.clickLike({dataset:{id:post.id}});assert.equal(likes.length,0);assert.equal(total(),0);assert.equal(renders,2);
+ await ctx.clickLike({dataset:{id:post.id}});assert.equal(likes.length,0);assert.equal(total(),0);assert.equal(renders,4);
  likes.push({post_id:post.id,user_id:other});await ctx.Store.load();assert.equal(total(),1,'Other user like stays visible');
  await ctx.clickLike({dataset:{id:post.id}});assert.equal(total(),2,'Own like counts exactly once alongside another user');
  await ctx.clickLike({dataset:{id:post.id}});assert.equal(total(),1);assert.equal(likes[0].user_id,other,'Unlike preserves other users');

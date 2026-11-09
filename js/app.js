@@ -386,8 +386,8 @@
   const originalFoodView = V.food;
   V.food = params => window.IEBFoodLocale.html(originalFoodView(params), lang(), { preserveOriginalName: true });
 
-  V.food.mount = ({ id }) => {
-    Store.update(s => { s.recentFoods = [id, ...s.recentFoods.filter(x => x !== id)].slice(0, 20); });
+  V.food.mount = ({ id, refreshing = false }) => {
+    if (!refreshing) Store.update(s => { s.recentFoods = [id, ...s.recentFoods.filter(x => x !== id)].slice(0, 20); });
     const chips = [...app.querySelectorAll('.section-chips .chip')];
     const setActive = k => chips.forEach(c => c.classList.toggle('active', c.dataset.sec === k));
     if ('IntersectionObserver' in window) {
@@ -559,15 +559,15 @@
         <p class="content">${esc(p.body)}</p>
         ${p.photos && p.photos.length ? `<div class="post-photos">${p.photos.map(src => `<img src="${esc(src)}" alt="">`).join('')}</div>` : ''}
         ${p.food && FOOD[p.food] ? `<a class="card list-item" href="#/food/${p.food}" style="border:1px solid var(--border)"><img class="thumb sm" src="${img(p.food)}" alt=""><span class="li-body"><span class="li-meta">${esc(t('post.foodTag'))}</span><span class="li-title">${esc(fname(FOOD[p.food]))}</span></span>${icon('chevronRight')}</a>` : ''}
-        <div class="post-actions"><button class="like ${liked ? 'on' : ''}" data-act="likePost" data-id="${id}" aria-pressed="${liked}">${icon('heart', liked)}${esc(t('post.like', { n: postLikes(p) }).trim())}</button>
+        <div class="post-actions"><button class="like ${liked ? 'on' : ''}" data-act="likePost" data-id="${id}" aria-pressed="${liked}" ${Store.isPending('like:' + id) ? 'disabled aria-busy="true"' : ''}>${icon('heart', liked)}${esc(t('post.like', { n: postLikes(p) }).trim())}</button>
           <span class="like">${icon('comment')}${esc(t('post.comments', { n: cs.length }))}</span></div>
       </article>
       <div class="band"></div>
       <div class="group-title">${esc(t('post.comments', { n: cs.length }))}</div>
-      ${cs.map(c => `<div class="comment"><span class="avatar" style="width:32px;height:32px;font-size:13px">${initial(c.author)}</span><div class="c-body">
+      ${cs.map(c => `<div class="comment" ${c.pending ? 'aria-busy="true" style="opacity:.6"' : ''}><span class="avatar" style="width:32px;height:32px;font-size:13px">${initial(c.author)}</span><div class="c-body">
         <div class="c-meta"><b style="font-weight:500">${countryBadge(c.countryCode)}${esc(c.author)}</b><span>${esc(ago(c.createdAt))}</span></div><p>${esc(c.text)}</p>
         <span class="muted" style="font-size:12px">♡ ${c.likes || 0}</span></div></div>`).join('')}
-      <form class="comment-bar" data-form="comment" data-id="${id}"><input id="comment-input" name="text" maxlength="300" autocomplete="off" placeholder="${esc(t('post.placeholder'))}" aria-label="${esc(t('post.placeholder'))}"><button type="submit">${esc(t('post.submit'))}</button></form>
+      <form class="comment-bar" data-form="comment" data-id="${id}"><input id="comment-input" name="text" maxlength="300" autocomplete="off" placeholder="${esc(t('post.placeholder'))}" aria-label="${esc(t('post.placeholder'))}"><button type="submit" ${Store.isPending('comment:' + id) ? 'disabled aria-busy="true"' : ''}>${esc(t('post.submit'))}</button></form>
     </main>`;
   };
 
@@ -844,7 +844,7 @@
   const MEMBER_ONLY = ['write', 'profile', 'accountPrivacy', 'myPosts', 'myComments', 'myRecent'];
   let cleanup = [];
   const stack = [];
-  function route() {
+  function route({ refreshing = false } = {}) {
     syncFoodCatalog();
     const hash = location.hash || '#/home';
     let name = 'notFound', params = {};
@@ -872,7 +872,7 @@
     const pageTitle = app.querySelector('h1')?.textContent || (titleKeys[name] ? t(titleKeys[name]) : '');
     document.title = name === 'home' || name === 'login' || !pageTitle ? 'I EAT BUSAN' : `${pageTitle} · I EAT BUSAN`;
     window.scrollTo(0, 0);
-    if (V[name].mount) V[name].mount(params);
+    if (V[name].mount && !(refreshing && name === 'notifications')) V[name].mount({ ...params, refreshing });
     const measuredPost = name === 'post' ? postById(params.id) : null;
     window.IEBAnalytics?.view(name, params, {
       validContent: name === 'post' ? !!measuredPost : !!FOOD[params.id],
@@ -885,27 +885,37 @@
   }
 
   /* ---------- actions ---------- */
-  function rerender() { const y = window.scrollY; route(); window.scrollTo(0, y); }
+  function rerender() {
+    const y = window.scrollY, input = app.querySelector('#comment-input');
+    const draft = input ? { text: input.value, focused: document.activeElement === input,
+      start: input.selectionStart, end: input.selectionEnd } : null;
+    route({ refreshing: true }); window.scrollTo(0, y);
+    const next = app.querySelector('#comment-input');
+    if (draft && next) {
+      next.value = draft.text;
+      if (draft.focused) { next.focus({ preventScroll: true }); next.setSelectionRange(draft.start, draft.end); }
+    }
+  }
   const A = {
     back: el => back(el.dataset.fallback),
     guest: () => { Store.set({ guest: true }); go(S().langChosen ? '#/home' : '#/lang'); },
     pickLang: el => { const code = el.dataset.code; Store.set({ lang: code }); rerender(); app.querySelector(`[data-act="pickLang"][data-code="${code}"]`)?.focus(); },
     confirmLang: () => { Store.set({ langChosen: true }); if (stack.length > 1 && !stack[stack.length - 2].startsWith('#/login')) history.back(); else go('#/home'); },
     sort: () => { Store.set({ sort: S().sort === 'popular' ? 'name' : 'popular' }); rerender(); },
-    saveFood: async el => {
+    saveFood: el => {
       if (!requireLogin()) return;
-      const id = el.dataset.id, on = !S().foodLikes?.[id];
-      await Cloud.foodLike(id, on);
-      // Keep the existing saved-food page in sync with newly pressed food hearts.
-      Store.update(s => { s.savedFoods = on ? [id, ...s.savedFoods.filter(x => x !== id)] : s.savedFoods.filter(x => x !== id); });
-      await Store.flush(); if (!app.contains(el)) return;
-      toast(t(on ? 'food.saved' : 'food.unsaved')); rerender();
+      const id = el.dataset.id;
+      if (Store.isPending('foodLike:' + id)) return;
+      const on = !S().foodLikes?.[id];
+      const result = Cloud.foodLike(id, on);
+      toast(t(on ? 'food.saved' : 'food.unsaved'));
+      return result;
     },
-    savePlace: async el => {
+    savePlace: el => {
       if (!requireLogin()) return;
       const k = el.dataset.key; let on;
       Store.update(s => { on = !s.savedPlaces.includes(k); s.savedPlaces = on ? [k, ...s.savedPlaces] : s.savedPlaces.filter(x => x !== k); });
-      await Store.flush(); if (!app.contains(el)) return; toast(t(on ? 'food.saved' : 'food.unsaved')); rerender();
+      rerender(); toast(t(on ? 'food.saved' : 'food.unsaved'));
     },
     jump: el => {
       const sec = document.getElementById('sec-' + el.dataset.sec); if (!sec) return;
@@ -928,7 +938,7 @@
     locate: () => mapView.locate(),
     needLogin: (el, e) => { if (!loggedIn()) { e.preventDefault(); requireLogin(); } },
     refreshCommunity: async el => { await Cloud.refresh(); if (app.contains(el)) rerender(); },
-    likePost: async el => { if (!requireLogin()) return; await Cloud.like(el.dataset.id, !S().postLikes[el.dataset.id]); if (app.contains(el)) rerender(); },
+    likePost: el => { if (!requireLogin()) return; return Cloud.like(el.dataset.id, !S().postLikes[el.dataset.id]); },
     deletePost: async el => {
       if (!confirm(t('post.deleteConfirm'))) return;
       await Cloud.deletePost(el.dataset.id);
@@ -1015,10 +1025,19 @@
       go('#/results/' + encodeURIComponent(q));
     } else if (kind === 'comment') {
       if (!requireLogin()) return;
+      const postId = f.dataset.id;
+      if (Store.isPending('comment:' + postId)) return;
       const text = f.text.value.trim(); if (!text) return;
-      await Cloud.comment(f.dataset.id, text);
-      if (!f.isConnected) return;
-      toast(t('post.commented')); rerender(); window.scrollTo(0, document.body.scrollHeight);
+      f.text.value = '';
+      const result = Cloud.comment(postId, text);
+      window.scrollTo(0, document.body.scrollHeight);
+      try { await result; }
+      catch (error) {
+        const current = app.querySelector('form[data-form="comment"]');
+        if (current?.dataset.id === postId && !current.text.value) current.text.value = text;
+        throw error;
+      }
+      if (location.hash === '#/post/' + postId) toast(t('post.commented'));
     } else if (kind === 'write') {
       if (!requireLogin()) return;
       const title = f.title.value.trim(), body = f.body.value.trim();
@@ -1057,6 +1076,13 @@
     Store.set({ lang: ['ko', 'en', 'zh', 'ja'].includes(nav) ? nav : 'en' });
   }
   window.addEventListener('ieb:save-error', event => toast(t(event.detail || 'db.failure')));
+  window.addEventListener('ieb:change', event => {
+    // A late acknowledgement must not rebuild an unrelated editor/search form.
+    const relevant = event.detail === 'preferences' || event.detail?.startsWith('foodLike:')
+      ? /^#\/(?:home|food|place|saved|my|settings|lang|map|results)(?:\/|$)/
+      : /^#\/(?:post|community|my|results)(?:\/|$)/;
+    if (relevant.test(location.hash || '#/home')) rerender();
+  });
   app.innerHTML = `<p class="pad" role="status">${esc(t('db.loading'))}</p>`;
   Store.load().then(route).catch(error => { route(); toast(t(error.message || 'db.failure')); });
 })();

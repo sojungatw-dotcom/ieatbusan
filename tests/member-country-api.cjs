@@ -28,7 +28,7 @@ global.fetch=async(url,options={})=>{
       :filter?.startsWith('neq.')?rows.filter(row=>row.country_code!==filter.slice(4)):rows);
   }
   if(parsed.pathname==='/rest/v1/ieb_comments') {
-    if(options.method==='POST'){savedComments.push({...body,seed_likes:0,created_at:'2026-11-05T00:00:00Z'});return reply(null);}
+    if(options.method==='POST'){const saved={...body,seed_likes:0,created_at:'2026-11-05T00:00:00Z'};savedComments.push(saved);return reply([saved]);}
     return reply(savedComments.map(comment=>({...comment,ieb_profiles:{nickname:'작성자',country_code:country}})));
   }
   if(parsed.pathname==='/rest/v1/ieb_foods'||parsed.pathname==='/rest/v1/ieb_restaurant')return reply([]);

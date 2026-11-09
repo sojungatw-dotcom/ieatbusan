@@ -19,7 +19,7 @@ const ctx = vm.createContext({console, URL, Promise, Intl,
   document:{getElementById:()=>element,documentElement:{lang:'ko'},addEventListener(){}},
   navigator:{language:'ko'},location:{hash:'#/signup',replace(value){this.hash=value;}},history:{back(){}},
   setTimeout:()=>1,clearTimeout(){},scrollTo(){},addEventListener(){},
-  Store:{get:()=>state,set:patch=>Object.assign(state,patch),load:()=>new Promise(()=>{}),update:fn=>fn(state)},
+  Store:{get:()=>state,set:patch=>Object.assign(state,patch),load:()=>new Promise(()=>{}),update:fn=>fn(state),isPending:()=>false},
 });ctx.window=ctx;
 for (const [, src] of read('index.html').matchAll(/<script src="([^"]+)"/g)) {
   const file=src.split('?')[0];

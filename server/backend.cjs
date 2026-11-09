@@ -11,7 +11,7 @@ function config() {
   if (missing.length) fail('db.configuration', 503);
   const url = values.SUPABASE_URL.replace(/\/$/, '');
   if (!/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(url)) fail('db.configuration', 503);
-  return { url, key: values.SUPABASE_PUBLISHABLE_KEY, secret: process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY };
+  return { url, key: values.SUPABASE_PUBLISHABLE_KEY, secret: process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY, timings: [] };
 }
 function cookies(req) {
   return Object.fromEntries((req.headers.cookie || '').split(';').filter(Boolean).map(part => {
@@ -28,6 +28,14 @@ function setSession(req, res, session) {
   ]);
 }
 async function upstream(cfg, endpoint, { token, admin = false, method = 'GET', body, headers = {}, raw = false } = {}) {
+  const started = performance.now();
+  try { return await upstreamRequest(cfg, endpoint, { token, admin, method, body, headers, raw }); }
+  finally {
+    const name = endpoint.startsWith('/auth/') ? 'auth' : endpoint.startsWith('/storage/') ? 'storage' : 'db';
+    cfg.timings.push({ name, duration: performance.now() - started });
+  }
+}
+async function upstreamRequest(cfg, endpoint, { token, admin, method, body, headers, raw }) {
   if (admin && !cfg.secret) fail('db.configuration', 503);
   const response = await fetch(cfg.url + endpoint, {
     method, signal: AbortSignal.timeout(15000),
@@ -271,8 +279,10 @@ async function action(cfg, req, res, name, body) {
   if (name === 'comment') {
     const post_id = checkedText(body.postId, 1, 80), text = checkedText(body.text, 1, 300);
     const countryCode = await postingCountry(cfg, session);
-    await rest(cfg, 'ieb_comments', '', { token, method: 'POST', body: { id: randomUUID(), user_id: uid, post_id, body: text, country_code: countryCode } });
-    return { saved: true };
+    const rows = await rest(cfg, 'ieb_comments', '?select=id,body,created_at,country_code', { token, method: 'POST',
+      headers: { Prefer: 'return=representation' }, body: { id: randomUUID(), user_id: uid, post_id, body: text, country_code: countryCode } });
+    const comment = rows[0];
+    return { saved: true, comment: { id: comment.id, text: comment.body, createdAt: Date.parse(comment.created_at), countryCode: savedCountry(comment.country_code), authorCountryCode: savedCountry(comment.country_code) } };
   }
   if (name === 'like') {
     const postId = checkedText(body.postId, 1, 80);
@@ -333,6 +343,12 @@ async function action(cfg, req, res, name, body) {
   fail('db.notFound', 404);
 }
 module.exports = async function handler(req, res) {
+  const started = performance.now();
+  let cfg;
+  function timing() {
+    const entries = (cfg?.timings || []).map((entry, i) => `${entry.name}${i};dur=${entry.duration.toFixed(1)}`);
+    res.setHeader('Server-Timing', [...entries, `total;dur=${(performance.now() - started).toFixed(1)}`].join(', '));
+  }
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
   res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -350,9 +366,12 @@ module.exports = async function handler(req, res) {
       body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body || {};
       if (Buffer.byteLength(JSON.stringify(body)) > 4000000) fail('db.photoSize', 413);
     }
-    const result = await action(config(), req, res, name, body);
+    cfg = config();
+    const result = await action(cfg, req, res, name, body);
+    timing();
     res.statusCode = 200; res.end(JSON.stringify(result));
   } catch (error) {
+    timing();
     res.statusCode = error.status || 503;
     const code = /^(db|auth|profile)\./.test(error.message) ? error.message : 'db.failure';
     // Deliberately exclude credentials, tokens, upstream payloads and env values.

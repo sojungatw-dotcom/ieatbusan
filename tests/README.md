@@ -4,6 +4,14 @@ Run `node tests/google-maps.cjs`. Uses a fake Google SDK to verify lazy loading,
 
 # Isolated browser checks
 
+## Engagement latency checks
+
+Run `node tests/engagement-latency.cjs` for immediate updates, rollback, duplicate suppression,
+preference write coalescing, stale bootstrap protection and unrelated editor preservation.
+Run `node tests/engagement-browser.cjs`, then open `http://127.0.0.1:8781/#/post/fixture-post`
+for an isolated test account with an eight-second fake API delay and success/failure controls.
+It never connects to Supabase. Stop the server after testing. See `docs/engagement-performance.md`
+for observations, production measurements and the limits of the verification.
 ## Member country checks
 
 Run `node tests/comment-country-migration.cjs` for the additive, nullable comment snapshot migration
