@@ -167,7 +167,7 @@
     const translated = summaries[food.id];
     if (!translated) return;
     for (const [i, language] of ['en', 'zh', 'ja'].entries()) {
-      food[language] = { ...food[language], summary: translated[i] };
+      food[language] = { ...food[language], summary: food.editorSummaries?.[language] ?? translated[i] };
     }
   }
   window.IEBFoodSummaries = { apply };

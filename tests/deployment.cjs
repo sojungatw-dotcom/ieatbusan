@@ -12,14 +12,14 @@ assert.equal(config.outputDirectory, 'dist');
 assert.equal(config.buildCommand, 'node tools/build-static.cjs');
 assert.ok(fs.existsSync(path.join(root, 'api/service.js')));
 assert.ok(fs.existsSync(path.join(root, 'server/backend.cjs')));
-assert.deepEqual(fs.readdirSync(out).sort(), ['assets', 'chatbot', 'css', 'index.html', 'js']);
+assert.deepEqual(fs.readdirSync(out).sort(), ['admin.html', 'assets', 'chatbot', 'css', 'index.html', 'js']);
 assert.equal(fs.readFileSync(path.join(out, 'index.html'), 'utf8'), fs.readFileSync(path.join(root, 'index.html'), 'utf8'));
 const context = { window: {} };
 vm.runInNewContext(fs.readFileSync(path.join(out, 'js/data/foods.js'), 'utf8'), context);
 for (const food of context.window.FOODS) {
   assert.ok(fs.statSync(path.join(out, food.photo || 'assets/food/' + food.id + '.jpg')).size > 0, food.id + ' photo missing');
 }
-for (const file of ['chatbot/index.html', 'chatbot/db-bot.js', 'chatbot/app.js', 'js/chatbot-widget.js', 'css/chatbot-widget.css', 'js/auth.js', 'js/store.js', 'js/app.js', 'css/app.css', 'assets/icon.svg']) {
+for (const file of ['admin.html','js/admin.js','css/admin.css','chatbot/index.html', 'chatbot/db-bot.js', 'chatbot/app.js', 'js/chatbot-widget.js', 'css/chatbot-widget.css', 'js/auth.js', 'js/store.js', 'js/app.js', 'css/app.css', 'assets/icon.svg']) {
   assert.ok(fs.statSync(path.join(out, file)).size > 0, file + ' missing');
 }
 const frontend = ['js/cloud.js','js/auth.js','js/store.js','js/app.js'].map(file => fs.readFileSync(path.join(out, file), 'utf8')).join('\n');

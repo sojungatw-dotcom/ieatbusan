@@ -115,3 +115,7 @@ Run `node tests/comment-controls.cjs` for owner-only edits/deletes, input valida
 Run `node tests/chatbot.cjs` to verify the DB-fed catalog and image references, all 44 rule-based scenarios, and host-owned close/reopen controls. The popup and mobile page require browser checks. `food-manuscript.cjs` uses a browser-like shared window/global object to support the current translation scripts.
 
 Run `node --test tests/chatbot-live.cjs` for all four languages, DB additions/removals, failure without local fallback, catalog projection privacy and hiding/reappearing options. `node tools/preview-chatbot-fixture.cjs` serves a synthetic DB on port 8783 for browser checks; it never connects to Supabase.
+
+## Administrator console
+
+Run `node tests/admin-api.cjs` for authorization, forged role denial, CSRF, editable-field restrictions, archive/restore, moderation and edit conflicts. See [admin guide](../docs/admin.md). Run `node tests/admin-browser.cjs` for an isolated browser preview on port 8782; it never connects to Supabase.

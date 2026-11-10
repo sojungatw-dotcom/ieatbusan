@@ -37,8 +37,8 @@
         const selected = region(district), area = areaName(district), foods = data.foodCounts(district);
         const places = selectedPlaces(null, district);
         return `<main class="screen map-overview">${appHeader()}
-          <div class="map-intro"><span class="map-eyebrow">${esc(mt('overview'))}</span><h1>${esc(mt('title'))}</h1><p>${esc(mt('hint'))}</p></div>
           <section class="district-card" aria-label="${esc(mt('mapLabel'))}">
+            <div class="map-intro"><h1>${esc(mt('title'))}</h1><p>${esc(mt('hint'))}</p></div>
             <div class="district-card-top"><span>${esc(selected ? districtName(selected.index) : mt('all'))}</span><a href="#/map" class="district-reset">${esc(mt('clear'))}</a></div>
             ${districtMap(selected)}
             <p class="district-note">${esc(mt('preview'))}</p>
