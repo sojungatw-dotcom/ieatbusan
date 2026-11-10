@@ -12,7 +12,7 @@ const ctx = vm.createContext({console,URL,Promise,Intl,
 });ctx.window=ctx;
 for (const [,src] of read('index.html').matchAll(/<script src="([^"]+)"/g)) {
   const file=src.split('?')[0];
-  if (['js/store.js','js/cloud.js','js/auth.js','js/app.js'].includes(file)) continue;
+  if (['js/store.js','js/cloud.js','js/auth.js','js/app.js','js/chatbot-widget.js'].includes(file)) continue;
   vm.runInContext(read(file),ctx,{filename:file});
 }
 ctx.Auth={};ctx.Cloud={};

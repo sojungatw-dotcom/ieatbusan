@@ -16,6 +16,7 @@ vm.runInContext(source.slice(source.indexOf('  function appHeader()'),source.ind
 ctx.route();
 assert.equal(rendered,'home','Fresh visitors must see home without opting into guest mode');
 assert.equal(redirects.length,0);
+ctx.location.hash='#/chatbot';ctx.route();assert.equal(rendered,'chatbot','Chatbot has a public mobile page route');
 for(const hash of ['#/map','#/community','#/my','#/food/milmyeon']){
   ctx.location.hash=hash;ctx.route();assert.equal(redirects.length,0,'Public page cannot require login: '+hash);
 }
