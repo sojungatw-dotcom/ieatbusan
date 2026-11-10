@@ -5,6 +5,7 @@
     create({ data, routes, shapes, messages, getLanguage, districtName, t, esc, fname, img, placeImg = p => img(p.food.id), icon,
       appHeader, tabbar, mapAvailable }) {
       const region = id => data.districtById[id];
+      const localized = value => window.IEBFoodLocale?.text(value, getLanguage()) ?? value;
       const selection = id => data.hasFood(id) ? id : null;
       const selectedPlaces = (foodId, districtId) => data.placesForSelection({ foodId, districtId });
       const detailLink = routes.place, overviewLink = routes.overview, detailHref = routes.detail;
@@ -45,7 +46,7 @@
           </section>
           <div class="district-detail-action"><a class="btn btn-primary btn-block" href="${detailHref(district)}">${icon('map')}${esc(mt('detail'))}${icon('arrowRight')}</a></div>
           <section class="district-food-section" aria-labelledby="map-restaurants-heading"><div class="district-food-heading"><h2 id="map-restaurants-heading">${esc(mt('places', { n: places.length }))}</h2></div>
-            <div class="map-food-list map-restaurant-list" tabindex="0" role="region" aria-labelledby="map-restaurants-heading">${places.length ? places.map(p => `<a class="map-food-card map-restaurant-row" href="${detailLink(p)}"><img src="${esc(placeImg(p))}" data-image-fallback="${esc(img(p.food.id))}" alt="" loading="lazy"><span><b lang="ko">${esc(p.name)}</b><small>${esc(p.address || p.area || fname(p.food))}</small></span>${icon('chevronRight')}</a>`).join('') : `<div class="district-empty"><b>${esc(mt('emptyRestaurants'))}</b><p>${esc(mt('emptyHint'))}</p></div>`}</div>
+            <div class="map-food-list map-restaurant-list" tabindex="0" role="region" aria-labelledby="map-restaurants-heading">${places.length ? places.map(p => `<a class="map-food-card map-restaurant-row" href="${detailLink(p)}"><img src="${esc(placeImg(p))}" data-image-fallback="${esc(img(p.food.id))}" alt="" loading="lazy"><span><b lang="${esc(getLanguage())}">${esc(localized(p.name))}</b><small lang="${esc(getLanguage())}">${esc(localized(p.address || p.area || fname(p.food)))}</small></span>${icon('chevronRight')}</a>`).join('') : `<div class="district-empty"><b>${esc(mt('emptyRestaurants'))}</b><p>${esc(mt('emptyHint'))}</p></div>`}</div>
           </section>${tabbar('map')}</main>`;
       }
       function detail({ id, district } = {}) {
