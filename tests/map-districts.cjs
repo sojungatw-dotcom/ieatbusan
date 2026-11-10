@@ -46,8 +46,8 @@ for(language of ['ko','en','zh','ja']){
   view.mount({})();
   assert.equal(creates,0,'Overview must not initialize an external map');
   const selected=view.render({district:'haeundae'});
-  assert.ok(selected.includes('href="#/map/region/haeundae/detail/bokguk"'));
-  assert.ok(!selected.includes('href="#/map/region/haeundae/detail/jagalchi-hoe"'));
+  assert.ok(selected.includes('href="#/place/bokguk/0"'));
+  assert.ok(!selected.includes('href="#/place/jagalchi-hoe/0"'));
   assert.ok(selected.includes('aria-current="true"'));
   assert.ok(!selected.includes('undefined'));
   const detail=view.render({district:'haeundae',mode:'detail',id:'bokguk'});
