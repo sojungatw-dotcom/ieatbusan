@@ -43,13 +43,23 @@
         const places = foodId ? placesFor(foodId) : allPlaces();
         return districtId ? places.filter(place => place.districtId === districtId) : places;
       }
+      function restaurantsForSelection(selection = {}) {
+        const restaurants = new Map();
+        const normalized = value => String(value || '').normalize('NFKC').replace(/\s+/g, '').toLowerCase();
+        for (const place of placesForSelection(selection)) {
+          const key = place.restaurantId ? 'id:' + place.restaurantId
+            : 'place:' + normalized(place.name) + ':' + normalized(place.address || place.areaKo || place.area);
+          if (!restaurants.has(key)) restaurants.set(key, place);
+        }
+        return [...restaurants.values()];
+      }
       function foodCounts(districtId) {
         const counts = new Map();
         for (const place of placesForSelection({ districtId })) counts.set(place.food.id, (counts.get(place.food.id) || 0) + 1);
         return foods.filter(food => counts.has(food.id)).map(food => ({ food, count: counts.get(food.id) }));
       }
       return { foods, byId, hasFood, placeKey, placeOf, placesFor, allPlaces, hasCoordinates,
-        districts, districtById, hasDistrict, placesForSelection, foodCounts };
+        districts, districtById, hasDistrict, placesForSelection, restaurantsForSelection, foodCounts };
     },
   };
 })();

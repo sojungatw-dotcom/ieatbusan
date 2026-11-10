@@ -34,8 +34,8 @@
             </svg>`;
       }
       function overview({ district } = {}) {
-        const selected = region(district), area = areaName(district), foods = data.foodCounts(district);
-        const places = selectedPlaces(null, district);
+        const selected = region(district);
+        const places = data.restaurantsForSelection({ districtId: district });
         return `<main class="screen map-overview">${appHeader()}
           <section class="district-card" aria-label="${esc(mt('mapLabel'))}">
             <div class="map-intro"><h1>${esc(mt('title'))}</h1><p>${esc(mt('hint'))}</p></div>
@@ -44,8 +44,8 @@
             <p class="district-note">${esc(mt('preview'))}</p>
           </section>
           <div class="district-detail-action"><a class="btn btn-primary btn-block" href="${detailHref(district)}">${icon('map')}${esc(mt('detail'))}${icon('arrowRight')}</a></div>
-          <section class="district-food-section"><div class="district-food-heading"><h2>${esc(mt('foods', { area }))}</h2><p>${esc(mt('counts', { foods: foods.length, places: places.length }))}</p></div>
-            <div class="map-food-list">${foods.length ? foods.map(({ food, count }) => `<a class="map-food-card" href="${detailHref(district, food.id)}"><img src="${img(food.id)}" alt="" loading="lazy"><span><b>${esc(fname(food))}</b><small>${esc(mt('places', { n: count }))}</small></span>${icon('chevronRight')}</a>`).join('') : `<div class="district-empty"><b>${esc(mt('empty'))}</b><p>${esc(mt('emptyHint'))}</p></div>`}</div>
+          <section class="district-food-section" aria-labelledby="map-restaurants-heading"><div class="district-food-heading"><h2 id="map-restaurants-heading">${esc(mt('places', { n: places.length }))}</h2></div>
+            <div class="map-food-list map-restaurant-list" tabindex="0" role="region" aria-labelledby="map-restaurants-heading">${places.length ? places.map(p => `<a class="map-food-card map-restaurant-row" href="${detailLink(p)}"><img src="${esc(placeImg(p))}" data-image-fallback="${esc(img(p.food.id))}" alt="" loading="lazy"><span><b lang="ko">${esc(p.name)}</b><small>${esc(p.address || p.area || fname(p.food))}</small></span>${icon('chevronRight')}</a>`).join('') : `<div class="district-empty"><b>${esc(mt('emptyRestaurants'))}</b><p>${esc(mt('emptyHint'))}</p></div>`}</div>
           </section>${tabbar('map')}</main>`;
       }
       function detail({ id, district } = {}) {
