@@ -830,8 +830,11 @@
 
   V.chatbot = () => '<main class="screen"><section class="chatbot-route-note" lang="ko"><h1>나에게 맞는 부산의 맛</h1><p>한국어 음식 도우미와 대화해 보세요.</p><a href="#/home">홈으로 돌아가기</a></section></main>';
 
+  // Separate administrator document, mounted at the requested public hash URL.
+  V.admin = () => '<main class="screen admin-screen"><header class="page-header" style="display:none"></header><iframe src="admin.html" title="콘텐츠 관리자" class="admin-frame"></iframe><nav class="tabbar" style="display:none"></nav></main>';
   /* ---------- router ---------- */
   const ROUTES = [
+    [/^#\/(?:home\/)?admin$/, 'admin'],
     [/^#\/chatbot$/, 'chatbot'], [/^#\/login$/, 'login'], [/^#\/signup$/, 'signup'], [/^#\/lang$/, 'lang'], [/^#\/home$/, 'home'],
     [/^#\/category\/([\w-]+)$/, 'category', ['id']],
     [/^#\/food\/([\w-]+)$/, 'food', ['id']], [/^#\/place\/([\w-]+)\/(\d+)$/, 'place', ['id', 'i']],
@@ -874,7 +877,7 @@
     }
     const titleKeys = { map: 'tab.map', community: 'tab.community', search: 'search.placeholder' };
     const pageTitle = app.querySelector('h1')?.textContent || (titleKeys[name] ? t(titleKeys[name]) : '');
-    document.title = name === 'home' || name === 'login' || !pageTitle ? 'I EAT BUSAN' : `${pageTitle} · I EAT BUSAN`;
+    document.title = name === 'admin' ? '관리자 · I EAT BUSAN' : name === 'home' || name === 'login' || !pageTitle ? 'I EAT BUSAN' : `${pageTitle} · I EAT BUSAN`;
     window.IEBStructuredData?.update({ name, root: screen, language: lang() });
     window.scrollTo(0, 0);
     if (V[name].mount && !(refreshing && name === 'notifications')) V[name].mount({ ...params, refreshing });
