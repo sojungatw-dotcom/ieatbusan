@@ -1,7 +1,7 @@
 /* node tests/food-manuscript.cjs */
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
-const ctx={window:{},console};vm.createContext(ctx);vm.runInContext(read('js/data/foods.js'),ctx);vm.runInContext(read('js/i18n.js'),ctx);vm.runInContext(read('js/data/food-info-translations.js'),ctx);vm.runInContext(read('js/data/food-detail-locales.js'),ctx);
+const ctx={console};ctx.window=ctx;vm.createContext(ctx);vm.runInContext(read('js/data/foods.js'),ctx);vm.runInContext(read('js/i18n.js'),ctx);vm.runInContext(read('js/data/food-info-translations.js'),ctx);vm.runInContext(read('js/data/food-detail-locales.js'),ctx);
 ctx.I18N=ctx.window.I18N; const foods=ctx.window.FOODS,items=foods.filter(f=>f.manuscript),app=read('js/app.js');
 assert.equal(items.length,32);assert.equal(new Set(foods.map(f=>f.id)).size,foods.length);assert.ok(foods.every(f=>f.id));
 assert.equal(items.reduce((n,f)=>n+f.manuscript.restaurants.length,0),103);

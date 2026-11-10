@@ -109,3 +109,7 @@ The catalog now contains 43 visible foods and 164 food/place links. `node tests/
 ## Comment editing and deletion
 
 Run `node tests/comment-controls.cjs` for owner-only edits/deletes, input validation, rollback, escaped content and deletion confirmation/cancellation. Apply `supabase/comment-owner-controls.sql` when provisioning an existing database.
+
+## Integrated chatbot
+
+Run `node tests/chatbot.cjs` to verify the app-owned catalog and image references, all 44 rule-based scenarios, and host-owned close/reopen controls. The popup and mobile page require browser checks. `food-manuscript.cjs` uses a browser-like shared window/global object to support the current translation scripts.

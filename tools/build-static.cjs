@@ -6,7 +6,7 @@ const vm = require('node:vm');
 
 const root = path.resolve(__dirname, '..');
 const output = path.join(root, 'dist');
-const entries = ['index.html', 'css', 'js', 'assets'];
+const entries = ['index.html', 'css', 'js', 'assets', 'chatbot'];
 // Validate source files before replacing an existing generated directory.
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 for (const match of html.matchAll(/(?:src|href)="([^"]+)"/g)) {
@@ -27,6 +27,7 @@ function verifyScripts(dir) {
 }
 verifyScripts(path.join(root, 'js'));
 verifyScripts(path.join(root, 'api'));
+verifyScripts(path.join(root, 'chatbot'));
 new vm.Script(fs.readFileSync(path.join(root, 'server/backend.cjs'), 'utf8'));
 if (path.dirname(output) !== root || path.basename(output) !== 'dist') {
   throw new Error('Refusing to replace a directory outside the project dist folder.');
