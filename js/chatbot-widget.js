@@ -1,17 +1,22 @@
 (function(){
  'use strict';
+ const L=window.ChatLocale,language=()=>L?.normalize(window.Store?.get()?.lang||document.documentElement?.lang)||'ko',t=key=>L?.t(key,language())||key;
  const mobile=window.matchMedia('(max-width:740px)'),route='#/chatbot';
  const launcher=document.createElement('button');launcher.type='button';launcher.className='ieb-chat-launcher';launcher.id='ieb-chat-launcher';launcher.textContent='무';launcher.setAttribute('aria-label','나에게 맞는 부산의 맛 챗봇 열기');launcher.setAttribute('aria-controls','ieb-chat-panel');launcher.setAttribute('aria-expanded','false');
  const panel=document.createElement('section');panel.id='ieb-chat-panel';panel.className='ieb-chat-panel';panel.setAttribute('aria-label','나에게 맞는 부산의 맛');panel.hidden=true;
  const closeButton=document.createElement('button');closeButton.type='button';closeButton.className='ieb-chat-control ieb-chat-close';closeButton.textContent='×';closeButton.setAttribute('aria-label','챗봇 닫기');
  const expandButton=document.createElement('button');expandButton.type='button';expandButton.className='ieb-chat-control ieb-chat-expand';expandButton.textContent='⛶';expandButton.setAttribute('aria-label','챗봇 크게 보기');expandButton.setAttribute('aria-pressed','false');panel.append(expandButton,closeButton);
- let frame=null,opened=false,expanded=false,returnFocus=launcher,fromLauncher=false,lastHash=location.hash;
+ let refreshing=false;
+ let databaseReady=Array.isArray(window.Store?.get()?.foods),lastContext='',frame=null,opened=false,expanded=false,returnFocus=launcher,fromLauncher=false,lastHash=location.hash;
  const targetOrigin=location.origin==='null'?'*':location.origin;
  function mode(){return mobile.matches?'mobile':'desktop';}
- function sendMode(){frame?.contentWindow?.postMessage({type:'ieb-chatbot:mode',mode:mode()},targetOrigin);}
- function ensureFrame(){if(frame)return;frame=document.createElement('iframe');frame.title='나에게 맞는 부산의 맛 · 한국어 음식 도우미';frame.src='chatbot/index.html?embed='+mode();frame.className='ieb-chat-frame';frame.addEventListener('load',()=>{sendMode();if(opened)frame.focus();});panel.append(frame);}
+ function sendContext(force=false){if(!frame)return;const state=window.Store?.get()||{},snapshot=databaseReady&&window.IEBChatbotCatalog?window.IEBChatbotCatalog.project(state.foods,window.FOODS||[]):{available:false,foods:[]};const payload={type:'ieb-chatbot:context',language:language(),mode:mode(),catalog:snapshot};const key=JSON.stringify(payload);if(force||key!==lastContext){lastContext=key;frame.contentWindow?.postMessage(payload,targetOrigin);}}
+ function sendMode(){frame?.contentWindow?.postMessage({type:'ieb-chatbot:mode',mode:mode()},targetOrigin);sendContext();}
+ function ensureFrame(){if(frame)return;frame=document.createElement('iframe');frame.title=t('나에게 맞는 부산의 맛 챗봇');frame.src='chatbot/index.html?embed='+mode()+'&lang='+language();frame.className='ieb-chat-frame';frame.addEventListener('load',()=>{sendMode();sendContext(true);if(opened)frame.focus();});panel.append(frame);}
+ async function refreshCatalog(){if(refreshing||!window.Store?.load)return;refreshing=true;frame?.contentWindow?.postMessage({type:'ieb-chatbot:refresh-state',busy:true},targetOrigin);try{await window.Store.load();databaseReady=true;}catch{databaseReady=false;}finally{refreshing=false;sendContext(true);frame?.contentWindow?.postMessage({type:'ieb-chatbot:refresh-state',busy:false},targetOrigin);}}
  function render(){
-  closeButton.textContent=mobile.matches?'←':'×';closeButton.setAttribute('aria-label',mobile.matches?'이전 화면으로 돌아가기':'챗봇 닫기');expandButton.setAttribute('aria-pressed',String(expanded));expandButton.setAttribute('aria-label',expanded?'챗봇 기본 크기로 보기':'챗봇 크게 보기');
+  launcher.setAttribute('aria-label',t('나에게 맞는 부산의 맛 챗봇 열기'));panel.setAttribute('aria-label',t('나에게 맞는 부산의 맛'));if(frame)frame.title=t('나에게 맞는 부산의 맛 챗봇');
+  closeButton.textContent=mobile.matches?'←':'×';closeButton.setAttribute('aria-label',t(mobile.matches?'이전 화면으로 돌아가기':'챗봇 닫기'));expandButton.setAttribute('aria-pressed',String(expanded));expandButton.setAttribute('aria-label',t(expanded?'챗봇 기본 크기로 보기':'챗봇 크게 보기'));
   panel.hidden=!opened;launcher.hidden=opened;launcher.setAttribute('aria-expanded',String(opened));
   panel.classList.toggle('is-expanded',expanded);document.body.classList.toggle('ieb-chat-open',opened&&mobile.matches);
   // On a phone the dedicated route replaces the visible app screen.
@@ -20,7 +25,7 @@
  }
  function open(event){returnFocus=event?.currentTarget||launcher;opened=true;
   if(mobile.matches&&location.hash!==route){fromLauncher=true;location.hash=route;}
-  render();if(frame)frame.focus();
+  render();if(!databaseReady)refreshCatalog();if(frame)frame.focus();
  }
  function close(){
   opened=false;render();
@@ -32,10 +37,11 @@
  window.addEventListener('hashchange',()=>{const next=location.hash;if(next===route)opened=true;else if(mobile.matches||lastHash===route)opened=false;lastHash=next;render();});
  mobile.addEventListener('change',()=>{if(opened&&mobile.matches&&location.hash!==route){fromLauncher=true;location.hash=route;}render();});
  window.addEventListener('message',event=>{if(!frame||event.source!==frame.contentWindow||event.origin!==location.origin)return;
-  if(event.data?.type==='ieb-chatbot:close')close();
+  if(event.data?.type==='ieb-chatbot:close')close();else if(event.data?.type==='ieb-chatbot:refresh')refreshCatalog();
   else if(event.data?.type==='ieb-chatbot:expand'&&!mobile.matches){expanded=!expanded;render();}
  });
  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&opened)close();});
  document.body.append(panel,launcher);opened=location.hash===route;render();
- window.IEBChatbot={open,close};
+ window.addEventListener('ieb:catalog',event=>{if(event.detail==='catalogReady')databaseReady=true;else if(event.detail==='catalogUnavailable')databaseReady=false;sendContext();});
+ window.IEBChatbot={open,close,refreshCatalog,sync(){render();sendContext();}};
 })();

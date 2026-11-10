@@ -9,8 +9,8 @@ for(const match of html.matchAll(/(?:src|href)="([^"]+)"/g)){
  const target=path.resolve(path.dirname(entry),ref.split(/[?#]/)[0]);
  assert.ok(target.startsWith(root+path.sep)&&fs.existsSync(target),'Integrated asset missing: '+ref);
 }
-for(const file of ['js/data/foods.js','chatbot/busan-data.js','chatbot/db-rules.js','chatbot/db-bot.js','chatbot/db-scenarios.js'])vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file});
-const bot=context.FoodGuide;
+for(const file of ['js/data/foods.js','chatbot/busan-data.js','chatbot/locales.js','chatbot/db-rules.js','chatbot/db-bot.js','chatbot/bot-localization.js','chatbot/db-scenarios.js'])vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file});
+const bot=context.FoodGuide;assert.equal(bot.foods.length,0,'No local fallback before DB catalog');bot.replaceCatalog(context.FOODS.map(f=>({...f,photo:'../'+(f.photo||'assets/food/'+f.id+'.jpg')})),{source:'DB test fixture',available:true});
 assert.equal(bot.foods.length,43);assert.equal(bot.source.foods.length,context.FOODS.length);
 for(const food of bot.foods){assert.ok(context.FOODS.some(f=>f.id===food.id));assert.ok(fs.existsSync(path.resolve(path.dirname(entry),food.photo)),food.id+' shared photo');}
 for(const scenario of context.FoodScenarios){let r=bot.respond(scenario.initial);for(const step of scenario.steps){const input=typeof step==='string'?{action:step}:step;assert.ok(r.choices.some(c=>c.id===input.action),scenario.id+' / '+input.action);r=bot.respond(input,r.state);}assert.ok(['results','empty'].includes(r.state.stage));if(scenario.expectAlternatives)assert.equal(r.alternatives,true);if(scenario.expectStage)assert.equal(r.state.stage,scenario.expectStage);}
