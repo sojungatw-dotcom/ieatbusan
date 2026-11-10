@@ -29,7 +29,7 @@ http.createServer(async (req, res) => {
   let name;
   try { name = decodeURIComponent(pathname); } catch { res.writeHead(400).end(); return; }
   if (name === '/') name = '/index.html';
-  if (!/^\/(index\.html|(?:js|css|assets|chatbot)\/)/.test(name)) { res.writeHead(404).end(); return; }
+  if (!/^\/((?:index|admin)\.html|(?:js|css|assets|chatbot)\/)/.test(name)) { res.writeHead(404).end(); return; }
   const file = path.resolve(root, '.' + name);
   if (!file.startsWith(root + path.sep) || !fs.existsSync(file) || !fs.statSync(file).isFile()) { res.writeHead(404).end(); return; }
   res.setHeader('Content-Type', types[path.extname(file)] || 'application/octet-stream');

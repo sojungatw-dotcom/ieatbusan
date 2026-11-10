@@ -1,6 +1,7 @@
 'use strict';
 const { randomUUID, createHash } = require('node:crypto');
 const countries = require('../js/countries.js');
+const adminAction = require('./admin.cjs');
 const accessCookie = 'ieb_access', refreshCookie = 'ieb_refresh';
 const fail = (code, status = 400) => { const error = new Error(code); error.status = status; throw error; };
 const districts = ['중구','서구','동구','영도구','부산진구','동래구','남구','북구','해운대구','사하구','금정구','강서구','연제구','수영구','사상구','기장군'];
@@ -274,6 +275,7 @@ async function action(cfg, req, res, name, body) {
     if (session.token) await upstream(cfg, '/auth/v1/logout?scope=local', { token: session.token, method: 'POST' });
     setSession(req, res, null); return { signedOut: true };
   }
+  if (name.startsWith('admin')) return adminAction({ cfg, session, name, body, rest, fail });
   const token = session.token, uid = session.user.id;
   if (name === 'post') return createPost(cfg, session, body);
   if (name === 'comment') {
