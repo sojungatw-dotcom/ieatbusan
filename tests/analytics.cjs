@@ -64,6 +64,8 @@ function harness(host = 'ieatbusan-eight.vercel.app') {
   let loggedIn = true, failBootstrap = false;
   ctx.localStorage = { getItem: () => null, setItem: () => {} };
   ctx.SEED = { posts: [] };
+  ctx.CustomEvent = class { constructor(type, options) { this.type = type; this.detail = options?.detail; } };
+  ctx.dispatchEvent = () => {};
   ctx.Cloud = { call: async action => {
     if (action === 'logout' || action === 'deleteAccount') loggedIn = false;
     if (action === 'bootstrap') {

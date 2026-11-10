@@ -30,6 +30,7 @@
   const preferenceData = () => JSON.parse(JSON.stringify(Object.fromEntries(fields.map(key => [key, state[key]]))));
   let confirmedPreferences = preferenceData(), lastPreferences = JSON.stringify(confirmedPreferences);
   const changed = key => window.dispatchEvent(new CustomEvent('ieb:change', { detail: key }));
+  const catalogStatus = key => window.dispatchEvent(new CustomEvent('ieb:catalog', { detail: key }));
   function persistUI() {
     try { localStorage.setItem(KEY, JSON.stringify({ lang: state.lang, langChosen: state.langChosen, sort: state.sort, guest: state.guest })); }
     catch { /* A blocked local preference store must not fail a DB write. */ }
@@ -130,8 +131,9 @@
         persistUI();
         window.IEBAnalytics?.identity(state.user);
         confirmedPreferences = preferenceData(); lastPreferences = JSON.stringify(confirmedPreferences);
+        catalogStatus('catalogReady');
         return true;
-      })().finally(() => { loading = null; });
+      })().catch(error => { catalogStatus('catalogUnavailable'); throw error; }).finally(() => { loading = null; });
       return loading;
     },
     async signIn() { return this.load(); },

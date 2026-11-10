@@ -828,7 +828,7 @@
     <div class="credit"><span class="sub">Map data © OpenStreetMap contributors · Icons: Lucide (ISC)</span></div></main>`;
   V.notFound = () => `<main class="screen">${pageHeader('404')}${empty(t('common.notFound'))}</main>`;
 
-  V.chatbot = () => '<main class="screen"><section class="chatbot-route-note" lang="ko"><h1>나에게 맞는 부산의 맛</h1><p>한국어 음식 도우미와 대화해 보세요.</p><a href="#/home">홈으로 돌아가기</a></section></main>';
+  V.chatbot = () => `<main class="screen"><section class="chatbot-route-note"><h1>${esc(t('chatbot.title'))}</h1><p>${esc(t('chatbot.intro'))}</p><a href="#/home">${esc(t('tab.home'))}</a></section></main>`;
 
   // Separate administrator document, mounted at the requested public hash URL.
   V.admin = () => '<main class="screen admin-screen"><header class="page-header" style="display:none"></header><iframe src="admin.html" title="콘텐츠 관리자" class="admin-frame"></iframe><nav class="tabbar" style="display:none"></nav></main>';
@@ -853,6 +853,7 @@
   const stack = [];
   function route({ refreshing = false } = {}) {
     syncFoodCatalog();
+    window.IEBChatbot?.sync?.();
     const hash = location.hash || '#/home';
     let name = 'notFound', params = {};
     for (const [re, n, keys] of ROUTES) {
