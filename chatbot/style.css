@@ -14,3 +14,7 @@ body.embedded{background:var(--bg)}.embedded .desktop-story,.embedded .mobile-en
 .embedded #close-chat,.embedded #expand-chat{display:none!important}.embedded .app-header{padding-left:12px;padding-right:100px}.embedded .app-header h1{font-size:14px}@media(max-width:500px){.embedded .app-header{padding-left:6px;padding-right:46px}}@media(max-width:360px){.embedded .app-header h1{font-size:12px}}
 
 .embedded-desktop .app-header{padding-right:100px}
+
+.catalog-status{margin:0;padding:10px 16px;background:#f8e9df;color:#99513f;font-size:12px;line-height:1.7;flex:none}.source-language-note{font-size:11px;line-height:1.7;color:#8b6651;background:#f3eadd;padding:5px 8px;border-radius:5px;margin:4px 0 8px}
+
+.photo-placeholder{display:grid;place-items:center;text-align:center;background:var(--beige);color:var(--ink-2);font-size:12px}.catalog-food .photo-placeholder{width:76px;height:76px;border-radius:8px;flex:none;font-size:10px}
