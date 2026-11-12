@@ -119,3 +119,7 @@ Run `node --test tests/chatbot-live.cjs` for all four languages, DB additions/re
 ## Administrator console
 
 Run `node tests/admin-api.cjs` for authorization, forged role denial, CSRF, editable-field restrictions, archive/restore, moderation and edit conflicts. See [admin guide](../docs/admin.md). Run `node tests/admin-browser.cjs` for an isolated browser preview on port 8782; it never connects to Supabase.
+
+## Visitor chatbot regression checks
+
+Run `node --test tests/chatbot-visitor.cjs` for report examples, compound requests, allergen clarification, consent before alternatives, mild-spice retention, shared translations, restaurant metadata and recovery expiry. Browser checks use the synthetic catalog on 8783, never a live Supabase write.

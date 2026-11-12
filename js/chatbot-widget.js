@@ -12,7 +12,7 @@
  function mode(){return mobile.matches?'mobile':'desktop';}
  function sendContext(force=false){if(!frame)return;const state=window.Store?.get()||{},snapshot=databaseReady&&window.IEBChatbotCatalog?window.IEBChatbotCatalog.project(state.foods,window.FOODS||[]):{available:false,foods:[]};const payload={type:'ieb-chatbot:context',language:language(),mode:mode(),catalog:snapshot};const key=JSON.stringify(payload);if(force||key!==lastContext){lastContext=key;frame.contentWindow?.postMessage(payload,targetOrigin);}}
  function sendMode(){frame?.contentWindow?.postMessage({type:'ieb-chatbot:mode',mode:mode()},targetOrigin);sendContext();}
- function ensureFrame(){if(frame)return;frame=document.createElement('iframe');frame.title=t('나에게 맞는 부산의 맛 챗봇');frame.src='chatbot/index.html?embed='+mode()+'&lang='+language();frame.className='ieb-chat-frame';frame.addEventListener('load',()=>{sendMode();sendContext(true);if(opened)frame.focus();});panel.append(frame);}
+ function ensureFrame(){if(frame)return;frame=document.createElement('iframe');frame.title=t('나에게 맞는 부산의 맛 챗봇');frame.src='chatbot/index.html?v=20261112-visitor&embed='+mode()+'&lang='+language();frame.className='ieb-chat-frame';frame.addEventListener('load',()=>{sendMode();sendContext(true);if(opened)frame.focus();});panel.append(frame);}
  async function refreshCatalog(){if(refreshing||!window.Store?.load)return;refreshing=true;frame?.contentWindow?.postMessage({type:'ieb-chatbot:refresh-state',busy:true},targetOrigin);try{await window.Store.load();databaseReady=true;}catch{databaseReady=false;}finally{refreshing=false;sendContext(true);frame?.contentWindow?.postMessage({type:'ieb-chatbot:refresh-state',busy:false},targetOrigin);}}
  function render(){
   launcher.setAttribute('aria-label',t('나에게 맞는 부산의 맛 챗봇 열기'));panel.setAttribute('aria-label',t('나에게 맞는 부산의 맛'));if(frame)frame.title=t('나에게 맞는 부산의 맛 챗봇');
@@ -37,6 +37,12 @@
  window.addEventListener('hashchange',()=>{const next=location.hash;if(next===route)opened=true;else if(mobile.matches||lastHash===route)opened=false;lastHash=next;render();});
  mobile.addEventListener('change',()=>{if(opened&&mobile.matches&&location.hash!==route){fromLauncher=true;location.hash=route;}render();});
  window.addEventListener('message',event=>{if(!frame||event.source!==frame.contentWindow||event.origin!==location.origin)return;
+  if(event.data?.type==='ieb-chatbot:visit'){
+   const {foodId,placeIndex,kind}=event.data;const row=(window.Store?.get()?.foods||[]).find(f=>f.id===foodId);if(!row||row.content?.catalogStatus==='archived')return;
+   const food=(window.FOODS||[]).find(f=>f.id===foodId),places=row.content?.places||food?.places||[];
+   if(!Number.isInteger(placeIndex)||placeIndex<0||placeIndex>=places.length||!['place','map'].includes(kind))return;
+   opened=false;fromLauncher=false;render();location.hash=kind==='map'?'#/map/'+encodeURIComponent(foodId):'#/place/'+encodeURIComponent(foodId)+'/'+placeIndex;return;
+  }
   if(event.data?.type==='ieb-chatbot:close')close();else if(event.data?.type==='ieb-chatbot:refresh')refreshCatalog();
   else if(event.data?.type==='ieb-chatbot:expand'&&!mobile.matches){expanded=!expanded;render();}
  });
