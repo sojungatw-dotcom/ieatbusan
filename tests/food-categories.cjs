@@ -14,7 +14,7 @@ for(const group of api.groups){
  for(const id of group.foods){assert.ok(ids.has(id),'Unknown or archived dish: '+id);covered.add(id);}
  for(const lang of ['ko','en','zh','ja'])assert.ok(api.name(group,lang).trim());
  const svg=fs.readFileSync(path.join(root,group.image.split('?')[0]),'utf8');
- assert.ok(svg.includes('viewBox="0 0 72 72"'));
+ assert.ok(svg.includes('viewBox="0 0 24 24"'));
  assert.ok(!/<script|<foreignObject|https?:|<text/.test(svg.replace('http://www.w3.org/2000/svg','')),'Icons contain only original vector artwork');
  const expected=foods.filter(f=>group.foods.includes(f.id));
  assert.equal(api.foods(group.id,foods).map(f=>f.id).join(),expected.map(f=>f.id).join());

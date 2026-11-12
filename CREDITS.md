@@ -68,3 +68,7 @@
 | 의령 망개떡 | uiryeong-manggaetteok.jpg | 구례로컬푸드 상품 사진 | [원문](https://guryelocalfood.com/product/%EC%9D%98%EB%A0%B9-%EB%A7%9D%EA%B0%9C%EB%96%A1-%ED%8C%A5-%EA%B2%AC%EA%B3%BC-%EC%A0%84%ED%86%B5-%EB%A7%9D%EA%B0%9C%EB%96%A1-40%EA%B0%9C-%ED%86%A0%EB%B3%B5%EB%A0%B9-%EC%9D%98%EB%A0%B9%ED%8A%B9%EC%82%B0%EB%AC%BC/994/) | 재사용 허가 미확인 (제공 안내 기준) |
 
 사진과 원문에 기재된 촬영 지역은 음식명 전체의 모든 지역을 의미하지 않습니다. 영덕·울진 대게 사진은 영덕 사진이며, 부산 음식점별 실제 제공 모습이나 촬영 장소로 표시하지 않습니다.
+
+
+## UI typography and logo derivative · 2026-11-12
+Pretendard Variable 1.3.9 by Kil Hyung-jin (SIL OFL 1.1), https://github.com/orioncactus/pretendard. License: assets/fonts/OFL-Pretendard.txt. Original supplied Muboso logos are retained; muboso-transparent.png is a background-removed derivative generated with imagegen. Eight category SVGs were redrawn for the shared rounded icon system. Existing Lucide icon attribution remains applicable.

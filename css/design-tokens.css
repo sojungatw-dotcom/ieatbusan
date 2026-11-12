@@ -1,0 +1,46 @@
+/* Muboso visual contract. Shared by the app, chatbot and administration UI. */
+@font-face { font-family: "Pretendard Variable"; src: url('../assets/fonts/PretendardVariable.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
+:root {
+  --font-ko: "Pretendard Variable", "Noto Sans KR", system-ui, sans-serif;
+  --font: var(--font-ko);
+  --font-logo: "Pretendard Variable", system-ui, sans-serif;
+  --bg: #F5F2EC;
+  --surface: #FFFFFF;
+  --beige: #E5D5C2;
+  --blush: #F7E7DF;
+  --accent: #CC4936;
+  --accent-hover: #B73C2B;
+  --on-accent: #FFFFFF;
+  --ink: #282622;
+  --ink-2: #5F5850;
+  --ink-3: #71685E;
+  --muted: #8D7B68;
+  --border: #E9E1D7;
+  --surface-soft: #FAF7F3;
+  --radius-sm: 12px;
+  --radius-control: 16px;
+  --radius: 24px;
+  --radius-lg: 32px;
+  --radius-pill: 999px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --shadow: 0 6px 24px rgba(65, 43, 26, .045);
+  --shadow-raised: 0 12px 36px rgba(65, 43, 26, .09);
+  --shadow-floating: 0 8px 40px rgba(65, 43, 26, .12);
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --motion-fast: 160ms;
+  --motion-normal: 280ms;
+  --page-gutter: 20px;
+}
+html[lang="en"] { --font: var(--font-ko); }
+body { font-family: var(--font); }
+@media (min-width: 600px) { :root { --page-gutter: 32px; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

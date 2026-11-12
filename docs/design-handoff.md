@@ -1,3 +1,5 @@
+> 2026-11-12: 현재 웹 디자인 기준은 [rounded-ui.md](rounded-ui.md)와 공통 CSS 토큰입니다. 아래는 이전 Figma 시안의 기록이며 최신 웹과 동일하지 않습니다.
+
 # I EAT BUSAN — 디자인 핸드오프 (Figma → 개발)
 
 | 항목 | 내용 |

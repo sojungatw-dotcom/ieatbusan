@@ -90,7 +90,7 @@
   /* ---------- shared UI ---------- */
   function appHeader() {
     return `<header class="app-header">
-      <a class="logo brand-logo" href="#/home" aria-label="${esc(t('brand.home'))}"><svg viewBox="330 190 1020 530" aria-hidden="true" focusable="false"><image href="assets/brand/muboso-header.png" width="1672" height="941"/></svg></a>
+      <a class="logo brand-logo" href="#/home" aria-label="${esc(t('brand.home'))}"><svg viewBox="190 35 1450 735" aria-hidden="true" focusable="false"><image href="assets/brand/muboso-transparent.png" width="1921" height="819"/></svg></a>
       <form class="desktop-search" data-form="search" role="search">${icon('search')}<input name="q" type="search" required autocomplete="off" placeholder="${esc(t('search.placeholder'))}" aria-label="${esc(t('search.placeholder'))}"></form>
       <div class="header-actions">
         <a class="lang-pill" href="#/lang" aria-label="${esc(t('set.language'))}">${icon('globe')}<span>${esc(t('lang.code'))}</span></a>
@@ -107,7 +107,7 @@
   }
   function tabbar(active) {
     const tabs = [['home', 'home', '#/home'], ['map', 'map', '#/map'], ['community', 'community', '#/community'], ['saved', 'heart', '#/saved'], ['my', 'user', '#/my']];
-    return `<nav class="tabbar" aria-label="${esc(t('nav.main'))}"><a class="nav-brand" href="#/home" aria-label="${esc(t('brand.home'))}"><svg viewBox="330 190 1020 530" aria-hidden="true" focusable="false"><image href="assets/brand/muboso-header.png" width="1672" height="941"/></svg></a>${tabs.map(([k, ic, href]) =>
+    return `<nav class="tabbar" aria-label="${esc(t('nav.main'))}"><a class="nav-brand" href="#/home" aria-label="${esc(t('brand.home'))}"><svg viewBox="190 35 1450 735" aria-hidden="true" focusable="false"><image href="assets/brand/muboso-transparent.png" width="1921" height="819"/></svg></a>${tabs.map(([k, ic, href]) =>
       `<a class="tab" href="${href}" ${k === active ? 'aria-current="page"' : ''}>${icon(ic)}<span>${esc(t('tab.' + k))}</span></a>`).join('')}<div class="nav-tools"><a href="#/search">${icon('search')}${esc(t('search.placeholder'))}</a><a href="#/settings">${icon('settings')}${esc(t('set.title'))}</a></div></nav>`;
   }
   const empty = (msg, ic = 'info', extra = '') => `<div class="empty">${icon(ic)}<p>${esc(msg)}</p>${extra}</div>`;
@@ -162,7 +162,7 @@
   let registeredId = '';
   function authScreen(signup) {
     return `<main class="screen login auth-screen">
-    <div class="login-hero"><div class="auth-logo"><img src="assets/brand/muboso-login.png" width="1254" height="1254" alt="무보소 · I Eat Busan"></div><p class="sub" style="margin:0">${esc(t('app.tagline'))}</p></div>
+    <div class="login-hero"><div class="auth-logo"><img src="assets/brand/muboso-transparent.png" width="1921" height="819" alt="무보소 · I Eat Busan"></div><p class="sub" style="margin:0">${esc(t('app.tagline'))}</p></div>
     <form class="auth-form" data-form="${signup ? 'signup' : 'login'}">
       <h1>${esc(t(signup ? 'auth.signup' : 'auth.login'))}</h1>
       <div class="field"><label for="auth-username">${esc(t('auth.username'))}</label>
@@ -201,7 +201,7 @@
     homeFeaturedPeriod = period;
     const featured = window.IEBFeaturedFoods.select(FOODS, featuredAt);
     return `<main class="screen has-tabbar home-screen">${appHeader()}
-      <section class="home-intro"><h1>${esc(t('home.discover'))}</h1><p>${esc(t('home.discoverSub'))}</p></section>
+      <section class="home-intro"><span class="eyebrow" lang="en">I EAT BUSAN</span><h1>${esc(t('home.discover'))}</h1><p>${esc(t('home.discoverSub'))}</p></section>
       <section class="home-carousel" aria-labelledby="home-featured-title" aria-roledescription="${esc(t('home.carousel'))}">
         <div class="section-head"><h2 id="home-featured-title">${esc(t('home.featured'))}</h2></div>
         <p class="home-swipe-hint" id="home-swipe-hint">${esc(t('home.swipe'))}</p>
@@ -216,7 +216,9 @@
       <div class="band"></div>
       <section class="category-section" aria-labelledby="category-title"><div class="home-toolbar"><h2 id="category-title">${esc(t('category.title'))}</h2><a class="category-all" href="#/category/all">${esc(t('search.seeAll'))}${icon('chevronRight')}</a></div>
         <div class="category-grid">${window.IEBFoodCategories.groups.map(group => `<a class="category-tile" href="#/category/${group.id}"><span class="category-art"><img src="${group.image}" width="72" height="72" alt="" loading="lazy"></span><span>${esc(window.IEBFoodCategories.name(group, lang()))}</span></a>`).join('')}</div>
-      </section>${tabbar('home')}</main>`;
+      </section>
+      <div class="home-explore"><a class="explore-card" href="#/map">${icon('map')}<span>${esc(t('food.cta'))}</span>${icon('chevronRight')}</a><a class="explore-card" href="#/community">${icon('community')}<span>${esc(t('tab.community'))}</span>${icon('chevronRight')}</a></div>
+      ${tabbar('home')}</main>`;
   };
   V.category = ({ id = 'all' }) => {
     const categories = window.IEBFoodCategories, group = categories.byId(id);
@@ -271,14 +273,16 @@
       counter.textContent = `${index + 1} / ${slides.length}`;
       pages.forEach((page, i) => page.setAttribute('aria-current', String(i === index)));
     };
+    // Measure actual cards: phone peeks and desktop two-up cards have different strides.
+    const slideLeft = i => slides[i].offsetLeft - slides[0].offsetLeft;
     const move = (to, instant = false) => {
       const targetIndex = Math.max(0, Math.min(slides.length - 1, to));
-      track.scrollTo({ left: targetIndex * track.clientWidth,
+      track.scrollTo({ left: slideLeft(targetIndex),
         behavior: instant || matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
     };
     const onScroll = () => {
       if (!track.clientWidth) return;
-      const nearest = Math.max(0, Math.min(slides.length - 1, Math.round(track.scrollLeft / track.clientWidth)));
+      const nearest = slides.reduce((best, _, i) => Math.abs(slideLeft(i) - track.scrollLeft) < Math.abs(slideLeft(best) - track.scrollLeft) ? i : best, 0);
       if (nearest !== index) { index = nearest; update(); }
       schedule();
     };
@@ -458,7 +462,7 @@
       ${rec.length ? `<div class="wrap-chips">${rec.map(r => `<span class="recent-chip"><a href="#/results/${encodeURIComponent(r)}">${esc(r)}</a><button class="x" data-act="removeRecent" data-q="${esc(r)}" aria-label="${esc(t('common.delete'))}">${icon('close')}</button></span>`).join('')}</div>`
         : `<p class="pad muted" style="margin:0 0 8px;font-size:14px">${esc(t('search.noRecent'))}</p>`}
       <div class="section-head"><h2>${esc(t('search.popular'))}</h2></div>
-      <div class="popular">${SEED.popular.map((id, i) => `<a href="#/results/${encodeURIComponent(fname(FOOD[id]))}" style="display:flex;gap:12px;padding:10px 0"><b style="width:18px;color:var(--accent)">${i + 1}</b><span>${esc(fname(FOOD[id]))}</span></a>`).join('')}</div>
+      <div class="popular">${SEED.popular.map((id, i) => `<a href="#/results/${encodeURIComponent(fname(FOOD[id]))}" class="popular-item"><b style="width:18px;color:var(--accent)">${i + 1}</b><span>${esc(fname(FOOD[id]))}</span></a>`).join('')}</div>
     </main>`;
   };
   V.search.mount = () => { const q = document.getElementById('q'); if (q) setTimeout(() => q.focus(), 50); };
@@ -488,7 +492,7 @@
         <button type="button" class="icon-btn" data-act="back" data-fallback="#/search" aria-label="${esc(t('common.back'))}">${icon('back')}</button>
         <label class="search-input">${icon('search')}<input id="q" name="q" type="search" value="${esc(q)}" autocomplete="off" enterkeyhint="search" aria-label="${esc(t('search.placeholder'))}"></label>
       </form>
-      <div class="seg" role="tablist">${tabs.map(([k, n]) => `<a role="tab" aria-selected="${k === tab}" href="#/results/${encodeURIComponent(q)}/${k}" style="padding:12px 2px 10px;border-bottom:2px solid ${k === tab ? 'var(--accent)' : 'transparent'};color:${k === tab ? 'var(--ink)' : 'var(--ink-3)'};font-weight:${k === tab ? 700 : 400};white-space:nowrap">${esc(t('search.tab.' + k))} ${n}</a>`).join('')}</div>
+      <div class="seg" role="tablist">${tabs.map(([k, n]) => `<a role="tab" aria-selected="${k === tab}" href="#/results/${encodeURIComponent(q)}/${k}">${esc(t('search.tab.' + k))} ${n}</a>`).join('')}</div>
       ${body}<div style="height:32px"></div></main>`;
   };
 
@@ -532,7 +536,7 @@
     return `<main class="screen has-tabbar">${appHeader()}
       <div class="section-head"><h1 class="page-title">${esc(t('tab.community'))}</h1><button class="text-btn" data-act="refreshCommunity">${esc(t('db.refresh'))}</button></div>
       ${viewer ? `<p class="country-feed-note">${esc(t('country.feedFirst', {country: Countries.name(viewer.countryCode, lang())}))}</p>` : ''}
-      <nav class="seg" aria-label="${esc(t('com.categories'))}">${tabs.map(([k, label]) => `<a href="#/community/${k}" ${k === tab ? 'aria-current="page"' : ''} style="padding:12px 2px 10px;white-space:nowrap;border-bottom:2px solid ${k === tab ? 'var(--accent)' : 'transparent'};color:${k === tab ? 'var(--ink)' : 'var(--ink-3)'};font-weight:${k === tab ? 700 : 400}">${esc(label)}</a>`).join('')}</nav>
+      <nav class="seg" aria-label="${esc(t('com.categories'))}">${tabs.map(([k, label]) => `<a href="#/community/${k}" ${k === tab ? 'aria-current="page"' : ''}>${esc(label)}</a>`).join('')}</nav>
       ${list.length ? list.map(postCard).join('') : empty(t('com.empty'), 'community')}
       <div style="height:72px"></div>
       <a class="fab" href="#/write" data-act="needLogin">${icon('pencil')}${esc(t('com.write'))}</a>
@@ -637,7 +641,7 @@
     const places = st.savedPlaces.map(k => { const [fid, i] = k.split(':'); return placeOf(fid, Number(i)); }).filter(Boolean);
     return `<main class="screen has-tabbar">${pageHeader(t('saved.title'), { back: false })}
       <div class="seg" role="tablist">${[['foods', t('saved.foods', { n: foods.length })], ['places', t('saved.places', { n: places.length })]].map(([k, label]) =>
-        `<a role="tab" aria-selected="${k === tab}" href="#/saved/${k}" style="padding:12px 2px 10px;border-bottom:2px solid ${k === tab ? 'var(--accent)' : 'transparent'};color:${k === tab ? 'var(--ink)' : 'var(--ink-3)'};font-weight:${k === tab ? 700 : 400}">${esc(label)}</a>`).join('')}</div>
+        `<a role="tab" aria-selected="${k === tab}" href="#/saved/${k}">${esc(label)}</a>`).join('')}</div>
       ${tab === 'foods'
         ? (foods.length ? foods.map(f => foodRow(f)).join('') : empty(t('saved.emptyFoods'), 'heart', `<a class="btn btn-primary btn-sm" href="#/home">${esc(t('saved.go'))}</a>`))
         : (places.length ? places.map(p => placeRow(p, { showFood: true })).join('') : empty(t('saved.emptyPlaces'), 'heart', `<a class="btn btn-primary btn-sm" href="#/map">${esc(t('food.cta'))}</a>`))}
@@ -851,6 +855,7 @@
   const MEMBER_ONLY = ['write', 'profile', 'accountPrivacy', 'myPosts', 'myComments', 'myRecent'];
   let cleanup = [];
   const stack = [];
+  let brandIntroPlayed = false;
   function route({ refreshing = false } = {}) {
     syncFoodCatalog();
     const hash = location.hash || '#/home';
@@ -869,10 +874,16 @@
     app.innerHTML = V[name](params);
     const screen = app.querySelector('main');
     if (screen) {
+      screen.dataset.view = name;
       if (!screen.querySelector('.app-header, .page-header')) screen.insertAdjacentHTML('afterbegin', appHeader());
       if (!screen.querySelector('.tabbar')) {
         const active = ['food', 'search', 'results'].includes(name) ? 'home' : name === 'place' ? 'map' : ['post', 'write'].includes(name) ? 'community' : ['login', 'signup', 'lang'].includes(name) ? '' : 'my';
         screen.insertAdjacentHTML('beforeend', tabbar(active));
+      }
+      if (!brandIntroPlayed) {
+        brandIntroPlayed = true;
+        app.classList.add('brand-intro');
+        setTimeout(() => app.classList.remove('brand-intro'), 700);
       }
     }
     const titleKeys = { map: 'tab.map', community: 'tab.community', search: 'search.placeholder' };
