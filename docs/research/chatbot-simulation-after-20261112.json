@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-12",
+  "source": "current workspace",
+  "sourceHashes": {
+    "js/data/foods.js": "850c1938447b5e5cf03787391cf3b320e2a1b50d1691dd7ba05ffe0664592ff7",
+    "js/data/food-detail-locales.js": "e2a40a6ad9530f121073b233471950920ddfca838cbeaf0b8af93f6b98ef67c1",
+    "js/data/food-info-translations.js": "59464c5a5c8011e768185316ec17f442ad9720f053f4e0c8d73dcd7888050f52",
+    "js/data/food-safety-locales.js": "247c65a9620077288b926134485d5e87f2baf3f8af0437c2129e1dbb023e8d97",
+    "chatbot/busan-data.js": "d9540cf8771166cf14c7ac9dcd92e63b2564ea22fefd5ff1c803156ee4042543",
+    "chatbot/locales.js": "f468d1232c8c78c506fc557d7148247febc39a89620c8f19683aad9390b44038",
+    "chatbot/db-rules.js": "8b72fd0734998378c0ca2ffa52ea5157e33469b9c70f13e8e98c7b84519a1586",
+    "chatbot/db-bot.js": "bb97b86be05b4aad41f4c1d7b68ae07b99d26ca7001930c1782bf0ac27dfdca2",
+    "chatbot/visitor-input.js": "a5e44f5d82161bb5cd7dac3bab1773e2deaea40877096a7c3af8c26a7805b189",
+    "chatbot/bot-localization.js": "1da0ec7a97c00bbc1263ddc32e009e3514072293010294e2c83c0dfdbb0b491f",
+    "chatbot/visitor-locales.js": "afd444a25318e8dd89f900b27ffc3af5b855db501155effacf3331c65e620e98",
+    "chatbot/db-scenarios.js": "3a2c7f0130afe35c892f630b3bd0c605dcde8aeb29b93e60de41dbaf5896179b",
+    "chatbot/scenario-locales.js": "edeccbb070883769b28b1697df0a53616e45bcab281d2fa244f6dfbb6d2237a7",
+    "chatbot/app.js": "a43608ed4aa08342a3498e72f4684a6284408cd6b72151fab42e904dab95741c"
+  },
+  "hashNormalization": "UTF-8 with LF line endings",
+  "simulationHash": "8ff05ec88a40e3d856530d6c87ae33059595ccf8686126d2be8a405961b2e26f",
+  "catalog": "synthetic controlled recipes + 43 repository food fixtures; not live DB",
+  "total": 4643,
+  "passed": 4643,
+  "failed": 0,
+  "groups": {
+    "interpretation": 1964,
+    "conversation": 31,
+    "ambiguity": 9,
+    "endToEnd": 1764,
+    "recommendation": 132,
+    "diet": 1,
+    "namedFood": 172,
+    "namedExclusion": 172,
+    "namedConflict": 2,
+    "translation": 129,
+    "semanticAnchors": 129,
+    "translatedExamples": 132,
+    "countGrammar": 6
+  },
+  "failures": []
+}

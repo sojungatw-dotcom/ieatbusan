@@ -8,6 +8,7 @@
   if(state.pendingAllergy?.length)lines.push('알레르기 항목이 아직 미확인입니다. 갑각류·조개류 등 정확한 범위와 재료·교차 접촉을 먼저 확인해 주세요.');
   if(state.allergies.length)lines.push('음식 알레르기가 있습니다: '+state.allergies.map(k=>labels[k]).join(', ')+'. 재료·육수·소스·새우젓과 교차 접촉 가능성을 확인해 주세요.');
   if(state.excluded.length)lines.push('이 재료는 빼 주세요: '+state.excluded.map(k=>labels[k]).join(', ')+'. 미리 들어간 재료라면 알려 주세요.');
+  if(state.excludedFoodIds?.length)lines.push('이 음식은 원하지 않습니다: '+state.excludedFoodIds.map(id=>bot.foods.find(f=>f.id===id)?.name||id).join(', ')+'.');
   if(state.spice==='mild')lines.push('맵지 않은 음식을 원합니다. 고추·다대기·매운 소스는 따로 주세요.');
   lines.push('실제 재료와 조리 환경을 확인해 주세요. 안전하게 준비하기 어렵다면 알려 주세요.');return [...new Set(lines)].join('\n');
  }

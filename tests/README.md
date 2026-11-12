@@ -123,3 +123,5 @@ Run `node tests/admin-api.cjs` for authorization, forged role denial, CSRF, edit
 ## Visitor chatbot regression checks
 
 Run `node --test tests/chatbot-visitor.cjs` for report examples, compound requests, allergen clarification, consent before alternatives, mild-spice retention, shared translations, restaurant metadata and recovery expiry. Browser checks use the synthetic catalog on 8783, never a live Supabase write.
+
+Run `node tests/chatbot-simulation.cjs` for the expanded 4,643-case matrix of multilingual polarity, end-to-end recommendation restrictions, named dishes and translated examples. See `docs/chatbot-simulation-20261112.md` for scope, controlled data and limitations.

@@ -1,6 +1,9 @@
 (function(){
  'use strict';
  const rows=[
+ ['available.one','등록 {n}개','Available: {n} item','已收录 {n} 项','登録 {n} 件'],['available.many','등록 {n}개','Available: {n} items','已收录 {n} 项','登録 {n} 件'],['foodcount.one','음식 {n}개','{n} food item','{n} 道菜','料理 {n} 件'],['foodcount.many','음식 {n}개','{n} food items','{n} 道菜','料理 {n} 件'],
+ ['request.food','찾는 음식:','Requested food:','想吃的菜品：','希望する料理：'],['request.excludedFood','제외한 음식:','Excluded dishes:','排除的菜品：','除外した料理：'],
+ ['입력만으로 조건을 확정하기 어려워 기존 선택을 유지했습니다. 원하는 재료와 피할 재료를 각각 선택해 주세요.','입력만으로 조건을 확정하기 어려워 기존 선택을 유지했습니다. 원하는 재료와 피할 재료를 각각 선택해 주세요.','I could not confirm a change of preferences from that message, so your choices were retained. Please select wanted and excluded ingredients separately.','无法从该消息确定新的条件，已保留原选择。请分别选择想吃和排除的食材。','入力だけで条件の変更を確定できないため、以前の選択を保持しています。希望する食材と避ける食材をそれぞれ選んでください。'],
  ['stage.relax','대안 조건 확인','Alternative preferences','确认替代条件','代替候補の条件'],
  ['msg.relax','일치하는 음식이 없습니다. 식단·알레르기·제외와 낮은 맵기 조건은 유지하고 종류·원하는 주재료를 넓혀 찾아볼까요?','No exact match. May we broaden category and preferred ingredients? Diet, allergies, exclusions and mild spice remain required.','没有精确匹配。是否放宽类别和偏好食材？饮食、过敏、排除项和低辣度条件将保留。','完全一致はありません。種類と希望の食材を広げますか？食事制限・アレルギー・除外・辛さ控えめの条件は保持します。'],
  ['choice.alternatives:accept','조건 완화에 동의 · 대안 찾기','Agree · find alternatives','同意放宽 · 查找替代','同意して代替候補を探す'],
@@ -18,4 +21,5 @@
  ['spice.retained','낮은 맵기는 대안에서도 유지합니다. 종류·주재료 완화는 먼저 동의를 받습니다.','Mild spice remains required for alternatives. Category and ingredient preferences are broadened only with your consent.','替代候选也保留低辣度；放宽类别或偏好食材前会征求同意。','代替候補でも辛さ控えめを保持します。種類と希望食材は同意を得てから広げます。'],
  ['order.phonetic','메뉴명 로마자 표기','Romanized menu name','菜名罗马字标记','メニュー名のローマ字表記']
  ];for(const row of rows)ChatLocale.add(...row);
+ ChatLocale.count=(kind,n,language)=>ChatLocale.t(kind+'.'+(Number(n)===1?'one':'many'),language,{n});
 })();

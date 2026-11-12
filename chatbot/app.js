@@ -94,16 +94,17 @@
   if(schema.kind==='profile'){
    const diet=group(form,T('기본 식단'));for(const [key,label] of Object.entries(bot.diets))option(diet,'radio','diet',key,label,state.diet===key);
    const status=group(form,T('알레르기가 있으신가요?'));for(const [key,label] of [['none',T('없어요')],['selected',T('있어요 · 다음 질문에서 선택')],['unknown',T('모르겠어요 / 미확인')]])option(status,'radio','allergyStatus',key,label,state.allergyStatus===key);
-   const exclusions=el('details','form-details');exclusions.open=state.excluded.length>0;exclusions.append(el('summary','',T('알레르기와 별개로 피하고 싶은 재료·음식 (선택)')));
+   const exclusions=el('details','form-details');exclusions.open=state.excluded.length>0||!!state.excludedFoodIds?.length;exclusions.append(el('summary','',T('알레르기와 별개로 피하고 싶은 재료·음식 (선택)')));
+   const excludedDishes=state.excludedFoodIds?.map(id=>bot.foods.find(f=>f.id===id)).filter(Boolean)||[];if(excludedDishes.length){const dishes=group(exclusions,T('request.excludedFood'));for(const food of excludedDishes)option(dishes,'checkbox','excludedFood',food.id,bot.displayFood(food).name,true);}
    const excluded=group(exclusions,T('추가로 피할 재료·음식'));for(const key of schema.excludeKeys)option(excluded,'checkbox','excluded',key,bot.labels[key],state.excluded.includes(key),T('추가 제외: ')+bot.labels[key]);form.append(exclusions);
    form.append(el('p','form-note',T('알레르기가 있다고 답하시면 다음 질문에서 피해야 하는 항목을 여러 개 선택할 수 있어요.')));
-   submit(T('다음으로'),()=>send({action:'profile:submit',diet:values('diet')[0],allergyStatus:values('allergyStatus')[0],allergies:values('allergyStatus')[0]==='selected'?state.allergies:[],excluded:values('excluded')}));
+   submit(T('다음으로'),()=>send({action:'profile:submit',diet:values('diet')[0],allergyStatus:values('allergyStatus')[0],allergies:values('allergyStatus')[0]==='selected'?state.allergies:[],excluded:values('excluded'),excludedFoodIds:values('excludedFood')}));
   }else if(schema.kind==='allergies'){
    const allergies=group(form,T('피해야 하는 알레르기 항목 · 복수 선택'));for(const key of schema.allergyKeys)option(allergies,'checkbox','allergy',key,bot.labels[key],state.allergies.includes(key),T('알레르기: ')+bot.labels[key]);
    form.append(el('p','form-note',T('해당하는 항목을 모두 선택해 주세요. 실제 원료·육수·양념과 교차 접촉 여부는 식당에 확인해야 합니다.')));
    submit(T('알레르기 항목 저장'),()=>send({action:'allergies:submit',allergies:values('allergy')}));
   }else if(schema.kind==='wanted'){
-   const wanted=group(form,T('먹고 싶은 주재료·음식 · 복수 선택'));for(const key of schema.wantedKeys){const check=option(wanted,'checkbox','wanted',key,bot.labels[key],state.wanted.includes(key),T('찾는 재료: ')+bot.labels[key]);check.parentElement.append(el('small','option-count',schema.counts[key]?T('등록 ')+schema.counts[key]+T('개'):T('현재 등록 0개')));}
+   const wanted=group(form,T('먹고 싶은 주재료·음식 · 복수 선택'));for(const key of schema.wantedKeys){const check=option(wanted,'checkbox','wanted',key,bot.labels[key],state.wanted.includes(key),T('찾는 재료: ')+bot.labels[key]);check.parentElement.append(el('small','option-count',schema.counts[key]?ChatLocale.count('available',schema.counts[key],bot.language):T('현재 등록 0개')));}
    form.append(el('p','form-note',T('현재 DB에 있는 항목만 표시합니다. 음식이 추가되면 목록 새로고침 후 선택 항목에도 반영됩니다.')));
    const mode=group(form,T('여러 항목을 선택했다면'));option(mode,'radio','mode','all',T('선택한 항목 모두 포함'),state.ingredientMode==='all');option(mode,'radio','mode','any',T('선택한 항목 중 하나 이상'),state.ingredientMode==='any');
    const spice=group(form,T('맵기도 함께 골라 주세요'));for(const [key,label] of Object.entries(schema.spiceLabels))option(spice,'radio','spice',key,label,(state.spice||'any')===key);
@@ -129,7 +130,8 @@
  function render(result){
   $('condition-summary').textContent=ChatLocale.t('condition-summary',bot.language,{summary:bot.summary(state)});
   $('diet').textContent=(bot.diets[state.diet]||'')+(state.profileComplete?'':T(' · 설정 대기'));
-  for(const key of ['wanted','excluded','allergies']){ $(key).replaceChildren();for(const value of state[key])$(key).append(el('span','tag '+key,bot.labels[value]));if(!state[key].length)$(key).append(el('span','empty',key==='allergies'?(state.allergyStatus==='none'?T('없다고 응답'):T('미확인 / 미입력')):T('등록된 조건이 없습니다.')));}
+  for(const key of ['wanted','excluded','allergies']){ $(key).replaceChildren();for(const value of state[key])$(key).append(el('span','tag '+key,bot.labels[value]));if(!state[key].length&&!(key==='wanted'&&state.requestedFoodIds?.length)&&!(key==='excluded'&&state.excludedFoodIds?.length))$(key).append(el('span','empty',key==='allergies'?(state.allergyStatus==='none'?T('없다고 응답'):T('미확인 / 미입력')):T('등록된 조건이 없습니다.')));}
+  for(const [field,key] of [['wanted','requestedFoodIds'],['excluded','excludedFoodIds']])for(const id of state[key]||[]){const food=bot.foods.find(f=>f.id===id);if(food)$(field).append(el('span','tag '+field,bot.displayFood(food).name));}
   if(state.wanted.length>1)$('wanted').append(el('span','tag',state.ingredientMode==='any'?T('하나 이상 포함'):T('모두 포함')));
   const prefs=[];
   if(state.category)prefs.push(bot.categories[state.category]);
@@ -157,8 +159,8 @@
   closeDialogs();openTab('chat');state=bot.createState();recoveryInputs=[];history=[];activeScenario=null;$('scenario-active').hidden=true;$('messages').replaceChildren();const result=bot.view(state);addMessage('bot',result.text,[],result.choices,result.form);render(result);input.value='';$('count').textContent='0 / 2,000';
  }
  function scenarioTranscript(scenario){
-  let current=bot.respond(scenario.initial);const entries=[{who:T('나'),text:scenario.initial},{who:T('도우미'),text:current.text}];
-  for(const step of scenario.steps){let label,value;if(typeof step==='object'){value=step;label=bot.describeAction(step);}else if(step.startsWith('text:')){label=step.slice(5);value=label;}else{label=current.choices.find(c=>c.id===step)?.label||step;value={action:step};}if(typeof value==='object'&&!bot.view(current.state).choices.some(c=>c.id===value.action)){entries.push({who:T('도우미'),text:T('현재 DB에서 사용할 수 없는 선택이 있어 예시를 멈췄습니다. 표시된 항목으로 계속해 주세요.')});break;}current=bot.respond(value,current.state);entries.push({who:T('나'),text:label},{who:T('도우미'),text:current.text+(current.foods.length?T('\n확인할 후보: ')+current.foods.map(f=>f.name).join(', '):'')});}
+  let current=bot.respond(scenario.initial);const entries=[{who:T('나'),text:T(scenario.initial)},{who:T('도우미'),text:current.text}];
+  for(const step of scenario.steps){let label,value;if(typeof step==='object'){value=step;label=bot.describeAction(step);}else if(step.startsWith('text:')){label=step.slice(5);value=label;}else{label=current.choices.find(c=>c.id===step)?.label||step;value={action:step};}if(typeof value==='object'&&!bot.view(current.state).choices.some(c=>c.id===value.action)){entries.push({who:T('도우미'),text:T('현재 DB에서 사용할 수 없는 선택이 있어 예시를 멈췄습니다. 표시된 항목으로 계속해 주세요.')});break;}current=bot.respond(value,current.state);entries.push({who:T('나'),text:label},{who:T('도우미'),text:current.text+(current.foods.length?T('\n확인할 후보: ')+current.foods.map(f=>bot.displayFood(f).name).join(', '):'')});}
   return entries;
  }
  function startScenario(scenario,playAll){
@@ -185,7 +187,7 @@
  }
  function renderCatalog(){
   const query=$('catalog-query').value.trim().toLowerCase();const items=bot.foods.filter(food=>(catalogCategory==='any'||food.categories.includes(catalogCategory))&&[bot.displayFood(food).name,bot.displayFood(food).primary,food.name,food.primary,...food.categories.map(key=>bot.categories[key])].join(' ').toLowerCase().includes(query));
-  $('catalog-title').textContent=catalogCategory==='any'?T('전체 음식'):bot.categories[catalogCategory];$('catalog-count').textContent=items.length+T('가지 음식');$('catalog-list').replaceChildren();
+  $('catalog-title').textContent=catalogCategory==='any'?T('전체 음식'):bot.categories[catalogCategory];$('catalog-count').textContent=ChatLocale.count('foodcount',items.length,bot.language);$('catalog-list').replaceChildren();
   for(const rawFood of items){const food=bot.displayFood(rawFood);const row=button('',()=>showFood(food),'catalog-food');row.setAttribute('aria-label',food.name+T(' 음식 정보 보기'));const body=el('span','catalog-food-content');body.append(el('strong','',food.name),el('p','',food.detail),el('small','',food.categories.map(key=>bot.categories[key]).join(' · ')));row.append(imageFor(food,''),body,el('span','catalog-arrow','›'));$('catalog-list').append(row);}
   if(!items.length)$('catalog-list').append(el('p','empty',T(bot.source.available===false?'DB 음식 목록을 받지 못해 추천할 수 없습니다. 잠시 후 다시 열어 주세요.':'아직 등록된 음식을 찾지 못했어요. 다른 재료나 이름으로 찾아보세요.')));
  }
