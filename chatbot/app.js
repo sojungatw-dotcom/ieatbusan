@@ -97,7 +97,7 @@
    const exclusions=el('details','form-details');exclusions.open=state.excluded.length>0||!!state.excludedFoodIds?.length;exclusions.append(el('summary','',T('알레르기와 별개로 피하고 싶은 재료·음식 (선택)')));
    const excludedDishes=state.excludedFoodIds?.map(id=>bot.foods.find(f=>f.id===id)).filter(Boolean)||[];if(excludedDishes.length){const dishes=group(exclusions,T('request.excludedFood'));for(const food of excludedDishes)option(dishes,'checkbox','excludedFood',food.id,bot.displayFood(food).name,true);}
    const excluded=group(exclusions,T('추가로 피할 재료·음식'));for(const key of schema.excludeKeys)option(excluded,'checkbox','excluded',key,bot.labels[key],state.excluded.includes(key),T('추가 제외: ')+bot.labels[key]);form.append(exclusions);
-   form.append(el('p','form-note',T('알레르기가 있다고 답하시면 다음 질문에서 피해야 하는 항목을 여러 개 선택할 수 있어요.')));
+
    submit(T('다음으로'),()=>send({action:'profile:submit',diet:values('diet')[0],allergyStatus:values('allergyStatus')[0],allergies:values('allergyStatus')[0]==='selected'?state.allergies:[],excluded:values('excluded'),excludedFoodIds:values('excludedFood')}));
   }else if(schema.kind==='allergies'){
    const allergies=group(form,T('피해야 하는 알레르기 항목 · 복수 선택'));for(const key of schema.allergyKeys)option(allergies,'checkbox','allergy',key,bot.labels[key],state.allergies.includes(key),T('알레르기: ')+bot.labels[key]);
@@ -105,7 +105,7 @@
    submit(T('알레르기 항목 저장'),()=>send({action:'allergies:submit',allergies:values('allergy')}));
   }else if(schema.kind==='wanted'){
    const wanted=group(form,T('먹고 싶은 주재료·음식 · 복수 선택'));for(const key of schema.wantedKeys){const check=option(wanted,'checkbox','wanted',key,bot.labels[key],state.wanted.includes(key),T('찾는 재료: ')+bot.labels[key]);check.parentElement.append(el('small','option-count',schema.counts[key]?ChatLocale.count('available',schema.counts[key],bot.language):T('현재 등록 0개')));}
-   form.append(el('p','form-note',T('현재 DB에 있는 항목만 표시합니다. 음식이 추가되면 목록 새로고침 후 선택 항목에도 반영됩니다.')));
+
    const mode=group(form,T('여러 항목을 선택했다면'));option(mode,'radio','mode','all',T('선택한 항목 모두 포함'),state.ingredientMode==='all');option(mode,'radio','mode','any',T('선택한 항목 중 하나 이상'),state.ingredientMode==='any');
    const spice=group(form,T('맵기도 함께 골라 주세요'));for(const [key,label] of Object.entries(schema.spiceLabels))option(spice,'radio','spice',key,label,(state.spice||'any')===key);
    form.append(el('p','form-note',T('spice.retained')));
@@ -118,7 +118,7 @@
   const content=el('div','message-content');content.append(el('div','sender',role==='bot'?T('무보소 음식 도우미'):T('나')),el('div','bubble',text));
   if(foods.length){const list=el('div','food-list');for(const rawFood of foods){const food=bot.displayFood(rawFood);
    const card=el('article','food-card');card.append(imageFor(food,'food-photo'));const body=el('div','food-card-body');if(food.sourceLanguage==='ko'&&bot.language!=='ko')body.append(el('small','source-language-note',T('원문 정보 (한국어)')));body.append(el('span','verification',food.verification),el('h3','',food.name),el('p','',food.detail));
-   if(bot.language!=='ko'){const original=el('small','original-name',food.originalName);original.lang='ko';body.append(original);}body.append(el('small','recommend-reason',T('recommend.reason')));
+   if(bot.language!=='ko'){const original=el('small','original-name',food.originalName);original.lang='ko';body.append(original);}
    const tags=el('div','food-categories');for(const key of food.categories)tags.append(el('span','',bot.categories[key]));body.append(tags,el('small','',food.priceText));
    const detailButton=button('',()=>showFood(food),'food-detail-button');detailButton.setAttribute('aria-label',food.name+T(' 음식 정보 보기'));detailButton.append(el('span','',T('음식 정보 살펴보기')),el('span','','↗'));card.append(body,detailButton);list.append(card);
   }content.append(list);}
@@ -139,7 +139,7 @@
   if(state.diet==='vegan')prefs.push(state.reviewVegan?T('확인 필요 후보 표시'):T('choice.vegan:strict'));
   if(state.pendingAllergy?.length)prefs.push(T('request.clarify'));if(state.unsupported?.length)prefs.push(T('request.unsupported')+' '+state.unsupported.map(k=>T('unsupported.'+k)).join(', '));
   $('preferences').replaceChildren(...prefs.map(p=>el('span','tag',p)));if(!prefs.length)$('preferences').append(el('span','empty',T('아직 정한 취향이 없습니다.')));
-  $('stage-name').textContent=bot.stages[state.stage];$('stage-summary').textContent=state.stage==='results'?T('부산의 맛을 만나보세요.'):result.form?T('여러 항목을 선택할 수 있어요.'):T('원하시는 답변을 골라 주세요.');
+  $('stage-name').textContent=bot.stages[state.stage];$('stage-summary').textContent=state.stage==='results'?T('부산의 맛을 만나보세요.'):'';
   const phase={profile:0,allergies:0,veganReview:0,category:1,wanted:2,confirm:3,results:4,relax:3,empty:4,edit:0,conflict:0}[state.stage];$('step-dots').replaceChildren(...[0,1,2,3,4].map(i=>el('i',i===phase?'active':'')));
   $('flow').textContent=bot.stages[state.stage]+' · '+(result.form?T('여러 항목 선택 후 저장해 주세요.'):result.choices.length+T('개 선택지로 이어갈 수 있습니다.'));
   $('rule-count').textContent=result.matches.length+T('개');$('rules').replaceChildren();for(const match of result.matches){const li=el('li');li.append(el('b','',match.rule),el('small','','“'+match.evidence+'”'));$('rules').append(li);}

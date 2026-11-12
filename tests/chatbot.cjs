@@ -9,7 +9,7 @@ for(const match of html.matchAll(/(?:src|href)="([^"]+)"/g)){
  const target=path.resolve(path.dirname(entry),ref.split(/[?#]/)[0]);
  assert.ok(target.startsWith(root+path.sep)&&fs.existsSync(target),'Integrated asset missing: '+ref);
 }
-for(const file of ['js/data/foods.js','chatbot/busan-data.js','chatbot/locales.js','chatbot/db-rules.js','chatbot/db-bot.js','chatbot/visitor-input.js','chatbot/bot-localization.js','chatbot/visitor-locales.js','chatbot/db-scenarios.js'])vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file});
+for(const file of ['js/data/foods.js','chatbot/busan-data.js','chatbot/locales.js','chatbot/db-rules.js','chatbot/db-bot.js','chatbot/visitor-input.js','chatbot/bot-localization.js','chatbot/visitor-locales.js','chatbot/concise-copy.js','chatbot/db-scenarios.js'])vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context,{filename:file});
 const bot=context.FoodGuide;assert.equal(bot.foods.length,0,'No local fallback before DB catalog');bot.replaceCatalog(context.FOODS.map(f=>({...f,photo:'../'+(f.photo||'assets/food/'+f.id+'.jpg')})),{source:'DB test fixture',available:true});
 assert.equal(bot.foods.length,43);assert.equal(bot.source.foods.length,context.FOODS.length);
 for(const food of bot.foods){assert.ok(context.FOODS.some(f=>f.id===food.id));assert.ok(fs.existsSync(path.resolve(path.dirname(entry),food.photo)),food.id+' shared photo');}
