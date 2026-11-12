@@ -40,12 +40,12 @@
     for (const row of entries) {
       let food = FOOD[row.id];
       if (!food) { food = { id: row.id }; FOODS.push(food); FOOD[row.id] = food; mapData.byId[row.id] = food; }
-      const placeLinks = new Map((food.places || []).filter(place => place.naverUrl).map(place => [place.name, place.naverUrl]));
+      const knownPlaces = new Map((food.places || []).map(place => [place.name, place]));
       Object.assign(food, row.content || {}, { id: row.id, likes: row.likes || 0 });
       food.ko = { allergens: [], steps: [], restaurants: [], ...food.ko, name: row.name, summary: row.summary, category: row.category };
       food.places ||= [];
-      // Retain explicit restaurant links when an older DB snapshot omits them.
-      food.places = food.places.map(place => place.naverUrl || !placeLinks.has(place.name) ? place : { ...place, naverUrl: placeLinks.get(place.name) });
+      // Retain public visit metadata only for the same restaurant in a partial DB record.
+      food.places = food.places.map(place => ({ ...knownPlaces.get(place.name), ...place }));
       food.photo = row.imageAsset === 'food-placeholder.svg' ? 'assets/food-placeholder.svg' : 'assets/food/' + row.imageAsset;
       window.IEBFoodSummaries.apply(food);
     }
@@ -343,7 +343,8 @@
     const infoRows = labels.map((label, index) => [label, values[index] || t('food.unconfirmed')]);
     const introduction = manuscript ? manuscript.introduction : (d.origin || d.summary);
     const how = manuscript ? manuscript.sections[1] : `<ol class="steps">${d.steps.map(step => `<li><span>${esc(step)}</span></li>`).join('')}</ol>`;
-    const allergyNotes = manuscript ? manuscript.allergenInfo.notes : [d.allergenNote];
+    const safetyNote=window.IEBFoodSafety?.note(f,lang());
+    const allergyNotes = safetyNote ? [safetyNote] : manuscript ? manuscript.allergenInfo.notes : [d.allergenNote];
     const allergy = `<strong lang="${lang()}">${esc(t('food.allergyTitle'))}</strong><div class="pills">${d.allergens.map(a=>`<span class="pill">${esc(a)}</span>`).join('')}</div>${allergyNotes.filter(Boolean).map(note=>`<p>※ ${esc(note)}</p>`).join('')}`;
     return { infoRows, infoLang: lang(), introduction, how, allergy, bodyLang: manuscript ? 'ko' : lang() };
   }
