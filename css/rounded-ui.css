@@ -57,8 +57,17 @@ h1, h2, h3 { letter-spacing: -.035em; text-wrap: balance; }
 
 /* Fixed navigation: safe-area geometry remains shared with map and action bars. */
 .persistent-nav { --tabbar-h: 76px; --header-h: calc(76px + env(safe-area-inset-top, 0px)); }
+/* Cover the entire reserved navigation area, including rounded corners and gutters.
+   Keep this below the controls (1000) and above scrolling/sticky content. */
+.persistent-nav:not(:has(.admin-screen))::before,
+.persistent-nav:not(:has(.admin-screen))::after {
+  content: ""; position: fixed; left: 0; right: 0; z-index: 990;
+  background: var(--bg); pointer-events: none;
+}
+.persistent-nav::before { top: 0; height: var(--header-h); }
+.persistent-nav::after { bottom: 0; height: var(--footer-h); }
 .persistent-nav .app-header, .persistent-nav .page-header {
-  background: rgba(255,255,255,.96); border: 0; border-radius: 0 0 var(--radius) var(--radius);
+  background: var(--surface); border: 0; border-radius: 0 0 var(--radius) var(--radius);
   box-shadow: 0 6px 24px rgba(65,43,26,.04); padding-inline: var(--page-gutter); gap: 12px;
 }
 .app-header .brand-logo { flex-basis: 104px; height: 56px; border-radius: var(--radius-sm); }
@@ -66,7 +75,7 @@ h1, h2, h3 { letter-spacing: -.035em; text-wrap: balance; }
 .header-actions { gap: 8px; }
 .persistent-nav .tabbar {
   border: 1px solid rgba(233,225,215,.7); border-bottom: 0;
-  border-radius: var(--radius) var(--radius) 0 0; background: rgba(255,255,255,.98);
+  border-radius: var(--radius) var(--radius) 0 0; background: var(--surface);
   box-shadow: 0 -6px 32px rgba(65,43,26,.055); padding: 8px 12px env(safe-area-inset-bottom,0px); gap: 4px;
 }
 .tab { font-weight: 500; gap: 5px; }
@@ -292,6 +301,7 @@ body:has(.fixed-cta, .comment-bar) .ieb-chat-launcher { bottom: calc(180px + env
 @media (min-width: 960px) {
   :root { --rail: 256px; }
   .persistent-nav { --header-h: 92px; --footer-h: 0px; }
+  .persistent-nav::after { top: 0; right: auto; bottom: 0; width: var(--rail); height: auto; }
   .persistent-nav > main { padding-bottom: 32px; }
   .persistent-nav .app-header, .persistent-nav .page-header {
     top: 16px; left: calc(var(--rail) + 16px); width: calc(100% - var(--rail) - 40px);
