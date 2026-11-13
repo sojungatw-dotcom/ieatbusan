@@ -558,10 +558,13 @@ body:has(#write-form) .ieb-chat-launcher { display: none; }
 .map-overview .district-food-section {background:transparent;box-shadow:none;border-radius:0;}
 .map-overview .district-food-heading {padding-bottom:12px;}
 .map-overview .map-food-list {gap:0;padding:0 4px;}
-.map-overview .map-restaurant-row {padding:16px 0;gap:16px;background:transparent;border:0;border-radius:0;box-shadow:none;transform:none;transition:background var(--motion-normal) var(--ease-out);}
-.map-overview .map-restaurant-row + .map-restaurant-row {border-top:1px solid var(--border);}
-.map-overview .map-restaurant-row:hover {background:var(--blush);box-shadow:none;transform:none;}
-.map-overview .map-restaurant-row:focus-visible {outline-offset:2px;border-radius:var(--radius-sm);}
+.map-overview .map-restaurant-row {padding:16px 12px;gap:16px;background:transparent;border:0;border-radius:var(--radius-control);box-shadow:none;transform:none;transition:background var(--motion-normal) var(--ease-out);}
+.map-overview .map-restaurant-row {position:relative;}
+.map-overview .map-restaurant-row + .map-restaurant-row::before {content:'';position:absolute;top:0;left:12px;right:12px;height:1px;background:var(--border);pointer-events:none;}
+.map-overview .map-restaurant-row:is(:hover,:active,:focus-visible)::before,
+.map-overview .map-restaurant-row:is(:hover,:active,:focus-visible) + .map-restaurant-row::before {opacity:0;}
+.map-overview .map-restaurant-row:is(:hover,:active,:focus-visible) {background:var(--blush);box-shadow:none;transform:none;}
+.map-overview .map-restaurant-row:focus-visible {outline-offset:-2px;border-radius:var(--radius-control);}
 .map-overview .map-restaurant-row img {border-radius:var(--radius-control);}
 .map-overview .map-restaurant-row b {line-height:1.5;}
 .map-overview .map-restaurant-row small {line-height:1.6;overflow-wrap:anywhere;}
@@ -580,3 +583,8 @@ body:has(#write-form) .ieb-chat-launcher { display: none; }
 }
 .map-overview .district-stage { width:100%; min-width:0; }
 .map-overview .district-heading h1 { flex:1; min-width:0; max-width:none; overflow-wrap:anywhere; }
+
+.ieb-chat-control {top:16px;width:32px;height:32px;padding:6px;border-radius:10px;}
+.ieb-chat-control svg {width:20px;height:20px;}
+.ieb-chat-close {right:16px;}
+.ieb-chat-expand {right:52px;}

@@ -140,3 +140,19 @@ button, .food-card h3, .catalog-food strong { word-break:keep-all; overflow-wrap
 .condition-note { color: var(--ink-2); }
 
 .catalog-description { display: block; margin-top: 4px; }
+
+/* Compact single-row title and toolbar; the host owns expand/close in embeds. */
+.experience .app-header,.embedded .app-header,.embedded-desktop .app-header {height:64px;padding:12px 160px 12px 16px;gap:10px;}
+.experience .app-header .brand-logo {width:64px;height:36px;}
+.experience .app-header h1 {font-size:14px;line-height:1.4;white-space:nowrap;letter-spacing:-.4px;}
+.experience .app-header .icon-button {top:16px;width:32px;height:32px;padding:6px;border-radius:10px;}
+.experience .app-header .icon-button svg {width:20px;height:20px;}
+.experience #reset,.embedded-desktop #reset {right:124px;}
+.experience #open-help,.embedded-desktop #open-help {right:88px;}
+.experience #expand-chat {right:52px;}
+.experience #close-chat {right:16px;order:initial;}
+@media(max-width:540px){.experience .app-header .brand-logo {display:none;}}
+.embedded:not(.embedded-desktop) .app-header {padding-right:124px;}
+.embedded:not(.embedded-desktop) #reset {right:88px;}
+.embedded:not(.embedded-desktop) #open-help {right:52px;}
+@media(max-width:360px){.experience .app-header h1 {font-size:12px;letter-spacing:-.5px;}}
