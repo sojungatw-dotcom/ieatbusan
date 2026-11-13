@@ -548,3 +548,35 @@ body:has(#write-form) .ieb-chat-launcher { display: none; }
  .home-screen .home-slide .rank {display:none;}
  .home-screen .home-slide::after {background:linear-gradient(180deg,rgba(0,0,0,.48),rgba(0,0,0,.82));}
 }
+
+/* Map overview: one open canvas and a quiet restaurant list, without nested cards. */
+.map-overview > .district-card {background:transparent;border:0;border-radius:0;box-shadow:none;overflow:visible;}
+.map-overview .district-heading {padding:0 0 12px;}
+.map-overview .district-stage {margin-inline:0;}
+.map-overview .district-caption {left:0;}
+.map-overview .district-note {padding:8px 0 12px;}
+.map-overview .district-food-section {background:transparent;box-shadow:none;border-radius:0;}
+.map-overview .district-food-heading {padding-bottom:12px;}
+.map-overview .map-food-list {gap:0;padding:0 4px;}
+.map-overview .map-restaurant-row {padding:16px 0;gap:16px;background:transparent;border:0;border-radius:0;box-shadow:none;transform:none;transition:background var(--motion-normal) var(--ease-out);}
+.map-overview .map-restaurant-row + .map-restaurant-row {border-top:1px solid var(--border);}
+.map-overview .map-restaurant-row:hover {background:var(--blush);box-shadow:none;transform:none;}
+.map-overview .map-restaurant-row:focus-visible {outline-offset:2px;border-radius:var(--radius-sm);}
+.map-overview .map-restaurant-row img {border-radius:var(--radius-control);}
+.map-overview .map-restaurant-row b {line-height:1.5;}
+.map-overview .map-restaurant-row small {line-height:1.6;overflow-wrap:anywhere;}
+@media(min-width:960px){
+ .persistent-nav > .map-overview {gap:16px 32px;}
+ .map-overview .district-food-section {padding-left:24px;border-left:1px solid var(--border);}
+ .map-overview .district-food-heading {padding:0 4px 12px;min-height:56px;display:flex;align-items:center;}
+ .map-overview .district-food-heading h2 {font-size:22px;margin:0;}
+}
+@media(max-width:959px){
+ .map-overview > .district-card {margin:20px var(--page-gutter) 0;}
+ .map-overview .district-food-section {padding:24px var(--page-gutter);}
+ .map-overview .district-food-heading h2 {font-size:21px;}
+ .map-overview .map-restaurant-row img {width:64px;height:64px;}
+ .map-overview .district-heading {gap:12px;}
+}
+.map-overview .district-stage { width:100%; min-width:0; }
+.map-overview .district-heading h1 { flex:1; min-width:0; max-width:none; overflow-wrap:anywhere; }
