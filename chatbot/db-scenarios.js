@@ -50,5 +50,6 @@
  scenarios.push({id:'vegan-alternative',title:'42. 비건·우유 알레르기 대안',group:'비건',description:'아이스크림이 없어도 식물성 후보 표시 동의와 우유 알레르기를 유지합니다.',initial:'시작',steps:route(profile('vegan',['dairy']),['icecream'],'dessert'),expectAlternatives:true});
  scenarios.push({id:'no-safe-alternative',title:'43. 제한에 맞는 대안도 없는 경우',group:'비건',description:'비건에 밀·우유·대두 알레르기를 적용해 후보가 없으면 없는 그대로 안내합니다.',initial:'시작',steps:route(profile('vegan',['wheat','dairy','soy']),['icecream'],'dessert'),expectStage:'empty'});
  scenarios.push({id:'allergy-unknown-next',title:'44. 알레르기 항목을 모르는 경우',group:'알레르기',description:'알레르기는 있다고 했지만 정확한 항목을 모르면 미확인으로 저장하고 종류 질문으로 이어갑니다.',initial:'시작',steps:[profile('none',[],[],'selected'),'allergies:unknown','category:any',{action:'wanted:submit',wanted:[],mode:'any',spice:'any'},'confirm']});
+ for(const scenario of scenarios)if(['wheat-noodle','dessert-wheat','icecream-alternative','fruit-alternative','sujebi-wheat','vegan-alternative'].includes(scenario.id)){scenario.steps.push('alternatives:accept');scenario.description+=' 종류·주재료를 넓힌 대안은 동의 후 검색하며 낮은 맵기는 유지합니다.';}
  if(typeof module!=='undefined')module.exports=scenarios;else root.FoodScenarios=scenarios;
 })(globalThis);

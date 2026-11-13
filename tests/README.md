@@ -112,8 +112,16 @@ Run `node tests/comment-controls.cjs` for owner-only edits/deletes, input valida
 
 ## Integrated chatbot
 
-Run `node tests/chatbot.cjs` to verify the app-owned catalog and image references, all 44 rule-based scenarios, and host-owned close/reopen controls. The popup and mobile page require browser checks. `food-manuscript.cjs` uses a browser-like shared window/global object to support the current translation scripts.
+Run `node tests/chatbot.cjs` to verify the DB-fed catalog and image references, all 44 rule-based scenarios, and host-owned close/reopen controls. The popup and mobile page require browser checks. `food-manuscript.cjs` uses a browser-like shared window/global object to support the current translation scripts.
+
+Run `node --test tests/chatbot-live.cjs` for all four languages, DB additions/removals, failure without local fallback, catalog projection privacy and hiding/reappearing options. `node tools/preview-chatbot-fixture.cjs` serves a synthetic DB on port 8783 for browser checks; it never connects to Supabase.
 
 ## Administrator console
 
 Run `node tests/admin-api.cjs` for authorization, forged role denial, CSRF, editable-field restrictions, archive/restore, moderation and edit conflicts. See [admin guide](../docs/admin.md). Run `node tests/admin-browser.cjs` for an isolated browser preview on port 8782; it never connects to Supabase.
+
+## Visitor chatbot regression checks
+
+Run `node --test tests/chatbot-visitor.cjs` for report examples, compound requests, allergen clarification, consent before alternatives, mild-spice retention, shared translations, restaurant metadata and recovery expiry. Browser checks use the synthetic catalog on 8783, never a live Supabase write.
+
+Run `node tests/chatbot-simulation.cjs` for the expanded 4,643-case matrix of multilingual polarity, end-to-end recommendation restrictions, named dishes and translated examples. See `docs/chatbot-simulation-20261112.md` for scope, controlled data and limitations.

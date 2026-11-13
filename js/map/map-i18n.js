@@ -101,3 +101,9 @@ window.IEBMapText = {
     "detailTitle": "{area} · お店の地図"
   }
 };
+
+// Restaurant overview empty state.
+window.IEBMapText.ko.emptyRestaurants = "아직 등록된 식당이 없어요.";
+window.IEBMapText.en.emptyRestaurants = "No restaurants listed in this area yet.";
+window.IEBMapText.zh.emptyRestaurants = "该地区暂无已登记的餐厅。";
+window.IEBMapText.ja.emptyRestaurants = "この地域にはまだ登録された飲食店がありません。";

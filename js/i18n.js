@@ -368,3 +368,8 @@ Object.assign(I18N.ko, {"comment.edit":"수정","comment.deleteConfirm":"댓글�
 Object.assign(I18N.en, {"comment.edit":"Edit","comment.deleteConfirm":"Delete this comment?","comment.edited":"Comment updated","comment.deleted":"Comment deleted"});
 Object.assign(I18N.zh, {"comment.edit":"编辑","comment.deleteConfirm":"确定要删除这条评论吗？","comment.edited":"评论已更新","comment.deleted":"评论已删除"});
 Object.assign(I18N.ja, {"comment.edit":"編集","comment.deleteConfirm":"このコメントを削除しますか？","comment.edited":"コメントを更新しました","comment.deleted":"コメントを削除しました"});
+
+Object.assign(window.I18N.ko,{'chatbot.title':'나에게 맞는 부산의 맛','chatbot.intro':'음식 도우미와 대화해 보세요.'});
+Object.assign(window.I18N.en,{'chatbot.title':'Your taste of Busan','chatbot.intro':'Talk to your food guide.'});
+Object.assign(window.I18N.zh,{'chatbot.title':'适合您的釜山美味','chatbot.intro':'与美食助手对话。'});
+Object.assign(window.I18N.ja,{'chatbot.title':'あなたに合う釜山の味','chatbot.intro':'料理ガイドと話してみましょう。'});

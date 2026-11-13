@@ -27,18 +27,18 @@
 .map-intro { padding: 20px 16px 8px; }
 .map-intro h1 { margin: 0 0 6px; font-size: 23px; line-height: 1.35; letter-spacing: -.04em; }
 .map-intro p { margin: 0; color: var(--ink-2); font-size: 12px; }
-.district-card { margin: 0 16px; background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+.district-card { margin: 0 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
 .map-overview > .district-card { margin-top: 16px; }
 .district-card-top { padding: 14px 16px 0; display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 13px; font-weight: 700; }
 .district-reset { color: var(--ink-3); font-size: 11px; font-weight: 400; padding: 6px; }
 .district-svg { width: 100%; display: block; height: auto; overflow: visible; }
 .district-region { cursor: pointer; outline: none; }
-.district-region > path:not(.district-leader) { fill: #f9f8f5; stroke: #bdb8af; stroke-width: 1.7; stroke-linejoin: round; transition: fill .15s; }
+.district-region > path:not(.district-leader) { fill: #fff; stroke: #bdb8af; stroke-width: 1.7; stroke-linejoin: round; transition: fill .15s; }
 .district-label > text { fill: #514b43; font: 600 19px var(--font-ko); paint-order: stroke; stroke: white; stroke-width: 3px; stroke-linejoin: round; }
 .district-label > text.district-label-en { font-size: 14px; }
 .district-leader { fill: none; stroke: #bdb8af; stroke-width: 1.3; pointer-events: none; }
-.district-region:hover > path:not(.district-leader), .district-region:focus-visible > path:not(.district-leader) { fill: var(--beige); stroke: var(--accent); stroke-width: 2.5; }
-.district-region.is-selected > path:not(.district-leader) { fill: #f1c7b8; stroke: var(--accent); stroke-width: 2.5; }
+.district-region:hover > path:not(.district-leader), .district-region:focus-visible > path:not(.district-leader) { fill: #fff; stroke: var(--accent); stroke-width: 2.5; }
+.district-region.is-selected > path:not(.district-leader) { fill: #fff; stroke: var(--accent); stroke-width: 2.5; }
 .district-label.is-selected > text { fill: #a43525; font-weight: 800; }
 .district-label:hover > text { fill: var(--accent); }
 .district-note { margin: 0; padding: 0 14px 12px; color: var(--ink-3); font-size: 10px; text-align: center; }
@@ -46,12 +46,12 @@
 .district-detail-action .btn { height: 46px; font-size: 14px; }
 .district-detail-action .btn > svg:last-child { margin-left: auto; }
 .district-detail-action .btn > svg:first-child { margin-right: auto; }
-.district-food-section { border-top: 8px solid rgba(229,213,194,.6); padding: 18px 16px 24px; }
+.district-food-section { border-top: 1px solid var(--border); padding: 18px 16px 24px; }
 .district-food-heading h2 { margin: 0 0 4px; font-size: 17px; }
 .district-food-heading p { margin: 0 0 14px; font-size: 12px; color: var(--ink-3); }
-.map-food-list { display: grid; gap: 9px; }
-.map-food-card { display: flex; align-items: center; gap: 12px; background: #fff; padding: 10px; border: 1px solid var(--border); border-radius: 12px; min-height: 76px; }
-.map-food-card img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; flex: none; }
+.map-food-list { display: grid; gap: 0; }
+.map-food-card { display: flex; align-items: center; gap: 16px; background: transparent; padding: 14px 0; border: 0; border-bottom: 1px solid var(--border); border-radius: 0; min-height: 100px; }
+.map-food-card img { width: 72px; height: 72px; object-fit: cover; border-radius: 8px; flex: none; }
 .map-food-card > span { flex: 1; min-width: 0; display: grid; gap: 4px; }
 .map-food-card b { font-size: 14px; }
 .map-food-card small { color: var(--ink-3); font-size: 12px; }
@@ -77,3 +77,8 @@
 .gm-style .gm-style-iw { font-family: var(--font); font-size: 13px; }
 .gm-style .gm-style-iw b { display: block; font-size: 14px; }
 .gm-style .gm-style-iw a { color: var(--accent); font-weight: 700; }
+
+.map-restaurant-row b, .map-restaurant-row small { overflow-wrap:anywhere; }
+.map-restaurant-row:focus-visible { outline:2px solid var(--accent); outline-offset:-2px; }
+.map-restaurant-row:hover b { color:var(--accent); }
+@media (max-width:599px) { .map-restaurant-row img { width:60px; height:60px; } }
