@@ -9,3 +9,5 @@ Fix: all 16 highlight paths are painted in a dedicated pointer-transparent layer
 Reproduce against `tools/preview-chatbot-fixture.cjs` on port 8783. Set `PLAYWRIGHT_MODULE` if Playwright is installed outside the normal module path. `UI_AUDIT_URL` can point to the public app for the same read-only tests. Map-related regression checks and static deployment build pass. No route or geographic boundary data changed.
 
 Figma's two map screens reflect the thicker borders and raised caption, with three additional perimeter examples (Buk, Geumjeong, Sasang). This supersedes the map styling in the earlier spacing-audit screenshots.
+
+Public verification: Vercel reported deployment success for a376658. The same 128-case outline audit then passed against https://ieatbusan-eight.vercel.app/ with 0 page errors. Public home/map/search passed at 390/1440px; eight changed files matched local source, and chatbot received 43 foods with a 12px help-action gap. The audit now explicitly waits for asynchronous route initialization on the public server.
