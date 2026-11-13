@@ -87,8 +87,8 @@ h1, h2, h3 { letter-spacing: -.035em; text-wrap: balance; }
 @keyframes brand-welcome { from { opacity: 0; transform: translateY(7px) scale(.97); } to { opacity: 1; transform: none; } }
 
 /* Editorial food cards: one photograph and one clear reading path. */
-.home-intro { padding: 40px var(--page-gutter) 20px; }
-.home-intro .eyebrow { display: block; font-family: var(--font-logo); font-size: 10px; font-weight: 650; letter-spacing: .18em; margin-bottom: 18px; }
+.home-intro { padding: 28px var(--page-gutter) 16px; }
+.home-intro .eyebrow { display: block; font-family: var(--font-logo); font-size: 10px; font-weight: 650; letter-spacing: .18em; margin-bottom: 12px; }
 .home-intro h1 { font-size: clamp(30px, 6.7vw, 44px); font-weight: 750; line-height: 1.22; letter-spacing: -.045em; margin: 0 0 16px; }
 .home-intro p { font-size: 15px; line-height: 1.75; letter-spacing: -.015em; max-width: 36ch; margin: 0; text-wrap: pretty; }
 .home-carousel { padding: 0 var(--page-gutter) 12px; }
@@ -317,8 +317,8 @@ body:has(.fixed-cta, .comment-bar) .ieb-chat-launcher { bottom: calc(180px + env
   .nav-tools { border: 0; padding-top: 16px; }
   .nav-tools a { background: var(--surface-soft); padding: 14px; font-size: 13px; }
   .desktop-search { width: min(540px,65%); background: var(--surface-soft); border: 0; }
-  .home-intro { padding-top: 48px; padding-bottom: 24px; }
-  .home-intro h1 { font-size: 44px; margin-bottom: 18px; }
+  .home-intro { padding-top: 32px; padding-bottom: 16px; }
+  .home-intro h1 { font-size: 40px; margin-bottom: 12px; }
   .home-intro > p { font-size: 17px; max-width: none; }
   .home-carousel .section-head { padding-top: 24px; padding-bottom: 20px; }
   .home-slide { min-height: 460px; padding: 220px 32px 32px; grid-template-columns: none; grid-template-rows: none; }
@@ -398,7 +398,7 @@ body:has(.fixed-cta, .comment-bar) .ieb-chat-launcher { bottom: calc(180px + env
 .btn, .chip, .icon-btn { flex-shrink: 0; }
 .btn > svg, .chip > svg, .icon-btn > svg { flex-shrink: 0; }
 .list-item .li-body, .action > span { min-width: 0; }
-.district-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 24px 24px 12px; }
+.district-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 24px 24px 8px; }
 .district-heading h1 { margin: 0; font-size: clamp(21px,2vw,28px); line-height: 1.35; letter-spacing: -.035em; word-break: keep-all; }
 .district-heading .district-reset { display: inline-flex; align-items: center; justify-content: center; flex: none; min-height: 44px; padding: 10px 16px; border-radius: var(--radius-control); background: var(--surface); color: var(--ink-2); font-size: 12px; font-weight: 600; text-align: center; }
 .district-reset:hover { background: var(--blush); color: var(--accent); }
@@ -419,7 +419,7 @@ body:has(.fixed-cta, .comment-bar) .ieb-chat-launcher { bottom: calc(180px + env
  .map-overview .district-stage { flex: 1; min-height: 280px; aspect-ratio: auto; }
 }
 @media (max-width: 599px) {
- .district-heading { padding: 20px 16px 12px; gap: 12px; }
+ .district-heading { padding: 20px 16px 8px; gap: 12px; }
  .district-heading h1 { max-width: 68%; font-size: 21px; }
  .district-heading .district-reset { padding-inline: 12px; }
  .district-stage { margin-inline: 8px; }
@@ -451,3 +451,12 @@ body:has(.fixed-cta, .comment-bar) .ieb-chat-launcher { bottom: calc(180px + env
 .category-tile { background: var(--surface-soft); }
 @media (min-width: 960px) { .category-tile { gap: 20px; padding: 20px 24px; min-height: 120px; font-size: 16px; } .category-art { width: 76px; height: 76px; padding: 2px; border-radius: 0; } }
 @media (max-width: 359px) { .category-art { width: 48px; height: 48px; padding: 0; } }
+
+/* Compact heading rhythm; heading controls do not inflate the text baseline. */
+.district-heading h1 { min-height: 44px; display: flex; align-items: center; }
+.actions-row { gap: 12px; }
+.comment-controls { flex-wrap: wrap; }
+.persistent-nav .tabbar { border-top-color: transparent; }
+@media (max-width: 959px) { .persistent-nav .tabbar { padding: 12px 12px max(12px,env(safe-area-inset-bottom)); } .tab { border-radius: var(--radius-sm); } }
+
+.ieb-chat-panel.has-dialog > .ieb-chat-control { visibility: hidden; pointer-events: none; }

@@ -1,0 +1,3760 @@
+{
+  "generatedAt": "2026-11-13T02:27:55.533Z",
+  "cases": 400,
+  "failures": [],
+  "errors": [],
+  "help": {
+    "gap": 12,
+    "width": 400
+  },
+  "tabs": {
+    "padding": "16px",
+    "borderRadius": "16px"
+  },
+  "results": [
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "home",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "category/all",
+      "overflow": false,
+      "main": true,
+      "title": "모든 음식 · I EAT BUSAN",
+      "wide": [
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip "
+      ]
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "category/soups",
+      "overflow": false,
+      "main": true,
+      "title": "찜·탕 · I EAT BUSAN",
+      "wide": [
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip "
+      ]
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "food/dwaeji-gukbap",
+      "overflow": false,
+      "main": true,
+      "title": "돼지국밥 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "place/dwaeji-gukbap/0",
+      "overflow": false,
+      "main": true,
+      "title": "수변최고돼지국밥 민락본점 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "search",
+      "overflow": false,
+      "main": true,
+      "title": "음식이나 식당을 검색해 보세요 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "results/국밥/all",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "notifications",
+      "overflow": false,
+      "main": true,
+      "title": "알림 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "map",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": [
+        "district-stage",
+        {},
+        {},
+        {},
+        {},
+        {}
+      ]
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "map/region/haeundae",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": [
+        "district-stage",
+        {},
+        {},
+        {},
+        {},
+        {}
+      ]
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "map/detail",
+      "overflow": false,
+      "main": true,
+      "title": "지도 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "community",
+      "overflow": false,
+      "main": true,
+      "title": "커뮤니티 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "saved",
+      "overflow": false,
+      "main": true,
+      "title": "찜 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "my",
+      "overflow": false,
+      "main": true,
+      "title": "마이페이지 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "settings",
+      "overflow": false,
+      "main": true,
+      "title": "설정 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "notices",
+      "overflow": false,
+      "main": true,
+      "title": "공지사항 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "faq",
+      "overflow": false,
+      "main": true,
+      "title": "자주 묻는 질문 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "contact",
+      "overflow": false,
+      "main": true,
+      "title": "고객센터 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "terms",
+      "overflow": false,
+      "main": true,
+      "title": "이용약관 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "privacy",
+      "overflow": false,
+      "main": true,
+      "title": "개인정보 처리방침 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "credits",
+      "overflow": false,
+      "main": true,
+      "title": "사진 출처 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "login",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "signup",
+      "overflow": false,
+      "main": true,
+      "title": "회원가입 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "lang",
+      "overflow": false,
+      "main": true,
+      "title": "언어 · Language · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ko",
+      "route": "missing",
+      "overflow": false,
+      "main": true,
+      "title": "404 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "home",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "category/all",
+      "overflow": false,
+      "main": true,
+      "title": "모든 음식 · I EAT BUSAN",
+      "wide": [
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip "
+      ]
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "category/soups",
+      "overflow": false,
+      "main": true,
+      "title": "찜·탕 · I EAT BUSAN",
+      "wide": [
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip "
+      ]
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "food/dwaeji-gukbap",
+      "overflow": false,
+      "main": true,
+      "title": "돼지국밥 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "place/dwaeji-gukbap/0",
+      "overflow": false,
+      "main": true,
+      "title": "수변최고돼지국밥 민락본점 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "search",
+      "overflow": false,
+      "main": true,
+      "title": "음식이나 식당을 검색해 보세요 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "results/국밥/all",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "notifications",
+      "overflow": false,
+      "main": true,
+      "title": "알림 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "map",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": [
+        "district-stage",
+        {},
+        {},
+        {},
+        {},
+        {}
+      ]
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "map/region/haeundae",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": [
+        "district-stage",
+        {},
+        {},
+        {},
+        {},
+        {}
+      ]
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "map/detail",
+      "overflow": false,
+      "main": true,
+      "title": "지도 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "community",
+      "overflow": false,
+      "main": true,
+      "title": "커뮤니티 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "saved",
+      "overflow": false,
+      "main": true,
+      "title": "찜 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "my",
+      "overflow": false,
+      "main": true,
+      "title": "마이페이지 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "settings",
+      "overflow": false,
+      "main": true,
+      "title": "설정 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "notices",
+      "overflow": false,
+      "main": true,
+      "title": "공지사항 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "faq",
+      "overflow": false,
+      "main": true,
+      "title": "자주 묻는 질문 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "contact",
+      "overflow": false,
+      "main": true,
+      "title": "고객센터 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "terms",
+      "overflow": false,
+      "main": true,
+      "title": "이용약관 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "privacy",
+      "overflow": false,
+      "main": true,
+      "title": "개인정보 처리방침 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "credits",
+      "overflow": false,
+      "main": true,
+      "title": "사진 출처 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "login",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "signup",
+      "overflow": false,
+      "main": true,
+      "title": "회원가입 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "lang",
+      "overflow": false,
+      "main": true,
+      "title": "언어 · Language · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "route": "missing",
+      "overflow": false,
+      "main": true,
+      "title": "404 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "home",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "category/all",
+      "overflow": false,
+      "main": true,
+      "title": "모든 음식 · I EAT BUSAN",
+      "wide": [
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip "
+      ]
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "category/soups",
+      "overflow": false,
+      "main": true,
+      "title": "찜·탕 · I EAT BUSAN",
+      "wide": [
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip "
+      ]
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "food/dwaeji-gukbap",
+      "overflow": false,
+      "main": true,
+      "title": "돼지국밥 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "place/dwaeji-gukbap/0",
+      "overflow": false,
+      "main": true,
+      "title": "수변최고돼지국밥 민락본점 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "search",
+      "overflow": false,
+      "main": true,
+      "title": "음식이나 식당을 검색해 보세요 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "results/국밥/all",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "notifications",
+      "overflow": false,
+      "main": true,
+      "title": "알림 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "map",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": [
+        "district-stage",
+        {},
+        {},
+        {},
+        {},
+        {}
+      ]
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "map/region/haeundae",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": [
+        "district-stage",
+        {},
+        {},
+        {},
+        {},
+        {}
+      ]
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "map/detail",
+      "overflow": false,
+      "main": true,
+      "title": "지도 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "community",
+      "overflow": false,
+      "main": true,
+      "title": "커뮤니티 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "saved",
+      "overflow": false,
+      "main": true,
+      "title": "찜 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "my",
+      "overflow": false,
+      "main": true,
+      "title": "마이페이지 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "settings",
+      "overflow": false,
+      "main": true,
+      "title": "설정 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "notices",
+      "overflow": false,
+      "main": true,
+      "title": "공지사항 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "faq",
+      "overflow": false,
+      "main": true,
+      "title": "자주 묻는 질문 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "contact",
+      "overflow": false,
+      "main": true,
+      "title": "고객센터 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "terms",
+      "overflow": false,
+      "main": true,
+      "title": "이용약관 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "privacy",
+      "overflow": false,
+      "main": true,
+      "title": "개인정보 처리방침 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "credits",
+      "overflow": false,
+      "main": true,
+      "title": "사진 출처 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "login",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "signup",
+      "overflow": false,
+      "main": true,
+      "title": "회원가입 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "lang",
+      "overflow": false,
+      "main": true,
+      "title": "언어 · Language · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "route": "missing",
+      "overflow": false,
+      "main": true,
+      "title": "404 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "home",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "category/all",
+      "overflow": false,
+      "main": true,
+      "title": "모든 음식 · I EAT BUSAN",
+      "wide": [
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip "
+      ]
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "category/soups",
+      "overflow": false,
+      "main": true,
+      "title": "찜·탕 · I EAT BUSAN",
+      "wide": [
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip "
+      ]
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "food/dwaeji-gukbap",
+      "overflow": false,
+      "main": true,
+      "title": "돼지국밥 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "place/dwaeji-gukbap/0",
+      "overflow": false,
+      "main": true,
+      "title": "수변최고돼지국밥 민락본점 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "search",
+      "overflow": false,
+      "main": true,
+      "title": "음식이나 식당을 검색해 보세요 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "results/국밥/all",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "notifications",
+      "overflow": false,
+      "main": true,
+      "title": "알림 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "map",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": [
+        "district-stage",
+        {},
+        {},
+        {},
+        {},
+        {}
+      ]
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "map/region/haeundae",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": [
+        "district-stage",
+        {},
+        {},
+        {},
+        {},
+        {}
+      ]
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "map/detail",
+      "overflow": false,
+      "main": true,
+      "title": "지도 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "community",
+      "overflow": false,
+      "main": true,
+      "title": "커뮤니티 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "saved",
+      "overflow": false,
+      "main": true,
+      "title": "찜 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "my",
+      "overflow": false,
+      "main": true,
+      "title": "마이페이지 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "settings",
+      "overflow": false,
+      "main": true,
+      "title": "설정 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "notices",
+      "overflow": false,
+      "main": true,
+      "title": "공지사항 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "faq",
+      "overflow": false,
+      "main": true,
+      "title": "자주 묻는 질문 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "contact",
+      "overflow": false,
+      "main": true,
+      "title": "고객센터 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "terms",
+      "overflow": false,
+      "main": true,
+      "title": "이용약관 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "privacy",
+      "overflow": false,
+      "main": true,
+      "title": "개인정보 처리방침 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "credits",
+      "overflow": false,
+      "main": true,
+      "title": "사진 출처 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "login",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "signup",
+      "overflow": false,
+      "main": true,
+      "title": "회원가입 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "lang",
+      "overflow": false,
+      "main": true,
+      "title": "언어 · Language · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "route": "missing",
+      "overflow": false,
+      "main": true,
+      "title": "404 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "home",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "category/all",
+      "overflow": false,
+      "main": true,
+      "title": "모든 음식 · I EAT BUSAN",
+      "wide": [
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip "
+      ]
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "category/soups",
+      "overflow": false,
+      "main": true,
+      "title": "찜·탕 · I EAT BUSAN",
+      "wide": [
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip "
+      ]
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "food/dwaeji-gukbap",
+      "overflow": false,
+      "main": true,
+      "title": "돼지국밥 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "place/dwaeji-gukbap/0",
+      "overflow": false,
+      "main": true,
+      "title": "수변최고돼지국밥 민락본점 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "search",
+      "overflow": false,
+      "main": true,
+      "title": "음식이나 식당을 검색해 보세요 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "results/국밥/all",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "notifications",
+      "overflow": false,
+      "main": true,
+      "title": "알림 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "map",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "map/region/haeundae",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "map/detail",
+      "overflow": false,
+      "main": true,
+      "title": "지도 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "community",
+      "overflow": false,
+      "main": true,
+      "title": "커뮤니티 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "saved",
+      "overflow": false,
+      "main": true,
+      "title": "찜 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "my",
+      "overflow": false,
+      "main": true,
+      "title": "마이페이지 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "settings",
+      "overflow": false,
+      "main": true,
+      "title": "설정 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "notices",
+      "overflow": false,
+      "main": true,
+      "title": "공지사항 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "faq",
+      "overflow": false,
+      "main": true,
+      "title": "자주 묻는 질문 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "contact",
+      "overflow": false,
+      "main": true,
+      "title": "고객센터 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "terms",
+      "overflow": false,
+      "main": true,
+      "title": "이용약관 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "privacy",
+      "overflow": false,
+      "main": true,
+      "title": "개인정보 처리방침 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "credits",
+      "overflow": false,
+      "main": true,
+      "title": "사진 출처 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "login",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "signup",
+      "overflow": false,
+      "main": true,
+      "title": "회원가입 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "lang",
+      "overflow": false,
+      "main": true,
+      "title": "언어 · Language · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "route": "missing",
+      "overflow": false,
+      "main": true,
+      "title": "404 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "home",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "category/all",
+      "overflow": false,
+      "main": true,
+      "title": "모든 음식 · I EAT BUSAN",
+      "wide": [
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip "
+      ]
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "category/soups",
+      "overflow": false,
+      "main": true,
+      "title": "찜·탕 · I EAT BUSAN",
+      "wide": [
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip "
+      ]
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "food/dwaeji-gukbap",
+      "overflow": false,
+      "main": true,
+      "title": "돼지국밥 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "place/dwaeji-gukbap/0",
+      "overflow": false,
+      "main": true,
+      "title": "수변최고돼지국밥 민락본점 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "search",
+      "overflow": false,
+      "main": true,
+      "title": "음식이나 식당을 검색해 보세요 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "results/국밥/all",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "notifications",
+      "overflow": false,
+      "main": true,
+      "title": "알림 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "map",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "map/region/haeundae",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "map/detail",
+      "overflow": false,
+      "main": true,
+      "title": "지도 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "community",
+      "overflow": false,
+      "main": true,
+      "title": "커뮤니티 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "saved",
+      "overflow": false,
+      "main": true,
+      "title": "찜 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "my",
+      "overflow": false,
+      "main": true,
+      "title": "마이페이지 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "settings",
+      "overflow": false,
+      "main": true,
+      "title": "설정 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "notices",
+      "overflow": false,
+      "main": true,
+      "title": "공지사항 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "faq",
+      "overflow": false,
+      "main": true,
+      "title": "자주 묻는 질문 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "contact",
+      "overflow": false,
+      "main": true,
+      "title": "고객센터 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "terms",
+      "overflow": false,
+      "main": true,
+      "title": "이용약관 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "privacy",
+      "overflow": false,
+      "main": true,
+      "title": "개인정보 처리방침 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "credits",
+      "overflow": false,
+      "main": true,
+      "title": "사진 출처 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "login",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "signup",
+      "overflow": false,
+      "main": true,
+      "title": "회원가입 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "lang",
+      "overflow": false,
+      "main": true,
+      "title": "언어 · Language · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "route": "missing",
+      "overflow": false,
+      "main": true,
+      "title": "404 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "home",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "category/all",
+      "overflow": false,
+      "main": true,
+      "title": "모든 음식 · I EAT BUSAN",
+      "wide": [
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip "
+      ]
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "category/soups",
+      "overflow": false,
+      "main": true,
+      "title": "찜·탕 · I EAT BUSAN",
+      "wide": [
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip "
+      ]
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "food/dwaeji-gukbap",
+      "overflow": false,
+      "main": true,
+      "title": "돼지국밥 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "place/dwaeji-gukbap/0",
+      "overflow": false,
+      "main": true,
+      "title": "수변최고돼지국밥 민락본점 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "search",
+      "overflow": false,
+      "main": true,
+      "title": "음식이나 식당을 검색해 보세요 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "results/국밥/all",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "notifications",
+      "overflow": false,
+      "main": true,
+      "title": "알림 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "map",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "map/region/haeundae",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "map/detail",
+      "overflow": false,
+      "main": true,
+      "title": "지도 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "community",
+      "overflow": false,
+      "main": true,
+      "title": "커뮤니티 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "saved",
+      "overflow": false,
+      "main": true,
+      "title": "찜 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "my",
+      "overflow": false,
+      "main": true,
+      "title": "마이페이지 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "settings",
+      "overflow": false,
+      "main": true,
+      "title": "설정 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "notices",
+      "overflow": false,
+      "main": true,
+      "title": "공지사항 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "faq",
+      "overflow": false,
+      "main": true,
+      "title": "자주 묻는 질문 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "contact",
+      "overflow": false,
+      "main": true,
+      "title": "고객센터 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "terms",
+      "overflow": false,
+      "main": true,
+      "title": "이용약관 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "privacy",
+      "overflow": false,
+      "main": true,
+      "title": "개인정보 처리방침 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "credits",
+      "overflow": false,
+      "main": true,
+      "title": "사진 출처 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "login",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "signup",
+      "overflow": false,
+      "main": true,
+      "title": "회원가입 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "lang",
+      "overflow": false,
+      "main": true,
+      "title": "언어 · Language · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "route": "missing",
+      "overflow": false,
+      "main": true,
+      "title": "404 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "home",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "category/all",
+      "overflow": false,
+      "main": true,
+      "title": "모든 음식 · I EAT BUSAN",
+      "wide": [
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip "
+      ]
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "category/soups",
+      "overflow": false,
+      "main": true,
+      "title": "찜·탕 · I EAT BUSAN",
+      "wide": [
+        "chip ",
+        "chip ",
+        "chip ",
+        "chip "
+      ]
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "food/dwaeji-gukbap",
+      "overflow": false,
+      "main": true,
+      "title": "돼지국밥 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "place/dwaeji-gukbap/0",
+      "overflow": false,
+      "main": true,
+      "title": "수변최고돼지국밥 민락본점 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "search",
+      "overflow": false,
+      "main": true,
+      "title": "음식이나 식당을 검색해 보세요 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "results/국밥/all",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "notifications",
+      "overflow": false,
+      "main": true,
+      "title": "알림 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "map",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "map/region/haeundae",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "map/detail",
+      "overflow": false,
+      "main": true,
+      "title": "지도 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "community",
+      "overflow": false,
+      "main": true,
+      "title": "커뮤니티 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "saved",
+      "overflow": false,
+      "main": true,
+      "title": "찜 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "my",
+      "overflow": false,
+      "main": true,
+      "title": "마이페이지 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "settings",
+      "overflow": false,
+      "main": true,
+      "title": "설정 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "notices",
+      "overflow": false,
+      "main": true,
+      "title": "공지사항 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "faq",
+      "overflow": false,
+      "main": true,
+      "title": "자주 묻는 질문 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "contact",
+      "overflow": false,
+      "main": true,
+      "title": "고객센터 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "terms",
+      "overflow": false,
+      "main": true,
+      "title": "이용약관 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "privacy",
+      "overflow": false,
+      "main": true,
+      "title": "개인정보 처리방침 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "credits",
+      "overflow": false,
+      "main": true,
+      "title": "사진 출처 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "login",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "signup",
+      "overflow": false,
+      "main": true,
+      "title": "회원가입 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "lang",
+      "overflow": false,
+      "main": true,
+      "title": "언어 · Language · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "route": "missing",
+      "overflow": false,
+      "main": true,
+      "title": "404 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "home",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "category/all",
+      "overflow": false,
+      "main": true,
+      "title": "모든 음식 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "category/soups",
+      "overflow": false,
+      "main": true,
+      "title": "찜·탕 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "food/dwaeji-gukbap",
+      "overflow": false,
+      "main": true,
+      "title": "돼지국밥 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "place/dwaeji-gukbap/0",
+      "overflow": false,
+      "main": true,
+      "title": "수변최고돼지국밥 민락본점 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "search",
+      "overflow": false,
+      "main": true,
+      "title": "음식이나 식당을 검색해 보세요 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "results/국밥/all",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "notifications",
+      "overflow": false,
+      "main": true,
+      "title": "알림 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "map",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "map/region/haeundae",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "map/detail",
+      "overflow": false,
+      "main": true,
+      "title": "지도 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "community",
+      "overflow": false,
+      "main": true,
+      "title": "커뮤니티 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "saved",
+      "overflow": false,
+      "main": true,
+      "title": "찜 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "my",
+      "overflow": false,
+      "main": true,
+      "title": "마이페이지 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "settings",
+      "overflow": false,
+      "main": true,
+      "title": "설정 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "notices",
+      "overflow": false,
+      "main": true,
+      "title": "공지사항 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "faq",
+      "overflow": false,
+      "main": true,
+      "title": "자주 묻는 질문 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "contact",
+      "overflow": false,
+      "main": true,
+      "title": "고객센터 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "terms",
+      "overflow": false,
+      "main": true,
+      "title": "이용약관 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "privacy",
+      "overflow": false,
+      "main": true,
+      "title": "개인정보 처리방침 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "credits",
+      "overflow": false,
+      "main": true,
+      "title": "사진 출처 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "login",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "signup",
+      "overflow": false,
+      "main": true,
+      "title": "회원가입 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "lang",
+      "overflow": false,
+      "main": true,
+      "title": "언어 · Language · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ko",
+      "route": "missing",
+      "overflow": false,
+      "main": true,
+      "title": "404 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "home",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "category/all",
+      "overflow": false,
+      "main": true,
+      "title": "모든 음식 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "category/soups",
+      "overflow": false,
+      "main": true,
+      "title": "찜·탕 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "food/dwaeji-gukbap",
+      "overflow": false,
+      "main": true,
+      "title": "돼지국밥 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "place/dwaeji-gukbap/0",
+      "overflow": false,
+      "main": true,
+      "title": "수변최고돼지국밥 민락본점 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "search",
+      "overflow": false,
+      "main": true,
+      "title": "음식이나 식당을 검색해 보세요 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "results/국밥/all",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "notifications",
+      "overflow": false,
+      "main": true,
+      "title": "알림 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "map",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "map/region/haeundae",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "map/detail",
+      "overflow": false,
+      "main": true,
+      "title": "지도 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "community",
+      "overflow": false,
+      "main": true,
+      "title": "커뮤니티 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "saved",
+      "overflow": false,
+      "main": true,
+      "title": "찜 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "my",
+      "overflow": false,
+      "main": true,
+      "title": "마이페이지 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "settings",
+      "overflow": false,
+      "main": true,
+      "title": "설정 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "notices",
+      "overflow": false,
+      "main": true,
+      "title": "공지사항 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "faq",
+      "overflow": false,
+      "main": true,
+      "title": "자주 묻는 질문 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "contact",
+      "overflow": false,
+      "main": true,
+      "title": "고객센터 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "terms",
+      "overflow": false,
+      "main": true,
+      "title": "이용약관 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "privacy",
+      "overflow": false,
+      "main": true,
+      "title": "개인정보 처리방침 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "credits",
+      "overflow": false,
+      "main": true,
+      "title": "사진 출처 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "login",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "signup",
+      "overflow": false,
+      "main": true,
+      "title": "회원가입 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "lang",
+      "overflow": false,
+      "main": true,
+      "title": "언어 · Language · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "en",
+      "route": "missing",
+      "overflow": false,
+      "main": true,
+      "title": "404 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "home",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "category/all",
+      "overflow": false,
+      "main": true,
+      "title": "모든 음식 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "category/soups",
+      "overflow": false,
+      "main": true,
+      "title": "찜·탕 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "food/dwaeji-gukbap",
+      "overflow": false,
+      "main": true,
+      "title": "돼지국밥 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "place/dwaeji-gukbap/0",
+      "overflow": false,
+      "main": true,
+      "title": "수변최고돼지국밥 민락본점 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "search",
+      "overflow": false,
+      "main": true,
+      "title": "음식이나 식당을 검색해 보세요 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "results/국밥/all",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "notifications",
+      "overflow": false,
+      "main": true,
+      "title": "알림 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "map",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "map/region/haeundae",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "map/detail",
+      "overflow": false,
+      "main": true,
+      "title": "지도 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "community",
+      "overflow": false,
+      "main": true,
+      "title": "커뮤니티 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "saved",
+      "overflow": false,
+      "main": true,
+      "title": "찜 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "my",
+      "overflow": false,
+      "main": true,
+      "title": "마이페이지 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "settings",
+      "overflow": false,
+      "main": true,
+      "title": "설정 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "notices",
+      "overflow": false,
+      "main": true,
+      "title": "공지사항 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "faq",
+      "overflow": false,
+      "main": true,
+      "title": "자주 묻는 질문 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "contact",
+      "overflow": false,
+      "main": true,
+      "title": "고객센터 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "terms",
+      "overflow": false,
+      "main": true,
+      "title": "이용약관 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "privacy",
+      "overflow": false,
+      "main": true,
+      "title": "개인정보 처리방침 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "credits",
+      "overflow": false,
+      "main": true,
+      "title": "사진 출처 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "login",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "signup",
+      "overflow": false,
+      "main": true,
+      "title": "회원가입 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "lang",
+      "overflow": false,
+      "main": true,
+      "title": "언어 · Language · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "zh",
+      "route": "missing",
+      "overflow": false,
+      "main": true,
+      "title": "404 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "home",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "category/all",
+      "overflow": false,
+      "main": true,
+      "title": "모든 음식 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "category/soups",
+      "overflow": false,
+      "main": true,
+      "title": "찜·탕 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "food/dwaeji-gukbap",
+      "overflow": false,
+      "main": true,
+      "title": "돼지국밥 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "place/dwaeji-gukbap/0",
+      "overflow": false,
+      "main": true,
+      "title": "수변최고돼지국밥 민락본점 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "search",
+      "overflow": false,
+      "main": true,
+      "title": "음식이나 식당을 검색해 보세요 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "results/국밥/all",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "notifications",
+      "overflow": false,
+      "main": true,
+      "title": "알림 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "map",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "map/region/haeundae",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "map/detail",
+      "overflow": false,
+      "main": true,
+      "title": "지도 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "community",
+      "overflow": false,
+      "main": true,
+      "title": "커뮤니티 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "saved",
+      "overflow": false,
+      "main": true,
+      "title": "찜 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "my",
+      "overflow": false,
+      "main": true,
+      "title": "마이페이지 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "settings",
+      "overflow": false,
+      "main": true,
+      "title": "설정 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "notices",
+      "overflow": false,
+      "main": true,
+      "title": "공지사항 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "faq",
+      "overflow": false,
+      "main": true,
+      "title": "자주 묻는 질문 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "contact",
+      "overflow": false,
+      "main": true,
+      "title": "고객센터 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "terms",
+      "overflow": false,
+      "main": true,
+      "title": "이용약관 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "privacy",
+      "overflow": false,
+      "main": true,
+      "title": "개인정보 처리방침 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "credits",
+      "overflow": false,
+      "main": true,
+      "title": "사진 출처 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "login",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "signup",
+      "overflow": false,
+      "main": true,
+      "title": "회원가입 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "lang",
+      "overflow": false,
+      "main": true,
+      "title": "언어 · Language · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 768,
+      "lang": "ja",
+      "route": "missing",
+      "overflow": false,
+      "main": true,
+      "title": "404 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "home",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "category/all",
+      "overflow": false,
+      "main": true,
+      "title": "모든 음식 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "category/soups",
+      "overflow": false,
+      "main": true,
+      "title": "찜·탕 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "food/dwaeji-gukbap",
+      "overflow": false,
+      "main": true,
+      "title": "돼지국밥 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "place/dwaeji-gukbap/0",
+      "overflow": false,
+      "main": true,
+      "title": "수변최고돼지국밥 민락본점 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "search",
+      "overflow": false,
+      "main": true,
+      "title": "음식이나 식당을 검색해 보세요 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "results/국밥/all",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "notifications",
+      "overflow": false,
+      "main": true,
+      "title": "알림 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "map",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "map/region/haeundae",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "map/detail",
+      "overflow": false,
+      "main": true,
+      "title": "지도 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "community",
+      "overflow": false,
+      "main": true,
+      "title": "커뮤니티 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "saved",
+      "overflow": false,
+      "main": true,
+      "title": "찜 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "my",
+      "overflow": false,
+      "main": true,
+      "title": "마이페이지 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "settings",
+      "overflow": false,
+      "main": true,
+      "title": "설정 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "notices",
+      "overflow": false,
+      "main": true,
+      "title": "공지사항 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "faq",
+      "overflow": false,
+      "main": true,
+      "title": "자주 묻는 질문 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "contact",
+      "overflow": false,
+      "main": true,
+      "title": "고객센터 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "terms",
+      "overflow": false,
+      "main": true,
+      "title": "이용약관 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "privacy",
+      "overflow": false,
+      "main": true,
+      "title": "개인정보 처리방침 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "credits",
+      "overflow": false,
+      "main": true,
+      "title": "사진 출처 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "login",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "signup",
+      "overflow": false,
+      "main": true,
+      "title": "회원가입 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "lang",
+      "overflow": false,
+      "main": true,
+      "title": "언어 · Language · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "route": "missing",
+      "overflow": false,
+      "main": true,
+      "title": "404 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "home",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "category/all",
+      "overflow": false,
+      "main": true,
+      "title": "모든 음식 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "category/soups",
+      "overflow": false,
+      "main": true,
+      "title": "찜·탕 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "food/dwaeji-gukbap",
+      "overflow": false,
+      "main": true,
+      "title": "돼지국밥 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "place/dwaeji-gukbap/0",
+      "overflow": false,
+      "main": true,
+      "title": "수변최고돼지국밥 민락본점 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "search",
+      "overflow": false,
+      "main": true,
+      "title": "음식이나 식당을 검색해 보세요 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "results/국밥/all",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "notifications",
+      "overflow": false,
+      "main": true,
+      "title": "알림 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "map",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "map/region/haeundae",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "map/detail",
+      "overflow": false,
+      "main": true,
+      "title": "지도 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "community",
+      "overflow": false,
+      "main": true,
+      "title": "커뮤니티 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "saved",
+      "overflow": false,
+      "main": true,
+      "title": "찜 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "my",
+      "overflow": false,
+      "main": true,
+      "title": "마이페이지 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "settings",
+      "overflow": false,
+      "main": true,
+      "title": "설정 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "notices",
+      "overflow": false,
+      "main": true,
+      "title": "공지사항 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "faq",
+      "overflow": false,
+      "main": true,
+      "title": "자주 묻는 질문 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "contact",
+      "overflow": false,
+      "main": true,
+      "title": "고객센터 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "terms",
+      "overflow": false,
+      "main": true,
+      "title": "이용약관 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "privacy",
+      "overflow": false,
+      "main": true,
+      "title": "개인정보 처리방침 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "credits",
+      "overflow": false,
+      "main": true,
+      "title": "사진 출처 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "login",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "signup",
+      "overflow": false,
+      "main": true,
+      "title": "회원가입 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "lang",
+      "overflow": false,
+      "main": true,
+      "title": "언어 · Language · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "route": "missing",
+      "overflow": false,
+      "main": true,
+      "title": "404 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "home",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "category/all",
+      "overflow": false,
+      "main": true,
+      "title": "모든 음식 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "category/soups",
+      "overflow": false,
+      "main": true,
+      "title": "찜·탕 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "food/dwaeji-gukbap",
+      "overflow": false,
+      "main": true,
+      "title": "돼지국밥 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "place/dwaeji-gukbap/0",
+      "overflow": false,
+      "main": true,
+      "title": "수변최고돼지국밥 민락본점 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "search",
+      "overflow": false,
+      "main": true,
+      "title": "음식이나 식당을 검색해 보세요 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "results/국밥/all",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "notifications",
+      "overflow": false,
+      "main": true,
+      "title": "알림 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "map",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "map/region/haeundae",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "map/detail",
+      "overflow": false,
+      "main": true,
+      "title": "지도 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "community",
+      "overflow": false,
+      "main": true,
+      "title": "커뮤니티 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "saved",
+      "overflow": false,
+      "main": true,
+      "title": "찜 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "my",
+      "overflow": false,
+      "main": true,
+      "title": "마이페이지 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "settings",
+      "overflow": false,
+      "main": true,
+      "title": "설정 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "notices",
+      "overflow": false,
+      "main": true,
+      "title": "공지사항 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "faq",
+      "overflow": false,
+      "main": true,
+      "title": "자주 묻는 질문 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "contact",
+      "overflow": false,
+      "main": true,
+      "title": "고객센터 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "terms",
+      "overflow": false,
+      "main": true,
+      "title": "이용약관 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "privacy",
+      "overflow": false,
+      "main": true,
+      "title": "개인정보 처리방침 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "credits",
+      "overflow": false,
+      "main": true,
+      "title": "사진 출처 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "login",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "signup",
+      "overflow": false,
+      "main": true,
+      "title": "회원가입 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "lang",
+      "overflow": false,
+      "main": true,
+      "title": "언어 · Language · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "route": "missing",
+      "overflow": false,
+      "main": true,
+      "title": "404 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "home",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "category/all",
+      "overflow": false,
+      "main": true,
+      "title": "모든 음식 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "category/soups",
+      "overflow": false,
+      "main": true,
+      "title": "찜·탕 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "food/dwaeji-gukbap",
+      "overflow": false,
+      "main": true,
+      "title": "돼지국밥 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "place/dwaeji-gukbap/0",
+      "overflow": false,
+      "main": true,
+      "title": "수변최고돼지국밥 민락본점 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "search",
+      "overflow": false,
+      "main": true,
+      "title": "음식이나 식당을 검색해 보세요 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "results/국밥/all",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "notifications",
+      "overflow": false,
+      "main": true,
+      "title": "알림 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "map",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "map/region/haeundae",
+      "overflow": false,
+      "main": true,
+      "title": "부산, 어디로 가볼까요? · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "map/detail",
+      "overflow": false,
+      "main": true,
+      "title": "지도 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "community",
+      "overflow": false,
+      "main": true,
+      "title": "커뮤니티 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "saved",
+      "overflow": false,
+      "main": true,
+      "title": "찜 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "my",
+      "overflow": false,
+      "main": true,
+      "title": "마이페이지 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "settings",
+      "overflow": false,
+      "main": true,
+      "title": "설정 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "notices",
+      "overflow": false,
+      "main": true,
+      "title": "공지사항 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "faq",
+      "overflow": false,
+      "main": true,
+      "title": "자주 묻는 질문 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "contact",
+      "overflow": false,
+      "main": true,
+      "title": "고객센터 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "terms",
+      "overflow": false,
+      "main": true,
+      "title": "이용약관 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "privacy",
+      "overflow": false,
+      "main": true,
+      "title": "개인정보 처리방침 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "credits",
+      "overflow": false,
+      "main": true,
+      "title": "사진 출처 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "login",
+      "overflow": false,
+      "main": true,
+      "title": "I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "signup",
+      "overflow": false,
+      "main": true,
+      "title": "회원가입 · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "lang",
+      "overflow": false,
+      "main": true,
+      "title": "언어 · Language · I EAT BUSAN",
+      "wide": []
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "route": "missing",
+      "overflow": false,
+      "main": true,
+      "title": "404 · I EAT BUSAN",
+      "wide": []
+    }
+  ]
+}

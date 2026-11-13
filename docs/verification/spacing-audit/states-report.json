@@ -1,0 +1,248 @@
+{
+  "cases": 48,
+  "failures": [],
+  "errors": [],
+  "dialogControls": "hidden while dialog open; restored after close",
+  "results": [
+    {
+      "route": "write",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "route": "profile",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "route": "settings/privacy",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "route": "my/posts",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "route": "my/comments",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "route": "my/recent",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "route": "post/ui-post",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "route": "community",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "route": "saved/foods",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "route": "saved/places",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "route": "chatbot",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "route": "admin",
+      "width": 320,
+      "overflow": false
+    },
+    {
+      "route": "write",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "profile",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "settings/privacy",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "my/posts",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "my/comments",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "my/recent",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "post/ui-post",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "community",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "saved/foods",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "saved/places",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "chatbot",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "admin",
+      "width": 390,
+      "overflow": false
+    },
+    {
+      "route": "write",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "profile",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "settings/privacy",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "my/posts",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "my/comments",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "my/recent",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "post/ui-post",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "community",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "saved/foods",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "saved/places",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "chatbot",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "admin",
+      "width": 768,
+      "overflow": false
+    },
+    {
+      "route": "write",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "profile",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "settings/privacy",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "my/posts",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "my/comments",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "my/recent",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "post/ui-post",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "community",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "saved/foods",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "saved/places",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "chatbot",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "route": "admin",
+      "width": 1440,
+      "overflow": false
+    }
+  ]
+}

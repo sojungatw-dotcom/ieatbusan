@@ -25,4 +25,6 @@ const launcher=nodes.find(n=>n.id==='ieb-chat-launcher');launcher.click();
 const panel=nodes.find(n=>n.id==='ieb-chat-panel');assert.equal(panel.hidden,false);
 const closer=nodes.find(n=>n['aria-label']==='챗봇 닫기');assert.ok(closer,'The parent app must own its close control');closer.click();assert.equal(panel.hidden,true);
 launcher.click();assert.equal(panel.hidden,false);assert.equal(nodes.filter(n=>n.tag==='iframe').length,1,'Reopening retains the existing conversation frame');
-console.log('PASS host-owned close control and retained conversation frame');
+const mainEntry=fs.readFileSync(path.join(root,'index.html'),'utf8');
+assert.ok(mainEntry.indexOf('js/chatbot-catalog.js')>=0 && mainEntry.indexOf('js/chatbot-catalog.js')<mainEntry.indexOf('js/chatbot-widget.js'),'Load DB projection before the host widget');
+console.log('PASS host-owned close control, retained conversation frame and catalog script integration');
