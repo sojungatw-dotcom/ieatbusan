@@ -108,7 +108,7 @@
   function tabbar(active) {
     const tabs = [['home', 'home', '#/home'], ['map', 'map', '#/map'], ['community', 'community', '#/community'], ['saved', 'heart', '#/saved'], ['my', 'user', '#/my']];
     return `<nav class="tabbar" aria-label="${esc(t('nav.main'))}"><a class="nav-brand" href="#/home" aria-label="${esc(t('brand.home'))}"><svg viewBox="190 35 1450 735" aria-hidden="true" focusable="false"><image href="assets/brand/muboso-transparent.png" width="1921" height="819"/></svg></a>${tabs.map(([k, ic, href]) =>
-      `<a class="tab" href="${href}" ${k === active ? 'aria-current="page"' : ''}>${icon(ic)}<span>${esc(t('tab.' + k))}</span></a>`).join('')}<div class="nav-tools"><a href="#/search">${icon('search')}${esc(t('search.placeholder'))}</a><a href="#/settings">${icon('settings')}${esc(t('set.title'))}</a></div></nav>`;
+      `<a class="tab" href="${href}" ${k === active ? 'aria-current="page"' : ''}>${icon(ic)}<span>${esc(t('tab.' + k))}</span></a>`).join('')}<div class="nav-tools"><a href="#/search">${icon('search')}<span class="nav-search-label">${lang() === 'ko' ? '<span>음식이나 식당을</span><span>검색해 보세요</span>' : esc(t('search.placeholder'))}</span></a><a href="#/settings">${icon('settings')}${esc(t('set.title'))}</a></div></nav>`;
   }
   const empty = (msg, ic = 'info', extra = '') => `<div class="empty">${icon(ic)}<p>${esc(msg)}</p>${extra}</div>`;
   function foodRow(f, { save = true } = {}) {
@@ -675,7 +675,7 @@
     const list = myComments().sort((a, b) => b.createdAt - a.createdAt);
     return `<main class="screen">${pageHeader(t('my.myComments'), { fallback: '#/my' })}${list.length ? list.map(c => {
       const p = postById(c.pid);
-      return `<a class="comment" href="#/post/${c.pid}" style="border-bottom:1px solid var(--border)"><div class="c-body"><p>${esc(c.text)}</p><span class="muted" style="font-size:12px">${esc(p ? p.title : '')} · ${esc(ago(c.createdAt))}</span></div></a>`;
+      return `<a class="comment" href="#/post/${c.pid}"><div class="c-body"><p>${esc(c.text)}</p><span class="muted" style="font-size:12px">${esc(p ? p.title : '')} · ${esc(ago(c.createdAt))}</span></div></a>`;
     }).join('') : empty(t('my.emptyComments'), 'comment')}</main>`;
   };
   V.myRecent = () => {

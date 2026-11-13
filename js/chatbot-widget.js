@@ -11,7 +11,7 @@
  function sendMode(){frame?.contentWindow?.postMessage({type:'ieb-chatbot:mode',mode:mode()},targetOrigin);}
  function ensureFrame(){if(frame)return;frame=document.createElement('iframe');frame.title='나에게 맞는 부산의 맛 · 한국어 음식 도우미';frame.src='chatbot/index.html?embed='+mode();frame.className='ieb-chat-frame';frame.addEventListener('load',()=>{sendMode();if(opened)frame.focus();});panel.append(frame);}
  function render(){
-  closeButton.textContent=mobile.matches?'←':'×';closeButton.setAttribute('aria-label',mobile.matches?'이전 화면으로 돌아가기':'챗봇 닫기');expandButton.setAttribute('aria-pressed',String(expanded));expandButton.setAttribute('aria-label',expanded?'챗봇 기본 크기로 보기':'챗봇 크게 보기');
+  closeButton.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="'+(mobile.matches?'m14 6-6 6 6 6M8 12h12':'m6 6 12 12M18 6 6 18')+'"/></svg>';expandButton.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/></svg>';closeButton.setAttribute('aria-label',mobile.matches?'이전 화면으로 돌아가기':'챗봇 닫기');expandButton.setAttribute('aria-pressed',String(expanded));expandButton.setAttribute('aria-label',expanded?'챗봇 기본 크기로 보기':'챗봇 크게 보기');
   panel.hidden=!opened;launcher.hidden=opened;launcher.setAttribute('aria-expanded',String(opened));
   panel.classList.toggle('is-expanded',expanded);document.body.classList.toggle('ieb-chat-open',opened&&mobile.matches);
   // On a phone the dedicated route replaces the visible app screen.

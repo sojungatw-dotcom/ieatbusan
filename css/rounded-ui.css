@@ -362,3 +362,26 @@ body:has(.fixed-cta, .comment-bar) .ieb-chat-launcher { bottom: calc(180px + env
 
 .popular-item { display:flex; align-items:center; gap:12px; padding:16px; min-height:56px; background:var(--surface); border-radius:var(--radius-control); }
 .card > .list-item { box-shadow:none; }
+
+/* Dividers separate rows; the final row never has a trailing line. */
+.info-card .info-row { border-bottom: 0; }
+@media (min-width: 960px) {
+  .info-card .info-row { border-top: 0; }
+  .info-card .info-row:nth-child(n+3) { border-top: 1px solid var(--border); }
+}
+.card > :is(.credit, .faq, .list-item):last-child { border-bottom: 0; }
+.map-food-card { padding: 12px; }
+.map-food-card img { border-radius: calc(var(--radius) - 12px); }
+.list-item:has(> img) { padding: 12px; }
+.list-item > img { border-radius: calc(var(--radius) - 12px); }
+.sheet-list .list-item { border-radius: var(--radius); padding: 12px; }
+.sheet-list .list-item img { border-radius: calc(var(--radius) - 12px); }
+.nav-search-label { min-width: 0; line-height: 1.6; }
+.nav-search-label > span { display: block; white-space: nowrap; }
+.ieb-chat-control { top: 72px; width: 44px; height: 44px; padding: 10px; border-radius: var(--radius-sm); background: var(--surface-soft); }
+.ieb-chat-control svg { width: 24px; height: 24px; display: block; }
+.ieb-chat-close { right: 16px; }
+.ieb-chat-expand { right: 68px; }
+@media (min-width: 1200px) {
+  .persistent-nav > .map-overview { grid-template-columns: minmax(0, 1.6fr) minmax(340px, 1fr); }
+}

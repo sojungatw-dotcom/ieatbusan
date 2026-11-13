@@ -34,7 +34,9 @@ button:active { transform: scale(.98); }
 .form-submit, .primary-button, .secondary-button { border-radius: var(--radius-control); min-height: 48px; }
 .form-submit, .primary-button { background: var(--accent); }
 .experience .food-card, .catalog-food, .scenario-card { border-radius: var(--radius); border-color: var(--border); overflow: hidden; box-shadow: var(--shadow); }
-.experience .food-card img, .catalog-food img { border-radius: var(--radius-control); }
+.experience .food-card .food-photo { border-radius: 0; }
+.catalog-food { padding: var(--space-3); gap: var(--space-4); }
+.catalog-food img { border-radius: calc(var(--radius) - var(--space-3)); }
 .composer { border-radius: var(--radius-control); border-color: var(--border); background: var(--surface); }
 .composer-wrap { background: var(--surface); border-radius: var(--radius) var(--radius) 0 0; }
 .app-tabs { background: var(--surface); border: 0; padding: 8px; gap: 4px; }
@@ -56,3 +58,39 @@ dialog.sheet { border-radius: var(--radius-lg); border-color: var(--border); box
 
 body { word-break:keep-all; overflow-wrap:anywhere; }
 button, .food-card h3, .catalog-food strong { word-break:keep-all; overflow-wrap:anywhere; }
+
+/* Header controls match the host's 44px targets and 8px gaps. */
+.experience .app-header, .embedded .app-header, .embedded-desktop .app-header {
+  position: relative; height: 132px; padding: 16px 16px 72px; gap: 16px;
+  border-radius: 0; align-items: center;
+}
+.experience .brand-logo { display: flex; align-items: center; width: 96px; height: 44px; }
+.experience .header-divider { display: none; }
+.experience .app-header h1 { font-size: 16px; line-height: 1.5; white-space: normal; min-width: 0; }
+.experience .app-header .icon-button {
+  position: absolute; top: 72px; width: 44px; height: 44px; padding: 10px;
+  display: grid; place-items: center; border-radius: var(--radius-sm); line-height: 1;
+}
+.experience #reset { right: 120px; }
+.experience #open-help { right: 68px; }
+.embedded-desktop #reset { right: 172px; }
+.embedded-desktop #open-help { right: 120px; }
+.experience .app-header .icon-button svg { width: 24px; height: 24px; }
+/* Separate the send target from the textarea's scrolling area. */
+#chat-form { display: grid; grid-template-columns: minmax(0,1fr) 44px; gap: 8px; align-items: end; }
+#chat-form textarea { min-width: 0; height: 52px; min-height: 52px; max-height: 120px; padding: 12px; resize: none; font-size: 16px; line-height: 1.6; border-radius: var(--radius-control); }
+@supports (field-sizing: content) { #chat-form textarea { field-sizing: content; height: auto; } }
+#chat-form .send { position: static; width: 44px; height: 44px; margin-bottom: 4px; padding: 10px; border-radius: var(--radius-sm); }
+.composer-wrap { padding: 16px; border: 0; }
+.examples, .reply-choices, .category-catalog, .option-grid, .scenario-actions { gap: 8px; }
+.examples { margin-bottom: 12px; }
+.scroll-view { padding: 0 16px 24px; }
+.catalog-search { border-radius: var(--radius-control); min-height: 48px; padding: 12px 16px; margin-block: 12px 16px; }
+.catalog-search svg { flex: none; }
+.catalog-list, .food-list { gap: 16px; }
+.condition-section { border-bottom: 0; padding: 16px 0; }
+.condition-section + .condition-section { border-top: 1px solid var(--border); }
+.inspector > .primary-button { margin-top: 8px; }
+.form-submit, .primary-button, .secondary-button { padding: 12px 16px; }
+.app-tabs { padding: 8px 16px max(8px,env(safe-area-inset-bottom)); gap: 8px; }
+.app-tabs button[aria-selected=true]::after { content: none; }
