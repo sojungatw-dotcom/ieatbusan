@@ -18,3 +18,12 @@ Reproduce with PLAYWRIGHT_MODULE pointing to the installed Playwright package:
     node tools/audit-chatbot-content.cjs
 
 Home/chatbot scripts accept UI_AUDIT_URL for read-only production verification. Tests reject unmet assertions.
+
+## Production verification
+
+- Application commit 956fe84: Vercel GitHub status success; served rounded-ui.css exactly matches local source.
+- Public URL: https://ieatbusan-eight.vercel.app/
+- Live DB: 43 foods × EN/JA/ZH, 44 scenarios per language, 129 food dialogs, zero unexpected Korean UI strings outside documented original-language content.
+- Public language entry/switch: 16 cases, no browser errors.
+- Public home: all 28 language/viewport combinations passed. Screenshots include the actual live food images.
+- Browser audit selects the iframe element directly, supporting Vercel's clean-URL redirect as well as local index.html paths.
