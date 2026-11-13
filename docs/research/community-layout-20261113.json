@@ -1,6 +1,6 @@
 {
   "date": "2026-11-13",
-  "base": "7cba5c3",
+  "base": "1b8ce17",
   "environment": "Local browser using synthetic public food/post/account fixtures; no production writes. Map SDK unavailable in fixture.",
   "before": {
     "communityWriteOverlapsChat": true,
@@ -628,6 +628,7 @@
     "Native Android/iOS WebView, on-screen keyboard, and live map SDK rendering were not tested.",
     "Measurements cover action controls and horizontal overflow. Floating launcher may overlay ordinary scrollable content; it does not reserve a full page gutter."
   ],
+  "integration": "Rechecked after merging latest rounded UI main (1b8ce17).",
   "validation": {
     "staticBuild": "passed",
     "testScripts": 40,
@@ -635,11 +636,11 @@
     "gitDiffCheck": "passed"
   },
   "sourceHashes": {
-    "css/app.css": "264d4770499273c6eac74b622439309f36ed528eb9e9469f71a6f78962425726",
+    "css/app.css": "e8617e5d9d203efea528d34b36b69fe8a34302586278adf8079660c522a5238b",
     "css/chatbot-widget.css": "fe56990a6890e8d45b30630a1a531007e3afdc7bab40ef92e39ae55a4665d4c0",
     "css/map.css": "e3143143559e9d6df5e88af72a5fccd54328a596bd8e208ae1d6e6ecd0acdd5c",
     "css/responsive.css": "bee51c9eba8c2e7cae9a304f3310a7a6dae50a77d42a5b3800025ea21ccfb8ef",
-    "index.html": "09bd58d8514f741c4db0ced7d4a19216ede910023b7518b13bad1acd63127cac",
-    "js/app.js": "f94f5caa63cb438de125c9c16845f366a0ca11ae10fa06719a4b67f671f2bb00"
+    "index.html": "9aa2b8c519be8aeb9d65bbb29d02c1c76deb0721e709ec6270ae21755691d435",
+    "js/app.js": "e7a43fa037403e6c637a21ab015fb227ee80be27f817e781e88d466b3dd5aab7"
   }
 }

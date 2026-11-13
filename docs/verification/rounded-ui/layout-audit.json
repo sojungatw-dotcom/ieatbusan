@@ -1,0 +1,1046 @@
+[
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/home",
+    "view": "home",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/category/all",
+    "view": "category",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/food/dwaeji-gukbap",
+    "view": "food",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/place/dwaeji-gukbap/0",
+    "view": "place",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/map",
+    "view": "map",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/map/region/haeundae",
+    "view": "map",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/map/detail",
+    "view": "map",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/community",
+    "view": "community",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/post/fixture-jp",
+    "view": "post",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/write",
+    "view": "write",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/saved/foods",
+    "view": "saved",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/saved/places",
+    "view": "saved",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/my",
+    "view": "my",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/my/posts",
+    "view": "myPosts",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/my/comments",
+    "view": "myComments",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/my/recent",
+    "view": "myRecent",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/profile",
+    "view": "profile",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/settings/privacy",
+    "view": "accountPrivacy",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/settings",
+    "view": "settings",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/lang",
+    "view": "lang",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 15,
+    "path": "#/search",
+    "view": "search",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 15,
+    "path": "#/results/%EA%B5%AD%EB%B0%A5/all",
+    "view": "results",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/notifications",
+    "view": "notifications",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/notices",
+    "view": "notices",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/faq",
+    "view": "faq",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/contact",
+    "view": "contact",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/terms",
+    "view": "terms",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/privacy",
+    "view": "privacy",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/credits",
+    "view": "credits",
+    "width": 320
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/home",
+    "view": "home",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/category/all",
+    "view": "category",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/food/dwaeji-gukbap",
+    "view": "food",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/place/dwaeji-gukbap/0",
+    "view": "place",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/map",
+    "view": "map",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/map/region/haeundae",
+    "view": "map",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/map/detail",
+    "view": "map",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/community",
+    "view": "community",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/post/fixture-jp",
+    "view": "post",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/write",
+    "view": "write",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/saved/foods",
+    "view": "saved",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/saved/places",
+    "view": "saved",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/my",
+    "view": "my",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/my/posts",
+    "view": "myPosts",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/my/comments",
+    "view": "myComments",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/my/recent",
+    "view": "myRecent",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/profile",
+    "view": "profile",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/settings/privacy",
+    "view": "accountPrivacy",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/settings",
+    "view": "settings",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/lang",
+    "view": "lang",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/search",
+    "view": "search",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/results/%EA%B5%AD%EB%B0%A5/all",
+    "view": "results",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/notifications",
+    "view": "notifications",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/notices",
+    "view": "notices",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/faq",
+    "view": "faq",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/contact",
+    "view": "contact",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/terms",
+    "view": "terms",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/privacy",
+    "view": "privacy",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/credits",
+    "view": "credits",
+    "width": 390
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/home",
+    "view": "home",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/category/all",
+    "view": "category",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/food/dwaeji-gukbap",
+    "view": "food",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/place/dwaeji-gukbap/0",
+    "view": "place",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/map",
+    "view": "map",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/map/region/haeundae",
+    "view": "map",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/map/detail",
+    "view": "map",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/community",
+    "view": "community",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/post/fixture-jp",
+    "view": "post",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/write",
+    "view": "write",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/saved/foods",
+    "view": "saved",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/saved/places",
+    "view": "saved",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/my",
+    "view": "my",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/my/posts",
+    "view": "myPosts",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/my/comments",
+    "view": "myComments",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/my/recent",
+    "view": "myRecent",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/profile",
+    "view": "profile",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/settings/privacy",
+    "view": "accountPrivacy",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/settings",
+    "view": "settings",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/lang",
+    "view": "lang",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/search",
+    "view": "search",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/results/%EA%B5%AD%EB%B0%A5/all",
+    "view": "results",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/notifications",
+    "view": "notifications",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/notices",
+    "view": "notices",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/faq",
+    "view": "faq",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/contact",
+    "view": "contact",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/terms",
+    "view": "terms",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/privacy",
+    "view": "privacy",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/credits",
+    "view": "credits",
+    "width": 768
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/home",
+    "view": "home",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/category/all",
+    "view": "category",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/food/dwaeji-gukbap",
+    "view": "food",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/place/dwaeji-gukbap/0",
+    "view": "place",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/map",
+    "view": "map",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/map/region/haeundae",
+    "view": "map",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/map/detail",
+    "view": "map",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/community",
+    "view": "community",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/post/fixture-jp",
+    "view": "post",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/write",
+    "view": "write",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/saved/foods",
+    "view": "saved",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/saved/places",
+    "view": "saved",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/my",
+    "view": "my",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/my/posts",
+    "view": "myPosts",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/my/comments",
+    "view": "myComments",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/my/recent",
+    "view": "myRecent",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/profile",
+    "view": "profile",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/settings/privacy",
+    "view": "accountPrivacy",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/settings",
+    "view": "settings",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/lang",
+    "view": "lang",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/search",
+    "view": "search",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/results/%EA%B5%AD%EB%B0%A5/all",
+    "view": "results",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/notifications",
+    "view": "notifications",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/notices",
+    "view": "notices",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/faq",
+    "view": "faq",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/contact",
+    "view": "contact",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/terms",
+    "view": "terms",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/privacy",
+    "view": "privacy",
+    "width": 1280
+  },
+  {
+    "clipped": [],
+    "headers": 1,
+    "navs": 1,
+    "overflow": 0,
+    "path": "#/credits",
+    "view": "credits",
+    "width": 1280
+  }
+]

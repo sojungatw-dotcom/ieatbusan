@@ -10,7 +10,7 @@
     ['street', ['분식','Street food','街头小吃','軽食'], ['ssiat-hotteok','eomuk','bibim-dangmyeon','multteok','yubu-jumeoni','busan-wandang','daegu-napjak-mandu','chungmu-gimbap']],
     ['snacks', ['간식','Snacks','点心','おやつ'], ['ssiat-hotteok','eomuk','multteok','daegu-kongguk','daegu-napjak-mandu','uiryeong-manggaetteok']],
     ['spicy', ['매운맛','Spicy','香辣','辛い料理'], ['nakgopsae','kkomjangeo','jobang-nakji','masan-agujjim','sogogi-gukbap','pohang-mulhoe','andong-jjimdak','chungmu-gimbap']],
-  ].map(([id, names, foods]) => Object.freeze({ id, names: Object.freeze(names), foods: Object.freeze(foods), image: 'assets/categories/' + id + '.svg?v=20261109-eight-steamed-soups' }));
+  ].map(([id, names, foods]) => Object.freeze({ id, names: Object.freeze(names), foods: Object.freeze(foods), image: 'assets/categories/' + id + '.svg?v=20261112-rounded' }));
   const languageIndex = {ko:0,en:1,zh:2,ja:3};
   window.IEBFoodCategories = Object.freeze({
     groups: Object.freeze(groups),

@@ -473,7 +473,7 @@ details.faq p { margin: 0 0 16px; color: var(--ink-2); font-size: 14px; }
 .comment-edit textarea { width:100%; resize:vertical; }
 
 /* Keep community actions in document flow; category tabs scroll independently. */
-.community-toolbar { display: flex; align-items: center; gap: 12px; padding: 0 16px; border-bottom: 1px solid var(--border); }
-.community-toolbar .seg { flex: 1; min-width: 0; padding: 0; border-bottom: 0; }
+.community-toolbar { display: flex; align-items: center; gap: 12px; padding: 0 var(--page-gutter, 16px); border-bottom: 1px solid var(--border); }
+.community-toolbar .seg { margin: 0; flex: 1; min-width: 0; padding: 0; border-bottom: 0; }
 .community-write { flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 8px 12px; margin-block: 4px; border-radius: 10px; background: var(--accent); color: var(--on-accent); font-size: 14px; font-weight: 700; white-space: nowrap; }
 .community-write svg { width: 18px; height: 18px; }

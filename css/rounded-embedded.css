@@ -1,0 +1,96 @@
+/* Shared shape/space/state contract for the separately hosted documents. */
+button, input, select, textarea { border-radius: var(--radius-control); }
+button { transition: background-color var(--motion-fast), transform var(--motion-normal) var(--ease-out); }
+button:active { transform: scale(.98); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.admin-ui { background: var(--bg); color: var(--ink); font-family: "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif; }
+.admin-ui .admin-header { position: sticky; top: 0; z-index: 3; border: 0; border-radius: 0 0 var(--radius) var(--radius); box-shadow: var(--shadow); }
+.admin-ui .panel, .admin-ui .login, .admin-ui .admin-confirm { border: 0; border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: 28px; }
+.admin-ui input, .admin-ui textarea { min-height: 48px; background: var(--surface-soft); border-color: var(--border); padding: 12px 16px; }
+.admin-ui .primary, .admin-ui .tabs [aria-pressed="true"] { background: var(--accent); border-color: var(--accent); }
+.admin-ui .primary:hover { background: var(--accent-hover); }
+.admin-ui .tabs { background: var(--beige); padding: 6px; border-radius: var(--radius-control); }
+.admin-ui .tabs button { flex: 1; border: 0; border-radius: var(--radius-sm); }
+.admin-ui .record { border-radius: var(--radius-control); margin-block: 8px; padding: 16px; background: var(--surface-soft); }
+.admin-ui .record[aria-current="true"] { background: var(--blush); color: var(--accent); }
+.admin-ui .records li + li { border: 0; }
+.admin-ui .actions { gap: 12px; }
+.admin-ui .status { border-radius: var(--radius-control); }
+.admin-ui h1, .admin-ui h2 { letter-spacing: -.035em; }
+
+/* Conversation is framed by the same warm surfaces and rounded controls. */
+.app-frame { border-radius: var(--radius-lg); background: var(--bg); border-color: var(--border); box-shadow: var(--shadow-floating); }
+.experience .app-header { background: var(--surface); border: 0; box-shadow: var(--shadow); }
+.experience .app-header .icon-button { border-radius: var(--radius-sm); background: var(--surface-soft); }
+.messages { background: var(--bg); }
+.bubble, .conversation-form { border-radius: var(--radius); box-shadow: var(--shadow); }
+.bubble { background: var(--surface); padding: 16px 18px; }
+.user .bubble { background: var(--blush); color: var(--ink); border-radius: var(--radius) var(--radius) 8px var(--radius); }
+.conversation-form { padding: 20px; background: var(--surface); }
+.conversation-form legend { font-size: 14px; font-weight: 700; }
+.form-option, .reply-choices button, .category-chip, .examples button { border-radius: var(--radius-control); border-color: var(--border); min-height: 40px; }
+.form-option { padding: 12px 10px; background: var(--surface-soft); }
+.form-option:has(input:checked), .reply-choices button[aria-pressed="true"] { background: var(--blush); border-color: var(--accent); }
+.form-submit, .primary-button, .secondary-button { border-radius: var(--radius-control); min-height: 48px; }
+.form-submit, .primary-button { background: var(--accent); }
+.experience .food-card, .catalog-food, .scenario-card { border-radius: var(--radius); border-color: var(--border); overflow: hidden; box-shadow: var(--shadow); }
+.experience .food-card .food-photo { border-radius: 0; }
+.catalog-food { padding: var(--space-3); gap: var(--space-4); }
+.catalog-food img { border-radius: calc(var(--radius) - var(--space-3)); }
+.composer { border-radius: var(--radius-control); border-color: var(--border); background: var(--surface); }
+.composer-wrap { background: var(--surface); border-radius: var(--radius) var(--radius) 0 0; }
+.app-tabs { background: var(--surface); border: 0; padding: 8px; gap: 4px; }
+.app-tabs button { border-radius: var(--radius-control); min-height: 48px; }
+.app-tabs button[aria-selected="true"] { background: var(--blush); color: var(--accent); }
+dialog.sheet { border-radius: var(--radius-lg); border-color: var(--border); box-shadow: var(--shadow-floating); }
+.condition-note, .journey, .verification { border-radius: var(--radius-control); }
+@media (max-width: 720px) {
+  .admin-ui .panel, .admin-ui .login, .admin-ui .admin-confirm { padding: 20px; }
+  .admin-ui .admin-header { flex-wrap: wrap; }
+  .experience .app-header { border-radius: 0 0 var(--radius) var(--radius); }
+  .conversation-form { padding: 16px; }
+  .bubble { padding: 14px; }
+}
+
+.admin-ui, .experience { font-family: var(--font-ko); }
+.experience .brand-logo { overflow: visible; }
+.experience .brand-logo img { position: static; width: 100%; height: auto; transform: none; }
+
+body { word-break:keep-all; overflow-wrap:anywhere; }
+button, .food-card h3, .catalog-food strong { word-break:keep-all; overflow-wrap:anywhere; }
+
+/* Header controls match the host's 44px targets and 8px gaps. */
+.experience .app-header, .embedded .app-header, .embedded-desktop .app-header {
+  position: relative; height: 132px; padding: 16px 16px 72px; gap: 16px;
+  border-radius: 0; align-items: center;
+}
+.experience .brand-logo { display: flex; align-items: center; width: 96px; height: 44px; }
+.experience .header-divider { display: none; }
+.experience .app-header h1 { font-size: 16px; line-height: 1.5; white-space: normal; min-width: 0; }
+.experience .app-header .icon-button {
+  position: absolute; top: 72px; width: 44px; height: 44px; padding: 10px;
+  display: grid; place-items: center; border-radius: var(--radius-sm); line-height: 1;
+}
+.experience #reset { right: 120px; }
+.experience #open-help { right: 68px; }
+.embedded-desktop #reset { right: 172px; }
+.embedded-desktop #open-help { right: 120px; }
+.experience .app-header .icon-button svg { width: 24px; height: 24px; }
+/* Separate the send target from the textarea's scrolling area. */
+#chat-form { display: grid; grid-template-columns: minmax(0,1fr) 44px; gap: 8px; align-items: end; }
+#chat-form textarea { min-width: 0; height: 52px; min-height: 52px; max-height: 120px; padding: 12px; resize: none; font-size: 16px; line-height: 1.6; border-radius: var(--radius-control); }
+@supports (field-sizing: content) { #chat-form textarea { field-sizing: content; height: auto; } }
+#chat-form .send { position: static; width: 44px; height: 44px; margin-bottom: 4px; padding: 10px; border-radius: var(--radius-sm); }
+.composer-wrap { padding: 16px; border: 0; }
+.examples, .reply-choices, .category-catalog, .option-grid, .scenario-actions { gap: 8px; }
+.examples { margin-bottom: 12px; }
+.scroll-view { padding: 0 16px 24px; }
+.catalog-search { border-radius: var(--radius-control); min-height: 48px; padding: 12px 16px; margin-block: 12px 16px; }
+.catalog-search svg { flex: none; }
+.catalog-list, .food-list { gap: 16px; }
+.condition-section { border-bottom: 0; padding: 16px 0; }
+.condition-section + .condition-section { border-top: 1px solid var(--border); }
+.inspector > .primary-button { margin-top: 8px; }
+.form-submit, .primary-button, .secondary-button { padding: 12px 16px; }
+.app-tabs { padding: 8px 16px max(8px,env(safe-area-inset-bottom)); gap: 8px; }
+.app-tabs button[aria-selected=true]::after { content: none; }

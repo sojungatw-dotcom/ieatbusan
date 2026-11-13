@@ -57,6 +57,8 @@ const slides = Array.from({ length: 5 }, (_, i) => new Element({ foodId: 'f' + i
 const pages = Array.from({ length: 5 }, () => new Element());
 const track = new Element();
 Object.assign(track, { children: slides, clientWidth: 358, scrollLeft: 0 });
+let cardStride = null;
+slides.forEach((slide, i) => Object.defineProperty(slide, 'offsetLeft', { get: () => 12 + i * (cardStride ?? track.clientWidth) }));
 track.scrollTo = ({ left }) => { track.scrollLeft = left; track.events.scroll?.(); };
 const counter = new Element(), carousel = new Element(), autoplay = new Element();
 const elements = { '.home-track': track, '.home-status': counter,
@@ -112,6 +114,20 @@ windowEvents.resize();
 assert.equal(track.scrollLeft, 398 * 3);
 unmount();
 console.log('PASS native scroll state, navigation, boundaries, rerender, resize, and cleanup');
+
+cardStride = 286; // Narrow card plus gap, with the next card peeking into view.
+mount();
+pages[4].events.click();
+assert.equal(track.scrollLeft, 286 * 4);
+assert.equal(counter.textContent, '5 / 5');
+track.scrollLeft = 286 * 2 + 30;
+track.events.scroll();
+assert.equal(counter.textContent, '3 / 5');
+cardStride = 460; // Desktop two-up cards after resizing.
+windowEvents.resize();
+assert.equal(track.scrollLeft, 460 * 2);
+unmount(); cardStride = null;
+console.log('PASS measured card positions for mobile peeks, desktop cards and resize');
 
 mount();
 pages[0].events.click();advance(3999);assert.equal(counter.textContent,'1 / 5');
