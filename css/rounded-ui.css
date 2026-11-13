@@ -385,3 +385,69 @@ body:has(.fixed-cta, .comment-bar) .ieb-chat-launcher { bottom: calc(180px + env
 @media (min-width: 1200px) {
   .persistent-nav > .map-overview { grid-template-columns: minmax(0, 1.6fr) minmax(340px, 1fr); }
 }
+
+/* 2026-11: shared controls, concentric surfaces and geographic preview. */
+.search-input, .desktop-search { border-radius: var(--radius-control); padding: 0 16px; gap: 12px; align-items: center; }
+.search-input input, .desktop-search input { appearance: none; border: 0; border-radius: 0; box-shadow: none; background: transparent; padding: 0; height: 100%; min-height: 0; line-height: 1.5; outline: none; }
+.search-input svg, .desktop-search svg { width: 20px; height: 20px; flex: none; }
+.search-bar > .icon-btn { flex: none; }
+.category-art { width: 56px; height: 56px; flex: none; border-radius: 18px; background: var(--bg); padding: 6px; }
+.category-art img { padding: 0; object-fit: contain; }
+.category-tile:hover .category-art, .category-tile:focus-visible .category-art { background: var(--blush); }
+.category-tile { gap: 12px; }
+.btn, .chip, .icon-btn { flex-shrink: 0; }
+.btn > svg, .chip > svg, .icon-btn > svg { flex-shrink: 0; }
+.list-item .li-body, .action > span { min-width: 0; }
+.district-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 24px 24px 12px; }
+.district-heading h1 { margin: 0; font-size: clamp(21px,2vw,28px); line-height: 1.35; letter-spacing: -.035em; word-break: keep-all; }
+.district-heading .district-reset { display: inline-flex; align-items: center; justify-content: center; flex: none; min-height: 44px; padding: 10px 16px; border-radius: var(--radius-control); background: var(--surface); color: var(--ink-2); font-size: 12px; font-weight: 600; text-align: center; }
+.district-reset:hover { background: var(--blush); color: var(--accent); }
+.district-stage { position: relative; margin: 0 20px; aspect-ratio: 580 / 446; min-height: 260px; }
+.district-caption { position: absolute; top: 0; left: 4px; width: 44%; z-index: 1; pointer-events: none; }
+.district-caption p { margin: 0 0 16px; font-size: 13px; line-height: 1.65; color: var(--ink-2); word-break: keep-all; }
+.district-caption span { display: inline-flex; color: var(--accent); font-size: 13px; font-weight: 700; }
+.district-stage .district-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.district-region > path:not(.district-leader) { fill: #FFFDFA; stroke: #CFBCAB; stroke-width: 1; vector-effect: non-scaling-stroke; transition: fill 160ms ease, stroke 160ms ease; }
+.district-region:hover > path:not(.district-leader), .district-region:focus-visible > path:not(.district-leader), .district-region.is-selected > path:not(.district-leader) { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
+.district-label > text { fill: var(--ink-2); font-size: 16px; font-weight: 650; stroke: #FFFDFA; stroke-width: 2px; }
+.district-label > text.district-label-en { font-size: 12px; }
+.district-leader { stroke: #BBA491; stroke-width: 1; }
+.district-note { padding: 12px 24px 20px; line-height: 1.5; }
+@media (min-width: 960px) {
+ .category-art { width: 64px; height: 64px; border-radius: 20px; padding: 8px; }
+ .category-tile { padding: 20px; }
+ .map-overview .district-stage { flex: 1; min-height: 280px; aspect-ratio: auto; }
+}
+@media (max-width: 599px) {
+ .district-heading { padding: 20px 16px 12px; gap: 12px; }
+ .district-heading h1 { max-width: 68%; font-size: 21px; }
+ .district-heading .district-reset { padding-inline: 12px; }
+ .district-stage { margin-inline: 8px; }
+ .district-caption { left: 8px; width: 45%; }
+ .district-caption p { font-size: 11px; margin-bottom: 12px; }
+ .district-caption span { font-size: 12px; }
+}
+@media (max-width: 359px) { .category-art { width: 44px; height: 44px; padding: 4px; border-radius: 14px; } }
+.district-svg:has(.district-label[data-district="jung"]:hover) #district-shape-jung { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
+.district-svg:has(.district-label[data-district="seo"]:hover) #district-shape-seo { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
+.district-svg:has(.district-label[data-district="dong"]:hover) #district-shape-dong { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
+.district-svg:has(.district-label[data-district="yeongdo"]:hover) #district-shape-yeongdo { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
+.district-svg:has(.district-label[data-district="busanjin"]:hover) #district-shape-busanjin { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
+.district-svg:has(.district-label[data-district="dongnae"]:hover) #district-shape-dongnae { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
+.district-svg:has(.district-label[data-district="nam"]:hover) #district-shape-nam { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
+.district-svg:has(.district-label[data-district="buk"]:hover) #district-shape-buk { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
+.district-svg:has(.district-label[data-district="haeundae"]:hover) #district-shape-haeundae { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
+.district-svg:has(.district-label[data-district="saha"]:hover) #district-shape-saha { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
+.district-svg:has(.district-label[data-district="geumjeong"]:hover) #district-shape-geumjeong { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
+.district-svg:has(.district-label[data-district="gangseo"]:hover) #district-shape-gangseo { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
+.district-svg:has(.district-label[data-district="yeonje"]:hover) #district-shape-yeonje { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
+.district-svg:has(.district-label[data-district="suyeong"]:hover) #district-shape-suyeong { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
+.district-svg:has(.district-label[data-district="sasang"]:hover) #district-shape-sasang { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
+.district-svg:has(.district-label[data-district="gijang"]:hover) #district-shape-gijang { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
+
+/* Food artwork has one visible surface, with room for its silhouette. */
+.category-art { width: 60px; height: 60px; padding: 2px; background: transparent; border-radius: 0; }
+.category-tile:hover .category-art, .category-tile:focus-visible .category-art { background: transparent; }
+.category-tile { background: var(--surface-soft); }
+@media (min-width: 960px) { .category-tile { gap: 20px; padding: 20px 24px; min-height: 120px; font-size: 16px; } .category-art { width: 76px; height: 76px; padding: 2px; border-radius: 0; } }
+@media (max-width: 359px) { .category-art { width: 48px; height: 48px; padding: 0; } }

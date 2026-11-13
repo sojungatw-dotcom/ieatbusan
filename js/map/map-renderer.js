@@ -20,15 +20,15 @@
         if (!shapes?.viewBox || !data.districts.every(d => shapesByCode.get(d.code)?.path)) {
           return `<p class="district-note">${esc(mt('boundaryFallback'))}</p><div class="map-region-list">${data.districts.map(d => `<a class="chip${selected?.id === d.id ? ' active' : ''}" href="${overviewLink(d.id)}">${esc(districtName(d.index))}</a>`).join('')}</div>`;
         }
-        return `            <svg class="district-svg" viewBox="${shapes.viewBox}" role="group" aria-label="${esc(mt('mapLabel'))}">
+        return `            <svg class="district-svg" viewBox="${shapes.viewBox}" preserveAspectRatio="xMidYMin meet" role="group" aria-label="${esc(mt('mapLabel'))}">
               ${data.districts.map(d => {
                 const shape = shapesByCode.get(d.code), active = d.id === selected?.id;
                 return `<a class="district-region${active ? ' is-selected' : ''}" href="${overviewLink(d.id)}" aria-label="${esc(districtName(d.index))}" ${active ? 'aria-current="true"' : ''}>
-                  <title>${esc(districtName(d.index))}</title><path d="${shape.path}" fill-rule="evenodd"/></a>`;
+                  <title>${esc(districtName(d.index))}</title><path id="district-shape-${d.id}" d="${shape.path}" fill-rule="evenodd"/></a>`;
               }).join('')}
               ${data.districts.map(d => {
                 const shape = shapesByCode.get(d.code), active = d.id === selected?.id;
-                return `<a class="district-label${active ? ' is-selected' : ''}" href="${overviewLink(d.id)}" tabindex="-1" aria-hidden="true">
+                return `<a class="district-label${active ? ' is-selected' : ''}" data-district="${d.id}" href="${overviewLink(d.id)}" tabindex="-1" aria-hidden="true">
                   ${shape.anchor ? `<path class="district-leader" d="M${shape.anchor.join(',')}L${shape.label.join(',')}"/>` : ''}
                   <text x="${shape.label[0]}" y="${shape.label[1]}" text-anchor="middle" dominant-baseline="central"${getLanguage() === 'en' ? ' class="district-label-en"' : ''}>${esc(districtName(d.index))}</text></a>`;
               }).join('')}
@@ -39,9 +39,9 @@
         const places = data.restaurantsForSelection({ districtId: district });
         return `<main class="screen map-overview">${appHeader()}
           <section class="district-card" aria-label="${esc(mt('mapLabel'))}">
-            <div class="map-intro"><h1>${esc(mt('title'))}</h1><p>${esc(mt('hint'))}</p></div>
-            <div class="district-card-top"><span>${esc(selected ? districtName(selected.index) : mt('all'))}</span><a href="#/map" class="district-reset">${esc(mt('clear'))}</a></div>
-            ${districtMap(selected)}
+            <div class="district-heading"><h1>${esc(mt('title'))}</h1><a href="#/map" class="district-reset">${esc(mt('clear'))}</a></div>
+            <div class="district-stage"><div class="district-caption"><p>${esc(mt('hint'))}</p><span>${esc(selected ? districtName(selected.index) : mt('all'))}</span></div>
+            ${districtMap(selected)}</div>
             <p class="district-note">${esc(mt('preview'))}</p>
           </section>
           <div class="district-detail-action"><a class="btn btn-primary btn-block" href="${detailHref(district)}">${icon('map')}${esc(mt('detail'))}${icon('arrowRight')}</a></div>
