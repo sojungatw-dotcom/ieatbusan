@@ -82,3 +82,7 @@
 .map-restaurant-row:focus-visible { outline:2px solid var(--accent); outline-offset:-2px; }
 .map-restaurant-row:hover b { color:var(--accent); }
 @media (max-width:599px) { .map-restaurant-row img { width:60px; height:60px; } }
+
+/* Leave room for the floating food guide beside restaurant actions. */
+.sheet-list { padding-right: 76px; }
+.map-overview .map-food-list { padding-right: 76px; }

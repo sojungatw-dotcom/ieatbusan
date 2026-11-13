@@ -537,10 +537,9 @@
     return `<main class="screen has-tabbar">${appHeader()}
       <div class="section-head"><h1 class="page-title">${esc(t('tab.community'))}</h1><button class="text-btn" data-act="refreshCommunity">${esc(t('db.refresh'))}</button></div>
       ${viewer ? `<p class="country-feed-note">${esc(t('country.feedFirst', {country: Countries.name(viewer.countryCode, lang())}))}</p>` : ''}
-      <nav class="seg" aria-label="${esc(t('com.categories'))}">${tabs.map(([k, label]) => `<a href="#/community/${k}" ${k === tab ? 'aria-current="page"' : ''}>${esc(label)}</a>`).join('')}</nav>
+      <div class="community-toolbar"><nav class="seg" aria-label="${esc(t('com.categories'))}">${tabs.map(([k, label]) => `<a href="#/community/${k}" ${k === tab ? 'aria-current="page"' : ''}>${esc(label)}</a>`).join('')}</nav>
+      <a class="community-write" href="#/write" data-act="needLogin">${icon('pencil')}${esc(t('com.write'))}</a></div>
       ${list.length ? list.map(postCard).join('') : empty(t('com.empty'), 'community')}
-      <div style="height:72px"></div>
-      <a class="fab" href="#/write" data-act="needLogin">${icon('pencil')}${esc(t('com.write'))}</a>
       ${tabbar('community')}</main>`;
   };
 

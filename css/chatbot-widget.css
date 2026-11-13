@@ -3,3 +3,12 @@
 @media(max-width:740px){.ieb-chat-launcher{width:56px;height:56px;border-radius:16px;font-size:26px;right:16px;bottom:calc(80px + env(safe-area-inset-bottom,0px))}.ieb-chat-panel,.ieb-chat-panel.is-expanded{inset:0;width:100%;height:100dvh;border:0;border-radius:0;box-shadow:none}.ieb-chat-open{overflow:hidden}}
 
 .ieb-chat-control{position:absolute;z-index:2;top:14px;width:32px;height:36px;display:grid;place-items:center;border:0;border-radius:50%;background:#F5F2EC;color:#8f7c6a;font-size:27px;line-height:1;cursor:pointer}.ieb-chat-control:hover{background:#eae1d6}.ieb-chat-control:focus-visible{outline:2px solid #CC4936;outline-offset:2px}.ieb-chat-close{right:12px}.ieb-chat-expand{right:52px;font-size:24px}@media(max-width:740px){.ieb-chat-expand{display:none}.ieb-chat-control{top:max(12px,env(safe-area-inset-top,0px))}.ieb-chat-close{right:7px;font-size:24px}}
+
+/* Keep the launcher above navigation and persistent page actions. */
+@media (max-width: 959px) { .ieb-chat-launcher { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); } }
+body:has(.fixed-cta, .comment-bar) .ieb-chat-launcher { bottom: 96px; }
+@media (max-width: 959px) { body:has(.fixed-cta, .comment-bar) .ieb-chat-launcher { bottom: calc(160px + env(safe-area-inset-bottom, 0px)); } }
+
+/* Keep the floating guide beside the avatar or category choices on editing screens. */
+body:has(#profile-form, #write-form) .ieb-chat-launcher { top: calc(88px + env(safe-area-inset-top, 0px)); bottom: auto; }
+@media (max-width: 959px) { body:has(#profile-form, #write-form) .ieb-chat-launcher { top: calc(80px + env(safe-area-inset-top, 0px)); } }
