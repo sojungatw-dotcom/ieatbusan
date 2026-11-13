@@ -48,3 +48,9 @@
 고정 메뉴의 바깥 여백도 예약된 메뉴 영역이다. `.persistent-nav`의 고정 배경은 상단 전체와 데스크톱 좌측 레일(모바일에서는 하단)을 덮어 스크롤 내용이 모서리/여백으로 비치지 않게 한다. 배경 990, 메뉴 1000의 순서를 유지하며 배경은 입력을 가로채지 않는다. 관리자 전체 화면에는 생성하지 않는다. 2026-11-12 홈/해산물 목록의 1440px 데스크톱 및 390px 모바일 스크롤 화면에서 확인했다.
 
 작업 브랜치 feature/rounded-ui-20261112. 사용자 요청대로 코드와 문서를 push하며 Figma/배포/병합은 이번 작업에서 실행하지 않는다.
+
+## 2026-11-13 지도 및 아이콘 보완
+
+- **지도·Figma 아이콘 배포 요청 (2026-11-13):** 음식 카테고리 8종을 Figma에서 제작·SVG export하여 반영. 지도는 KOSTAT 2013 상세 TopoJSON에서 복원한 경계로 교체(최신 행정경계 아님), 제목/전체 지역 버튼 정렬, 우측 상단 지도 시작 배치, 구역 및 라벨 hover 채색 추가. 검색창 내부 입력창의 중복 곡률 제거, 카테고리 타일과 아이콘 여백 통일. 정적 빌드와 관련 검사 12개 통과. 사용자가 화면 검증 제한을 안내받은 뒤 배포를 명시 요청. 이번 수정의 실제 브라우저 시각 검증은 Computer Use URL 확인 실패로 미완료이며 전체 UI 검수 완료로 간주하지 않음. main push로 Vercel 자동 배포 진행. Figma: https://www.figma.com/design/2jTLllte3E3vg4fjrbvwj2
+
+검사: food-categories, map-districts, map-restaurant-overview, map-restaurant-locales, map-contracts, public-entry, i18n, home-carousel, chatbot, chatbot-live, chatbot-visitor, deployment. 라우트 구성 변경 없음.

@@ -72,3 +72,6 @@
 
 ## UI typography and logo derivative · 2026-11-12
 Pretendard Variable 1.3.9 by Kil Hyung-jin (SIL OFL 1.1), https://github.com/orioncactus/pretendard. License: assets/fonts/OFL-Pretendard.txt. Original supplied Muboso logos are retained; muboso-transparent.png is a background-removed derivative generated with imagegen. Eight category SVGs were redrawn for the shared rounded icon system. Existing Lucide icon attribution remains applicable.
+
+### 무보소 음식 아이콘 (2026-11-13)
+사용자 제공 스타일 참고를 바탕으로 제작한 8종 벡터. Figma 컴포넌트에서 SVG로 내보내 assets/categories에 반영. 편집 원본: https://www.figma.com/design/2jTLllte3E3vg4fjrbvwj2
