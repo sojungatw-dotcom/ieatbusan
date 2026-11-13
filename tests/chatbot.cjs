@@ -17,8 +17,8 @@ for(const scenario of context.FoodScenarios){let r=bot.respond(scenario.initial)
 console.log('PASS integrated shared food catalog, local assets and all '+context.FoodScenarios.length+' chatbot scenarios');
 
 // Exercise host controls without depending on cross-frame UI events.
-const events={},nodes=[],app={inert:false};
-function node(tag){const listeners={},classes=new Set();return {tag,hidden:false,isConnected:true,contentWindow:{postMessage(){}},classList:{toggle(key,value){if(value===undefined)value=!classes.has(key);if(value)classes.add(key);else classes.delete(key);return value;}},setAttribute(key,value){this[key]=String(value);},addEventListener(key,fn){listeners[key]=fn;},append(...items){nodes.push(...items);},focus(){},click(){listeners.click?.({currentTarget:this});}};}
+const events={},nodes=[],messages=[],app={inert:false};
+function node(tag){const listeners={},classes=new Set();return {tag,hidden:false,isConnected:true,contentWindow:{postMessage(value){messages.push(value);}},classList:{toggle(key,value){if(value===undefined)value=!classes.has(key);if(value)classes.add(key);else classes.delete(key);return value;}},setAttribute(key,value){this[key]=String(value);},addEventListener(key,fn){listeners[key]=fn;},append(...items){nodes.push(...items);},focus(){},click(){listeners.click?.({currentTarget:this});}};}
 const doc={createElement:node,getElementById:id=>id==='app'?app:nodes.find(n=>n.id===id),body:node('body'),addEventListener:(key,fn)=>events['document:'+key]=fn};
 const host={document:doc,location:{origin:'http://localhost',hash:''},history:{back(){}},matchMedia:()=>({matches:false,addEventListener(){}}),addEventListener:(key,fn)=>events[key]=fn};host.window=host;vm.createContext(host);vm.runInContext(fs.readFileSync(path.join(root,'js/chatbot-widget.js'),'utf8'),host);
 const launcher=nodes.find(n=>n.id==='ieb-chat-launcher');launcher.click();
@@ -27,4 +27,6 @@ const closer=nodes.find(n=>n['aria-label']==='챗봇 닫기');assert.ok(closer,'
 launcher.click();assert.equal(panel.hidden,false);assert.equal(nodes.filter(n=>n.tag==='iframe').length,1,'Reopening retains the existing conversation frame');
 const mainEntry=fs.readFileSync(path.join(root,'index.html'),'utf8');
 assert.ok(mainEntry.indexOf('js/chatbot-catalog.js')>=0 && mainEntry.indexOf('js/chatbot-catalog.js')<mainEntry.indexOf('js/chatbot-widget.js'),'Load DB projection before the host widget');
+assert.ok(mainEntry.indexOf('chatbot/locales.js')>=0 && mainEntry.indexOf('chatbot/locales.js')<mainEntry.indexOf('js/chatbot-widget.js'),'Load shared language module before the host widget');
+host.Store={get:()=>({lang:'ja'})};host.IEBChatbot.sync();assert.equal(messages.at(-1).language,'ja','Missing optional locale module must not force Korean');
 console.log('PASS host-owned close control, retained conversation frame and catalog script integration');

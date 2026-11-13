@@ -217,7 +217,6 @@
       <section class="category-section" aria-labelledby="category-title"><div class="home-toolbar"><h2 id="category-title">${esc(t('category.title'))}</h2><a class="category-all" href="#/category/all">${esc(t('search.seeAll'))}${icon('chevronRight')}</a></div>
         <div class="category-grid">${window.IEBFoodCategories.groups.map(group => `<a class="category-tile" href="#/category/${group.id}"><span class="category-art"><img src="${group.image}" width="72" height="72" alt="" loading="lazy"></span><span>${esc(window.IEBFoodCategories.name(group, lang()))}</span></a>`).join('')}</div>
       </section>
-      <div class="home-explore"><a class="explore-card" href="#/map">${icon('map')}<span>${esc(t('food.cta'))}</span>${icon('chevronRight')}</a><a class="explore-card" href="#/community">${icon('community')}<span>${esc(t('tab.community'))}</span>${icon('chevronRight')}</a></div>
       ${tabbar('home')}</main>`;
   };
   V.category = ({ id = 'all' }) => {

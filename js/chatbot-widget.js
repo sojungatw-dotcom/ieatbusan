@@ -1,6 +1,6 @@
 (function(){
  'use strict';
- const L=window.ChatLocale,language=()=>L?.normalize(window.Store?.get()?.lang||document.documentElement?.lang)||'ko',t=key=>L?.t(key,language())||key;
+ const L=window.ChatLocale,language=()=>{const selected=window.Store?.get()?.lang||document.documentElement?.lang||'ko';return L?L.normalize(selected):(['ko','en','zh','ja'].includes(selected)?selected:'ko');},t=key=>L?.t(key,language())||key;
  const mobile=window.matchMedia('(max-width:740px)'),route='#/chatbot';
  const launcher=document.createElement('button');launcher.type='button';launcher.className='ieb-chat-launcher';launcher.id='ieb-chat-launcher';launcher.textContent='무';launcher.setAttribute('aria-label','나에게 맞는 부산의 맛 챗봇 열기');launcher.setAttribute('aria-controls','ieb-chat-panel');launcher.setAttribute('aria-expanded','false');
  const panel=document.createElement('section');panel.id='ieb-chat-panel';panel.className='ieb-chat-panel';panel.setAttribute('aria-label','나에게 맞는 부산의 맛');panel.hidden=true;
