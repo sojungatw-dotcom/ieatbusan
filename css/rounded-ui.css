@@ -543,3 +543,8 @@ body:has(#write-form) .ieb-chat-launcher { display: none; }
  .home-screen .home-carousel .section-head {padding-right:48px;}
 }
 @media(max-width:359px){.tabbar .tab {padding-inline:2px;font-size:10px;white-space:nowrap;}}
+
+@media(max-width:599px) and (max-height:650px) {
+ .home-screen .home-slide .rank {display:none;}
+ .home-screen .home-slide::after {background:linear-gradient(180deg,rgba(0,0,0,.48),rgba(0,0,0,.82));}
+}
