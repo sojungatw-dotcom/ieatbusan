@@ -444,3 +444,10 @@ body:has(.fixed-cta, .comment-bar) .ieb-chat-launcher { bottom: calc(180px + env
 .district-svg:has(.district-label[data-district="suyeong"]:hover) #district-shape-suyeong { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
 .district-svg:has(.district-label[data-district="sasang"]:hover) #district-shape-sasang { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
 .district-svg:has(.district-label[data-district="gijang"]:hover) #district-shape-gijang { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
+
+/* Food artwork has one visible surface, with room for its silhouette. */
+.category-art { width: 60px; height: 60px; padding: 2px; background: transparent; border-radius: 0; }
+.category-tile:hover .category-art, .category-tile:focus-visible .category-art { background: transparent; }
+.category-tile { background: var(--surface-soft); }
+@media (min-width: 960px) { .category-tile { gap: 20px; padding: 20px 24px; min-height: 120px; font-size: 16px; } .category-art { width: 76px; height: 76px; padding: 2px; border-radius: 0; } }
+@media (max-width: 359px) { .category-art { width: 48px; height: 48px; padding: 0; } }
