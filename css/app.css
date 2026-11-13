@@ -322,9 +322,6 @@ html[lang="en"] .info-row { grid-template-columns: 96px 1fr; }
 .post-text h3 { margin: 0; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .post-text p { margin: 0; font-size: 13px; color: var(--ink-2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .post-foot { display: flex; gap: 14px; }
-.fab { position: fixed; z-index: 45; right: max(16px, calc(50% - 215px + 16px)); bottom: calc(var(--tabbar-h) + 16px + env(safe-area-inset-bottom, 0px)); display: inline-flex; align-items: center; gap: 6px; height: 46px; padding: 0 20px 0 16px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-weight: 700; box-shadow: 0 4px 12px rgba(204, 73, 54, .35); }
-@media (min-width: 600px) { .fab { bottom: calc(var(--tabbar-h) + 40px); } }
-.fab svg { width: 18px; height: 18px; }
 .post-body { padding: 16px; display: grid; gap: 14px; }
 .post-body h1 { margin: 0; font-size: 20px; line-height: 1.4; }
 .post-body .content { margin: 0; font-size: 15px; line-height: 1.75; white-space: pre-wrap; word-break: break-word; }
@@ -416,7 +413,6 @@ details.faq p { margin: 0 0 16px; color: var(--ink-2); font-size: 14px; }
 .persistent-nav .login > .top-right { display: none; }
 
 
-.persistent-nav .fab { bottom: calc(var(--footer-h) + 16px); }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; scroll-behavior: auto !important; }
@@ -475,3 +471,9 @@ details.faq p { margin: 0 0 16px; color: var(--ink-2); font-size: 14px; }
 .comment-controls button:disabled { opacity:.5; }
 .comment-edit { display:grid; gap:4px; }
 .comment-edit textarea { width:100%; resize:vertical; }
+
+/* Keep community actions in document flow; category tabs scroll independently. */
+.community-toolbar { display: flex; align-items: center; gap: 12px; padding: 0 16px; border-bottom: 1px solid var(--border); }
+.community-toolbar .seg { flex: 1; min-width: 0; padding: 0; border-bottom: 0; }
+.community-write { flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 8px 12px; margin-block: 4px; border-radius: 10px; background: var(--accent); color: var(--on-accent); font-size: 14px; font-weight: 700; white-space: nowrap; }
+.community-write svg { width: 18px; height: 18px; }

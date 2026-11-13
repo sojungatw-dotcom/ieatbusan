@@ -1,0 +1,645 @@
+{
+  "date": "2026-11-13",
+  "base": "7cba5c3",
+  "environment": "Local browser using synthetic public food/post/account fixtures; no production writes. Map SDK unavailable in fixture.",
+  "before": {
+    "communityWriteOverlapsChat": true,
+    "commentSubmitOverlapsChat": true
+  },
+  "checks": [
+    {
+      "blockedControls": [],
+      "community": {
+        "belowRefresh": true,
+        "count": 1,
+        "rightOfCategories": true
+      },
+      "height": 740,
+      "overflow": false,
+      "route": "#/community/popular",
+      "width": 320
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 740,
+      "overflow": false,
+      "route": "#/food/haeundae-galbi",
+      "width": 320
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 740,
+      "overflow": false,
+      "route": "#/post/p1",
+      "width": 320
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 740,
+      "overflow": false,
+      "route": "#/profile",
+      "width": 320
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 740,
+      "overflow": false,
+      "route": "#/write",
+      "width": 320
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 740,
+      "overflow": false,
+      "route": "#/map/haeundae-galbi",
+      "width": 320
+    },
+    {
+      "blockedControls": [],
+      "community": {
+        "belowRefresh": true,
+        "count": 1,
+        "rightOfCategories": true
+      },
+      "height": 844,
+      "overflow": false,
+      "route": "#/community/popular",
+      "width": 390
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 844,
+      "overflow": false,
+      "route": "#/food/haeundae-galbi",
+      "width": 390
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 844,
+      "overflow": false,
+      "route": "#/post/p1",
+      "width": 390
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 844,
+      "overflow": false,
+      "route": "#/profile",
+      "width": 390
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 844,
+      "overflow": false,
+      "route": "#/write",
+      "width": 390
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 844,
+      "overflow": false,
+      "route": "#/map/haeundae-galbi",
+      "width": 390
+    },
+    {
+      "blockedControls": [],
+      "community": {
+        "belowRefresh": true,
+        "count": 1,
+        "rightOfCategories": true
+      },
+      "height": 1024,
+      "overflow": false,
+      "route": "#/community/popular",
+      "width": 768
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 1024,
+      "overflow": false,
+      "route": "#/food/haeundae-galbi",
+      "width": 768
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 1024,
+      "overflow": false,
+      "route": "#/post/p1",
+      "width": 768
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 1024,
+      "overflow": false,
+      "route": "#/profile",
+      "width": 768
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 1024,
+      "overflow": false,
+      "route": "#/write",
+      "width": 768
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 1024,
+      "overflow": false,
+      "route": "#/map/haeundae-galbi",
+      "width": 768
+    },
+    {
+      "blockedControls": [],
+      "community": {
+        "belowRefresh": true,
+        "count": 1,
+        "rightOfCategories": true
+      },
+      "height": 720,
+      "overflow": false,
+      "route": "#/community/popular",
+      "width": 960
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 720,
+      "overflow": false,
+      "route": "#/food/haeundae-galbi",
+      "width": 960
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 720,
+      "overflow": false,
+      "route": "#/post/p1",
+      "width": 960
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 720,
+      "overflow": false,
+      "route": "#/profile",
+      "width": 960
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 720,
+      "overflow": false,
+      "route": "#/write",
+      "width": 960
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 720,
+      "overflow": false,
+      "route": "#/map/haeundae-galbi",
+      "width": 960
+    },
+    {
+      "blockedControls": [],
+      "community": {
+        "belowRefresh": true,
+        "count": 1,
+        "rightOfCategories": true
+      },
+      "height": 900,
+      "overflow": false,
+      "route": "#/community/popular",
+      "width": 1440
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 900,
+      "overflow": false,
+      "route": "#/food/haeundae-galbi",
+      "width": 1440
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 900,
+      "overflow": false,
+      "route": "#/post/p1",
+      "width": 1440
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 900,
+      "overflow": false,
+      "route": "#/profile",
+      "width": 1440
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 900,
+      "overflow": false,
+      "route": "#/write",
+      "width": 1440
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 900,
+      "overflow": false,
+      "route": "#/map/haeundae-galbi",
+      "width": 1440
+    },
+    {
+      "blockedControls": [],
+      "community": {
+        "belowRefresh": true,
+        "count": 1,
+        "rightOfCategories": true
+      },
+      "height": 390,
+      "overflow": false,
+      "route": "#/community/popular",
+      "width": 844
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 390,
+      "overflow": false,
+      "route": "#/food/haeundae-galbi",
+      "width": 844
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 390,
+      "overflow": false,
+      "route": "#/post/p1",
+      "width": 844
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 390,
+      "overflow": false,
+      "route": "#/profile",
+      "width": 844
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 390,
+      "overflow": false,
+      "route": "#/write",
+      "width": 844
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 390,
+      "overflow": false,
+      "route": "#/map/haeundae-galbi",
+      "width": 844
+    },
+    {
+      "lang": "en",
+      "blockedControls": [],
+      "community": {
+        "belowRefresh": true,
+        "count": 1,
+        "rightOfCategories": true
+      },
+      "height": 740,
+      "overflow": false,
+      "route": "#/community/popular",
+      "width": 320
+    },
+    {
+      "lang": "en",
+      "blockedControls": [],
+      "community": null,
+      "height": 740,
+      "overflow": false,
+      "route": "#/write",
+      "width": 320
+    },
+    {
+      "lang": "zh",
+      "blockedControls": [],
+      "community": {
+        "belowRefresh": true,
+        "count": 1,
+        "rightOfCategories": true
+      },
+      "height": 740,
+      "overflow": false,
+      "route": "#/community/popular",
+      "width": 320
+    },
+    {
+      "lang": "zh",
+      "blockedControls": [],
+      "community": null,
+      "height": 740,
+      "overflow": false,
+      "route": "#/write",
+      "width": 320
+    },
+    {
+      "lang": "ja",
+      "blockedControls": [],
+      "community": {
+        "belowRefresh": true,
+        "count": 1,
+        "rightOfCategories": true
+      },
+      "height": 740,
+      "overflow": false,
+      "route": "#/community/popular",
+      "width": 320
+    },
+    {
+      "lang": "ja",
+      "blockedControls": [],
+      "community": null,
+      "height": 740,
+      "overflow": false,
+      "route": "#/write",
+      "width": 320
+    },
+    {
+      "lang": "ko",
+      "blockedControls": [],
+      "community": {
+        "belowRefresh": true,
+        "count": 1,
+        "rightOfCategories": true
+      },
+      "height": 740,
+      "overflow": false,
+      "route": "#/community/popular",
+      "width": 320
+    },
+    {
+      "lang": "ko",
+      "blockedControls": [],
+      "community": null,
+      "height": 740,
+      "overflow": false,
+      "route": "#/write",
+      "width": 320
+    },
+    {
+      "lang": "en",
+      "blockedControls": [],
+      "community": {
+        "belowRefresh": true,
+        "count": 1,
+        "rightOfCategories": true
+      },
+      "height": 900,
+      "overflow": false,
+      "route": "#/community/popular",
+      "width": 1440
+    },
+    {
+      "lang": "en",
+      "blockedControls": [],
+      "community": null,
+      "height": 900,
+      "overflow": false,
+      "route": "#/write",
+      "width": 1440
+    },
+    {
+      "lang": "zh",
+      "blockedControls": [],
+      "community": {
+        "belowRefresh": true,
+        "count": 1,
+        "rightOfCategories": true
+      },
+      "height": 900,
+      "overflow": false,
+      "route": "#/community/popular",
+      "width": 1440
+    },
+    {
+      "lang": "zh",
+      "blockedControls": [],
+      "community": null,
+      "height": 900,
+      "overflow": false,
+      "route": "#/write",
+      "width": 1440
+    },
+    {
+      "lang": "ja",
+      "blockedControls": [],
+      "community": {
+        "belowRefresh": true,
+        "count": 1,
+        "rightOfCategories": true
+      },
+      "height": 900,
+      "overflow": false,
+      "route": "#/community/popular",
+      "width": 1440
+    },
+    {
+      "lang": "ja",
+      "blockedControls": [],
+      "community": null,
+      "height": 900,
+      "overflow": false,
+      "route": "#/write",
+      "width": 1440
+    },
+    {
+      "lang": "ko",
+      "blockedControls": [],
+      "community": {
+        "belowRefresh": true,
+        "count": 1,
+        "rightOfCategories": true
+      },
+      "height": 900,
+      "overflow": false,
+      "route": "#/community/popular",
+      "width": 1440
+    },
+    {
+      "lang": "ko",
+      "blockedControls": [],
+      "community": null,
+      "height": 900,
+      "overflow": false,
+      "route": "#/write",
+      "width": 1440
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 844,
+      "overflow": false,
+      "route": "#/home",
+      "width": 390
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 844,
+      "overflow": false,
+      "route": "#/category/all",
+      "width": 390
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 844,
+      "overflow": false,
+      "route": "#/search",
+      "width": 390
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 844,
+      "overflow": false,
+      "route": "#/saved",
+      "width": 390
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 844,
+      "overflow": false,
+      "route": "#/my",
+      "width": 390
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 844,
+      "overflow": false,
+      "route": "#/settings",
+      "width": 390
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 844,
+      "overflow": false,
+      "route": "#/map",
+      "width": 390
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 844,
+      "overflow": false,
+      "route": "#/place/haeundae-galbi/0",
+      "width": 390
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 900,
+      "overflow": false,
+      "route": "#/home",
+      "width": 1440
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 900,
+      "overflow": false,
+      "route": "#/category/all",
+      "width": 1440
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 900,
+      "overflow": false,
+      "route": "#/search",
+      "width": 1440
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 900,
+      "overflow": false,
+      "route": "#/saved",
+      "width": 1440
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 900,
+      "overflow": false,
+      "route": "#/my",
+      "width": 1440
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 900,
+      "overflow": false,
+      "route": "#/settings",
+      "width": 1440
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 900,
+      "overflow": false,
+      "route": "#/map",
+      "width": 1440
+    },
+    {
+      "blockedControls": [],
+      "community": null,
+      "height": 900,
+      "overflow": false,
+      "route": "#/place/haeundae-galbi/0",
+      "width": 1440
+    }
+  ],
+  "limits": [
+    "Native Android/iOS WebView, on-screen keyboard, and live map SDK rendering were not tested.",
+    "Measurements cover action controls and horizontal overflow. Floating launcher may overlay ordinary scrollable content; it does not reserve a full page gutter."
+  ],
+  "validation": {
+    "staticBuild": "passed",
+    "testScripts": 40,
+    "testScriptsPassed": 40,
+    "gitDiffCheck": "passed"
+  },
+  "sourceHashes": {
+    "css/app.css": "264d4770499273c6eac74b622439309f36ed528eb9e9469f71a6f78962425726",
+    "css/chatbot-widget.css": "fe56990a6890e8d45b30630a1a531007e3afdc7bab40ef92e39ae55a4665d4c0",
+    "css/map.css": "e3143143559e9d6df5e88af72a5fccd54328a596bd8e208ae1d6e6ecd0acdd5c",
+    "css/responsive.css": "bee51c9eba8c2e7cae9a304f3310a7a6dae50a77d42a5b3800025ea21ccfb8ef",
+    "index.html": "09bd58d8514f741c4db0ced7d4a19216ede910023b7518b13bad1acd63127cac",
+    "js/app.js": "f94f5caa63cb438de125c9c16845f366a0ca11ae10fa06719a4b67f671f2bb00"
+  }
+}
