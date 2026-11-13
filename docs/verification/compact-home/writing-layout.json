@@ -1,0 +1,974 @@
+[
+  {
+    "lang": "ko",
+    "width": 320,
+    "route": "write",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "등록",
+        "rect": {
+          "x": 240,
+          "y": 16,
+          "width": 64,
+          "height": 44,
+          "top": 16,
+          "right": 304,
+          "bottom": 60,
+          "left": 240
+        }
+      },
+      {
+        "text": "맛집 후기",
+        "rect": {
+          "x": 16,
+          "y": 125.6875,
+          "width": 90.65625,
+          "height": 44,
+          "top": 125.6875,
+          "right": 106.65625,
+          "bottom": 169.6875,
+          "left": 16
+        }
+      },
+      {
+        "text": "질문",
+        "rect": {
+          "x": 114.65625,
+          "y": 125.6875,
+          "width": 90.671875,
+          "height": 44,
+          "top": 125.6875,
+          "right": 205.328125,
+          "bottom": 169.6875,
+          "left": 114.65625
+        }
+      },
+      {
+        "text": "자유",
+        "rect": {
+          "x": 213.328125,
+          "y": 125.6875,
+          "width": 90.671875,
+          "height": 44,
+          "top": 125.6875,
+          "right": 304,
+          "bottom": 169.6875,
+          "left": 213.328125
+        }
+      }
+    ]
+  },
+  {
+    "lang": "ko",
+    "width": 320,
+    "route": "community",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "글쓰기",
+        "rect": {
+          "x": 220.28125,
+          "y": 104,
+          "width": 83.71875,
+          "height": 44,
+          "top": 104,
+          "right": 304,
+          "bottom": 148,
+          "left": 220.28125
+        }
+      }
+    ]
+  },
+  {
+    "lang": "ko",
+    "width": 390,
+    "route": "write",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "등록",
+        "rect": {
+          "x": 306,
+          "y": 16,
+          "width": 64,
+          "height": 44,
+          "top": 16,
+          "right": 370,
+          "bottom": 60,
+          "left": 306
+        }
+      },
+      {
+        "text": "맛집 후기",
+        "rect": {
+          "x": 20,
+          "y": 125.6875,
+          "width": 111.328125,
+          "height": 44,
+          "top": 125.6875,
+          "right": 131.328125,
+          "bottom": 169.6875,
+          "left": 20
+        }
+      },
+      {
+        "text": "질문",
+        "rect": {
+          "x": 139.328125,
+          "y": 125.6875,
+          "width": 111.34375,
+          "height": 44,
+          "top": 125.6875,
+          "right": 250.671875,
+          "bottom": 169.6875,
+          "left": 139.328125
+        }
+      },
+      {
+        "text": "자유",
+        "rect": {
+          "x": 258.671875,
+          "y": 125.6875,
+          "width": 111.328125,
+          "height": 44,
+          "top": 125.6875,
+          "right": 370,
+          "bottom": 169.6875,
+          "left": 258.671875
+        }
+      }
+    ]
+  },
+  {
+    "lang": "ko",
+    "width": 390,
+    "route": "community",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "글쓰기",
+        "rect": {
+          "x": 286.28125,
+          "y": 104,
+          "width": 83.71875,
+          "height": 44,
+          "top": 104,
+          "right": 370,
+          "bottom": 148,
+          "left": 286.28125
+        }
+      }
+    ]
+  },
+  {
+    "lang": "ko",
+    "width": 1440,
+    "route": "write",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "등록",
+        "rect": {
+          "x": 1328,
+          "y": 26,
+          "width": 64,
+          "height": 44,
+          "top": 26,
+          "right": 1392,
+          "bottom": 70,
+          "left": 1328
+        }
+      },
+      {
+        "text": "맛집 후기",
+        "rect": {
+          "x": 360,
+          "y": 141.6875,
+          "width": 320,
+          "height": 44,
+          "top": 141.6875,
+          "right": 680,
+          "bottom": 185.6875,
+          "left": 360
+        }
+      },
+      {
+        "text": "질문",
+        "rect": {
+          "x": 688,
+          "y": 141.6875,
+          "width": 320,
+          "height": 44,
+          "top": 141.6875,
+          "right": 1008,
+          "bottom": 185.6875,
+          "left": 688
+        }
+      },
+      {
+        "text": "자유",
+        "rect": {
+          "x": 1016,
+          "y": 141.6875,
+          "width": 320,
+          "height": 44,
+          "top": 141.6875,
+          "right": 1336,
+          "bottom": 185.6875,
+          "left": 1016
+        }
+      }
+    ]
+  },
+  {
+    "lang": "ko",
+    "width": 1440,
+    "route": "community",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "글쓰기",
+        "rect": {
+          "x": 1246.875,
+          "y": 120,
+          "width": 89.125,
+          "height": 44,
+          "top": 120,
+          "right": 1336,
+          "bottom": 164,
+          "left": 1246.875
+        }
+      }
+    ]
+  },
+  {
+    "lang": "en",
+    "width": 320,
+    "route": "write",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "Post",
+        "rect": {
+          "x": 240,
+          "y": 16,
+          "width": 64,
+          "height": 44,
+          "top": 16,
+          "right": 304,
+          "bottom": 60,
+          "left": 240
+        }
+      },
+      {
+        "text": "Reviews",
+        "rect": {
+          "x": 16,
+          "y": 125.6875,
+          "width": 90.65625,
+          "height": 44,
+          "top": 125.6875,
+          "right": 106.65625,
+          "bottom": 169.6875,
+          "left": 16
+        }
+      },
+      {
+        "text": "Q&A",
+        "rect": {
+          "x": 114.65625,
+          "y": 125.6875,
+          "width": 90.671875,
+          "height": 44,
+          "top": 125.6875,
+          "right": 205.328125,
+          "bottom": 169.6875,
+          "left": 114.65625
+        }
+      },
+      {
+        "text": "General",
+        "rect": {
+          "x": 213.328125,
+          "y": 125.6875,
+          "width": 90.671875,
+          "height": 44,
+          "top": 125.6875,
+          "right": 304,
+          "bottom": 169.6875,
+          "left": 213.328125
+        }
+      }
+    ]
+  },
+  {
+    "lang": "en",
+    "width": 320,
+    "route": "community",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "New post",
+        "rect": {
+          "x": 196.3125,
+          "y": 104,
+          "width": 107.6875,
+          "height": 44,
+          "top": 104,
+          "right": 304,
+          "bottom": 148,
+          "left": 196.3125
+        }
+      }
+    ]
+  },
+  {
+    "lang": "en",
+    "width": 390,
+    "route": "write",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "Post",
+        "rect": {
+          "x": 306,
+          "y": 16,
+          "width": 64,
+          "height": 44,
+          "top": 16,
+          "right": 370,
+          "bottom": 60,
+          "left": 306
+        }
+      },
+      {
+        "text": "Reviews",
+        "rect": {
+          "x": 20,
+          "y": 125.6875,
+          "width": 111.328125,
+          "height": 44,
+          "top": 125.6875,
+          "right": 131.328125,
+          "bottom": 169.6875,
+          "left": 20
+        }
+      },
+      {
+        "text": "Q&A",
+        "rect": {
+          "x": 139.328125,
+          "y": 125.6875,
+          "width": 111.34375,
+          "height": 44,
+          "top": 125.6875,
+          "right": 250.671875,
+          "bottom": 169.6875,
+          "left": 139.328125
+        }
+      },
+      {
+        "text": "General",
+        "rect": {
+          "x": 258.671875,
+          "y": 125.6875,
+          "width": 111.328125,
+          "height": 44,
+          "top": 125.6875,
+          "right": 370,
+          "bottom": 169.6875,
+          "left": 258.671875
+        }
+      }
+    ]
+  },
+  {
+    "lang": "en",
+    "width": 390,
+    "route": "community",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "New post",
+        "rect": {
+          "x": 262.3125,
+          "y": 104,
+          "width": 107.6875,
+          "height": 44,
+          "top": 104,
+          "right": 370,
+          "bottom": 148,
+          "left": 262.3125
+        }
+      }
+    ]
+  },
+  {
+    "lang": "en",
+    "width": 1440,
+    "route": "write",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "Post",
+        "rect": {
+          "x": 1328,
+          "y": 26,
+          "width": 64,
+          "height": 44,
+          "top": 26,
+          "right": 1392,
+          "bottom": 70,
+          "left": 1328
+        }
+      },
+      {
+        "text": "Reviews",
+        "rect": {
+          "x": 360,
+          "y": 141.6875,
+          "width": 320,
+          "height": 44,
+          "top": 141.6875,
+          "right": 680,
+          "bottom": 185.6875,
+          "left": 360
+        }
+      },
+      {
+        "text": "Q&A",
+        "rect": {
+          "x": 688,
+          "y": 141.6875,
+          "width": 320,
+          "height": 44,
+          "top": 141.6875,
+          "right": 1008,
+          "bottom": 185.6875,
+          "left": 688
+        }
+      },
+      {
+        "text": "General",
+        "rect": {
+          "x": 1016,
+          "y": 141.6875,
+          "width": 320,
+          "height": 44,
+          "top": 141.6875,
+          "right": 1336,
+          "bottom": 185.6875,
+          "left": 1016
+        }
+      }
+    ]
+  },
+  {
+    "lang": "en",
+    "width": 1440,
+    "route": "community",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "New post",
+        "rect": {
+          "x": 1224.75,
+          "y": 120,
+          "width": 111.25,
+          "height": 44,
+          "top": 120,
+          "right": 1336,
+          "bottom": 164,
+          "left": 1224.75
+        }
+      }
+    ]
+  },
+  {
+    "lang": "ja",
+    "width": 320,
+    "route": "write",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "投稿",
+        "rect": {
+          "x": 240,
+          "y": 16,
+          "width": 64,
+          "height": 44,
+          "top": 16,
+          "right": 304,
+          "bottom": 60,
+          "left": 240
+        }
+      },
+      {
+        "text": "グルメレビュー",
+        "rect": {
+          "x": 16,
+          "y": 125.6875,
+          "width": 90.65625,
+          "height": 62.28125,
+          "top": 125.6875,
+          "right": 106.65625,
+          "bottom": 187.96875,
+          "left": 16
+        }
+      },
+      {
+        "text": "質問",
+        "rect": {
+          "x": 114.65625,
+          "y": 125.6875,
+          "width": 90.671875,
+          "height": 62.28125,
+          "top": 125.6875,
+          "right": 205.328125,
+          "bottom": 187.96875,
+          "left": 114.65625
+        }
+      },
+      {
+        "text": "雑談",
+        "rect": {
+          "x": 213.328125,
+          "y": 125.6875,
+          "width": 90.671875,
+          "height": 62.28125,
+          "top": 125.6875,
+          "right": 304,
+          "bottom": 187.96875,
+          "left": 213.328125
+        }
+      }
+    ]
+  },
+  {
+    "lang": "ja",
+    "width": 320,
+    "route": "community",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "投稿する",
+        "rect": {
+          "x": 202,
+          "y": 104,
+          "width": 102,
+          "height": 44,
+          "top": 104,
+          "right": 304,
+          "bottom": 148,
+          "left": 202
+        }
+      }
+    ]
+  },
+  {
+    "lang": "ja",
+    "width": 390,
+    "route": "write",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "投稿",
+        "rect": {
+          "x": 306,
+          "y": 16,
+          "width": 64,
+          "height": 44,
+          "top": 16,
+          "right": 370,
+          "bottom": 60,
+          "left": 306
+        }
+      },
+      {
+        "text": "グルメレビュー",
+        "rect": {
+          "x": 20,
+          "y": 125.6875,
+          "width": 111.328125,
+          "height": 62.28125,
+          "top": 125.6875,
+          "right": 131.328125,
+          "bottom": 187.96875,
+          "left": 20
+        }
+      },
+      {
+        "text": "質問",
+        "rect": {
+          "x": 139.328125,
+          "y": 125.6875,
+          "width": 111.34375,
+          "height": 62.28125,
+          "top": 125.6875,
+          "right": 250.671875,
+          "bottom": 187.96875,
+          "left": 139.328125
+        }
+      },
+      {
+        "text": "雑談",
+        "rect": {
+          "x": 258.671875,
+          "y": 125.6875,
+          "width": 111.328125,
+          "height": 62.28125,
+          "top": 125.6875,
+          "right": 370,
+          "bottom": 187.96875,
+          "left": 258.671875
+        }
+      }
+    ]
+  },
+  {
+    "lang": "ja",
+    "width": 390,
+    "route": "community",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "投稿する",
+        "rect": {
+          "x": 268,
+          "y": 104,
+          "width": 102,
+          "height": 44,
+          "top": 104,
+          "right": 370,
+          "bottom": 148,
+          "left": 268
+        }
+      }
+    ]
+  },
+  {
+    "lang": "ja",
+    "width": 1440,
+    "route": "write",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "投稿",
+        "rect": {
+          "x": 1328,
+          "y": 26,
+          "width": 64,
+          "height": 44,
+          "top": 26,
+          "right": 1392,
+          "bottom": 70,
+          "left": 1328
+        }
+      },
+      {
+        "text": "グルメレビュー",
+        "rect": {
+          "x": 360,
+          "y": 141.6875,
+          "width": 320,
+          "height": 44,
+          "top": 141.6875,
+          "right": 680,
+          "bottom": 185.6875,
+          "left": 360
+        }
+      },
+      {
+        "text": "質問",
+        "rect": {
+          "x": 688,
+          "y": 141.6875,
+          "width": 320,
+          "height": 44,
+          "top": 141.6875,
+          "right": 1008,
+          "bottom": 185.6875,
+          "left": 688
+        }
+      },
+      {
+        "text": "雑談",
+        "rect": {
+          "x": 1016,
+          "y": 141.6875,
+          "width": 320,
+          "height": 44,
+          "top": 141.6875,
+          "right": 1336,
+          "bottom": 185.6875,
+          "left": 1016
+        }
+      }
+    ]
+  },
+  {
+    "lang": "ja",
+    "width": 1440,
+    "route": "community",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "投稿する",
+        "rect": {
+          "x": 1230,
+          "y": 120,
+          "width": 106,
+          "height": 44,
+          "top": 120,
+          "right": 1336,
+          "bottom": 164,
+          "left": 1230
+        }
+      }
+    ]
+  },
+  {
+    "lang": "zh",
+    "width": 320,
+    "route": "write",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "发布",
+        "rect": {
+          "x": 240,
+          "y": 16,
+          "width": 64,
+          "height": 44,
+          "top": 16,
+          "right": 304,
+          "bottom": 60,
+          "left": 240
+        }
+      },
+      {
+        "text": "美食点评",
+        "rect": {
+          "x": 16,
+          "y": 125.6875,
+          "width": 90.65625,
+          "height": 44,
+          "top": 125.6875,
+          "right": 106.65625,
+          "bottom": 169.6875,
+          "left": 16
+        }
+      },
+      {
+        "text": "提问",
+        "rect": {
+          "x": 114.65625,
+          "y": 125.6875,
+          "width": 90.671875,
+          "height": 44,
+          "top": 125.6875,
+          "right": 205.328125,
+          "bottom": 169.6875,
+          "left": 114.65625
+        }
+      },
+      {
+        "text": "闲聊",
+        "rect": {
+          "x": 213.328125,
+          "y": 125.6875,
+          "width": 90.671875,
+          "height": 44,
+          "top": 125.6875,
+          "right": 304,
+          "bottom": 169.6875,
+          "left": 213.328125
+        }
+      }
+    ]
+  },
+  {
+    "lang": "zh",
+    "width": 320,
+    "route": "community",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "写帖子",
+        "rect": {
+          "x": 215,
+          "y": 104,
+          "width": 89,
+          "height": 44,
+          "top": 104,
+          "right": 304,
+          "bottom": 148,
+          "left": 215
+        }
+      }
+    ]
+  },
+  {
+    "lang": "zh",
+    "width": 390,
+    "route": "write",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "发布",
+        "rect": {
+          "x": 306,
+          "y": 16,
+          "width": 64,
+          "height": 44,
+          "top": 16,
+          "right": 370,
+          "bottom": 60,
+          "left": 306
+        }
+      },
+      {
+        "text": "美食点评",
+        "rect": {
+          "x": 20,
+          "y": 125.6875,
+          "width": 111.328125,
+          "height": 44,
+          "top": 125.6875,
+          "right": 131.328125,
+          "bottom": 169.6875,
+          "left": 20
+        }
+      },
+      {
+        "text": "提问",
+        "rect": {
+          "x": 139.328125,
+          "y": 125.6875,
+          "width": 111.34375,
+          "height": 44,
+          "top": 125.6875,
+          "right": 250.671875,
+          "bottom": 169.6875,
+          "left": 139.328125
+        }
+      },
+      {
+        "text": "闲聊",
+        "rect": {
+          "x": 258.671875,
+          "y": 125.6875,
+          "width": 111.328125,
+          "height": 44,
+          "top": 125.6875,
+          "right": 370,
+          "bottom": 169.6875,
+          "left": 258.671875
+        }
+      }
+    ]
+  },
+  {
+    "lang": "zh",
+    "width": 390,
+    "route": "community",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "写帖子",
+        "rect": {
+          "x": 281,
+          "y": 104,
+          "width": 89,
+          "height": 44,
+          "top": 104,
+          "right": 370,
+          "bottom": 148,
+          "left": 281
+        }
+      }
+    ]
+  },
+  {
+    "lang": "zh",
+    "width": 1440,
+    "route": "write",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "发布",
+        "rect": {
+          "x": 1328,
+          "y": 26,
+          "width": 64,
+          "height": 44,
+          "top": 26,
+          "right": 1392,
+          "bottom": 70,
+          "left": 1328
+        }
+      },
+      {
+        "text": "美食点评",
+        "rect": {
+          "x": 360,
+          "y": 141.6875,
+          "width": 320,
+          "height": 44,
+          "top": 141.6875,
+          "right": 680,
+          "bottom": 185.6875,
+          "left": 360
+        }
+      },
+      {
+        "text": "提问",
+        "rect": {
+          "x": 688,
+          "y": 141.6875,
+          "width": 320,
+          "height": 44,
+          "top": 141.6875,
+          "right": 1008,
+          "bottom": 185.6875,
+          "left": 688
+        }
+      },
+      {
+        "text": "闲聊",
+        "rect": {
+          "x": 1016,
+          "y": 141.6875,
+          "width": 320,
+          "height": 44,
+          "top": 141.6875,
+          "right": 1336,
+          "bottom": 185.6875,
+          "left": 1016
+        }
+      }
+    ]
+  },
+  {
+    "lang": "zh",
+    "width": 1440,
+    "route": "community",
+    "overflow": false,
+    "buttons": [
+      {
+        "text": "写帖子",
+        "rect": {
+          "x": 1242,
+          "y": 120,
+          "width": 94,
+          "height": 44,
+          "top": 120,
+          "right": 1336,
+          "bottom": 164,
+          "left": 1242
+        }
+      }
+    ]
+  }
+]

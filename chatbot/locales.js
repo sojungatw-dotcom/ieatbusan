@@ -38,6 +38,10 @@
  add('현재 DB에 있는 항목만 표시합니다. 음식이 추가되면 목록 새로고침 후 선택 항목에도 반영됩니다.','현재 DB에 있는 항목만 표시합니다. 음식이 추가되면 목록 새로고침 후 선택 항목에도 반영됩니다.','Only items present in the database are shown. Newly added foods appear after refreshing the catalog.','仅显示数据库中已有的项目。新增食物会在刷新目录后反映到选项中。','データベースにある項目のみを表示します。料理が追加されると、一覧更新後に選択肢にも反映されます。');
  add('사진 준비 중','사진 준비 중','Photo unavailable','暂无图片','写真準備中');
  add('현재 DB에서 사용할 수 없는 선택이 있어 예시를 멈췄습니다. 표시된 항목으로 계속해 주세요.','현재 DB에서 사용할 수 없는 선택이 있어 예시를 멈췄습니다. 표시된 항목으로 계속해 주세요.','This example stopped because an option is absent from the current database. Continue with the displayed choices.','当前数据库缺少某个选项，示例已暂停。请使用页面中的选项继续。','現在のデータベースにない選択肢があるため、例を停止しました。表示された項目で続けてください。');
+ add("DB에 등록된 음식만 표시합니다.","DB에 등록된 음식만 표시합니다.","Only foods registered in the database are shown.","仅显示数据库中登记的食物。","データベースに登録された料理のみ表示します。");
+ add("재사용 허가 미확인 (제공 안내 기준)","재사용 허가 미확인 (제공 안내 기준)","Reuse permission unconfirmed (based on supplied information)","再使用许可未确认（依据所提供的信息）","再利用の許可は未確認（提供情報に基づく）");
+ add("공공누리 표기·원문 조건 추가 확인 필요","공공누리 표기·원문 조건 추가 확인 필요","KOGL indicated; check the original usage terms","标注韩国公共许可；须核实原始使用条件","KOGL表記あり・原文の利用条件を要確認");
+ add("공공누리 제1유형 (제공 안내 기준)","공공누리 제1유형 (제공 안내 기준)","KOGL Type 1 (based on supplied information)","韩国公共许可第1类型（依据所提供的信息）","KOGL第1類型（提供情報に基づく）");
  const api={languages,dictionary,normalize:l=>languages.includes(l)?l:'ko',t(key,language='ko',values={}){const row=dictionary[key];let value=row?.[api.normalize(language)]??row?.ko??key;for(const [k,v] of Object.entries(values))value=value.split('{'+k+'}').join(String(v));return value;},ui:(value,language)=>api.t(value,language),map:(type,source,language)=>Object.fromEntries(Object.keys(source).map(k=>[k,api.t(type+'.'+k,language)])),add};
  root.ChatLocale=api;if(typeof module!=='undefined')module.exports=api;
 })(globalThis);

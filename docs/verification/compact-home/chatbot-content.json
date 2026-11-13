@@ -1,0 +1,59 @@
+[
+  {
+    "language": "en",
+    "foods": 43,
+    "scenarios": 44,
+    "stages": [
+      "category",
+      "wanted",
+      "confirm",
+      "results",
+      "veganReview",
+      "empty",
+      "allergies",
+      "relax",
+      "conflict",
+      "edit",
+      "profile"
+    ],
+    "failures": []
+  },
+  {
+    "language": "ja",
+    "foods": 43,
+    "scenarios": 44,
+    "stages": [
+      "category",
+      "wanted",
+      "confirm",
+      "results",
+      "veganReview",
+      "empty",
+      "allergies",
+      "relax",
+      "conflict",
+      "edit",
+      "profile"
+    ],
+    "failures": []
+  },
+  {
+    "language": "zh",
+    "foods": 43,
+    "scenarios": 44,
+    "stages": [
+      "category",
+      "wanted",
+      "confirm",
+      "results",
+      "veganReview",
+      "empty",
+      "allergies",
+      "relax",
+      "conflict",
+      "edit",
+      "profile"
+    ],
+    "failures": []
+  }
+]

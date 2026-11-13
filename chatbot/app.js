@@ -79,7 +79,7 @@
   if(food.allergenLabels.length)content.append(el('p','',T('원문 관련 항목: ')+food.allergenLabels.join(', ')));
   content.append(orderSection(food));
   if(food.places.length)content.append(el('h3','',T('함께 살펴볼 등록 식당')),visitList(food));
-  if(food.credit){const credit=el('p','credit-link',T('사진: ')+(food.credit.author||T('원문 출처 참고'))+' · '+(food.credit.license||''));if(/^https:\/\//.test(food.credit.url||'')){const link=el('a','',T('사진 원문 ↗'));link.href=food.credit.url;link.target='_blank';link.rel='noopener noreferrer';credit.append(document.createTextNode(' · '),link);}content.append(credit);}
+  if(food.credit){const credit=el('p','credit-link',T('사진: '));const author=el('span','',food.credit.author||T('원문 출처 참고'));if(/[가-힣]/.test(food.credit.author||''))author.lang='ko';credit.append(author,document.createTextNode(' · '+T(food.credit.license||'')));if(/^https:\/\//.test(food.credit.url||'')){const link=el('a','',T('사진 원문 ↗'));link.href=food.credit.url;link.target='_blank';link.rel='noopener noreferrer';credit.append(document.createTextNode(' · '),link);}content.append(credit);}
   $('food-detail').append(content);openDialog('food-dialog');
  }
  function disableOldChoices(){document.querySelectorAll('.reply-choices button,.conversation-form input,.conversation-form button').forEach(node=>{node.disabled=true;});}

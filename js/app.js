@@ -108,7 +108,7 @@
   function tabbar(active) {
     const tabs = [['home', 'home', '#/home'], ['map', 'map', '#/map'], ['community', 'community', '#/community'], ['saved', 'heart', '#/saved'], ['my', 'user', '#/my']];
     return `<nav class="tabbar" aria-label="${esc(t('nav.main'))}"><a class="nav-brand" href="#/home" aria-label="${esc(t('brand.home'))}"><svg viewBox="190 35 1450 735" aria-hidden="true" focusable="false"><image href="assets/brand/muboso-transparent.png" width="1921" height="819"/></svg></a>${tabs.map(([k, ic, href]) =>
-      `<a class="tab" href="${href}" ${k === active ? 'aria-current="page"' : ''}>${icon(ic)}<span>${esc(t('tab.' + k))}</span></a>`).join('')}<div class="nav-tools"><a href="#/search">${icon('search')}<span class="nav-search-label">${lang() === 'ko' ? '<span>음식이나 식당을</span><span>검색해 보세요</span>' : esc(t('search.placeholder'))}</span></a><a href="#/settings">${icon('settings')}${esc(t('set.title'))}</a></div></nav>`;
+      `<a class="tab" href="${href}" ${k === active ? 'aria-current="page"' : ''}>${icon(ic)}<span>${esc(t('tab.' + k))}</span></a>`).join('')}<div class="nav-tools"><a href="#/settings">${icon('settings')}${esc(t('set.title'))}</a></div></nav>`;
   }
   const empty = (msg, ic = 'info', extra = '') => `<div class="empty">${icon(ic)}<p>${esc(msg)}</p>${extra}</div>`;
   function foodRow(f, { save = true } = {}) {
@@ -201,7 +201,6 @@
     homeFeaturedPeriod = period;
     const featured = window.IEBFeaturedFoods.select(FOODS, featuredAt);
     return `<main class="screen has-tabbar home-screen">${appHeader()}
-      <section class="home-intro"><span class="eyebrow" lang="en">I EAT BUSAN</span><h1>${esc(t('home.discover'))}</h1><p>${esc(t('home.discoverSub'))}</p></section>
       <section class="home-carousel" aria-labelledby="home-featured-title" aria-roledescription="${esc(t('home.carousel'))}">
         <div class="section-head"><h2 id="home-featured-title">${esc(t('home.featured'))}</h2></div>
         <p class="home-swipe-hint" id="home-swipe-hint">${esc(t('home.swipe'))}</p>
@@ -272,7 +271,7 @@
       counter.textContent = `${index + 1} / ${slides.length}`;
       pages.forEach((page, i) => page.setAttribute('aria-current', String(i === index)));
     };
-    // Measure actual cards: phone peeks and desktop two-up cards have different strides.
+    // Measure actual cards so the single-card rail remains accurate after resizing.
     const slideLeft = i => slides[i].offsetLeft - slides[0].offsetLeft;
     const move = (to, instant = false) => {
       const targetIndex = Math.max(0, Math.min(slides.length - 1, to));
@@ -534,12 +533,11 @@
     }
     const tabs = [['popular', t('com.tab.popular')], ['latest', t('com.tab.latest')], ['review', t('cat.review')], ['question', t('cat.question')], ['free', t('cat.free')]];
     return `<main class="screen has-tabbar">${appHeader()}
-      <div class="section-head"><h1 class="page-title">${esc(t('tab.community'))}</h1><button class="text-btn" data-act="refreshCommunity">${esc(t('db.refresh'))}</button></div>
+      <div class="section-head"><h1 class="page-title">${esc(t('tab.community'))}</h1><a class="btn btn-primary btn-sm community-write" href="#/write" data-act="needLogin">${icon('pencil')}${esc(t('com.write'))}</a></div>
       ${viewer ? `<p class="country-feed-note">${esc(t('country.feedFirst', {country: Countries.name(viewer.countryCode, lang())}))}</p>` : ''}
       <nav class="seg" aria-label="${esc(t('com.categories'))}">${tabs.map(([k, label]) => `<a href="#/community/${k}" ${k === tab ? 'aria-current="page"' : ''}>${esc(label)}</a>`).join('')}</nav>
       ${list.length ? list.map(postCard).join('') : empty(t('com.empty'), 'community')}
-      <div style="height:72px"></div>
-      <a class="fab" href="#/write" data-act="needLogin">${icon('pencil')}${esc(t('com.write'))}</a>
+
       ${tabbar('community')}</main>`;
   };
 
@@ -582,10 +580,10 @@
     draftPhotos = [];
     return `<main class="screen">
       <header class="page-header"><button class="icon-btn" data-act="back" data-fallback="#/community" aria-label="${esc(t('common.cancel'))}">${icon('close')}</button>
-        <h1 class="page-title" style="text-align:center">${esc(t('write.title'))}</h1><button form="write-form" type="submit" style="font-weight:700;color:var(--accent);padding:0 8px">${esc(t('write.submit'))}</button></header>
+        <h1 class="page-title" style="text-align:center">${esc(t('write.title'))}</h1><button form="write-form" type="submit" class="btn btn-primary btn-sm write-submit">${esc(t('write.submit'))}</button></header>
       <form class="form" id="write-form" data-form="write">
         <div class="field"><span class="label">${esc(t('write.category'))}</span>
-          <div style="display:flex;gap:8px" role="radiogroup" aria-label="${esc(t('write.category'))}">${['review', 'question', 'free'].map((c, i) => `<label class="chip ${i === 0 ? 'active' : ''}" data-cat-chip><input type="radio" name="cat" value="${c}" ${i === 0 ? 'checked' : ''} class="sr-only">${esc(catLabel(c))}</label>`).join('')}</div></div>
+          <div class="write-categories" role="radiogroup" aria-label="${esc(t('write.category'))}">${['review', 'question', 'free'].map((c, i) => `<label class="chip ${i === 0 ? 'active' : ''}" data-cat-chip><input type="radio" name="cat" value="${c}" ${i === 0 ? 'checked' : ''} class="sr-only">${esc(catLabel(c))}</label>`).join('')}</div></div>
         <input class="input title-input" id="w-title" name="title" maxlength="60" placeholder="${esc(t('write.titlePh'))}" aria-label="${esc(t('write.titlePh'))}">
         <textarea class="textarea" id="w-body" name="body" maxlength="2000" placeholder="${esc(t('write.bodyPh'))}" aria-label="${esc(t('write.bodyPh'))}"></textarea>
         <div class="field"><span class="label">${esc(t('write.photos'))}</span>
