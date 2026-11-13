@@ -9,3 +9,5 @@ Validation: tools/audit-open-map.cjs checks KO/EN/JA/ZH × 320/390/768/960/1440p
 Figma existing editable frames: desktop 45:868, mobile 45:1256 in 2jTLllte3E3vg4fjrbvwj2. Mobile viewport clips below-fold content while retaining editable layers. Shared navigation, district paths, text and image assets preserved; redundant sidebar search hidden.
 
 Local screenshots and reports are included. Public verification follows deployment, using UI_AUDIT_URL=https://ieatbusan-eight.vercel.app with the same audit.
+
+Production: ad0daa2 Vercel success. Served CSS matches local source exactly. The same 20 layouts and selection/reset interactions passed against the live site; public screenshots and report included.
