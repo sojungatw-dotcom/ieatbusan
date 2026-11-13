@@ -20,7 +20,7 @@
         if (!shapes?.viewBox || !data.districts.every(d => shapesByCode.get(d.code)?.path)) {
           return `<p class="district-note">${esc(mt('boundaryFallback'))}</p><div class="map-region-list">${data.districts.map(d => `<a class="chip${selected?.id === d.id ? ' active' : ''}" href="${overviewLink(d.id)}">${esc(districtName(d.index))}</a>`).join('')}</div>`;
         }
-        return `            <svg class="district-svg" viewBox="${shapes.viewBox}" preserveAspectRatio="xMaxYMin meet" role="group" aria-label="${esc(mt('mapLabel'))}">
+        return `            <svg class="district-svg" viewBox="${shapes.viewBox}" preserveAspectRatio="xMidYMin meet" role="group" aria-label="${esc(mt('mapLabel'))}">
               ${data.districts.map(d => {
                 const shape = shapesByCode.get(d.code), active = d.id === selected?.id;
                 return `<a class="district-region${active ? ' is-selected' : ''}" href="${overviewLink(d.id)}" aria-label="${esc(districtName(d.index))}" ${active ? 'aria-current="true"' : ''}>
