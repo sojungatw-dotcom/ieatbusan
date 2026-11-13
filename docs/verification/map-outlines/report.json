@@ -1,0 +1,1286 @@
+{
+  "cases": 128,
+  "errors": [],
+  "results": [
+    {
+      "width": "2.5px",
+      "id": "jung",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "jung",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "jung",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "jung",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "seo",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "seo",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "seo",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "seo",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "dong",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "dong",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "dong",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "dong",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "yeongdo",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "yeongdo",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "yeongdo",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "yeongdo",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "busanjin",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "busanjin",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "busanjin",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "busanjin",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "dongnae",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "dongnae",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "dongnae",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "dongnae",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "nam",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "nam",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "nam",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "nam",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "buk",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "buk",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "buk",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "buk",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "haeundae",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "haeundae",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "haeundae",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "haeundae",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "saha",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "saha",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "saha",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "saha",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "geumjeong",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "geumjeong",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "geumjeong",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "geumjeong",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "gangseo",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "gangseo",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "gangseo",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "gangseo",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "yeonje",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "yeonje",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "yeonje",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "yeonje",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "suyeong",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "suyeong",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "suyeong",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "suyeong",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "sasang",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "sasang",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "sasang",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "sasang",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "gijang",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "gijang",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "gijang",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "gijang",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "jung",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "jung",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "jung",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "jung",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "seo",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "seo",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "seo",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "seo",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "dong",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "dong",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "dong",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "dong",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "yeongdo",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "yeongdo",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "yeongdo",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "yeongdo",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "busanjin",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "busanjin",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "busanjin",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "busanjin",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "dongnae",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "dongnae",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "dongnae",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "dongnae",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "nam",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "nam",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "nam",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "nam",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "buk",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "buk",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "buk",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "buk",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "haeundae",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "haeundae",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "haeundae",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "haeundae",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "saha",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "saha",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "saha",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "saha",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "geumjeong",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "geumjeong",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "geumjeong",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "geumjeong",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "gangseo",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "gangseo",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "gangseo",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "gangseo",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "yeonje",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "yeonje",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "yeonje",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "yeonje",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "suyeong",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "suyeong",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "suyeong",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "suyeong",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "sasang",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "sasang",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "sasang",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "sasang",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "gijang",
+      "state": "shape-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "gijang",
+      "state": "label-hover",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "gijang",
+      "state": "keyboard-focus",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    },
+    {
+      "width": "2.5px",
+      "id": "gijang",
+      "state": "selected",
+      "display": "block",
+      "fill": "none",
+      "pointer": "none",
+      "samePath": true,
+      "aboveEveryRegion": true
+    }
+  ]
+}

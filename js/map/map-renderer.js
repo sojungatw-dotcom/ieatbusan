@@ -26,6 +26,7 @@
                 return `<a class="district-region${active ? ' is-selected' : ''}" href="${overviewLink(d.id)}" aria-label="${esc(districtName(d.index))}" ${active ? 'aria-current="true"' : ''}>
                   <title>${esc(districtName(d.index))}</title><path id="district-shape-${d.id}" d="${shape.path}" fill-rule="evenodd"/></a>`;
               }).join('')}
+              <g class="district-outlines" aria-hidden="true" pointer-events="none">${data.districts.map(d => `<path class="district-outline${d.id === selected?.id ? ' is-selected' : ''}" data-district="${d.id}" d="${shapesByCode.get(d.code).path}"/>`).join('')}</g>
               ${data.districts.map(d => {
                 const shape = shapesByCode.get(d.code), active = d.id === selected?.id;
                 return `<a class="district-label${active ? ' is-selected' : ''}" data-district="${d.id}" href="${overviewLink(d.id)}" tabindex="-1" aria-hidden="true">

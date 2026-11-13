@@ -404,10 +404,10 @@ body:has(.fixed-cta, .comment-bar) .ieb-chat-launcher { bottom: calc(180px + env
 .district-reset:hover { background: var(--blush); color: var(--accent); }
 .district-stage { position: relative; margin: 0 20px; aspect-ratio: 580 / 446; min-height: 260px; }
 .district-caption { position: absolute; top: 0; left: 4px; width: 44%; z-index: 1; pointer-events: none; }
-.district-caption p { margin: 0 0 16px; font-size: 13px; line-height: 1.65; color: var(--ink-2); word-break: keep-all; }
+.district-caption p { margin: 0 0 8px; font-size: 13px; line-height: 1.65; color: var(--ink-2); word-break: keep-all; }
 .district-caption span { display: inline-flex; color: var(--accent); font-size: 13px; font-weight: 700; }
 .district-stage .district-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.district-region > path:not(.district-leader) { fill: #FFFDFA; stroke: #CFBCAB; stroke-width: 1; vector-effect: non-scaling-stroke; transition: fill 160ms ease, stroke 160ms ease; }
+.district-region > path:not(.district-leader) { fill: #FFFDFA; stroke: #CFBCAB; stroke-width: 1.5; vector-effect: non-scaling-stroke; transition: fill 160ms ease, stroke 160ms ease; }
 .district-region:hover > path:not(.district-leader), .district-region:focus-visible > path:not(.district-leader), .district-region.is-selected > path:not(.district-leader) { fill: #F2C6B8; stroke: var(--accent); stroke-width: 1.6; }
 .district-label > text { fill: var(--ink-2); font-size: 16px; font-weight: 650; stroke: #FFFDFA; stroke-width: 2px; }
 .district-label > text.district-label-en { font-size: 12px; }
@@ -424,7 +424,7 @@ body:has(.fixed-cta, .comment-bar) .ieb-chat-launcher { bottom: calc(180px + env
  .district-heading .district-reset { padding-inline: 12px; }
  .district-stage { margin-inline: 8px; }
  .district-caption { left: 8px; width: 45%; }
- .district-caption p { font-size: 11px; margin-bottom: 12px; }
+ .district-caption p { font-size: 11px; margin-bottom: 6px; }
  .district-caption span { font-size: 12px; }
 }
 @media (max-width: 359px) { .category-art { width: 44px; height: 44px; padding: 4px; border-radius: 14px; } }
@@ -460,3 +460,24 @@ body:has(.fixed-cta, .comment-bar) .ieb-chat-launcher { bottom: calc(180px + env
 @media (max-width: 959px) { .persistent-nav .tabbar { padding: 12px 12px max(12px,env(safe-area-inset-bottom)); } .tab { border-radius: var(--radius-sm); } }
 
 .ieb-chat-panel.has-dialog > .ieb-chat-control { visibility: hidden; pointer-events: none; }
+
+/* Paint complete highlighted perimeters after every district fill. Adjacent polygons cannot cover them. */
+.district-outlines { pointer-events: none; }
+.district-outline { display: none; fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; pointer-events: none; }
+.district-outline.is-selected { display: block; }
+.district-svg:has(#district-shape-jung:hover, .district-region:focus-visible > #district-shape-jung, .district-label[data-district='jung']:hover) .district-outline[data-district='jung'] { display: block; }
+.district-svg:has(#district-shape-seo:hover, .district-region:focus-visible > #district-shape-seo, .district-label[data-district='seo']:hover) .district-outline[data-district='seo'] { display: block; }
+.district-svg:has(#district-shape-dong:hover, .district-region:focus-visible > #district-shape-dong, .district-label[data-district='dong']:hover) .district-outline[data-district='dong'] { display: block; }
+.district-svg:has(#district-shape-yeongdo:hover, .district-region:focus-visible > #district-shape-yeongdo, .district-label[data-district='yeongdo']:hover) .district-outline[data-district='yeongdo'] { display: block; }
+.district-svg:has(#district-shape-busanjin:hover, .district-region:focus-visible > #district-shape-busanjin, .district-label[data-district='busanjin']:hover) .district-outline[data-district='busanjin'] { display: block; }
+.district-svg:has(#district-shape-dongnae:hover, .district-region:focus-visible > #district-shape-dongnae, .district-label[data-district='dongnae']:hover) .district-outline[data-district='dongnae'] { display: block; }
+.district-svg:has(#district-shape-nam:hover, .district-region:focus-visible > #district-shape-nam, .district-label[data-district='nam']:hover) .district-outline[data-district='nam'] { display: block; }
+.district-svg:has(#district-shape-buk:hover, .district-region:focus-visible > #district-shape-buk, .district-label[data-district='buk']:hover) .district-outline[data-district='buk'] { display: block; }
+.district-svg:has(#district-shape-haeundae:hover, .district-region:focus-visible > #district-shape-haeundae, .district-label[data-district='haeundae']:hover) .district-outline[data-district='haeundae'] { display: block; }
+.district-svg:has(#district-shape-saha:hover, .district-region:focus-visible > #district-shape-saha, .district-label[data-district='saha']:hover) .district-outline[data-district='saha'] { display: block; }
+.district-svg:has(#district-shape-geumjeong:hover, .district-region:focus-visible > #district-shape-geumjeong, .district-label[data-district='geumjeong']:hover) .district-outline[data-district='geumjeong'] { display: block; }
+.district-svg:has(#district-shape-gangseo:hover, .district-region:focus-visible > #district-shape-gangseo, .district-label[data-district='gangseo']:hover) .district-outline[data-district='gangseo'] { display: block; }
+.district-svg:has(#district-shape-yeonje:hover, .district-region:focus-visible > #district-shape-yeonje, .district-label[data-district='yeonje']:hover) .district-outline[data-district='yeonje'] { display: block; }
+.district-svg:has(#district-shape-suyeong:hover, .district-region:focus-visible > #district-shape-suyeong, .district-label[data-district='suyeong']:hover) .district-outline[data-district='suyeong'] { display: block; }
+.district-svg:has(#district-shape-sasang:hover, .district-region:focus-visible > #district-shape-sasang, .district-label[data-district='sasang']:hover) .district-outline[data-district='sasang'] { display: block; }
+.district-svg:has(#district-shape-gijang:hover, .district-region:focus-visible > #district-shape-gijang, .district-label[data-district='gijang']:hover) .district-outline[data-district='gijang'] { display: block; }
