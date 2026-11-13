@@ -7,3 +7,5 @@ Chatbot title and desktop four controls now share a 64px header. Controls are 32
 Local headless Chrome: 4 languages × 4 widths (320,390,960,1440), all 158 rows = 2528 row bounds checks; title clipping and toolbar center alignment; hover and keyboard focus; help opening/closing and host close. tools/audit-interaction-polish.cjs reproduces and accepts UI_AUDIT_URL for production. Related chatbot/map regression tests and deployment build pass. Screenshots included.
 
 Figma: restaurant rows in existing map frames updated; four existing chatbot headers reduced; editable desktop toolbar 62:969 created in existing final UI page.
+
+Public verification: 8c5ab31 deployed successfully. All 16 cases / 2528 restaurant rows passed on the live site, including translated title alignment and help/close interactions. The audit waits for the iframe title to render before checking its header, avoiding a network-load race.

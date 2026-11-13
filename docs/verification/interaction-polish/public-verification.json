@@ -1,0 +1,103 @@
+{
+  "applicationCommit": "8c5ab31",
+  "deployment": "Vercel success",
+  "cases": [
+    {
+      "width": 320,
+      "lang": "ko",
+      "rows": 158,
+      "titleClipped": false
+    },
+    {
+      "width": 320,
+      "lang": "en",
+      "rows": 158,
+      "titleClipped": false
+    },
+    {
+      "width": 320,
+      "lang": "ja",
+      "rows": 158,
+      "titleClipped": false
+    },
+    {
+      "width": 320,
+      "lang": "zh",
+      "rows": 158,
+      "titleClipped": false
+    },
+    {
+      "width": 390,
+      "lang": "ko",
+      "rows": 158,
+      "titleClipped": false
+    },
+    {
+      "width": 390,
+      "lang": "en",
+      "rows": 158,
+      "titleClipped": false
+    },
+    {
+      "width": 390,
+      "lang": "ja",
+      "rows": 158,
+      "titleClipped": false
+    },
+    {
+      "width": 390,
+      "lang": "zh",
+      "rows": 158,
+      "titleClipped": false
+    },
+    {
+      "width": 960,
+      "lang": "ko",
+      "rows": 158,
+      "titleClipped": false
+    },
+    {
+      "width": 960,
+      "lang": "en",
+      "rows": 158,
+      "titleClipped": false
+    },
+    {
+      "width": 960,
+      "lang": "ja",
+      "rows": 158,
+      "titleClipped": false
+    },
+    {
+      "width": 960,
+      "lang": "zh",
+      "rows": 158,
+      "titleClipped": false
+    },
+    {
+      "width": 1440,
+      "lang": "ko",
+      "rows": 158,
+      "titleClipped": false
+    },
+    {
+      "width": 1440,
+      "lang": "en",
+      "rows": 158,
+      "titleClipped": false
+    },
+    {
+      "width": 1440,
+      "lang": "ja",
+      "rows": 158,
+      "titleClipped": false
+    },
+    {
+      "width": 1440,
+      "lang": "zh",
+      "rows": 158,
+      "titleClipped": false
+    }
+  ],
+  "rows": 2528
+}
