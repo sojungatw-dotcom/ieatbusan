@@ -373,3 +373,8 @@ Object.assign(window.I18N.ko,{'chatbot.title':'나에게 맞는 부산의 맛','
 Object.assign(window.I18N.en,{'chatbot.title':'Your taste of Busan','chatbot.intro':'Talk to your food guide.'});
 Object.assign(window.I18N.zh,{'chatbot.title':'适合您的釜山美味','chatbot.intro':'与美食助手对话。'});
 Object.assign(window.I18N.ja,{'chatbot.title':'あなたに合う釜山の味','chatbot.intro':'料理ガイドと話してみましょう。'});
+
+Object.assign(I18N.ko,{"support.emptyNotices":"등록된 공지사항이 없습니다.","support.emptyFaq":"등록된 질문이 없습니다."});
+Object.assign(I18N.en,{"support.emptyNotices":"No notices published yet.","support.emptyFaq":"No questions published yet."});
+Object.assign(I18N.zh,{"support.emptyNotices":"暂无公告。","support.emptyFaq":"暂无常见问题。"});
+Object.assign(I18N.ja,{"support.emptyNotices":"お知らせはまだありません。","support.emptyFaq":"よくある質問はまだありません。"});

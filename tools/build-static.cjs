@@ -28,7 +28,7 @@ function verifyScripts(dir) {
 verifyScripts(path.join(root, 'js'));
 verifyScripts(path.join(root, 'api'));
 verifyScripts(path.join(root, 'chatbot'));
-for (const file of ['server/backend.cjs','server/admin.cjs']) new vm.Script(fs.readFileSync(path.join(root, file), 'utf8'));
+for (const file of ['server/backend.cjs','server/admin.cjs','server/support.cjs']) new vm.Script(fs.readFileSync(path.join(root, file), 'utf8'));
 if (path.dirname(output) !== root || path.basename(output) !== 'dist') {
   throw new Error('Refusing to replace a directory outside the project dist folder.');
 }

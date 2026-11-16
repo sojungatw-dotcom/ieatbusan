@@ -32,6 +32,7 @@ global.fetch=async(url,options={})=>{
     return reply(savedComments.map(comment=>({...comment,ieb_profiles:{nickname:'작성자',country_code:country}})));
   }
   if(parsed.pathname==='/rest/v1/ieb_foods'||parsed.pathname==='/rest/v1/ieb_restaurant')return reply([]);
+  if(parsed.pathname==='/rest/v1/ieb_support_content')return reply([]);
   if(parsed.pathname==='/rest/v1/ieb_preferences')return reply([]);
   throw new Error('Unexpected mock URL '+parsed.pathname);
 };
