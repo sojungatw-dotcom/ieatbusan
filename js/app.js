@@ -431,7 +431,7 @@
           <span>${esc(t('place.holidays'))}: <span${p.holiday ? ' lang="ko"' : ''}>${esc(holiday)}</span></span>
         </span></div>
       </div>
-      <div class="mini-map" id="mini-map" role="img" aria-label="${esc(p.name)}"></div>
+      <div class="mini-map" id="mini-map" role="region" aria-label="${esc(p.name)}"></div>
       ${!hasCoordinates(p) ? `<p class="map-inline-status"><a href="${esc(directions)}" target="_blank" rel="noopener">${esc(t('place.google'))}</a></p>` : ''}
       <div class="band"></div>
       ${research ? `<section class="detail-section"><h2>${esc(t('place.menu'))}</h2><dl class="info-card"><div class="info-row"><dt lang="ko">${esc(menuName)}</dt><dd>${esc(menuPrice)}</dd></div></dl><p class="muted" lang="ko">${esc(research.priceNote)}</p></section>
