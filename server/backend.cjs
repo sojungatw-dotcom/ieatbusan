@@ -177,6 +177,7 @@ async function snapshot(cfg, session) {
 async function signup(cfg, req, body) {
   if (!cfg.secret) fail('db.configuration', 503);
   const login = credentials(body);
+  if (!countries.isValid(body.countryCode)) fail('profile.invalidCountry');
   const countryCode = checkedCountry(body.countryCode);
   // Fail before creating an account if the country migration has not been applied.
   await rest(cfg, 'ieb_profiles', '?select=country_code&limit=0');

@@ -26,7 +26,7 @@ Run `node tests/public-entry.cjs` for anonymous home entry, the header login lin
 without forced login, explicit login access and protected member-only routes.
 
 Run `node tests/member-country.cjs` and `node tests/member-country-api.cjs` for translated country names,
-KR defaults, signup payloads, profile badges, country settings, stable community priority, guest activity
+required country selection, signup payloads, profile badges, country settings, stable community priority, guest activity
 guards, server-side validation and own-user country updates. API responses are mocked.
 
 Run `node tests/member-country-preview.cjs` to inspect the production UI at `http://127.0.0.1:8781/`
@@ -129,3 +129,7 @@ Run `node tests/chatbot-simulation.cjs` for the expanded 4,643-case matrix of mu
 ## Support content management
 
 Run node tests/support-content.cjs for notice/FAQ CRUD, settings, publish permissions, conflicts and multilingual public views. See docs/support-admin.md.
+
+## Staff-facing condition card
+
+Run `node tests/chatbot-condition-card.cjs` for the default allergy choice, explicit unknown status, Korean plus selected-language card content, preference/allergy separation and long text wrapping. Korean-only output is not duplicated. The card is generated locally without storing conditions in a member profile. Browser verification and limitations are in [condition-card](../docs/chatbot-condition-card.md).

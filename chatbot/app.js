@@ -5,7 +5,7 @@
  document.querySelectorAll('select option:not([value])').forEach(option=>{option.value=option.textContent;});
  const staticText=[],walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let staticNode;while((staticNode=walker.nextNode())){const value=staticNode.nodeValue.trim();if(value&&/[가-힣]/.test(value)&&!['SCRIPT','STYLE'].includes(staticNode.parentElement?.tagName))staticText.push({node:staticNode,original:staticNode.nodeValue,value});}
  const staticAttributes=[];document.querySelectorAll('[aria-label],[placeholder],[title]').forEach(node=>{for(const name of ['aria-label','placeholder','title']){const value=node.getAttribute(name);if(value&&/[가-힣]/.test(value))staticAttributes.push({node,name,value});}});
- function translateStatic(){document.querySelectorAll('[data-visitor-text]').forEach(node=>{node.textContent=T(node.dataset.visitorText);});document.documentElement.lang=bot.language;document.title=T('무보소 · 나에게 맞는 부산의 맛');for(const item of staticText)if(item.node.isConnected)item.node.nodeValue=item.original.replace(item.value,T(item.value));for(const item of staticAttributes)if(item.node.isConnected)item.node.setAttribute(item.name,T(item.value));}
+ function translateStatic(){$('condition-image-close').setAttribute('aria-label',T('card.close'));$('condition-image-preview').alt=T('card.title');document.querySelectorAll('[data-visitor-text]').forEach(node=>{node.textContent=T(node.dataset.visitorText);});document.documentElement.lang=bot.language;document.title=T('무보소 · 나에게 맞는 부산의 맛');for(const item of staticText)if(item.node.isConnected)item.node.nodeValue=item.original.replace(item.value,T(item.value));for(const item of staticAttributes)if(item.node.isConnected)item.node.setAttribute(item.name,T(item.value));}
  function displayScenario(scenario){return ChatLocale.scenario?ChatLocale.scenario(scenario,bot.language):scenario;}
  function userLabel(value){return typeof value==='object'?bot.describeAction(value):value==='시작'?T(value):value;}
 
@@ -139,6 +139,7 @@
   if(state.diet==='vegan')prefs.push(state.reviewVegan?T('확인 필요 후보 표시'):T('choice.vegan:strict'));
   if(state.pendingAllergy?.length)prefs.push(T('request.clarify'));if(state.unsupported?.length)prefs.push(T('request.unsupported')+' '+state.unsupported.map(k=>T('unsupported.'+k)).join(', '));
   $('preferences').replaceChildren(...prefs.map(p=>el('span','tag',p)));if(!prefs.length)$('preferences').append(el('span','empty',T('아직 정한 취향이 없습니다.')));
+  const cardReady=ConditionCard.model(state,bot).ready;$('save-condition-image').disabled=!cardReady;$('condition-image-note').textContent=T(cardReady?'card.note':'card.pending');
   $('stage-name').textContent=bot.stages[state.stage];$('stage-summary').textContent=state.stage==='results'?T('부산의 맛을 만나보세요.'):'';
   const phase={profile:0,allergies:0,veganReview:0,category:1,wanted:2,confirm:3,results:4,relax:3,empty:4,edit:0,conflict:0}[state.stage];$('step-dots').replaceChildren(...[0,1,2,3,4].map(i=>el('i',i===phase?'active':'')));
   $('flow').textContent=bot.stages[state.stage]+' · '+(result.form?T('여러 항목 선택 후 저장해 주세요.'):result.choices.length+T('개 선택지로 이어갈 수 있습니다.'));
@@ -204,6 +205,24 @@
  document.querySelectorAll('[data-close-dialog]').forEach(close=>close.addEventListener('click',()=>close.closest('dialog').close()));
  document.querySelectorAll('dialog').forEach(dialog=>dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();}));
  $('export').addEventListener('click',()=>{const blob=new Blob([JSON.stringify({version:5,language:bot.language,databaseCatalogAvailable:bot.source.available===true,dataSource:bot.source.source,sourceHash:bot.source.sha256,scenario:activeScenario,exportedAt:new Date().toISOString(),history},null,2)],{type:'application/json;charset=utf-8'});const url=URL.createObjectURL(blob),link=el('a');link.href=url;link.download='busan-chatbot-scenario.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+ let conditionImageFile=null;
+ $('save-condition-image').addEventListener('click',async()=>{
+  const data=ConditionCard.model(state,bot);if(!data.ready)return;
+  const control=$('save-condition-image');control.disabled=true;$('condition-image-status').textContent='';
+  try{
+   await document.fonts?.ready;
+   const canvas=ConditionCard.draw(document.createElement('canvas'),data);
+   const blob=await new Promise((resolve,reject)=>canvas.toBlob(value=>value?resolve(value):reject(new Error('PNG unavailable')),'image/png'));
+   const imageURL=canvas.toDataURL('image/png');conditionImageFile=typeof File==='function'?new File([blob],'muboso-my-conditions.png',{type:'image/png'}):null;
+   $('condition-image-preview').src=imageURL;
+   const download=$('download-condition-image');download.href=imageURL;download.download='muboso-my-conditions.png';
+   $('share-condition-image').hidden=!(conditionImageFile&&navigator.canShare?.({files:[conditionImageFile]}));
+   $('condition-share-status').textContent='';openDialog('condition-image-dialog');download.click();
+  }catch{$('condition-image-status').textContent=T('card.failed');}
+  finally{control.disabled=!ConditionCard.model(state,bot).ready;}
+ });
+ $('share-condition-image').addEventListener('click',async()=>{if(!conditionImageFile)return;try{await navigator.share({files:[conditionImageFile]});}catch(error){if(error.name!=='AbortError')$('condition-share-status').textContent=T('card.failed');}});
+ $('condition-image-dialog').addEventListener('close',()=>{conditionImageFile=null;$('condition-image-preview').removeAttribute('src');$('download-condition-image').removeAttribute('href');});
  function updateSource(){
   $('restore-conversation').disabled=bot.source.available!==true;
   $('scenario-eyebrow').textContent=FoodScenarios.length+T('가지 대화 예시');$('menu-count').textContent=bot.foods.length;

@@ -34,7 +34,7 @@ async function apiTests(){
   if(u.pathname==='/auth/v1/user')return opts.headers.Authorization?reply({id:uid}):reply({},401);
   if(u.pathname==='/auth/v1/logout'||u.pathname==='/auth/v1/admin/users/'+uid)return reply({});
   if(u.pathname==='/rest/v1/ieb_profiles'){if(opts.method==='PATCH'){if(failPatch)return reply({code:'42501'},403);assert.equal(u.searchParams.get('id'),'eq.'+uid);Object.assign(profile,body);return reply(null);}return reply([profile]);}
-  if(['/rest/v1/ieb_posts','/rest/v1/ieb_comments','/rest/v1/ieb_foods','/rest/v1/ieb_restaurant','/rest/v1/ieb_preferences'].includes(u.pathname))return reply([]);
+  if(['/rest/v1/ieb_posts','/rest/v1/ieb_comments','/rest/v1/ieb_foods','/rest/v1/ieb_restaurant','/rest/v1/ieb_preferences','/rest/v1/ieb_support_content'].includes(u.pathname))return reply([]);
   if(u.pathname==='/storage/v1/object/ieb-avatars'&&opts.method==='DELETE'){body.prefixes.forEach(key=>objects.delete(key));return reply({});}
   if(u.pathname.startsWith('/storage/v1/object/ieb-avatars/')&&opts.method==='POST'){const key=u.pathname.split('/ieb-avatars/')[1];assert.ok(key.startsWith(uid+'/'));assert.equal(opts.headers.apikey,'public-test');assert.equal(opts.headers.Authorization,'Bearer verified');assert.equal(opts.headers['x-upsert'],'false');assert.equal(opts.headers['Content-Type'],'image/jpeg');objects.set(key,body);return failUpload?reply({code:'storage_unavailable'},500):reply({Key:key});}
   if(u.pathname.startsWith('/storage/v1/object/sign/ieb-avatars/'))return reply({signedURL:'/object/sign/ieb-avatars/'+profile.avatar_path+'?token=signed-fixture'});

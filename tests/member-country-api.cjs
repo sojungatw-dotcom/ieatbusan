@@ -48,12 +48,12 @@ async function request(action,body,cookie='') {
   assert.equal(registration.status,200);
   assert.equal(calls.find(call=>call.url.pathname==='/auth/v1/admin/users').body.user_metadata.country_code,'JP');
   calls.length=0;
-  assert.equal((await request('signup',credentials)).status,200);
-  assert.equal(calls.find(call=>call.url.pathname==='/auth/v1/admin/users').body.user_metadata.country_code,'KR');
+  assert.equal((await request('signup',credentials)).status,400);
+  assert.equal(calls.length,0,'Missing country must be rejected before signup side effects');
   for(const empty of ['',null,'   ']) {
     calls.length=0;
-    assert.equal((await request('signup',{...credentials,countryCode:empty})).status,200);
-    assert.equal(calls.find(call=>call.url.pathname==='/auth/v1/admin/users').body.user_metadata.country_code,'KR','Unselected country defaults to KR');
+    assert.equal((await request('signup',{...credentials,countryCode:empty})).status,400);
+    assert.equal(calls.length,0,'An unselected country must not create an account');
   }
   for(const bad of ['ZZ','<script>',[],{}]) {
     const before=calls.length;
@@ -121,7 +121,7 @@ async function request(action,body,cookie='') {
   }
   assert.equal((await request('bootstrap',undefined,cookie)).data.comments.jp.find(item=>item.id==='c1').countryCode,null,'Default only new content, never backfill legacy comments');
   assert.ok(!JSON.stringify(bootstrap.data).includes('test-secret'));
-  console.log('PASS country signup/default/validation, own-only update, current-author badges, country-prioritized feed and server-assigned posting country');
+  console.log('PASS country signup/required selection/validation, own-only update, current-author badges, country-prioritized feed and server-assigned posting country');
 })().catch(error=>{console.error(error);process.exitCode=1;}).finally(()=>{
   global.fetch=oldFetch;
   for(const key of ['SUPABASE_URL','SUPABASE_PUBLISHABLE_KEY','SUPABASE_SECRET_KEY']) {
