@@ -184,7 +184,7 @@
 
   V.lang = () => {
     const cur = lang();
-    return `<main class="screen">${pageHeader(t('lang.header'), { fallback: loggedIn() || S().guest ? '#/home' : '#/login' })}
+    return `<main class="screen lang-screen">${pageHeader(t('lang.header'), { fallback: loggedIn() || S().guest ? '#/home' : '#/login' })}
       <div class="intro"><h1>${esc(t('lang.title'))}</h1><p class="sub" style="margin:0">${esc(t('lang.sub'))}</p></div>
       <div class="options" role="group" aria-label="${esc(t('lang.title'))}">${LANGS.map(l => `<button class="option" aria-pressed="${l.code === cur}" data-act="pickLang" data-code="${l.code}" lang="${l.code}">
         <span><span class="native">${esc(l.native)}</span><br><span class="eng" lang="en">${esc(l.eng)}</span></span><span class="radio"></span></button>`).join('')}</div>
