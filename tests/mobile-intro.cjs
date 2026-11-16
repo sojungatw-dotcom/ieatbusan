@@ -18,19 +18,20 @@ function fixture({mobile=true,hash='',seen=false,reduced=false,storageBlocked=fa
  return {ctx,app,theme,classes,timers,images,requests,revoked,media,listeners,stored:()=>stored,run(ms){const entry=[...timers].find(([,t])=>t.ms===ms);assert.ok(entry,'Expected timer '+ms);timers.delete(entry[0]);entry[1].fn();}};
 }
 (async()=>{
- for(const options of [{mobile:false},{seen:true},...['#/admin','#/home/admin','#/login','#/food/milmyeon','#/place/milmyeon/0','#/map'].map(hash=>({hash}))]){
+ for(const options of [{mobile:false},...['#/admin','#/home/admin','#/login','#/food/milmyeon','#/place/milmyeon/0','#/map'].map(hash=>({hash}))]){
   const f=fixture(options);await tick();assert.equal(f.requests.length,0,'Excluded routes/devices must not download the GIF');assert.equal(f.classes.size,0);
  }
  const f=fixture();await tick();assert.ok(f.classes.has('mobile-intro-pending'));assert.equal(f.app.inert,true);assert.equal(f.images[0].src,'blob:local-animation');
  assert.ok(![...f.timers.values()].some(t=>t.ms===3920),'Playback begins only after image load');
  f.images[0].load();assert.equal(f.theme.attrs.content,'#C44934');f.run(3920);
- assert.equal(f.classes.size,0);assert.equal(f.app.inert,false);assert.equal(f.app.getAttribute('aria-hidden'),null);assert.equal(f.theme.attrs.content,'#F5F2EC');assert.equal(f.ctx.location.hash,'#/home');assert.equal(f.stored(),'seen');assert.deepEqual(f.revoked,['blob:local-animation']);assert.equal(f.timers.size,0);
- const reduced=fixture({reduced:true});await tick();assert.ok(reduced.requests[0].endsWith('.png'));reduced.images[0].load();reduced.run(600);assert.equal(reduced.classes.size,0);
- const failed=fixture({fail:true});await tick();assert.equal(failed.classes.size,0,'Failure cannot trap users on a red screen');
- const decode=fixture();await tick();decode.images[0].error();assert.equal(decode.classes.size,0);
- const timeout=fixture();await tick();timeout.run(6000);assert.equal(timeout.classes.size,0);
+ assert.equal(f.classes.size,0);assert.equal(f.app.inert,false);assert.equal(f.app.getAttribute('aria-hidden'),null);assert.equal(f.theme.attrs.content,'#F5F2EC');assert.equal(f.ctx.location.hash,'#/home');assert.equal(f.stored(),null);assert.deepEqual(f.revoked,['blob:local-animation']);assert.equal(f.timers.size,0);
+ const reload=fixture({seen:true,hash:'#/home'});await tick();assert.equal(reload.requests.length,1,'A previous visit never suppresses a home refresh');reload.images[0].load();reload.run(3920);
+ const reduced=fixture({reduced:true});await tick();assert.ok(reduced.requests[0].endsWith('.png'));reduced.images[0].load();reduced.run(2200);assert.equal(reduced.classes.size,0);
+ const failed=fixture({fail:true});await tick();assert.ok(failed.images[0].src.startsWith('assets/brand/mobile-intro-fast.gif?play='),'Network buffering failure falls back to native loading');failed.images[0].error();assert.equal(failed.classes.size,0);
+ const decode=fixture();await tick();decode.images[0].error();assert.ok(decode.images[0].src.includes('?play='));decode.images[0].error();assert.equal(decode.classes.size,0);
+ const timeout=fixture();await tick();timeout.run(12000);assert.equal(timeout.classes.size,0);
  const blocked=fixture({storageBlocked:true});await tick();blocked.images[0].load();blocked.run(3920);assert.equal(blocked.classes.size,0);
  const navigated=fixture();await tick();navigated.ctx.location.hash='#/login';navigated.listeners.hashchange();assert.equal(navigated.ctx.location.hash,'#/login','Never hijack a route changed during playback');assert.equal(navigated.classes.size,0);
  const resized=fixture();await tick();resized.media.matches=false;resized.media.change();assert.equal(resized.classes.size,0);
- console.log('PASS mobile home-only intro, no desktop downloads, per-tab session, delayed playback, home transition, reduced motion, network/decode/timeout recovery, blocked storage, route changes and resize cleanup');
+ console.log('PASS mobile home-only intro, no desktop downloads, every home refresh, native fallback, delayed playback, home transition, reduced motion, network/decode/timeout recovery, blocked storage, route changes and resize cleanup');
 })().catch(error=>{console.error(error);process.exitCode=1;});
