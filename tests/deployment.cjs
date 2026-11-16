@@ -19,7 +19,7 @@ vm.runInNewContext(fs.readFileSync(path.join(out, 'js/data/foods.js'), 'utf8'), 
 for (const food of context.window.FOODS) {
   assert.ok(fs.statSync(path.join(out, food.photo || 'assets/food/' + food.id + '.jpg')).size > 0, food.id + ' photo missing');
 }
-for (const file of ['admin.html','js/admin-support.js','js/support-content.js','js/admin.js','css/admin.css','chatbot/index.html', 'chatbot/db-bot.js', 'chatbot/app.js', 'js/chatbot-widget.js', 'css/chatbot-widget.css', 'js/auth.js', 'js/store.js', 'js/app.js', 'css/app.css', 'assets/icon.svg']) {
+for (const file of ['js/mobile-intro.js','css/mobile-intro.css','assets/brand/mobile-intro-fast.gif','assets/brand/mobile-intro-poster.png','admin.html','js/admin-support.js','js/support-content.js','js/admin.js','css/admin.css','chatbot/index.html', 'chatbot/db-bot.js', 'chatbot/app.js', 'js/chatbot-widget.js', 'css/chatbot-widget.css', 'js/auth.js', 'js/store.js', 'js/app.js', 'css/app.css', 'assets/icon.svg']) {
   assert.ok(fs.statSync(path.join(out, file)).size > 0, file + ' missing');
 }
 const frontend = ['js/cloud.js','js/auth.js','js/store.js','js/app.js'].map(file => fs.readFileSync(path.join(out, file), 'utf8')).join('\n');
