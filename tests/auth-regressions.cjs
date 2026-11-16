@@ -9,6 +9,10 @@ const root=path.resolve(__dirname,'..'),read=file=>fs.readFileSync(path.join(roo
  vm.runInContext(source.slice(source.indexOf('  const V = {};'),source.indexOf('  V.lang =')),view);
  for(language of ['ko','en','zh','ja'])for(const screen of ['login','signup']){
    const html=vm.runInContext(`V.${screen}()`,view);assert.equal((html.match(/<input /g)||[]).length,2);assert.equal(html.includes('name="countryCode"'),screen==='signup');assert.ok(!html.includes('undefined'));
+   if(screen==='signup'){
+     assert.ok(/<option value=""[^>]*selected/.test(html),'Signup starts with an empty country selection');
+     assert.ok(!html.includes('value="KR" selected'),'Korea must not be preselected');
+   }
  }
  const storage=new Map([['ieatbusan.v1',JSON.stringify({user:{nickname:'legacy'},accounts:[{id:'old-id',hash:'old-hash'}]})]]);
  const localStorage={getItem:key=>storage.get(key)||null,setItem:(key,value)=>storage.set(key,value)};
@@ -25,7 +29,11 @@ const root=path.resolve(__dirname,'..'),read=file=>fs.readFileSync(path.join(roo
  }};
  vm.runInContext(read('js/store.js'),ctx);vm.runInContext(read('js/auth.js'),ctx);
  assert.equal(ctx.Store.get().user,null,'Legacy local accounts must not authorize a Supabase session');
- await ctx.Auth.register('tester','only-a-test-password');
+ vm.runInContext(read('js/countries.js'),ctx);
+ await assert.rejects(()=>ctx.Auth.register('tester','only-a-test-password'),/profile.invalidCountry/);
+ await assert.rejects(()=>ctx.Auth.register('tester','only-a-test-password',''),/profile.invalidCountry/);
+ assert.equal(calls.length,0,'Client validation must prevent signup requests without a country');
+ await ctx.Auth.register('tester','only-a-test-password','JP');
  assert.equal(await ctx.Auth.verify('TESTER','only-a-test-password'),'tester');
  await ctx.Store.signIn();assert.equal(ctx.Store.get().user.id,'uuid-one');assert.equal(ctx.Store.get().savedFoods[0],'milmyeon');
  ctx.Store.update(s=>{s.savedFoods=['dwaeji-gukbap'];});await ctx.Store.flush();assert.equal(prefs.savedFoods[0],'dwaeji-gukbap');

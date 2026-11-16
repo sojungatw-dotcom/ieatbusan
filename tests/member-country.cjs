@@ -40,7 +40,8 @@ for (const lang of ['ko','en','zh','ja']) {
   state.lang=lang;
   const html=V.signup();
   assert.ok(html.includes('name="countryCode"'));
-  assert.ok(html.includes('value="KR" selected'));
+  assert.ok(html.includes('value="" selected'));
+  assert.ok(!html.includes('value="KR" selected'));
   assert.ok(!/undefined|NaN/.test(html));
   assert.ok(!V.login().includes('name="countryCode"'));
 }
@@ -91,5 +92,5 @@ assert.ok(V.community({tab:'latest'}).indexOf('#/post/kr')<V.community({tab:'lat
   await submitForm({target:{dataset:{form:'profile'},nickname:{value:'새닉네임'},bio:{value:'소개'},elements:{countryCode:{value:'US'}},isConnected:false},preventDefault(){}});
   assert.equal(calls[1][0],'profile');
   assert.deepEqual(JSON.parse(JSON.stringify(calls[1][1])),{nickname:'새닉네임',bio:'소개',countryCode:'US'});
-  console.log('PASS 249 countries, translated names/default KR, signup payload, badges, country settings, stable feed priority and guest activity guards');
+  console.log('PASS 249 countries, translated names/required selection, signup payload, badges, country settings, stable feed priority and guest activity guards');
 })().catch(error=>{console.error(error);process.exitCode=1;});

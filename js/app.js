@@ -20,7 +20,7 @@
   const L = f => (lang() !== 'ko' && f[lang()]) ? f[lang()] : f.ko;
   const fname = f => L(f).name;
   const Countries = window.IEBCountries;
-  const countryOptions = value => Countries.list(lang()).map(item => `<option value="${item.code}" ${item.code === Countries.normalize(value) ? 'selected' : ''}>${esc(item.name)}</option>`).join('');
+  const countryOptions = value => (Countries.isValid(value) ? '' : `<option value="" selected disabled>${esc(t('profile.invalidCountry'))}</option>`) + Countries.list(lang()).map(item => `<option value="${item.code}" ${item.code === value ? 'selected' : ''}>${esc(item.name)}</option>`).join('');
   const countryBadge = value => {
     if (!Countries.isValid(value)) return '';
     const code = value, name = esc(Countries.name(code, lang()));
@@ -171,7 +171,7 @@
       <div class="field"><label for="auth-password">${esc(t('auth.password'))}</label>
         <input class="input" id="auth-password" name="password" type="password" autocomplete="${signup ? 'new-password' : 'current-password'}" required minlength="8" maxlength="72" ${signup ? 'aria-describedby="auth-password-help"' : ''}>
         ${signup ? `<span class="helper" id="auth-password-help">${esc(t('auth.passwordHelp'))}</span>` : ''}</div>
-      ${signup ? `<div class="field"><label for="auth-country">${esc(t('country.label'))}</label><select class="select" id="auth-country" name="countryCode" required>${countryOptions('KR')}</select><span class="helper">${esc(t('country.help'))}</span></div>` : ''}
+      ${signup ? `<div class="field"><label for="auth-country">${esc(t('country.label'))}</label><select class="select" id="auth-country" name="countryCode" required>${countryOptions('')}</select><span class="helper">${esc(t('country.help'))}</span></div>` : ''}
       <p class="auth-error" role="alert" id="auth-error" hidden></p>
       <button class="btn btn-primary btn-block" type="submit">${esc(t(signup ? 'auth.signup' : 'auth.login'))}</button>
       <a class="auth-switch" href="${signup ? '#/login' : '#/signup'}">${esc(t(signup ? 'auth.haveAccount' : 'auth.createAccount'))}</a>
@@ -1039,6 +1039,7 @@
       submit.textContent = t('auth.processing');
       try {
         if (kind === 'signup') {
+          if (!Countries.isValid(f.elements.countryCode.value)) throw new Error('profile.invalidCountry');
           await Auth.register(username, password, f.elements.countryCode.value);
           window.IEBAnalytics?.auth('sign_up');
           if (!f.isConnected) return;
@@ -1059,7 +1060,7 @@
         }
       } catch (errorValue) {
         if (!f.isConnected) return;
-        error.textContent = t(errorValue.message?.startsWith('auth.') ? errorValue.message : 'auth.failure');
+        error.textContent = t(/^(auth\.|profile\.invalidCountry$)/.test(errorValue.message || '') ? errorValue.message : 'auth.failure');
         error.hidden = false;
         f.elements.password.value = '';
       } finally {

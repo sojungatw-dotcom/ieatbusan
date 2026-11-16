@@ -1,0 +1,19 @@
+[
+  {
+    "lang": "en",
+    "allergies": "Milk and dairyPeanut"
+  },
+  {
+    "lang": "zh",
+    "allergies": "牛奶及乳制品花生"
+  },
+  {
+    "lang": "ja",
+    "allergies": "牛乳・乳製品落花生"
+  },
+  {
+    "lang": "ko",
+    "allergies": "우유·유제품땅콩",
+    "route": "http://127.0.0.1:8786/#/chatbot"
+  }
+]
