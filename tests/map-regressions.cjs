@@ -99,7 +99,7 @@ language = 'ko';
 {
   const h = harness();
   const dispose = h.view.mountMini({ id: 'jagalchi-hoe', i: '2' });
-  assert.equal(h.maps[0].options.interactive, false);
+  assert.equal(h.maps[0].options.interactive, true, 'Restaurant mini-map must allow movement and zoom');
   assert.equal(h.maps[0].places.length, 1);
   assert.equal(h.maps[0].places[0].place.name, '달봉이횟집');
   dispose(); assert.equal(h.maps[0].disposed, 1);

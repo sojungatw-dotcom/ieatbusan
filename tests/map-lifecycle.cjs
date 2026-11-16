@@ -7,7 +7,7 @@ function harness(mapData=data) {
   const nodes={map:{},'mini-map':{},'map-warning':{hidden:true}};
   const picker={value:'suyeong',addEventListener(){},removeEventListener(){}};
   const provider={available:()=>ready,load:()=>new Promise((resolve,reject)=>requests.push({resolve(){ready=true;resolve();},reject})),
-    create(element,options){const map={removed:0,places:[],addPlace(p){this.places.push(p);},fitPlaces(p){this.bounds=p;},resize(){},dispose(){this.removed++;}};maps.push(map);return map;}};
+    create(element,options){const map={options,removed:0,places:[],addPlace(p){this.places.push(p);},fitPlaces(p){this.bounds=p;},resize(){},dispose(){this.removed++;}};maps.push(map);return map;}};
   const view=ctx.IEBMapView.create({data:mapData,provider,root:{querySelector:()=>picker},document:{getElementById:id=>nodes[id]},navigator:{},
     getLanguage:()=> 'ko',districtName:i=>ctx.DISTRICTS.ko[i],
     t:key=>ctx.I18N.ko[key]||key,esc:String,fname:f=>f.ko.name,img:id=>id,icon:()=>'',appHeader:()=>'',tabbar:()=>'',toast(){},
@@ -26,6 +26,12 @@ const flush=()=>new Promise(resolve=>setImmediate(resolve));
   failed.requests[0].reject(new Error('sdk unavailable'));await flush();
   assert.ok(failed.nodes.map.textContent.includes('지도를 불러오지 못했어요'));
   assert.equal(failed.maps.length,0);
+  const interactiveMini=harness();const closeMini=interactiveMini.view.mountMini({id:'jagalchi-hoe',i:0});
+  interactiveMini.requests[0].resolve();await flush();
+  assert.equal(interactiveMini.maps[0].options.interactive,true,'Coordinate-backed restaurant map permits interaction');
+  assert.equal(interactiveMini.maps[0].options.zoom,15,'Keep the restaurant starting zoom');
+  assert.equal(interactiveMini.maps[0].places.length,1,'Keep the restaurant marker');
+  closeMini();assert.equal(interactiveMini.maps[0].removed,1);
   const mini=harness();const disposeMini=mini.view.mountMini({id:'jagalchi-hoe',i:'0'});
   disposeMini();mini.requests[0].resolve();await flush();assert.equal(mini.maps.length,0);
   const active=harness();const dispose=active.view.mount({district:'suyeong',mode:'detail'});
@@ -40,7 +46,9 @@ const flush=()=>new Promise(resolve=>setImmediate(resolve));
   const geocoded=harness(addressData);geocoded.provider.resolvePlace=async()=>({...source,lat:35.1,lng:128.9});
   const disposeAddress=geocoded.view.mountMini({id:'test',i:0});await flush();
   assert.equal(geocoded.requests.length,1,'A coordinate-less restaurant can load the Google mini-map after address lookup');
-  geocoded.requests[0].resolve();await flush();assert.equal(geocoded.maps[0].places[0].lat,35.1);disposeAddress();
+  geocoded.requests[0].resolve();await flush();assert.equal(geocoded.maps[0].places[0].lat,35.1);
+  assert.equal(geocoded.maps[0].options.interactive,true,'Address-resolved restaurant map permits interaction too');
+  disposeAddress();
   const abandoned=harness(addressData);let finishAddress;
   abandoned.provider.resolvePlace=()=>new Promise(resolve=>{finishAddress=resolve;});
   const leave=abandoned.view.mountMini({id:'test',i:0});await flush();leave();finishAddress({...source,lat:35.1,lng:128.9});await flush();
