@@ -115,12 +115,12 @@
             Promise.resolve().then(() => disposed ? null : provider.resolvePlace(place)).then(located => {
               if (disposed) return;
               if (!data.hasCoordinates(located)) { unavailable(); return; }
-              stop = startMap(element, [located], { interactive: false, center: [located.lat, located.lng], zoom: 15 }, { mini: true }).dispose;
+              stop = startMap(element, [located], { interactive: true, center: [located.lat, located.lng], zoom: 15 }, { mini: true }).dispose;
             }).catch(unavailable);
           } else unavailable();
           return () => { disposed = true; stop(); };
         }
-        return startMap(element, [place], { interactive: false, center: [place.lat, place.lng], zoom: 15 }, { mini: true }).dispose;
+        return startMap(element, [place], { interactive: true, center: [place.lat, place.lng], zoom: 15 }, { mini: true }).dispose;
       }
       function sheet() {
         current?.sheet?.toggle();
