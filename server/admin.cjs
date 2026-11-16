@@ -1,5 +1,6 @@
 'use strict';
 // This module is reachable only through the same-origin, CSRF-checked backend.
+const support = require('./support.cjs');
 const kinds = {
   foods: { table:'ieb_foods', list:'id,name,summary,updated_at,content->>catalogStatus', fields:{name:160,summary:2000,category:100,image_asset:200}, detail:'id,name,summary,category,image_asset,content,updated_at' },
   restaurants: { table:'ieb_restaurant', list:'id,name,address,updated_at', fields:{name:200,address:500,opening_hours:2000,closed_days:1000,phone:100,image_asset:200}, detail:'id,name,address,opening_hours,closed_days,phone,image_asset,updated_at' },
@@ -35,6 +36,7 @@ module.exports = async function adminAction({cfg,session,name,body,rest,fail}) {
   if (session.user?.app_metadata?.ieatbusan_admin !== true) fail('db.forbidden',403);
   if (!cfg.secret) fail('db.configuration',503);
   if (name==='adminSession') return {username:session.user.email?.split('@')[0] || '관리자'};
+  if (support.isKind(body.kind)) return support.admin({cfg,session,name,body,rest,fail});
   const kind=Object.hasOwn(kinds,body.kind) ? kinds[body.kind] : null; if (!kind) fail('db.validation');
   if (name==='adminList') {
     const page=body.page ?? 0;

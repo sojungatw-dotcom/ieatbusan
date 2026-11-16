@@ -1,7 +1,8 @@
 (function () {
   'use strict';
   const root=document.getElementById('admin-root'),logout=document.getElementById('logout'),status=document.getElementById('admin-status');
-  const labels={foods:'음식 정보',restaurants:'식당 정보',posts:'커뮤니티 게시글',comments:'댓글'};
+  const labels={foods:'음식 정보',restaurants:'식당 정보',posts:'커뮤니티 게시글',comments:'댓글',notices:'공지사항',faq:'자주 묻는 질문',support:'고객지원 · 문의'};
+  const Support=window.IEBAdminSupport;
   const fields={foods:['name','summary','category','image_asset'],restaurants:['name','address','opening_hours','closed_days','phone','image_asset'],posts:['title','body'],comments:['body']};
   const names={name:'이름',summary:'음식 설명',category:'분류',image_asset:'이미지 파일 이름',address:'상세 주소',opening_hours:'영업일·영업시간',closed_days:'휴무일',phone:'전화번호',title:'제목',body:'내용',ko:'한국어',en:'영어',zh:'중국어',ja:'일본어',manuscript:'음식 상세 내용',introduction:'음식 소개',sections:'상세 섹션',infoRows:'상세 정보',ingredients:'주재료',taste:'맛·식감',price:'가격',origin:'소개·유래',steps:'먹는 방법',allergens:'알레르기 성분',allergenNote:'알레르기 주의사항',allergenInfo:'알레르기 정보',notes:'안내 문구',restaurants:'식당 소개',gloss:'한국어 이름 표기',region:'지역',spice:'매운맛',season:'계절',method:'조리 방법',cooking:'조리 방법'};
   const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -34,7 +35,7 @@
   }
   function workspace(user) {
     logout.hidden=false;root.removeAttribute('aria-busy');
-    root.innerHTML=`<div class="workspace"><h1>콘텐츠 관리</h1><p class="muted">${esc(user.username)} 관리자 · 저장한 내용은 웹서비스의 DB 데이터에 반영됩니다.</p><nav class="tabs" aria-label="관리 항목">${Object.entries(labels).map(([key,label])=>`<button type="button" data-kind="${key}" aria-pressed="${key===kind}">${label}</button>`).join('')}</nav><div class="columns"><section class="panel" aria-label="게시물 목록"><form class="search" id="admin-search"><input name="search" aria-label="이름 또는 내용 검색" placeholder="이름 또는 내용 검색" maxlength="100"><button>검색</button></form><p id="list-state" role="status"></p><ul class="records" id="records"></ul><div class="pager"><button type="button" id="prev">이전</button><span id="page"></span><button type="button" id="next">다음</button></div></section><section class="panel" id="editor" aria-label="내용 수정"><p class="empty">목록에서 수정할 항목을 선택해 주세요.</p></section></div></div>`;
+    root.innerHTML=`<div class="workspace"><h1>콘텐츠 관리</h1><p class="muted">${esc(user.username)} 관리자 · 저장한 내용은 웹서비스의 DB 데이터에 반영됩니다.</p><nav class="tabs" aria-label="관리 항목">${Object.entries(labels).map(([key,label])=>`<button type="button" data-kind="${key}" aria-pressed="${key===kind}">${label}</button>`).join('')}</nav><div class="columns"><section class="panel" aria-label="게시물 목록"><form class="search" id="admin-search"><input name="search" aria-label="이름 또는 내용 검색" placeholder="이름 또는 내용 검색" maxlength="100"><button>검색</button></form><button type="button" id="new-support" hidden>새 항목 추가</button><p id="list-state" role="status"></p><ul class="records" id="records"></ul><div class="pager"><button type="button" id="prev">이전</button><span id="page"></span><button type="button" id="next">다음</button></div></section><section class="panel" id="editor" aria-label="내용 수정"><p class="empty">목록에서 수정할 항목을 선택해 주세요.</p></section></div></div>`;
   }
   async function loadList() {
     const generation=++listGeneration,state=document.getElementById('list-state');if(!state)return;
@@ -65,6 +66,7 @@
     const generation=++editorGeneration,recordKind=kind;
     const {row}=await api('adminGet',{kind:recordKind,id});if(generation!==editorGeneration||recordKind!==kind)return;
     selected=row;dirty=false;
+    if(Support.isKind(kind)){document.getElementById('editor').innerHTML=Support.form(row,kind);document.querySelectorAll('[data-record]').forEach(el=>el.setAttribute('aria-current',el.dataset.record===id?'true':'false'));return;}
     textFields=[];
     if(kind==='foods')for(const key of ['manuscript','ko','en','zh','ja'])if(row.content?.[key])collectText(row.content[key],[key],textFields);
     const limits={name:kind==='restaurants'?200:160,summary:2000,category:100,image_asset:200,address:500,opening_hours:2000,closed_days:1000,phone:100,title:80,body:kind==='comments'?300:2000};
@@ -94,7 +96,12 @@
         await api('login',{username,password});form.elements.password.value='';
         const user=await api('adminSession');workspace(user);await loadList();
       }else if(form.id==='admin-search'){search=form.elements.search.value;page=0;await loadList();}
-      else if(form.id==='admin-edit'){
+      else if(form.id==='admin-edit' && Support.isKind(kind)){
+        form.querySelector('fieldset').disabled=true;
+        const result=await api(selected.id?'adminSave':'adminCreate',{kind,id:selected.id,...version(),patch:Support.read(form,kind)});
+        dirty=false;notify('저장했습니다. 사용자 페이지를 새로고침하면 반영됩니다.');
+        await openRecord(result.id,{discard:true});await loadList();
+      }else if(form.id==='admin-edit'){
         const patch=Object.fromEntries(fields[kind].map(key=>[key,form.elements[key].value]));
         const payload={kind,id:selected.id,...version(),patch,contentChanges:kind==='foods'?changes(form):[]};
         form.querySelector('fieldset').disabled=true;
@@ -106,8 +113,11 @@
   root.addEventListener('click',async event=>{
     const button=event.target.closest('button');if(!button||busy)return;
     try{
-      if(button.dataset.kind){if(dirty&&!confirm('저장하지 않은 변경 내용을 버리고 이동할까요?'))return;kind=button.dataset.kind;page=0;search='';selected=null;dirty=false;editorGeneration++;document.getElementById('admin-search').reset();document.getElementById('editor').innerHTML='<p class="empty">목록에서 수정할 항목을 선택해 주세요.</p>';root.querySelectorAll('[data-kind]').forEach(el=>el.setAttribute('aria-pressed',el.dataset.kind===kind?'true':'false'));await loadList();}
-      else if(button.dataset.record)await openRecord(button.dataset.record);
+      if(button.dataset.kind){if(dirty&&!(await confirmAction('저장하지 않은 변경 내용을 버리고 이동할까요?')))return;kind=button.dataset.kind;page=0;search='';selected=null;dirty=false;editorGeneration++;document.getElementById('admin-search').reset();document.getElementById('new-support').hidden=!['notices','faq'].includes(kind);document.getElementById('editor').innerHTML='<p class="empty">목록에서 수정할 항목을 선택해 주세요.</p>';root.querySelectorAll('[data-kind]').forEach(el=>el.setAttribute('aria-pressed',el.dataset.kind===kind?'true':'false'));await loadList();}
+      else if(button.id==='new-support'){
+        if(dirty&&!(await confirmAction('저장하지 않은 변경 내용을 버리고 새 항목을 작성할까요?')))return;
+        editorGeneration++;selected=Support.draft(kind);dirty=false;document.getElementById('editor').innerHTML=Support.form(selected,kind);
+      }else if(button.dataset.record)await openRecord(button.dataset.record);
       else if(button.id==='prev'||button.id==='next'){page+=button.id==='prev'?-1:1;await loadList();}
       else if(button.id==='reload')await openRecord(selected.id);
       else if(button.id==='delete'){

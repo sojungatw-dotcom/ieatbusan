@@ -659,8 +659,8 @@
       ${u ? `<div class="menu-group-title">${esc(t('my.activity'))}</div>
       ${menu('#/my/posts', t('my.myPosts'))}${menu('#/my/comments', t('my.myComments'))}${menu('#/my/recent', t('my.recent'))}
       <div class="band"></div>` : ''}
-      <div class="menu-group-title">${esc(t('my.support'))}</div>
-      ${menu('#/notices', t('my.notices'))}${menu('#/faq', t('my.faq'))}${menu('#/contact', t('my.contact'))}
+      <div class="menu-group-title">${esc(supportText('sectionTitle','my.support'))}</div>
+      ${menu('#/notices', supportText('noticesLabel','my.notices'))}${menu('#/faq', supportText('faqLabel','my.faq'))}${menu('#/contact', supportText('contactLabel','my.contact'))}
       ${tabbar('my')}</main>`;
   };
   V.myPosts = () => {
@@ -753,13 +753,23 @@
   V.accountPrivacy = () => V.profile();
   V.accountPrivacy.mount = V.profile.mount;
 
-  V.notices = () => `<main class="screen">${pageHeader(t('notice.title'), { fallback: '#/my' })}${SEED.notices.map(n => {
-    const [title, body] = n[lang()] || n.ko;
-    return `<details class="faq"><summary><span>${esc(title)}<br><small class="muted">${esc(n.date)}</small></span></summary><p>${esc(body)}</p></details>`;
-  }).join('')}</main>`;
-  V.faq = () => `<main class="screen">${pageHeader(t('faq.title'), { fallback: '#/my' })}${(SEED.faq[lang()] || SEED.faq.ko).map(([q, a]) => `<details class="faq"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</main>`;
-  V.contact = () => `<main class="screen">${pageHeader(t('contact.title'), { fallback: '#/my' })}<div class="prose"><p>${esc(t('contact.desc'))}</p>
-    <p><b style="color:var(--ink);user-select:all">help@ieatbusan.example</b></p><button class="btn btn-outline btn-sm" data-act="copyText" data-text="help@ieatbusan.example">${esc(t('common.copy'))}</button></div></main>`;
+  function supportText(field,key) { return window.IEBSupport.text(S().support,lang(),field,t(key)); }
+  V.notices = () => {
+    const records=S().support?.notices;
+    const notices=Array.isArray(records)?records.map(row=>({...window.IEBSupport.localize(row,lang()),date:row.notice_date})):SEED.notices.map(row=>({title:(row[lang()]||row.ko)[0],body:(row[lang()]||row.ko)[1],date:row.date}));
+    return `<main class="screen">${pageHeader(supportText('noticesTitle','notice.title'), { fallback: '#/my' })}${notices.map(n=>`<details class="faq"><summary><span>${esc(n.title)}<br><small class="muted">${esc(n.date)}</small></span></summary><p style="white-space:pre-wrap">${esc(n.body)}</p></details>`).join('')||empty(t('support.emptyNotices'))}</main>`;
+  };
+  V.faq = () => {
+    const records=S().support?.faq;
+    const questions=Array.isArray(records)?records.map(row=>window.IEBSupport.localize(row,lang())):(SEED.faq[lang()]||SEED.faq.ko).map(([title,body])=>({title,body}));
+    return `<main class="screen">${pageHeader(supportText('faqTitle','faq.title'), { fallback: '#/my' })}${questions.map(row=>`<details class="faq"><summary>${esc(row.title)}</summary><p style="white-space:pre-wrap">${esc(row.body)}</p></details>`).join('')||empty(t('support.emptyFaq'))}</main>`;
+  };
+  V.contact = () => {
+    const email=window.IEBSupport.email(S().support),link=window.IEBSupport.validEmail(email);
+    return `<main class="screen">${pageHeader(supportText('contactTitle','contact.title'), { fallback: '#/my' })}<div class="prose"><p style="white-space:pre-wrap">${esc(supportText('contactDescription','contact.desc'))}</p>
+      ${email?`<p><b style="color:var(--ink);user-select:all">${link?`<a href="mailto:${esc(email)}">${esc(email)}</a>`:esc(email)}</b></p><button class="btn btn-outline btn-sm" data-act="copyText" data-text="${esc(email)}">${esc(t('common.copy'))}</button>`:''}</div></main>`;
+  };
+
   const LEGAL = {
     "terms": {
       "ko": [
