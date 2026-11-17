@@ -29,6 +29,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 160.359375,
           "y": 16,
@@ -42,6 +44,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 209.875,
           "y": 16,
@@ -55,6 +59,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 256.875,
           "y": 16,
@@ -98,6 +104,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 193.765625,
           "y": 16,
@@ -111,6 +119,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 260.28125,
           "y": 16,
@@ -124,6 +134,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 312.28125,
           "y": 16,
@@ -167,6 +179,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 803.765625,
           "y": 24,
@@ -180,6 +194,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 870.28125,
           "y": 24,
@@ -223,6 +239,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1283.765625,
           "y": 24,
@@ -236,6 +254,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 1350.28125,
           "y": 24,
@@ -279,6 +299,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1591.765625,
           "y": 24,
@@ -292,6 +314,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 1658.28125,
           "y": 24,
@@ -335,6 +359,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 158.453125,
           "y": 16,
@@ -348,6 +374,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 207.03125,
           "y": 16,
@@ -361,6 +389,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 254.03125,
           "y": 16,
@@ -404,6 +434,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 191.625,
           "y": 16,
@@ -417,6 +449,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 257.203125,
           "y": 16,
@@ -430,6 +464,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 309.203125,
           "y": 16,
@@ -473,6 +509,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 801.625,
           "y": 24,
@@ -486,6 +524,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 867.203125,
           "y": 24,
@@ -529,6 +569,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1281.625,
           "y": 24,
@@ -542,6 +584,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 1347.203125,
           "y": 24,
@@ -585,6 +629,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1589.625,
           "y": 24,
@@ -598,6 +644,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 1655.203125,
           "y": 24,
@@ -641,6 +689,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 124,
           "y": 16,
@@ -654,6 +704,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 193,
           "y": 16,
@@ -667,6 +719,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 240,
           "y": 16,
@@ -710,6 +764,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 156,
           "y": 16,
@@ -723,6 +779,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 242,
           "y": 16,
@@ -736,6 +794,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 294,
           "y": 16,
@@ -779,6 +839,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 766,
           "y": 24,
@@ -792,6 +854,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 852,
           "y": 24,
@@ -835,6 +899,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1246,
           "y": 24,
@@ -848,6 +914,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 1332,
           "y": 24,
@@ -891,6 +959,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1554,
           "y": 24,
@@ -904,6 +974,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 1640,
           "y": 24,
@@ -947,6 +1019,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 160,
           "y": 16,
@@ -960,6 +1034,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 217,
           "y": 16,
@@ -973,6 +1049,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 264,
           "y": 16,
@@ -1016,6 +1094,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 194,
           "y": 16,
@@ -1029,6 +1109,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 268,
           "y": 16,
@@ -1042,6 +1124,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 320,
           "y": 16,
@@ -1085,6 +1169,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 804,
           "y": 24,
@@ -1098,6 +1184,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 878,
           "y": 24,
@@ -1141,6 +1229,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1284,
           "y": 24,
@@ -1154,6 +1244,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 1358,
           "y": 24,
@@ -1197,6 +1289,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1592,
           "y": 24,
@@ -1210,6 +1304,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(204, 73, 54)",
+        "login": true,
         "rect": {
           "x": 1666,
           "y": 24,
@@ -1253,6 +1349,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 163.484375,
           "y": 16,
@@ -1266,6 +1364,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 213,
           "y": 16,
@@ -1279,6 +1379,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 260,
           "y": 16,
@@ -1322,6 +1424,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 207.484375,
           "y": 16,
@@ -1335,6 +1439,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 274,
           "y": 16,
@@ -1348,6 +1454,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 326,
           "y": 16,
@@ -1391,6 +1499,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 817.484375,
           "y": 24,
@@ -1404,6 +1514,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 884,
           "y": 24,
@@ -1447,6 +1559,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1297.484375,
           "y": 24,
@@ -1460,6 +1574,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1364,
           "y": 24,
@@ -1503,6 +1619,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1605.484375,
           "y": 24,
@@ -1516,6 +1634,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1672,
           "y": 24,
@@ -1559,6 +1679,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 164.421875,
           "y": 16,
@@ -1572,6 +1694,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 213,
           "y": 16,
@@ -1585,6 +1709,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 260,
           "y": 16,
@@ -1628,6 +1754,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 208.421875,
           "y": 16,
@@ -1641,6 +1769,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 274,
           "y": 16,
@@ -1654,6 +1784,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 326,
           "y": 16,
@@ -1697,6 +1829,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 818.421875,
           "y": 24,
@@ -1710,6 +1844,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 884,
           "y": 24,
@@ -1753,6 +1889,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1298.421875,
           "y": 24,
@@ -1766,6 +1904,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1364,
           "y": 24,
@@ -1809,6 +1949,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1606.421875,
           "y": 24,
@@ -1822,6 +1964,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1672,
           "y": 24,
@@ -1865,6 +2009,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 144,
           "y": 16,
@@ -1878,6 +2024,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 213,
           "y": 16,
@@ -1891,6 +2039,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 260,
           "y": 16,
@@ -1934,6 +2084,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 188,
           "y": 16,
@@ -1947,6 +2099,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 274,
           "y": 16,
@@ -1960,6 +2114,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 326,
           "y": 16,
@@ -2003,6 +2159,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 798,
           "y": 24,
@@ -2016,6 +2174,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 884,
           "y": 24,
@@ -2059,6 +2219,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1278,
           "y": 24,
@@ -2072,6 +2234,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1364,
           "y": 24,
@@ -2115,6 +2279,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1586,
           "y": 24,
@@ -2128,6 +2294,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1672,
           "y": 24,
@@ -2171,6 +2339,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 156,
           "y": 16,
@@ -2184,6 +2354,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 213,
           "y": 16,
@@ -2197,6 +2369,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 260,
           "y": 16,
@@ -2240,6 +2414,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 200,
           "y": 16,
@@ -2253,6 +2429,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 274,
           "y": 16,
@@ -2266,6 +2444,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 326,
           "y": 16,
@@ -2309,6 +2489,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 810,
           "y": 24,
@@ -2322,6 +2504,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 884,
           "y": 24,
@@ -2365,6 +2549,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1290,
           "y": 24,
@@ -2378,6 +2564,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1364,
           "y": 24,
@@ -2421,6 +2609,8 @@
     "buttons": [
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1598,
           "y": 24,
@@ -2434,6 +2624,8 @@
       },
       {
         "background": "rgb(255, 255, 255)",
+        "color": "rgb(40, 38, 34)",
+        "login": false,
         "rect": {
           "x": 1672,
           "y": 24,

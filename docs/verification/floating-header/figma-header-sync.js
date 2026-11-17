@@ -1,4 +1,0 @@
-// Run with Figma use_figma after reauthentication. Existing native components retained.
-const changed=[];
-for(const page of figma.root.children){await figma.setCurrentPageAsync(page);for(const n of page.findAllWithCriteria({types:['COMPONENT']})){if(!/Header/.test(n.name))continue;for(const t of n.findAllWithCriteria({types:['TEXT']}))for(const seg of t.getStyledTextSegments(['fontName']))await figma.loadFontAsync(seg.fontName);n.fills=[];n.effects=[];n.cornerRadius=0;const search=n.children.find(c=>c.name==='Search');if(search){n.paddingLeft=16;n.paddingRight=16;search.layoutGrow=1;search.fills=[{type:'SOLID',color:{r:1,g:1,b:1}}];}for(const c of n.findAll(x=>x.type==='FRAME'&&/^Link/.test(x.name)&&!x.name.includes('무보소')))c.fills=[{type:'SOLID',color:{r:1,g:1,b:1}}];for(const t of n.findAllWithCriteria({types:['TEXT']}))t.fills=[{type:'SOLID',color:{r:0.157,g:0.149,b:0.133}}];changed.push(n.id);}}
-return changed;
