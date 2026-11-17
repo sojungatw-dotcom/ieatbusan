@@ -3,3 +3,5 @@
 .admin-confirm{max-width:440px;width:calc(100% - 32px);border:1px solid #d9cdbd;border-radius:16px;padding:24px;color:#292724}.admin-confirm::backdrop{background:rgba(30,25,20,.35)}.admin-confirm h2{margin-top:0}.admin-confirm .actions{justify-content:flex-end;padding-bottom:0}
 
 .search button { flex:none; white-space:nowrap; min-width:60px; }
+
+#new-support { margin-top:12px; width:100%; } #admin-edit select { width:100%; padding:10px; border:1px solid #d9cdbd; border-radius:9px; background:#fff; font:inherit; color:inherit; }

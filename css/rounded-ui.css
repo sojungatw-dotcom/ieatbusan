@@ -603,3 +603,5 @@ body:has(#write-form) .ieb-chat-launcher { display: none; }
  .app-header .header-actions {margin-left:0;flex:none;gap:8px;}
  .app-header .header-actions > a {height:48px;}
 }
+
+.app-header .header-actions > .header-login {color:var(--accent);font-weight:700;}

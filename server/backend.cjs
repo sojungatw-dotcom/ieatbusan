@@ -2,6 +2,7 @@
 const { randomUUID, createHash } = require('node:crypto');
 const countries = require('../js/countries.js');
 const adminAction = require('./admin.cjs');
+const supportContent = require('./support.cjs');
 const accessCookie = 'ieb_access', refreshCookie = 'ieb_refresh';
 const fail = (code, status = 400) => { const error = new Error(code); error.status = status; throw error; };
 const districts = ['중구','서구','동구','영도구','부산진구','동래구','남구','북구','해운대구','사하구','금정구','강서구','연제구','수영구','사상구','기장군'];
@@ -132,11 +133,12 @@ async function snapshot(cfg, session) {
     rest(cfg, 'ieb_posts', query + '&country_code=eq.' + country, opts),
     rest(cfg, 'ieb_posts', query + '&country_code=neq.' + country, opts),
   ]).then(([same, other]) => [...same, ...other].slice(0, 500)) : rest(cfg, 'ieb_posts', query, opts);
-  const [posts, comments, foods, restaurants] = await Promise.all([
+  const [posts, comments, foods, restaurants, support] = await Promise.all([
     feed,
     rest(cfg, 'ieb_comments', '?select=*,ieb_profiles(nickname)&order=created_at.asc&limit=5000', opts),
     rest(cfg, 'ieb_foods', '?select=*&order=display_order.asc,id.asc&limit=1000', opts),
     rest(cfg, 'ieb_restaurant', '?select=id,name,address,opening_hours,closed_days,phone,naver_url,latitude,longitude,food_links,like_count,image_asset&limit=1000', opts),
+    supportContent.read(cfg, rest, opts),
   ]);
   applyRestaurantData(foods, restaurants);
   const paths = [...new Set(posts.flatMap(post => post.photos))];
@@ -156,7 +158,7 @@ async function snapshot(cfg, session) {
   const foodLikes = Object.fromEntries(foods.filter(food => uid && food.liked_user_ids?.includes(uid)).map(food => [food.id, true]));
   return {
     user: current ? { id: current.id, username: current.username, provider: 'supabase', avatarUrl, nickname: current.nickname, countryCode: country, area: current.area, bio: current.bio, joined: current.created_at.slice(0, 10).replaceAll('-', '.') } : null,
-    preferences: preferences[0]?.data || {}, postLikes, foodLikes,
+    preferences: preferences[0]?.data || {}, postLikes, foodLikes, support,
     foods: foods.filter(food => food.content?.catalogStatus !== 'archived').map(food => ({ id: food.id, name: food.name, summary: food.summary, category: food.category, imageAsset: food.image_asset, content: food.content, likes: food.like_count })),
     posts: posts.map(post => ({ id: post.id, title: post.title, body: post.body, cat: post.category, food: post.food,
       author: post.ieb_profiles?.nickname || post.seed_author || '', area: districts[post.ieb_profiles?.area] || post.seed_area || '',
@@ -175,6 +177,7 @@ async function snapshot(cfg, session) {
 async function signup(cfg, req, body) {
   if (!cfg.secret) fail('db.configuration', 503);
   const login = credentials(body);
+  if (!countries.isValid(body.countryCode)) fail('profile.invalidCountry');
   const countryCode = checkedCountry(body.countryCode);
   // Fail before creating an account if the country migration has not been applied.
   await rest(cfg, 'ieb_profiles', '?select=country_code&limit=0');

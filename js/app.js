@@ -20,7 +20,7 @@
   const L = f => (lang() !== 'ko' && f[lang()]) ? f[lang()] : f.ko;
   const fname = f => L(f).name;
   const Countries = window.IEBCountries;
-  const countryOptions = value => Countries.list(lang()).map(item => `<option value="${item.code}" ${item.code === Countries.normalize(value) ? 'selected' : ''}>${esc(item.name)}</option>`).join('');
+  const countryOptions = value => (Countries.isValid(value) ? '' : `<option value="" selected disabled>${esc(t('profile.invalidCountry'))}</option>`) + Countries.list(lang()).map(item => `<option value="${item.code}" ${item.code === value ? 'selected' : ''}>${esc(item.name)}</option>`).join('');
   const countryBadge = value => {
     if (!Countries.isValid(value)) return '';
     const code = value, name = esc(Countries.name(code, lang()));
@@ -171,7 +171,7 @@
       <div class="field"><label for="auth-password">${esc(t('auth.password'))}</label>
         <input class="input" id="auth-password" name="password" type="password" autocomplete="${signup ? 'new-password' : 'current-password'}" required minlength="8" maxlength="72" ${signup ? 'aria-describedby="auth-password-help"' : ''}>
         ${signup ? `<span class="helper" id="auth-password-help">${esc(t('auth.passwordHelp'))}</span>` : ''}</div>
-      ${signup ? `<div class="field"><label for="auth-country">${esc(t('country.label'))}</label><select class="select" id="auth-country" name="countryCode" required>${countryOptions('KR')}</select><span class="helper">${esc(t('country.help'))}</span></div>` : ''}
+      ${signup ? `<div class="field"><label for="auth-country">${esc(t('country.label'))}</label><select class="select" id="auth-country" name="countryCode" required>${countryOptions('')}</select><span class="helper">${esc(t('country.help'))}</span></div>` : ''}
       <p class="auth-error" role="alert" id="auth-error" hidden></p>
       <button class="btn btn-primary btn-block" type="submit">${esc(t(signup ? 'auth.signup' : 'auth.login'))}</button>
       <a class="auth-switch" href="${signup ? '#/login' : '#/signup'}">${esc(t(signup ? 'auth.haveAccount' : 'auth.createAccount'))}</a>
@@ -184,7 +184,7 @@
 
   V.lang = () => {
     const cur = lang();
-    return `<main class="screen">${pageHeader(t('lang.header'), { fallback: loggedIn() || S().guest ? '#/home' : '#/login' })}
+    return `<main class="screen lang-screen">${pageHeader(t('lang.header'), { fallback: loggedIn() || S().guest ? '#/home' : '#/login' })}
       <div class="intro"><h1>${esc(t('lang.title'))}</h1><p class="sub" style="margin:0">${esc(t('lang.sub'))}</p></div>
       <div class="options" role="group" aria-label="${esc(t('lang.title'))}">${LANGS.map(l => `<button class="option" aria-pressed="${l.code === cur}" data-act="pickLang" data-code="${l.code}" lang="${l.code}">
         <span><span class="native">${esc(l.native)}</span><br><span class="eng" lang="en">${esc(l.eng)}</span></span><span class="radio"></span></button>`).join('')}</div>
@@ -431,7 +431,7 @@
           <span>${esc(t('place.holidays'))}: <span${p.holiday ? ' lang="ko"' : ''}>${esc(holiday)}</span></span>
         </span></div>
       </div>
-      <div class="mini-map" id="mini-map" role="img" aria-label="${esc(p.name)}"></div>
+      <div class="mini-map" id="mini-map" role="region" aria-label="${esc(p.name)}"></div>
       ${!hasCoordinates(p) ? `<p class="map-inline-status"><a href="${esc(directions)}" target="_blank" rel="noopener">${esc(t('place.google'))}</a></p>` : ''}
       <div class="band"></div>
       ${research ? `<section class="detail-section"><h2>${esc(t('place.menu'))}</h2><dl class="info-card"><div class="info-row"><dt lang="ko">${esc(menuName)}</dt><dd>${esc(menuPrice)}</dd></div></dl><p class="muted" lang="ko">${esc(research.priceNote)}</p></section>
@@ -659,8 +659,8 @@
       ${u ? `<div class="menu-group-title">${esc(t('my.activity'))}</div>
       ${menu('#/my/posts', t('my.myPosts'))}${menu('#/my/comments', t('my.myComments'))}${menu('#/my/recent', t('my.recent'))}
       <div class="band"></div>` : ''}
-      <div class="menu-group-title">${esc(t('my.support'))}</div>
-      ${menu('#/notices', t('my.notices'))}${menu('#/faq', t('my.faq'))}${menu('#/contact', t('my.contact'))}
+      <div class="menu-group-title">${esc(supportText('sectionTitle','my.support'))}</div>
+      ${menu('#/notices', supportText('noticesLabel','my.notices'))}${menu('#/faq', supportText('faqLabel','my.faq'))}${menu('#/contact', supportText('contactLabel','my.contact'))}
       ${tabbar('my')}</main>`;
   };
   V.myPosts = () => {
@@ -753,13 +753,23 @@
   V.accountPrivacy = () => V.profile();
   V.accountPrivacy.mount = V.profile.mount;
 
-  V.notices = () => `<main class="screen">${pageHeader(t('notice.title'), { fallback: '#/my' })}${SEED.notices.map(n => {
-    const [title, body] = n[lang()] || n.ko;
-    return `<details class="faq"><summary><span>${esc(title)}<br><small class="muted">${esc(n.date)}</small></span></summary><p>${esc(body)}</p></details>`;
-  }).join('')}</main>`;
-  V.faq = () => `<main class="screen">${pageHeader(t('faq.title'), { fallback: '#/my' })}${(SEED.faq[lang()] || SEED.faq.ko).map(([q, a]) => `<details class="faq"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</main>`;
-  V.contact = () => `<main class="screen">${pageHeader(t('contact.title'), { fallback: '#/my' })}<div class="prose"><p>${esc(t('contact.desc'))}</p>
-    <p><b style="color:var(--ink);user-select:all">help@ieatbusan.example</b></p><button class="btn btn-outline btn-sm" data-act="copyText" data-text="help@ieatbusan.example">${esc(t('common.copy'))}</button></div></main>`;
+  function supportText(field,key) { return window.IEBSupport.text(S().support,lang(),field,t(key)); }
+  V.notices = () => {
+    const records=S().support?.notices;
+    const notices=Array.isArray(records)?records.map(row=>({...window.IEBSupport.localize(row,lang()),date:row.notice_date})):SEED.notices.map(row=>({title:(row[lang()]||row.ko)[0],body:(row[lang()]||row.ko)[1],date:row.date}));
+    return `<main class="screen">${pageHeader(supportText('noticesTitle','notice.title'), { fallback: '#/my' })}${notices.map(n=>`<details class="faq"><summary><span>${esc(n.title)}<br><small class="muted">${esc(n.date)}</small></span></summary><p style="white-space:pre-wrap">${esc(n.body)}</p></details>`).join('')||empty(t('support.emptyNotices'))}</main>`;
+  };
+  V.faq = () => {
+    const records=S().support?.faq;
+    const questions=Array.isArray(records)?records.map(row=>window.IEBSupport.localize(row,lang())):(SEED.faq[lang()]||SEED.faq.ko).map(([title,body])=>({title,body}));
+    return `<main class="screen">${pageHeader(supportText('faqTitle','faq.title'), { fallback: '#/my' })}${questions.map(row=>`<details class="faq"><summary>${esc(row.title)}</summary><p style="white-space:pre-wrap">${esc(row.body)}</p></details>`).join('')||empty(t('support.emptyFaq'))}</main>`;
+  };
+  V.contact = () => {
+    const email=window.IEBSupport.email(S().support),link=window.IEBSupport.validEmail(email);
+    return `<main class="screen">${pageHeader(supportText('contactTitle','contact.title'), { fallback: '#/my' })}<div class="prose"><p style="white-space:pre-wrap">${esc(supportText('contactDescription','contact.desc'))}</p>
+      ${email?`<p><b style="color:var(--ink);user-select:all">${link?`<a href="mailto:${esc(email)}">${esc(email)}</a>`:esc(email)}</b></p><button class="btn btn-outline btn-sm" data-act="copyText" data-text="${esc(email)}">${esc(t('common.copy'))}</button>`:''}</div></main>`;
+  };
+
   const LEGAL = {
     "terms": {
       "ko": [
@@ -1029,6 +1039,7 @@
       submit.textContent = t('auth.processing');
       try {
         if (kind === 'signup') {
+          if (!Countries.isValid(f.elements.countryCode.value)) throw new Error('profile.invalidCountry');
           await Auth.register(username, password, f.elements.countryCode.value);
           window.IEBAnalytics?.auth('sign_up');
           if (!f.isConnected) return;
@@ -1049,7 +1060,7 @@
         }
       } catch (errorValue) {
         if (!f.isConnected) return;
-        error.textContent = t(errorValue.message?.startsWith('auth.') ? errorValue.message : 'auth.failure');
+        error.textContent = t(/^(auth\.|profile\.invalidCountry$)/.test(errorValue.message || '') ? errorValue.message : 'auth.failure');
         error.hidden = false;
         f.elements.password.value = '';
       } finally {

@@ -53,14 +53,14 @@ async function request(action, body, { cookie = '', origin = 'https://site.verce
   assert.equal((await request('comment', { postId: 'p1', text: 'hi' })).status, 401);
   assert.equal((await request('signup', { username: 'x', password: 'test-password' })).status, 400);
   assert.equal((await request('signup', { username: 'tester', password: 'short' })).status, 400);
-  const registration = await request('signup', { username: 'TESTER', password: 'test-password' });
+  const registration = await request('signup', { username: 'TESTER', password: 'test-password', countryCode: 'JP' });
   assert.equal(registration.status, 200);
   const create = calls.find(call => call.path === '/auth/v1/admin/users');
   assert.equal(create.parsed.email, 'tester@accounts.ieatbusan.invalid');
   assert.equal(create.headers.apikey, process.env.SUPABASE_SECRET_KEY);
   assert.ok(!JSON.stringify(registration).includes('test-password'));
   duplicate = true;
-  assert.equal((await request('signup', { username: 'tester', password: 'test-password' })).status, 409);
+  assert.equal((await request('signup', { username: 'tester', password: 'test-password', countryCode: 'JP' })).status, 409);
   duplicate = false;
   wrongPassword = true;
   assert.equal((await request('login', { username: 'tester', password: 'test-password' })).status, 401);
