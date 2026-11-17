@@ -13,7 +13,7 @@
   theme?.setAttribute('content','#C44934');
   const controller=new AbortController();
   // Buffer the animation before displaying it so slow downloads cannot consume its playback time.
-  const asset=reduced?'assets/brand/mobile-intro-poster.png':'assets/brand/mobile-intro-fast.gif';
+  const asset=reduced?'assets/brand/mobile-intro-9x16-poster.png':'assets/brand/mobile-intro-9x16.gif';
   const resource=fetch(asset,{cache:'force-cache',signal:controller.signal})
     .then(response=>{if(!response.ok)throw Error('intro asset unavailable');return response.blob();});
   resource.catch(()=>{}); // The mounted handler owns failure recovery.
@@ -35,7 +35,7 @@
     app=document.getElementById('app');
     if(app){oldInert=!!app.inert;oldHidden=app.getAttribute('aria-hidden');app.inert=true;app.setAttribute('aria-hidden','true');}
     overlay=document.createElement('div');overlay.className='mobile-intro';overlay.id='mobile-intro';overlay.setAttribute('role','status');overlay.setAttribute('aria-label','무보소 · I Eat Busan');
-    image=document.createElement('img');image.alt='';image.width=540;image.height=1170;image.decoding='sync';
+    image=document.createElement('img');image.alt='';image.width=1080;image.height=1920;image.decoding='sync';
     image.addEventListener('load',()=>{
       if(closed)return;clearTimeout(resourceTimer);overlay.classList.add('mobile-intro-ready');
       playTimer=setTimeout(finish,reduced?2200:3920);
