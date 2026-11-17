@@ -27,7 +27,7 @@ function fixture({mobile=true,hash='',seen=false,reduced=false,storageBlocked=fa
  assert.equal(f.classes.size,0);assert.equal(f.app.inert,false);assert.equal(f.app.getAttribute('aria-hidden'),null);assert.equal(f.theme.attrs.content,'#F5F2EC');assert.equal(f.ctx.location.hash,'#/home');assert.equal(f.stored(),null);assert.deepEqual(f.revoked,['blob:local-animation']);assert.equal(f.timers.size,0);
  const reload=fixture({seen:true,hash:'#/home'});await tick();assert.equal(reload.requests.length,1,'A previous visit never suppresses a home refresh');reload.images[0].load();reload.run(3920);
  const reduced=fixture({reduced:true});await tick();assert.ok(reduced.requests[0].endsWith('.png'));reduced.images[0].load();reduced.run(2200);assert.equal(reduced.classes.size,0);
- const failed=fixture({fail:true});await tick();assert.ok(failed.images[0].src.startsWith('assets/brand/mobile-intro-fast.gif?play='),'Network buffering failure falls back to native loading');failed.images[0].error();assert.equal(failed.classes.size,0);
+ const failed=fixture({fail:true});await tick();assert.ok(failed.images[0].src.startsWith('assets/brand/mobile-intro-9x16.gif?play='),'Network buffering failure falls back to native loading');failed.images[0].error();assert.equal(failed.classes.size,0);
  const decode=fixture();await tick();decode.images[0].error();assert.ok(decode.images[0].src.includes('?play='));decode.images[0].error();assert.equal(decode.classes.size,0);
  const timeout=fixture();await tick();timeout.run(12000);assert.equal(timeout.classes.size,0);
  const blocked=fixture({storageBlocked:true});await tick();blocked.images[0].load();blocked.run(3920);assert.equal(blocked.classes.size,0);
