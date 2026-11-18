@@ -1,0 +1,50 @@
+[
+  {
+    "width": 320,
+    "frame": {
+      "bodyWidth": 320,
+      "composerPadding": "8px 12px",
+      "description": "none",
+      "header": 52,
+      "helpTop": "10px",
+      "input": 44,
+      "scrollWidth": 320
+    },
+    "host": {
+      "height": 32,
+      "top": "10px"
+    }
+  },
+  {
+    "width": 390,
+    "frame": {
+      "bodyWidth": 390,
+      "composerPadding": "8px 12px",
+      "description": "none",
+      "header": 52,
+      "helpTop": "10px",
+      "input": 44,
+      "scrollWidth": 390
+    },
+    "host": {
+      "height": 32,
+      "top": "10px"
+    }
+  },
+  {
+    "width": 1280,
+    "frame": {
+      "bodyWidth": 480,
+      "composerPadding": "8px 12px",
+      "description": "none",
+      "header": 52,
+      "helpTop": "10px",
+      "input": 44,
+      "scrollWidth": 480
+    },
+    "host": {
+      "height": 32,
+      "top": "10px"
+    }
+  }
+]

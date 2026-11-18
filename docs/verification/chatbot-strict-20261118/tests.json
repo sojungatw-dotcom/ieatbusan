@@ -1,0 +1,237 @@
+[
+  {
+    "file": "admin-api.cjs",
+    "passed": true,
+    "output": "PASS admin authentication, user-metadata spoof denial, CSRF, table/column/path allowlists, pagination, text edits, concurrency conflicts, archive/restore, moderation deletes, role revocation"
+  },
+  {
+    "file": "analytics.cjs",
+    "passed": true,
+    "output": "PASS GA4 restored sessions, anonymous/authenticated visits, logout identity clearing, post revisit/rerender/missing cases, sanitized URLs, single tag and production-only collection"
+  },
+  {
+    "file": "api-regressions.cjs",
+    "passed": true,
+    "output": "PASS CSRF, validation, signup, duplicate ID, login, HttpOnly cookies, verified identity, RLS tokens, owner checks, preferences allowlist, refresh, logout, missing env"
+  },
+  {
+    "file": "async-regressions.cjs",
+    "passed": true,
+    "output": "PASS cancelled photo session cannot contaminate a new draft\nPASS overlapping uploads preserve the four-photo limit\n2/2 passed"
+  },
+  {
+    "file": "auth-regressions.cjs",
+    "passed": true,
+    "output": "PASS two-input auth screens, server auth calls, verified-session hydration, DB preference writes, no local account/post/token persistence, logout/relogin and legacy preservation"
+  },
+  {
+    "file": "chatbot-condition-card.cjs",
+    "passed": true,
+    "output": "PASS default allergy choice, Korean staff card, unknown and preference separation, unresolved scope and long-card layout"
+  },
+  {
+    "file": "chatbot-empty-state.cjs",
+    "passed": true,
+    "output": "PASS four-language no-match, exhausted, consented alternatives, replay and removed-catalog states"
+  },
+  {
+    "file": "chatbot-host-language.cjs",
+    "passed": true,
+    "output": "✔ Actual main-page script order initializes localized launcher and iframe context (35.7726ms)\n✔ Changing parent language reuses the conversation frame and sends all four languages (3.6273ms)\n✔ A missing optional label dictionary cannot force the iframe language to Korean (2.5237ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 48.2771"
+  },
+  {
+    "file": "chatbot-input-controls.cjs",
+    "passed": true,
+    "output": "PASS typed request priority, empty-input selections, draft restrictions and language preservation"
+  },
+  {
+    "file": "chatbot-live.cjs",
+    "passed": true,
+    "output": "✔ DB에서 추가된 음식을 재빌드 없이 분류하고 추천합니다 (41.7729ms)\n✔ DB 새 음식의 알레르기는 기존 제한에도 적용됩니다 (17.9656ms)\n✔ DB에서 빠진 음식은 추천 목록에서도 제거합니다 (16.7374ms)\n✔ 분류 근거가 없는 새 음식은 기타로 표시하며 재료 미확인 제한을 적용합니다 (15.8276ms)\n✔ 네 언어의 질문·선택지가 동일한 조건 저장 흐름으로 동작합니다 (16.3151ms)\n✔ DB를 받지 못한 상태에서는 로컬·기존 음식으로 대신 추천하지 않습니다 (12.8747ms)\n✔ 모든 등록 시나리오를 네 언어로 실행해도 동일한 안전 조건을 유지합니다 (572.7464ms)\n✔ 다국어로 입력한 우유 알레르기도 같은 성분 키로 저장합니다 (23.2644ms)\n✔ DB 투영은 DB에 실제로 있는 ID만 전달하고 회원 정보는 포함하지 않습니다 (41.9092ms)\n✔ DB에 없는 카테고리와 세부 항목은 숨기고 새 등록 시 다시 나타납니다 (15.1512ms)\n✔ Store의 DB 목록 성공·실패를 챗봇에 통지합니다 (2.9391ms)\n✔ 없는 음식을 직접 요청하면 숨겨진 항목을 고르게 하지 않고 DB 대안을 제시합니다 (25.5491ms)\nℹ tests 12\nℹ suites 0\nℹ pass 12\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 810.5347"
+  },
+  {
+    "file": "chatbot-restrictions.cjs",
+    "passed": true,
+    "output": "{\n  \"total\": 11783,\n  \"passed\": 11783,\n  \"failed\": 0,\n  \"groups\": {\n    \"allergyOptions\": 300,\n    \"category\": 300,\n    \"ingredients\": 2700,\n    \"recommendation\": 8100,\n    \"alternatives\": 320,\n    \"unresolved\": 4,\n    \"response\": 1,\n    \"examples\": 45,\n    \"separateQuestions\": 12,\n    \"candidate\": 1\n  },\n  \"failures\": []\n}"
+  },
+  {
+    "file": "chatbot-simulation.cjs",
+    "passed": true,
+    "output": "{\n  \"date\": \"2026-11-12\",\n  \"source\": \"current workspace\",\n  \"hashNormalization\": \"UTF-8 with LF line endings\",\n  \"catalog\": \"synthetic controlled recipes + 43 repository food fixtures; not live DB\",\n  \"total\": 4643,\n  \"passed\": 4643,\n  \"failed\": 0,\n  \"groups\": {\n    \"interpretation\": 1964,\n    \"conversation\": 31,\n    \"ambiguity\": 9,\n    \"endToEnd\": 1764,\n    \"recommendation\": 132,\n    \"diet\": 1,\n    \"namedFood\": 172,\n    \"namedExclusion\": 172,\n    \"namedConflict\": 2,\n    \"translation\": 129,\n    \"semanticAnchors\": 129,\n    \"translatedExamples\": 132,\n    \"countGrammar\": 6\n  },\n  \"failures\": []\n}"
+  },
+  {
+    "file": "chatbot-visitor.cjs",
+    "passed": true,
+    "output": "✔ Exclusions never become preferences: No pork please (43.2624ms)\n✔ Exclusions never become preferences: I want dairy-free food (22.0911ms)\n✔ Exclusions never become preferences: 豚肉なしでお願いします (23.6036ms)\n✔ Exclusions never become preferences: 不要猪肉 (22.8219ms)\n✔ Exclusions never become preferences: I cannot eat beef or chicken (26.0694ms)\n✔ Exclusions never become preferences: No fish please (20.0228ms)\n✔ Vegan and peanut allergy and mild spice survive one compound request (21.1158ms)\n✔ Shellfish is clarified without inventing a fish allergy or permitting results (20.7407ms)\n✔ Allergy and exclusion scopes do not leak to a separate positive preference (21.9368ms)\n✔ Word boundaries avoid eggplant/fishcake/shellfish substring mistakes and negative diet claims (19.0392ms)\n✔ Alternatives need consent and never relax a mild spice restriction (22.9509ms)\n✔ Food detail uses the same translated info rows as the main app (24.6557ms)\n✔ DB projection retains public visit fields and original place indexes without private data (2.3343ms)\n✔ Recovery replays choices against current DB instead of restoring stale result foods (22.0974ms)\n✔ Order card carries original menu, selected restrictions and no safety certification (17.5975ms)\n✔ All 43 food safety notes have shared translations; edited DB notes are not hidden by stale translations (25.3169ms)\n✔ Broad seafood/nut allergies require clarification and cannot disappear silently (24.7408ms)\n✔ A targeted negative allergy statement does not clear existing unrelated allergies (20.8472ms)\n✔ A language-specific quick reply opens profile choices instead of assigning arbitrary allergens (18.6408ms)\n✔ Recovery records expire at 24 hours and corrupt storage is ignored (21.141ms)\n✔ An unresolved allergy remains visible on the Korean order card (16.9925ms)\n✔ Partial DB restaurant rows retain known address only for a matching restaurant (0.2909ms)\n✔ Changing a category retains mild spice and invalidates earlier alternative consent (22.0575ms)\n✔ The main catalog hydrates partial restaurant records without crashing or losing visit metadata (1.6645ms)\n✔ Chatbot visit addresses use manuscript restaurant metadata just like the main map (0.1866ms)\n✔ Supported foreign category requests and explicit vegetarian correction remain usable (20.7052ms)\nℹ tests 26\nℹ suites 0\nℹ pass 26\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 512.7567"
+  },
+  {
+    "file": "chatbot.cjs",
+    "passed": true,
+    "output": "PASS integrated shared food catalog, local assets and all 44 chatbot scenarios\nPASS host-owned close control, retained conversation frame and catalog script integration"
+  },
+  {
+    "file": "comment-controls.cjs",
+    "passed": true,
+    "output": "PASS comment validation, session ownership, restricted patch, edit/delete rollback, owner-only controls, escaped text, cancel/confirm deletion"
+  },
+  {
+    "file": "comment-country-migration.cjs",
+    "passed": true,
+    "output": "PASS additive comment snapshot SQL, nullable legacy records, insert-only trigger and unchanged historical data (DB execution pending)"
+  },
+  {
+    "file": "deployment.cjs",
+    "passed": true,
+    "output": "PASS Vercel config, production file allowlist, script/style assets and all food images"
+  },
+  {
+    "file": "engagement-latency.cjs",
+    "passed": true,
+    "output": "PASS immediate feedback, duplicate suppression, canonical comments, rollback, coalesced preferences, refresh deduplication and stale-response protection"
+  },
+  {
+    "file": "engagement.cjs",
+    "passed": true,
+    "output": "PASS zero static metrics, visible zero display, real like counts, bookmark distinction, no example comments in seed, and five-food title"
+  },
+  {
+    "file": "featured-foods.cjs",
+    "passed": true,
+    "output": "PASS random unique five, stable two-hour windows, exact boundary, unchanged catalog, order/like independence, small/empty catalogs and full selection pool"
+  },
+  {
+    "file": "food-categories.cjs",
+    "passed": true,
+    "output": "PASS 8 category illustrations, four labels each, merged steamed/soup links and separate street-food/snack links, complete active-food coverage and catalog immutability"
+  },
+  {
+    "file": "food-manuscript.cjs",
+    "passed": true,
+    "output": "PASS all 43 foods use one template with 8 info rows, combined introduction, white eating-method card, allergen card, and restaurant banners\nPASS 32 complete sourced food details in 4 language modes, 103 restaurant records, image fallbacks, and no invented map coordinates"
+  },
+  {
+    "file": "full-food-locales.cjs",
+    "passed": true,
+    "output": "PASS 283 keys in four locales, interpolation, accessible controls, legal/support copy, source-language separation and 1024 view renders\nPASS all 43 food summaries and eight information rows in four languages, original Korean names and source facts, and DB hydration\nPASS 618 full food/restaurant pages: no Korean outside original food-name line, safe HTML, unchanged links and identifiers"
+  },
+  {
+    "file": "google-maps.cjs",
+    "passed": true,
+    "output": "PASS Google lazy/shared loading, missing key, retry, timeout, auth errors, advanced pins, bounds, popup, location replacement, mini-map, disposal and public-config allowlist"
+  },
+  {
+    "file": "home-carousel.cjs",
+    "passed": true,
+    "output": "PASS 4 languages and both sorts retain 5 slides and the complete food catalog\nPASS native scroll state, navigation, boundaries, rerender, resize, and cleanup\nPASS measured card positions for mobile peeks, desktop cards and resize\nPASS four-second autoplay and wrap, no visible pause label, touch/focus interruption and cleanup\nPASS two-hour live refresh, hidden-tab catch-up and recommendation timer cleanup"
+  },
+  {
+    "file": "i18n.cjs",
+    "passed": true,
+    "output": "PASS 283 keys in four locales, interpolation, accessible controls, legal/support copy, source-language separation and 1024 view renders\nPASS all 43 food summaries and eight information rows in four languages, original Korean names and source facts, and DB hydration"
+  },
+  {
+    "file": "map-contracts.cjs",
+    "passed": true,
+    "output": "PASS stable district IDs, explicit overrides, invalid selections, real route matching/building, legacy IDs and missing/invalid data\nPASS full restaurant addresses, source/direct schedules, and unknown legacy metadata"
+  },
+  {
+    "file": "map-districts.cjs",
+    "passed": true,
+    "output": "PASS 16 district shapes, local-only overview, four languages, region/food filters, empty regions, state links and legacy detail routes"
+  },
+  {
+    "file": "map-integration.cjs",
+    "passed": true,
+    "output": "PASS current-main catalog, research details, source-address districts, explicit overrides and coordinate-less row navigation"
+  },
+  {
+    "file": "map-lifecycle.cjs",
+    "passed": true,
+    "output": "PASS late SDK completion, failed SDK/create fallback, mini-map disposal and active initialization"
+  },
+  {
+    "file": "map-loader.cjs",
+    "passed": true,
+    "output": "PASS lazy SDK loading, shared request, stylesheet readiness, failure/retry and bounded timeout"
+  },
+  {
+    "file": "map-provider.cjs",
+    "passed": true,
+    "output": "PASS map provider focus/popup cancellation, location circle, tile failure/recovery and partial initialization cleanup"
+  },
+  {
+    "file": "map-regressions.cjs",
+    "passed": true,
+    "output": "PASS map data/legacy IDs, four-language routes, food filtering, list/pin links, mini map, location ordering, disposal and SDK fallback"
+  },
+  {
+    "file": "map-restaurant-locales.cjs",
+    "passed": true,
+    "output": "PASS all catalog restaurant names/addresses in KO/EN/ZH/JA, detail-page translation parity, language attributes and unchanged routes"
+  },
+  {
+    "file": "map-restaurant-overview.cjs",
+    "passed": true,
+    "output": "PASS restaurant deduplication, branch distinction, district counts, missing coordinates, storefront photos, stable detail links and empty states"
+  },
+  {
+    "file": "map-sheet.cjs",
+    "passed": true,
+    "output": "PASS arbitrary drag height, full-map expansion, touch/click suppression, keyboard sizing, resize, desktop mode, cleanup and compact map toolbar"
+  },
+  {
+    "file": "member-country-api.cjs",
+    "passed": true,
+    "output": "PASS country signup/required selection/validation, own-only update, current-author badges, country-prioritized feed and server-assigned posting country"
+  },
+  {
+    "file": "member-country-migration.cjs",
+    "passed": true,
+    "output": "PASS migration preserves existing signup/RLS and matches country defaults, allowlists and column grants (SQL execution pending)"
+  },
+  {
+    "file": "member-country.cjs",
+    "passed": true,
+    "output": "PASS 249 countries, translated names/required selection, signup payload, badges, country settings, stable feed priority and guest activity guards"
+  },
+  {
+    "file": "mobile-intro.cjs",
+    "passed": true,
+    "output": "PASS mobile home-only intro, no desktop downloads, every home refresh, native fallback, delayed playback, home transition, reduced motion, network/decode/timeout recovery, blocked storage, route changes and resize cleanup"
+  },
+  {
+    "file": "post-like-flow.cjs",
+    "passed": true,
+    "output": "PASS consolidated post/food like RPCs, DB catalog and filename assets; production handler → Cloud → API → bootstrap → Store: add, reload, cancel, actual totals, no seed inflation, owner-only delete, guest guard"
+  },
+  {
+    "file": "profile-avatar.cjs",
+    "passed": true,
+    "output": "PASS local square preview/compression, file validation, stale decode guards, authenticated avatar upload, signed reload, replace/remove, failed-save cleanup, path spoof rejection and account cleanup"
+  },
+  {
+    "file": "public-entry.cjs",
+    "passed": true,
+    "output": "PASS home-first public entry, header login, explicit guest login and member-only route protection"
+  },
+  {
+    "file": "restaurant-data.cjs",
+    "passed": true,
+    "output": "PASS restaurant master projection, shared stores across foods, stable indices, per-food menu preservation, full addresses/hours, explicit map overrides and actual like counts"
+  },
+  {
+    "file": "restaurant-images.cjs",
+    "passed": true,
+    "output": "PASS 86 verified storefront assets, master-data image projection, safe filenames, and null/unknown fallback"
+  },
+  {
+    "file": "structured-data.cjs",
+    "passed": true,
+    "output": "PASS 283 keys in four locales, interpolation, accessible controls, legal/support copy, source-language separation and 1024 view renders\nPASS all 43 food summaries and eight information rows in four languages, original Korean names and source facts, and DB hydration\nPASS structured data matches rendered markup: 172 food, 652 restaurant, 64 category/sort/locale cases; privacy, safe serialization and stale-route cleanup"
+  },
+  {
+    "file": "support-content.cjs",
+    "passed": true,
+    "output": "PASS support CRUD, verified admin only, CSRF, unpublished isolation, email validation, setting singleton, conflict detection, KO/EN/ZH/JA public views, menu updates, no fallback resurrection and escaped text"
+  }
+]

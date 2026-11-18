@@ -9,6 +9,14 @@
  const mainKeys=[...new Set(Object.values(wantedByCategory).flat())];
  function wantedKeys(s){return [...new Set([...(wantedByCategory[s.category]||mainKeys),...(s.wanted||[])])];}
  const spiceLabels={any:'맵기 상관없어요',mild:'기본 맵기가 낮은 음식',hot:'매운 음식'};
+ // Choices and alternatives use the same hard restrictions as recommendations.
+ function eligibleFoods(s){if(s.pendingAllergy?.length||(s.allergyStatus==='selected'&&!s.allergies.length))return [];return R.filter(foods,{...s,wanted:[],category:'any',spice:'any',requestedFoodIds:[]}).foods;}
+ function canReplay(s){
+  if(!s.seen.length||s.pendingAllergy?.length||(s.allergyStatus==='selected'&&!s.allergies.length))return false;
+  let pool=R.filter(foods,s).foods;if(s.requestedFoodIds.length)pool=pool.filter(food=>s.requestedFoodIds.includes(food.id));
+  if(!pool.length&&s.relaxAllowed)pool=R.filter(foods,{...s,wanted:[],category:'any',spice:s.spice==='mild'?'mild':'any',requestedFoodIds:[]}).foods;
+  return pool.length>0&&pool.every(food=>s.seen.includes(food.id));
+ }
  const createState=()=>({stage:'profile',diet:'none',profileComplete:false,allergyStatus:'none',allergies:[],excluded:[],allowed:[],wanted:[],ingredientMode:'all',reviewVegan:false,category:null,spice:null,requestedFoodIds:[],excludedFoodIds:[],seen:[],proposal:null,pendingAllergy:[],unsupported:[],relaxAllowed:false});
  const clone=s=>JSON.parse(JSON.stringify(s)),c=(id,label)=>({id,label});
  function summary(s){const parts=[diets[s.diet]];parts.push('알레르기: '+(s.allergies.length?s.allergies.map(k=>labels[k]).join(', '):s.allergyStatus==='none'?'없다고 응답':'미확인'));if(s.excluded.length)parts.push('추가 제외: '+s.excluded.map(k=>labels[k]).join(', '));if(s.wanted.length)parts.push('찾는 재료: '+s.wanted.map(k=>labels[k]).join(s.ingredientMode==='any'?' 또는 ':' + '));if(s.requestedFoodIds.length)parts.push('음식: '+s.requestedFoodIds.map(id=>foods.find(f=>f.id===id)?.name||id).join(', '));if(s.category)parts.push(categories[s.category]);if(s.spice)parts.push(s.spice==='mild'?'원문상 기본 맵기 낮음':s.spice==='hot'?'매운 음식':'맵기 상관없음');return parts.join(' · ');}
@@ -20,11 +28,11 @@
    case 'profile':text='부산의 한 끼, 함께 찾아볼까요?\n먼저 식단과 알레르기가 있는지 알려 주세요. 있다고 답하시면 다음 질문에서 항목을 고를 수 있어요.';form={kind:'profile',excludeKeys};choices=[c('profile:submit','다음으로')];break;
    case 'allergies':text='어떤 알레르기가 있으신가요?\n피해야 하는 항목을 모두 골라 주세요. 알려 주신 항목은 미리 선택해 두었습니다.';form={kind:'allergies',allergyKeys};choices=[c('allergies:submit','알레르기 항목 저장'),c('allergies:unknown','정확한 항목은 모르겠어요'),c('allergies:back','알레르기 여부 다시 선택')];break;
    case 'veganReview':text='DB에 비건 적합성이 확인된 음식 '+foods.filter(f=>f.veganVerified).length+'개가 등록되어 있습니다. 식물성 기본 재료 후보 '+foods.filter(f=>f.plantCandidate).length+'개를 “비건 여부 확인 필요” 후보로 볼까요? 알려 주신 알레르기와 피하는 재료는 계속 적용합니다.';choices=[c('vegan:review','확인이 필요한 식물성 후보도 보기'),c('vegan:strict','확정된 비건 음식만 보기')];break;
-   case 'wanted':{const keys=wantedKeys(s),items=foods.filter(f=>!s.category||s.category==='any'||f.categories.includes(s.category));text=(s.category&&s.category!=='any'?categories[s.category]+'에서 ':'')+'어떤 주재료나 음식이 당기시나요?\n여러 항목을 고르거나 선택 없이 넘어가셔도 좋아요. 맵기도 함께 알려 주세요.';form={kind:'wanted',wantedKeys:keys.filter(k=>s.wanted.includes(k)||items.some(f=>f.preferences.some(p=>R.belongs(p,k)))),spiceLabels,counts:Object.fromEntries(keys.map(k=>[k,items.filter(f=>f.preferences.some(p=>R.belongs(p,k))).length]))};choices=[c('wanted:submit','이 취향으로 찾기')];break;}
-   case 'category':text='어떤 한 끼가 좋으세요?\n든든한 밥부터 달콤한 디저트까지, 원하시는 종류를 골라 주세요.';choices=Object.entries(categories).filter(([key])=>key==='any'||foods.some(f=>f.categories.includes(key))).map(([key,label])=>c('category:'+key,label));break;
+   case 'wanted':{const keys=wantedKeys(s),items=eligibleFoods(s).filter(f=>!s.category||s.category==='any'||f.categories.includes(s.category));text=(s.category&&s.category!=='any'?categories[s.category]+'에서 ':'')+'어떤 주재료나 음식이 당기시나요?\n여러 항목을 고르거나 선택 없이 넘어가셔도 좋아요. 맵기도 함께 알려 주세요.';form={kind:'wanted',wantedKeys:keys.filter(k=>items.some(f=>f.preferences.some(p=>R.belongs(p,k)))),spiceLabels,counts:Object.fromEntries(keys.map(k=>[k,items.filter(f=>f.preferences.some(p=>R.belongs(p,k))).length]))};choices=[c('wanted:submit','이 취향으로 찾기')];break;}
+   case 'category':{const items=eligibleFoods(s);text='어떤 한 끼가 좋으세요?\n든든한 밥부터 달콤한 디저트까지, 원하시는 종류를 골라 주세요.';choices=Object.entries(categories).filter(([key])=>key==='any'||items.some(f=>f.categories.includes(key))).map(([key,label])=>c('category:'+key,label));break;}
    case 'confirm':text='이렇게 골라드리면 될까요?\n'+summary(s)+'\n등록된 부산·부울경 음식에서 살펴보겠습니다. 실제 재료와 조리 환경은 식당에 확인해 주세요.';choices=[c('confirm','이 조건으로 찾기'),c('result:edit','조건 수정')];break;
    case 'results':text=(info.alternatives?'요청하신 종류·주재료·맵기로는 등록된 음식을 찾지 못했어요.\n식단·알레르기·추가 제외 조건은 그대로 유지하고, 동의하신 종류·주재료 취향을 넓혀 (낮은 맵기는 유지) 다른 후보 '+selected.length+'개를 무작위로 골랐습니다.\n원래 요청: '+summary(s):'이런 부산의 맛은 어떠세요?\n조건으로 살펴볼 수 있는 음식 '+(info.total||0)+'개 중 '+selected.length+'개를 골랐습니다.')+(s.diet==='vegan'?'\n비건 적합 여부는 확인이 필요합니다.':'')+(s.allergies.length?'\n선택한 알레르기 재료가 명시되거나 포함 가능성이 적힌 음식은 제외했습니다. 남은 음식도 식당 확인이 필요합니다.':'\n식당마다 재료와 양념이 다를 수 있어요. 음식 정보를 함께 확인해 주세요.');choices=[c('result:more','다른 후보 보기'),c('result:edit','조건 수정')];break;
-   case 'empty':text=(info.exhausted?'지금 조건으로 살펴볼 새 음식은 모두 보여 드렸어요.':'아쉽지만 지금 조건으로 살펴볼 음식을 찾지 못했어요.')+'\n'+summary(s)+'\n'+(info.reasons?.slice(0,3).map(r=>r.reason).join(' / ')||'식당별 확인 정보가 더 필요합니다.')+'\n알레르기와 식단 조건은 유지했습니다. 다른 종류나 재료로 다시 살펴볼까요?';choices=[c('result:edit','조건 수정'),c('result:again','같은 조건으로 처음부터 보기')];break;
+   case 'empty':info={...info,exhausted:canReplay(s)};text=(info.exhausted?'지금 조건으로 살펴볼 새 음식은 모두 보여 드렸어요.':'아쉽지만 지금 조건으로 살펴볼 음식을 찾지 못했어요.')+'\n'+summary(s)+'\n'+(info.reasons?.slice(0,3).map(r=>r.reason).join(' / ')||'식당별 확인 정보가 더 필요합니다.')+'\n알레르기와 식단 조건은 유지했습니다. 다른 종류나 재료로 다시 살펴볼까요?';choices=[...(s.diet==='vegan'&&!info.exhausted?[c('profile:open','식단 다시 선택')]:[]),c('result:edit','조건 수정')];if(info.exhausted)choices.push(c('result:again','같은 조건으로 처음부터 보기'));break;
    case 'relax':text='일치하는 음식이 없습니다. 식단·알레르기·제외와 낮은 맵기 조건은 유지하고 종류·원하는 주재료만 넓혀 다른 후보를 찾아볼까요?';choices=[c('alternatives:accept','조건 완화에 동의 · 대안 찾기'),c('result:edit','조건 수정')];break;
    case 'edit':text='바꾸고 싶은 항목을 선택해 주세요. 다른 조건은 유지합니다.';choices=[c('edit:profile','식단·알레르기·제외 재료 수정'),c('edit:category','한 끼 종류 수정'),c('edit:wanted','주재료·맵기 수정'),c('edit:done','현재 조건으로 돌아가기')];break;
    case 'conflict':text='찾고 싶은 '+(labels[s.proposal]||foods.find(f=>'food:'+f.id===s.proposal)?.name||'음식')+' 재료가 현재 식단·알레르기·제외 조건과 충돌합니다. 제외 조건을 유지하고 찾는 재료를 빼거나, 조건 설정 화면에서 직접 검토해 주세요.';choices=[c('conflict:remove-wanted','제외 조건 유지 · 찾는 재료 빼기'),c('conflict:profile','식단·알레르기 설정 다시 검토')];break;
@@ -32,10 +40,10 @@
   return {state:s,text:prefix?prefix+'\n\n'+text:text,choices,form,matches,foods:selected,uncertain:s.stage==='empty'||s.stage==='conflict',...info};
  }
  function shuffled(items){const copy=[...items];for(let i=copy.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[copy[i],copy[j]]=[copy[j],copy[i]];}return copy;}
- function results(s,matches){if(s.pendingAllergy?.length){s.stage='allergies';return view(s);}const all=R.filter(foods,s);if(s.requestedFoodIds.length)all.foods=all.foods.filter(f=>s.requestedFoodIds.includes(f.id));const fresh=all.foods.filter(f=>!s.seen.includes(f.id));let selected=fresh.slice(0,3),alternatives=false;
+ function results(s,matches){if(s.pendingAllergy?.length||(s.allergyStatus==='selected'&&!s.allergies.length)){s.stage='allergies';return view(s);}const all=R.filter(foods,s);if(s.requestedFoodIds.length)all.foods=all.foods.filter(f=>s.requestedFoodIds.includes(f.id));const fresh=all.foods.filter(f=>!s.seen.includes(f.id));let selected=fresh.slice(0,3),alternatives=false;
   if(!all.foods.length){if(!s.relaxAllowed){const possible=R.filter(foods,{...s,wanted:[],category:'any',spice:s.spice==='mild'?'mild':'any',requestedFoodIds:[]}).foods;if(possible.length){s.stage='relax';return view(s);}}const relaxed={...s,wanted:[],category:'any',spice:s.spice==='mild'?'mild':'any',requestedFoodIds:[]},pool=R.filter(foods,relaxed).foods.filter(f=>!s.seen.includes(f.id)),same=pool.filter(f=>s.category&&s.category!=='any'&&f.categories.includes(s.category));selected=shuffled(same.length>=2?same:pool).slice(0,3);alternatives=selected.length>0;}
   s.stage=selected.length?'results':'empty';s.seen.push(...selected.map(f=>f.id));return view(s,'',matches,selected,{total:all.foods.length,alternatives,exhausted:all.foods.length>0&&!fresh.length,reasons:all.reasons});}
- function afterProfile(s){s.profileComplete=true;if(s.pendingAllergy?.length){s.stage='allergies';return;}if(getConflict(s))return;if(s.diet==='vegan')s.stage='veganReview';else s.stage='category';}
+ function afterProfile(s){s.profileComplete=true;if(s.pendingAllergy?.length){s.stage='allergies';return;}if(getConflict(s))return;if(data.available&& !eligibleFoods({...s,reviewVegan:s.diet==='vegan'||s.reviewVegan}).length){s.stage='empty';return;}if(s.diet==='vegan')s.stage='veganReview';else s.stage='category';}
  function respond(input,previous=createState()){
   const s=clone(previous),matches=[];
   if(input&&typeof input==='object'){
@@ -72,14 +80,14 @@
     if(!Array.isArray(input.wanted)||!input.wanted.every(k=>wantedKeys(s).includes(k))||!['all','any'].includes(input.mode)||!Object.hasOwn(spiceLabels,input.spice||'any'))return view(s,'찾을 재료와 포함 방식을 다시 선택해 주세요.');
     s.wanted=[...new Set(input.wanted)];s.ingredientMode=input.mode;s.spice=input.spice||'any';s.seen=[];s.relaxAllowed=false;if(!getConflict(s))s.stage='confirm';
    }
-   else if(action.startsWith('vegan:')){s.reviewVegan=action==='vegan:review';s.stage='category';}
+   else if(action.startsWith('vegan:')){s.reviewVegan=action==='vegan:review';s.stage=eligibleFoods(s).length?'category':'empty';}
    else if(action.startsWith('category:')){const next=action.slice(9);if(s.category&&s.category!==next){s.wanted=[];}s.category=next;s.relaxAllowed=false;s.wanted=s.wanted.filter(k=>wantedKeys(s).includes(k));s.seen=[];s.stage='wanted';}
    else if(action==='alternatives:accept'){s.relaxAllowed=true;return results(s,[]);}
    else if(action==='confirm'||action==='result:more'||action==='result:again'){if(action==='result:again')s.seen=[];return results(s,[{rule:'실제 프로젝트 데이터 검색',evidence:summary(s)}]);}
    else if(action==='result:edit')s.stage='edit';
    else if(action.startsWith('edit:')){const key=action.slice(5);s.stage=key==='done'?'confirm':key;if(key==='category')s.requestedFoodIds=[];s.seen=[];}
    else if(action==='conflict:profile')s.stage='profile';
-   else if(action==='conflict:remove-wanted'){if(s.proposal?.startsWith('food:'))s.requestedFoodIds=s.requestedFoodIds.filter(id=>'food:'+id!==s.proposal);s.wanted=s.wanted.filter(k=>!R.related(k,s.proposal));s.proposal=null;if(!getConflict(s))s.stage=!s.profileComplete?'profile':s.diet==='vegan'?'veganReview':'category';}
+   else if(action==='conflict:remove-wanted'){if(s.proposal?.startsWith('food:'))s.requestedFoodIds=s.requestedFoodIds.filter(id=>'food:'+id!==s.proposal);s.wanted=s.wanted.filter(k=>!R.related(k,s.proposal));s.proposal=null;if(!getConflict(s)){if(!s.profileComplete)s.stage='profile';else afterProfile(s);}}
    matches.push({rule:'대화 조건 저장',evidence:describeAction(input)});return view(s,'',matches);
   }
   const text=String(input||'').trim().slice(0,2000);if(!text||/^(시작|안녕|안녕하세요)[.!\s]*$/.test(text))return view(s);
@@ -116,5 +124,5 @@
   matches.push({rule:'직접 입력을 선택 화면에 반영',evidence:text});return view(s,'입력하신 조건을 아래 선택 화면에 반영했습니다. 저장한 뒤 대화를 이어가 주세요.',matches);
  }
  function replaceCatalog(input,metadata={}){if(!Array.isArray(input))return false;if(metadata.available===false)input=[];const unique=new Map();for(const food of input){if(food&&typeof food.id==='string'&&food.id&&food.ko&&typeof food.ko.name==='string')unique.set(food.id,food);}const raw=[...unique.values()],next=raw.map(R.adapt);const changed=JSON.stringify(foods)!==JSON.stringify(next)||data.available!==(metadata.available!==false);data.available=metadata.available!==false;if(changed){foods.splice(0,foods.length,...next);data.foods=raw;data.source=metadata.source||'앱 음식 카탈로그';data.syncedAt=metadata.syncedAt||new Date().toISOString();}return changed;}
- const api={replaceCatalog,createState,respond,view,summary,describeAction,labels,categories,diets,stages,foods,source:data,allergyKeys};if(node)module.exports=api;else root.FoodGuide=api;
+ const api={replaceCatalog,createState,respond,view,summary,describeAction,labels,categories,diets,stages,foods,eligibleFoods,source:data,allergyKeys};if(node)module.exports=api;else root.FoodGuide=api;
 })(globalThis);

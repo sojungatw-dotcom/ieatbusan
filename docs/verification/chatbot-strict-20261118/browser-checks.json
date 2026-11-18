@@ -1,0 +1,96 @@
+{
+  "languages": [
+    {
+      "checked": [
+        "wheat",
+        "dairy"
+      ],
+      "current": "무\nMuboso food guide\nWhich foods are you allergic to?\nAllergens (select multiple)\nWheat and wheat flour\nBuckwheat\nEgg\nMilk and dairy\nSoy\nPeanut\nWalnut\nPine nut\nSesame\nShrimp\nCrab\nAll crustaceans\nShellfish and abalone\nSquid and octopus\nAll molluscs\nFish\nMackerel\nBeef\nPork\nChicken\nWhale meat\nJellyfish\nMustard\nSea squirt\n\nCheck ingredients, broth and cross-contact with the restaurant.\n\nSave and continue\nI do not know the exact allergens\nChoose allergy status again",
+      "language": "en",
+      "title": "Your taste of Busan"
+    },
+    {
+      "checked": [
+        "wheat",
+        "dairy"
+      ],
+      "current": "무\nMuboso 美食助手\n您对哪些食物过敏？\n过敏原（可多选）\n小麦及面粉\n荞麦\n鸡蛋\n牛奶及乳制品\n大豆\n花生\n核桃\n松子\n芝麻\n虾\n蟹\n所有甲壳类\n贝类及鲍鱼\n鱿鱼及章鱼\n所有软体动物\n鱼类\n鲭鱼\n牛肉\n猪肉\n鸡肉\n鲸肉\n海蜇\n芥末\n海鞘\n\n请向餐厅确认原料、汤底及交叉接触。\n\n保存并继续\n不清楚具体过敏原\n重新选择过敏情况",
+      "language": "zh",
+      "title": "适合您的釜山美味"
+    },
+    {
+      "checked": [
+        "wheat",
+        "dairy"
+      ],
+      "current": "무\nムボソの料理ガイド\nどの食物アレルギーがありますか？\nアレルゲン（複数選択）\n小麦・小麦粉\nそば\n卵\n牛乳・乳製品\n大豆\n落花生\nくるみ\n松の実\nごま\nえび\nかに\n甲殻類全般\n貝類・あわび\nいか・たこ\n軟体動物全般\n魚\nさば\n牛肉\n豚肉\n鶏肉\n鯨肉\nくらげ\nからし\nほや\n\n原材料・だし・交差接触を店舗に確認してください。\n\n保存して次へ\n詳しい項目はわかりません\nアレルギーの有無を選び直す",
+      "language": "ja",
+      "title": "あなたに合う釜山の味"
+    },
+    {
+      "checked": [
+        "wheat",
+        "dairy"
+      ],
+      "current": "무\n무보소 음식 도우미\n어떤 알레르기가 있으신가요?\n알레르기 (복수 선택)\n밀·밀가루\n메밀\n달걀\n우유·유제품\n대두\n땅콩\n호두\n잣\n참깨\n새우\n게\n갑각류 전체\n조개류·전복\n오징어·낙지\n연체동물 전체\n생선\n고등어\n소고기\n돼지고기\n닭고기\n고래고기\n해파리\n겨자\n멍게\n\n원료·육수·교차 접촉은 식당에 확인해 주세요.\n\n저장하고 다음으로\n정확한 항목은 모르겠어요\n알레르기 여부 다시 선택",
+      "language": "ko",
+      "title": "나에게 맞는 부산의 맛"
+    }
+  ],
+  "alignment": [
+    {
+      "note": {
+        "bottom": 545.5,
+        "height": 100.5,
+        "left": 20,
+        "right": 370.3999938964844,
+        "top": 445,
+        "width": 350.3999938964844,
+        "x": 20,
+        "y": 445
+      },
+      "option": {
+        "bottom": 213.9000015258789,
+        "height": 65.70000457763672,
+        "left": 20,
+        "right": 370.3999938964844,
+        "top": 148.1999969482422,
+        "width": 350.3999938964844,
+        "x": 20,
+        "y": 148.1999969482422
+      },
+      "width": 390
+    },
+    {
+      "note": {
+        "bottom": 544.0999984741211,
+        "height": 83.0999984741211,
+        "left": 468,
+        "right": 1068,
+        "top": 461,
+        "width": 600,
+        "x": 468,
+        "y": 461
+      },
+      "option": {
+        "bottom": 229.9000015258789,
+        "height": 65.70000457763672,
+        "left": 468,
+        "right": 1068,
+        "top": 164.1999969482422,
+        "width": 600,
+        "x": 468,
+        "y": 164.1999969482422
+      },
+      "width": 1280
+    }
+  ],
+  "foodChoiceCheck": "무\n무보소 음식 도우미\n어떤 음식이 좋으세요?\n종류 상관없어요\n육류\n해산물\n찜탕\n밥류",
+  "textPriority": "현재 조건: 별도 식단 없음 · 알레르기: 밀·밀가루, 우유·유제품 · 디저트",
+  "veganChange": {
+    "beforeVisibleCards": 3,
+    "afterVisibleCards": 0,
+    "botBorders": "all solid"
+  },
+  "scope": "43 repository dishes via synthetic API, not live DB or real native device"
+}
