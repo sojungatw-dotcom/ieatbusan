@@ -133,3 +133,5 @@ Run node tests/support-content.cjs for notice/FAQ CRUD, settings, publish permis
 ## Staff-facing condition card
 
 Run `node tests/chatbot-condition-card.cjs` for the default allergy choice, explicit unknown status, Korean plus selected-language card content, preference/allergy separation and long text wrapping. Korean-only output is not duplicated. The card is generated locally without storing conditions in a member profile. Browser verification and limitations are in [condition-card](../docs/chatbot-condition-card.md).
+
+Run `node tests/chatbot-design.cjs` for three-stage progress and localized staff previews that retain category, ingredient matching mode and restriction/preference separation without changing canonical state. See [local design review](../docs/chatbot-design-review.md) for browser checks and screenshots.

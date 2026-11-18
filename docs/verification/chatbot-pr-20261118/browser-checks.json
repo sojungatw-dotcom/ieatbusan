@@ -1,0 +1,83 @@
+{
+  "languages": [
+    {
+      "checked": [
+        "vegan",
+        "none"
+      ],
+      "draft": "test draft",
+      "language": "en",
+      "steps": "1Diet & allergies2Food preferences3Review & results",
+      "title": "Your taste of Busan"
+    },
+    {
+      "checked": [
+        "vegan",
+        "none"
+      ],
+      "draft": "test draft",
+      "language": "zh",
+      "steps": "1饮食与过敏2饮食偏好3确认与推荐",
+      "title": "适合您的釜山美味"
+    },
+    {
+      "checked": [
+        "vegan",
+        "none"
+      ],
+      "draft": "test draft",
+      "language": "ja",
+      "steps": "1食事・アレルギー2料理の好み3確認・おすすめ",
+      "title": "あなたに合う釜山の味"
+    },
+    {
+      "checked": [
+        "vegan",
+        "none"
+      ],
+      "draft": "test draft",
+      "language": "ko",
+      "steps": "1식단·알레르기2음식 취향3확인·추천",
+      "title": "나에게 맞는 부산의 맛"
+    }
+  ],
+  "layout": [
+    {
+      "width": 320,
+      "host": {
+        "height": 32,
+        "top": "10px"
+      },
+      "frame": {
+        "helpTop": "10px",
+        "scrollWidth": 320,
+        "width": 320
+      }
+    },
+    {
+      "width": 390,
+      "host": {
+        "height": 32,
+        "top": "10px"
+      },
+      "frame": {
+        "helpTop": "10px",
+        "scrollWidth": 390,
+        "width": 390
+      }
+    },
+    {
+      "width": 1280,
+      "host": {
+        "height": 32,
+        "top": "10px"
+      },
+      "frame": {
+        "helpTop": "10px",
+        "scrollWidth": 480,
+        "width": 480
+      }
+    }
+  ],
+  "scope": "Local synthetic catalog, not native device or live Supabase"
+}

@@ -1,0 +1,179 @@
+[
+  {
+    "file": "admin-api.cjs",
+    "passed": true
+  },
+  {
+    "file": "analytics.cjs",
+    "passed": true
+  },
+  {
+    "file": "api-regressions.cjs",
+    "passed": true
+  },
+  {
+    "file": "async-regressions.cjs",
+    "passed": true
+  },
+  {
+    "file": "auth-regressions.cjs",
+    "passed": true
+  },
+  {
+    "file": "chatbot-condition-card.cjs",
+    "passed": true
+  },
+  {
+    "file": "chatbot-host-language.cjs",
+    "passed": true
+  },
+  {
+    "file": "chatbot-live.cjs",
+    "passed": true
+  },
+  {
+    "file": "chatbot-simulation.cjs",
+    "passed": true
+  },
+  {
+    "file": "chatbot-visitor.cjs",
+    "passed": true
+  },
+  {
+    "file": "chatbot.cjs",
+    "passed": true
+  },
+  {
+    "file": "comment-controls.cjs",
+    "passed": true
+  },
+  {
+    "file": "comment-country-migration.cjs",
+    "passed": true
+  },
+  {
+    "file": "deployment.cjs",
+    "passed": true,
+    "note": "Reran after rebuilding dist, as required by this test."
+  },
+  {
+    "file": "engagement-latency.cjs",
+    "passed": true
+  },
+  {
+    "file": "engagement.cjs",
+    "passed": true
+  },
+  {
+    "file": "featured-foods.cjs",
+    "passed": true
+  },
+  {
+    "file": "food-categories.cjs",
+    "passed": true
+  },
+  {
+    "file": "food-manuscript.cjs",
+    "passed": true
+  },
+  {
+    "file": "full-food-locales.cjs",
+    "passed": true
+  },
+  {
+    "file": "google-maps.cjs",
+    "passed": true
+  },
+  {
+    "file": "home-carousel.cjs",
+    "passed": true
+  },
+  {
+    "file": "i18n.cjs",
+    "passed": true
+  },
+  {
+    "file": "map-contracts.cjs",
+    "passed": true
+  },
+  {
+    "file": "map-districts.cjs",
+    "passed": true
+  },
+  {
+    "file": "map-integration.cjs",
+    "passed": true
+  },
+  {
+    "file": "map-lifecycle.cjs",
+    "passed": true
+  },
+  {
+    "file": "map-loader.cjs",
+    "passed": true
+  },
+  {
+    "file": "map-provider.cjs",
+    "passed": true
+  },
+  {
+    "file": "map-regressions.cjs",
+    "passed": true
+  },
+  {
+    "file": "map-restaurant-locales.cjs",
+    "passed": true
+  },
+  {
+    "file": "map-restaurant-overview.cjs",
+    "passed": true
+  },
+  {
+    "file": "map-sheet.cjs",
+    "passed": true
+  },
+  {
+    "file": "member-country-api.cjs",
+    "passed": true
+  },
+  {
+    "file": "member-country-migration.cjs",
+    "passed": true
+  },
+  {
+    "file": "member-country.cjs",
+    "passed": true
+  },
+  {
+    "file": "mobile-intro.cjs",
+    "passed": true
+  },
+  {
+    "file": "post-like-flow.cjs",
+    "passed": true
+  },
+  {
+    "file": "profile-avatar.cjs",
+    "passed": true
+  },
+  {
+    "file": "public-entry.cjs",
+    "passed": true
+  },
+  {
+    "file": "restaurant-data.cjs",
+    "passed": true
+  },
+  {
+    "file": "restaurant-images.cjs",
+    "passed": true
+  },
+  {
+    "file": "structured-data.cjs",
+    "passed": true
+  },
+  {
+    "file": "support-content.cjs",
+    "passed": true
+  }
+]
