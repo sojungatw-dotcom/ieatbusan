@@ -2,6 +2,11 @@
 (function(){
  'use strict';
  const rows=[
+ ['msg.empty.vegan','현재 조건으로 추천할 수 있는 비건 음식이 등록되어 있지 않아요.\n비건 메뉴 제공 여부와 원재료는 음식점에 직접 문의해 주세요.\n적용 조건: {summary}\n식단을 다시 선택하거나 다른 조건을 확인해 보세요.','No vegan food is registered that matches your current choices.\nPlease ask the restaurant directly about vegan options and ingredients.\nApplied choices: {summary}\nYou can choose your diet again or review other choices.','目前没有符合这些条件的已收录纯素美食。\n请直接向餐厅询问是否提供纯素菜单及其原料。\n已应用条件：{summary}\n您可以重新选择饮食方式，或查看其他条件。','現在の条件に合うヴィーガン料理は登録されていません。\nヴィーガンメニューの有無と原材料は店舗に直接お問い合わせください。\n適用した条件：{summary}\n食事スタイルを選び直すか、ほかの条件をご確認ください。'],
+ ['choice.profile:open','식단 다시 선택','Choose diet again','重新选择饮食方式','食事スタイルを選び直す'],
+ ['choice.result:again','이전에 본 음식 다시 보기','View previous recommendations','重新查看已推荐的美食','以前のおすすめをもう一度見る'],
+ ['msg.relax.any','맞는 음식이 없어요.\n식단·알레르기·제외 조건은 유지하고, 다른 종류·재료·맵기도 찾아볼까요?','No exact match. Try other categories, ingredients or spice levels?\nDiet, allergies and exclusions stay required.','没有精确匹配。要换类别、食材或辣度找找吗？\n饮食、过敏和排除项仍保留。','一致する料理がありません。種類・食材・辛さを広げますか？\n食事制限・アレルギー・除外は保持します。'],
+ ['msg.alternatives.any','동의하신 대안 {n}개를 찾았어요.\n식단·알레르기·제외 조건은 유지했어요.','Found {n} alternatives with your consent.\nDiet, allergies and exclusions were retained.','经您同意，找到 {n} 个替代候选。\n饮食、过敏和排除项均已保留。','同意いただいた代替候補は {n} 件です。\n食事制限・アレルギー・除外は保持しました。'],
  ['stage.profile','식단·알레르기','Diet and allergies','饮食与过敏','食事制限・アレルギー'],['stage.category','음식 종류','Food category','食物类别','料理の種類'],['stage.wanted','재료·맵기','Ingredients and spice','食材与辣度','食材・辛さ'],['stage.confirm','조건 확인','Review choices','确认条件','条件の確認'],['stage.results','추천 음식','Recommendations','推荐美食','おすすめ'],
  ['msg.profile','식단과 알레르기를 알려 주세요.','Choose your diet and allergy status.','请选择饮食方式和过敏情况。','食事スタイルとアレルギーの有無を選んでください。'],
  ['msg.allergies','어떤 알레르기가 있으신가요?','Which foods are you allergic to?','您对哪些食物过敏？','どの食物アレルギーがありますか？'],
@@ -9,7 +14,7 @@
  ['msg.wanted','원하는 재료와 맵기를 골라 주세요.','Choose ingredients and spice level.','请选择食材和辣度。','食材と辛さを選んでください。'],
  ['msg.confirm','이 조건으로 추천해 드릴까요?\n{summary}','Recommend food with these choices?\n{summary}','按这些条件推荐吗？\n{summary}','この条件で探しますか？\n{summary}'],
  ['msg.results','추천 음식 {n}개예요.','Recommendations: {n}','为您推荐 {n} 道菜。','おすすめは {n} 件です。'],
- ['msg.empty','조건에 맞는 음식이 없어요.\n식단·알레르기·제외 조건은 유지했어요.','No matching food found.\nYour diet, allergies and exclusions are unchanged.','暂无符合条件的食物。\n饮食、过敏和排除条件均已保留。','条件に合う料理がありません。\n食事制限・アレルギー・除外は保持しています。'],
+ ['msg.empty','이 조건에 맞는 등록 음식이 없어요.\n적용 조건: {summary}\n식단·알레르기·제외 조건은 유지했어요.','No registered food matches these choices.\nApplied choices: {summary}\nYour diet, allergies and exclusions are unchanged.','暂无符合这些条件的已收录美食。\n已应用条件：{summary}\n饮食、过敏和排除条件均已保留。','この条件に合う登録料理はありません。\n適用した条件：{summary}\n食事制限・アレルギー・除外は保持しています。'],
  ['msg.veganReview','비건 확인 기록 {verified}개 · 확인 필요 후보 {n}개\n확인이 필요한 후보도 보시겠어요?','Verified vegan records: {verified} · Unverified candidates: {n}\nShow candidates needing verification too?','已确认纯素记录 {verified} 个，待确认候选 {n} 个。\n也查看待确认候选吗？','確認済み {verified} 件・要確認の候補 {n} 件。\n要確認の候補も表示しますか？'],
  ['msg.conflict','{ingredient}: 식단·알레르기·제외 조건과 충돌해요.\n어떻게 할까요?','{ingredient} conflicts with your restrictions.\nWhat would you like to change?','{ingredient} 与限制条件冲突。\n您想如何调整？','{ingredient} は制限条件と矛盾しています。\nどうしますか？'],
  ['msg.relax','맞는 음식이 없어요.\n식단·알레르기·제외·순한맛은 유지하고, 다른 종류·재료도 찾아볼까요?','No exact match. Try other categories or ingredients?\nDiet, allergies, exclusions and mild spice stay required.','没有精确匹配。要换类别或食材找找吗？\n饮食、过敏、排除项和低辣度仍保留。','完全一致がありません。種類や食材を広げますか？\n食事制限・アレルギー・除外・辛さ控えめは保持します。'],

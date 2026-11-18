@@ -41,7 +41,7 @@
    for(const key of s.excluded||[])if([...all,...(f.preferences||[])].some(k=>related(k,key)))reasons.push('제외 재료·음식 또는 포함 가능성: '+labels[key]);
    if(s.diet==='vegan'){
     if(!f.veganVerified&&(!s.reviewVegan||!f.plantCandidate))reasons.push(s.reviewVegan?'원문에 식물성 기본 재료 후보로 분류되지 않음':'비건 적합성 확정 자료 없음');
-    if([...f.ingredients,...(!s.reviewVegan?f.possibleIngredients:[])].some(k=>['meat','seafood','egg','dairy','honey'].some(group=>belongs(k,group))))reasons.push('비건 기본 조건과 주재료 충돌');
+    if(all.some(k=>['meat','seafood','egg','dairy','honey'].some(group=>belongs(k,group))))reasons.push('비건 기본 조건과 주재료 충돌');
    }else if(s.diet==='vegetarian'&&all.some(k=>belongs(k,'meat')||belongs(k,'seafood')))reasons.push('채식 기본 조건과 동물성 재료·가능성 충돌');
    if(s.wanted?.length){const has=key=>(f.preferences||f.ingredients).some(k=>belongs(k,key));if(!(s.ingredientMode==='any'?s.wanted.some(has):s.wanted.every(has)))reasons.push('찾는 주재료·음식 형태가 원문에 명시되지 않음');}
    if(s.category&&s.category!=='any'&&!f.categories.includes(s.category))reasons.push('선택한 음식 종류와 다름');

@@ -1,0 +1,208 @@
+{
+  "total": 11783,
+  "passed": 11783,
+  "failed": 0,
+  "groups": {
+    "allergyOptions": 300,
+    "category": 300,
+    "ingredients": 2700,
+    "recommendation": 8100,
+    "alternatives": 320,
+    "unresolved": 4,
+    "response": 1,
+    "examples": 45,
+    "separateQuestions": 12,
+    "candidate": 1
+  },
+  "examples": [
+    {
+      "id": "basic",
+      "available": true
+    },
+    {
+      "id": "vegan",
+      "available": false,
+      "blocked": "vegan:review"
+    },
+    {
+      "id": "vegan-strict",
+      "available": false,
+      "blocked": "vegan:strict"
+    },
+    {
+      "id": "vegan-milk",
+      "available": false,
+      "blocked": "vegan:review"
+    },
+    {
+      "id": "vegetarian",
+      "available": true
+    },
+    {
+      "id": "wheat-egg",
+      "available": true
+    },
+    {
+      "id": "shrimp-crab",
+      "available": true
+    },
+    {
+      "id": "wheat-buckwheat",
+      "available": true
+    },
+    {
+      "id": "soy-peanut",
+      "available": true
+    },
+    {
+      "id": "nuts-seeds",
+      "available": true
+    },
+    {
+      "id": "fish-shellfish",
+      "available": true
+    },
+    {
+      "id": "jelly-mustard",
+      "available": true
+    },
+    {
+      "id": "no-beef-pork",
+      "available": true
+    },
+    {
+      "id": "no-pork-beef",
+      "available": true
+    },
+    {
+      "id": "want-pork",
+      "available": true
+    },
+    {
+      "id": "want-beef",
+      "available": true
+    },
+    {
+      "id": "want-chicken",
+      "available": true
+    },
+    {
+      "id": "want-shrimp",
+      "available": true
+    },
+    {
+      "id": "meat",
+      "available": true
+    },
+    {
+      "id": "rice",
+      "available": true
+    },
+    {
+      "id": "stew",
+      "available": true
+    },
+    {
+      "id": "noodle",
+      "available": true
+    },
+    {
+      "id": "snack",
+      "available": true
+    },
+    {
+      "id": "seafood",
+      "available": true
+    },
+    {
+      "id": "mild",
+      "available": true
+    },
+    {
+      "id": "hot",
+      "available": true
+    },
+    {
+      "id": "wheat-noodle",
+      "available": false,
+      "blocked": "category:noodle"
+    },
+    {
+      "id": "pocket",
+      "available": true
+    },
+    {
+      "id": "beef-shrimp",
+      "available": true
+    },
+    {
+      "id": "beef-or-pork",
+      "available": true
+    },
+    {
+      "id": "unknown",
+      "available": true
+    },
+    {
+      "id": "two-meat",
+      "available": true
+    },
+    {
+      "id": "conflict",
+      "available": false,
+      "blocked": "wanted:submit"
+    },
+    {
+      "id": "edit-allergies",
+      "available": true
+    },
+    {
+      "id": "vegan-wheat",
+      "available": false,
+      "blocked": "vegan:review"
+    },
+    {
+      "id": "prefill",
+      "available": true
+    },
+    {
+      "id": "dessert",
+      "available": true
+    },
+    {
+      "id": "dessert-wheat",
+      "available": false,
+      "blocked": "category:dessert"
+    },
+    {
+      "id": "icecream-alternative",
+      "available": false,
+      "blocked": "wanted:submit"
+    },
+    {
+      "id": "fruit-alternative",
+      "available": false,
+      "blocked": "wanted:submit"
+    },
+    {
+      "id": "sujebi-wheat",
+      "available": false,
+      "blocked": "category:noodle"
+    },
+    {
+      "id": "vegan-alternative",
+      "available": false,
+      "blocked": "vegan:review"
+    },
+    {
+      "id": "no-safe-alternative",
+      "available": false,
+      "blocked": "vegan:review"
+    },
+    {
+      "id": "allergy-unknown-next",
+      "available": true
+    }
+  ],
+  "failures": []
+}

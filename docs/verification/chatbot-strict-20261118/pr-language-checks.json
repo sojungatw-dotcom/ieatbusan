@@ -1,0 +1,178 @@
+[
+  {
+    "diet": [
+      "vegan"
+    ],
+    "draft": "language QA draft",
+    "kind": "draft",
+    "language": "en",
+    "title": "Your taste of Busan"
+  },
+  {
+    "diet": [
+      "vegan"
+    ],
+    "draft": "language QA draft",
+    "kind": "draft",
+    "language": "zh",
+    "title": "适合您的釜山美味"
+  },
+  {
+    "diet": [
+      "vegan"
+    ],
+    "draft": "language QA draft",
+    "kind": "draft",
+    "language": "ja",
+    "title": "あなたに合う釜山の味"
+  },
+  {
+    "diet": [
+      "vegan"
+    ],
+    "draft": "language QA draft",
+    "kind": "draft",
+    "language": "ko",
+    "title": "나에게 맞는 부산의 맛"
+  },
+  {
+    "foodCards": 0,
+    "kind": "vegan-empty",
+    "language": "en",
+    "response": "무\nMuboso food guide\nNo vegan food is registered that matches your current choices.\nPlease ask the restaurant directly about vegan options and ingredients.\nApplied choices: Vegan · Allergies: Reported none\nYou can choose your diet again or review other choices.\nChoose diet again\nEdit choices",
+    "summary": "Current choices: Vegan · Allergies: Reported none"
+  },
+  {
+    "foodCards": 0,
+    "kind": "vegan-empty",
+    "language": "zh",
+    "response": "무\nMuboso 美食助手\n目前没有符合这些条件的已收录纯素美食。\n请直接向餐厅询问是否提供纯素菜单及其原料。\n已应用条件：纯素 · 过敏原：已回答没有\n您可以重新选择饮食方式，或查看其他条件。\n重新选择饮食方式\n修改条件",
+    "summary": "当前条件：纯素 · 过敏原：已回答没有"
+  },
+  {
+    "foodCards": 0,
+    "kind": "vegan-empty",
+    "language": "ja",
+    "response": "무\nムボソの料理ガイド\n現在の条件に合うヴィーガン料理は登録されていません。\nヴィーガンメニューの有無と原材料は店舗に直接お問い合わせください。\n適用した条件：ヴィーガン · アレルギー：なしと回答\n食事スタイルを選び直すか、ほかの条件をご確認ください。\n食事スタイルを選び直す\n条件を変更",
+    "summary": "現在の条件：ヴィーガン · アレルギー：なしと回答"
+  },
+  {
+    "foodCards": 0,
+    "kind": "vegan-empty",
+    "language": "ko",
+    "response": "무\n무보소 음식 도우미\n현재 조건으로 추천할 수 있는 비건 음식이 등록되어 있지 않아요.\n비건 메뉴 제공 여부와 원재료는 음식점에 직접 문의해 주세요.\n적용 조건: 비건 · 알레르기: 없다고 응답\n식단을 다시 선택하거나 다른 조건을 확인해 보세요.\n식단 다시 선택\n조건 수정",
+    "summary": "현재 조건: 비건 · 알레르기: 없다고 응답"
+  },
+  {
+    "checked": [
+      "wheat",
+      "dairy"
+    ],
+    "count": 24,
+    "kind": "allergy-draft",
+    "language": "en"
+  },
+  {
+    "checked": [
+      "wheat",
+      "dairy"
+    ],
+    "count": 24,
+    "kind": "allergy-draft",
+    "language": "zh"
+  },
+  {
+    "checked": [
+      "wheat",
+      "dairy"
+    ],
+    "count": 24,
+    "kind": "allergy-draft",
+    "language": "ja"
+  },
+  {
+    "checked": [
+      "wheat",
+      "dairy"
+    ],
+    "count": 24,
+    "kind": "allergy-draft",
+    "language": "ko"
+  },
+  {
+    "foods": [],
+    "kind": "no-match-mild",
+    "language": "en",
+    "response": "No registered food matches these choices.\nApplied choices: No special diet · Allergies: Wheat and wheat flour, Milk and dairy · Prefer: Beef · Meat · Mild\nYour diet, allergies and exclusions are unchanged.",
+    "summary": "Current choices: No special diet · Allergies: Wheat and wheat flour, Milk and dairy · Prefer: Beef · Meat · Mild"
+  },
+  {
+    "foods": [],
+    "kind": "no-match-mild",
+    "language": "zh",
+    "response": "暂无符合这些条件的已收录美食。\n已应用条件：无特殊饮食限制 · 过敏原：小麦及面粉, 牛奶及乳制品 · 想吃的食材：牛肉 · 肉类 · 不辣／微辣\n饮食、过敏和排除条件均已保留。",
+    "summary": "当前条件：无特殊饮食限制 · 过敏原：小麦及面粉, 牛奶及乳制品 · 想吃的食材：牛肉 · 肉类 · 不辣／微辣"
+  },
+  {
+    "foods": [],
+    "kind": "no-match-mild",
+    "language": "ja",
+    "response": "この条件に合う登録料理はありません。\n適用した条件：特別な食事制限なし · アレルギー：小麦・小麦粉, 牛乳・乳製品 · 希望する食材：牛肉 · 肉料理 · 辛さ控えめ\n食事制限・アレルギー・除外は保持しています。",
+    "summary": "現在の条件：特別な食事制限なし · アレルギー：小麦・小麦粉, 牛乳・乳製品 · 希望する食材：牛肉 · 肉料理 · 辛さ控えめ"
+  },
+  {
+    "foods": [],
+    "kind": "no-match-mild",
+    "language": "ko",
+    "response": "이 조건에 맞는 등록 음식이 없어요.\n적용 조건: 별도 식단 없음 · 알레르기: 밀·밀가루, 우유·유제품 · 찾는 재료: 소고기 · 육류 · 순한맛\n식단·알레르기·제외 조건은 유지했어요.",
+    "summary": "현재 조건: 별도 식단 없음 · 알레르기: 밀·밀가루, 우유·유제품 · 찾는 재료: 소고기 · 육류 · 순한맛"
+  },
+  {
+    "foods": [
+      {
+        "id": "sogogi-gukbap",
+        "name": "Sogogi-gukbap"
+      }
+    ],
+    "kind": "recommendations",
+    "language": "en",
+    "response": "Recommendations: 1\nAllergy safety is unverified. Check ingredients and cross-contact with the restaurant.",
+    "summary": "Current choices: No special diet · Allergies: Wheat and wheat flour, Milk and dairy · Prefer: Beef · Meat · Any"
+  },
+  {
+    "foods": [
+      {
+        "id": "sogogi-gukbap",
+        "name": "牛肉汤饭"
+      }
+    ],
+    "kind": "recommendations",
+    "language": "zh",
+    "response": "为您推荐 1 道菜。\n不保证过敏安全，请向餐厅确认原料及交叉接触。",
+    "summary": "当前条件：无特殊饮食限制 · 过敏原：小麦及面粉, 牛奶及乳制品 · 想吃的食材：牛肉 · 肉类 · 不限"
+  },
+  {
+    "foods": [
+      {
+        "id": "sogogi-gukbap",
+        "name": "ソコギクッパ"
+      }
+    ],
+    "kind": "recommendations",
+    "language": "ja",
+    "response": "おすすめは 1 件です。\nアレルギーへの安全性は未確認です。原材料と交差接触を店舗に確認してください。",
+    "summary": "現在の条件：特別な食事制限なし · アレルギー：小麦・小麦粉, 牛乳・乳製品 · 希望する食材：牛肉 · 肉料理 · こだわらない"
+  },
+  {
+    "foods": [
+      {
+        "id": "sogogi-gukbap",
+        "name": "소고기국밥"
+      }
+    ],
+    "kind": "recommendations",
+    "language": "ko",
+    "response": "추천 음식 1개예요.\n알레르기 안전은 보장되지 않아요. 원료·교차 접촉을 식당에 확인해 주세요.",
+    "summary": "현재 조건: 별도 식단 없음 · 알레르기: 밀·밀가루, 우유·유제품 · 찾는 재료: 소고기 · 육류 · 상관없음"
+  }
+]

@@ -6,7 +6,7 @@
 .lang-screen .option { min-height:56px; padding:8px 14px; border-radius:16px; }
 .lang-screen .option .native { font-size:16px; line-height:1.2; }
 .lang-screen .option .eng { font-size:12px; line-height:1.2; }
-.lang-screen .note-card { margin:10px 20px 0; padding:10px 14px; font-size:12px; line-height:1.45; }
+.lang-screen .note-card { width:min(calc(100% - 40px),600px); margin:10px auto 0; padding:10px 14px; font-size:12px; line-height:1.45; }
 .lang-screen .bottom-cta { margin-top:auto; padding:10px 20px; position:sticky; bottom:var(--footer-h,0px); z-index:30; background:var(--bg); }
 .lang-screen .bottom-cta .btn { min-height:44px; padding:10px 16px; }
 body:has(.lang-screen) .ieb-chat-launcher { display:none; }

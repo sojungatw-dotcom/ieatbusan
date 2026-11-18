@@ -89,6 +89,7 @@
  function group(form,title){const field=el('fieldset');field.append(el('legend','',title));const options=el('div','option-grid');field.append(options);form.append(field);return options;}
  function buildForm(schema){
   const form=el('form','conversation-form');
+  form.dataset.kind=schema.kind;
   const values=name=>[...form.querySelectorAll('input[name="'+name+'"]:checked')].map(n=>n.value);
   function submit(label,callback){const control=el('button','form-submit',label);control.type='submit';form.append(control);form.addEventListener('submit',event=>{event.preventDefault();callback();});}
   if(schema.kind==='profile'){
@@ -117,14 +118,14 @@
   const row=el('div','message '+role);if(role==='bot')row.append(el('span','avatar',T('무')));
   const content=el('div','message-content');content.append(el('div','sender',role==='bot'?T('무보소 음식 도우미'):T('나')),el('div','bubble',text));
   if(foods.length){const list=el('div','food-list');for(const rawFood of foods){const food=bot.displayFood(rawFood);
-   const card=el('article','food-card');card.append(imageFor(food,'food-photo'));const body=el('div','food-card-body');if(food.sourceLanguage==='ko'&&bot.language!=='ko')body.append(el('small','source-language-note',T('원문 정보 (한국어)')));body.append(el('span','verification',food.verification),el('h3','',food.name),el('p','',food.detail));
+   const card=el('article','food-card');card.dataset.foodId=rawFood.id;card.append(imageFor(food,'food-photo'));const body=el('div','food-card-body');if(food.sourceLanguage==='ko'&&bot.language!=='ko')body.append(el('small','source-language-note',T('원문 정보 (한국어)')));body.append(el('span','verification',food.verification),el('h3','',food.name),el('p','',food.detail));
    if(bot.language!=='ko'){const original=el('small','original-name',food.originalName);original.lang='ko';body.append(original);}
    const tags=el('div','food-categories');for(const key of food.categories)tags.append(el('span','',bot.categories[key]));body.append(tags,el('small','',food.priceText));
    const detailButton=button('',()=>showFood(food),'food-detail-button');detailButton.setAttribute('aria-label',food.name+T(' 음식 정보 보기'));detailButton.append(el('span','',T('음식 정보 살펴보기')),el('span','','↗'));card.append(body,detailButton);list.append(card);
   }content.append(list);}
   if(schema)content.append(buildForm(schema));
   const buttons=choices.filter(c=>!schema||!['profile:submit','allergies:submit','wanted:submit'].includes(c.id));
-  if(buttons.length){const list=el('div','reply-choices');list.setAttribute('aria-label',T('현재 질문의 답변 선택지'));for(const c of buttons)list.append(button(c.label,()=>send({action:c.id},c.label)));content.append(list);}
+  if(buttons.length){const list=el('div','reply-choices');list.setAttribute('aria-label',T('현재 질문의 답변 선택지'));for(const c of buttons){const choice=button(c.label,()=>send({action:c.id},c.label));choice.dataset.action=c.id;list.append(choice);}content.append(list);}
   row.append(content);$('messages').append(row);$('messages').scrollTop=schema?row.offsetTop-$('messages').offsetTop:$('messages').scrollHeight;
  }
  function render(result){
@@ -145,6 +146,7 @@
   $('flow').textContent=bot.stages[state.stage]+' · '+(result.form?T('여러 항목 선택 후 저장해 주세요.'):result.choices.length+T('개 선택지로 이어갈 수 있습니다.'));
   $('rule-count').textContent=result.matches.length+T('개');$('rules').replaceChildren();for(const match of result.matches){const li=el('li');li.append(el('b','',match.rule),el('small','','“'+match.evidence+'”'));$('rules').append(li);}
   if(!result.matches.length)$('rules').append(el('li','empty',T('답변을 선택하면 적용한 분기가 표시됩니다.')));
+  refreshFoodSurfaces();
  }
  function send(value,label){
   if(typeof value==='string'&&!value.trim())return;
@@ -171,7 +173,7 @@
  function renderLibrary(){
   const query=$('scenario-search').value.trim().toLowerCase(),group=$('scenario-group').value;
   const preview=s=>s.initial==='시작'?bot.describeAction(s.steps.find(step=>typeof step==='object'&&step.action==='profile:submit')||s.initial):T(s.initial);
-  const items=FoodScenarios.filter(s=>(group==='all'||s.group===group)&&[displayScenario(s).title,displayScenario(s).description,s.title,s.description,preview(s)].join(' ').toLowerCase().includes(query));
+  const items=FoodScenarios.filter(s=>FoodScenarios.availability(s).available&&(group==='all'||s.group===group)&&[displayScenario(s).title,displayScenario(s).description,s.title,s.description,preview(s)].join(' ').toLowerCase().includes(query));
   $('scenario-count').textContent=items.length+' / '+FoodScenarios.length+T('개');$('scenario-grid').replaceChildren();
   for(const scenario of items){
    const card=el('article','scenario-card');card.append(el('span','badge',scenario.group),el('h3','',displayScenario(scenario).title),el('p','',displayScenario(scenario).description),el('blockquote','',preview(scenario)));
@@ -184,16 +186,29 @@
  }
  function renderCategories(){
   $('category-catalog').replaceChildren();
-  for(const [key,label] of Object.entries(bot.categories)){const count=key==='any'?bot.foods.length:bot.foods.filter(food=>food.categories.includes(key)).length;if(key!=='any'&&!count)continue;const chip=button(key==='any'?T('전체'):label,()=>{catalogCategory=key;renderCategories();renderCatalog();},'category-chip');chip.append(el('span','',count));chip.setAttribute('aria-pressed',String(catalogCategory===key));$('category-catalog').append(chip);}
+  const available=bot.eligibleFoods(visibleRestrictions());
+  if(catalogCategory!=='any'&&!available.some(food=>food.categories.includes(catalogCategory)))catalogCategory='any';
+  for(const [key,label] of Object.entries(bot.categories)){const count=key==='any'?available.length:available.filter(food=>food.categories.includes(key)).length;if(key!=='any'&&!count)continue;const chip=button(key==='any'?T('전체'):label,()=>{catalogCategory=key;renderCategories();renderCatalog();},'category-chip');chip.append(el('span','',count));chip.setAttribute('aria-pressed',String(catalogCategory===key));$('category-catalog').append(chip);}
  }
  function renderCatalog(){
-  const query=$('catalog-query').value.trim().toLowerCase();const items=bot.foods.filter(food=>(catalogCategory==='any'||food.categories.includes(catalogCategory))&&[bot.displayFood(food).name,bot.displayFood(food).primary,food.name,food.primary,...food.categories.map(key=>bot.categories[key])].join(' ').toLowerCase().includes(query));
+  const query=$('catalog-query').value.trim().toLowerCase();const items=bot.eligibleFoods(visibleRestrictions()).filter(food=>(catalogCategory==='any'||food.categories.includes(catalogCategory))&&[bot.displayFood(food).name,bot.displayFood(food).primary,food.name,food.primary,...food.categories.map(key=>bot.categories[key])].join(' ').toLowerCase().includes(query));
   $('catalog-title').textContent=catalogCategory==='any'?T('전체 음식'):bot.categories[catalogCategory];$('catalog-count').textContent=ChatLocale.count('foodcount',items.length,bot.language);$('catalog-list').replaceChildren();
   for(const rawFood of items){const food=bot.displayFood(rawFood);const row=button('',()=>showFood(food),'catalog-food');row.setAttribute('aria-label',food.name+T(' 음식 정보 보기'));const body=el('span','catalog-food-content');body.append(el('strong','',food.name),el('p','',food.detail),el('small','',food.categories.map(key=>bot.categories[key]).join(' · ')));row.append(imageFor(food,''),body,el('span','catalog-arrow','›'));$('catalog-list').append(row);}
   if(!items.length)$('catalog-list').append(el('p','empty',T(bot.source.available===false?'DB 음식 목록을 받지 못해 추천할 수 없습니다. 잠시 후 다시 열어 주세요.':'아직 등록된 음식을 찾지 못했어요. 다른 재료나 이름으로 찾아보세요.')));
  }
- $('chat-form').addEventListener('submit',event=>{event.preventDefault();send(input.value);});
- input.addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey&&!event.isComposing){event.preventDefault();send(input.value);}});
+ function activeForm(){return [...$('messages').querySelectorAll('.conversation-form')].reverse().find(form=>form.querySelector('button:not(:disabled)'));}
+ function visibleRestrictions(){const selected=ChatInput.submission(activeForm(),state);return selected&&['profile:submit','allergies:submit'].includes(selected.action)?{...state,...selected}:state;}
+ function refreshFoodSurfaces(){
+  const available=bot.eligibleFoods(visibleRestrictions()),ids=new Set(available.map(food=>food.id));
+  document.querySelector('[data-example="meat"]').hidden=!available.some(food=>food.categories.includes('meat'));
+  $('messages').querySelectorAll('.food-card').forEach(card=>{card.hidden=!ids.has(card.dataset.foodId);});
+  $('messages').querySelectorAll('[data-action^="category:"]').forEach(choice=>{const category=choice.dataset.action.slice(9);choice.hidden=category!=='any'&&!available.some(food=>food.categories.includes(category));});
+  $('messages').querySelectorAll('.conversation-form[data-kind="wanted"] input[name="wanted"]').forEach(control=>{control.closest('label').hidden=!available.some(food=>food.preferences.some(key=>BusanRules.belongs(key,control.value)));});
+  renderCategories();renderCatalog();
+ }
+ $('messages').addEventListener('change',refreshFoodSurfaces);
+ $('chat-form').addEventListener('submit',event=>{event.preventDefault();for(const value of ChatInput.plan(input.value,activeForm(),state))send(value);});
+ input.addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey&&!event.isComposing){event.preventDefault();$('chat-form').requestSubmit();}});
  input.addEventListener('input',()=>{$('count').textContent=input.value.length.toLocaleString()+' / 2,000';});
  document.querySelectorAll('[data-example]').forEach(node=>node.addEventListener('click',()=>{if(node.dataset.example==='restrictions'){send({action:'profile:open'});return;}input.value=T(node.dataset.example==='vegan'?'quick.vegan':'quick.meat');input.dispatchEvent(new Event('input'));input.focus();}));
  $('reset').addEventListener('click',()=>{deleteRecovery();reset();});$('scenario-search').addEventListener('input',renderLibrary);$('scenario-group').addEventListener('change',renderLibrary);
@@ -230,11 +245,11 @@
   document.querySelectorAll('[data-refresh-catalog]').forEach(node=>{if(!node.disabled)node.textContent=T('DB 음식 목록 새로고침');});
   $('catalog-status').hidden=bot.source.available===true;$('catalog-status').textContent=T('DB 음식 목록을 받지 못해 추천할 수 없습니다. 잠시 후 다시 열어 주세요.');
  }
- function redrawConversation(){const current=state;$('messages').replaceChildren();if(!history.length){const r=bot.view(current);addMessage('bot',r.text,r.foods,r.choices,r.form);}else for(const entry of history){disableOldChoices();const r=bot.localize(entry.result);state=r.state;entry.input=userLabel(entry.rawInput);entry.response=r.text;addMessage('user',entry.input);addMessage('bot',r.text,r.foods,r.choices,r.form);}state=current;render(bot.view(state));}
+ function redrawConversation(preserveDraft=false){const current=state,draft=preserveDraft?ChatInput.capture(activeForm()):null;$('messages').replaceChildren();if(!history.length){const r=bot.view(current);addMessage('bot',r.text,r.foods,r.choices,r.form);}else for(const entry of history){disableOldChoices();const r=bot.localize(entry.result);state=r.state;entry.input=userLabel(entry.rawInput);entry.response=r.text;addMessage('user',entry.input);addMessage('bot',r.text,r.foods,r.choices,r.form);}state=current;ChatInput.restore(activeForm(),draft);render(bot.view(state));}
  function applyContext(payload){
   const languageChanged=bot.language!==ChatLocale.normalize(payload.language);bot.setLanguage(payload.language);
   const catalogChanged=payload.catalog&&Array.isArray(payload.catalog.foods)?bot.replaceCatalog(payload.catalog.foods,{available:payload.catalog.available===true,source:'DB 음식 카탈로그'}):false;
-  if(catalogChanged){state.seen=[];if(['results','empty','relax'].includes(state.stage))state.stage=state.profileComplete?'confirm':'profile';history=[];closeDialogs();$('messages').replaceChildren();const r=bot.view(state,'DB 음식 목록이 갱신되었습니다. 알려 주신 조건은 유지했습니다.');addMessage('bot',r.text,r.foods,r.choices,r.form);render(r);}else if(languageChanged){closeDialogs();redrawConversation();}
+  if(catalogChanged){state.seen=[];if(['results','empty','relax'].includes(state.stage))state.stage=state.profileComplete?'confirm':'profile';history=[];closeDialogs();$('messages').replaceChildren();const r=bot.view(state,'DB 음식 목록이 갱신되었습니다. 알려 주신 조건은 유지했습니다.');addMessage('bot',r.text,r.foods,r.choices,r.form);render(r);}else if(languageChanged){closeDialogs();redrawConversation(true);}
   translateStatic();openTab(document.querySelector('[data-tab][aria-selected="true"]')?.dataset.tab||'chat');renderCategories();renderCatalog();renderLibrary();updateSource();
  }
  window.addEventListener('message',event=>{if(event.source!==window.parent||event.origin!==location.origin)return;if(event.data?.type==='ieb-chatbot:context')applyContext(event.data);else if(event.data?.type==='ieb-chatbot:refresh-state')document.querySelectorAll('[data-refresh-catalog]').forEach(node=>{node.disabled=!!event.data.busy;node.textContent=T(event.data.busy?'불러오는 중…':'DB 음식 목록 새로고침');});});

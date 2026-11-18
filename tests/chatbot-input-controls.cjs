@@ -1,0 +1,15 @@
+'use strict';
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const c={};vm.createContext(c);const file='chatbot/input-controls.js';assert.ok(fs.existsSync(file),'Input routing module must exist');vm.runInContext(fs.readFileSync(file,'utf8'),c);
+const api=c.ChatInput,state={diet:'none',allergyStatus:'none',allergies:[],excluded:[],excludedFoodIds:[]};
+const make=(kind,values)=>({dataset:{kind},querySelectorAll:()=>Object.entries(values).flatMap(([name,values])=>values.map(value=>({name,value,checked:true,disabled:false})))});
+const profile=make('profile',{diet:['vegan'],allergyStatus:['none'],excluded:['pork']});
+let p=api.plan('소고기 먹고 싶어',profile,state);assert.equal(p.length,2);assert.equal(p[0].diet,'vegan');assert.deepEqual(Array.from(p[0].excluded),['pork']);assert.equal(p[1],'소고기 먹고 싶어','Text is the actual request; safety selections must not be discarded');
+p=api.plan('',profile,state);assert.equal(p.length,1);assert.equal(p[0].action,'profile:submit');
+const wanted=make('wanted',{wanted:['beef'],mode:['all'],spice:['mild']});
+p=api.plan('디저트 추천해줘',wanted,state);assert.deepEqual(Array.from(p),['디저트 추천해줘'],'Text takes priority over unsubmitted food preference');
+p=api.plan('  ',wanted,state);assert.equal(p[0].action,'wanted:submit');assert.deepEqual(Array.from(p[0].wanted),['beef']);assert.equal(p[0].spice,'mild');
+p=api.plan('',null,state);assert.equal(p.length,0,'Never guess an arbitrary category or answer');
+const allergy=make('allergies',{allergy:['dairy','peanut']});p=api.plan('아무거나',allergy,state);assert.equal(p[0].action,'allergies:submit');assert.deepEqual(Array.from(p[0].allergies),['dairy','peanut']);
+const draft=api.capture(profile),translated=make('profile',{diet:['none'],allergyStatus:['none'],excluded:['pork']});translated.querySelectorAll=()=>translated.controls;translated.controls=[{name:'diet',value:'none',checked:true},{name:'diet',value:'vegan',checked:false}];assert.equal(api.restore(translated,draft),true);assert.equal(translated.controls[1].checked,true);assert.equal(translated.controls[0].checked,false);assert.equal(api.restore(make('wanted',{}),draft),false);
+console.log('PASS typed request priority, empty-input selections, draft restrictions and language preservation');

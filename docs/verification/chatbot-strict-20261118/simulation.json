@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-12",
+  "source": "current workspace",
+  "sourceHashes": {
+    "js/data/foods.js": "850c1938447b5e5cf03787391cf3b320e2a1b50d1691dd7ba05ffe0664592ff7",
+    "js/data/food-detail-locales.js": "e2a40a6ad9530f121073b233471950920ddfca838cbeaf0b8af93f6b98ef67c1",
+    "js/data/food-info-translations.js": "59464c5a5c8011e768185316ec17f442ad9720f053f4e0c8d73dcd7888050f52",
+    "js/data/food-safety-locales.js": "247c65a9620077288b926134485d5e87f2baf3f8af0437c2129e1dbb023e8d97",
+    "chatbot/busan-data.js": "d9540cf8771166cf14c7ac9dcd92e63b2564ea22fefd5ff1c803156ee4042543",
+    "chatbot/locales.js": "02b7eb00c46b6acf69f3b3a1f44ae337850f5134376c00a28675ac5c66925d4a",
+    "chatbot/db-rules.js": "854da2b6b7b252e4a355df8363cf28ff25b48f4632952c77038fd59fea06324c",
+    "chatbot/db-bot.js": "41df72dbae34de36a024ae77dd3214533db983588bb405c6afb8acea5f450531",
+    "chatbot/visitor-input.js": "a5e44f5d82161bb5cd7dac3bab1773e2deaea40877096a7c3af8c26a7805b189",
+    "chatbot/bot-localization.js": "07fa18219971984e7e2fccfa6dec99c6a081a2fab36edc30fffe1a401d3fcb0d",
+    "chatbot/visitor-locales.js": "afd444a25318e8dd89f900b27ffc3af5b855db501155effacf3331c65e620e98",
+    "chatbot/concise-copy.js": "4b4f1a06727f21cb6ee79564f3406ea8ac00054cf4b79ea076a45b146c9d80f1",
+    "chatbot/db-scenarios.js": "7c4f379621acab276d9e0a069db1634df721f9edb56c5826054b41ff9f90cf84",
+    "chatbot/scenario-locales.js": "edeccbb070883769b28b1697df0a53616e45bcab281d2fa244f6dfbb6d2237a7",
+    "chatbot/app.js": "a678eb4c6711e320e83853f8ef81866643d3490a591c630ee1861351cd94fb47"
+  },
+  "hashNormalization": "UTF-8 with LF line endings",
+  "simulationHash": "33b65cb02d00209d480356d85a27210e97da403d851bd1edf2dde0f468c05282",
+  "catalog": "synthetic controlled recipes + 43 repository food fixtures; not live DB",
+  "total": 4643,
+  "passed": 4643,
+  "failed": 0,
+  "groups": {
+    "interpretation": 1964,
+    "conversation": 31,
+    "ambiguity": 9,
+    "endToEnd": 1764,
+    "recommendation": 132,
+    "diet": 1,
+    "namedFood": 172,
+    "namedExclusion": 172,
+    "namedConflict": 2,
+    "translation": 129,
+    "semanticAnchors": 129,
+    "translatedExamples": 132,
+    "countGrammar": 6
+  },
+  "failures": []
+}
