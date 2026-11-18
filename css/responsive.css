@@ -1,9 +1,6 @@
 /* Unslop direction: warm, practical, local. Existing Muboso palette and photography.
    Review method: unslop by Damir Sokolovsky, https://github.com/heydamir/unslop (CC BY 4.0). */
 :root { --ink-3: #71685e; --muted: #8d7b68; --rail: 224px; }
-/* Keep embedded mobile browsers' automatic text sizing consistent with the
-   responsive layout. Pinch zoom and the user's accessibility zoom stay enabled. */
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { background: var(--bg); padding: 0; }
 .app { max-width: none; margin: 0; border-radius: 0; box-shadow: none; overflow: visible; }
 .screen { min-height: 100dvh; }
