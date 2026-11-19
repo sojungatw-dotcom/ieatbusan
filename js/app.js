@@ -108,7 +108,7 @@
   function tabbar(active) {
     const tabs = [['home', 'home', '#/home'], ['map', 'map', '#/map'], ['community', 'community', '#/community'], ['saved', 'heart', '#/saved'], ['my', 'user', '#/my']];
     return `<nav class="tabbar" aria-label="${esc(t('nav.main'))}"><a class="nav-brand" href="#/home" aria-label="${esc(t('brand.home'))}"><svg viewBox="190 35 1450 735" aria-hidden="true" focusable="false"><image href="assets/brand/muboso-transparent.png" width="1921" height="819"/></svg></a>${tabs.map(([k, ic, href]) =>
-      `<a class="tab" href="${href}" ${k === active ? 'aria-current="page"' : ''}>${icon(ic)}<span>${esc(t('tab.' + k))}</span></a>`).join('')}<div class="nav-tools"><a href="#/settings">${icon('settings')}${esc(t('set.title'))}</a></div></nav>`;
+      `<a class="tab" href="${href}" ${k === active ? 'aria-current="page"' : ''}>${icon(ic)}<span>${esc(t('tab.' + k))}</span></a>`).join('')}<div class="nav-tools"><a href="#/settings" ${active === 'settings' ? 'aria-current="page"' : ''}>${icon('settings')}${esc(t('set.title'))}</a></div></nav>`;
   }
   const empty = (msg, ic = 'info', extra = '') => `<div class="empty">${icon(ic)}<p>${esc(msg)}</p>${extra}</div>`;
   function foodRow(f, { save = true } = {}) {
@@ -126,7 +126,7 @@
       <a href="#/place/${p.food.id}/${p.i}" style="display:contents"><img class="thumb sm" src="${esc(placeImg(p))}" data-image-fallback="${esc(img(p.food.id))}" alt="${esc(p.name)}" loading="lazy">
       <span class="li-body"><span class="li-title" lang="ko">${esc(p.name)}</span><span class="li-sub">${esc(p.area)}</span>
       <span class="li-meta">${esc(showFood ? fname(p.food) + ' · ' : '')}${esc(t('place.signature'))} · ${esc(p.signature)}</span></span></a>
-      ${save ? `<button class="save-btn" data-act="savePlace" data-key="${key}" aria-pressed="${saved}" aria-label="${esc(t(saved ? 'common.unsaveItem' : 'common.saveItem'))}">${icon('heart', saved)}</button>` : `<span class="like">${icon('heart')}${placeLikes(p)}</span>`}
+      ${save ? `<button class="save-btn place-save-btn" data-act="savePlace" data-key="${key}" aria-pressed="${saved}" aria-label="${esc(t(saved ? 'common.unsaveItem' : 'common.saveItem'))}">${icon('heart', saved)}<span>${placeLikes(p) || ''}</span></button>` : `<span class="like">${icon('heart')}${placeLikes(p) || ''}</span>`}
     </div>`;
   }
   function postCard(p) {
@@ -417,7 +417,7 @@
           <button class="circle-btn ${saved ? 'on' : ''}" data-act="savePlace" data-key="${key}" aria-pressed="${saved}" aria-label="${esc(t(saved ? 'common.unsaveItem' : 'common.saveItem'))}">${icon('heart', saved)}</button></div></div>
       <div class="title-block"><span class="eyebrow">${esc(t('place.signature'))} · ${esc(research ? menuName : p.signature)}</span><h1 lang="ko">${esc(p.name)}</h1>
         <span class="orig-line">${esc(p.area)}</span>
-        ${research ? `<p class="muted">${esc(t(research.matchType === 'similar' ? 'place.similar' : 'place.exact'))} · ${esc(t('place.researched'))} ${esc(research.date)} · ${esc(t('place.checkFirst'))}</p>` : `<div class="meta-line">${icon('heart', true)}<span>${placeLikes(p)}</span></div>`}</div>
+        ${research ? `<p class="muted">${esc(t(research.matchType === 'similar' ? 'place.similar' : 'place.exact'))} · ${esc(t('place.researched'))} ${esc(research.date)} · ${esc(t('place.checkFirst'))}</p>` : ''}<div class="meta-line">${icon('heart', saved)}<span>${placeLikes(p) || ''}</span></div></div>
       <div class="actions-row">
         <a class="action" href="${esc(directions)}" target="_blank" rel="noopener">${icon('navigation')}${esc(t('place.google'))}</a>
         <a class="action" href="${esc(naverUrl)}" target="_blank" rel="noopener">${icon('map')}${esc(t('place.naver'))}</a>
@@ -887,7 +887,7 @@
       screen.dataset.view = name;
       if (!screen.querySelector('.app-header, .page-header')) screen.insertAdjacentHTML('afterbegin', appHeader());
       if (!screen.querySelector('.tabbar')) {
-        const active = ['food', 'search', 'results'].includes(name) ? 'home' : name === 'place' ? 'map' : ['post', 'write'].includes(name) ? 'community' : ['login', 'signup', 'lang'].includes(name) ? '' : 'my';
+        const active = ['food', 'search', 'results'].includes(name) ? 'home' : name === 'place' ? 'map' : ['post', 'write'].includes(name) ? 'community' : ['login', 'signup', 'lang'].includes(name) ? '' : ['settings','terms','privacy','credits','notices','faq','contact'].includes(name) ? 'settings' : 'my';
         screen.insertAdjacentHTML('beforeend', tabbar(active));
       }
       if (!brandIntroPlayed) {
@@ -942,9 +942,12 @@
     },
     savePlace: el => {
       if (!requireLogin()) return;
-      const k = el.dataset.key; let on;
-      Store.update(s => { on = !s.savedPlaces.includes(k); s.savedPlaces = on ? [k, ...s.savedPlaces] : s.savedPlaces.filter(x => x !== k); });
-      rerender(); toast(t(on ? 'food.saved' : 'food.unsaved'));
+      const [foodId,index] = el.dataset.key.split(':'), place = placeOf(foodId,Number(index));
+      if (!place?.restaurantId) { toast(t('db.failure')); return; }
+      if (Store.isPending('restaurantLike:' + place.restaurantId)) return;
+      const on = !S().restaurantLikes?.[place.restaurantId];
+      const result = Cloud.restaurantLike(place.restaurantId,on);
+      toast(t(on ? 'food.saved' : 'food.unsaved')); return result;
     },
     jump: el => {
       const sec = document.getElementById('sec-' + el.dataset.sec); if (!sec) return;
@@ -1137,8 +1140,8 @@
   window.addEventListener('ieb:save-error', event => toast(t(event.detail || 'db.failure')));
   window.addEventListener('ieb:change', event => {
     // A late acknowledgement must not rebuild an unrelated editor/search form.
-    const relevant = event.detail === 'preferences' || event.detail?.startsWith('foodLike:')
-      ? /^#\/(?:home|food|place|saved|my|settings|lang|map|results)(?:\/|$)/
+    const relevant = event.detail === 'preferences' || event.detail?.startsWith('foodLike:') || event.detail?.startsWith('restaurantLike:')
+      ? /^#\/(?:home|category|food|place|saved|my|settings|lang|map|results)(?:\/|$)/
       : /^#\/(?:post|community|my|results)(?:\/|$)/;
     if (relevant.test(location.hash || '#/home')) rerender();
   });

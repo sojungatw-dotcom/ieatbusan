@@ -36,6 +36,7 @@ global.fetch = async (url, options = {}) => {
   if (path === '/rest/v1/ieb_comments' && options.method === 'POST') return reply([{id:body.id,body:body.body,created_at:'2026-11-08T00:00:00Z'}]);
   if (path === '/rest/v1/ieb_foods') return reply(catalogRows);
   if (path === '/rest/v1/ieb_comments' || path === '/rest/v1/ieb_restaurant') return reply([]);
+  if (path === '/rest/v1/rpc/ieb_set_restaurant_like') return reply({like_count:body.is_liked?3:2,liked:body.is_liked});
   if (path === '/auth/v1/logout' || path.startsWith('/rest/v1/')) return reply({});
   throw new Error('Unexpected upstream endpoint: ' + path);
 };
@@ -75,6 +76,15 @@ async function request(action, body, { cookie = '', origin = 'https://site.verce
   assert.ok(!JSON.stringify(data.data).includes('server-secret'));
   assert.equal(data.headers['Cache-Control'], 'no-store');
   assert.match(data.headers['Server-Timing'], /total;dur=/);
+  const restaurantId='22222222-2222-4222-8222-222222222222';
+  assert.equal((await request('restaurantLike',{restaurantId,on:true})).status,401);
+  assert.equal((await request('restaurantLike',{restaurantId:'invalid',on:true},{cookie})).status,400);
+  assert.equal((await request('restaurantLike',{restaurantId,on:'true'},{cookie})).status,400);
+  const restaurantLike=await request('restaurantLike',{restaurantId,on:true},{cookie});
+  assert.equal(restaurantLike.status,200);assert.equal(restaurantLike.data.likes,3);
+  const restaurantCall=calls.findLast(c=>c.path==='/rest/v1/rpc/ieb_set_restaurant_like');
+  assert.equal(restaurantCall.parsed.target_id,restaurantId);assert.equal(restaurantCall.parsed.is_liked,true);
+  assert.equal(restaurantCall.headers.Authorization,'Bearer verified-access');
   const commentStart = calls.length;
   const comment = await request('comment', { postId:'p1', text:'hello' }, { cookie });
   assert.equal(comment.status,200);

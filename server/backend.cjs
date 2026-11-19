@@ -138,7 +138,7 @@ async function snapshot(cfg, session) {
     feed,
     rest(cfg, 'ieb_comments', '?select=*,ieb_profiles(nickname)&order=created_at.asc&limit=5000', opts),
     rest(cfg, 'ieb_foods', '?select=*&order=display_order.asc,id.asc&limit=1000', opts),
-    rest(cfg, 'ieb_restaurant', '?select=id,name,address,opening_hours,closed_days,phone,naver_url,latitude,longitude,food_links,like_count,image_asset&limit=1000', opts),
+    rest(cfg, 'ieb_restaurant', '?select=id,name,address,opening_hours,closed_days,phone,naver_url,latitude,longitude,food_links,liked_user_ids,like_count,image_asset&limit=1000', opts),
     supportContent.read(cfg, rest, opts),
   ]);
   applyRestaurantData(foods, restaurants);
@@ -155,11 +155,13 @@ async function snapshot(cfg, session) {
     } catch { /* A missing image must not prevent account/feed loading. */ }
   }
   const uid = session.user?.id;
+  const restaurantLikes = Object.fromEntries(restaurants.filter(row=>uid && row.liked_user_ids?.includes(uid)).map(row=>[row.id,true]));
+  const savedPlaces = restaurants.filter(row=>restaurantLikes[row.id]).flatMap(row=>(row.food_links||[]).map(link=>link.food_id+':'+link.place_index));
   const postLikes = Object.fromEntries(posts.filter(post => uid && post.liked_user_ids?.includes(uid)).map(post => [post.id, true]));
   const foodLikes = Object.fromEntries(foods.filter(food => uid && food.liked_user_ids?.includes(uid)).map(food => [food.id, true]));
   return {
     user: current ? { id: current.id, username: current.username, provider: 'supabase', avatarUrl, nickname: current.nickname, countryCode: country, area: current.area, bio: current.bio, joined: current.created_at.slice(0, 10).replaceAll('-', '.') } : null,
-    preferences: preferences[0]?.data || {}, postLikes, foodLikes, support,
+    preferences: { ...(preferences[0]?.data || {}), savedPlaces }, postLikes, foodLikes, restaurantLikes, support,
     foods: foods.filter(food => food.content?.catalogStatus !== 'archived').map(food => ({ id: food.id, name: food.name, summary: food.summary, category: food.category, imageAsset: food.image_asset, content: food.content, likes: food.like_count })),
     posts: posts.map(post => ({ id: post.id, title: post.title, body: post.body, cat: post.category, food: post.food, restaurantId: post.restaurant_id || null,
       author: post.ieb_profiles?.nickname || post.seed_author || '', area: districts[post.ieb_profiles?.area] || post.seed_area || '',
@@ -313,6 +315,12 @@ async function action(cfg, req, res, name, body) {
     if (!/^[a-z0-9][a-z0-9-]*$/.test(foodId) || typeof body.on !== 'boolean') fail('db.validation');
     await rest(cfg, 'rpc/ieb_set_food_like', '', { token, method: 'POST', body: { target_id: foodId, is_liked: body.on } });
     return { saved: true };
+  }
+  if (name === 'restaurantLike') {
+    const restaurantId = checkedText(body.restaurantId,36,36);
+    if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(restaurantId) || typeof body.on !== 'boolean') fail('db.validation');
+    const result = await rest(cfg,'rpc/ieb_set_restaurant_like','',{token,method:'POST',body:{target_id:restaurantId,is_liked:body.on}});
+    return {saved:true,likes:result.like_count,liked:result.liked};
   }
   if (name === 'deletePost') {
     const id = checkedText(body.id, 1, 80);
