@@ -605,3 +605,7 @@ body:has(#write-form) .ieb-chat-launcher { display: none; }
 }
 
 .app-header .header-actions > .header-login {color:var(--accent);font-weight:700;}
+
+/* Keep settings distinct from the account tab; restaurant hearts show the DB aggregate. */
+.nav-tools a[aria-current="page"] { background:var(--blush); color:var(--accent); font-weight:700; }
+.place-save-btn { display:inline-flex; align-items:center; justify-content:center; gap:4px; width:auto; min-width:44px; padding-inline:8px; }

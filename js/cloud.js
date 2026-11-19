@@ -76,6 +76,24 @@
           Store.save();
         });
     },
+    restaurantLike(restaurantId, on) {
+      const state=Store.get(), previous=!!state.restaurantLikes?.[restaurantId];
+      const known=new Set(), refs=new Set();
+      for(const food of [...(state.foods||[]).map(row=>({id:row.id,places:row.content?.places||[]})),...(window.FOODS||[])]) {
+        (food.places||[]).forEach((place,index)=>{if(place.restaurantId===restaurantId){known.add(food.id+':'+index);refs.add(place);}});
+      }
+      const original=new Map([...refs].map(p=>[p,p.likes||0])), saved=new Set(state.savedPlaces);
+      function count(value){for(const p of refs)p.likes=value;}
+      return Store.mutate('restaurantLike:'+restaurantId,
+        s=>{s.restaurantLikes||={};if(on)s.restaurantLikes[restaurantId]=true;else delete s.restaurantLikes[restaurantId];
+          for(const [p,n] of original)p.likes=Math.max(0,n+Number(on)-Number(previous));
+          s.savedPlaces=[...(on?known:[]),...s.savedPlaces.filter(k=>!known.has(k))];},
+        ()=>this.call('restaurantLike',{restaurantId,on}),
+        (s,result)=>{if(Number.isInteger(result?.likes))count(result.likes);Store.save();},
+        s=>{if(previous)s.restaurantLikes[restaurantId]=true;else delete s.restaurantLikes[restaurantId];
+          for(const [p,n] of original)p.likes=n;
+          s.savedPlaces=[...[...known].filter(k=>saved.has(k)),...s.savedPlaces.filter(k=>!known.has(k))];Store.save();});
+    },
     async deletePost(id) { await this.call('deletePost', { id }); await Store.load(); },
     async profile(data) { await this.call('profile', data); await Store.load(); },
     async country(countryCode) { await this.call('country', { countryCode }); await Store.load(); },
