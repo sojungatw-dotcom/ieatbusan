@@ -373,7 +373,8 @@
         <div class="allergen-card manuscript" lang="${content.bodyLang}">${content.allergy}</div></section>
       <section class="detail-section" id="sec-places"><h2>${esc(t('food.h.places'))} <small>${esc(t('food.count',{n:f.places.length}))}</small></h2>
         <div class="place-list">${f.places.map((_,index)=>placeRow(placeOf(f.id,index))).join('') || `<p class="muted">${esc(t('food.noPlaces'))}</p>`}</div>
-        ${f.manuscript?`<details class="manuscript"><summary>${esc(t('food.placeReview'))}</summary><div lang="ko">${f.manuscript.placesIntro}</div></details>`:''}</section>
+      </section>
+      ${window.IEBDiscussions.section()}
       <div style="height:24px"></div>
       <div class="fixed-cta"><a class="btn btn-primary btn-block" href="#/map/${f.id}">${esc(t('food.cta'))}${icon('arrowRight')}</a></div>
     </main>`;
@@ -384,6 +385,7 @@
 
   V.food.mount = ({ id, refreshing = false }) => {
     if (!refreshing) Store.update(s => { s.recentFoods = [id, ...s.recentFoods.filter(x => x !== id)].slice(0, 20); });
+    cleanup.push(window.IEBDiscussions.mount({root:app,food:id,postCard,requireLogin,toast}));
     const chips = [...app.querySelectorAll('.section-chips .chip')];
     const setActive = k => chips.forEach(c => c.classList.toggle('active', c.dataset.sec === k));
     if ('IntersectionObserver' in window) {
@@ -398,7 +400,6 @@
   V.place = ({ id, i }) => {
     const p = placeOf(id, Number(i)); if (!p) return V.notFound();
     const key = placeKey(id, p.i), saved = S().savedPlaces.includes(key);
-    const related = allPosts().filter(x => x.food === id);
     const address = p.address || p.area || t('food.unconfirmed');
     const hours = p.hours || t('food.unconfirmed');
     const holiday = p.holiday || t('food.unconfirmed');
@@ -438,8 +439,7 @@
       <div class="band"></div><section class="detail-section manuscript"><h2>${esc(t('place.beforeVisit'))}</h2><p lang="ko">${esc(research.visitNote)}</p><p><strong>${esc(t('place.unverified'))}:</strong> <span lang="ko">${esc(research.unverified)}</span></p><p><strong>${esc(t('place.researched'))}:</strong> ${esc(research.date)}</p></section><div class="band"></div>` : ''}
       <div class="section-head"><h2>${esc(t('place.servesFood'))}</h2></div>
       <div class="card" style="margin:0 16px">${foodRow(p.food)}</div>
-      <div class="section-head"><h2>${esc(t('place.related'))}</h2></div>
-      ${related.length ? related.map(postCard).join('') : `<p class="pad muted" style="margin:0 0 32px">${esc(t('place.noRelated'))}</p>`}
+      ${window.IEBDiscussions.section({restaurant:true})}
       <div style="height:24px"></div>
     </main>`;
   };
@@ -448,6 +448,7 @@
 
   V.place.mount = ({ id, i }) => {
     cleanup.push(mapView.mountMini({ id, i }));
+    cleanup.push(window.IEBDiscussions.mount({root:app,food:id,place:placeOf(id,Number(i)),postCard,requireLogin,toast}));
   };
 
   V.search = () => {
