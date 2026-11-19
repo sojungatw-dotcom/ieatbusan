@@ -3,6 +3,7 @@ const { randomUUID, createHash } = require('node:crypto');
 const countries = require('../js/countries.js');
 const adminAction = require('./admin.cjs');
 const supportContent = require('./support.cjs');
+const discussions = require('./discussions.cjs');
 const accessCookie = 'ieb_access', refreshCookie = 'ieb_refresh';
 const fail = (code, status = 400) => { const error = new Error(code); error.status = status; throw error; };
 const districts = ['중구','서구','동구','영도구','부산진구','동래구','남구','북구','해운대구','사하구','금정구','강서구','연제구','수영구','사상구','기장군'];
@@ -160,7 +161,7 @@ async function snapshot(cfg, session) {
     user: current ? { id: current.id, username: current.username, provider: 'supabase', avatarUrl, nickname: current.nickname, countryCode: country, area: current.area, bio: current.bio, joined: current.created_at.slice(0, 10).replaceAll('-', '.') } : null,
     preferences: preferences[0]?.data || {}, postLikes, foodLikes, support,
     foods: foods.filter(food => food.content?.catalogStatus !== 'archived').map(food => ({ id: food.id, name: food.name, summary: food.summary, category: food.category, imageAsset: food.image_asset, content: food.content, likes: food.like_count })),
-    posts: posts.map(post => ({ id: post.id, title: post.title, body: post.body, cat: post.category, food: post.food,
+    posts: posts.map(post => ({ id: post.id, title: post.title, body: post.body, cat: post.category, food: post.food, restaurantId: post.restaurant_id || null,
       author: post.ieb_profiles?.nickname || post.seed_author || '', area: districts[post.ieb_profiles?.area] || post.seed_area || '',
       countryCode: savedCountry(post.country_code), authorCountryCode: savedCountry(post.country_code),
       createdAt: Date.parse(post.created_at), mine: !!uid && post.user_id === uid,
@@ -195,6 +196,7 @@ async function createPost(cfg, session, body) {
   if (!['review','question','free'].includes(body.cat)) fail('db.validation');
   if (body.food && (typeof body.food !== 'string' || !/^[\w-]{1,80}$/.test(body.food))) fail('db.validation');
   if (!Array.isArray(body.photos) || body.photos.length > 4) fail('db.validation');
+  const restaurantId = await discussions.validateRestaurant({ cfg, session, body, rest, fail });
   const countryCode = await postingCountry(cfg, session);
   const photos = [];
   try {
@@ -208,7 +210,7 @@ async function createPost(cfg, session, body) {
       photos.push(name);
     }
     const id = randomUUID();
-    await rest(cfg, 'ieb_posts', '', { token: session.token, method: 'POST', body: { id, user_id: session.user.id, country_code: countryCode, title, body: text, category: body.cat, food: body.food || null, photos } });
+    await rest(cfg, 'ieb_posts', '', { token: session.token, method: 'POST', body: { id, user_id: session.user.id, country_code: countryCode, title, body: text, category: body.cat, food: body.food || null, restaurant_id: restaurantId, photos } });
     return { id };
   } catch (error) {
     if (photos.length) await upstream(cfg, '/storage/v1/object/ieb-community', { token: session.token, method: 'DELETE', body: { prefixes: photos } }).catch(() => {});
@@ -272,8 +274,9 @@ async function action(cfg, req, res, name, body) {
     setSession(req, res, session);
     return { signedIn: true };
   }
-  const session = await identity(cfg, req, res, !['bootstrap','logout'].includes(name));
+  const session = await identity(cfg, req, res, !['bootstrap','logout','detailPosts'].includes(name));
   if (name === 'bootstrap') return snapshot(cfg, session);
+  if (name === 'detailPosts') return discussions.list({ cfg, session, body, rest, upstream, fail, countries, districts });
   if (name === 'logout') {
     if (session.token) await upstream(cfg, '/auth/v1/logout?scope=local', { token: session.token, method: 'POST' });
     setSession(req, res, null); return { signedOut: true };
@@ -370,9 +373,9 @@ module.exports = async function handler(req, res) {
   try {
     const parsed = new URL(req.url, 'https://' + req.headers.host);
     const name = parsed.searchParams.get('action') || 'bootstrap';
-    const readOnly = ['bootstrap','status'].includes(name);
+    const readOnly = ['bootstrap','status','detailPosts'].includes(name);
     if (req.method !== (readOnly ? 'GET' : 'POST')) fail('db.notFound', 405);
-    let body = {};
+    let body = name === 'detailPosts' ? Object.fromEntries(parsed.searchParams) : {};
     if (!readOnly) {
       if (!String(req.headers['content-type'] || '').startsWith('application/json')) fail('db.forbidden', 403);
       let origin;
