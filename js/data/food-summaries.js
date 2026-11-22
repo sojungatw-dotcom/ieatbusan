@@ -3,9 +3,9 @@
   'use strict';
   const summaries = {
   "dwaeji-gukbap": [
-    "A signature Busan meal of rice served with hot pork soup.",
-    "釜山代表性的一餐，将米饭与热腾腾的猪肉汤搭配享用。",
-    "豚肉入りの熱いスープにご飯を添えた、釜山を代表する一食。"
+    "A Busan specialty of rice served with a steaming bowl of pork soup.",
+    "热腾腾的猪肉汤配米饭，是釜山的代表性美食。",
+    "熱々の豚肉入りスープをご飯と味わう、釜山の定番料理。"
   ],
   "milmyeon": [
     "A Busan wheat-noodle dish served in chilled broth or mixed with a spicy sauce.",
@@ -15,11 +15,11 @@
   "ssiat-hotteok": [
     "A sweet Busan street snack: a hotteok pancake split open and filled with seeds and nuts.",
     "将甜馅糖饼切开，填入种子和坚果的釜山街头小吃。",
-    "甘いホットクを開いて種やナッツを詰めた、釜山の屋台おやつ。"
+    "甘いホットクを開いて種やナッツを詰めた、釜山の屋台で人気のおやつ。"
   ],
   "nakgopsae": [
-    "A spicy Busan stew of small octopus, beef offal and shrimp, served with rice.",
-    "将章鱼、牛内脏和虾一起煮成香辣炖菜，配米饭享用的釜山料理。",
+    "A spicy Busan stew of long-arm octopus, beef offal and shrimp, served with rice.",
+    "釜山特色炖菜，用长腕章鱼、牛内脏和虾煮成，香辣下饭。",
     "テナガダコ・牛もつ・エビを辛く煮込み、ご飯と味わう釜山料理。"
   ],
   "naengchae-jokbal": [
@@ -45,7 +45,7 @@
   "multteok": [
     "A Busan market snack of long rice cakes on skewers, warmed in fish-cake broth.",
     "将条状年糕串在竹签上，放入鱼饼汤中加热享用的釜山市场小吃。",
-    "棒状の餅を串に刺し、練り物のスープで温めて食べる釜山の市場おやつ。"
+    "棒状の餅を串に刺し、練り物のスープで温めて食べる釜山の市場で親しまれているおやつ。"
   ],
   "busan-wandang": [
     "A Busan dish of small, thin-skinned wontons served in a clear broth.",
@@ -69,7 +69,7 @@
   ],
   "andong-jjimdak": [
     "Chicken simmered with glass noodles, potatoes and vegetables in a soy-based sauce.",
-    "将鸡肉、粉条、土豆和蔬菜以酱油酱汁焖煮而成的料理。",
+    "用酱油调味，将鸡肉、粉条、土豆和蔬菜一起焖煮的料理。",
     "鶏肉・春雨・ジャガイモ・野菜を醤油ベースのタレで煮込んだ料理。"
   ],
   "andong-godeungeo": [
@@ -104,7 +104,7 @@
   ],
   "eonyang-bulgogi": [
     "Eonyang-style bulgogi made with thinly sliced, seasoned beef grilled on a wire rack or similar grill.",
-    "将薄切牛肉调味后放在烤网上等烤制的彦阳式烤牛肉。",
+    "彦阳式烤牛肉，将薄切牛肉腌好后放在烤网上烤制。",
     "薄切りの牛肉に味をつけ、焼き網などで焼いて食べる彦陽式プルコギ。"
   ],
   "gorae-gogi": [

@@ -3,9 +3,9 @@
  'use strict';
  const words={
  ko:['이 음식의 커뮤니티 글','식당 리뷰','+더보기','아직 이 음식에 대한 글이 없어요.','아직 등록된 식당 리뷰가 없어요.','리뷰 작성','방문 경험을 남겨주세요.','등록하기','로그인 후 리뷰를 작성할 수 있어요.','로그인','불러오는 중…','불러오지 못했습니다. 다시 시도해 주세요.','다시 시도','리뷰가 등록되었습니다.','음식 선택','제목','리뷰 내용을 입력해 주세요.'],
- en:['Community posts about this dish','Restaurant reviews','+ Show more','No posts about this dish yet.','No restaurant reviews yet.','Write a review','Share your visit.','Post review','Sign in to write a review.','Sign in','Loading…','Could not load. Please try again.','Try again','Review posted.','Food','Title','Please enter your review.'],
- zh:['这道菜的社区帖子','餐厅评价','+查看更多','暂无这道菜的帖子。','暂无餐厅评价。','写评价','分享您的用餐体验。','发布评价','登录后可写评价。','登录','加载中…','加载失败，请重试。','重试','评价已发布。','选择美食','标题','请输入评价内容。'],
- ja:['この料理のコミュニティ投稿','お店のレビュー','＋もっと見る','この料理の投稿はまだありません。','レビューはまだありません。','レビューを書く','来店時の感想をお聞かせください。','投稿する','ログインするとレビューを書けます。','ログイン','読み込み中…','読み込めませんでした。再試行してください。','再試行','レビューを投稿しました。','料理','タイトル','レビューを入力してください。']};
+ en:['Community posts about this dish','Restaurant reviews','Show more','No posts about this dish yet.','No restaurant reviews yet.','Write a review','Tell us about your visit.','Post review','Sign in to write a review.','Sign in','Loading…','Could not load. Please try again.','Try again','Review posted.','Food','Title','Please enter your review.'],
+ zh:['关于这道菜的社区帖子','餐厅评价','查看更多','暂无这道菜的帖子。','暂无餐厅评价。','写评价','分享您的用餐体验。','发布评价','登录后可写评价。','登录','加载中…','加载失败，请重试。','重试','评价已发布。','选择美食','标题','请输入评价内容。'],
+ ja:['この料理に関する投稿','お店のレビュー','もっと見る','この料理の投稿はまだありません。','レビューはまだありません。','レビューを書く','お店での感想をお聞かせください。','投稿する','ログインするとレビューを書けます。','ログイン','読み込み中…','読み込めませんでした。再試行してください。','再試行','レビューを投稿しました。','料理','タイトル','レビューを入力してください。']};
  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const copy=()=>words[Store.get().lang]||words.ko;
  function section({restaurant=false}={}){const w=copy();return '<section class="detail-section detail-discussions" data-discussions><h2>'+esc(w[restaurant?1:0])+'</h2><div data-review-editor></div><div data-discussion-list aria-live="polite"></div><p data-discussion-status role="status">'+esc(w[10])+'</p><button type="button" class="btn btn-outline discussion-more" data-discussion-more hidden>'+esc(w[2])+'</button></section>';}
