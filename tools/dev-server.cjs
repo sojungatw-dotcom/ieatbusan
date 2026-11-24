@@ -8,11 +8,17 @@ const root = path.resolve(__dirname, '..');
 if (fs.existsSync(path.join(root, '.env.local'))) process.loadEnvFile(path.join(root, '.env.local'));
 const handler = require('../api/service.js');
 const mapsConfig = require('../api/maps-config.js');
+const chatbot = require('../api/chatbot.js');
 const geminiPreview = require('./gemini-preview.cjs');
 const port = Number(process.env.PORT || 8779);
 const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'application/javascript; charset=utf-8', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.gif': 'image/gif', '.webp': 'image/webp', '.svg': 'image/svg+xml', '.md': 'text/plain; charset=utf-8' };
 http.createServer(async (req, res) => {
-  const pathname = new URL(req.url, 'http://localhost').pathname;
+  const url = new URL(req.url, 'http://localhost');
+  const pathname = url.pathname;
+  if (pathname === '/api/chatbot') {
+    await chatbot(req, res);
+    return;
+  }
   if (pathname.startsWith('/__local/gemini/')) {
     await geminiPreview(req, res, pathname, port);
     return;
@@ -40,7 +46,7 @@ http.createServer(async (req, res) => {
   if (!file.startsWith(root + path.sep) || !fs.existsSync(file) || !fs.statSync(file).isFile()) { res.writeHead(404).end(); return; }
   res.setHeader('Content-Type', types[path.extname(file)] || 'application/octet-stream');
   res.setHeader('Cache-Control', 'no-store');
-  if (name === '/index.html') {
+  if (name === '/index.html' && url.searchParams.get('geminiDemo') === '1') {
     const html = fs.readFileSync(file, 'utf8');
     res.end(html.replace('<script src="js/chatbot-widget.js?', '<script data-local-chatbot="gemini" src="js/chatbot-widget.js?'));
     return;

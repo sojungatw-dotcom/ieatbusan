@@ -7,10 +7,37 @@
  const staticAttributes=[];document.querySelectorAll('[aria-label],[placeholder],[title]').forEach(node=>{for(const name of ['aria-label','placeholder','title']){const value=node.getAttribute(name);if(value&&/[가-힣]/.test(value))staticAttributes.push({node,name,value});}});
  function translateStatic(){$('condition-image-close').setAttribute('aria-label',T('card.close'));$('condition-image-preview').alt=T('card.title');document.querySelectorAll('[data-visitor-text]').forEach(node=>{node.textContent=T(node.dataset.visitorText);});document.documentElement.lang=bot.language;document.title=T('무보소 · 나에게 맞는 부산의 맛');for(const item of staticText)if(item.node.isConnected)item.node.nodeValue=item.original.replace(item.value,T(item.value));for(const item of staticAttributes)if(item.node.isConnected)item.node.setAttribute(item.name,T(item.value));}
  function displayScenario(scenario){return ChatLocale.scenario?ChatLocale.scenario(scenario,bot.language):scenario;}
- function userLabel(value){return typeof value==='object'?bot.describeAction(value):value==='시작'?T(value):value;}
+ function userLabel(value){return typeof value==='object'?value.originalText||bot.describeAction(value):value==='시작'?T(value):value;}
 
  let state=bot.createState(),recoveryInputs=[],history=[],activeScenario=null,catalogCategory='any';
  const input=$('message');
+ const composer=$('chat-form'),sendButton=composer.querySelector('button[type="submit"]');
+ let pendingMessage=null, pendingReply=null;
+ let geminiAvailability;
+ for(const row of [
+  ['gemini.wait','답변을 준비하고 있어요…','Preparing a reply…','正在准备回复…','返信を準備しています…'],
+  ['gemini.unavailable','지금은 입력하신 내용을 해석할 수 없어요. 다시 보내거나 아래 선택지에서 조건을 골라 주세요.','I couldn’t process your message right now. Try again or select your preferences below.','暂时无法处理您的消息。请重试，或在下方选择偏好。','現在メッセージを処理できません。再送するか、下の選択肢から設定してください。'],
+  ['unsupported.solo','혼밥 가능 여부','solo dining suitability','独自用餐条件','一人での利用可否']
+ ])ChatLocale.add(...row);
+ function geminiAvailable(){
+  if(!geminiAvailability)geminiAvailability=fetch('/api/chatbot',{signal:AbortSignal.timeout(4000)})
+   .then(response=>response.ok?response.json():null).then(data=>data?.available===true).catch(()=>false)
+   .then(available=>{if(!available)geminiAvailability=null;return available;});
+  return geminiAvailability;
+ }
+ async function gemini(operation,payload,signal){
+  if(!await geminiAvailable()||signal.aborted)return null;
+  try{
+   const response=await fetch('/api/chatbot',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({operation,language:bot.language,...payload}),signal:AbortSignal.any([signal,AbortSignal.timeout(27000)])});
+   return response.ok?await response.json():null;
+  }catch{return null;}
+ }
+ function cancelPendingMessage(){
+  if(!pendingMessage)return;
+  pendingMessage.abort();pendingMessage=null;input.readOnly=false;sendButton.disabled=false;composer.removeAttribute('aria-busy');$('gemini-status').textContent='';
+ }
+ function cancelPendingReply(){pendingReply?.abort();pendingReply=null;}
  document.body.classList.add('embedded');
  function bridge(type){if(window.parent!==window)window.parent.postMessage({type},location.origin==='null'?'*':location.origin);}
  function setMode(mode){document.body.classList.toggle('embedded-desktop',mode==='desktop');$('close-chat').setAttribute('aria-label',mode==='desktop'?T('챗봇 닫기'):T('이전 화면으로 돌아가기'));}
@@ -127,6 +154,7 @@
   const buttons=choices.filter(c=>!schema||!['profile:submit','allergies:submit','wanted:submit'].includes(c.id));
   if(buttons.length){const list=el('div','reply-choices');list.setAttribute('aria-label',T('현재 질문의 답변 선택지'));for(const c of buttons){const choice=button(c.label,()=>send({action:c.id},c.label));choice.dataset.action=c.id;list.append(choice);}content.append(list);}
   row.append(content);$('messages').append(row);$('messages').scrollTop=schema?row.offsetTop-$('messages').offsetTop:$('messages').scrollHeight;
+  return content.querySelector('.bubble');
  }
  function render(result){
   $('condition-summary').textContent=ChatLocale.t('condition-summary',bot.language,{summary:bot.summary(state)});
@@ -148,17 +176,55 @@
   if(!result.matches.length)$('rules').append(el('li','empty',T('답변을 선택하면 적용한 분기가 표시됩니다.')));
   refreshFoodSurfaces();
  }
- function send(value,label){
+ function send(value,label,generatedMessage){
   if(typeof value==='string'&&!value.trim())return;
+  cancelPendingMessage();
+  cancelPendingReply();$('gemini-status').textContent='';
   openTab('chat');
   label=label||userLabel(value);
   disableOldChoices();const result=bot.respond(value,state);state=result.state;
-  recoveryInputs.push(JSON.parse(JSON.stringify(value)));history.push({rawInput:JSON.parse(JSON.stringify(value)),result:result._canonical||result,input:label||value,action:typeof value==='object'?value.action:null,response:result.text,state:JSON.parse(JSON.stringify(state)),matches:result.matches,foods:result.foods.map(f=>f.name),choices:result.choices,alternatives:!!result.alternatives,uncertain:result.uncertain});
-  addMessage('user',label);addMessage('bot',result.text,result.foods,result.choices,result.form);render(result);
+  const entry={rawInput:JSON.parse(JSON.stringify(value)),result:result._canonical||result,input:label||value,action:typeof value==='object'?value.action:null,response:result.text,state:JSON.parse(JSON.stringify(state)),matches:result.matches,foods:result.foods.map(f=>f.name),choices:result.choices,alternatives:!!result.alternatives,uncertain:result.uncertain};
+  recoveryInputs.push(entry.rawInput);history.push(entry);
+  const language=bot.language;
+  const retainGuide=(['allergies','veganReview','confirm','results','empty','relax','conflict'].includes(state.stage)||state.unsupported.length>0)&&value?.action!=='request:message';
+  const useMessage=(message,includeGuide)=>{
+   entry.generated={language,message,includeGuide};
+   entry.response=includeGuide?message+'\n\n'+result.text:message;
+   return entry.response;
+  };
+  addMessage('user',label);const bubble=addMessage('bot',generatedMessage?useMessage(generatedMessage,!!retainGuide):result.text,result.foods,result.choices,result.form);render(result);
   input.value='';$('count').textContent='0 / 2,000';
   saveRecovery();
+  if(generatedMessage===undefined&&!activeScenario&&typeof value==='object'){
+   const controller=new AbortController();pendingReply=controller;
+   void gemini('reply',{stage:state.stage,nextStep:result.text,cardCount:result.foods.length},controller.signal).then(data=>{
+    if(pendingReply!==controller)return;
+    pendingReply=null;
+    if(data?.message&&bubble.isConnected&&language===bot.language)bubble.textContent=useMessage(data.message,retainGuide);
+   });
+  }
+ }
+ async function submitMessage(){
+  if(pendingMessage)return;
+  const values=ChatInput.plan(input.value,activeForm(),state);
+  if(!input.value.trim()){for(const value of values)send(value);return;}
+  const message=values.pop();
+  const controller=new AbortController();pendingMessage=controller;
+  input.readOnly=true;sendButton.disabled=true;composer.setAttribute('aria-busy','true');
+  const status=$('gemini-status');status.textContent=T('gemini.wait');
+  const recent=recoveryInputs.flatMap(value=>typeof value==='string'?[value]:value.originalText?[value.originalText]:[]).slice(-3);
+  const preferences=values.reduce((current,value)=>bot.respond(value,current).state,state);
+  const catalog=bot.foods.map(food=>({id:food.id,name:food.name}));
+  const data=await gemini('interpret',{message,current:preferences,recent,catalog},controller.signal);
+  if(pendingMessage!==controller)return;
+  cancelPendingMessage();
+  status.textContent=data?.message?'':T('gemini.unavailable');
+  if(!data?.message)return;
+  for(const value of values)send(value,undefined,'');
+  send({...data.action,action:data.action?.action||'request:message',originalText:message},message,data.message);
  }
  function reset(){
+  cancelPendingMessage();cancelPendingReply();$('gemini-status').textContent='';
   closeDialogs();openTab('chat');state=bot.createState();recoveryInputs=[];history=[];activeScenario=null;$('scenario-active').hidden=true;$('messages').replaceChildren();const result=bot.view(state);addMessage('bot',result.text,[],result.choices,result.form);render(result);input.value='';$('count').textContent='0 / 2,000';
  }
  function scenarioTranscript(scenario){
@@ -207,7 +273,7 @@
   renderCategories();renderCatalog();
  }
  $('messages').addEventListener('change',refreshFoodSurfaces);
- $('chat-form').addEventListener('submit',event=>{event.preventDefault();for(const value of ChatInput.plan(input.value,activeForm(),state))send(value);});
+ composer.addEventListener('submit',event=>{event.preventDefault();void submitMessage();});
  input.addEventListener('keydown',event=>{if(event.key==='Enter'&&!event.shiftKey&&!event.isComposing){event.preventDefault();$('chat-form').requestSubmit();}});
  input.addEventListener('input',()=>{$('count').textContent=input.value.length.toLocaleString()+' / 2,000';});
  document.querySelectorAll('[data-example]').forEach(node=>node.addEventListener('click',()=>{if(node.dataset.example==='restrictions'){send({action:'profile:open'});return;}input.value=T(node.dataset.example==='vegan'?'quick.vegan':'quick.meat');input.dispatchEvent(new Event('input'));input.focus();}));
@@ -245,10 +311,11 @@
   document.querySelectorAll('[data-refresh-catalog]').forEach(node=>{if(!node.disabled)node.textContent=T('DB 음식 목록 새로고침');});
   $('catalog-status').hidden=bot.source.available===true;$('catalog-status').textContent=T('DB 음식 목록을 받지 못해 추천할 수 없습니다. 잠시 후 다시 열어 주세요.');
  }
- function redrawConversation(preserveDraft=false){const current=state,draft=preserveDraft?ChatInput.capture(activeForm()):null;$('messages').replaceChildren();if(!history.length){const r=bot.view(current);addMessage('bot',r.text,r.foods,r.choices,r.form);}else for(const entry of history){disableOldChoices();const r=bot.localize(entry.result);state=r.state;entry.input=userLabel(entry.rawInput);entry.response=r.text;addMessage('user',entry.input);addMessage('bot',r.text,r.foods,r.choices,r.form);}state=current;ChatInput.restore(activeForm(),draft);render(bot.view(state));}
+ function redrawConversation(preserveDraft=false){const current=state,draft=preserveDraft?ChatInput.capture(activeForm()):null;$('messages').replaceChildren();if(!history.length){const r=bot.view(current);addMessage('bot',r.text,r.foods,r.choices,r.form);}else for(const entry of history){disableOldChoices();const r=bot.localize(entry.result);state=r.state;entry.input=userLabel(entry.rawInput);const copy=entry.generated;entry.response=copy?.language===bot.language?(copy.includeGuide?copy.message+'\n\n'+r.text:copy.message):r.text;addMessage('user',entry.input);addMessage('bot',entry.response,r.foods,r.choices,r.form);}state=current;ChatInput.restore(activeForm(),draft);render(bot.view(state));}
  function applyContext(payload){
   const languageChanged=bot.language!==ChatLocale.normalize(payload.language);bot.setLanguage(payload.language);
   const catalogChanged=payload.catalog&&Array.isArray(payload.catalog.foods)?bot.replaceCatalog(payload.catalog.foods,{available:payload.catalog.available===true,source:'DB 음식 카탈로그'}):false;
+  if(catalogChanged||languageChanged){cancelPendingMessage();cancelPendingReply();$('gemini-status').textContent='';}
   if(catalogChanged){state.seen=[];if(['results','empty','relax'].includes(state.stage))state.stage=state.profileComplete?'confirm':'profile';history=[];closeDialogs();$('messages').replaceChildren();const r=bot.view(state,'DB 음식 목록이 갱신되었습니다. 알려 주신 조건은 유지했습니다.');addMessage('bot',r.text,r.foods,r.choices,r.form);render(r);}else if(languageChanged){closeDialogs();redrawConversation(true);}
   translateStatic();openTab(document.querySelector('[data-tab][aria-selected="true"]')?.dataset.tab||'chat');renderCategories();renderCatalog();renderLibrary();updateSource();
  }
