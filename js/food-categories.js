@@ -16,6 +16,10 @@
     groups: Object.freeze(groups),
     byId: id => groups.find(group => group.id === id),
     name: (group, language) => group.names[languageIndex[language] ?? 0],
-    foods: (id, foods) => id === 'all' ? [...foods] : foods.filter(food => groups.find(group => group.id === id)?.foods.includes(food.id)),
+    foods: (id, foods) => {
+      if (id === 'all') return [...foods];
+      const group = groups.find(group => group.id === id);
+      return foods.filter(food => group?.foods.includes(food.id));
+    },
   });
 })();

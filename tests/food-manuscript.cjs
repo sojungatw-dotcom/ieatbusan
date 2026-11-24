@@ -6,6 +6,9 @@ ctx.I18N=ctx.window.I18N; const foods=ctx.window.FOODS,items=foods.filter(f=>f.m
 assert.equal(items.length,32);assert.equal(new Set(foods.map(f=>f.id)).size,foods.length);assert.ok(foods.every(f=>f.id));
 assert.equal(items.reduce((n,f)=>n+f.manuscript.restaurants.length,0),103);
 Object.assign(ctx,{FOODS:foods,FOOD:Object.fromEntries(foods.map(f=>[f.id,f])),V:{},S:()=>({savedFoods:[],savedPlaces:[]}),language:'ko',lang:()=>ctx.language,esc:v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),L:f=>f[ctx.language]||f.ko,t:k=>ctx.I18N[ctx.language][k]??ctx.I18N.ko[k]??k,img:id=>ctx.FOOD[id].photo||`assets/food/${id}.jpg`,placeImg:p=>ctx.img(p.food.id),icon:()=>'',foodLikes:f=>f.likes});
+// Load the production discussion renderer with a language-only Store; no API calls.
+ctx.Store={get:()=>({lang:ctx.language})};
+vm.runInContext(read('js/detail-discussions.js'),ctx);
 const maps=require('./map-context.cjs')();
 const data=maps.IEBMapData.create(foods,()=>ctx.language);
 Object.assign(ctx,{placeKey:data.placeKey,placeOf:data.placeOf,allPlaces:data.allPlaces});
@@ -36,7 +39,8 @@ for(const food of items){
    assert.ok(section.includes('#/place/'+food.id+'/'+i));
    const detail=ctx.V.place({id:food.id,i});
    for(const part of ['class="hero"','class="actions-row"','class="rows place-info"'])assert.ok(detail.includes(part));
-   assert.ok(detail.includes('이 식당 이야기')||lang!=='ko');
+   assert.ok(detail.includes('<h2>'+ctx.esc(ctx.t('place.servesFood'))+'</h2>'));
+   assert.ok(detail.includes('data-discussions'));
    const projected=data.placeOf(food.id,i);
    const info=detail.slice(detail.indexOf('class="rows place-info"'),detail.indexOf('<div class="mini-map'));
    assert.equal((info.match(/class="row"/g)||[]).length,2,'Address and schedule rows only');
@@ -79,10 +83,10 @@ for(const food of foods){
 assert.equal(signatures.size,1);
 console.log('PASS all 43 foods use one template with 8 info rows, combined introduction, white eating-method card, allergen card, and restaurant banners');
 // A missing restaurant coordinate must never reach the map provider.
-let pins=0;
+const pins=[];
 const view=maps.IEBMapView.create({data,provider:{available:()=>true,create(){return {
- addPlace(p){assert.ok(data.hasCoordinates(p));pins++;},fitPlaces(){},resize(){},dispose(){}};}},
+ addPlace(p){assert.ok(data.hasCoordinates(p));pins.push(p.key);},fitPlaces(){},resize(){},dispose(){}};}},
  root:{querySelector:()=>null},document:{getElementById:()=>({})},navigator:{},getLanguage:()=> 'ko',
  t:k=>ctx.I18N.ko[k]||k,esc:ctx.esc,fname:f=>f.ko.name,img:ctx.img,icon:()=>'',appHeader:()=>'',tabbar:()=>'',toast(){},setTimeout:()=>1,clearTimeout(){}});
-view.mount({mode:'detail'})();assert.equal(pins,data.allPlaces().filter(data.hasCoordinates).length);
+view.mount({mode:'detail'})();assert.deepEqual(pins, Array.from(data.restaurantsForSelection().filter(data.hasCoordinates), place=>place.key));
 console.log('PASS 32 complete sourced food details in 4 language modes, 103 restaurant records, image fallbacks, and no invented map coordinates');
