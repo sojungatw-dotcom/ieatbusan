@@ -1,0 +1,18 @@
+:root { color-scheme: light; font-family: system-ui, sans-serif; color: #282622; background: #f5f2ec; }
+body { margin: 0; }
+main { box-sizing: border-box; height: 100dvh; display: flex; flex-direction: column; gap: 12px; padding: 16px; }
+header { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px; padding-right: 72px; }
+h1, p { margin: 0; }
+h1 { font-size: 18px; }
+header p { grid-column: 1 / -1; color: #5f5850; font-size: 13px; line-height: 1.45; }
+button, textarea { font: inherit; }
+button { min-height: 44px; padding: 8px 12px; border: 1px solid #ded6ca; border-radius: 12px; background: white; color: inherit; cursor: pointer; }
+button:disabled { opacity: .65; cursor: default; }
+#status { min-height: 1.4em; color: #6c342d; font-size: 13px; }
+#messages { flex: 1; min-height: 0; overflow: auto; display: flex; flex-direction: column; gap: 10px; }
+.message { max-width: 86%; padding: 10px 12px; border-radius: 14px; background: white; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.55; }
+.message.user { align-self: flex-end; background: #f4e3d9; }
+.message.model { align-self: flex-start; }
+form { display: flex; align-items: end; gap: 8px; }
+textarea { flex: 1; min-width: 0; padding: 10px; border: 1px solid #ded6ca; border-radius: 12px; resize: vertical; }
+#send { flex: none; background: #af321f; color: white; border-color: transparent; }
