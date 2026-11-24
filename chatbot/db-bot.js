@@ -47,6 +47,7 @@
  function respond(input,previous=createState()){
   const s=clone(previous),matches=[];
   if(input&&typeof input==='object'){
+   if(input.action==='request:message')return view(s);
    if(input.action==='request:uncertain')return view(s,'입력만으로 조건을 확정하기 어려워 기존 선택을 유지했습니다. 원하는 재료와 피할 재료를 각각 선택해 주세요.',[],[],{uncertain:true});
    if(input.action==='request:parsed'){
     if(input.diet)s.diet=input.diet;

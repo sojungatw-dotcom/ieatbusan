@@ -2,6 +2,7 @@
  'use strict';
  const L=window.ChatLocale,language=()=>{const selected=window.Store?.get()?.lang||document.documentElement?.lang||'ko';return L?L.normalize(selected):(['ko','en','zh','ja'].includes(selected)?selected:'ko');},t=key=>L?.t(key,language())||key;
  const mobile=window.matchMedia('(max-width:740px)'),route='#/chatbot';
+ const geminiPreview=document.currentScript?.dataset.localChatbot==='gemini';
  const launcher=document.createElement('button');launcher.type='button';launcher.className='ieb-chat-launcher';launcher.id='ieb-chat-launcher';const launcherIcon=document.createElement('img');launcherIcon.src='assets/brand/chatbot-launcher.png';launcherIcon.alt='';launcherIcon.setAttribute('aria-hidden','true');launcher.append(launcherIcon);launcher.setAttribute('aria-label','나에게 맞는 부산의 맛 챗봇 열기');launcher.setAttribute('aria-controls','ieb-chat-panel');launcher.setAttribute('aria-expanded','false');
  const panel=document.createElement('section');panel.id='ieb-chat-panel';panel.className='ieb-chat-panel';panel.setAttribute('aria-label','나에게 맞는 부산의 맛');panel.hidden=true;
  const closeButton=document.createElement('button');closeButton.type='button';closeButton.className='ieb-chat-control ieb-chat-close';closeButton.textContent='×';closeButton.setAttribute('aria-label','챗봇 닫기');
@@ -10,9 +11,9 @@
  let databaseReady=Array.isArray(window.Store?.get()?.foods),lastContext='',frame=null,opened=false,expanded=false,returnFocus=launcher,fromLauncher=false,lastHash=location.hash;
  const targetOrigin=location.origin==='null'?'*':location.origin;
  function mode(){return mobile.matches?'mobile':'desktop';}
- function sendContext(force=false){if(!frame)return;const state=window.Store?.get()||{},snapshot=databaseReady&&window.IEBChatbotCatalog?window.IEBChatbotCatalog.project(state.foods,window.FOODS||[]):{available:false,foods:[]};const payload={type:'ieb-chatbot:context',language:language(),mode:mode(),catalog:snapshot};const key=JSON.stringify(payload);if(force||key!==lastContext){lastContext=key;frame.contentWindow?.postMessage(payload,targetOrigin);}}
- function sendMode(){frame?.contentWindow?.postMessage({type:'ieb-chatbot:mode',mode:mode()},targetOrigin);sendContext();}
- function ensureFrame(){if(frame)return;frame=document.createElement('iframe');frame.title=t('나에게 맞는 부산의 맛 챗봇');frame.src='chatbot/index.html?v=20261123-locale-copy&embed='+mode()+'&lang='+language();frame.className='ieb-chat-frame';frame.addEventListener('load',()=>{sendMode();sendContext(true);if(opened)frame.focus();});panel.append(frame);}
+ function sendContext(force=false){if(!frame||geminiPreview)return;const state=window.Store?.get()||{},snapshot=databaseReady&&window.IEBChatbotCatalog?window.IEBChatbotCatalog.project(state.foods,window.FOODS||[]):{available:false,foods:[]};const payload={type:'ieb-chatbot:context',language:language(),mode:mode(),catalog:snapshot};const key=JSON.stringify(payload);if(force||key!==lastContext){lastContext=key;frame.contentWindow?.postMessage(payload,targetOrigin);}}
+ function sendMode(){frame?.contentWindow?.postMessage({type:'ieb-chatbot:mode',mode:mode(),language:language()},targetOrigin);sendContext();}
+ function ensureFrame(){if(frame)return;frame=document.createElement('iframe');frame.title=t('나에게 맞는 부산의 맛 챗봇');const path=geminiPreview?'/__local/gemini/':'chatbot/index.html';frame.src=path+'?v=20261124-gemini&embed='+mode()+'&lang='+language();frame.className='ieb-chat-frame';frame.addEventListener('load',()=>{sendMode();sendContext(true);if(opened)frame.focus();});panel.append(frame);}
  async function refreshCatalog(){if(refreshing||!window.Store?.load)return;refreshing=true;frame?.contentWindow?.postMessage({type:'ieb-chatbot:refresh-state',busy:true},targetOrigin);try{await window.Store.load();databaseReady=true;}catch{databaseReady=false;}finally{refreshing=false;sendContext(true);frame?.contentWindow?.postMessage({type:'ieb-chatbot:refresh-state',busy:false},targetOrigin);}}
  function render(){
   launcher.setAttribute('aria-label',t('나에게 맞는 부산의 맛 챗봇 열기'));panel.setAttribute('aria-label',t('나에게 맞는 부산의 맛'));if(frame)frame.title=t('나에게 맞는 부산의 맛 챗봇');
@@ -25,7 +26,7 @@
  }
  function open(event){returnFocus=event?.currentTarget||launcher;opened=true;
   if(mobile.matches&&location.hash!==route){fromLauncher=true;location.hash=route;}
-  render();if(!databaseReady)refreshCatalog();if(frame)frame.focus();
+  render();if(!geminiPreview&&!databaseReady)refreshCatalog();if(frame)frame.focus();
  }
  function close(){
   opened=false;render();

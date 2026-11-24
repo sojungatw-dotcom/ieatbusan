@@ -5,6 +5,9 @@
   "buildCommand": "node tools/build-static.cjs",
   "outputDirectory": "dist",
   "functions": {
+    "api/chatbot.js": {
+      "maxDuration": 30
+    },
     "api/service.js": {
       "maxDuration": 60
     }

@@ -2,11 +2,14 @@
 
 `로컬 실행.cmd`를 실행한 뒤 http://127.0.0.1:8779/ 에 접속합니다. 실제 추천을 보려면 기존 `.env.example` 안내에 따라 Supabase 환경변수를 `.env.local`에 설정해야 합니다. 환경변수나 DB 연결이 없으면 **챗봇은 로컬 예시 메뉴로 대체하지 않습니다.**
 
+자유 입력과 대화 답변을 테스트하려면 `.env.local`에 `GEMINI_API_KEY`를 설정하고 로컬 서버를 다시 시작합니다. Vercel에서는 해당 배포 환경의 Environment Variables에 같은 이름으로 키를 등록한 뒤 배포합니다. `GEMINI_MODEL`을 생략하면 `gemini-3.1-flash-lite`를 사용하며, 기본 모델의 과부하나 시간 초과 시 `gemini-3.5-flash-lite`로 한 번 다시 요청합니다. 브라우저는 같은 사이트의 `/api/chatbot`을 호출하고, 키는 서버에서만 읽습니다. 기존 Gemini 단독 데모는 로컬에서 `?geminiDemo=1`을 붙여 열 수 있습니다.
+
 ## 사용 방법
 
 - 오른쪽 아래 `무` 아이콘으로 엽니다. 모바일(740px 이하)은 `#/chatbot` 전용 화면, 웹은 기본 480px / 확대 약 693px 팝업입니다.
 - 앱의 언어 설정(한국어·영어·중국어 간체·일본어)을 따릅니다. 대화 중 언어를 바꿔도 식단·알레르기·취향은 유지됩니다.
 - 식단·알레르기 여부 → 해당 시 항목 복수 선택 → 비건 후보 표시 여부 → 한 끼 종류 → 주재료·맵기 → 확인 → DB 음식 후보 순서입니다.
+- Gemini가 자유 입력에서 음식 조건을 해석하고 대화 문장을 작성합니다. 새 알레르기를 감지하면 항목 선택 화면을 먼저 표시합니다. 실제 후보와 알레르기 안내는 기존 DB 검색과 제한 조건을 적용합니다. Gemini 연결이 어려울 때도 선택 버튼으로 계속할 수 있습니다.
 - DB에 음식이 없는 카테고리 및 등록 수가 0인 세부 항목은 표시하지 않습니다. DB에 추가된 뒤 목록을 갱신하면 다시 나타납니다.
 - 음식 둘러보기 또는 이용 안내에서 **DB 음식 목록 새로고침**을 누르면 앱의 bootstrap API를 다시 읽습니다. 소스 수정·빌드는 필요하지 않습니다. DB 실시간 구독/자동 폴링 방식은 아닙니다.
 - 없는 음식을 직접 입력하면 조건 확인 및 완화 동의 후 식단·알레르기·추가 제외·낮은 맵기를 유지한 채 DB 안에서 대안을 최대 3개 찾습니다. 제한에 맞는 음식이 없으면 없는 그대로 안내합니다.
@@ -18,7 +21,7 @@
 
 - bootstrap 응답에 있는 음식 ID만 전달합니다. 로컬 파일에만 있는 ID를 합치거나 추천하지 않습니다.
 - DB가 비어 있으면 빈 목록을 유지합니다. 연결 실패 시에도 목록과 추천을 비우고 연결 안내를 표시합니다.
-- 회원 ID, 프로필, 게시글, 계정 설정, 세션 토큰은 프레임에 전달하지 않습니다. 대화는 외부 AI/API로 보내지 않습니다.
+- 회원 ID, 프로필, 게시글, 계정 설정, 세션 토큰은 프레임에 전달하지 않습니다. Gemini에는 답변 작성에 필요한 최근 대화와 음식 조건, 공개 음식 ID·이름을 전달합니다.
 - `content.catalogStatus: archived` 음식은 제외합니다. 공개 API의 보관 음식 제외 규칙도 그대로 적용됩니다.
 - 음식 사진은 DB의 검증된 `imageAsset`를 사용하며, 사진이 없으면 현재 언어의 준비 중 안내를 표시합니다.
 
@@ -28,7 +31,7 @@ DB의 `category`, `content.ko.category`, `content.ko.ingredients`, `content.manu
 
 기본 카테고리는 `meat` 육류 / `seafood` 해산물 / `stew` 찜탕 / `rice` 밥류 / `noodle` 면류 / `snack` 분식 / `dessert` 디저트입니다. 앱의 `soups`, `noodles`, `street` 등 별칭도 지원합니다. 원문에 알려진 주재료·음식 형태가 있으면 여러 종류에 함께 속할 수 있습니다.
 
-분류 정보나 알려진 표현이 없으면 임의로 추정하지 않고 `other`(기타·확인 필요)로 둡니다. 아무 텍스트나 완전히 이해하는 생성형 AI 방식이 아니므로 새로운 표현/새 분류 체계는 관리자가 `content.classification`으로 지정하거나 `chatbot/db-rules.js`의 규칙을 보완해야 합니다.
+분류 정보나 알려진 표현이 없으면 `other`(기타·확인 필요)로 둡니다. 음식 카탈로그 분류는 `content.classification`과 `chatbot/db-rules.js`를 사용합니다.
 
 새 음식 레코드의 구성 예(실제 DB 수정 명령이 아닙니다):
 
@@ -68,6 +71,7 @@ DB의 `category`, `content.ko.category`, `content.ko.ingredients`, `content.manu
 - `chatbot/locales.js`, `chatbot/bot-localization.js`, `chatbot/scenario-locales.js`: 4개 언어 UI·대화·예시
 - `chatbot/db-rules.js`, `chatbot/db-bot.js`: 자동 분류, 제한 조건, DB 후보 검색
 - `js/chatbot-catalog.js`, `js/chatbot-widget.js`: DB 공개 데이터와 언어/화면 상태 전달
+- `api/chatbot.js`: Gemini 호출, 자유 입력에서 추출한 조건의 유효성 검사, 대화 답변 생성
 - `chatbot/app.js`: 목록 갱신, 조건 보존, 대화 재표시
 - `tests/chatbot-live.cjs`: DB 추가/삭제/실패, 4언어 × 44시나리오, 미등록 항목 숨김/재노출, 직접 입력 대안, 공개 필드 제한
 
