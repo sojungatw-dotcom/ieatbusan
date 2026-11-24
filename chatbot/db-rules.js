@@ -36,11 +36,7 @@
  }
  function filter(foods,s){
   const accepted=[],rejected=[],counts=new Map();
-  for(const food of foods){
-   const places=s.districtId ? food.places.filter(place=>place.registeredDistrictId===s.districtId) : food.places;
-   if(s.districtId&&!places.length)continue;
-   const f=s.districtId ? {...food,places,recommendationDistrict:s.districtId} : food;
-   const reasons=[];if(s.excludedFoodIds?.includes(f.id))reasons.push('제외한 음식');if((s.allergies?.length||s.excluded?.length||s.diet!=='none')&&(!f.hasIngredientInfo||!f.hasAllergenInfo))reasons.push('재료·알레르기 정보가 부족해 제한 조건 확인 불가');const all=[...f.ingredients,...f.possibleIngredients];
+  for(const f of foods){const reasons=[];if(s.excludedFoodIds?.includes(f.id))reasons.push('제외한 음식');if((s.allergies?.length||s.excluded?.length||s.diet!=='none')&&(!f.hasIngredientInfo||!f.hasAllergenInfo))reasons.push('재료·알레르기 정보가 부족해 제한 조건 확인 불가');const all=[...f.ingredients,...f.possibleIngredients];
    for(const key of s.allergies||[])if(all.some(k=>related(k,key)))reasons.push('알레르기 관련 재료 또는 포함 가능성: '+labels[key]);
    for(const key of s.excluded||[])if([...all,...(f.preferences||[])].some(k=>related(k,key)))reasons.push('제외 재료·음식 또는 포함 가능성: '+labels[key]);
    if(s.diet==='vegan'){

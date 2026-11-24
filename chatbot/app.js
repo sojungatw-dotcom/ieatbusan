@@ -148,17 +148,7 @@
    const card=el('article','food-card');card.dataset.foodId=rawFood.id;card.append(imageFor(food,'food-photo'));const body=el('div','food-card-body');if(food.sourceLanguage==='ko'&&bot.language!=='ko')body.append(el('small','source-language-note',T('원문 정보 (한국어)')));body.append(el('span','verification',food.verification),el('h3','',food.name),el('p','',food.detail));
    if(bot.language!=='ko'){const original=el('small','original-name',food.originalName);original.lang='ko';body.append(original);}
    const tags=el('div','food-categories');for(const key of food.categories)tags.append(el('span','',bot.categories[key]));body.append(tags,el('small','',food.priceText));
-   if(food.recommendationDistrict){
-    const restaurants=el('ul','');
-    for(const place of food.places){
-     const item=el('li','');
-     item.append(button(place.name,()=>visitAction(food,place,'place'),'secondary-button'));
-     if(place.address) item.append(el('p','',place.address));
-     restaurants.append(item);
-    }
-    body.append(el('h4','',T('함께 살펴볼 등록 식당')),restaurants);
-   }
-   const detailButton=button('',()=>showFood(rawFood),'food-detail-button');detailButton.setAttribute('aria-label',food.name+T(' 음식 정보 보기'));detailButton.append(el('span','',T('음식 정보 살펴보기')),el('span','','↗'));card.append(body,detailButton);list.append(card);
+   const detailButton=button('',()=>showFood(food),'food-detail-button');detailButton.setAttribute('aria-label',food.name+T(' 음식 정보 보기'));detailButton.append(el('span','',T('음식 정보 살펴보기')),el('span','','↗'));card.append(body,detailButton);list.append(card);
   }content.append(list);}
   if(schema)content.append(buildForm(schema));
   const buttons=choices.filter(c=>!schema||!['profile:submit','allergies:submit','wanted:submit'].includes(c.id));
@@ -231,7 +221,7 @@
   status.textContent=data?.message?'':T('gemini.unavailable');
   if(!data?.message)return;
   for(const value of values)send(value,undefined,'');
-  send({...data.action,action:data.action?.action||'request:message',originalText:message},message,data.action?.districtId?'':data.message);
+  send({...data.action,action:data.action?.action||'request:message',originalText:message},message,data.message);
  }
  function reset(){
   cancelPendingMessage();cancelPendingReply();$('gemini-status').textContent='';
