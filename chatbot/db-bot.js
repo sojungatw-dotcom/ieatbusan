@@ -2,7 +2,7 @@
  'use strict';
  const node=typeof module!=='undefined',R=node?require('./db-rules.js'):root.BusanRules,data=node?require('./busan-data.js'):root.BusanData;
  const foods=data.foods.map(R.adapt),labels=R.labels,categories=R.categories,diets={none:'별도 식단 없음',vegan:'비건',vegetarian:'채식 · 달걀·유제품 허용'};
- const stages={profile:'식단·알레르기 여부',allergies:'알레르기 항목',veganReview:'비건 후보 안내',wanted:'주재료·맵기',category:'한 끼 종류',confirm:'마지막 확인',results:'음식 후보',empty:'후보 없음',relax:'대안 조건 확인',edit:'나의 조건 수정',conflict:'조건 다시 살펴보기'};
+ const stages={chat:'음식 추천',profile:'식단·알레르기 여부',allergies:'알레르기 항목',veganReview:'비건 후보 안내',wanted:'주재료·맵기',category:'한 끼 종류',confirm:'마지막 확인',results:'음식 후보',empty:'후보 없음',relax:'대안 조건 확인',edit:'나의 조건 수정',conflict:'조건 다시 살펴보기'};
  const allergyKeys=['wheat','buckwheat','egg','dairy','soy','peanut','walnut','pine','sesame','shrimp','crab','crustacean','shellfish','squid','mollusc','finfish','mackerel','beef','pork','chicken','whale','jellyfish','mustard','seasquirt'];
  const excludeKeys=Object.keys(labels);
  const wantedByCategory={meat:['beef','pork','chicken','whale'],seafood:['finfish','shrimp','crab','shellfish','squid','seasquirt','jellyfish'],stew:['beef','pork','chicken','finfish','shellfish','squid','porridge','dumpling','pocket','sujebi'],rice:['beef','pork','finfish','shellfish','squid','seasquirt','rice'],noodle:['noodles','beef','sujebi'],snack:['fishcake','ricecake','dumpling','pancake','pocket','soysoup'],dessert:['fruit','icecream','hotteok','ricecake']};
@@ -17,7 +17,7 @@
   if(!pool.length&&s.relaxAllowed)pool=R.filter(foods,{...s,wanted:[],category:'any',spice:s.spice==='mild'?'mild':'any',requestedFoodIds:[]}).foods;
   return pool.length>0&&pool.every(food=>s.seen.includes(food.id));
  }
- const createState=()=>({stage:'profile',diet:'none',profileComplete:false,allergyStatus:'none',allergies:[],excluded:[],allowed:[],wanted:[],ingredientMode:'all',reviewVegan:false,category:null,spice:null,requestedFoodIds:[],excludedFoodIds:[],seen:[],proposal:null,pendingAllergy:[],unsupported:[],relaxAllowed:false});
+ const createState=(conversation=false)=>({stage:conversation?'chat':'profile',...(conversation?{conversation:true,chatCopy:'intro',districtId:null}:{}),diet:'none',profileComplete:false,allergyStatus:conversation?'unknown':'none',allergies:[],excluded:[],allowed:[],wanted:[],ingredientMode:'all',reviewVegan:false,category:null,spice:null,requestedFoodIds:[],excludedFoodIds:[],seen:[],proposal:null,pendingAllergy:[],unsupported:[],relaxAllowed:false});
  const clone=s=>JSON.parse(JSON.stringify(s)),c=(id,label)=>({id,label});
  function summary(s){const parts=[diets[s.diet]];parts.push('알레르기: '+(s.allergies.length?s.allergies.map(k=>labels[k]).join(', '):s.allergyStatus==='none'?'없다고 응답':'미확인'));if(s.excluded.length)parts.push('추가 제외: '+s.excluded.map(k=>labels[k]).join(', '));if(s.wanted.length)parts.push('찾는 재료: '+s.wanted.map(k=>labels[k]).join(s.ingredientMode==='any'?' 또는 ':' + '));if(s.requestedFoodIds.length)parts.push('음식: '+s.requestedFoodIds.map(id=>foods.find(f=>f.id===id)?.name||id).join(', '));if(s.category)parts.push(categories[s.category]);if(s.spice)parts.push(s.spice==='mild'?'원문상 기본 맵기 낮음':s.spice==='hot'?'매운 음식':'맵기 상관없음');return parts.join(' · ');}
  function describeAction(action){if(typeof action==='string')return action;if(action.action==='profile:submit')return `${diets[action.diet]} / 알레르기: ${action.allergies?.length?action.allergies.map(k=>labels[k]).join(', '):action.allergyStatus==='none'?'없어요':action.allergyStatus==='selected'?'있어요 · 다음 질문에서 선택':'모르겠어요'}${action.excluded?.length?' / 추가 제외: '+action.excluded.map(k=>labels[k]).join(', '):''}`;if(action.action==='allergies:submit')return '알레르기: '+action.allergies.map(k=>labels[k]).join(', ');if(action.action==='wanted:submit')return '주재료·음식: '+(action.wanted.map(k=>labels[k]).join(', ')||'상관없어요')+' / '+(action.mode==='any'?'하나 이상 포함':'모두 포함')+' / '+(spiceLabels[action.spice||'any']);return action.action;}
@@ -25,6 +25,7 @@
  function view(s,prefix='',matches=[],selected=[],info={}){
   let text='',choices=[],form=null;
   switch(s.stage){
+   case 'chat':return {state:s,text:'',choices:s.chatCopy==='results'?[c('chat:more','chat.more')]:[],form:null,matches,foods:selected,chatCopy:s.chatCopy};
    case 'profile':text='부산의 한 끼, 함께 찾아볼까요?\n먼저 식단과 알레르기가 있는지 알려 주세요. 있다고 답하시면 다음 질문에서 항목을 고를 수 있어요.';form={kind:'profile',excludeKeys};choices=[c('profile:submit','다음으로')];break;
    case 'allergies':text='어떤 알레르기가 있으신가요?\n피해야 하는 항목을 모두 골라 주세요. 알려 주신 항목은 미리 선택해 두었습니다.';form={kind:'allergies',allergyKeys};choices=[c('allergies:submit','알레르기 항목 저장'),c('allergies:unknown','정확한 항목은 모르겠어요'),c('allergies:back','알레르기 여부 다시 선택')];break;
    case 'veganReview':text='DB에 비건 적합성이 확인된 음식 '+foods.filter(f=>f.veganVerified).length+'개가 등록되어 있습니다. 식물성 기본 재료 후보 '+foods.filter(f=>f.plantCandidate).length+'개를 “비건 여부 확인 필요” 후보로 볼까요? 알려 주신 알레르기와 피하는 재료는 계속 적용합니다.';choices=[c('vegan:review','확인이 필요한 식물성 후보도 보기'),c('vegan:strict','확정된 비건 음식만 보기')];break;
@@ -43,13 +44,35 @@
  function results(s,matches){if(s.pendingAllergy?.length||(s.allergyStatus==='selected'&&!s.allergies.length)){s.stage='allergies';return view(s);}const all=R.filter(foods,s);if(s.requestedFoodIds.length)all.foods=all.foods.filter(f=>s.requestedFoodIds.includes(f.id));const fresh=all.foods.filter(f=>!s.seen.includes(f.id));let selected=fresh.slice(0,3),alternatives=false;
   if(!all.foods.length){if(!s.relaxAllowed){const possible=R.filter(foods,{...s,wanted:[],category:'any',spice:s.spice==='mild'?'mild':'any',requestedFoodIds:[]}).foods;if(possible.length){s.stage='relax';return view(s);}}const relaxed={...s,wanted:[],category:'any',spice:s.spice==='mild'?'mild':'any',requestedFoodIds:[]},pool=R.filter(foods,relaxed).foods.filter(f=>!s.seen.includes(f.id)),same=pool.filter(f=>s.category&&s.category!=='any'&&f.categories.includes(s.category));selected=shuffled(same.length>=2?same:pool).slice(0,3);alternatives=selected.length>0;}
   s.stage=selected.length?'results':'empty';s.seen.push(...selected.map(f=>f.id));return view(s,'',matches,selected,{total:all.foods.length,alternatives,exhausted:all.foods.length>0&&!fresh.length,reasons:all.reasons});}
- function afterProfile(s){s.profileComplete=true;if(s.pendingAllergy?.length){s.stage='allergies';return;}if(getConflict(s))return;if(data.available&& !eligibleFoods({...s,reviewVegan:s.diet==='vegan'||s.reviewVegan}).length){s.stage='empty';return;}if(s.diet==='vegan')s.stage='veganReview';else s.stage='category';}
+ function chatResult(s,copy){s.stage='chat';s.chatCopy=copy;return view(s);}
+ function recommendRestaurants(s){
+  if(!data.available)return chatResult(s,'unavailable');
+  const candidates=[];
+  for(const food of R.filter(foods,s).foods){
+   if(s.requestedFoodIds.length&&!s.requestedFoodIds.includes(food.id))continue;
+   for(const place of food.places){
+    if(!place.restaurantId||(s.districtId&&place.registeredDistrictId!==s.districtId)||s.seen.includes(place.restaurantId))continue;
+    candidates.push({...food,places:[place],restaurantRecommendation:true});
+    s.seen.push(place.restaurantId);
+    if(candidates.length===3)break;
+   }
+   if(candidates.length===3)break;
+  }
+  if(!candidates.length)return chatResult(s,s.seen.length?'exhausted':'empty');
+  s.stage='chat';s.chatCopy='results';return view(s,'',[],candidates);
+ }
+ function afterProfile(s){s.profileComplete=true;if(s.conversation){s.stage='chat';s.chatCopy=s.pendingAllergy.length?'allergy':'intro';return;}if(s.pendingAllergy?.length){s.stage='allergies';return;}if(getConflict(s))return;if(data.available&& !eligibleFoods({...s,reviewVegan:s.diet==='vegan'||s.reviewVegan}).length){s.stage='empty';return;}if(s.diet==='vegan')s.stage='veganReview';else s.stage='category';}
  function respond(input,previous=createState()){
   const s=clone(previous),matches=[];
   if(input&&typeof input==='object'){
+   if(s.conversation&&input.action==='chat:more')return s.pendingAllergy.length?chatResult(s,'allergy'):recommendRestaurants(s);
    if(input.action==='request:message')return view(s);
    if(input.action==='request:uncertain')return view(s,'입력만으로 조건을 확정하기 어려워 기존 선택을 유지했습니다. 원하는 재료와 피할 재료를 각각 선택해 주세요.',[],[],{uncertain:true});
-   if(input.action==='request:parsed'){
+   if(input.action==='request:parsed'||input.action==='chat:turn'){
+    const conversation=input.action==='chat:turn';
+    if(conversation&&input.intent==='chat'){s.conversation=true;return chatResult(s,'social');}
+    if(conversation){s.conversation=true;if(input.districtId){s.districtId=input.districtId==='all'?null:input.districtId;s.unsupported=s.unsupported.filter(key=>key!=='location');}}
+    if(conversation&&input.wanted?.length&&input.replaceWanted)s.wanted=[];
     if(input.diet)s.diet=input.diet;
     if(input.allergyStatus==='none'){s.allergies=[];s.pendingAllergy=[];s.allergyStatus='none';}
     for(const key of ['allergies','excluded','wanted'])for(const value of input[key]||[])if((key==='allergies'?allergyKeys:key==='excluded'?excludeKeys:Object.keys(labels)).includes(value)&&!s[key].includes(value))s[key].push(value);
@@ -61,6 +84,17 @@
     if(input.excludedFoodIds){s.excludedFoodIds=[...new Set([...(s.excludedFoodIds||[]),...input.excludedFoodIds.filter(id=>foods.some(f=>f.id===id))])];s.requestedFoodIds=s.requestedFoodIds.filter(id=>!s.excludedFoodIds.includes(id));}if(input.requestedFoodIds){s.requestedFoodIds=input.requestedFoodIds.filter(id=>foods.some(f=>f.id===id));s.category=null;}
     if(input.spice)s.spice=input.spice;if(input.category)s.category=input.category;if(input.wanted?.length&&!input.requestedFoodIds)s.requestedFoodIds=[];
     if(input.ingredientMode)s.ingredientMode=input.ingredientMode;
+    if(conversation){
+     if(input.clearPreference){s.wanted=[];s.requestedFoodIds=[];s.category=null;s.spice=null;}
+     if(input.allergies?.length&&!input.pendingAllergy?.length)s.pendingAllergy=[];
+     if(s.pendingAllergy.length)return chatResult(s,'allergy');
+     if(s.allergyStatus==='selected'&&!s.allergies.length)return chatResult(s,'allergy');
+     if(input.intent==='more')return s.seen.length?recommendRestaurants(s):chatResult(s,'preference');
+     s.seen=[];
+     const hasPreference=s.wanted.length||s.requestedFoodIds.length||(s.category&&s.category!=='any')||(s.spice&&s.spice!=='any')||s.diet!=='none'||s.excluded.length;
+     if(input.intent==='recommend'||input.clearPreference||(hasPreference&&(input.intent==='food'||input.districtId||input.excluded?.length||input.allergies?.length||input.diet)))return recommendRestaurants(s);
+     return chatResult(s,'preference');
+    }
     s.seen=[];s.relaxAllowed=false;
     s.stage=s.pendingAllergy.length?'allergies':!s.profileComplete||input.diet||input.allergyStatus?'profile':'confirm';
     if(!s.pendingAllergy.length)getConflict(s);

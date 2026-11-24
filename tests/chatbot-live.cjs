@@ -2,6 +2,39 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');const root=path.resolve(__dirname,'..');
 function load(){const c={console};c.window=c;c.globalThis=c;vm.createContext(c);for(const p of ['js/data/foods.js','chatbot/busan-data.js','chatbot/locales.js','chatbot/db-rules.js','chatbot/db-bot.js','chatbot/visitor-input.js','chatbot/bot-localization.js','chatbot/visitor-locales.js','chatbot/concise-copy.js'])vm.runInContext(fs.readFileSync(path.join(root,p),'utf8'),c);return c;}
 const fresh={id:'db-strawberry-icecream',ko:{name:'딸기 아이스크림',summary:'딸기와 우유로 만든 아이스크림',category:'dessert',ingredients:'딸기 · 우유',allergens:['우유'],allergenNote:'우유 포함'},en:{name:'Strawberry ice cream'},zh:{name:'草莓冰淇淋'},ja:{name:'いちごアイスクリーム'},photo:'assets/food-placeholder.svg'};
+test('자유 대화는 한 번 취향을 묻고 같은 구의 등록 식당을 바로 추천합니다',()=>{
+ const {project}=require('../js/chatbot-catalog.js');
+ const {FoodGuide:bot}=load();
+ const row=(id,allergens,places)=>({id,name:id,content:{ko:{ingredients:'생선',allergens},classification:{categories:['seafood'],spicy:true},places}});
+ const place=(restaurantId,address)=>({name:restaurantId||'미등록 식당',restaurantId,address});
+ bot.replaceCatalog(project([
+  row('fish',[],[place('in','부산 수영구 광안로 1'),place('out','부산 해운대구 해운대로 1'),place(null,'부산 수영구 광안로 2')]),
+  row('shrimp',['새우'],[place('allergen','부산광역시 수영구 광안로 3')]),
+  row('duplicate',[],[place('in','부산 수영구 광안로 1')])
+ ]).foods);
+ const first=bot.respond({action:'chat:turn',districtId:'suyeong',intent:'clarify'},bot.createState(true));
+ assert.equal(first.form,null);
+ assert.equal(first.foods.length,0);
+ assert.match(first.text,/어떤 음식/);
+ const result=bot.respond({action:'chat:turn',intent:'food',category:'seafood',spice:'hot',allergies:['shrimp']},first.state);
+ assert.equal(result.form,null);
+ assert.equal(result.state.districtId,'suyeong');
+ assert.deepEqual(Array.from(result.foods,f=>f.places[0].restaurantId),['in']);
+ assert(!result.choices.some(choice=>choice.id==='confirm'));
+ const more=bot.respond({action:'chat:more'},result.state);
+ assert.equal(more.chatCopy,'exhausted');
+ const unclear=bot.respond({action:'chat:turn',intent:'food',pendingAllergy:['confirm'],spice:'hot'},first.state);
+ assert.equal(unclear.chatCopy,'allergy');
+ assert.equal(unclear.form,null);
+ assert.equal(unclear.foods.length,0);
+ const greeting=bot.respond({action:'chat:turn',intent:'chat',districtId:'haeundae',clearPreference:true},result.state);
+ assert.equal(greeting.chatCopy,'social');
+ assert.equal(greeting.foods.length,0);
+ assert.equal(greeting.state.districtId,'suyeong');
+ assert.equal(greeting.state.category,'seafood');
+ assert.deepEqual(greeting.state.seen,result.state.seen);
+ assert.equal(bot.respond({action:'chat:turn',intent:'more'},bot.createState(true)).foods.length,0);
+});
 test('DB에서 추가된 음식을 재빌드 없이 분류하고 추천합니다',()=>{const c=load(),b=c.FoodGuide;assert.equal(typeof b.replaceCatalog,'function');b.replaceCatalog([...c.FOODS,fresh]);assert.ok(b.foods.find(f=>f.id===fresh.id).categories.includes('dessert'));let r=b.respond({action:'profile:submit',diet:'none',allergyStatus:'none',allergies:[],excluded:[]});r=b.respond({action:'category:dessert'},r.state);assert.equal(r.form.counts.icecream,1);r=b.respond({action:'wanted:submit',wanted:['icecream'],mode:'any',spice:'any'},r.state);r=b.respond({action:'confirm'},r.state);assert.deepEqual(Array.from(r.foods,f=>f.id),[fresh.id]);});
 test('DB 새 음식의 알레르기는 기존 제한에도 적용됩니다',()=>{const c=load(),b=c.FoodGuide;b.replaceCatalog([...c.FOODS,fresh]);const state=b.createState();Object.assign(state,{stage:'confirm',profileComplete:true,category:'dessert',wanted:['icecream'],allergies:['dairy'],allergyStatus:'selected'});const r=b.respond({action:'confirm'},state);assert.ok(!r.foods.some(f=>f.id===fresh.id));assert.deepEqual(Array.from(r.state.allergies),['dairy']);});
 test('DB에서 빠진 음식은 추천 목록에서도 제거합니다',()=>{const c=load(),b=c.FoodGuide;b.replaceCatalog([fresh]);assert.deepEqual(Array.from(b.foods,f=>f.id),[fresh.id]);b.replaceCatalog([]);assert.equal(b.foods.length,0);});
