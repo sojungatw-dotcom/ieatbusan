@@ -7,7 +7,7 @@
       const region = id => data.districtById[id];
       const localized = value => window.IEBFoodLocale?.text(value, getLanguage()) ?? value;
       const selection = id => data.hasFood(id) ? id : null;
-      const selectedPlaces = (foodId, districtId) => data.placesForSelection({ foodId, districtId });
+      const selectedPlaces = (foodId, districtId) => data.restaurantsForSelection({ foodId, districtId });
       const detailLink = routes.place, overviewLink = routes.overview, detailHref = routes.detail;
       function mt(key, vars = {}) {
         let value = messages[getLanguage()]?.[key] || messages.ko[key] || key;
@@ -69,7 +69,11 @@
               <div class="sheet-list">${places.map(p => `<div class="list-item" data-act="flyTo" data-key="${data.placeKey(p.food.id, p.i)}" role="button" tabindex="0"><img class="thumb sm" src="${esc(placeImg(p))}" data-image-fallback="${esc(img(p.food.id))}" alt="${esc(p.name)}" loading="lazy">
                 <span class="li-body"><span class="li-title" lang="ko">${esc(p.name)}</span><span class="li-sub">${esc(p.area)}</span><span class="li-meta">${esc(fname(p.food))} · ${esc(p.signature)}</span></span>
                 <a class="save-btn" href="${detailLink(p)}" aria-label="${esc(t('map.detail'))}">${icon('chevronRight')}</a></div>`).join('')}</div></section>
-          </div>${tabbar('map')}</main>`;
+          </div><dialog class="map-location-help" id="map-location-help" aria-labelledby="map-location-help-title" aria-describedby="map-location-help-message">
+            <h2 id="map-location-help-title">${esc(mt('locationHelpTitle'))}</h2>
+            <p id="map-location-help-message">${esc(mt('locationHelp'))}</p>
+            <form method="dialog"><button class="btn btn-primary btn-block" autofocus>${esc(mt('locationHelpConfirm'))}</button></form>
+          </dialog>${tabbar('map')}</main>`;
       }
       function invalid() {
         return `<main class="screen">${appHeader()}<div class="empty"><h1>404</h1><p>${esc(mt('invalid'))}</p><a class="btn btn-outline" href="${overviewLink()}">${esc(mt('back'))}</a></div>${tabbar('map')}</main>`;

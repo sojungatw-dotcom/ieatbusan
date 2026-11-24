@@ -36,11 +36,12 @@
         },
         create(element, { interactive = true, center = [35.155, 129.07], zoom = 11, onStatus = () => {} } = {}) {
           const maps = getSDK(), markers = new Map(), handles = [];
-          let map, popup, locationCircle, unsubscribe = () => {}, disposed = false;
+          let map, popup, locationCircle, boundsHandle, unsubscribe = () => {}, disposed = false;
+          function cancelBounds() { boundsHandle?.remove(); boundsHandle = null; }
           const position = ll => ({ lat: ll[0], lng: ll[1] });
           function dispose() {
             if (disposed) return;
-            disposed = true; unsubscribe();
+            disposed = true; unsubscribe(); cancelBounds();
             for (const handle of handles) handle.remove();
             popup?.close(); locationCircle?.setMap(null);
             for (const marker of markers.values()) marker.map = null;
@@ -70,26 +71,31 @@
               },
               fitPlaces(places) {
                 if (disposed || !places.length) return;
+                cancelBounds();
                 if (places.length === 1) { map.setCenter({ lat: places[0].lat, lng: places[0].lng }); map.setZoom(15); return; }
                 const bounds = new maps.LatLngBounds();
                 places.forEach(place => bounds.extend({ lat: place.lat, lng: place.lng }));
                 map.fitBounds(bounds, { top: 40, right: 40, bottom: 160, left: 40 });
-                let handle;
-                handle = maps.event.addListenerOnce(map, 'idle', () => { if (!disposed && map.getZoom() > 15) map.setZoom(15); });
-                handles.push(handle);
+                boundsHandle = maps.event.addListenerOnce(map, 'idle', () => {
+                  boundsHandle = null;
+                  if (!disposed && map.getZoom() > 15) map.setZoom(15);
+                });
               },
               resize() { if (!disposed) maps.event.trigger(map, 'resize'); },
               focusPlace(key) {
                 const marker = markers.get(key);
                 if (!marker || disposed) return;
+                cancelBounds();
                 map.panTo(marker.position); map.setZoom(16); marker.iebOpen();
               },
               showLocation(ll) {
                 if (disposed) return;
+                cancelBounds(); popup.close();
                 locationCircle?.setMap(null);
                 locationCircle = new maps.Circle({ map, center: position(ll), radius: 25,
                   strokeColor: '#FFFFFF', strokeWeight: 3, fillColor: '#3A7291', fillOpacity: 1 });
-                map.panTo(position(ll)); map.setZoom(14);
+                // Set center and zoom together so pending pan/fit animations cannot override the location.
+                map.moveCamera({ center: position(ll), zoom: Math.max(16, map.getZoom() || 0) });
               },
               dispose,
             };
