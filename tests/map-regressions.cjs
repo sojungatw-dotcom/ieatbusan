@@ -23,6 +23,8 @@ function harness(available = true, overrides = {}) {
   const maps = [], requests = [], toasts = [], timers = new Map();
   let timerId = 0;
   const nodes = { map: {}, 'mini-map': {}, 'map-warning': { hidden: true } };
+  nodes['map-location-help'] = { open: false, shown: 0,
+    showModal() { this.open = true; this.shown++; }, close() { this.open = false; } };
   const provider = {
     available: () => available,
     create(element, options) {
@@ -63,16 +65,30 @@ for (language of ['ko', 'en', 'zh', 'ja']) {
   assert.ok(html.includes('href="#/place/jagalchi-hoe/2"'));
   assert.ok(html.includes('data-key="jagalchi-hoe:2"'));
   assert.ok(!html.includes('undefined'));
+  assert.ok(html.includes('<dialog class="map-location-help"'));
+  assert.ok(html.includes(context.IEBMapText[language].locationHelp));
+  assert.ok(html.includes('method="dialog"'));
   const dispose = h.view.mount({ id: 'jagalchi-hoe' });
   assert.equal(h.maps[0].places.length, 4);
   assert.equal(h.maps[0].places[2].place.name, '달봉이횟집');
   assert.ok(h.maps[0].places[2].popup.includes('#/place/jagalchi-hoe/2'));
   assert.equal(h.maps[0].fitted.length, 4);
+  const help=h.nodes['map-location-help'];
+  for(const code of [1,2,3]) {
+    h.view.locate();h.requests.at(-1).error({code});
+    assert.equal(help.open,true,'Permission denied, unavailable and timeout all show guidance');
+    help.close();
+  }
+  h.view.locate();h.success(h.requests.length-1);
+  assert.equal(help.open,false,'A successful location lookup does not open guidance');
+  h.view.locate();h.success(h.requests.length-1,NaN,129);
+  assert.equal(help.open,true,'Invalid coordinates show guidance');
   h.view.flyTo({ dataset: { key: 'jagalchi-hoe:2' } }, { target: { closest: () => null } });
   assert.deepEqual(h.maps[0].focused, ['jagalchi-hoe:2']);
   h.view.flyTo({ dataset: { key: 'jagalchi-hoe:2' } }, { target: { closest: () => ({}) } });
   assert.equal(h.maps[0].focused.length, 1, 'Detail link must not move the map');
   dispose(); dispose();
+  assert.equal(help.open,false,'Leaving the map closes its dialog');
   assert.equal(h.maps[0].disposed, 1);
   assert.equal(h.timers.size, 0);
 }
@@ -92,9 +108,14 @@ language = 'ko';
   h.view.locate(); h.success(3);
   assert.equal(h.maps[1].locations.length, 1);
   h.view.locate(); h.requests[4].error({ code: 1 });
-  assert.equal(h.toasts.length, 1);
+  assert.equal(h.nodes['map-location-help'].shown, 1);
   h.view.locate(); disposeB(); h.requests[5].error({ code: 3 });
-  assert.equal(h.toasts.length, 1, 'Disposed map failures stay silent');
+  assert.equal(h.nodes['map-location-help'].shown, 1, 'Disposed map failures stay silent');
+}
+for(const navigator of [{},{geolocation:{getCurrentPosition(){throw new Error('Blocked');}}}]) {
+  const h=harness(true,{navigator});h.view.mount({mode:'detail'});h.view.locate();
+  assert.equal(h.nodes['map-location-help'].open,true,'Missing or blocked geolocation shows guidance');
+  h.view.locate();assert.equal(h.nodes['map-location-help'].shown,1,'Repeated failures do not reopen an open dialog');
 }
 {
   const h = harness();
@@ -137,4 +158,20 @@ language = 'ko';
   h.view.mountMini({id:'jagalchi-hoe',i:'0'})();
   assert.ok(h.nodes['mini-map'].textContent.includes('Google'),'Missing coordinates without address lookup support retain Google search guidance');
 }
-console.log('PASS map data/legacy IDs, four-language routes, food filtering, list/pin links, mini map, location ordering, disposal and SDK fallback');
+{
+  const source=fs.readFileSync(path.join(root,'js/app.js'),'utf8');
+  const start=source.indexOf("  app.addEventListener('submit', event => {");
+  const end=source.indexOf('\n  });',start)+'\n  });'.length;
+  let submit,submitted=0,prevented=0;
+  vm.runInNewContext(source.slice(start,end),{
+    app:{addEventListener(type,fn){submit=fn;}},
+    submitForm(){submitted++;return Promise.resolve();},toast(){},t:key=>key,
+  });
+  submit({target:{method:'dialog'},preventDefault(){prevented++;}});
+  assert.equal(prevented,0,'Confirm preserves native dialog close for mouse and keyboard submission');
+  assert.equal(submitted,0,'Dialog forms bypass account/content submission');
+  submit({target:{method:'post',dataset:{}},preventDefault(){prevented++;}});
+  assert.equal(prevented,1,'Application forms still prevent native navigation');
+  assert.equal(submitted,1);
+}
+console.log('PASS map data/legacy IDs, four-language routes, food filtering, list/pin links, mini map, location ordering, disposal, SDK fallback and native dialog confirmation');

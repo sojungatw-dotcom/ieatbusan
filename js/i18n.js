@@ -2,6 +2,13 @@
 window.I18N = {
   ko: {
     'lang.name': '한국어', 'lang.code': 'KO',
+    'write.leaveTitle': '글쓰기를 나가시겠어요?',
+    'write.closeEditor': '글쓰기 닫기',
+    'write.exitSaveTitle': '작성 중인 글이 있습니다.',
+    'write.exitSaveMessage': '임시저장하시겠습니까?',
+    'write.exitSave': '저장하고 나가기',
+    'write.exitDiscard': '저장 안 하고 나가기',
+    'write.leaveMessage': '다른 페이지로 넘어가면 작성 중인 내용은 사라집니다.',
     'app.tagline': '부산의 맛, 한 입에 담다',
     'tab.home': '홈', 'tab.map': '지도', 'tab.community': '커뮤니티', 'tab.saved': '찜', 'tab.my': '마이',
     'login.kakao': '카카오로 시작하기', 'login.naver': '네이버로 시작하기', 'login.apple': 'Apple로 시작하기',
@@ -63,6 +70,13 @@ window.I18N = {
   },
   en: {
     'lang.name': 'English', 'lang.code': 'EN',
+    'write.leaveTitle': 'Leave this post?',
+    'write.closeEditor': 'Close editor',
+    'write.exitSaveTitle': 'You have an unfinished post.',
+    'write.exitSaveMessage': 'Would you like to save it as a draft?',
+    'write.exitSave': 'Save and leave',
+    'write.exitDiscard': 'Leave without saving',
+    'write.leaveMessage': 'If you go to another page, your unfinished post will be lost.',
     'app.tagline': 'Taste Busan, one bite at a time',
     'tab.home': 'Home', 'tab.map': 'Map', 'tab.community': 'Community', 'tab.saved': 'Saved', 'tab.my': 'Account',
     'login.kakao': 'Continue with Kakao', 'login.naver': 'Continue with Naver', 'login.apple': 'Continue with Apple',
@@ -124,6 +138,13 @@ window.I18N = {
   },
   zh: {
     'lang.name': '中文', 'lang.code': '中文',
+    'write.leaveTitle': '要离开编辑页面吗？',
+    'write.closeEditor': '关闭编辑页面',
+    'write.exitSaveTitle': '有一篇帖子尚未写完。',
+    'write.exitSaveMessage': '要保存为草稿吗？',
+    'write.exitSave': '保存并离开',
+    'write.exitDiscard': '不保存并离开',
+    'write.leaveMessage': '前往其他页面后，正在编辑的内容将会丢失。',
     'app.tagline': '一口尝遍釜山味道',
     'tab.home': '首页', 'tab.map': '地图', 'tab.community': '社区', 'tab.saved': '收藏', 'tab.my': '我的',
     'login.kakao': '使用 Kakao 登录', 'login.naver': '使用 Naver 登录', 'login.apple': '使用 Apple 登录',
@@ -185,6 +206,13 @@ window.I18N = {
   },
   ja: {
     'lang.name': '日本語', 'lang.code': '日本語',
+    'write.leaveTitle': '投稿の作成を終了しますか？',
+    'write.closeEditor': '投稿画面を閉じる',
+    'write.exitSaveTitle': '作成中の投稿があります。',
+    'write.exitSaveMessage': '下書きとして保存しますか？',
+    'write.exitSave': '保存して終了',
+    'write.exitDiscard': '保存せず終了',
+    'write.leaveMessage': '別のページに移動すると、作成中の内容は失われます。',
     'app.tagline': '釜山の味を、ひと口ずつ',
     'tab.home': 'ホーム', 'tab.map': 'マップ', 'tab.community': 'コミュニティ', 'tab.saved': 'お気に入り', 'tab.my': 'マイページ',
     'login.kakao': 'Kakaoではじめる', 'login.naver': 'Naverではじめる', 'login.apple': 'Appleではじめる',
@@ -378,3 +406,9 @@ Object.assign(I18N.ko,{"support.emptyNotices":"등록된 공지사항이 없습�
 Object.assign(I18N.en,{"support.emptyNotices":"No notices published yet.","support.emptyFaq":"No questions published yet."});
 Object.assign(I18N.zh,{"support.emptyNotices":"暂无公告。","support.emptyFaq":"暂无常见问题。"});
 Object.assign(I18N.ja,{"support.emptyNotices":"お知らせはまだありません。","support.emptyFaq":"よくある質問はまだありません。"});
+
+// Draft editor and API messages.
+Object.assign(window.I18N.ko, {"write.saveDraft":"임시저장","write.loadDrafts":"임시저장한 글 불러오기","write.draftSaved":"임시저장했어요.","write.savedAt":"마지막 임시저장: {time}","write.noDrafts":"임시저장한 글이 없어요.","write.untitledDraft":"제목 없는 글","write.photoProcessing":"사진을 처리하고 있어요. 잠시 후 다시 시도해 주세요.","write.replaceDraftMessage":"다른 초안을 불러오면 저장하지 않은 변경사항은 사라집니다.","db.draftConflict":"초안이 다른 곳에서 변경되었거나 이미 게시됐어요. 임시저장 목록에서 다시 불러와 주세요.","db.draftNotFound":"초안을 찾을 수 없어요. 임시저장 목록을 다시 확인해 주세요."});
+Object.assign(window.I18N.en, {"write.saveDraft":"Save draft","write.loadDrafts":"Load a saved draft","write.draftSaved":"Draft saved.","write.savedAt":"Last saved: {time}","write.noDrafts":"No saved drafts yet.","write.untitledDraft":"Untitled post","write.photoProcessing":"Photos are still processing. Please try again shortly.","write.replaceDraftMessage":"Loading another draft will discard your unsaved changes.","db.draftConflict":"This draft changed elsewhere or was already published. Reload it from your saved drafts.","db.draftNotFound":"Draft not found. Please refresh your saved drafts."});
+Object.assign(window.I18N.zh, {"write.saveDraft":"保存草稿","write.loadDrafts":"载入已保存的草稿","write.draftSaved":"草稿已保存。","write.savedAt":"上次保存：{time}","write.noDrafts":"暂无已保存的草稿。","write.untitledDraft":"无标题帖子","write.photoProcessing":"正在处理照片，请稍后重试。","write.replaceDraftMessage":"载入其他草稿将丢弃尚未保存的更改。","db.draftConflict":"此草稿已在其他地方修改或已发布。请从草稿列表重新载入。","db.draftNotFound":"找不到草稿，请刷新草稿列表。"});
+Object.assign(window.I18N.ja, {"write.saveDraft":"下書き保存","write.loadDrafts":"保存した下書きを開く","write.draftSaved":"下書きを保存しました。","write.savedAt":"最終保存：{time}","write.noDrafts":"保存した下書きはありません。","write.untitledDraft":"タイトル未入力","write.photoProcessing":"写真を処理しています。少し待ってからお試しください。","write.replaceDraftMessage":"別の下書きを開くと、保存していない変更は失われます。","db.draftConflict":"この下書きは別の場所で変更されたか、すでに投稿されています。下書き一覧から再度開いてください。","db.draftNotFound":"下書きが見つかりません。一覧を更新してください。"});

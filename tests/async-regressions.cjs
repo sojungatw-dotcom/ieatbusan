@@ -29,6 +29,7 @@ function photoHarness(mountSource, fileCount = 2) {
     app: { querySelectorAll: () => [] },
     cleanup: [],
     draftPhotos: [],
+    writePhotoSession: 0,
     resizeImage: file => new Promise((resolve, reject) => pending.push({ file, resolve, reject })),
     renderPhotos: () => { renderCalls++; },
     toast: () => {},
@@ -72,6 +73,14 @@ async function run(source, { quiet = false } = {}) {
     const h = photoHarness(mountSource, 3);
     await h.finish([h.change(), h.change()]);
     assert.equal(h.context.draftPhotos.length, 4);
+  });
+  await test('loading another draft invalidates pending photo conversion', async () => {
+    const h = photoHarness(mountSource);
+    const task = h.change();
+    h.context.writePhotoSession++;
+    await h.finish([task]);
+    assert.equal(h.context.draftPhotos.length, 0);
+    assert.equal(h.renderCalls, 0);
   });
   const failed = results.filter(result => !result.passed);
   if (!quiet) {

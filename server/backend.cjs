@@ -4,6 +4,7 @@ const countries = require('../js/countries.js');
 const adminAction = require('./admin.cjs');
 const supportContent = require('./support.cjs');
 const discussions = require('./discussions.cjs');
+const draftAction = require('./drafts.cjs');
 const accessCookie = 'ieb_access', refreshCookie = 'ieb_refresh';
 const fail = (code, status = 400) => { const error = new Error(code); error.status = status; throw error; };
 const districts = ['중구','서구','동구','영도구','부산진구','동래구','남구','북구','해운대구','사하구','금정구','강서구','연제구','수영구','사상구','기장군'];
@@ -285,6 +286,7 @@ async function action(cfg, req, res, name, body) {
   }
   if (name.startsWith('admin')) return adminAction({ cfg, session, name, body, rest, fail });
   const token = session.token, uid = session.user.id;
+  if (['draftList','draftGet','draftSave','draftPublish'].includes(name)) return draftAction({ cfg, session, name, body, rest, upstream, fail });
   if (name === 'post') return createPost(cfg, session, body);
   if (name === 'comment') {
     const post_id = checkedText(body.postId, 1, 80), text = checkedText(body.text, 1, 300);
@@ -357,11 +359,7 @@ async function action(cfg, req, res, name, body) {
     // Verify identity above; never accept a user ID from request data.
     await upstream(cfg, '/auth/v1/logout?scope=global', { token, method: 'POST' });
     for (const bucket of ['ieb-community', 'ieb-avatars']) {
-      for (;;) {
-        const files = await upstream(cfg, '/storage/v1/object/list/' + bucket, { admin: true, method: 'POST', body: { prefix: uid, limit: 100 } });
-        if (!files.length) break;
-        await upstream(cfg, '/storage/v1/object/' + bucket, { admin: true, method: 'DELETE', body: { prefixes: files.map(file => uid + '/' + file.name) } });
-      }
+      await draftAction.removeUserImages({ cfg, session, bucket, upstream });
     }
     await upstream(cfg, '/auth/v1/admin/users/' + uid, { admin: true, method: 'DELETE' });
     setSession(req, res, null); return { deleted: true };

@@ -19,6 +19,10 @@
     },
     async refresh() { return Store.load(); },
     async createPost(data) { const result = await this.call('post', data); await Store.load(); return result.id; },
+    listDrafts(offset = 0) { return this.call('draftList', { offset }); },
+    getDraft(id) { return this.call('draftGet', { id }); },
+    saveDraft(data) { return this.call('draftSave', data); },
+    publishDraft(id, updatedAt) { return this.call('draftPublish', { id, updatedAt }); },
     comment(postId, text) {
       const user = Store.get().user;
       const temporary = { id: 'pending-' + crypto.randomUUID(), author: user.nickname, text,

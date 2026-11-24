@@ -58,6 +58,8 @@ Run `node tools/build-static.cjs`, then `node tests/deployment.cjs`. The build v
 
 ## Local account regression checks
 
+Draft storage checks: `node tests/post-drafts-api.cjs`. With Playwright and Chrome available, run `node tests/post-drafts-browser.cjs` for PC/mobile save/load/publication flows; its API is entirely synthetic. `tests/post-drafts-db.sql` and `tests/post-drafts-workflow-db.sql` verify RLS and atomic publication against Supabase with all test writes rolled back. See [draft storage](../docs/post-drafts.md).
+
 Run `node tests/auth-regressions.cjs`. Checks the two-input screens, server auth calls, server session hydration, preference persistence and exclusion of credentials/posts/tokens from local UI storage. Uses isolated mocked API responses.
 
 Run `node tests/api-regressions.cjs`. Checks the actual Vercel handler with mocked Supabase responses: CSRF, validation, signup, duplicate IDs, login errors, HttpOnly cookies, server-verified user identity, user JWT use for RLS, ownership checks, preference allowlist, token refresh, logout and missing environment settings. This test does not prove a live deployment is connected; check `/api/service?action=status` and real test-account flows separately.

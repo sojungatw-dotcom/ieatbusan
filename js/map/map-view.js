@@ -82,11 +82,12 @@
         const release = () => {
           picker?.removeEventListener('change', onRegionChange);
           sheetControl?.dispose();
+          document.getElementById('map-location-help')?.close?.();
         };
         const element = document.getElementById('map');
         if (!element) return release;
         const { foodId, districtId } = state;
-        const places = data.placesForSelection({ foodId, districtId });
+        const places = data.restaurantsForSelection({ foodId, districtId });
         const district = data.districtById[districtId];
         const shape = shapes?.districts.find(item => item.code === district?.code);
         current = startMap(element, places, { interactive: true, selected: !!foodId,
@@ -135,13 +136,26 @@
         current.sheet?.collapse();
       }
       function locate() {
-        if (!navigator.geolocation || !current?.map) { toast(t('map.locFail')); return; }
+        if (!current?.map) { toast(t('map.offline')); return; }
+        const showHelp = () => {
+          const dialog = document.getElementById('map-location-help');
+          if (dialog?.showModal) { if (!dialog.open) dialog.showModal(); }
+          else toast(renderer.mt('locationHelp'));
+        };
+        if (!navigator.geolocation) { showHelp(); return; }
         const session = current, request = ++session.request;
         const active = () => current === session && !session.disposed && request === session.request;
-        navigator.geolocation.getCurrentPosition(position => {
-          const ll = [position.coords.latitude, position.coords.longitude];
-          if (active() && data.hasCoordinates({ lat: ll[0], lng: ll[1] })) session.map.showLocation(ll);
-        }, () => { if (active()) toast(t('map.locFail')); }, { timeout: 8000 });
+        try {
+          navigator.geolocation.getCurrentPosition(position => {
+            if (!active()) return;
+            const ll = [position?.coords?.latitude, position?.coords?.longitude];
+            if (data.hasCoordinates({ lat: ll[0], lng: ll[1] })) {
+              session.sheet?.collapse();
+              session.map.showLocation(ll);
+            }
+            else showHelp();
+          }, () => { if (active()) showHelp(); }, { timeout: 8000 });
+        } catch { if (active()) showHelp(); }
       }
       return { render, mount, mountMini, sheet, flyTo, locate };
     },

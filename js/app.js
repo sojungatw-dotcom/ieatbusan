@@ -575,14 +575,99 @@
     </main>`;
   };
 
-  let draftPhotos = [];
+  let draftPhotos = [], writeFinished = false, writeDraftId = null, writeDraftUpdatedAt = null;
+  let writeSavedSnapshot = '', writeBusy = false, writeRestaurantId = null, writePublishAttempt = null, writePhotoSession = 0;
+  const writeSnapshot = form => JSON.stringify({ title: form.elements.title.value, body: form.elements.body.value,
+    cat: form.elements.cat.value, food: form.elements.food.value || '', photos: draftPhotos.map(photo => typeof photo === 'string' ? photo : photo.path) });
+  function writeHasUnsaved() {
+    const form = document.getElementById('write-form');
+    return !!form && !writeFinished && (writeSnapshot(form) !== writeSavedSnapshot || !!document.getElementById('w-photos')?.files.length);
+  }
+  function writeSetBusy(form, busy) {
+    writeBusy = busy; form.inert = busy;
+    app.querySelectorAll('[data-act="saveWriteDraft"], [data-act="listWriteDrafts"], [data-act="closeWrite"], .write-submit').forEach(button => { button.disabled = busy; });
+  }
+  async function saveWriteDraft(form, notify = true) {
+    if (writeBusy) return null;
+    if (document.getElementById('w-photos')?.files.length) throw new Error('write.photoProcessing');
+    writeSetBusy(form, true);
+    const values = JSON.parse(writeSnapshot(form)), photos = draftPhotos.slice();
+    writeDraftId ||= window.crypto.randomUUID();
+    try {
+      const { draft } = await Cloud.saveDraft({ id: writeDraftId, updatedAt: writeDraftUpdatedAt, ...values, restaurantId: writeRestaurantId });
+      if (!form.isConnected) return null;
+      writeDraftUpdatedAt = draft.updatedAt;
+      draftPhotos.splice(0, draftPhotos.length, ...draft.photos.map((photo, i) => ({ ...photo, url: photo.url || (typeof photos[i] === 'string' ? photos[i] : photos[i]?.url) || '' })));
+      writeSavedSnapshot = writeSnapshot(form); renderPhotos();
+      document.getElementById('write-draft-status').textContent = t('write.savedAt', { time: new Date(draft.updatedAt).toLocaleString(lang()) });
+      if (notify) toast(t('write.draftSaved'));
+      return draft;
+    } finally { if (form.isConnected) writeSetBusy(form, false); }
+  }
+  async function closeWrite() {
+    const form = document.getElementById('write-form');
+    if (!form || writeBusy) return;
+    if (writeHasUnsaved()) {
+      const choice = await writeLeaveGuard.confirmAction('write.exitSaveMessage', 'write.exitDiscard', 'write.exitSave', 'write.exitSaveTitle');
+      if (!choice || !form.isConnected || writeBusy) return;
+      if (choice === 'confirm' && !await saveWriteDraft(form)) return;
+      if (!form.isConnected) return;
+      writeFinished = true;
+    }
+    back('#/community');
+  }
+  async function listWriteDrafts(offset = 0) {
+    const form = document.getElementById('write-form'), dialog = document.getElementById('write-drafts');
+    if (!form || writeBusy) return;
+    const { drafts, hasMore } = await Cloud.listDrafts(offset);
+    if (!form.isConnected) return;
+    const list = dialog.querySelector('[data-draft-list]');
+    if (!offset) list.innerHTML = '';
+    list.querySelector('[data-act="moreWriteDrafts"]')?.remove();
+    list.insertAdjacentHTML('beforeend', drafts.length ? drafts.map(draft => `<button type="button" class="write-draft-row" data-act="loadWriteDraft" data-id="${esc(draft.id)}"><b>${esc(draft.title || t('write.untitledDraft'))}</b><small>${esc(new Date(draft.updatedAt).toLocaleString(lang()))}</small></button>`).join('') : offset ? '' : `<p class="muted">${esc(t('write.noDrafts'))}</p>`);
+    if (hasMore) list.insertAdjacentHTML('beforeend', `<button type="button" class="btn btn-outline btn-block" data-act="moreWriteDrafts" data-offset="${offset + drafts.length}">${esc(t('common.more'))}</button>`);
+    if (!dialog.open) dialog.showModal();
+  }
+  async function loadWriteDraft(id) {
+    const form = document.getElementById('write-form');
+    if (!form || writeBusy) return;
+    if (writeHasUnsaved() && await writeLeaveGuard.confirmAction('write.replaceDraftMessage') !== 'confirm') return;
+    if (!form.isConnected) return;
+    writeSetBusy(form, true);
+    try {
+      const { draft } = await Cloud.getDraft(id);
+      if (!form.isConnected) return;
+      form.elements.title.value = draft.title; form.elements.body.value = draft.body;
+      form.elements.cat.value = draft.cat;
+      if (draft.food && ![...form.elements.food.options].some(option => option.value === draft.food)) {
+        const option = document.createElement('option'); option.value = draft.food; option.textContent = draft.food;
+        form.elements.food.appendChild(option);
+      }
+      form.elements.food.value = draft.food || '';
+      writePhotoSession++;
+      draftPhotos.splice(0, draftPhotos.length, ...draft.photos);
+      document.getElementById('w-photos').value = '';
+      writeDraftId = draft.id; writeDraftUpdatedAt = draft.updatedAt; writeRestaurantId = draft.restaurantId;
+      writePublishAttempt = null; writeFinished = false;
+      app.querySelectorAll('[data-cat-chip]').forEach(label => label.classList.toggle('active', label.querySelector('input').checked));
+      renderPhotos(); writeSavedSnapshot = writeSnapshot(form);
+      document.getElementById('write-draft-status').textContent = t('write.savedAt', { time: new Date(draft.updatedAt).toLocaleString(lang()) });
+      document.getElementById('write-drafts').close(); form.elements.title.focus();
+    } finally { if (form.isConnected) writeSetBusy(form, false); }
+  }
   V.write = () => {
     if (!loggedIn()) return V.login();
     draftPhotos = [];
+    writePhotoSession++;
+    writeFinished = false;
+    writeDraftId = null; writeDraftUpdatedAt = null; writeRestaurantId = null; writeBusy = false; writePublishAttempt = null;
+    writeSavedSnapshot = JSON.stringify({ title: '', body: '', cat: 'review', food: '', photos: [] });
     return `<main class="screen">
-      <header class="page-header"><button class="icon-btn" data-act="back" data-fallback="#/community" aria-label="${esc(t('common.cancel'))}">${icon('close')}</button>
+      <header class="page-header"><button type="button" class="icon-btn" data-act="closeWrite" aria-label="${esc(t('write.closeEditor'))}">${icon('close')}</button>
         <h1 class="page-title" style="text-align:center">${esc(t('write.title'))}</h1><button form="write-form" type="submit" class="btn btn-primary btn-sm write-submit">${esc(t('write.submit'))}</button></header>
       <form class="form" id="write-form" data-form="write">
+        <div class="write-draft-tools"><button type="button" class="btn btn-outline btn-sm" data-act="saveWriteDraft">${esc(t('write.saveDraft'))}</button><button type="button" class="btn btn-outline btn-sm" data-act="listWriteDrafts">${esc(t('write.loadDrafts'))}</button></div>
+        <p id="write-draft-status" class="write-draft-status" role="status"></p>
         <div class="field"><span class="label">${esc(t('write.category'))}</span>
           <div class="write-categories" role="radiogroup" aria-label="${esc(t('write.category'))}">${['review', 'question', 'free'].map((c, i) => `<label class="chip ${i === 0 ? 'active' : ''}" data-cat-chip><input type="radio" name="cat" value="${c}" ${i === 0 ? 'checked' : ''} class="sr-only">${esc(catLabel(c))}</label>`).join('')}</div></div>
         <input class="input title-input" id="w-title" name="title" maxlength="60" placeholder="${esc(t('write.titlePh'))}" aria-label="${esc(t('write.titlePh'))}">
@@ -591,12 +676,12 @@
           <div class="photo-row" id="photo-row"><label class="add-photo">${icon('camera')}<span id="photo-count">0/4</span><input aria-label="${esc(t('write.addPhotos'))}" type="file" id="w-photos" accept="image/*" multiple class="sr-only"></label></div></div>
         <div class="field"><label for="w-food">${esc(t('write.foodTag'))}</label>
           <select class="select" id="w-food" name="food"><option value="">${esc(t('write.noTag'))}</option>${FOODS.map(f => `<option value="${f.id}">${esc(fname(f))}</option>`).join('')}</select></div>
-      </form></main>`;
+      </form><dialog class="write-drafts-dialog" id="write-drafts" aria-labelledby="write-drafts-title"><h2 id="write-drafts-title">${esc(t('write.loadDrafts'))}</h2><div data-draft-list></div><form method="dialog"><button class="btn btn-outline btn-block">${esc(t('common.cancel'))}</button></form></dialog></main>`;
   };
   function renderPhotos() {
     const row = document.getElementById('photo-row'); if (!row) return;
     row.querySelectorAll('.photo-prev').forEach(n => n.remove());
-    draftPhotos.forEach((src, i) => row.insertAdjacentHTML('beforeend', `<span class="photo-prev"><img src="${src}" alt=""><button type="button" data-act="rmPhoto" data-i="${i}" aria-label="${esc(t('common.delete'))}">${icon('close')}</button></span>`));
+    draftPhotos.forEach((photo, i) => row.insertAdjacentHTML('beforeend', `<span class="photo-prev"><img src="${esc((typeof photo === 'string' ? photo : photo.url) || 'assets/food-placeholder.svg')}" alt=""><button type="button" data-act="rmPhoto" data-i="${i}" aria-label="${esc(t('common.delete'))}">${icon('close')}</button></span>`));
     document.getElementById('photo-count').textContent = `${draftPhotos.length}/4`;
   }
   function resizeImage(file) {
@@ -616,16 +701,17 @@
     let active = true;
     cleanup.push(() => { active = false; });
     inp.addEventListener('change', async () => {
+      const photoSession = writePhotoSession;
       for (const file of [...inp.files]) {
-        if (!active) return;
+        if (!active || photoSession !== writePhotoSession) return;
         if (photos.length >= 4) { toast(t('write.photoMax')); break; }
         try {
           const photo = await resizeImage(file);
-          if (!active) return;
+          if (!active || photoSession !== writePhotoSession) return;
           if (photos.length < 4) photos.push(photo);
         } catch (e) { /* 이미지가 아니면 건너뜀 */ }
       }
-      if (!active) return;
+      if (!active || photoSession !== writePhotoSession) return;
       inp.value = ''; renderPhotos();
     });
     app.querySelectorAll('[data-cat-chip] input').forEach(r => r.addEventListener('change', () => {
@@ -864,11 +950,13 @@
   const MEMBER_ONLY = ['write', 'profile', 'accountPrivacy', 'myPosts', 'myComments', 'myRecent'];
   let cleanup = [];
   const stack = [];
+  const writeLeaveGuard = window.IEBWriteLeaveGuard.create({ t, esc, isDirty: writeHasUnsaved });
   let brandIntroPlayed = false;
   function route({ refreshing = false } = {}) {
+    const hash = location.hash || '#/home';
+    if (writeLeaveGuard.intercept(hash)) return;
     syncFoodCatalog();
     window.IEBChatbot?.sync?.();
-    const hash = location.hash || '#/home';
     let name = 'notFound', params = {};
     for (const [re, n, keys] of ROUTES) {
       const m = hash.match(re);
@@ -878,6 +966,7 @@
     if (!st.user && MEMBER_ONLY.includes(name)) { loginIntent = true; location.replace('#/login'); return; }
     if (name === 'login' && st.user && !loginIntent) { location.replace('#/home'); return; }
     loginIntent = false;
+    writeLeaveGuard.commit(hash);
     if (stack[stack.length - 2] === hash) stack.pop(); else if (stack[stack.length - 1] !== hash) stack.push(hash);
     cleanup.forEach(fn => { try { fn(); } catch (e) {} }); cleanup = [];
     document.documentElement.lang = lang();
@@ -994,7 +1083,12 @@
       if (!app.contains(el)) return;
       toast(t('post.deleted')); location.replace('#/community'); stack.pop();
     },
-    rmPhoto: el => { draftPhotos.splice(Number(el.dataset.i), 1); renderPhotos(); },
+    saveWriteDraft: () => saveWriteDraft(document.getElementById('write-form')),
+    closeWrite,
+    listWriteDrafts: () => listWriteDrafts(),
+    moreWriteDrafts: el => listWriteDrafts(Number(el.dataset.offset)),
+    loadWriteDraft: el => loadWriteDraft(el.dataset.id),
+    rmPhoto: el => { if (writeBusy) return; draftPhotos.splice(Number(el.dataset.i), 1); renderPhotos(); },
     logout: async () => { await Store.signOut(); window.IEBAnalytics?.auth('logout'); toast(t('set.loggedOut')); stack.length = 0; location.replace('#/login'); },
     withdraw: async () => { if (!confirm(t('set.withdrawConfirm'))) return; await Store.removeCurrentAccount(); stack.length = 0; location.replace('#/login'); },
   };
@@ -1027,6 +1121,7 @@
     if (form && commentDraft?.id === form.dataset.id) commentDraft.text = e.target.value;
   });
   app.addEventListener('change', e => {
+    if (e.target.closest('#write-form') && (e.target.name === 'food' || e.target.name === 'cat')) writeRestaurantId = null;
     const k = e.target.dataset.setting;
     if (k) Store.update(s => { s.settings[k] = e.target.checked; });
   });
@@ -1104,7 +1199,19 @@
       if (!requireLogin()) return;
       const title = f.title.value.trim(), body = f.body.value.trim();
       if (!title || !body) { toast(t('write.need')); return; }
-      const id = await Cloud.createPost({ title, body, cat: f.cat.value, food: f.food.value || null, photos: draftPhotos.slice() });
+      if (writeBusy) return;
+      if (!writePublishAttempt || writePublishAttempt.snapshot !== writeSnapshot(f)) {
+        const draft = await saveWriteDraft(f, false);
+        if (!draft || !f.isConnected) return;
+        writePublishAttempt = { id: draft.id, updatedAt: draft.updatedAt, snapshot: writeSnapshot(f) };
+      }
+      writeSetBusy(f, true);
+      let id;
+      try { ({ id } = await Cloud.publishDraft(writePublishAttempt.id, writePublishAttempt.updatedAt)); }
+      finally { if (f.isConnected) writeSetBusy(f, false); }
+      if (!f.isConnected) return;
+      writeFinished = true;
+      await Store.load().catch(() => toast(t('db.failure')));
       if (!f.isConnected) return;
       toast(t('write.done')); stack.pop(); location.replace('#/post/' + id);
     } else if (kind === 'profile') {
@@ -1122,6 +1229,8 @@
     }
   }
   app.addEventListener('submit', event => {
+    // Native dialog forms close their dialog through the browser's default action.
+    if (event.target.method === 'dialog') return;
     event.preventDefault();
     const form = event.target;
     if (form.dataset.submitting) return;

@@ -26,13 +26,13 @@ const flush=()=>new Promise(resolve=>setImmediate(resolve));
   assert.equal(auth.loader.ready(),false);
   const existing=loaderHarness({existing:true});await existing.loader.load();assert.equal(existing.nodes.length,0);
   const records={maps:[],pins:[],circles:[],events:[],popups:[]};let notify,unsubscribed=0;
-  class MapFake {constructor(el,options){this.options=options;this.zoom=options.zoom;records.maps.push(this);}setCenter(ll){this.center=ll;}setZoom(z){this.zoom=z;}getZoom(){return this.zoom;}panTo(ll){this.center=ll;}fitBounds(b,p){this.bounds=b;this.padding=p;}}
+  class MapFake {constructor(el,options){this.options=options;this.zoom=options.zoom;records.maps.push(this);}setCenter(ll){this.center=ll;}setZoom(z){this.zoom=z;}getZoom(){return this.zoom;}panTo(ll){this.center=ll;}fitBounds(b,p){this.bounds=b;this.padding=p;}moveCamera(options){this.center=options.center;this.zoom=options.zoom;this.camera=options;}}
   class Pin {constructor(options){Object.assign(this,options);records.pins.push(this);}addListener(name,fn){this.click=fn;return {remove(){records.events.push('removed');}};}}
   class Info {constructor(){records.popups.push(this);}setContent(html){this.html=html;}open(options){this.options=options;}close(){this.closed=true;}}
   class Circle {constructor(options){Object.assign(this,options);records.circles.push(this);}setMap(map){this.map=map;}}
   const sdk={Map:MapFake,marker:{AdvancedMarkerElement:Pin},InfoWindow:Info,Circle,
     LatLngBounds:class {constructor(){this.points=[];}extend(p){this.points.push(p);}},
-    event:{addListenerOnce(map,name,fn){map.idle=fn;return {remove(){records.events.push('idle removed');}};},clearInstanceListeners(map){map.cleared=true;},trigger(map,name){records.events.push(name);}}};
+    event:{addListenerOnce(map,name,fn){map.idle=fn;return {remove(){if(map.idle===fn)map.idle=null;records.events.push('idle removed');}};},clearInstanceListeners(map){map.cleared=true;},trigger(map,name){records.events.push(name);}}};
   const provider=context.window.IEBGoogleMapProvider.create({getSDK:()=>sdk,loader:{ready:()=>true,load:async()=>sdk,mapId:()=> 'TEST_MAP',onError(fn){notify=fn;return ()=>unsubscribed++;}},document:{createElement:()=>({})}});
   const element={replaceChildren(){this.cleared=true;}},statuses=[];
   const map=provider.create(element,{center:[35,129],onStatus:code=>statuses.push(code)});
@@ -43,7 +43,16 @@ const flush=()=>new Promise(resolve=>setImmediate(resolve));
   const place={food:{id:'milmyeon'},i:2,name:'식당',lat:35.2,lng:129.1};map.addPlace(place,'safe popup',true);map.fitPlaces([place]);assert.equal(records.maps[0].zoom,15);
   map.fitPlaces([place,{...place,lat:35.3}]);records.maps[0].zoom=19;records.maps[0].idle();assert.equal(records.maps[0].zoom,15);
   map.focusPlace('milmyeon:2');assert.equal(records.maps[0].zoom,16);assert.equal(records.popups[0].html,'safe popup');
-  map.showLocation([35.1,129.2]);map.showLocation([35.2,129.3]);assert.equal(records.circles[0].map,null);assert.ok(records.circles[1].map);
+  map.fitPlaces([place,{...place,lat:35.3}]);records.maps[0].zoom=11;
+  map.showLocation([35.1,129.2]);
+  assert.equal(records.maps[0].idle,null,'Locate cancels the initial bounds zoom adjustment');
+  assert.equal(records.maps[0].camera.center.lat,35.1);assert.equal(records.maps[0].camera.center.lng,129.2);
+  assert.equal(records.maps[0].zoom,16,'Locate immediately centers and zooms to street level');
+  assert.ok(records.popups[0].closed,'A restaurant popup cannot obscure the current location');
+  records.maps[0].zoom=18;
+  map.showLocation([35.2,129.3]);assert.equal(records.maps[0].zoom,18,'Keep an existing closer zoom');
+  assert.equal(records.maps[0].center.lat,35.2);assert.equal(records.maps[0].center.lng,129.3);
+  assert.equal(records.circles[0].map,null);assert.ok(records.circles[1].map);
   notify('authorization');assert.equal(statuses[0],'authorization');map.resize();assert.ok(records.events.includes('resize'));
   map.dispose();map.dispose();assert.equal(unsubscribed,1);assert.equal(records.pins[0].map,null);assert.equal(records.circles[1].map,null);assert.ok(element.cleared);assert.ok(records.maps[0].cleared);
   map.focusPlace('milmyeon:2');map.showLocation([0,0]);assert.equal(records.circles.length,2);
