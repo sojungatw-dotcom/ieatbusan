@@ -65,7 +65,16 @@
     clearTimeout(toast._t); toast._t = setTimeout(() => { toastEl.hidden = true; }, 2200);
   }
   const loggedIn = () => !!S().user;
-  function requireLogin() { if (loggedIn()) return true; toast(t('toast.loginRequired')); loginIntent = true; go('#/login'); return false; }
+  function requireLogin() {
+    if (loggedIn()) return true;
+    const hash = location.hash || '#/home';
+    const source = ROUTES.find(([pattern]) => pattern.test(hash))?.[1];
+    guestReturnTo = source && !MEMBER_ONLY.includes(source) && !['login', 'signup', 'lang'].includes(source) ? hash : null;
+    toast(t('toast.loginRequired'));
+    loginIntent = true;
+    go('#/login');
+    return false;
+  }
   const go = h => { if (location.hash === h) route(); else location.hash = h; };
   const initial = name => esc(String(name || '?').trim().charAt(0).toUpperCase());
   function profileAvatar(user, size = '') {
@@ -736,18 +745,24 @@
   const myComments = () => Object.entries(S().comments).flatMap(([pid, list]) => list.filter(c => c.mine).map(c => ({ ...c, pid })));
   V.my = () => {
     const st = S(), u = st.user;
+    const canLogOut = u || st.guest;
+    const logoutLabel = esc(t('set.logout'));
+    const logoutIcon = canLogOut ? `<button type="button" class="icon-btn my-logout-icon" data-act="logout" aria-label="${logoutLabel}" title="${logoutLabel}">${icon('logout')}</button>` : '';
     const menu = (href, label, val = '') => `<a class="menu-row" href="${href}"><span>${esc(label)}</span>${val ? `<span class="val">${esc(val)}</span>` : ''}${icon('chevronRight')}</a>`;
     const top = u ? `<div class="profile">${profileAvatar(u, 'lg')}<div class="who"><b>${countryBadge(u.countryCode)}${esc(u.nickname)}</b><span class="muted" style="font-size:13px">${esc(t('my.joined', { area: districtName(u.area), date: u.joined }))}</span>${u.bio ? `<div class="sub" style="font-size:13px">${esc(u.bio)}</div>` : ''}</div>
         <a class="btn btn-outline btn-sm" href="#/profile">${esc(t('my.edit'))}</a></div>
       <div class="stats"><a href="#/my/posts"><b>${st.posts.filter(post => post.mine).length}</b><span>${esc(t('my.posts'))}</span></a><i></i><a href="#/my/comments"><b>${myComments().length}</b><span>${esc(t('my.comments'))}</span></a><i></i><a href="#/saved"><b>${st.savedFoods.length + st.savedPlaces.length}</b><span>${esc(t('my.saved'))}</span></a></div>`
       : `<div class="login-card"><b>${esc(t('my.loginTitle'))}</b><span class="sub" style="font-size:14px">${esc(t('my.loginDesc'))}</span><a class="btn btn-primary" href="#/login">${esc(t('my.login'))}</a></div>`;
-    return `<main class="screen has-tabbar">${pageHeader(t('my.title'), { back: false, right: `<a class="icon-btn" href="#/settings" aria-label="${esc(t('set.title'))}">${icon('settings')}</a>` })}
+    return `<main class="screen has-tabbar">${pageHeader(t('my.title'), { back: false, right: logoutIcon })}
       ${top}<div class="band"></div>
       ${u ? `<div class="menu-group-title">${esc(t('my.activity'))}</div>
       ${menu('#/my/posts', t('my.myPosts'))}${menu('#/my/comments', t('my.myComments'))}${menu('#/my/recent', t('my.recent'))}
       <div class="band"></div>` : ''}
       <div class="menu-group-title">${esc(supportText('sectionTitle','my.support'))}</div>
       ${menu('#/notices', supportText('noticesLabel','my.notices'))}${menu('#/faq', supportText('faqLabel','my.faq'))}${menu('#/contact', supportText('contactLabel','my.contact'))}
+      <div class="band"></div>
+      ${menu('#/settings', t('set.title'))}
+      ${canLogOut ? `<div class="my-logout-footer"><button type="button" class="my-logout-text" data-act="logout">${logoutLabel}</button></div>` : ''}
       ${tabbar('my')}</main>`;
   };
   V.myPosts = () => {
@@ -820,7 +835,7 @@
     const st = S(), s = st.settings;
     const tog = (k, label, desc) => `<div class="toggle-row"><span class="t"><span>${esc(label)}</span>${desc ? `<small>${esc(desc)}</small>` : ''}</span>
       <label class="switch"><input type="checkbox" data-setting="${k}" ${s[k] ? 'checked' : ''} aria-label="${esc(label)}"><span></span></label></div>`;
-    const row = (href, label, val = '', act = '') => `<${href ? `a href="${href}"` : `button type="button" data-act="${act}"`} class="menu-row"><span>${esc(label)}</span>${val ? `<span class="val">${esc(val)}</span>` : ''}${href ? icon('chevronRight') : ''}</${href ? 'a' : 'button'}>`;
+    const row = (href, label, val = '') => `<a href="${href}" class="menu-row"><span>${esc(label)}</span>${val ? `<span class="val">${esc(val)}</span>` : ''}${icon('chevronRight')}</a>`;
     const acct = st.user ? (st.user.username || t('set.provider', { p: PROVIDERS[st.user.provider] || st.user.provider })) : t('set.guestNow');
     return `<main class="screen">${pageHeader(t('set.title'), { fallback: '#/my' })}
       <div class="menu-group-title">${esc(t('set.noti'))}</div><p class="pad muted" style="margin-top:0">${esc(t('set.notiHelp'))}</p>
@@ -829,7 +844,7 @@
       ${row('#/lang', t('set.language'), t('lang.name'))}
       <div class="band"></div><div class="menu-group-title">${esc(t('set.account'))}</div>
       <div class="menu-row"><span>${esc(t('set.accountInfo'))}</span><span class="val">${st.user ? countryBadge(st.user.countryCode) : ''}${esc(acct)}</span></div>
-      ${st.user || st.guest ? row('', t('set.logout'), '', 'logout') : row('#/login', t('my.login'))}
+      ${!st.user && !st.guest ? row('#/login', t('my.login')) : ''}
       <div class="band"></div><div class="menu-group-title">${esc(t('set.info'))}</div>
       ${row('#/terms', t('set.terms'))}${row('#/privacy', t('set.privacy'))}${row('#/credits', t('set.credits'))}
       <div class="menu-row"><span>${esc(t('set.version'))}</span><span class="val">1.0.0</span></div>
@@ -963,6 +978,7 @@
       if (m) { name = n; (keys || []).forEach((k, i) => { if (m[i + 1] !== undefined) params[k] = decodeURIComponent(m[i + 1]); }); break; }
     }
     const st = S();
+    if (st.user || !['login', 'signup', 'lang'].includes(name)) guestReturnTo = null;
     if (!st.user && MEMBER_ONLY.includes(name)) { loginIntent = true; location.replace('#/login'); return; }
     if (name === 'login' && st.user && !loginIntent) { location.replace('#/home'); return; }
     loginIntent = false;
@@ -997,7 +1013,12 @@
       category: measuredPost?.cat,
     });
   }
-  let loginIntent = false;
+  let loginIntent = false, guestReturnTo = null;
+  function finishGuestBrowsing() {
+    const target = guestReturnTo || '#/home';
+    guestReturnTo = null;
+    go(target);
+  }
   function back(fallback) {
     if (stack.length > 1) history.back(); else location.hash = fallback || '#/home';
   }
@@ -1016,9 +1037,18 @@
   }
   const A = {
     back: el => back(el.dataset.fallback),
-    guest: () => { Store.set({ guest: true }); go(S().langChosen ? '#/home' : '#/lang'); },
+    guest: () => {
+      Store.set({ guest: true });
+      if (S().langChosen) finishGuestBrowsing();
+      else go('#/lang');
+    },
     pickLang: el => { const code = el.dataset.code; Store.set({ lang: code }); rerender(); app.querySelector(`[data-act="pickLang"][data-code="${code}"]`)?.focus(); },
-    confirmLang: () => { Store.set({ langChosen: true }); if (stack.length > 1 && !stack[stack.length - 2].startsWith('#/login')) history.back(); else go('#/home'); },
+    confirmLang: () => {
+      Store.set({ langChosen: true });
+      if (guestReturnTo) finishGuestBrowsing();
+      else if (stack.length > 1 && !stack[stack.length - 2].startsWith('#/login')) history.back();
+      else go('#/home');
+    },
     sort: () => { Store.set({ sort: S().sort === 'popular' ? 'name' : 'popular' }); rerender(); },
     saveFood: el => {
       if (!requireLogin()) return;
@@ -1154,6 +1184,7 @@
           window.IEBAnalytics?.auth('login');
           f.elements.password.value = '';
           registeredId = '';
+          guestReturnTo = null;
           stack.length = 0;
           go(S().langChosen ? '#/home' : '#/lang');
         }
