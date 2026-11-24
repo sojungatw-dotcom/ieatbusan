@@ -17,7 +17,7 @@
   if(!pool.length&&s.relaxAllowed)pool=R.filter(foods,{...s,wanted:[],category:'any',spice:s.spice==='mild'?'mild':'any',requestedFoodIds:[]}).foods;
   return pool.length>0&&pool.every(food=>s.seen.includes(food.id));
  }
- const createState=()=>({stage:'profile',diet:'none',profileComplete:false,allergyStatus:'none',allergies:[],excluded:[],allowed:[],wanted:[],ingredientMode:'all',reviewVegan:false,category:null,spice:null,requestedFoodIds:[],excludedFoodIds:[],seen:[],proposal:null,pendingAllergy:[],unsupported:[],relaxAllowed:false});
+ const createState=()=>({stage:'profile',diet:'none',profileComplete:false,allergyStatus:'none',allergies:[],excluded:[],allowed:[],wanted:[],ingredientMode:'all',reviewVegan:false,category:null,spice:null,districtId:null,requestedFoodIds:[],excludedFoodIds:[],seen:[],proposal:null,pendingAllergy:[],unsupported:[],relaxAllowed:false});
  const clone=s=>JSON.parse(JSON.stringify(s)),c=(id,label)=>({id,label});
  function summary(s){const parts=[diets[s.diet]];parts.push('알레르기: '+(s.allergies.length?s.allergies.map(k=>labels[k]).join(', '):s.allergyStatus==='none'?'없다고 응답':'미확인'));if(s.excluded.length)parts.push('추가 제외: '+s.excluded.map(k=>labels[k]).join(', '));if(s.wanted.length)parts.push('찾는 재료: '+s.wanted.map(k=>labels[k]).join(s.ingredientMode==='any'?' 또는 ':' + '));if(s.requestedFoodIds.length)parts.push('음식: '+s.requestedFoodIds.map(id=>foods.find(f=>f.id===id)?.name||id).join(', '));if(s.category)parts.push(categories[s.category]);if(s.spice)parts.push(s.spice==='mild'?'원문상 기본 맵기 낮음':s.spice==='hot'?'매운 음식':'맵기 상관없음');return parts.join(' · ');}
  function describeAction(action){if(typeof action==='string')return action;if(action.action==='profile:submit')return `${diets[action.diet]} / 알레르기: ${action.allergies?.length?action.allergies.map(k=>labels[k]).join(', '):action.allergyStatus==='none'?'없어요':action.allergyStatus==='selected'?'있어요 · 다음 질문에서 선택':'모르겠어요'}${action.excluded?.length?' / 추가 제외: '+action.excluded.map(k=>labels[k]).join(', '):''}`;if(action.action==='allergies:submit')return '알레르기: '+action.allergies.map(k=>labels[k]).join(', ');if(action.action==='wanted:submit')return '주재료·음식: '+(action.wanted.map(k=>labels[k]).join(', ')||'상관없어요')+' / '+(action.mode==='any'?'하나 이상 포함':'모두 포함')+' / '+(spiceLabels[action.spice||'any']);return action.action;}
@@ -55,6 +55,10 @@
     for(const key of ['allergies','excluded','wanted'])for(const value of input[key]||[])if((key==='allergies'?allergyKeys:key==='excluded'?excludeKeys:Object.keys(labels)).includes(value)&&!s[key].includes(value))s[key].push(value);
     if(input.allergies?.length||input.pendingAllergy?.length)s.allergyStatus='selected';
     s.pendingAllergy=[...new Set([...(s.pendingAllergy||[]),...(input.pendingAllergy||[])])];
+    if(input.districtId){
+     s.districtId=input.districtId==='all'?null:input.districtId;
+     s.unsupported=s.unsupported.filter(key=>key!=='location');
+    }
     s.unsupported=[...new Set([...(s.unsupported||[]),...(input.unsupported||[])])];
     s.wanted=s.wanted.filter(k=>!(input.excluded||[]).some(a=>R.related(k,a))&&!(input.allergies||[]).some(a=>R.related(k,a)));
     for(const key of input.wanted||[])if(Object.hasOwn(labels,key)&&!s.wanted.includes(key))s.wanted.push(key);
@@ -63,7 +67,11 @@
     if(input.ingredientMode)s.ingredientMode=input.ingredientMode;
     s.seen=[];s.relaxAllowed=false;
     s.stage=s.pendingAllergy.length?'allergies':!s.profileComplete||input.diet||input.allergyStatus?'profile':'confirm';
-    if(!s.pendingAllergy.length)getConflict(s);
+    if(!s.pendingAllergy.length){
+     const conflict=getConflict(s);
+     const allergyNeedsSelection=s.allergyStatus==='selected'&&!s.allergies.length;
+     if(!conflict&&!allergyNeedsSelection&&!input.diet&&(s.districtId||input.districtId)&&data.available) return results(s,matches);
+    }
     return view(s,'',[],[],{interpretation:{applied:{diet:input.diet,allergies:input.allergies,excluded:input.excluded,wanted:input.wanted,spice:input.spice},unresolved:s.pendingAllergy,unsupported:s.unsupported}});
    }
    if(input.action==='profile:open'){s.stage='profile';return view(s,'식단과 피하실 재료를 다시 살펴볼까요? 기존 선택은 그대로 가져왔습니다.');}
