@@ -34,5 +34,7 @@
   };
   const placeDistricts = Object.fromEntries(Object.entries(legacyDistricts)
     .flatMap(([foodId, ids]) => ids.map((districtId, index) => [`${foodId}:${index}`, districtId])));
-  window.IEBMapCatalog = Object.freeze({ districts: Object.freeze(districts), placeDistricts: Object.freeze(placeDistricts) });
+  const catalog = Object.freeze({ districts: Object.freeze(districts), placeDistricts: Object.freeze(placeDistricts) });
+  if (typeof module !== 'undefined') module.exports = catalog;
+  else window.IEBMapCatalog = catalog;
 })();
